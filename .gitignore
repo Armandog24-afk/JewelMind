@@ -1,0 +1,32 @@
+# Python / backend
+backend/.venv/
+backend/**/__pycache__/
+backend/.pytest_cache/
+backend/.ruff_cache/
+*.pyc
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+
+# Local tooling (per-user Python install, scratch scripts)
+.tools/
+
+# Environment
+.env
+.env.local
+
+# Example generation output
+examples/output/
+examples/output*/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.log
+
+# Local Claude Code session permissions (personal, not project config)
+.claude/settings.local.json

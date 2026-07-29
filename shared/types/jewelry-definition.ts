@@ -1,0 +1,110 @@
+/**
+ * Canonical JewelryDefinition shape, shared conceptually with the backend's
+ * Pydantic schema (backend/jewelmind/domain/schema.py). This file is the
+ * single TypeScript source of truth for the frontend; keep it structurally
+ * in sync with the backend by hand — there is no codegen step in this
+ * milestone (see docs/known-limitations.md).
+ *
+ * All lengths are millimeters. The backend remains the authoritative
+ * validator: this type only describes shape, not the numeric business
+ * rules (see docs/validation-rules.md).
+ */
+
+export const SCHEMA_VERSION = '0.1.0'
+
+export type BandProfile = 'comfort_fit' | 'flat'
+export type StoneShape = 'round'
+export type SettingType = 'prong'
+export type MetalType =
+  | 'yellow_gold_18k'
+  | 'white_gold_18k'
+  | 'rose_gold_18k'
+  | 'platinum'
+  | 'silver'
+export type ManufacturingMethod = 'lost_wax_casting' | 'direct_resin_printing'
+export type RingSizeSystem = 'EU'
+export type JewelryCategory = 'ring'
+export type JewelryStyle = 'solitaire'
+
+export interface ProjectInfo {
+  name: string
+  units: 'mm'
+}
+
+export interface JewelryInfo {
+  category: JewelryCategory
+  style: JewelryStyle
+}
+
+export interface RingSpec {
+  sizeSystem: RingSizeSystem
+  size: number
+  innerDiameter: number
+}
+
+export interface BandSpec {
+  width: number
+  thickness: number
+  profile: BandProfile
+}
+
+export interface StoneSpec {
+  shape: StoneShape
+  diameter: number
+  depth: number
+}
+
+export interface SettingSpec {
+  type: SettingType
+  prongCount: number
+  prongDiameter: number
+  prongHeight: number
+  basketHeight: number
+}
+
+export interface MaterialSpec {
+  metal: MetalType
+}
+
+export interface ManufacturingSpec {
+  method: ManufacturingMethod
+}
+
+export interface PreviewSpec {
+  meshTolerance: number
+  angularTolerance: number
+}
+
+export interface JewelryDefinition {
+  schemaVersion: string
+  project: ProjectInfo
+  jewelry: JewelryInfo
+  ring: RingSpec
+  band: BandSpec
+  stone: StoneSpec
+  setting: SettingSpec
+  material: MaterialSpec
+  manufacturing: ManufacturingSpec
+  preview: PreviewSpec
+}
+
+export function createDefaultDefinition(): JewelryDefinition {
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    project: { name: 'Solitaire Ring', units: 'mm' },
+    jewelry: { category: 'ring', style: 'solitaire' },
+    ring: { sizeSystem: 'EU', size: 16, innerDiameter: 17.8 },
+    band: { width: 2.4, thickness: 1.8, profile: 'comfort_fit' },
+    stone: { shape: 'round', diameter: 6.5, depth: 4.0 },
+    setting: {
+      type: 'prong',
+      prongCount: 6,
+      prongDiameter: 1.1,
+      prongHeight: 4.8,
+      basketHeight: 3.5,
+    },
+    material: { metal: 'yellow_gold_18k' },
+    manufacturing: { method: 'lost_wax_casting' },
+    preview: { meshTolerance: 0.1, angularTolerance: 0.2 },
+  }
+}
