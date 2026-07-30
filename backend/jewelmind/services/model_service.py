@@ -10,6 +10,7 @@ files do not accumulate unboundedly across a long-running server process.
 from __future__ import annotations
 
 import atexit
+import os
 import shutil
 import tempfile
 import threading
@@ -114,11 +115,26 @@ class ModelService:
             return record
 
     # -- exports ------------------------------------------------------------
+    #
+    # Each STEP/STL export gets its own uniquely-named temp file (via
+    # tempfile.mkstemp), separate from the model's shared preview temp_dir.
+    # This matters because a single model can be exported many times
+    # concurrently with different options (e.g. includeStoneReference
+    # true/false from two browser tabs) — reusing one fixed "model.step"
+    # path per model would let concurrent exports overwrite each other's
+    # output out from under them. The caller (api/routes.py) is responsible
+    # for deleting the returned path once the response has been sent (a
+    # FastAPI/Starlette BackgroundTask); if generation of the file itself
+    # fails, this method cleans up the empty/partial temp file immediately.
 
     def export_step_file(self, model_id: str, *, include_stone: bool) -> Path:
         record = self.get_record(model_id)
-        destination = record.temp_dir / "model.step"
-        return export_step(record.generated_model, destination, include_stone=include_stone)
+        destination = self._unique_temp_path(model_id, ".step")
+        try:
+            return export_step(record.generated_model, destination, include_stone=include_stone)
+        except Exception:
+            destination.unlink(missing_ok=True)
+            raise
 
     def export_stl_file(
         self,
@@ -129,15 +145,19 @@ class ModelService:
         angular_tolerance: float | None = None,
     ) -> Path:
         record = self.get_record(model_id)
-        destination = record.temp_dir / "model.stl"
-        return export_stl(
-            record.generated_model,
-            record.definition,
-            destination,
-            include_stone=include_stone,
-            mesh_tolerance=mesh_tolerance,
-            angular_tolerance=angular_tolerance,
-        )
+        destination = self._unique_temp_path(model_id, ".stl")
+        try:
+            return export_stl(
+                record.generated_model,
+                record.definition,
+                destination,
+                include_stone=include_stone,
+                mesh_tolerance=mesh_tolerance,
+                angular_tolerance=angular_tolerance,
+            )
+        except Exception:
+            destination.unlink(missing_ok=True)
+            raise
 
     def export_json_text(self, model_id: str) -> str:
         record = self.get_record(model_id)
@@ -145,7 +165,18 @@ class ModelService:
 
     def export_specification_text(self, model_id: str) -> str:
         record = self.get_record(model_id)
-        return build_specification(record.definition, record.generated_model, record.validation_results)
+        return build_specification(
+            record.definition,
+            record.generated_model,
+            record.validation_results,
+            generated_at=record.generated_at,
+        )
+
+    @staticmethod
+    def _unique_temp_path(model_id: str, suffix: str) -> Path:
+        fd, raw_path = tempfile.mkstemp(prefix=f"jewelmind_{model_id}_export_", suffix=suffix)
+        os.close(fd)
+        return Path(raw_path)
 
     def preview_file(self, model_id: str, component_name: str) -> Path:
         from jewelmind.api.errors import ModelNotFoundError

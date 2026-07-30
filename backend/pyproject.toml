@@ -2,7 +2,7 @@
 name = "jewelmind-backend"
 version = "0.1.0"
 description = "JewelMind parametric jewelry CAD backend"
-authors = [{ name = "Armando Gervasi", email = "armandogervasi91@gmail.com" }]
+authors = [{ name = "Armando Gervasi" }]
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

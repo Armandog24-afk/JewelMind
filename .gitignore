@@ -1,9 +1,13 @@
 # Python / backend
 backend/.venv/
-backend/**/__pycache__/
-backend/.pytest_cache/
-backend/.ruff_cache/
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/
 *.pyc
+
+# Generated CAD output — always regenerated, never hand-authored source.
+*.step
+*.stl
 
 # Node / frontend
 frontend/node_modules/

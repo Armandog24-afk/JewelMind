@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -49,6 +50,7 @@ def main() -> None:
         raise SystemExit(1)
 
     model = build_solitaire_ring(definition)
+    generated_at = datetime.now(UTC).isoformat()
     print(f"Generated model {model.definition_hash} in {model.generation_duration_s:.3f}s")
     for warning in model.warnings:
         print(f"[WARNING] {warning}")
@@ -56,7 +58,8 @@ def main() -> None:
     export_step(model, output_dir / "model.step")
     export_stl(model, definition, output_dir / "model.stl")
     (output_dir / "specification.md").write_text(
-        build_specification(definition, model, results), encoding="utf-8"
+        build_specification(definition, model, results, generated_at=generated_at),
+        encoding="utf-8",
     )
 
     print(f"Wrote model.step, model.stl, specification.md to {output_dir}")

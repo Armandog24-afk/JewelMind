@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import math
 import os
 import time
 import uuid
+from typing import Any
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -21,6 +23,30 @@ configure_logging()
 logger = get_logger(__name__)
 
 _DEFAULT_ORIGINS = "http://localhost:3000,http://localhost:5173"
+
+
+def _json_safe(value: Any) -> Any:
+    """Recursively replace non-finite floats with a safe string.
+
+    Pydantic's `ValidationError.errors()` echoes back the raw invalid
+    `input` a client sent — which, for a rejected `Infinity`/`NaN` numeric
+    field (see domain/schema.py's `allow_inf_nan=False`), is itself a
+    non-finite float. Starlette's JSONResponse renders with
+    `allow_nan=False` (correctly — a JSON response body must not contain
+    the bare literals `Infinity`/`NaN`), so embedding that raw value
+    verbatim in the error response crashes the error handler itself while
+    trying to report the very error that rejected it. This must be applied
+    to any error payload built from arbitrary echoed request input before
+    it reaches JSONResponse.
+    """
+
+    if isinstance(value, float) and not math.isfinite(value):
+        return str(value)
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(v) for v in value]
+    return value
 
 
 def _cors_origins() -> list[str]:
@@ -92,7 +118,7 @@ def create_app() -> FastAPI:
                     "code": "REQUEST_VALIDATION_ERROR",
                     "message": "The request body did not match the expected schema.",
                     "requestId": request_id,
-                    "details": exc.errors(),
+                    "details": _json_safe(exc.errors()),
                 }
             },
         )
@@ -107,7 +133,7 @@ def create_app() -> FastAPI:
                     "code": "REQUEST_VALIDATION_ERROR",
                     "message": "The request body did not match the expected schema.",
                     "requestId": request_id,
-                    "details": exc.errors(),
+                    "details": _json_safe(exc.errors()),
                 }
             },
         )

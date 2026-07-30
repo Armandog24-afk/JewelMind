@@ -52,7 +52,10 @@ export function ModelViewport() {
     [lastSuccessfulPreview],
   )
 
-  const geometries = useComponentGeometries(lastSuccessfulPreview?.previewComponents ?? null)
+  const {
+    geometries,
+    hasError: previewMeshError,
+  } = useComponentGeometries(lastSuccessfulPreview?.previewComponents ?? null)
 
   function resetCamera() {
     const camera = cameraRef.current
@@ -140,7 +143,11 @@ export function ModelViewport() {
       </div>
 
       {generationStatus === 'generating' ? <LoadingOverlay /> : null}
-      {generationStatus === 'error' && generationError ? <ErrorBanner message={generationError} /> : null}
+      {generationStatus === 'error' && generationError ? (
+        <ErrorBanner message={generationError} />
+      ) : previewMeshError ? (
+        <ErrorBanner message="Could not load the 3D preview mesh from the backend. Showing the last successful preview, if any." />
+      ) : null}
       {isStale ? <div className="stale-banner">Parameters changed — regenerate model.</div> : null}
       {showEmptyState ? (
         <p className="empty-state" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

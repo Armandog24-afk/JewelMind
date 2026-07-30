@@ -88,6 +88,120 @@ export interface JewelryDefinition {
   preview: PreviewSpec
 }
 
+const METAL_TYPES: readonly MetalType[] = [
+  'yellow_gold_18k',
+  'white_gold_18k',
+  'rose_gold_18k',
+  'platinum',
+  'silver',
+]
+const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
+const MANUFACTURING_METHODS: readonly ManufacturingMethod[] = [
+  'lost_wax_casting',
+  'direct_resin_printing',
+]
+
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value)
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+/**
+ * Runtime structural check for arbitrary/untrusted data (e.g. a definition
+ * loaded from localStorage) before it is trusted as a real
+ * JewelryDefinition. Mirrors the backend's strictness intent — reject
+ * numeric-looking-but-wrong values (strings, NaN, Infinity), reject an
+ * unsupported schemaVersion, reject missing/malformed sections — without
+ * needing a validation library. This only checks shape/type, not the
+ * business rules in docs/validation-rules.md (those still run afterward,
+ * same as for any freshly-edited definition).
+ */
+export function isValidJewelryDefinition(value: unknown): value is JewelryDefinition {
+  if (!isPlainObject(value)) return false
+  if (value['schemaVersion'] !== SCHEMA_VERSION) return false
+
+  const project = value['project']
+  if (!isPlainObject(project) || typeof project['name'] !== 'string' || project['units'] !== 'mm') {
+    return false
+  }
+
+  const jewelry = value['jewelry']
+  if (!isPlainObject(jewelry) || jewelry['category'] !== 'ring' || jewelry['style'] !== 'solitaire') {
+    return false
+  }
+
+  const ring = value['ring']
+  if (
+    !isPlainObject(ring) ||
+    ring['sizeSystem'] !== 'EU' ||
+    !isFiniteNumber(ring['size']) ||
+    !isFiniteNumber(ring['innerDiameter'])
+  ) {
+    return false
+  }
+
+  const band = value['band']
+  if (
+    !isPlainObject(band) ||
+    !isFiniteNumber(band['width']) ||
+    !isFiniteNumber(band['thickness']) ||
+    !BAND_PROFILES.includes(band['profile'] as BandProfile)
+  ) {
+    return false
+  }
+
+  const stone = value['stone']
+  if (
+    !isPlainObject(stone) ||
+    stone['shape'] !== 'round' ||
+    !isFiniteNumber(stone['diameter']) ||
+    !isFiniteNumber(stone['depth'])
+  ) {
+    return false
+  }
+
+  const setting = value['setting']
+  if (
+    !isPlainObject(setting) ||
+    setting['type'] !== 'prong' ||
+    !isFiniteNumber(setting['prongCount']) ||
+    !isFiniteNumber(setting['prongDiameter']) ||
+    !isFiniteNumber(setting['prongHeight']) ||
+    !isFiniteNumber(setting['basketHeight'])
+  ) {
+    return false
+  }
+
+  const material = value['material']
+  if (!isPlainObject(material) || !METAL_TYPES.includes(material['metal'] as MetalType)) {
+    return false
+  }
+
+  const manufacturing = value['manufacturing']
+  if (
+    !isPlainObject(manufacturing) ||
+    !MANUFACTURING_METHODS.includes(manufacturing['method'] as ManufacturingMethod)
+  ) {
+    return false
+  }
+
+  const preview = value['preview']
+  if (
+    !isPlainObject(preview) ||
+    !isFiniteNumber(preview['meshTolerance']) ||
+    preview['meshTolerance'] <= 0 ||
+    !isFiniteNumber(preview['angularTolerance']) ||
+    preview['angularTolerance'] <= 0
+  ) {
+    return false
+  }
+
+  return true
+}
+
 export function createDefaultDefinition(): JewelryDefinition {
   return {
     schemaVersion: SCHEMA_VERSION,

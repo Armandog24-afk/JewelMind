@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
-
 from jewelmind.domain.disclaimer import PROFESSIONAL_REVIEW_NOTICE
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.model import GeneratedModel
@@ -18,8 +16,18 @@ def build_specification(
     definition: JewelryDefinition,
     model: GeneratedModel,
     validation_results: list[ValidationResult],
+    generated_at: str,
 ) -> str:
-    generated_at = datetime.now(UTC).isoformat()
+    """Render the Markdown specification.
+
+    `generated_at` must be the timestamp captured when the model was
+    originally generated (see ModelRecord.generated_at in
+    services/model_service.py) — NOT the current time. Downloading the same
+    specification twice must produce the same "Generated at" value; only the
+    content of the file should ever change, and only if the underlying
+    model changes.
+    """
+
     bb = model.bounding_box
 
     lines: list[str] = []

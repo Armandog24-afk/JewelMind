@@ -34,9 +34,28 @@ JewelryStyle = Literal["solitaire"]
 
 
 class StrictModel(BaseModel):
-    """Base model: reject unknown fields so client/server drift is caught early."""
+    """Base model for the domain schema.
 
-    model_config = ConfigDict(extra="forbid")
+    - ``extra="forbid"``: reject unknown fields so client/server drift is
+      caught early.
+    - ``strict=True``: reject type-coerced input — e.g. a JSON string like
+      ``"2.4"`` is NOT accepted for a numeric field, even though Pydantic's
+      default ("lax") mode would silently parse it. Untrusted input must
+      send real JSON numbers for numeric fields. Note that widening
+      int -> float (e.g. ``16`` for a ``float`` field) is still allowed in
+      strict mode, since that is lossless and is exactly what a JSON number
+      without a decimal point parses to.
+    """
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+
+
+# Every plain `float` field in this schema also sets `allow_inf_nan=False`.
+# Without it, `gt=0`-style constraints are not enough: `float('inf') > 0` is
+# True, so an infinite mesh tolerance or band width would otherwise sail
+# straight through validation and into CadQuery, which cannot construct
+# geometry from a non-finite dimension. NaN comparisons are always False,
+# so an unconstrained field (no gt/lt) would silently accept NaN too.
 
 
 class ProjectInfo(StrictModel):
@@ -51,20 +70,20 @@ class JewelryInfo(StrictModel):
 
 class RingSpec(StrictModel):
     sizeSystem: RingSizeSystem = "EU"
-    size: float = Field(default=16)
-    innerDiameter: float = Field(default=17.8)
+    size: float = Field(default=16, allow_inf_nan=False)
+    innerDiameter: float = Field(default=17.8, allow_inf_nan=False)
 
 
 class BandSpec(StrictModel):
-    width: float = Field(default=2.4)
-    thickness: float = Field(default=1.8)
+    width: float = Field(default=2.4, allow_inf_nan=False)
+    thickness: float = Field(default=1.8, allow_inf_nan=False)
     profile: BandProfile = "comfort_fit"
 
 
 class StoneSpec(StrictModel):
     shape: StoneShape = "round"
-    diameter: float = Field(default=6.5)
-    depth: float = Field(default=4.0)
+    diameter: float = Field(default=6.5, allow_inf_nan=False)
+    depth: float = Field(default=4.0, allow_inf_nan=False)
 
 
 class SettingSpec(StrictModel):
@@ -72,9 +91,9 @@ class SettingSpec(StrictModel):
     # Not a Literal[4, 6]: an out-of-set value must surface as a structured
     # JM-PRONG-001 validation result, not a raw pydantic parse error.
     prongCount: int = Field(default=6)
-    prongDiameter: float = Field(default=1.1)
-    prongHeight: float = Field(default=4.8)
-    basketHeight: float = Field(default=3.5)
+    prongDiameter: float = Field(default=1.1, allow_inf_nan=False)
+    prongHeight: float = Field(default=4.8, allow_inf_nan=False)
+    basketHeight: float = Field(default=3.5, allow_inf_nan=False)
 
 
 class MaterialSpec(StrictModel):
@@ -86,12 +105,15 @@ class ManufacturingSpec(StrictModel):
 
 
 class PreviewSpec(StrictModel):
-    meshTolerance: float = Field(default=0.1, gt=0)
-    angularTolerance: float = Field(default=0.2, gt=0)
+    meshTolerance: float = Field(default=0.1, gt=0, allow_inf_nan=False)
+    angularTolerance: float = Field(default=0.2, gt=0, allow_inf_nan=False)
 
 
 class JewelryDefinition(StrictModel):
-    schemaVersion: str = SCHEMA_VERSION
+    # Only the currently supported schema version is accepted. A definition
+    # saved by a future/older incompatible version of JewelMind must fail
+    # loudly here rather than being silently (mis)interpreted.
+    schemaVersion: Literal["0.1.0"] = SCHEMA_VERSION
     project: ProjectInfo = Field(default_factory=ProjectInfo)
     jewelry: JewelryInfo = Field(default_factory=JewelryInfo)
     ring: RingSpec = Field(default_factory=RingSpec)

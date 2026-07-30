@@ -51,9 +51,16 @@ See `docs/known-limitations.md` for exactly what is and isn't implemented.
 - Stale-state handling: changing a parameter after generating marks the
   model stale and disables export until you regenerate; a failed
   regeneration keeps the last successful preview visible instead of
-  blanking the viewport.
-- 52 backend tests (pytest) and 20 frontend tests (vitest) passing; see
-  §10 below for exact commands.
+  blanking the viewport, and a failed preview-mesh reload never disposes
+  or blanks an already-visible model.
+- Hardened backend data safety: numeric fields reject strings, `NaN`, and
+  `Infinity`; `schemaVersion` is locked to the currently supported version;
+  `/api/health` returns HTTP 503 (not a false "healthy") when CadQuery
+  fails to load; every export uses a unique temp file and is cleaned up
+  after both success and failure. See `AUDIT_FIXES.md` for the full list.
+- 139 backend tests (pytest) and 41 frontend tests (vitest) passing; see
+  §10 below for exact commands. A GitHub Actions workflow
+  (`.github/workflows/ci.yml`) runs all of this on every push/PR to `main`.
 
 ## 4. What does not work
 
@@ -84,7 +91,7 @@ One frontend, one backend — no microservices. Full write-up:
 ## 6. Requirements
 
 - Python 3.11
-- Node.js 20+
+- Node.js 24 (also runs fine on Node 20+; CI and Docker both pin Node 24)
 - Docker + Docker Compose (optional; see §8/§12)
 
 CadQuery installs via plain `pip install cadquery` — its OpenCascade
@@ -140,10 +147,10 @@ Or use `scripts/dev-backend.ps1` / `.sh` and `scripts/dev-frontend.ps1` /
 ## 10. Test commands
 
 ```bash
-# Backend (52 tests)
+# Backend (139 tests)
 cd backend && .venv/Scripts/python -m pytest -q   # .venv/bin/python on macOS/Linux
 
-# Frontend (20 tests)
+# Frontend (41 tests)
 cd frontend && npm run test
 
 # Type-check + build the frontend
@@ -209,4 +216,4 @@ Further reading: `docs/architecture.md`, `docs/geometry-conventions.md`,
 `docs/domain-model.md`, `docs/validation-rules.md`, `docs/api.md`,
 `docs/development.md`, `docs/known-limitations.md`, `CLAUDE.md`.
 
-**Author:** Armando Gervasi <armandogervasi91@gmail.com>
+**Author:** Armando Gervasi

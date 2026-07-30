@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 from jewelmind.validation.rules import ValidationResult
 
@@ -18,6 +18,7 @@ class HealthResponse(BaseModel):
     version: str
     cadEngine: str
     cadEngineReady: bool
+    cadEngineError: str | None = None
 
 
 class ValidateResponse(BaseModel):
@@ -48,21 +49,33 @@ class ModelMetadataResponse(BaseModel):
     validation: list[ValidationResult]
 
 
-class ExportStepRequest(BaseModel):
+class _StrictRequest(BaseModel):
+    """Shared strictness for request bodies: reject unknown fields and
+    reject type-coerced input (e.g. a numeric string for a float field).
+    """
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+
+
+class ExportStepRequest(_StrictRequest):
     modelId: str
     includeStoneReference: bool = False
 
 
-class ExportStlRequest(BaseModel):
+class ExportStlRequest(_StrictRequest):
     modelId: str
     includeStoneReference: bool = False
-    meshTolerance: float | None = None
-    angularTolerance: float | None = None
+    # Optional overrides for the definition's own preview.meshTolerance /
+    # angularTolerance. Must be finite and strictly positive when provided —
+    # an infinite or non-positive tolerance would hang or crash the
+    # OpenCascade tessellator.
+    meshTolerance: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+    angularTolerance: float | None = Field(default=None, gt=0, allow_inf_nan=False)
 
 
-class ExportJsonRequest(BaseModel):
+class ExportJsonRequest(_StrictRequest):
     modelId: str
 
 
-class SpecificationRequest(BaseModel):
+class SpecificationRequest(_StrictRequest):
     modelId: str

@@ -46,10 +46,35 @@ class ModelGenerationFailedError(AppError):
 
 
 class ExportFailedError(AppError):
+    """Generic export failure (JSON / specification exports)."""
+
     status_code = 500
     code = "EXPORT_FAILED"
+
+
+class StepExportFailedError(AppError):
+    status_code = 500
+    code = "STEP_EXPORT_FAILED"
+
+
+class StlExportFailedError(AppError):
+    status_code = 500
+    code = "STL_EXPORT_FAILED"
 
 
 class BadRequestError(AppError):
     status_code = 400
     code = "BAD_REQUEST"
+
+
+class CadEngineUnavailableError(AppError):
+    """Raised when CadQuery/OpenCascade failed to load in this process.
+
+    503 (Service Unavailable) rather than 500: this signals a temporary,
+    environment-level problem the caller cannot fix by changing their
+    request, distinct from a genuine bug in geometry generation for a
+    specific definition.
+    """
+
+    status_code = 503
+    code = "CAD_ENGINE_UNAVAILABLE"
