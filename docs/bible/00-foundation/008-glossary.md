@@ -9,6 +9,7 @@ source_of_truth: true
 depends_on: []
 related_documents:
   - JM-BIBLE-001
+  - JM-BIBLE-DOMAIN-README
 implementation_status: current
 ---
 
@@ -87,9 +88,26 @@ tolerance.
 
 ## Jewelry terms (as used by this project's simplified model)
 
+> Authoritative source for every term in this section:
+> [`04-jewelry-domain/`](../04-jewelry-domain/README.md) (Sprint 2). This
+> glossary gives the short definition; the linked domain document gives
+> full detail, current limitations, and professional-validation status.
+
+**JewelryProduct** — the top-level taxonomy concept covering every
+category of jewelry (ring, earring, pendant, ...). Only `Ring` is
+implemented today. See
+[`04-jewelry-domain/041-jewelry-product-taxonomy.md`](../04-jewelry-domain/041-jewelry-product-taxonomy.md).
+
+**Ring style** — the overall structural category of a ring (e.g.
+solitaire, halo). A separate axis from setting type, band style, and
+decorative treatment — see
+[`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md).
+Only `Solitaire` is implemented today.
+
 **Band** — the ring's circular metal body, defined by width, thickness,
 and profile (flat or comfort-fit). See
-`docs/geometry-conventions.md`.
+`docs/geometry-conventions.md` and
+[`04-jewelry-domain/045-band-domain.md`](../04-jewelry-domain/045-band-domain.md).
 
 **Flat profile** — a band cross-section that is a plain rectangle
 (optionally with a small outer-rim fillet).
@@ -99,11 +117,31 @@ rather than flat, intended to feel rounder against the finger. *Note:*
 this project's implementation is a simplified geometric approximation of
 the concept, not a manufacturing-validated ergonomic profile.
 
+**Shoulders** — the transitional band sections leading up to the setting
+(relevant to styles like cathedral). **Not implemented** — see
+[`04-jewelry-domain/043-ring-anatomy.md`](../04-jewelry-domain/043-ring-anatomy.md).
+
+**Head** — informal umbrella term for the setting + basket support
+combined. Not a named concept in current code — see
+[`04-jewelry-domain/043-ring-anatomy.md`](../04-jewelry-domain/043-ring-anatomy.md).
+
+**Gallery** — decorative open or filigreed structure between the stone
+and the band, often part of or visible through the basket. **Not
+implemented** — see
+[`04-jewelry-domain/049-basket-and-support-domain.md`](../04-jewelry-domain/049-basket-and-support-domain.md).
+
+**Bridge** — a structural connector distinct from the gallery, sometimes
+linking a basket to shoulders. **Not implemented** — see
+[`04-jewelry-domain/049-basket-and-support-domain.md`](../04-jewelry-domain/049-basket-and-support-domain.md).
+
 **Stone reference** — a simplified geometric solid representing the
 approximate size and position of the center stone, used for visualization
 and clearance checking. *Note:* explicitly not a gemological reproduction
-of a real cut stone — see [LAW-006](004-jewelmind-constitution.md) and
-`docs/known-limitations.md`.
+of a real cut stone — see [LAW-006](004-jewelmind-constitution.md),
+`docs/known-limitations.md`, and
+[`04-jewelry-domain/046-stone-domain.md`](../04-jewelry-domain/046-stone-domain.md).
+Deliberately not named "certified gemstone," "manufacturing stone seat,"
+or "gemological model" — see the linked document for why.
 
 **Girdle** — in real gemology, the widest edge of a cut stone, separating
 crown from pavilion. In this project's simplified stone reference, the
@@ -118,33 +156,81 @@ fraction of `stone.depth` above the girdle.
 below the girdle. In this project's stone reference, a fixed fraction of
 `stone.depth` below the girdle.
 
+**Stone shape** — the geometric cut category of a stone (round, oval,
+princess, ...). Only `round` is implemented today — see
+[`04-jewelry-domain/046-stone-domain.md`](../04-jewelry-domain/046-stone-domain.md).
+
+**Setting** — the general concept of how a stone is physically held
+(prong, bezel, channel, pavé, ...); this project currently supports only
+prong settings. See
+[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md).
+
+**Pavé** — a setting/decorative technique where many small stones are set
+closely together — **not a ring style**, despite sometimes being used
+loosely that way. **Not implemented.** See
+[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md)
+and
+[`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md)'s
+explicit warning against conflating it with a structural category.
+
+**Halo** — a ring style where a center stone is surrounded by a ring of
+smaller accent stones. **Not implemented** (requires multi-stone
+arrangement support the current schema does not have) — see
+[`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md).
+
+**Bezel** — a setting type where the stone is fully or partially
+encircled by a continuous metal rim, with no discrete prongs. **Not
+implemented.** See
+[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md).
+
+**Channel setting** — a setting type where stones are held between two
+parallel metal walls, typically in a row. **Not implemented.** See
+[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md).
+
 **Prong** — one of the metal claws (four or six, in this project) that
 grip the stone reference. Modeled here as plain cylinders — see
-`docs/known-limitations.md` for what this does not represent (tapered or
-hand-finished prong shaping).
+`docs/known-limitations.md` and
+[`04-jewelry-domain/048-prong-domain.md`](../04-jewelry-domain/048-prong-domain.md)
+for what this does not represent (tapered or hand-finished prong
+shaping, a real bearing/seat cut).
 
 **Basket** — the structural metal support connecting the prongs to the
 band. Modeled here as a plain cylindrical shell, deliberately simple
 rather than decorative — see
-[`02-architecture/026-known-technical-limitations.md`](../02-architecture/026-known-technical-limitations.md).
-
-**Setting** — the mechanism holding the stone in place; this project
-supports only prong settings.
+[`02-architecture/026-known-technical-limitations.md`](../02-architecture/026-known-technical-limitations.md)
+and
+[`04-jewelry-domain/049-basket-and-support-domain.md`](../04-jewelry-domain/049-basket-and-support-domain.md).
 
 **Lost-wax casting** — a traditional jewelry manufacturing method (a wax
 model is cast, then used to form a mold for metal casting). Used in this
 project as a `manufacturing.method` value affecting validation context,
-not as a simulated physical process.
+not as a simulated physical process. See
+[`04-jewelry-domain/051-manufacturing-context.md`](../04-jewelry-domain/051-manufacturing-context.md).
 
 **(Direct) resin printing** — a manufacturing method using 3D-printed
 resin patterns instead of hand-carved wax. Selecting this method in
 JewelMind triggers `JM-MANUFACTURING-001`, an extra minimum-feature-size
 warning, because printed features below a certain size may not resolve
-reliably.
+reliably. See
+[`04-jewelry-domain/051-manufacturing-context.md`](../04-jewelry-domain/051-manufacturing-context.md).
 
 **Manufacturing review** — the mandatory human step, by a qualified
 jewelry professional, required before any JewelMind output is used for
-actual production. See [LAW-010](004-jewelmind-constitution.md).
+actual production. See [LAW-010](004-jewelmind-constitution.md) and
+[`04-jewelry-domain/058-professional-validation-register.md`](../04-jewelry-domain/058-professional-validation-register.md).
+
+**Preliminary software rule** — a validation rule or geometric constant
+that is currently implemented for prototype safety or consistency, but
+has not been reviewed and accepted by a qualified jewelry professional.
+See
+[`04-jewelry-domain/040-domain-governance.md`](../04-jewelry-domain/040-domain-governance.md).
+As of Sprint 2, every numeric jewelry rule in this repository is, at
+most, a preliminary software rule.
+
+**Professionally validated rule** — a rule reviewed and accepted by an
+identified, named jewelry professional through the process in
+[`04-jewelry-domain/058-professional-validation-register.md`](../04-jewelry-domain/058-professional-validation-register.md).
+None exist yet.
 
 ## Application-specific terms
 

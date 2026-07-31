@@ -131,3 +131,50 @@ must:
   (or write a deliberate ADR if the accident turns out to be the better
   design), not the documentation, unless the documentation itself was
   simply wrong.
+
+## JEWELRY DOMAIN RULES
+
+`docs/bible/04-jewelry-domain/` is the authoritative jewelry-domain
+model — start at
+[`docs/bible/04-jewelry-domain/README.md`](docs/bible/04-jewelry-domain/README.md).
+Future coding agents must:
+
+- **Read `docs/bible/04-jewelry-domain/README.md` before changing jewelry
+  concepts** — before adding/changing a stone shape, setting type, ring
+  style, band profile, or any parameter that affects geometry or
+  validation.
+- **Use canonical terminology** — per
+  `docs/bible/00-foundation/008-glossary.md`; do not introduce a new name
+  for an existing concept, and do not reuse an existing term for
+  something different.
+- **Not invent jewelry measurements** — no default, tolerance, density,
+  shrinkage value, or proportion may be added to code or docs without a
+  traceable source; see
+  `docs/bible/04-jewelry-domain/040-domain-governance.md`.
+- **Distinguish metadata from geometry-driving parameters** — e.g.
+  `material.metal` and `manufacturing.method` currently affect
+  metadata/validation-context only, never geometry; do not silently
+  change that without updating
+  `docs/bible/04-jewelry-domain/052-parametric-dependency-model.md`.
+- **Preserve stone-reference separation** — see LAW-006; never union the
+  stone into the metal body or include it in a default export.
+- **Update the parameter catalog when adding parameters** —
+  `docs/bible/appendices/jewelry-domain-parameter-catalog.md`, in the
+  same change as the schema change.
+- **Update the dependency model when changing geometric relationships**
+  — `docs/bible/04-jewelry-domain/052-parametric-dependency-model.md`.
+- **Update the professional-validation register when introducing
+  expert-derived rules** —
+  `docs/bible/04-jewelry-domain/058-professional-validation-register.md`;
+  never invent a reviewer.
+- **Never label preliminary thresholds as industry standards** — a
+  number in `validation/engine.py` is a PRELIMINARY SOFTWARE RULE unless
+  a register entry says otherwise; see
+  `docs/bible/04-jewelry-domain/054-domain-validation-classification.md`.
+- **Create an RFC before adding a new ring style, setting type, or
+  jewelry category** — see
+  `docs/bible/04-jewelry-domain/056-domain-extension-strategy.md` for the
+  full workflow (an ADR is also required if the change is architectural).
+- **Update domain-to-code mapping after implementation changes** —
+  `docs/bible/04-jewelry-domain/055-domain-to-code-mapping.md` and
+  `docs/bible/appendices/jewelry-domain-status-matrix.md`.

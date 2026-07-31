@@ -13,6 +13,7 @@ related_documents:
   - JM-BIBLE-006
   - JM-BIBLE-A01
   - JM-BIBLE-A02
+  - JM-BIBLE-DOMAIN-README
 implementation_status: current
 ---
 
@@ -63,3 +64,17 @@ this table is the summary.
 
 See [`appendices/test-inventory.md`](../appendices/test-inventory.md) for
 what each suite actually covers and where coverage is known to be thin.
+
+## Jewelry-domain detail
+
+The table above is a capability-level summary. For the underlying
+jewelry-domain concepts — what a "ring," "band," "stone reference,"
+"setting," "prong," and "basket support" actually mean in this codebase,
+which are IMPLEMENTED FACTs versus PRELIMINARY SOFTWARE RULEs, and which
+jewelry-domain questions remain open — see
+[`04-jewelry-domain/README.md`](../04-jewelry-domain/README.md) (Sprint 2
+of this Bible). In particular,
+[`04-jewelry-domain/054-domain-validation-classification.md`](../04-jewelry-domain/054-domain-validation-classification.md)
+classifies every one of the sixteen validation rules referenced above,
+and confirms that **zero** of them have been professionally validated as
+of this Sprint.

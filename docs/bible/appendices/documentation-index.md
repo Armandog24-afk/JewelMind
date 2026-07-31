@@ -57,10 +57,35 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-ADR-008 | Monorepo architecture | accepted | current | [`03-decisions/ADR-008-monorepo-architecture.md`](../03-decisions/ADR-008-monorepo-architecture.md) |
 | JM-BIBLE-ADR-009 | Millimeter-only coordinate/unit system | accepted | current | [`03-decisions/ADR-009-millimeter-coordinate-system.md`](../03-decisions/ADR-009-millimeter-coordinate-system.md) |
 | JM-BIBLE-ADR-010 | STEP and STL as the export strategy | accepted | current | [`03-decisions/ADR-010-step-and-stl-export-strategy.md`](../03-decisions/ADR-010-step-and-stl-export-strategy.md) |
+| JM-BIBLE-DOMAIN-README | Jewelry Domain Model — Index | accepted | current | [`04-jewelry-domain/README.md`](../04-jewelry-domain/README.md) |
+| JM-BIBLE-040 | Domain Governance | accepted | current | [`04-jewelry-domain/040-domain-governance.md`](../04-jewelry-domain/040-domain-governance.md) |
+| JM-BIBLE-041 | Jewelry Product Taxonomy | accepted | partial | [`04-jewelry-domain/041-jewelry-product-taxonomy.md`](../04-jewelry-domain/041-jewelry-product-taxonomy.md) |
+| JM-BIBLE-042 | Ring Taxonomy | accepted | partial | [`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md) |
+| JM-BIBLE-043 | Ring Anatomy | accepted | partial | [`04-jewelry-domain/043-ring-anatomy.md`](../04-jewelry-domain/043-ring-anatomy.md) |
+| JM-BIBLE-044 | Solitaire Domain Model | accepted | current | [`04-jewelry-domain/044-solitaire-domain-model.md`](../04-jewelry-domain/044-solitaire-domain-model.md) |
+| JM-BIBLE-045 | Band Domain | accepted | current | [`04-jewelry-domain/045-band-domain.md`](../04-jewelry-domain/045-band-domain.md) |
+| JM-BIBLE-046 | Stone Domain | accepted | current | [`04-jewelry-domain/046-stone-domain.md`](../04-jewelry-domain/046-stone-domain.md) |
+| JM-BIBLE-047 | Setting Domain | accepted | partial | [`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md) |
+| JM-BIBLE-048 | Prong Domain | accepted | current | [`04-jewelry-domain/048-prong-domain.md`](../04-jewelry-domain/048-prong-domain.md) |
+| JM-BIBLE-049 | Basket and Support Domain | accepted | current | [`04-jewelry-domain/049-basket-and-support-domain.md`](../04-jewelry-domain/049-basket-and-support-domain.md) |
+| JM-BIBLE-050 | Material Domain | accepted | current | [`04-jewelry-domain/050-material-domain.md`](../04-jewelry-domain/050-material-domain.md) |
+| JM-BIBLE-051 | Manufacturing Context | accepted | current | [`04-jewelry-domain/051-manufacturing-context.md`](../04-jewelry-domain/051-manufacturing-context.md) |
+| JM-BIBLE-052 | Parametric Dependency Model | accepted | current | [`04-jewelry-domain/052-parametric-dependency-model.md`](../04-jewelry-domain/052-parametric-dependency-model.md) |
+| JM-BIBLE-053 | Domain Invariants | accepted | current | [`04-jewelry-domain/053-domain-invariants.md`](../04-jewelry-domain/053-domain-invariants.md) |
+| JM-BIBLE-054 | Domain Validation Classification | accepted | current | [`04-jewelry-domain/054-domain-validation-classification.md`](../04-jewelry-domain/054-domain-validation-classification.md) |
+| JM-BIBLE-055 | Domain-to-Code Mapping | accepted | current | [`04-jewelry-domain/055-domain-to-code-mapping.md`](../04-jewelry-domain/055-domain-to-code-mapping.md) |
+| JM-BIBLE-056 | Domain Extension Strategy | accepted | current | [`04-jewelry-domain/056-domain-extension-strategy.md`](../04-jewelry-domain/056-domain-extension-strategy.md) |
+| JM-BIBLE-057 | Open Domain Questions | accepted | current | [`04-jewelry-domain/057-open-domain-questions.md`](../04-jewelry-domain/057-open-domain-questions.md) |
+| JM-BIBLE-058 | Professional Validation Register | accepted | current | [`04-jewelry-domain/058-professional-validation-register.md`](../04-jewelry-domain/058-professional-validation-register.md) |
+| JM-BIBLE-SPRINT2-REPORT | Sprint 2 Validation Report | accepted | current | [`04-jewelry-domain/SPRINT-2-VALIDATION-REPORT.md`](../04-jewelry-domain/SPRINT-2-VALIDATION-REPORT.md) |
 | JM-BIBLE-A01 | Appendix: Implementation Inventory | accepted | current | [`appendices/implementation-inventory.md`](implementation-inventory.md) |
 | JM-BIBLE-A02 | Appendix: Test Inventory | accepted | current | [`appendices/test-inventory.md`](test-inventory.md) |
 | JM-BIBLE-A03 | Appendix: API Inventory | accepted | current | [`appendices/api-inventory.md`](api-inventory.md) |
 | JM-BIBLE-A04 | Appendix: Documentation Index | accepted | current | [`appendices/documentation-index.md`](documentation-index.md) (this document) |
+| JM-BIBLE-A05 | Appendix: Jewelry Domain Entity Catalog | accepted | current | [`appendices/jewelry-domain-entity-catalog.md`](jewelry-domain-entity-catalog.md) |
+| JM-BIBLE-A06 | Appendix: Jewelry Domain Parameter Catalog | accepted | current | [`appendices/jewelry-domain-parameter-catalog.md`](jewelry-domain-parameter-catalog.md) |
+| JM-BIBLE-A07 | Appendix: Jewelry Domain Relationship Matrix | accepted | current | [`appendices/jewelry-domain-relationship-matrix.md`](jewelry-domain-relationship-matrix.md) |
+| JM-BIBLE-A08 | Appendix: Jewelry Domain Status Matrix | accepted | current | [`appendices/jewelry-domain-status-matrix.md`](jewelry-domain-status-matrix.md) |
 
 ## Pre-existing technical reference — `docs/`
 

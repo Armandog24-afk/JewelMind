@@ -1,0 +1,65 @@
+---
+id: JM-BIBLE-A06
+title: "Appendix: Jewelry Domain Parameter Catalog"
+version: 1.0.0
+status: accepted
+owner: JewelMind
+last_updated: 2026-07-31
+source_of_truth: true
+depends_on:
+  - JM-BIBLE-052
+related_documents:
+  - JM-BIBLE-A05
+  - JM-BIBLE-054
+implementation_status: current
+professional_validation: preliminary
+---
+
+# Appendix: Jewelry Domain Parameter Catalog
+
+Every parameter in the current canonical schema
+(`backend/jewelmind/domain/schema.py`, mirrored in
+`shared/types/jewelry-definition.ts`). No default below is invented — all
+are copied directly from the schema's `Field(default=...)` values.
+
+| Canonical path | Type | Unit | Allowed values | Default | Direct/derived | Geometry influence | Validation influence | Current UI control | Professional-validation status |
+|---|---|---|---|---|---|---|---|---|---|
+| `project.name` | string | — | 1–200 chars | `"Solitaire Ring"` | direct | none | none | Text input (`project-name`) | not_required |
+| `project.units` | string | — | fixed `"mm"` | `"mm"` | direct | implicit (all lengths are mm) | schema-level only | none (fixed) | not_required |
+| `jewelry.category` | string | — | fixed `"ring"` | `"ring"` | direct | selects the assembly pipeline (implicitly, always solitaire) | none | none (fixed) | not_required |
+| `jewelry.style` | string | — | fixed `"solitaire"` | `"solitaire"` | direct | same as above | none | none (fixed) | not_required |
+| `ring.sizeSystem` | string | — | fixed `"EU"` | `"EU"` | direct | none | `JM-RING-003` (via `sizing.py`) | none (fixed) | preliminary |
+| `ring.size` | float | dimensionless (size label) | `> 1` and `< 50` (business rule) | `16` | direct | none directly; cross-checked against `innerDiameter` | `JM-RING-002`, `JM-RING-003` | Numeric input (`ring-size`), step 0.5 | preliminary |
+| `ring.innerDiameter` | float | mm | `> 10` and `< 30` (business rule) | `17.8` | direct | drives `inner_radius`/`outer_radius`/`band_top_z` | `JM-RING-001`, `JM-RING-003`, `JM-GEOMETRY-001` | Numeric input (`ring-inner-diameter`) | preliminary |
+| `band.width` | float | mm | `≥ 1.5` (business rule) | `2.4` | direct | band cross-section (Y extent) | `JM-BAND-001`, `JM-BAND-003`, `JM-GEOMETRY-001`, `JM-MANUFACTURING-001` | Numeric input (`band-width`) | preliminary |
+| `band.thickness` | float | mm | `≥ 1.4` (business rule) | `1.8` | direct | band cross-section (radial extent), `outer_radius` | `JM-BAND-002`, `JM-GEOMETRY-001`, `JM-MANUFACTURING-001` | Numeric input (`band-thickness`) | preliminary |
+| `band.profile` | string | — | `"flat"` \| `"comfort_fit"` | `"comfort_fit"` | direct | selects cross-section construction path | none directly | Select (`band-profile`) | preliminary |
+| `stone.shape` | string | — | fixed `"round"` | `"round"` | direct | selects stone-loft construction | none | none (fixed) | preliminary |
+| `stone.diameter` | float | mm | `2`–`15` (business rule) | `6.5` | direct | girdle radius, `prong_center_radius` | `JM-STONE-001`, `JM-PRONG-003` | Numeric input (`stone-diameter`) | preliminary |
+| `stone.depth` | float | mm | `> 0.5` and `< diameter` (business rule) | `4.0` | direct | crown/pavilion heights | `JM-STONE-002` | Numeric input (`stone-depth`) | preliminary |
+| `setting.type` | string | — | fixed `"prong"` | `"prong"` | direct | selects setting construction path | none | none (fixed) | preliminary |
+| `setting.prongCount` | integer | count | `4` or `6` (business rule; schema allows any int) | `6` | direct | number of prong solids, angular spacing | `JM-PRONG-001`, `JM-PRONG-003` | Select (`prong-count`, options 4/6) | preliminary |
+| `setting.prongDiameter` | float | mm | `≥ 0.8` (business rule) | `1.1` | direct | prong cylinder radius, `prong_center_radius` | `JM-PRONG-002` | Numeric input (`prong-diameter`) | preliminary |
+| `setting.prongHeight` | float | mm | `> basketHeight` (business rule) | `4.8` | direct | prong cylinder height | `JM-PRONG-004` | Numeric input (`prong-height`) | preliminary |
+| `setting.basketHeight` | float | mm | `> 0`, `< prongHeight` (business rule) | `3.5` | direct | basket height, stone girdle Z position | `JM-PRONG-004`, `JM-SETTING-001`, `JM-SETTING-002` | Numeric input (`basket-height`) | preliminary |
+| `material.metal` | string | — | 5 fixed values (see [`050-material-domain.md`](../04-jewelry-domain/050-material-domain.md)) | `"yellow_gold_18k"` | direct | none (preview color only) | none | Select (`metal`) | preliminary |
+| `manufacturing.method` | string | — | `"lost_wax_casting"` \| `"direct_resin_printing"` | `"lost_wax_casting"` | direct | none (validation context only) | `JM-MANUFACTURING-001` | Select (`manufacturing-method`) | preliminary |
+| `preview.meshTolerance` | float | mm | `> 0`, finite | `0.1` | direct | mesh triangle density only (not the B-Rep solid) | schema-level (`gt=0`, `allow_inf_nan=False`) | none in current UI (schema default used; overridable in the STL export API request only) | not_required |
+| `preview.angularTolerance` | float | radians | `> 0`, finite | `0.2` | direct | mesh triangle density only | schema-level | none in current UI (same override note as above) | not_required |
+
+## Derived (non-schema) values referenced elsewhere in this Bible
+
+These are computed, never stored, and therefore have no "canonical path"
+of their own — listed here only to avoid a reader mistaking them for
+missing schema parameters. Full detail:
+[`052-parametric-dependency-model.md`](../04-jewelry-domain/052-parametric-dependency-model.md).
+
+| Derived value | Computed from |
+|---|---|
+| `inner_radius` | `ring.innerDiameter / 2` |
+| `outer_radius` | `inner_radius + band.thickness` |
+| `band_top_z` | `outer_radius` |
+| `prong_center_radius` | `stone.diameter / 2 − (setting.prongDiameter / 2) × 0.3` |
+| Stone girdle radius | `stone.diameter / 2` |
+| Stone girdle Z | `band_top_z + setting.basketHeight` |
+| Stone crown/pavilion heights | `stone.depth × 0.35` / `stone.depth × 0.65` |
