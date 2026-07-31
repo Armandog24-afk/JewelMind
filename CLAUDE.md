@@ -90,3 +90,44 @@ Authentication, payments, subscriptions, a marketplace, multi-user
 collaboration, image generation, prompt-to-CAD, or any other feature not
 already described in `README.md`. If a task seems to call for one of
 these, stop and ask rather than adding it.
+
+## TECHNICAL BIBLE RULES
+
+`docs/bible/` is the structured source of truth for JewelMind's product
+rationale, architecture decisions, and constitutional rules — start at
+[`docs/bible/README.md`](docs/bible/README.md). The rules above in this
+file remain the fast, always-loaded summary; the Bible is where the full
+reasoning, current-status matrix, and ADRs live. Future coding agents
+must:
+
+- **Read `docs/bible/README.md` before architectural work** — specifically
+  before anything that would meet an "ADR required" condition (new CAD
+  engine, non-additive schema change, moving validation authority, changing
+  export defaults, changing the coordinate/unit system, or violating a
+  Constitution law).
+- **Identify related Constitution laws** in
+  `docs/bible/00-foundation/004-jewelmind-constitution.md` before making
+  the change, not after.
+- **Identify affected ADRs** in `docs/bible/03-decisions/` and update or
+  supersede them (never silently edit around one) if the change
+  contradicts an accepted decision.
+- **Update implementation-status documents when functionality changes** —
+  at minimum `docs/bible/00-foundation/005-current-product-status.md` and
+  `docs/bible/appendices/implementation-inventory.md`, in the same change
+  as the code.
+- **Never mark PLANNED functionality as CURRENT.** See the CURRENT /
+  PARTIAL / PLANNED / VISION rule in
+  `docs/bible/00-foundation/000-bible-governance.md`.
+- **Create an ADR before violating an accepted architectural decision** —
+  see "When an ADR is required" in the same governance document.
+- **Update functional requirements and tests together** —
+  `docs/bible/01-product/013-functional-requirements.md` should reflect
+  what the test suite actually proves, not what is merely intended.
+- **Report contradictions between code and the Bible explicitly** —
+  per the Bible's fundamental rule: never silently change the meaning of
+  the product to make a contradiction disappear.
+- **Avoid rewriting the Bible merely to justify an accidental
+  implementation** — if the code did something unintended, fix the code
+  (or write a deliberate ADR if the accident turns out to be the better
+  design), not the documentation, unless the documentation itself was
+  simply wrong.
