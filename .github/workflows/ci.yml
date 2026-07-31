@@ -63,8 +63,11 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Type-check and build
-        run: npm run build
+      - name: TypeScript build (strict type-check)
+        run: npx tsc -b
+
+      - name: Production build (Vite)
+        run: npx vite build
 
   docker-smoke-test:
     name: Docker smoke test
