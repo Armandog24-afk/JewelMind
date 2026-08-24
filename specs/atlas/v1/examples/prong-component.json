@@ -1,0 +1,36 @@
+{
+  "componentId": "prongs",
+  "componentType": "compound",
+  "componentName": "prongs",
+  "parentAssembly": "solitaire",
+  "geometryRole": "production_metal",
+  "productionRole": "included_by_default",
+  "previewRole": "visible",
+  "sourceJDLPaths": ["setting.prongCount", "setting.prongDiameter", "setting.prongHeight", "stone.diameter"],
+  "derivedParameters": {
+    "requestedCount": 6,
+    "generatedCount": 6,
+    "prongRadiusMm": 0.55,
+    "centerRadiusMm": 3.085,
+    "positions": [
+      { "x": 3.085, "y": 0.0 },
+      { "x": 1.5425000000000004, "y": 2.671688370674993 },
+      { "x": -1.5424999999999993, "y": 2.6716883706749934 },
+      { "x": -3.085, "y": 3.778035375369585e-16 },
+      { "x": -1.5425000000000013, "y": -2.6716883706749925 },
+      { "x": 1.5425000000000004, "y": -2.671688370674993 }
+    ]
+  },
+  "geometry": { "representation": "kernel-native-not-serialized" },
+  "boundingBox": {
+    "xmin": -3.635, "xmax": 3.635,
+    "ymin": -3.2216883706749933, "ymax": 3.2216883706749933,
+    "zmin": 10.3, "zmax": 15.5
+  },
+  "volume": 29.650351464580467,
+  "transform": null,
+  "generationStatus": "SUCCEEDED",
+  "warnings": [],
+  "fallbackUsed": false,
+  "inspectionResults": []
+}

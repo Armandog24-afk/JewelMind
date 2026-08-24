@@ -286,3 +286,70 @@ test vectors). Future coding agents must:
 - **Report code/Forge contradictions** — per the Bible's fundamental
   rule, never silently change the meaning of a rule to make a
   contradiction with `docs/bible/06-forge/` disappear.
+
+## ATLAS RULES
+
+`docs/bible/07-atlas/` is the authoritative Atlas Geometry Core
+specification — start at
+[`docs/bible/07-atlas/README.md`](docs/bible/07-atlas/README.md). The
+machine-readable half lives in
+[`specs/atlas/v1/`](specs/atlas/v1/README.md) (component/assembly/metadata/
+inspection/error/manifest JSON Schemas, real examples, and test vectors).
+Future coding agents must:
+
+- **Read `docs/bible/07-atlas/README.md` before changing geometry** —
+  before modifying anything in `backend/jewelmind/geometry/`,
+  `backend/jewelmind/preview/`, or `backend/jewelmind/exporters/`.
+- **Preserve the Atlas/Forge boundary** — Atlas reports geometric facts
+  (a volume, a solid count, a bounding box); only Forge may interpret a
+  fact as a jewelry-domain or manufacturing rule violation
+  (ATLAS-GOV-001, ATLAS-GOV-002).
+- **Use millimeters internally** — no unit field, no conversion
+  (ATLAS-GOV-008, restating LAW-007 for geometry code specifically).
+- **Document coordinate assumptions** — any new component or geometry
+  feature states its placement relative to the existing convention in
+  `docs/bible/07-atlas/123-coordinate-system-and-orientation.md`, or
+  proposes a normalization via ADR if it must diverge (ATLAS-GOV-012).
+- **Preserve deterministic construction** — no wall-clock time,
+  randomness, or external state in any geometry builder (ATLAS-GOV-003,
+  ATLAS-GOV-014).
+- **Preserve StoneReference separation** — see LAW-006 and
+  `docs/bible/07-atlas/143-stone-metal-separation-contract.md`; never
+  give a fuse/union function a code path that could accept the stone
+  shape (ATLAS-GOV-007, ATLAS-GOV-011).
+- **Never silently discard components** — a component with zero
+  geometry still appears in every manifest/result, never omitted
+  (ATLAS-GOV-006).
+- **Report fallback geometry** — any new fallback path (fillet-like or
+  boolean-like) must append a warning and be added to
+  `docs/bible/appendices/atlas-fallback-register.md`
+  (ATLAS-GOV-004, ATLAS-GOV-005).
+- **Update the component catalog** —
+  `docs/bible/appendices/atlas-component-catalog.md`, in the same change
+  as a new/changed component.
+- **Update the operation catalog** —
+  `docs/bible/appendices/atlas-operation-catalog.md`, in the same change
+  as a new CadQuery operation.
+- **Update geometry invariants** —
+  `docs/bible/appendices/atlas-geometry-invariant-catalog.md`, in the
+  same change as a new fixed geometric constant.
+- **Update the current solitaire mapping** —
+  `docs/bible/07-atlas/149-current-solitaire-geometry-mapping.md`, in
+  the same change as a field that gains or changes a geometry
+  dependency.
+- **Add geometry regression tests for output-changing modifications** —
+  `backend/tests/test_geometry.py` (ATLAS-GOV-015).
+- **Never make STL the source of truth** — every export/preview always
+  re-tessellates from the live B-Rep; never read geometry back from a
+  previously-written mesh file (ATLAS-GOV-009).
+- **Never introduce jewelry-domain thresholds into Atlas** — a numeric
+  jewelry-domain constant belongs in `backend/jewelmind/validation/`
+  with a Forge rule ID, not hardcoded inside
+  `backend/jewelmind/geometry/components/*.py` (ATLAS-GOV-002).
+- **Require an ADR for a geometry architecture change** — replacing or
+  wrapping the CAD kernel, changing the coordinate convention, or
+  changing required/optional component membership; see
+  `docs/bible/07-atlas/120-atlas-governance.md`.
+- **Require an RFC for a new geometric component family** — a new
+  component type beyond band/stone_reference/prongs/basket_support, or a
+  new ring style's geometry; see the same document.

@@ -1,0 +1,39 @@
+{
+  "description": "Real preview_manifest output from write_component_previews(default_definition()), generated during Sprint 5, projected into the component-manifest.schema.json shape.",
+  "definitionHash": "355ddca57e7e49ad",
+  "vectors": [
+    {
+      "componentId": "band", "name": "band", "category": "metal", "geometryRole": "production_metal",
+      "productionIncluded": true, "previewIncluded": true,
+      "volume": 250.99168317654699,
+      "boundingBox": { "xmin": -10.700000000000001, "xmax": 10.700000000000001, "ymin": -1.2000001, "ymax": 1.2000001000000002, "zmin": -10.700000000000001, "zmax": 10.700000000000001 },
+      "generationStatus": "SUCCEEDED", "fallbackUsed": false, "sourcePaths": ["ring.innerDiameter", "band.width", "band.thickness", "band.profile"], "warnings": [],
+      "rawPreviewManifest": { "file": "band.stl", "vertexCount": 3260, "triangleCount": 5670 }
+    },
+    {
+      "componentId": "stone_reference", "name": "stone_reference", "category": "stone_reference", "geometryRole": "stone_reference",
+      "productionIncluded": false, "previewIncluded": true,
+      "volume": 58.22141924499569,
+      "boundingBox": { "xmin": -3.2500001, "xmax": 3.2500001, "ymin": -3.2500001, "ymax": 3.2500001, "zmin": 11.599999900000002, "zmax": 15.6000001 },
+      "generationStatus": "SUCCEEDED", "fallbackUsed": false, "sourcePaths": ["stone.diameter", "stone.depth", "setting.basketHeight"], "warnings": [],
+      "rawPreviewManifest": { "file": "stone_reference.stl", "vertexCount": 485, "triangleCount": 632 }
+    },
+    {
+      "componentId": "prongs", "name": "prongs", "category": "metal", "geometryRole": "production_metal",
+      "productionIncluded": true, "previewIncluded": true,
+      "volume": 29.650351464580467,
+      "boundingBox": { "xmin": -3.635, "xmax": 3.635, "ymin": -3.2216883706749933, "ymax": 3.2216883706749933, "zmin": 10.3, "zmax": 15.5 },
+      "generationStatus": "SUCCEEDED", "fallbackUsed": false, "sourcePaths": ["setting.prongCount", "setting.prongDiameter", "setting.prongHeight"], "warnings": [],
+      "rawPreviewManifest": { "file": "prongs.stl", "vertexCount": 1524, "triangleCount": 1488 }
+    },
+    {
+      "componentId": "basket_support", "name": "basket_support", "category": "metal", "geometryRole": "production_metal",
+      "productionIncluded": true, "previewIncluded": true,
+      "volume": 83.15575842566426,
+      "boundingBox": { "xmin": -3.635, "xmax": 3.635, "ymin": -3.635, "ymax": 3.635, "zmin": 10.3, "zmax": 14.200000000000001 },
+      "generationStatus": "SUCCEEDED", "fallbackUsed": false, "sourcePaths": ["setting.basketHeight", "setting.prongDiameter"], "warnings": [],
+      "rawPreviewManifest": { "file": "basket_support.stl", "vertexCount": 508, "triangleCount": 504 }
+    }
+  ],
+  "note": "`rawPreviewManifest` is not part of component-manifest.schema.json — it is included here only to show the exact real API-facing shape (backend/jewelmind/preview/mesh.py::write_component_previews) that each conceptual record was derived from."
+}

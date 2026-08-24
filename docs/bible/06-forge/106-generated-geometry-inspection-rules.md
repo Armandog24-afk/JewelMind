@@ -10,12 +10,21 @@ depends_on:
   - JM-BIBLE-093
 related_documents:
   - JM-BIBLE-111
+  - JM-BIBLE-140
 implementation_status: partial
 professional_validation: not_required
 normative: true
 ---
 
 # Generated Geometry Inspection Rules
+
+**Relationship to Atlas (Sprint 5):** [`07-atlas/140-geometry-inspection-framework.md`](../07-atlas/140-geometry-inspection-framework.md)
+is the full Atlas-level formalization of the finding below, with the
+complete GEOMETRIC-FACT-vs-FORGE-INTERPRETATION vocabulary
+(`checkType`, `status`: `PASS`/`FAIL`/`UNKNOWN`/`NOT_APPLICABLE`) this
+document's table anticipates but does not itself define. Nothing in
+Sprint 5 changes the finding immediately below — it remains the single
+most important open geometry-inspection gap in the system.
 
 ## CURRENT: one runtime rule, several test-time-only guarantees
 

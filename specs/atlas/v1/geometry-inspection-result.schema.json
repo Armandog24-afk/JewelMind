@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/geometry-inspection-result.schema.json",
+  "title": "Atlas Inspection Result v1",
+  "description": "Structural schema for an AtlasInspection result — a GEOMETRIC FACT, never a jewelry-domain or manufacturing verdict. Forge (docs/bible/06-forge/) is the only layer permitted to interpret these facts as rule violations. See docs/bible/07-atlas/140-geometry-inspection-framework.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checkId", "checkType", "status", "component"],
+  "properties": {
+    "checkId": { "type": "string", "description": "e.g. \"FORGE-GEOM-001\" for the one current runtime check, or a descriptive id for a test-only check." },
+    "checkType": {
+      "enum": [
+        "SHAPE_EXISTS", "SOLID_COUNT", "VOLUME", "BOUNDING_BOX", "COMPONENT_COUNT",
+        "CONNECTIVITY", "TOPOLOGY_VALIDITY", "INTERSECTION", "DISTANCE", "MESH_GENERATION"
+      ]
+    },
+    "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE"] },
+    "component": { "type": ["string", "null"], "description": "Which component or assembly this fact concerns, e.g. \"combined_metal\"." },
+    "measuredValue": {},
+    "unit": { "type": ["string", "null"] },
+    "message": { "type": ["string", "null"], "description": "A factual statement only, e.g. \"1 solid detected\" — never a phrase like \"too thin\" or \"not manufacturable\", which is Forge's vocabulary, not Atlas's." },
+    "runtimeOrTestOnly": {
+      "enum": ["runtime", "test_only"],
+      "description": "CURRENT: exactly one check (the fuse-solid-count check backing FORGE-GEOM-001) is runtime; every other check in docs/bible/07-atlas/142-volume-and-bounding-box-inspection.md is test_only."
+    }
+  }
+}

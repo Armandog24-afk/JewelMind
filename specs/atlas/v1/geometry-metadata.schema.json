@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/geometry-metadata.schema.json",
+  "title": "Atlas Geometry Metadata v1",
+  "description": "Structural schema for generation-level metadata. Maps to the current /api/models/generate response and GeneratedModel. See docs/bible/07-atlas/139-geometry-metadata-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["generatorVersion", "definitionHash", "componentCount", "totalProductionMetalVolume"],
+  "properties": {
+    "generatorVersion": { "type": "string", "description": "CURRENT: GENERATOR_VERSION, e.g. \"0.1.0\"." },
+    "definitionHash": { "type": "string" },
+    "generationTimestamp": { "type": ["string", "null"], "description": "CURRENT: ModelRecord.generated_at (ISO 8601 UTC), set once at generation time, not regenerated on re-read." },
+    "generationDurationS": { "type": "number", "minimum": 0, "description": "CURRENT: GeneratedModel.generation_duration_s." },
+    "componentList": { "type": "array", "items": { "type": "string" }, "description": "CURRENT: [\"band\", \"stone_reference\", \"prongs\", \"basket_support\"]." },
+    "componentVolumes": { "type": "object", "description": "CURRENT: GeneratedModel.component_volumes(), name -> volume_mm3." },
+    "totalProductionMetalVolume": { "type": "number", "minimum": 0 },
+    "boundingBoxes": { "type": "object", "description": "Per-component bounding boxes plus the assembly's aggregate bounding box." },
+    "componentCount": { "type": "integer", "minimum": 0 },
+    "requestedProngCount": { "type": "integer" },
+    "generatedProngCount": { "type": "integer" },
+    "fallbackRecords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "CURRENT: a subset of GeneratedModel.warnings — specifically those describing a fallback (e.g. the fillet or fuse fallback), not distinguished from other warnings in the current implementation."
+    },
+    "warnings": { "type": "array", "items": { "type": "string" }, "description": "CURRENT: GeneratedModel.warnings, the full list." },
+    "inspectionResults": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "PLANNED — no runtime inspection result list is currently attached to generation metadata beyond the single inline fuse-fallback check."
+    }
+  }
+}

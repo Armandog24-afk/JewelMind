@@ -4,7 +4,7 @@ title: Architecture Overview
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-007
@@ -12,6 +12,7 @@ related_documents:
   - JM-BIBLE-021
   - JM-BIBLE-022
   - JM-BIBLE-ADR-008
+  - JM-BIBLE-121
 implementation_status: current
 ---
 
@@ -64,6 +65,11 @@ All 3D geometry is constructed through CadQuery
 (`backend/jewelmind/geometry/`), which drives the OpenCascade B-Rep
 kernel. This is a deliberate choice over a mesh-only or procedural-only
 approach — see [ADR-001](../03-decisions/ADR-001-cadquery-for-mvp.md).
+**This layer is formalized as "Atlas"** in Sprint 5 —
+[`07-atlas/README.md`](../07-atlas/README.md) — the deterministic
+geometry layer that owns primitives, coordinate conventions, component
+contracts, and geometric inspection, while jewelry-domain thresholds
+remain owned exclusively by Forge ([`06-forge/README.md`](../06-forge/README.md)).
 
 ## Preview pipeline
 

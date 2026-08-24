@@ -15,6 +15,7 @@ related_documents:
   - JM-BIBLE-049
   - JM-BIBLE-053
   - JM-BIBLE-078
+  - JM-BIBLE-149
 implementation_status: current
 professional_validation: not_required
 ---
@@ -32,6 +33,13 @@ introduce any dependency not already listed here — see open question
 JDL-OQ-007 in [`05-jdl/086-open-jdl-questions.md`](../05-jdl/086-open-jdl-questions.md)
 for whether `material.metal`/`manufacturing.method` should ever gain a
 geometry dependency in the future.
+
+**Relationship to Atlas (Sprint 5):** [`07-atlas/149-current-solitaire-geometry-mapping.md`](../07-atlas/149-current-solitaire-geometry-mapping.md)
+is the most granular current restatement of this table — a full
+JDL-path-to-CadQuery-operation trace for every geometry-driving field,
+including two cross-component dependencies (`setting.basketHeight` also
+placing the stone; `stone.diameter` also sizing the prongs/basket radii)
+made explicit there for the first time.
 
 ## Dependency table
 

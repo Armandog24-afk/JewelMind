@@ -1,0 +1,28 @@
+{
+  "componentId": "basket_support",
+  "componentType": "solid",
+  "componentName": "basket_support",
+  "parentAssembly": "solitaire",
+  "geometryRole": "production_metal",
+  "productionRole": "included_by_default",
+  "previewRole": "visible",
+  "sourceJDLPaths": ["setting.basketHeight", "setting.prongDiameter"],
+  "derivedParameters": {
+    "outerRadiusMm": 3.635,
+    "innerRadiusMm": 2.535,
+    "baseZMm": 10.3,
+    "heightMm": 3.9
+  },
+  "geometry": { "representation": "kernel-native-not-serialized" },
+  "boundingBox": {
+    "xmin": -3.635, "xmax": 3.635,
+    "ymin": -3.635, "ymax": 3.635,
+    "zmin": 10.3, "zmax": 14.200000000000001
+  },
+  "volume": 83.15575842566426,
+  "transform": null,
+  "generationStatus": "SUCCEEDED",
+  "warnings": [],
+  "fallbackUsed": false,
+  "inspectionResults": []
+}

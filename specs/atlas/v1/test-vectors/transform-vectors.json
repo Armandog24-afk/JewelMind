@@ -1,0 +1,30 @@
+{
+  "description": "CURRENT placement offsets actually used by each component builder, for the default definition. No component currently records an explicit transform object (see docs/bible/07-atlas/125-transformations.md) — placement is implicit in workplane offsets baked directly into construction code. These values were read from the real builder functions and cross-checked against a live run.",
+  "definitionHash": "355ddca57e7e49ad",
+  "vectors": [
+    {
+      "component": "band",
+      "placement": "cq.Workplane(\"XY\") with no offset; the 2D wire is drawn directly at the world origin, then revolved 360 degrees around axis (0,0,0)-(0,1,0).",
+      "source": "geometry/components/band.py::build_ring_band"
+    },
+    {
+      "component": "stone_reference",
+      "placement": "Workplane chain: base offset = girdleZ - pavilionH = 14.2 - 2.6 = 11.6 (culet plane); + pavilionH (2.6) to reach the girdle plane at z=14.2; + crownH (1.4) to reach the table plane at z=15.6.",
+      "offsets": { "culetZ": 11.599999900000002, "girdleZ": 14.200000000000001, "tableZ": 15.6000001 },
+      "source": "geometry/components/stone.py::build_stone_reference"
+    },
+    {
+      "component": "prongs",
+      "placement": "Workplane offset = base_z = band_top_z - EMBED_MM = 10.7 - 0.4 = 10.3; each prong additionally translated to (x, y) via .center(x, y) before extrusion, using the positions in coordinate-vectors.json.",
+      "baseZ": 10.3,
+      "source": "geometry/components/prongs.py::build_prongs"
+    },
+    {
+      "component": "basket_support",
+      "placement": "Workplane offset = base_z = band_top_z - EMBED_MM = 10.3, identical to prongs (shared anchor point so the two components genuinely overlap in Z).",
+      "baseZ": 10.3,
+      "source": "geometry/components/basket.py::build_basket_support"
+    }
+  ],
+  "scalingNote": "No component builder ever applies a uniform scale transform. Resizing a ring is always done by re-deriving geometry from new JDL parameter values (a fresh construction), never by scaling an existing solid — see docs/bible/07-atlas/125-transformations.md for why these are not equivalent (a uniformly-scaled comfort-fit fillet, embed depth, or stone proportion would no longer match the fixed millimeter constants those features are built from)."
+}

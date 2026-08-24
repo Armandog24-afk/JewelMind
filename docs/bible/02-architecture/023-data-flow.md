@@ -12,6 +12,7 @@ related_documents:
   - JM-BIBLE-020
   - JM-BIBLE-A03
   - JM-BIBLE-063
+  - JM-BIBLE-132
 implementation_status: current
 ---
 
@@ -29,6 +30,12 @@ concrete instance of the eleven-stage JDL processing model in
 `build_solitaire_ring()` covers JDL-7/JDL-8, and the exporters cover
 JDL-10. This document does not restate that model; it shows exactly where
 each stage lives in the running request/response sequence.
+
+**Relationship to Atlas (Sprint 5):** `build_solitaire_ring()`'s internal
+sequence (four component builders → boolean fuse → assembly) is the
+concrete instance of Atlas's twelve-stage construction pipeline,
+`ATLAS-0`..`ATLAS-11` — see
+[`07-atlas/132-construction-pipeline.md`](../07-atlas/132-construction-pipeline.md).
 
 ## `POST /api/models/validate`
 

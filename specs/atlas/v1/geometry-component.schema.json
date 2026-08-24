@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/geometry-component.schema.json",
+  "title": "Atlas Geometry Component v1",
+  "description": "Structural schema for an AtlasGeometryComponent record — geometry METADATA describing one named solid/compound, not the kernel-native OpenCascade geometry itself. See docs/bible/07-atlas/130-component-contract.md. The current backend's GeneratedComponent dataclass (backend/jewelmind/geometry/model.py) is the CURRENT partial implementation this schema generalizes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentId", "componentType", "componentName", "geometryRole", "generationStatus"],
+  "properties": {
+    "componentId": { "type": "string", "description": "Stable identifier within one assembly, e.g. \"band\", \"prongs\"." },
+    "componentType": { "enum": ["solid", "compound"], "description": "CURRENT: band/stone_reference/basket_support are single solids; prongs is a compound of N solids." },
+    "componentName": { "type": "string" },
+    "parentAssembly": { "type": ["string", "null"] },
+    "geometryRole": {
+      "enum": ["production_metal", "stone_reference", "support", "preview_only"],
+      "description": "CURRENT mapping: band/prongs/basket_support -> production_metal; stone_reference -> stone_reference. No component is currently support-only or preview_only as a distinct role — see docs/bible/07-atlas/130-component-contract.md."
+    },
+    "productionRole": {
+      "enum": ["included_by_default", "excluded_by_default", "never_included"],
+      "description": "CURRENT: production_metal components are included_by_default in STEP/STL; stone_reference is excluded_by_default (opt-in via includeStoneReference)."
+    },
+    "previewRole": {
+      "enum": ["visible", "hidden"],
+      "description": "CURRENT: every component (including stone_reference) is visible in preview."
+    },
+    "sourceJDLPaths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Canonical JDL field paths this component's geometry derives from."
+    },
+    "derivedParameters": {
+      "type": "object",
+      "description": "Values computed from JDL fields, e.g. innerRadiusMm, outerRadiusMm — mirrors the component's real `metadata` dict."
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "representation": { "const": "kernel-native-not-serialized" }
+      },
+      "description": "Deliberately does not serialize the actual B-Rep/mesh — this schema describes geometry metadata, never kernel-native geometry. See docs/bible/07-atlas/122-geometric-representation-model.md."
+    },
+    "boundingBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["xmin", "xmax", "ymin", "ymax", "zmin", "zmax"],
+      "properties": {
+        "xmin": { "type": "number" }, "xmax": { "type": "number" },
+        "ymin": { "type": "number" }, "ymax": { "type": "number" },
+        "zmin": { "type": "number" }, "zmax": { "type": "number" }
+      }
+    },
+    "volume": { "type": "number", "minimum": 0, "description": "Cubic millimeters." },
+    "transform": {
+      "type": ["object", "null"],
+      "description": "PLANNED — no component currently records an explicit local-to-world transform object; placement is implicit in the construction code (workplane offsets). See docs/bible/07-atlas/125-transformations.md."
+    },
+    "generationStatus": { "enum": ["SUCCEEDED", "SUCCEEDED_WITH_FALLBACK", "FAILED", "EMPTY"] },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "fallbackUsed": { "type": "boolean" },
+    "inspectionResults": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "PLANNED — no component currently carries embedded AtlasInspection results; see specs/atlas/v1/geometry-inspection-result.schema.json and docs/bible/07-atlas/140-geometry-inspection-framework.md."
+    }
+  }
+}

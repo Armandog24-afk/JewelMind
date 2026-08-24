@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/geometry-error.schema.json",
+  "title": "Atlas Geometry Error v1",
+  "description": "Structural schema for a conceptual AtlasGeometryError. Maps to current AppError subclasses in backend/jewelmind/api/errors.py without renaming or breaking any of them. See docs/bible/07-atlas/147-geometry-error-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["errorCode", "stage", "message", "blocking"],
+  "properties": {
+    "errorCode": {
+      "enum": [
+        "ATLAS_INPUT_ERROR", "ATLAS_CONSTRUCTION_ERROR", "ATLAS_BOOLEAN_ERROR",
+        "ATLAS_TOPOLOGY_ERROR", "ATLAS_INSPECTION_ERROR", "ATLAS_TESSELLATION_ERROR",
+        "ATLAS_COMPONENT_MISSING", "ATLAS_FALLBACK_USED", "ATLAS_KERNEL_ERROR"
+      ],
+      "description": "Conceptual codes, none of which exist as literal strings in current code — see docs/bible/07-atlas/147-geometry-error-model.md for the mapping to the real MODEL_GENERATION_FAILED / STEP_EXPORT_FAILED / STL_EXPORT_FAILED / CAD_ENGINE_UNAVAILABLE AppError codes."
+    },
+    "stage": {
+      "enum": ["ATLAS-0", "ATLAS-1", "ATLAS-2", "ATLAS-3", "ATLAS-4", "ATLAS-5", "ATLAS-6", "ATLAS-7", "ATLAS-8", "ATLAS-9", "ATLAS-10", "ATLAS-11"]
+    },
+    "component": { "type": ["string", "null"] },
+    "operation": { "type": ["string", "null"], "description": "e.g. \"fillet\", \"fuse\", \"revolve\", \"tessellate\"." },
+    "message": { "type": "string" },
+    "technicalCause": { "type": ["string", "null"], "description": "The underlying exception text, where safe to surface (never a raw stack trace to an external caller)." },
+    "fallbackAvailable": { "type": "boolean" },
+    "blocking": { "type": "boolean" },
+    "requestId": { "type": ["string", "null"], "description": "CURRENT: ErrorDetail.requestId in backend/jewelmind/api/errors.py." },
+    "definitionHash": { "type": ["string", "null"] }
+  }
+}

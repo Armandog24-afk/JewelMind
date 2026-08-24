@@ -12,6 +12,7 @@ related_documents:
   - JM-BIBLE-DOMAIN-README
   - JM-BIBLE-JDL-README
   - JM-BIBLE-FORGE-README
+  - JM-BIBLE-ATLAS-README
 implementation_status: current
 ---
 
@@ -319,3 +320,38 @@ review or published reference. See
 `NONE`, `GENERATION`, `PREVIEW`, `STEP_EXPORT`, `STL_EXPORT`,
 `ALL_EXPORTS`, or `WORKFLOW` — a separate axis from severity. See
 [`06-forge/099-severity-and-blocking-semantics.md`](../06-forge/099-severity-and-blocking-semantics.md).
+
+## Atlas terms (Sprint 5)
+
+> Authoritative source for every term in this section:
+> [`07-atlas/`](../07-atlas/README.md) (Sprint 5).
+
+**Atlas** — the deterministic geometry layer: a specification and
+classification layer over the CadQuery/OpenCascade code in
+`backend/jewelmind/geometry/`. Atlas owns primitives, transformations,
+coordinate systems, topology, construction operations, component
+geometry, geometric metadata, and geometric inspection — never
+jewelry-domain thresholds. See
+[`07-atlas/121-atlas-architecture-overview.md`](../07-atlas/121-atlas-architecture-overview.md).
+
+**Geometric fact** — a measurable property Atlas can report (a volume, a
+solid count, a bounding box) — never a jewelry-domain or manufacturing
+verdict. Only Forge may interpret a geometric fact as a rule violation.
+See
+[`07-atlas/140-geometry-inspection-framework.md`](../07-atlas/140-geometry-inspection-framework.md).
+
+**AtlasGeometryComponent** — the normative model of one named
+solid/compound: role, source JDL paths, derived parameters, bounding
+box, volume, generation status, warnings, fallback usage. See
+[`07-atlas/130-component-contract.md`](../07-atlas/130-component-contract.md).
+
+**Assembly anchor axis** — the vertical line `x=0, y=0`, parallel to
+global Z, starting at `z=band_top_z`, around which the stone reference,
+prongs, and basket support are all positioned. See
+[`07-atlas/123-coordinate-system-and-orientation.md`](../07-atlas/123-coordinate-system-and-orientation.md).
+
+**B-Rep vs. mesh** — B-Rep (Boundary Representation) is the exact,
+parametric source geometry every component builder constructs; a mesh
+(used only for preview and STL export) is a derived, lossy
+approximation that must never become the source of B-Rep truth. See
+[`07-atlas/129-mesh-model.md`](../07-atlas/129-mesh-model.md).

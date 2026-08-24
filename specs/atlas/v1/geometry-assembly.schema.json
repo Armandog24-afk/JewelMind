@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/geometry-assembly.schema.json",
+  "title": "Atlas Assembly v1",
+  "description": "Structural schema for an AtlasAssembly record. The current backend's GeneratedModel dataclass (backend/jewelmind/geometry/model.py) is the CURRENT implementation this generalizes. See docs/bible/07-atlas/131-assembly-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assemblyId", "requiredComponents", "components", "generationStatus"],
+  "properties": {
+    "assemblyId": { "type": "string", "description": "e.g. \"solitaire\" — the only assembly type that currently exists." },
+    "requiredComponents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "CURRENT: [\"band\", \"stone_reference\", \"prongs\", \"basket_support\"] — all four are always attempted; none is optional today."
+    },
+    "optionalComponents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "CURRENT: none. No optional component exists in the solitaire assembly."
+    },
+    "components": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "Each item conforms to geometry-component.schema.json."
+    },
+    "assemblyMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "definitionHash": { "type": "string" },
+        "generatorVersion": { "type": "string" },
+        "generationDurationS": { "type": "number", "minimum": 0 }
+      }
+    },
+    "transformOwnership": {
+      "type": "string",
+      "description": "PLANNED — no explicit transform-ownership model exists; every component builder computes its own absolute placement directly from JDL-derived constants (inner_radius, outer_radius, band_top_z, prong_center_radius), not from a parent-assembly-owned transform. See docs/bible/07-atlas/125-transformations.md."
+    },
+    "aggregateBoundingBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["xmin", "xmax", "ymin", "ymax", "zmin", "zmax"],
+      "properties": {
+        "xmin": { "type": "number" }, "xmax": { "type": "number" },
+        "ymin": { "type": "number" }, "ymax": { "type": "number" },
+        "zmin": { "type": "number" }, "zmax": { "type": "number" }
+      },
+      "description": "CURRENT: GeneratedModel.bounding_box, the union of combined_metal's bbox and stone_reference's bbox."
+    },
+    "totalProductionMetalVolume": {
+      "type": "number",
+      "minimum": 0,
+      "description": "CURRENT: GeneratedModel.combined_metal_volume_mm3 — excludes stone_reference by definition."
+    },
+    "componentCount": { "type": "integer", "minimum": 0 },
+    "generationStatus": { "enum": ["SUCCEEDED", "SUCCEEDED_WITH_FALLBACK", "FAILED"] },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }
+}

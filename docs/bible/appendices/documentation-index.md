@@ -154,6 +154,61 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A17 | Appendix: Forge Professional Validation Matrix | accepted | current | [`appendices/forge-professional-validation-matrix.md`](forge-professional-validation-matrix.md) |
 | JM-BIBLE-A18 | Appendix: Forge Rule Dependency Matrix | accepted | current | [`appendices/forge-rule-dependency-matrix.md`](forge-rule-dependency-matrix.md) |
 | JM-BIBLE-A19 | Appendix: Forge Rule Test Matrix | accepted | current | [`appendices/forge-rule-test-matrix.md`](forge-rule-test-matrix.md) |
+| JM-BIBLE-ATLAS-README | Atlas Geometry Core v1 — Index | accepted | partial | [`07-atlas/README.md`](../07-atlas/README.md) |
+| JM-BIBLE-120 | Atlas Governance | accepted | current | [`07-atlas/120-atlas-governance.md`](../07-atlas/120-atlas-governance.md) |
+| JM-BIBLE-121 | Atlas Architecture Overview | accepted | partial | [`07-atlas/121-atlas-architecture-overview.md`](../07-atlas/121-atlas-architecture-overview.md) |
+| JM-BIBLE-122 | Geometric Representation Model | accepted | current | [`07-atlas/122-geometric-representation-model.md`](../07-atlas/122-geometric-representation-model.md) |
+| JM-BIBLE-123 | Coordinate System and Orientation | accepted | current | [`07-atlas/123-coordinate-system-and-orientation.md`](../07-atlas/123-coordinate-system-and-orientation.md) |
+| JM-BIBLE-124 | Geometric Primitives | accepted | current | [`07-atlas/124-geometric-primitives.md`](../07-atlas/124-geometric-primitives.md) |
+| JM-BIBLE-125 | Transformations | accepted | current | [`07-atlas/125-transformations.md`](../07-atlas/125-transformations.md) |
+| JM-BIBLE-126 | Curve and Profile Model | accepted | current | [`07-atlas/126-curve-and-profile-model.md`](../07-atlas/126-curve-and-profile-model.md) |
+| JM-BIBLE-127 | Surface and Solid Model | accepted | current | [`07-atlas/127-surface-and-solid-model.md`](../07-atlas/127-surface-and-solid-model.md) |
+| JM-BIBLE-128 | B-Rep and Topology Model | accepted | partial | [`07-atlas/128-brep-and-topology-model.md`](../07-atlas/128-brep-and-topology-model.md) |
+| JM-BIBLE-129 | Mesh Model | accepted | current | [`07-atlas/129-mesh-model.md`](../07-atlas/129-mesh-model.md) |
+| JM-BIBLE-130 | Component Contract | accepted | partial | [`07-atlas/130-component-contract.md`](../07-atlas/130-component-contract.md) |
+| JM-BIBLE-131 | Assembly Contract | accepted | current | [`07-atlas/131-assembly-contract.md`](../07-atlas/131-assembly-contract.md) |
+| JM-BIBLE-132 | Construction Pipeline | accepted | partial | [`07-atlas/132-construction-pipeline.md`](../07-atlas/132-construction-pipeline.md) |
+| JM-BIBLE-133 | Operation Contracts | accepted | current | [`07-atlas/133-operation-contracts.md`](../07-atlas/133-operation-contracts.md) |
+| JM-BIBLE-134 | Boolean Operation Strategy | accepted | current | [`07-atlas/134-boolean-operation-strategy.md`](../07-atlas/134-boolean-operation-strategy.md) |
+| JM-BIBLE-135 | Fillets, Rounding, and Fallbacks | accepted | current | [`07-atlas/135-fillets-rounding-and-fallbacks.md`](../07-atlas/135-fillets-rounding-and-fallbacks.md) |
+| JM-BIBLE-136 | Tolerance Model | accepted | current | [`07-atlas/136-tolerance-model.md`](../07-atlas/136-tolerance-model.md) |
+| JM-BIBLE-137 | Determinism and Reproducibility | accepted | current | [`07-atlas/137-determinism-and-reproducibility.md`](../07-atlas/137-determinism-and-reproducibility.md) |
+| JM-BIBLE-138 | Component Naming and Identity | accepted | current | [`07-atlas/138-component-naming-and-identity.md`](../07-atlas/138-component-naming-and-identity.md) |
+| JM-BIBLE-139 | Geometry Metadata Model | accepted | current | [`07-atlas/139-geometry-metadata-model.md`](../07-atlas/139-geometry-metadata-model.md) |
+| JM-BIBLE-140 | Geometry Inspection Framework | accepted | partial | [`07-atlas/140-geometry-inspection-framework.md`](../07-atlas/140-geometry-inspection-framework.md) |
+| JM-BIBLE-141 | Connectivity and Component Integrity | accepted | partial | [`07-atlas/141-connectivity-and-component-integrity.md`](../07-atlas/141-connectivity-and-component-integrity.md) |
+| JM-BIBLE-142 | Volume and Bounding Box Inspection | accepted | current | [`07-atlas/142-volume-and-bounding-box-inspection.md`](../07-atlas/142-volume-and-bounding-box-inspection.md) |
+| JM-BIBLE-143 | Stone-Metal Separation Contract | accepted | current | [`07-atlas/143-stone-metal-separation-contract.md`](../07-atlas/143-stone-metal-separation-contract.md) |
+| JM-BIBLE-144 | Preview Mesh Contract | accepted | current | [`07-atlas/144-preview-mesh-contract.md`](../07-atlas/144-preview-mesh-contract.md) |
+| JM-BIBLE-145 | STEP Export Geometry Contract | accepted | current | [`07-atlas/145-step-export-geometry-contract.md`](../07-atlas/145-step-export-geometry-contract.md) |
+| JM-BIBLE-146 | STL Export Geometry Contract | accepted | current | [`07-atlas/146-stl-export-geometry-contract.md`](../07-atlas/146-stl-export-geometry-contract.md) |
+| JM-BIBLE-147 | Geometry Error Model | accepted | partial | [`07-atlas/147-geometry-error-model.md`](../07-atlas/147-geometry-error-model.md) |
+| JM-BIBLE-148 | Performance and Resource Model | accepted | partial | [`07-atlas/148-performance-and-resource-model.md`](../07-atlas/148-performance-and-resource-model.md) |
+| JM-BIBLE-149 | Current Solitaire Geometry Mapping | accepted | current | [`07-atlas/149-current-solitaire-geometry-mapping.md`](../07-atlas/149-current-solitaire-geometry-mapping.md) |
+| JM-BIBLE-150 | Atlas Gap Analysis | accepted | current | [`07-atlas/150-atlas-gap-analysis.md`](../07-atlas/150-atlas-gap-analysis.md) |
+| JM-BIBLE-151 | Open Atlas Questions | accepted | current | [`07-atlas/151-open-atlas-questions.md`](../07-atlas/151-open-atlas-questions.md) |
+| JM-BIBLE-SPRINT5-REPORT | Sprint 5 Validation Report | accepted | current | [`07-atlas/SPRINT-5-VALIDATION-REPORT.md`](../07-atlas/SPRINT-5-VALIDATION-REPORT.md) |
+| JM-BIBLE-A20 | Appendix: Atlas Component Catalog | accepted | current | [`appendices/atlas-component-catalog.md`](atlas-component-catalog.md) |
+| JM-BIBLE-A21 | Appendix: Atlas Operation Catalog | accepted | current | [`appendices/atlas-operation-catalog.md`](atlas-operation-catalog.md) |
+| JM-BIBLE-A22 | Appendix: Atlas Coordinate Reference | accepted | current | [`appendices/atlas-coordinate-reference.md`](atlas-coordinate-reference.md) |
+| JM-BIBLE-A23 | Appendix: Atlas Geometry Invariant Catalog | accepted | current | [`appendices/atlas-geometry-invariant-catalog.md`](atlas-geometry-invariant-catalog.md) |
+| JM-BIBLE-A24 | Appendix: Atlas Inspection Catalog | accepted | current | [`appendices/atlas-inspection-catalog.md`](atlas-inspection-catalog.md) |
+| JM-BIBLE-A25 | Appendix: Atlas Fallback Register | accepted | current | [`appendices/atlas-fallback-register.md`](atlas-fallback-register.md) |
+| JM-BIBLE-A26 | Appendix: Atlas Code Mapping | accepted | current | [`appendices/atlas-code-mapping.md`](atlas-code-mapping.md) |
+
+## Machine-readable Atlas specification — `specs/atlas/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/atlas/v1/README.md`](../../../specs/atlas/v1/README.md) |
+| Component schema | Yes | [`specs/atlas/v1/geometry-component.schema.json`](../../../specs/atlas/v1/geometry-component.schema.json) |
+| Assembly schema | Yes | [`specs/atlas/v1/geometry-assembly.schema.json`](../../../specs/atlas/v1/geometry-assembly.schema.json) |
+| Metadata schema | Yes | [`specs/atlas/v1/geometry-metadata.schema.json`](../../../specs/atlas/v1/geometry-metadata.schema.json) |
+| Inspection-result schema | Yes | [`specs/atlas/v1/geometry-inspection-result.schema.json`](../../../specs/atlas/v1/geometry-inspection-result.schema.json) |
+| Error schema | Yes | [`specs/atlas/v1/geometry-error.schema.json`](../../../specs/atlas/v1/geometry-error.schema.json) |
+| Component-manifest schema | Yes | [`specs/atlas/v1/component-manifest.schema.json`](../../../specs/atlas/v1/component-manifest.schema.json) |
+| Examples (real, generated) | Yes | [`specs/atlas/v1/examples/`](../../../specs/atlas/v1/examples/) |
+| Test vectors | Yes | [`specs/atlas/v1/test-vectors/`](../../../specs/atlas/v1/test-vectors/) |
 
 ## Machine-readable Forge specification — `specs/forge/v1/`
 

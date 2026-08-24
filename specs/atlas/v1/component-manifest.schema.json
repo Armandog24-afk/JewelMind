@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/atlas/v1/component-manifest.schema.json",
+  "title": "Atlas Component Manifest v1",
+  "description": "Structural schema for one component-manifest record — the machine-readable form of what the current preview_manifest (backend/jewelmind/preview/mesh.py::write_component_previews) already returns, generalized with a few PLANNED fields. See docs/bible/07-atlas/144-preview-mesh-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentId", "name", "category", "geometryRole", "productionIncluded", "previewIncluded", "volume", "boundingBox", "generationStatus"],
+  "properties": {
+    "componentId": { "type": "string" },
+    "name": { "type": "string" },
+    "category": { "enum": ["metal", "stone_reference"] },
+    "geometryRole": { "enum": ["production_metal", "stone_reference", "support", "preview_only"] },
+    "productionIncluded": { "type": "boolean", "description": "Whether this component is part of the default STEP/STL export." },
+    "previewIncluded": { "type": "boolean" },
+    "volume": { "type": "number", "minimum": 0 },
+    "boundingBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["xmin", "xmax", "ymin", "ymax", "zmin", "zmax"],
+      "properties": {
+        "xmin": { "type": "number" }, "xmax": { "type": "number" },
+        "ymin": { "type": "number" }, "ymax": { "type": "number" },
+        "zmin": { "type": "number" }, "zmax": { "type": "number" }
+      }
+    },
+    "generationStatus": { "enum": ["SUCCEEDED", "SUCCEEDED_WITH_FALLBACK", "FAILED", "EMPTY"] },
+    "fallbackUsed": { "type": "boolean" },
+    "sourcePaths": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }
+}

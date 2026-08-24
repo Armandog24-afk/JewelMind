@@ -11,12 +11,22 @@ depends_on:
 related_documents:
   - JM-BIBLE-079
   - JM-BIBLE-052
+  - JM-BIBLE-130
 implementation_status: current
 professional_validation: not_required
 normative: true
 ---
 
 # Geometry Generation Contract
+
+**Relationship to Atlas (Sprint 5):** this document's per-component
+contract table is superseded in detail (never contradicted) by
+[`07-atlas/130-component-contract.md`](../07-atlas/130-component-contract.md)
+(the normative `AtlasGeometryComponent` model) and
+[`07-atlas/149-current-solitaire-geometry-mapping.md`](../07-atlas/149-current-solitaire-geometry-mapping.md)
+(a full JDL-field-to-operation trace). Atlas also formalizes the exact
+fillet/fuse fallback behavior only briefly summarized here — see
+[`07-atlas/135-fillets-rounding-and-fallbacks.md`](../07-atlas/135-fillets-rounding-and-fallbacks.md).
 
 Per-component contract, grounded directly in `backend/jewelmind/geometry/components/*.py`, `geometry/constants.py`, and `geometry/assemblies/solitaire.py`.
 

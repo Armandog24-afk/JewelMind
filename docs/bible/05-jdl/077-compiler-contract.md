@@ -11,12 +11,21 @@ depends_on:
   - JM-BIBLE-076
 related_documents:
   - JM-BIBLE-078
+  - JM-BIBLE-121
 implementation_status: partial
 professional_validation: not_required
 normative: true
 ---
 
 # Compiler Contract
+
+**Relationship to Atlas (Sprint 5):** [`07-atlas/121-atlas-architecture-overview.md`](../07-atlas/121-atlas-architecture-overview.md)
+and [`07-atlas/132-construction-pipeline.md`](../07-atlas/132-construction-pipeline.md)
+give the "Plan + Generate" phase below its own twelve-stage breakdown
+(`ATLAS-0`..`ATLAS-11`), confirming the same PARTIAL finding this
+document already makes: no separate geometry-plan object exists between
+validation and construction — `build_solitaire_ring()` still does both
+in one call.
 
 The field-by-field mapping onto current backend types is in [`specs/jdl/v1/compiler-contract.md`](../../../specs/jdl/v1/compiler-contract.md). This document states the contract's intent and the prohibitions that make it a *contract* rather than just a description of what the code happens to do.
 

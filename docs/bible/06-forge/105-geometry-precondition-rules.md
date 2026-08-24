@@ -8,7 +8,8 @@ last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-093
-related_documents: []
+related_documents:
+  - JM-BIBLE-132
 implementation_status: current
 professional_validation: preliminary
 normative: true
@@ -17,6 +18,16 @@ normative: true
 # Geometry Precondition Rules
 
 Rules that must pass before `build_solitaire_ring()` is called at all — the FORGE-3 stage in [`096-rule-evaluation-pipeline.md`](096-rule-evaluation-pipeline.md).
+
+**Relationship to Atlas (Sprint 5):** FORGE-3 corresponds to `ATLAS-0`
+("receive validated geometry plan") in
+[`07-atlas/132-construction-pipeline.md`](../07-atlas/132-construction-pipeline.md)
+— by the time Atlas begins construction, every rule in this document has
+already passed. Atlas itself additionally guarantees a small number of
+pure-implementation preconditions (e.g. a non-positive height cannot
+become a solid) that are geometry-engineering facts, not Forge rules —
+see [`07-atlas/124-geometric-primitives.md`](../07-atlas/124-geometric-primitives.md)
+for the primitive-level invariants Atlas itself relies on.
 
 | Rule | Precondition | Code | Test |
 |---|---|---|---|

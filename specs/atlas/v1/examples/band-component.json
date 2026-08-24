@@ -1,0 +1,28 @@
+{
+  "componentId": "band",
+  "componentType": "solid",
+  "componentName": "band",
+  "parentAssembly": "solitaire",
+  "geometryRole": "production_metal",
+  "productionRole": "included_by_default",
+  "previewRole": "visible",
+  "sourceJDLPaths": ["ring.innerDiameter", "band.width", "band.thickness", "band.profile"],
+  "derivedParameters": {
+    "profile": "comfort_fit",
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "filletApplied": true
+  },
+  "geometry": { "representation": "kernel-native-not-serialized" },
+  "boundingBox": {
+    "xmin": -10.700000000000001, "xmax": 10.700000000000001,
+    "ymin": -1.2000001, "ymax": 1.2000001000000002,
+    "zmin": -10.700000000000001, "zmax": 10.700000000000001
+  },
+  "volume": 250.99168317654699,
+  "transform": null,
+  "generationStatus": "SUCCEEDED",
+  "warnings": [],
+  "fallbackUsed": false,
+  "inspectionResults": []
+}
