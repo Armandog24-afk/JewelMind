@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/jdl/v1/jdl.schema.json",
+  "title": "JewelMind JDL v1 Canonical Document",
+  "description": "Structural (schema-layer) validation for a JDL v1 Canonical Document. This schema mirrors the CURRENT backend Pydantic model (backend/jewelmind/domain/schema.py) exactly: it enforces types, literal/enum membership, and additionalProperties=false. It deliberately does NOT enforce jewelry business-rule thresholds (minimum band width, prong count set membership, positive dimensions, etc.) that the current backend enforces only at the semantic-validation layer (backend/jewelmind/validation/engine.py) rather than at the Pydantic/schema layer. See docs/bible/05-jdl/075-validation-pipeline.md for why these two layers are kept separate, and docs/bible/05-jdl/065-canonical-json-serialization.md for the one known schema-layer blind spot (non-finite numeric tokens).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0",
+      "description": "The only JDL schema version currently accepted. Default when omitted: \"0.1.0\"."
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "default": "Solitaire Ring"
+        },
+        "units": {
+          "const": "mm",
+          "default": "mm"
+        }
+      }
+    },
+    "jewelry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "const": "ring",
+          "default": "ring"
+        },
+        "style": {
+          "const": "solitaire",
+          "default": "solitaire"
+        }
+      }
+    },
+    "ring": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sizeSystem": {
+          "const": "EU",
+          "default": "EU"
+        },
+        "size": {
+          "type": "number",
+          "default": 16.0,
+          "description": "EU/French ring size. Positivity and range (1 < size < 50) are semantic rule JM-RING-002, not enforced here."
+        },
+        "innerDiameter": {
+          "type": "number",
+          "default": 17.8,
+          "description": "Millimeters. Range (10 < x < 30) is semantic rule JM-RING-001, not enforced here."
+        }
+      }
+    },
+    "band": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "number",
+          "default": 2.4,
+          "description": "Millimeters. Minimum 1.5mm / maximum-warning 12mm are semantic rules JM-BAND-001/JM-BAND-003, not enforced here."
+        },
+        "thickness": {
+          "type": "number",
+          "default": 1.8,
+          "description": "Millimeters. Minimum 1.4mm is semantic rule JM-BAND-002, not enforced here."
+        },
+        "profile": {
+          "enum": ["comfort_fit", "flat"],
+          "default": "comfort_fit"
+        }
+      }
+    },
+    "stone": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shape": {
+          "const": "round",
+          "default": "round"
+        },
+        "diameter": {
+          "type": "number",
+          "default": 6.5,
+          "description": "Millimeters. Range (2mm to 15mm) is semantic rule JM-STONE-001, not enforced here."
+        },
+        "depth": {
+          "type": "number",
+          "default": 4.0,
+          "description": "Millimeters. Range is semantic rule JM-STONE-002, not enforced here."
+        }
+      }
+    },
+    "setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "prong",
+          "default": "prong"
+        },
+        "prongCount": {
+          "type": "integer",
+          "default": 6,
+          "description": "Deliberately NOT constrained to {4, 6} at this layer. The current backend intentionally keeps prong-count set membership as semantic rule JM-PRONG-001 so an out-of-set value produces a structured diagnostic rather than a raw schema-parse error (see backend/jewelmind/domain/schema.py comment on SettingSpec.prongCount)."
+        },
+        "prongDiameter": {
+          "type": "number",
+          "default": 1.1,
+          "description": "Millimeters. Minimum 0.8mm is semantic rule JM-PRONG-002, not enforced here."
+        },
+        "prongHeight": {
+          "type": "number",
+          "default": 4.8,
+          "description": "Millimeters. Must exceed basketHeight per semantic rule JM-PRONG-004, not enforced here."
+        },
+        "basketHeight": {
+          "type": "number",
+          "default": 3.5,
+          "description": "Millimeters. Positivity and 8mm warning ceiling are semantic rules JM-SETTING-001/JM-SETTING-002, not enforced here."
+        }
+      }
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metal": {
+          "enum": ["yellow_gold_18k", "white_gold_18k", "rose_gold_18k", "platinum", "silver"],
+          "default": "yellow_gold_18k"
+        }
+      }
+    },
+    "manufacturing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": ["lost_wax_casting", "direct_resin_printing"],
+          "default": "lost_wax_casting"
+        }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "meshTolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 0.1,
+          "description": "Millimeters. Positivity IS enforced structurally here, matching Pydantic Field(gt=0) on PreviewSpec.meshTolerance."
+        },
+        "angularTolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 0.2,
+          "description": "Radians (confirmed by inspecting the installed CadQuery source: Shape.mesh() passes this value directly into OCCT's BRepMesh_IncrementalMesh angular-deflection parameter, which OCCT documents in radians). Positivity IS enforced structurally here, matching Pydantic Field(gt=0)."
+        }
+      }
+    }
+  }
+}

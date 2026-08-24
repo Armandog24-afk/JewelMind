@@ -178,3 +178,50 @@ Future coding agents must:
 - **Update domain-to-code mapping after implementation changes** —
   `docs/bible/04-jewelry-domain/055-domain-to-code-mapping.md` and
   `docs/bible/appendices/jewelry-domain-status-matrix.md`.
+
+## JDL RULES
+
+`docs/bible/05-jdl/` is the authoritative Jewelry Definition Language
+(JDL) specification — start at
+[`docs/bible/05-jdl/README.md`](docs/bible/05-jdl/README.md). The
+machine-readable half lives in
+[`specs/jdl/v1/`](specs/jdl/v1/README.md) (JSON Schema, the planned
+textual-DSL grammar, canonicalization/compiler-contract references,
+examples, and test vectors). Future coding agents must:
+
+- **Read `docs/bible/05-jdl/README.md` before changing schemas** — before
+  adding/changing a field, enum member, default, or validation layer in
+  `backend/jewelmind/domain/schema.py`, `shared/types/jewelry-definition.ts`,
+  or `specs/jdl/v1/jdl.schema.json`.
+- **Treat Canonical JSON as the current NORMATIVE representation.** YAML
+  serialization and the textual JDL DSL are PLANNED and NON-NORMATIVE —
+  never describe either as currently accepted by the API, and never
+  implement a production parser for either without a dedicated milestone
+  and an updated `docs/bible/05-jdl/README.md`.
+- **Never add executable code to JDL** — no field, in any current or
+  future representation, may carry an expression, script, macro, or
+  function body. See `docs/bible/05-jdl/062-design-goals-and-non-goals.md`.
+- **Keep structural (schema-layer) and semantic (business-rule) validation
+  separate** — a new numeric threshold belongs in
+  `backend/jewelmind/validation/engine.py`, not in
+  `specs/jdl/v1/jdl.schema.json`, unless it is a genuine type/structural
+  fact (see `docs/bible/05-jdl/075-validation-pipeline.md`).
+- **Never rename or reuse a published diagnostic code** — see JDL-GOV-007
+  in `docs/bible/05-jdl/060-jdl-governance.md` and
+  `docs/bible/appendices/jdl-error-code-catalog.md`.
+- **Generate test vectors by running the real implementation** — never
+  hand-invent a value in `specs/jdl/v1/test-vectors/`; see JDL-GOV-009.
+- **Create an RFC before adding a new ring style, stone shape, setting
+  type, or jewelry category** expressed as new JDL fields or enum
+  members — see `docs/bible/04-jewelry-domain/056-domain-extension-strategy.md`.
+- **Create an ADR for an incompatible language decision** — changing
+  which JDL representation is normative, moving validation authority
+  between layers, or changing the canonicalization/hashing algorithm; see
+  `docs/bible/05-jdl/060-jdl-governance.md`.
+- **Never describe a PLANNED JDL feature as currently supported** — a
+  YAML loader, a textual-DSL parser, or a capability-declaration endpoint
+  do not exist; do not imply otherwise in code comments, API docs, or the
+  frontend.
+- **Update `specs/jdl/v1/` and `backend/tests/test_jdl_schema_examples.py`
+  together** with any schema change, so the specification cannot silently
+  drift from the running implementation.

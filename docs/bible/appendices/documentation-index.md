@@ -4,7 +4,7 @@ title: "Appendix: Documentation Index"
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on: []
 related_documents: []
@@ -86,6 +86,52 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A06 | Appendix: Jewelry Domain Parameter Catalog | accepted | current | [`appendices/jewelry-domain-parameter-catalog.md`](jewelry-domain-parameter-catalog.md) |
 | JM-BIBLE-A07 | Appendix: Jewelry Domain Relationship Matrix | accepted | current | [`appendices/jewelry-domain-relationship-matrix.md`](jewelry-domain-relationship-matrix.md) |
 | JM-BIBLE-A08 | Appendix: Jewelry Domain Status Matrix | accepted | current | [`appendices/jewelry-domain-status-matrix.md`](jewelry-domain-status-matrix.md) |
+| JM-BIBLE-JDL-README | Jewelry Definition Language v1 — Index | accepted | partial | [`05-jdl/README.md`](../05-jdl/README.md) |
+| JM-BIBLE-060 | JDL Governance | accepted | current | [`05-jdl/060-jdl-governance.md`](../05-jdl/060-jdl-governance.md) |
+| JM-BIBLE-061 | JDL Language Overview | accepted | partial | [`05-jdl/061-language-overview.md`](../05-jdl/061-language-overview.md) |
+| JM-BIBLE-062 | JDL Design Goals and Non-Goals | accepted | partial | [`05-jdl/062-design-goals-and-non-goals.md`](../05-jdl/062-design-goals-and-non-goals.md) |
+| JM-BIBLE-063 | JDL Processing Model | accepted | partial | [`05-jdl/063-jdl-processing-model.md`](../05-jdl/063-jdl-processing-model.md) |
+| JM-BIBLE-064 | Canonical Document Model | accepted | current | [`05-jdl/064-canonical-document-model.md`](../05-jdl/064-canonical-document-model.md) |
+| JM-BIBLE-065 | Canonical JSON Serialization | accepted | current | [`05-jdl/065-canonical-json-serialization.md`](../05-jdl/065-canonical-json-serialization.md) |
+| JM-BIBLE-066 | YAML Serialization Contract | draft | planned | [`05-jdl/066-yaml-serialization-contract.md`](../05-jdl/066-yaml-serialization-contract.md) |
+| JM-BIBLE-067 | Textual DSL Overview | draft | planned | [`05-jdl/067-textual-dsl-overview.md`](../05-jdl/067-textual-dsl-overview.md) |
+| JM-BIBLE-068 | Lexical Conventions | draft | planned | [`05-jdl/068-lexical-conventions.md`](../05-jdl/068-lexical-conventions.md) |
+| JM-BIBLE-069 | Formal Grammar | draft | planned | [`05-jdl/069-formal-grammar.md`](../05-jdl/069-formal-grammar.md) |
+| JM-BIBLE-070 | Type System | accepted | partial | [`05-jdl/070-type-system.md`](../05-jdl/070-type-system.md) |
+| JM-BIBLE-071 | Units and Numeric Model | accepted | current | [`05-jdl/071-units-and-numeric-model.md`](../05-jdl/071-units-and-numeric-model.md) |
+| JM-BIBLE-072 | Identifiers, Enums, and Naming | accepted | current | [`05-jdl/072-identifiers-enums-and-naming.md`](../05-jdl/072-identifiers-enums-and-naming.md) |
+| JM-BIBLE-073 | Required, Optional, Default, and Derived Values | accepted | current | [`05-jdl/073-required-optional-default-and-derived-values.md`](../05-jdl/073-required-optional-default-and-derived-values.md) |
+| JM-BIBLE-074 | Semantic Rules | accepted | current | [`05-jdl/074-semantic-rules.md`](../05-jdl/074-semantic-rules.md) |
+| JM-BIBLE-075 | Validation Pipeline | accepted | partial | [`05-jdl/075-validation-pipeline.md`](../05-jdl/075-validation-pipeline.md) |
+| JM-BIBLE-076 | Canonicalization and Definition Hashing | accepted | current | [`05-jdl/076-canonicalization-and-definition-hashing.md`](../05-jdl/076-canonicalization-and-definition-hashing.md) |
+| JM-BIBLE-077 | Compiler Contract | accepted | partial | [`05-jdl/077-compiler-contract.md`](../05-jdl/077-compiler-contract.md) |
+| JM-BIBLE-078 | Geometry Generation Contract | accepted | current | [`05-jdl/078-geometry-generation-contract.md`](../05-jdl/078-geometry-generation-contract.md) |
+| JM-BIBLE-079 | Artifact Generation Contract | accepted | current | [`05-jdl/079-artifact-generation-contract.md`](../05-jdl/079-artifact-generation-contract.md) |
+| JM-BIBLE-080 | Errors, Warnings, and Diagnostics | accepted | current | [`05-jdl/080-errors-warnings-and-diagnostics.md`](../05-jdl/080-errors-warnings-and-diagnostics.md) |
+| JM-BIBLE-081 | Schema Versioning and Migrations | accepted | current | [`05-jdl/081-schema-versioning-and-migrations.md`](../05-jdl/081-schema-versioning-and-migrations.md) |
+| JM-BIBLE-082 | Extension and Capability Model | accepted | planned | [`05-jdl/082-extension-and-capability-model.md`](../05-jdl/082-extension-and-capability-model.md) |
+| JM-BIBLE-083 | Security and Resource Limits | accepted | current | [`05-jdl/083-security-and-resource-limits.md`](../05-jdl/083-security-and-resource-limits.md) |
+| JM-BIBLE-084 | Current Implementation Mapping | accepted | current | [`05-jdl/084-current-implementation-mapping.md`](../05-jdl/084-current-implementation-mapping.md) |
+| JM-BIBLE-085 | Conformance Levels and Test Vectors | accepted | partial | [`05-jdl/085-conformance-and-test-vectors.md`](../05-jdl/085-conformance-and-test-vectors.md) |
+| JM-BIBLE-086 | Open JDL Questions | accepted | current | [`05-jdl/086-open-jdl-questions.md`](../05-jdl/086-open-jdl-questions.md) |
+| JM-BIBLE-SPRINT3-REPORT | Sprint 3 Validation Report | accepted | current | [`05-jdl/SPRINT-3-VALIDATION-REPORT.md`](../05-jdl/SPRINT-3-VALIDATION-REPORT.md) |
+| JM-BIBLE-A09 | Appendix: JDL Field Catalog | accepted | current | [`appendices/jdl-field-catalog.md`](jdl-field-catalog.md) |
+| JM-BIBLE-A10 | Appendix: JDL Enumeration Catalog | accepted | current | [`appendices/jdl-enumeration-catalog.md`](jdl-enumeration-catalog.md) |
+| JM-BIBLE-A11 | Appendix: JDL Error Code Catalog | accepted | current | [`appendices/jdl-error-code-catalog.md`](jdl-error-code-catalog.md) |
+| JM-BIBLE-A12 | Appendix: JDL Version Compatibility Matrix | accepted | current | [`appendices/jdl-version-compatibility-matrix.md`](jdl-version-compatibility-matrix.md) |
+| JM-BIBLE-A13 | Appendix: JDL Example Index | accepted | current | [`appendices/jdl-example-index.md`](jdl-example-index.md) |
+
+## Machine-readable JDL specification — `specs/jdl/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/jdl/v1/README.md`](../../../specs/jdl/v1/README.md) |
+| JSON Schema | Yes (structural layer) | [`specs/jdl/v1/jdl.schema.json`](../../../specs/jdl/v1/jdl.schema.json) |
+| EBNF grammar (planned DSL) | No | [`specs/jdl/v1/jdl.ebnf`](../../../specs/jdl/v1/jdl.ebnf) |
+| Canonicalization reference | Yes | [`specs/jdl/v1/canonicalization.md`](../../../specs/jdl/v1/canonicalization.md) |
+| Compiler contract reference | Yes (CURRENT rows) | [`specs/jdl/v1/compiler-contract.md`](../../../specs/jdl/v1/compiler-contract.md) |
+| Examples (valid + invalid) | Yes | [`specs/jdl/v1/examples/`](../../../specs/jdl/v1/examples/) |
+| Test vectors | Yes | [`specs/jdl/v1/test-vectors/`](../../../specs/jdl/v1/test-vectors/) |
 
 ## Pre-existing technical reference — `docs/`
 

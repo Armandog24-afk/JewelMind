@@ -4,7 +4,7 @@ title: Solitaire Domain Model
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-043
@@ -17,6 +17,7 @@ related_documents:
   - JM-BIBLE-050
   - JM-BIBLE-051
   - JM-BIBLE-A05
+  - JM-BIBLE-064
 implementation_status: current
 professional_validation: preliminary
 ---
@@ -27,6 +28,14 @@ This is the central document of Sprint 2: the current solitaire ring,
 modeled as a domain aggregate, with every component classified by kind
 (domain entity, value object, parameter set, geometric component,
 metadata, manufacturing context, or generated artifact).
+
+**Relationship to JDL (Sprint 3):** this document describes the solitaire
+ring as a *jewelry concept*; [`05-jdl/064-canonical-document-model.md`](../05-jdl/064-canonical-document-model.md)
+describes the identical information as a *data type* (`JDLDocumentV1`),
+concluding it is fully equivalent to the current `JewelryDefinition`. Where
+the two overlap, this document remains authoritative for jewelry meaning;
+the JDL document is authoritative for field-level type/serialization
+concerns.
 
 ## Kind definitions
 

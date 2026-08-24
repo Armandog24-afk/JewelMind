@@ -1,0 +1,12 @@
+{
+  "description": "schemaVersion compatibility behavior of the current implementation (backend/jewelmind/domain/schema.py: schemaVersion: Literal[\"0.1.0\"]). Only one JDL schema version has ever been released, so this matrix intentionally has a single accepted row. It must be extended, never invented ahead of time, when a real 0.2.0 or later schema version is shipped (see docs/bible/05-jdl/081-schema-versioning-and-migrations.md).",
+  "currentSchemaVersion": "0.1.0",
+  "vectors": [
+    { "schemaVersion": "0.1.0", "accepted": true, "note": "The only version ever released; this is what every example in this directory declares." },
+    { "schemaVersion": "0.2.0", "accepted": false, "note": "Does not exist yet. Rejected because it is not the literal \"0.1.0\", not because a migration was attempted and failed." },
+    { "schemaVersion": "0.0.9", "accepted": false, "note": "Does not exist. Same rejection mechanism as any non-\"0.1.0\" string." },
+    { "schemaVersion": "0.1", "accepted": false, "note": "Not a byte-exact match for the literal \"0.1.0\" string; no semantic version parsing/coercion occurs." },
+    { "schemaVersion": 0.1, "accepted": false, "note": "Wrong type (JSON number, not string); rejected by strict-mode type checking before the literal comparison." }
+  ],
+  "migrationPathsImplemented": []
+}

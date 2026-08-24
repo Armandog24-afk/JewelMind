@@ -1,0 +1,108 @@
+(* JewelMind JDL v1 — textual DSL grammar.
+
+   STATUS: PLANNED, NON-NORMATIVE. No parser for this grammar exists in the
+   current codebase, and none is being built in this milestone (Sprint 3).
+   The only NORMATIVE JDL representation today is the Canonical JSON
+   document validated by jdl.schema.json. This file exists so the eventual
+   textual syntax is unambiguous *before* anyone writes a parser for it, and
+   so today's readers can see exactly how small the current supported
+   surface is.
+
+   Scope discipline:
+     - This grammar covers ONLY the fields the current solitaire schema
+       actually has (backend/jewelmind/domain/schema.py). It does not add
+       any new ring style, stone shape, setting type, or parameter.
+     - Reserved extension points are marked explicitly below and produce no
+       production rules of their own yet — they exist so a future grammar
+       revision does not need to break backward compatibility with this
+       one.
+     - No construct here implies executable behavior: no expressions,
+       loops, conditionals, functions, macros, imports, or external
+       references are part of this grammar, by design (see
+       docs/bible/05-jdl/062-design-goals-and-non-goals.md).
+
+   Notation: ISO/IEC 14977 EBNF. Terminal strings are double-quoted.
+   Whitespace and comment handling are defined in
+   docs/bible/05-jdl/068-lexical-conventions.md and are not repeated as
+   productions here (this grammar assumes a lexer has already stripped
+   insignificant whitespace and comments).
+*)
+
+jdl-document        = jdl-version-decl , [ project-decl ] , ring-decl ;
+
+jdl-version-decl     = "jdl" , version-literal ;
+version-literal       = digit-seq , "." , digit-seq ;
+
+project-decl         = "project" , string-literal , "{" , { project-field } , "}" ;
+project-field         = units-field ;
+units-field           = "units" , unit-literal ;
+unit-literal           = "mm" ;                     (* the only unit ever accepted; see 071-units-and-numeric-model.md *)
+
+ring-decl             = "ring" , style-literal , "{" , { ring-body-item } , "}" ;
+style-literal          = "solitaire" ;               (* RESERVED EXTENSION POINT: future ring styles are additive alternatives here, never a change to this alternative *)
+
+ring-body-item        = ring-field
+                        | band-decl
+                        | stone-decl
+                        | setting-decl
+                        | material-decl
+                        | manufacturing-decl
+                        | preview-decl ;
+
+ring-field            = size-field | inner-diameter-field ;
+size-field             = "size" , size-system-literal , number-literal ;
+size-system-literal    = "EU" ;                      (* RESERVED EXTENSION POINT: other size systems (US, UK, JP, ...) are additive alternatives here *)
+inner-diameter-field   = "innerDiameter" , dimension-literal ;
+
+band-decl             = "band" , "{" , { band-field } , "}" ;
+band-field             = width-field | thickness-field | profile-field ;
+width-field            = "width" , dimension-literal ;
+thickness-field        = "thickness" , dimension-literal ;
+profile-field          = "profile" , band-profile-literal ;
+band-profile-literal   = "comfort_fit" | "flat" ;    (* RESERVED EXTENSION POINT: future profiles are additive alternatives *)
+
+stone-decl            = "stone" , stone-role-literal , "{" , { stone-field } , "}" ;
+stone-role-literal     = "center" ;                  (* RESERVED EXTENSION POINT: side/accent stone roles are additive alternatives, not implemented *)
+stone-field            = stone-shape-field | diameter-field | depth-field ;
+stone-shape-field      = "shape" , stone-shape-literal ;
+stone-shape-literal    = "round" ;                   (* RESERVED EXTENSION POINT: future shapes are additive alternatives *)
+diameter-field         = "diameter" , dimension-literal ;
+depth-field            = "depth" , dimension-literal ;
+
+setting-decl          = "setting" , setting-type-literal , "{" , { setting-field } , "}" ;
+setting-type-literal   = "prong" ;                   (* RESERVED EXTENSION POINT: future setting types are additive alternatives *)
+setting-field          = prong-count-field | prong-diameter-field | prong-height-field | basket-height-field ;
+prong-count-field      = "prongCount" , integer-literal ;
+prong-diameter-field   = "prongDiameter" , dimension-literal ;
+prong-height-field     = "prongHeight" , dimension-literal ;
+basket-height-field    = "basketHeight" , dimension-literal ;
+
+material-decl         = "material" , metal-literal ;
+metal-literal          = "yellow_gold_18k" | "white_gold_18k" | "rose_gold_18k" | "platinum" | "silver" ; (* RESERVED EXTENSION POINT: future metals/alloys are additive alternatives *)
+
+manufacturing-decl    = "manufacturing" , method-literal ;
+method-literal         = "lost_wax_casting" | "direct_resin_printing" ; (* RESERVED EXTENSION POINT: future methods are additive alternatives *)
+
+preview-decl          = "preview" , "{" , { preview-field } , "}" ;
+preview-field          = mesh-tolerance-field | angular-tolerance-field ;
+mesh-tolerance-field   = "meshTolerance" , number-literal ;
+angular-tolerance-field = "angularTolerance" , number-literal ;   (* radians; see 071-units-and-numeric-model.md *)
+
+(* --- lexical productions --- *)
+
+dimension-literal      = number-literal , [ "mm" ] ;  (* unit suffix optional in this draft grammar; whether it becomes mandatory is open question JDL-OQ-004 *)
+number-literal         = [ "-" ] , digit-seq , [ "." , digit-seq ] ;
+integer-literal         = [ "-" ] , digit-seq ;
+digit-seq               = digit , { digit } ;
+digit                   = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+string-literal          = '"' , { any-character-except-unescaped-quote } , '"' ;
+identifier              = letter , { letter | digit | "_" } ;
+letter                  = "a" | ... | "z" | "A" | ... | "Z" ;
+
+(* Reserved keywords (case-sensitive; see 068-lexical-conventions.md):
+   jdl, project, units, ring, band, stone, setting, material, manufacturing,
+   preview, mm, EU, comfort_fit, flat, round, prong, center,
+   yellow_gold_18k, white_gold_18k, rose_gold_18k, platinum, silver,
+   lost_wax_casting, direct_resin_printing.
+   An identifier equal to a reserved keyword is a syntax error, not an
+   implicit string. *)

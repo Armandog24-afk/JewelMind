@@ -4,13 +4,14 @@ title: Data Flow
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-007
 related_documents:
   - JM-BIBLE-020
   - JM-BIBLE-A03
+  - JM-BIBLE-063
 implementation_status: current
 ---
 
@@ -20,6 +21,14 @@ Request-by-request walkthrough of the current system. Endpoint details
 (exact request/response shapes) are in `docs/api.md` and
 [`appendices/api-inventory.md`](../appendices/api-inventory.md); this
 document is about *sequencing and responsibility handoff*.
+
+**Relationship to JDL (Sprint 3):** the flows below are the current,
+concrete instance of the eleven-stage JDL processing model in
+[`05-jdl/063-jdl-processing-model.md`](../05-jdl/063-jdl-processing-model.md)
+(JDL-0 through JDL-10). `validate_definition()` covers JDL-5/JDL-6,
+`build_solitaire_ring()` covers JDL-7/JDL-8, and the exporters cover
+JDL-10. This document does not restate that model; it shows exactly where
+each stage lives in the running request/response sequence.
 
 ## `POST /api/models/validate`
 

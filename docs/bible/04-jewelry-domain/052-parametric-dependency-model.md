@@ -4,7 +4,7 @@ title: Parametric Dependency Model
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-044
@@ -14,6 +14,7 @@ related_documents:
   - JM-BIBLE-048
   - JM-BIBLE-049
   - JM-BIBLE-053
+  - JM-BIBLE-078
 implementation_status: current
 professional_validation: not_required
 ---
@@ -23,6 +24,14 @@ professional_validation: not_required
 Every dependency below is read directly from
 `backend/jewelmind/geometry/` and `backend/jewelmind/validation/engine.py`
 — none is inferred or assumed.
+
+**Relationship to JDL (Sprint 3):** [`05-jdl/078-geometry-generation-contract.md`](../05-jdl/078-geometry-generation-contract.md)
+restates this same dependency data as a per-component input/derived-value/output
+contract, for compiler-implementer purposes. That document does not
+introduce any dependency not already listed here — see open question
+JDL-OQ-007 in [`05-jdl/086-open-jdl-questions.md`](../05-jdl/086-open-jdl-questions.md)
+for whether `material.metal`/`manufacturing.method` should ever gain a
+geometry dependency in the future.
 
 ## Dependency table
 

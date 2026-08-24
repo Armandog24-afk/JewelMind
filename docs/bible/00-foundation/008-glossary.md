@@ -4,12 +4,13 @@ title: Glossary
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on: []
 related_documents:
   - JM-BIBLE-001
   - JM-BIBLE-DOMAIN-README
+  - JM-BIBLE-JDL-README
 implementation_status: current
 ---
 
@@ -250,3 +251,36 @@ same model ID.
 
 **Definition hash** — a SHA-256 hash (truncated to 16 hex characters) of
 the canonical definition JSON, used as the model's cache key and identity.
+
+## JDL terms (Sprint 3)
+
+> Authoritative source for every term in this section:
+> [`05-jdl/`](../05-jdl/README.md) (Sprint 3).
+
+**JDL (Jewelry Definition Language)** — the language and semantic contract
+governing how a piece of jewelry is expressed as data, independent of
+which representation carries it. See [`05-jdl/061-language-overview.md`](../05-jdl/061-language-overview.md).
+
+**JDL Canonical Document** — the normative, normalized in-memory result of
+parsing and default-filling a Canonical JSON document — today, exactly a
+`JewelryDefinition` instance. See
+[`05-jdl/064-canonical-document-model.md`](../05-jdl/064-canonical-document-model.md).
+
+**Canonical JSON** — the only NORMATIVE JDL representation today; the JSON
+shape the running API actually accepts and produces. See
+[`05-jdl/065-canonical-json-serialization.md`](../05-jdl/065-canonical-json-serialization.md).
+
+**Textual JDL DSL** — a PLANNED, non-normative human-authored syntax for
+JDL documents. No parser exists. See
+[`05-jdl/067-textual-dsl-overview.md`](../05-jdl/067-textual-dsl-overview.md)
+and [`specs/jdl/v1/jdl.ebnf`](../../../specs/jdl/v1/jdl.ebnf).
+
+**Structural validation** — the JSON-Schema-equivalent layer that checks
+types, literal/enum membership, and unknown-field rejection, deliberately
+kept separate from semantic/business-rule validation. See
+[`05-jdl/075-validation-pipeline.md`](../05-jdl/075-validation-pipeline.md).
+
+**Conformance level** — one of `JDL-READER`, `JDL-VALIDATOR`,
+`JDL-COMPILER`, `JDL-EXPORTER`, `JDL-FULL-V1`, describing how much of the
+JDL pipeline an implementation supports. See
+[`05-jdl/085-conformance-and-test-vectors.md`](../05-jdl/085-conformance-and-test-vectors.md).
