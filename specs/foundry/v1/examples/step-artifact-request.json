@@ -1,0 +1,12 @@
+{
+  "requestId": null,
+  "artifactType": "STEP",
+  "required": true,
+  "options": { "includeStoneReference": false },
+  "requestedBy": null,
+  "sourceCompilationId": null,
+  "sourceDefinitionHash": "355ddca57e7e49ad",
+  "includeComponents": [],
+  "excludeComponents": [],
+  "outputPreferences": {}
+}

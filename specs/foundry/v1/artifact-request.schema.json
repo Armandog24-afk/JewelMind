@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/artifact-request.schema.json",
+  "title": "Foundry Artifact Request v1",
+  "description": "Structural schema for the FULL request Foundry conceptually receives. This is a SUPERSET of specs/alchemist/v1/artifact-request.schema.json, which remains authoritative for the minimal shape (artifactType, options, required) as embedded conceptually inside CompilationInput. Foundry's version adds orchestration-context fields Alchemist would attach before handing a request to Foundry. Do not treat this as redefining artifactType/options/required — their meaning is identical to the Alchemist schema. See docs/bible/09-foundry/193-artifact-request-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifactType", "required"],
+  "properties": {
+    "requestId": { "type": ["string", "null"], "description": "PLANNED — no current request carries a distinct ID; see docs/bible/08-alchemist/163-compilation-input-contract.md's same finding for requestContext." },
+    "artifactType": { "enum": ["STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"], "description": "Identical vocabulary to specs/alchemist/v1/artifact-request.schema.json, minus PREVIEW_MESH — Foundry owns production/technical artifacts; preview belongs to Vision (see docs/bible/09-foundry/192-artifact-domain-model.md)." },
+    "required": { "type": "boolean" },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "includeStoneReference": { "type": "boolean", "default": false },
+        "meshTolerance": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "angularTolerance": { "type": ["number", "null"], "exclusiveMinimum": 0 }
+      }
+    },
+    "requestedBy": { "type": ["string", "null"], "description": "PLANNED — no request-attribution concept exists; this system has no user-account model." },
+    "sourceCompilationId": { "type": ["string", "null"], "description": "PLANNED — see docs/bible/08-alchemist/171-compilation-result-model.md's compilationId field, also PLANNED." },
+    "sourceDefinitionHash": { "type": ["string", "null"], "description": "CURRENT, implicit — every export request carries modelId, which equals definitionHash." },
+    "includeComponents": { "type": "array", "items": { "type": "string" }, "description": "PLANNED — no current request can select individual components; only whole-artifact requests (with the single includeStoneReference toggle) exist." },
+    "excludeComponents": { "type": "array", "items": { "type": "string" }, "description": "PLANNED, same reasoning." },
+    "outputPreferences": { "type": "object", "description": "PLANNED — no current output-format preference (e.g. ASCII vs. binary STL) is configurable." }
+  }
+}

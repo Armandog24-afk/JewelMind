@@ -1,0 +1,19 @@
+{
+  "description": "Which of the 8 conceptual integrity-validation levels are CURRENT vs. NOT_EXECUTED, confirmed by inspecting backend/jewelmind/exporters/integrity.py and services/model_service.py during Sprint 7.",
+  "vectors": [
+    { "level": "FILE_EXISTENCE", "status": "PASS", "artifactType": "STEP", "message": "Checked by validate_non_empty() (Sprint 7 addition), which raises ArtifactIntegrityError if the path does not exist." },
+    { "level": "FILE_EXISTENCE", "status": "PASS", "artifactType": "STL", "message": "Same mechanism." },
+    { "level": "NON_ZERO_SIZE", "status": "PASS", "artifactType": "STEP", "measuredValue": 197081, "message": "validate_non_empty() also rejects a zero-byte file." },
+    { "level": "NON_ZERO_SIZE", "status": "PASS", "artifactType": "STL", "measuredValue": 522784 },
+    { "level": "EXPECTED_EXTENSION", "status": "NOT_EXECUTED", "artifactType": "STEP", "message": "The extension is appended by the API layer (sanitize_filename() + '.step'), never independently verified against the actual file content." },
+    { "level": "EXPECTED_MIME", "status": "NOT_EXECUTED", "artifactType": "STEP", "message": "The MIME type in the HTTP response is a fixed literal ('application/step'), never derived from or checked against the actual file bytes." },
+    { "level": "CHECKSUM", "status": "PASS", "artifactType": "STEP", "message": "sha256_checksum() (Sprint 7 addition), exposed via the X-Content-SHA256 response header." },
+    { "level": "CHECKSUM", "status": "PASS", "artifactType": "STL", "message": "Same mechanism." },
+    { "level": "FORMAT_SIGNATURE", "status": "PASS", "artifactType": "STL", "message": "binary_stl_triangle_count() (Sprint 7 addition) reads and validates the binary STL header structure (84-byte header + N*50-byte triangles) matches the file size exactly." },
+    { "level": "FORMAT_SIGNATURE", "status": "NOT_EXECUTED", "artifactType": "STEP", "message": "No ISO-10303 header signature check exists." },
+    { "level": "PARSER_OR_REIMPORT_VALIDATION", "status": "PASS", "artifactType": "STEP", "message": "backend/tests/test_export_integrity.py::test_step_export_roundtrip_via_reimport re-imports via cadquery.importers.importStep() — but this runs only in the test suite, NOT at runtime for every real export request." },
+    { "level": "GEOMETRIC_ROUNDTRIP_VALIDATION", "status": "PASS", "artifactType": "STEP", "message": "The same test compares re-imported solid count and volume (within a 1e-3 relative tolerance) against the original GeneratedModel — test-time only, not runtime." },
+    { "level": "GEOMETRIC_ROUNDTRIP_VALIDATION", "status": "NOT_EXECUTED", "artifactType": "JSON", "message": "Not applicable in the same sense — JSON export is validated by re-parsing and comparing to the original definition, which IS tested (test_api.py::test_export_json_matches_original_definition), but this is a different kind of check than geometric roundtrip." }
+  ],
+  "runtimeVsTestOnly": "Every PASS above marked with 'test suite' in its message is TEST-TIME ONLY — it does not run for a real user's export request. The only checks that run for every real export request are FILE_EXISTENCE, NON_ZERO_SIZE (both via validate_non_empty()), and CHECKSUM (via sha256_checksum(), always computed and returned in the response header)."
+}

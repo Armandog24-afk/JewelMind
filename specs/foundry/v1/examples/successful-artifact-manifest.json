@@ -1,0 +1,53 @@
+{
+  "sourceDefinitionHash": "355ddca57e7e49ad",
+  "compilationHash": null,
+  "overallStatus": "ALL_REQUESTED_SUCCEEDED",
+  "artifacts": [
+    {
+      "artifactId": "step-355ddca57e7e49ad",
+      "artifactType": "STEP",
+      "artifactVersion": null,
+      "status": "SUCCEEDED",
+      "filename": "Solitaire_Ring.step",
+      "mimeType": "application/step",
+      "byteSize": 197081,
+      "checksum": "2b0202353a2fe456b57338347d1e9be13cffbee25109a567241faeec889f554d",
+      "sourceDefinitionHash": "355ddca57e7e49ad",
+      "compilationHash": null,
+      "sourceComponentIds": ["band", "prongs", "basket_support"],
+      "includedComponents": ["band", "prongs", "basket_support"],
+      "excludedComponents": ["stone_reference"],
+      "unitContract": "millimeters, implicit (no unit field in STEP output; source geometry is entirely mm-valued)",
+      "generationDuration": null,
+      "generatedAt": null,
+      "exporterVersion": null,
+      "warnings": [],
+      "errorCode": null,
+      "required": true,
+      "integrityStatus": "REIMPORT_VALIDATED"
+    },
+    {
+      "artifactId": "stl-355ddca57e7e49ad",
+      "artifactType": "STL",
+      "artifactVersion": null,
+      "status": "SUCCEEDED",
+      "filename": "Solitaire_Ring.stl",
+      "mimeType": "model/stl",
+      "byteSize": 522784,
+      "checksum": "d447f183bebeb5c32d1ef9f83eaffd634c5ff5f1150085b682070d6d2c631957",
+      "sourceDefinitionHash": "355ddca57e7e49ad",
+      "compilationHash": null,
+      "sourceComponentIds": ["band", "prongs", "basket_support"],
+      "includedComponents": ["band", "prongs", "basket_support"],
+      "excludedComponents": ["stone_reference"],
+      "unitContract": "millimeters, implicit (STL has no native unit field at all)",
+      "generationDuration": null,
+      "generatedAt": null,
+      "exporterVersion": null,
+      "warnings": [],
+      "errorCode": null,
+      "required": false,
+      "integrityStatus": "REIMPORT_VALIDATED"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/artifact-record.schema.json",
+  "title": "Foundry Artifact Record v1",
+  "description": "Structural schema for one ArtifactRecord — a richer, Foundry-owned per-artifact record with integrity/checksum/versioning detail that specs/alchemist/v1/artifact-manifest.schema.json (Sprint 6) does not carry. This is a genuine extension, not a duplicate — see docs/bible/09-foundry/201-artifact-manifest-model.md for the exact reconciliation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifactId", "artifactType", "status"],
+  "properties": {
+    "artifactId": { "type": "string" },
+    "artifactType": { "enum": ["STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+    "artifactVersion": { "type": ["string", "null"], "description": "PLANNED — no per-artifact-format version exists distinct from the exporter code itself." },
+    "status": { "enum": ["SUCCEEDED", "FAILED", "SKIPPED"] },
+    "filename": { "type": ["string", "null"] },
+    "mimeType": { "type": ["string", "null"] },
+    "byteSize": { "type": ["integer", "null"], "description": "CURRENT as of Sprint 7 — computed via exporters/integrity.py::validate_non_empty(), though not yet threaded into any API response field." },
+    "checksum": { "type": ["string", "null"], "description": "CURRENT as of Sprint 7 for STEP/STL — sha256_checksum(), exposed via the X-Content-SHA256 response header. Not yet computed for JSON/specification exports." },
+    "sourceDefinitionHash": { "type": "string" },
+    "compilationHash": { "type": ["string", "null"], "description": "PLANNED — see docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md." },
+    "sourceComponentIds": { "type": "array", "items": { "type": "string" } },
+    "includedComponents": { "type": "array", "items": { "type": "string" } },
+    "excludedComponents": { "type": "array", "items": { "type": "string" } },
+    "unitContract": { "type": ["string", "null"], "description": "e.g. \"millimeters, implicit\" for STEP/STL; see docs/bible/09-foundry/212-unit-and-scale-contract.md." },
+    "generationDuration": { "type": ["number", "null"], "description": "PLANNED — no per-artifact timing exists; see docs/bible/08-alchemist/185-compiler-performance-model.md." },
+    "generatedAt": { "type": ["string", "null"] },
+    "exporterVersion": { "type": ["string", "null"], "description": "PARTIAL — see docs/bible/09-foundry/208-export-version-fingerprint.md." },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "errorCode": { "type": ["string", "null"] },
+    "required": { "type": "boolean" },
+    "integrityStatus": { "enum": ["UNVALIDATED", "FILE_EXISTS", "NON_EMPTY", "CHECKSUM_COMPUTED", "REIMPORT_VALIDATED", null] }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "description": "The explicit component-inclusion matrix, confirmed by inspecting exporters/selection.py, preview/mesh.py, and exporters/specification.py directly during Sprint 7.",
+  "matrix": [
+    { "component": "band", "STEP": "included_by_default", "STL": "included_by_default", "JSON": "not_applicable_metadata_only", "TECHNICAL_SPECIFICATION": "included_by_default", "PREVIEW_MESH": "included_by_default" },
+    { "component": "prongs", "STEP": "included_by_default", "STL": "included_by_default", "JSON": "not_applicable_metadata_only", "TECHNICAL_SPECIFICATION": "included_by_default", "PREVIEW_MESH": "included_by_default" },
+    { "component": "basket_support", "STEP": "included_by_default", "STL": "included_by_default", "JSON": "not_applicable_metadata_only", "TECHNICAL_SPECIFICATION": "included_by_default", "PREVIEW_MESH": "included_by_default" },
+    { "component": "stone_reference", "STEP": "excluded_by_default_optional", "STL": "excluded_by_default_optional", "JSON": "not_applicable_metadata_only", "TECHNICAL_SPECIFICATION": "included_by_default_dimensions_only", "PREVIEW_MESH": "included_by_default" }
+  ],
+  "notes": {
+    "JSON": "The JSON export is the canonical JewelryDefinition itself, not a geometry export — 'component inclusion' does not apply the same way. Every field (including stone.diameter/depth) is present as design metadata, never as a fused/compound geometric component.",
+    "TECHNICAL_SPECIFICATION": "Includes per-component volumes for band/prongs/basket_support and the combined metal volume (build_specification() in exporters/specification.py); includes the stone's diameter/depth as design metadata under a heading explicitly labeled '(reference only, not a gemological reproduction)', never as production metal.",
+    "stone_reference": "Never 'prohibited' for any artifact type — always at least optionally includable (STEP/STL via includeStoneReference=true) or already included as metadata (JSON, spec) or always visible (preview). No artifact type excludes it unconditionally."
+  },
+  "realExportedComponentSets": {
+    "STEP_default": ["band", "prongs", "basket_support"],
+    "STEP_with_stone": ["band", "prongs", "basket_support", "stone_reference"],
+    "STL_default": ["band", "prongs", "basket_support"],
+    "STL_with_stone": ["band", "prongs", "basket_support", "stone_reference"]
+  }
+}

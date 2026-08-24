@@ -101,12 +101,18 @@ directory (`model_service.preview_file`) — see LAW-002.
 
 ## `POST /api/models/export/step` and `/export/stl`
 
+This flow is formalized as Foundry's FOUNDRY-0..FOUNDRY-9 generation
+pipeline in Sprint 7 — see
+[`09-foundry/194-generation-pipeline.md`](../09-foundry/194-generation-pipeline.md).
+
 ```mermaid
 sequenceDiagram
     participant FE as Frontend
     participant API as api/routes.py
     participant MS as services/model_service.py
+    participant SEL as exporters/selection.py
     participant EXP as exporters/step_exporter.py
+    participant INT as exporters/integrity.py
     FE->>API: modelId, includeStoneReference
     API->>MS: get_record(modelId)
     alt unknown modelId
@@ -116,16 +122,23 @@ sequenceDiagram
         API->>MS: export_step_file(modelId, ...)
         MS->>MS: unique temp file (tempfile.mkstemp)
         MS->>EXP: export_step(model, destination, include_stone)
+        EXP->>SEL: select_export_shapes(model, include_stone)
+        SEL-->>EXP: shape (combined_metal, + stone compound if requested)
         EXP-->>MS: written file path
+        MS->>INT: validate_non_empty(path, artifact_type="STEP")
+        INT-->>MS: byte size, or raise FOUNDRY_INTEGRITY_FAILED
         MS-->>API: path
-        API-->>FE: FileResponse (background task deletes temp file after send)
+        API->>INT: sha256_checksum(path)
+        INT-->>API: checksum
+        API-->>FE: FileResponse (X-Content-SHA256 header; background task deletes temp file after send)
     end
 ```
 
 STL follows the same shape, with an additional tolerance-validation step
 in `api/schemas.py::ExportStlRequest` before the request even reaches the
 handler (see [`013-functional-requirements.md`](../01-product/013-functional-requirements.md)
-JM-FR-019/020).
+JM-FR-019/020). `validate_non_empty()` and `sha256_checksum()` (both
+added in Sprint 7) are the same functions for both STEP and STL.
 
 ## `POST /api/models/export/json` and `/specification`
 
@@ -144,3 +157,4 @@ already present on it (`record.definition` and, for the specification,
 | Caching + temp files | `services/model_service.py` | Preview / export on demand |
 | Preview tessellation | `preview/mesh.py` | Frontend, via URL |
 | File export | `exporters/` | Frontend, via download |
+| Export integrity validation (Sprint 7) | `exporters/integrity.py` | API response header (`X-Content-SHA256`) |

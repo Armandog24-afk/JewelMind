@@ -16,9 +16,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import cadquery as cq
-
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.exporters.selection import select_export_shapes
 from jewelmind.geometry.model import GeneratedModel
 
 
@@ -34,10 +33,6 @@ def export_stl(
     tolerance = mesh_tolerance if mesh_tolerance is not None else definition.preview.meshTolerance
     angular = angular_tolerance if angular_tolerance is not None else definition.preview.angularTolerance
 
-    shapes = [model.combined_metal]
-    if include_stone:
-        shapes.append(model.components["stone_reference"].shape)
-
-    shape = shapes[0] if len(shapes) == 1 else cq.Compound.makeCompound(shapes)
+    shape = select_export_shapes(model, include_stone=include_stone)
     shape.exportStl(str(destination), tolerance=tolerance, angularTolerance=angular)
     return destination

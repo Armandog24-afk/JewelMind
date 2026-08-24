@@ -415,3 +415,78 @@ agents must:
 - **Create an RFC for major pipeline changes** — asynchronous
   compilation, component-level regeneration, or restructuring the
   five-layer pipeline itself; see the same document.
+
+## FOUNDRY RULES
+
+`docs/bible/09-foundry/` is the authoritative Foundry Export System
+specification — start at
+[`docs/bible/09-foundry/README.md`](docs/bible/09-foundry/README.md). The
+machine-readable half lives in
+[`specs/foundry/v1/`](specs/foundry/v1/README.md) (artifact request/
+record/manifest, export diagnostic, export validation result, and export
+version fingerprint JSON Schemas, real examples, and test vectors).
+Future coding agents must:
+
+- **Read `docs/bible/09-foundry/README.md` before changing exporters** —
+  before modifying anything in `backend/jewelmind/exporters/` or how
+  `ModelService.export_step_file()`/`export_stl_file()` orchestrate them.
+- **Keep StoneReference excluded from production artifacts by default**
+  — STEP/STL export must never default `includeStoneReference` to
+  `true`; restates LAW-006 at the export layer (FOUNDRY-GOV-004).
+- **Never claim native CAD preservation from STEP** — no parametric
+  history, feature tree, MatrixGold-equivalent editability, or
+  guaranteed import quality in every CAD application (FOUNDRY-GOV-006).
+- **Never claim parametric editing from STL** — it is a derived,
+  tessellated, one-way artifact; it must never become the canonical
+  source geometry for anything downstream (FOUNDRY-GOV-007,
+  FOUNDRY-GOV-013).
+- **Preserve the millimeter scale contract** — never guess a unit; a
+  claim about an artifact's unit must be grounded in actually inspecting
+  that artifact's real output, not assumed (FOUNDRY-GOV-012; see
+  `docs/bible/09-foundry/212-unit-and-scale-contract.md`).
+- **Never fake an export** — restates CLAUDE.md's own rule explicitly at
+  this layer; every exporter must write one complete, real file per
+  artifact in a single operation (FOUNDRY-GOV-002, FOUNDRY-GOV-008).
+- **Never silently drop a required production component** from an
+  export — a missing or failed required component must be an observable
+  failure, never a quietly smaller file (FOUNDRY-GOV-009).
+- **Use stable, namespaced diagnostic codes** — never rename or reuse
+  one once published (FOUNDRY-GOV-010); see
+  `docs/bible/appendices/foundry-export-diagnostic-catalog.md`.
+- **Never expose an internal server path** in a public error message or
+  response header (FOUNDRY-GOV-011).
+- **Never call an untested external CAD workflow "validated"** — an
+  `IMPORT_TESTED`/`WORKFLOW_VALIDATED` claim requires an actual recorded
+  test run, never an assumption of format compatibility
+  (FOUNDRY-GOV-014); see
+  `docs/bible/09-foundry/209-cad-interoperability-philosophy.md`.
+- **Clean up every temporary file** an exporter or export-orchestration
+  function creates, on both the success and failure path
+  (FOUNDRY-GOV-015).
+- **Treat a changed export default as a MAJOR change** — which
+  components are included, whether the stone is included by default,
+  or which artifact formats exist must never shift silently
+  (FOUNDRY-GOV-016).
+- **Report partial success honestly** — if some requested artifacts
+  succeed and others fail, never report complete success when a
+  required artifact failed (FOUNDRY-GOV-017).
+- **Preserve the Atlas/Forge boundary at the export layer** — Foundry
+  reports what was exported and whether it passed an integrity check;
+  it never interprets a geometric fact as a jewelry-domain violation
+  (Forge's job) and never constructs or mutates geometry itself (Atlas's
+  job) (FOUNDRY-GOV-018).
+- **Update the artifact/diagnostic/interoperability appendices** —
+  `docs/bible/appendices/foundry-artifact-catalog.md`,
+  `foundry-mime-type-catalog.md`, `foundry-component-inclusion-matrix.md`,
+  `foundry-export-diagnostic-catalog.md`, `foundry-export-test-matrix.md`,
+  `foundry-code-mapping.md`, and `foundry-interoperability-matrix.md` —
+  in the same change as an exporter, diagnostic, or interoperability
+  change.
+- **Require an ADR for a Foundry architecture change** — replacing the
+  export format set, changing which components are included in a
+  production export by default, changing StoneReference's default
+  export inclusion, or moving integrity validation to a different layer;
+  see `docs/bible/09-foundry/190-foundry-governance.md`.
+- **Require an RFC for a new artifact format** beyond STEP/STL/JSON/
+  technical specification, or a structural change to how artifacts are
+  requested/manifested across the whole pipeline; see the same document.

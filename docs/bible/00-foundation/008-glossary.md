@@ -391,9 +391,37 @@ a version change can be detected even when design intent is unchanged.
 Additive to, never replacing, the existing `definitionHash`. See
 [`08-alchemist/175-definition-hash-vs-compilation-hash.md`](../08-alchemist/175-definition-hash-vs-compilation-hash.md).
 
-**Foundry** — the artifact production/export layer (STEP, STL, JSON,
-technical specification), named in this Sprint's architecture but not
-yet formalized as its own Bible section — see Sprint 7.
+**Vision** — the preview/rendering layer, named since Sprint 6's
+architecture but not yet formalized as its own Bible section — planned
+for Sprint 8.
 
-**Vision** — the preview/rendering layer, named in this Sprint's
-architecture but not yet formalized as its own Bible section.
+## Foundry terms (Sprint 7)
+
+> Authoritative source for every term in this section:
+> [`09-foundry/`](../09-foundry/README.md) (Sprint 7).
+
+**Foundry** — the artifact-generation and export-integrity layer: the
+boundary between a validated, compiled model and a file the outside
+world can open (STEP, STL, canonical JDL JSON, or a technical
+specification). Unlike Alchemist, Foundry formalizes an export system
+that already runs in production. See
+[`09-foundry/191-foundry-architecture-overview.md`](../09-foundry/191-foundry-architecture-overview.md).
+
+**Artifact record** — a per-artifact result (filename, MIME type, byte
+size, checksum, integrity status, and more). **PARTIAL** — checksum and
+byte size are real for STEP/STL as of Sprint 7; most other fields are
+PLANNED, with no single object assembling them together yet. See
+[`09-foundry/201-artifact-manifest-model.md`](../09-foundry/201-artifact-manifest-model.md).
+
+**Artifact integrity level** — one of 8 conceptual validation depths,
+from file existence through geometric roundtrip validation. Only 3
+(file existence, non-zero size, checksum) run for every real export
+request today. See
+[`09-foundry/202-artifact-integrity-model.md`](../09-foundry/202-artifact-integrity-model.md).
+
+**Export version fingerprint** — a conceptual record of every
+tool/library version that influenced a given export (CadQuery,
+OpenCascade, tessellation tolerances). **PLANNED** — every individual
+field is independently queryable today, but none is assembled together.
+See
+[`09-foundry/208-export-version-fingerprint.md`](../09-foundry/208-export-version-fingerprint.md).

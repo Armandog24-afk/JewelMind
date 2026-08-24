@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/artifact-manifest.schema.json",
+  "title": "Foundry Artifact Manifest v1",
+  "description": "A collection of ArtifactRecord entries (see artifact-record.schema.json) — the Foundry-level manifest, distinct from specs/alchemist/v1/artifact-manifest.schema.json (a single per-compilation-result field). No unified manifest of this shape is returned by any current endpoint; this is the target aggregate shape. See docs/bible/09-foundry/201-artifact-manifest-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sourceDefinitionHash", "artifacts"],
+  "properties": {
+    "sourceDefinitionHash": { "type": "string" },
+    "compilationHash": { "type": ["string", "null"] },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "Each item conforms to artifact-record.schema.json."
+    },
+    "overallStatus": { "enum": ["ALL_REQUESTED_SUCCEEDED", "PARTIAL_SUCCESS", "FAILED_REQUIRED_ARTIFACT", "NO_ARTIFACTS_GENERATED", null] }
+  }
+}

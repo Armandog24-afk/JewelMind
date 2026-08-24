@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/export-diagnostic.schema.json",
+  "title": "Foundry Export Diagnostic v1",
+  "description": "Structural schema for a conceptual Foundry-namespaced diagnostic. See docs/bible/09-foundry/204-export-diagnostics.md for the mapping to real, unmodified public error codes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "artifactType", "message", "blocking"],
+  "properties": {
+    "code": {
+      "enum": [
+        "FOUNDRY_REQUEST_INVALID", "FOUNDRY_EXPORT_BLOCKED", "FOUNDRY_COMPONENT_MISSING",
+        "FOUNDRY_STEP_FAILED", "FOUNDRY_STL_FAILED", "FOUNDRY_JSON_FAILED", "FOUNDRY_SPEC_FAILED",
+        "FOUNDRY_FILE_EMPTY", "FOUNDRY_FILE_INVALID", "FOUNDRY_TEMPFILE_ERROR",
+        "FOUNDRY_CLEANUP_ERROR", "FOUNDRY_INTEGRITY_FAILED", "FOUNDRY_OPTION_UNSUPPORTED"
+      ]
+    },
+    "artifactType": { "enum": ["STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION", null] },
+    "message": { "type": "string" },
+    "realCurrentCode": {
+      "type": ["string", "null"],
+      "description": "The actual current AppError.code this conceptual code maps to, e.g. STEP_EXPORT_FAILED, MODEL_NOT_FOUND — see docs/bible/09-foundry/204-export-diagnostics.md."
+    },
+    "blocking": { "type": "boolean" },
+    "technicalCause": { "type": ["string", "null"] }
+  }
+}

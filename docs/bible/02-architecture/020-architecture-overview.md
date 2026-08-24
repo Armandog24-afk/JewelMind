@@ -89,7 +89,12 @@ STEP, STL, JSON, and Markdown-specification exporters
 `GeneratedModel` and definition, and write a real file. Export requests
 are keyed by `modelId` (not by a raw definition), so an export always
 corresponds to an already-validated, already-generated model — see
-[`023-data-flow.md`](023-data-flow.md).
+[`023-data-flow.md`](023-data-flow.md). This layer is formalized as
+**"Foundry"** in Sprint 7 — see [`09-foundry/README.md`](../09-foundry/README.md).
+STEP and STL share a single component-selection function
+(`exporters/selection.py::select_export_shapes()`, extracted in Sprint 7
+from previously duplicated logic); every STEP/STL export is also
+checksummed (SHA-256) and validated non-empty before being returned.
 
 ## Validation pipeline
 

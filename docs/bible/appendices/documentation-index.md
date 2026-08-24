@@ -233,6 +233,59 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A31 | Appendix: Compiler Diagnostic Catalog | accepted | current | [`appendices/compiler-diagnostic-catalog.md`](compiler-diagnostic-catalog.md) |
 | JM-BIBLE-A32 | Appendix: Compiler Code Mapping | accepted | current | [`appendices/compiler-code-mapping.md`](compiler-code-mapping.md) |
 | JM-BIBLE-A33 | Appendix: Compiler Test Matrix | accepted | current | [`appendices/compiler-test-matrix.md`](compiler-test-matrix.md) |
+| JM-BIBLE-FOUNDRY-README | Foundry Export System v1 — Index | accepted | current | [`09-foundry/README.md`](../09-foundry/README.md) |
+| JM-BIBLE-190 | Foundry Governance | accepted | current | [`09-foundry/190-foundry-governance.md`](../09-foundry/190-foundry-governance.md) |
+| JM-BIBLE-191 | Foundry Architecture Overview | accepted | partial | [`09-foundry/191-foundry-architecture-overview.md`](../09-foundry/191-foundry-architecture-overview.md) |
+| JM-BIBLE-192 | Artifact Domain Model | accepted | partial | [`09-foundry/192-artifact-domain-model.md`](../09-foundry/192-artifact-domain-model.md) |
+| JM-BIBLE-193 | Artifact Request Contract | accepted | partial | [`09-foundry/193-artifact-request-contract.md`](../09-foundry/193-artifact-request-contract.md) |
+| JM-BIBLE-194 | Artifact Generation Pipeline (FOUNDRY-0..FOUNDRY-9) | accepted | partial | [`09-foundry/194-generation-pipeline.md`](../09-foundry/194-generation-pipeline.md) |
+| JM-BIBLE-195 | Component Inclusion Policy | accepted | current | [`09-foundry/195-component-inclusion-policy.md`](../09-foundry/195-component-inclusion-policy.md) |
+| JM-BIBLE-196 | Production Geometry Selection | accepted | current | [`09-foundry/196-production-geometry-selection.md`](../09-foundry/196-production-geometry-selection.md) |
+| JM-BIBLE-197 | STEP Export Contract | accepted | current | [`09-foundry/197-step-export-contract.md`](../09-foundry/197-step-export-contract.md) |
+| JM-BIBLE-198 | STL Export Contract | accepted | current | [`09-foundry/198-stl-export-contract.md`](../09-foundry/198-stl-export-contract.md) |
+| JM-BIBLE-199 | JSON Export Contract | accepted | current | [`09-foundry/199-json-export-contract.md`](../09-foundry/199-json-export-contract.md) |
+| JM-BIBLE-200 | Technical Specification Contract | accepted | current | [`09-foundry/200-technical-specification-contract.md`](../09-foundry/200-technical-specification-contract.md) |
+| JM-BIBLE-201 | Artifact Manifest Model | accepted | planned | [`09-foundry/201-artifact-manifest-model.md`](../09-foundry/201-artifact-manifest-model.md) |
+| JM-BIBLE-202 | Artifact Integrity Model | accepted | partial | [`09-foundry/202-artifact-integrity-model.md`](../09-foundry/202-artifact-integrity-model.md) |
+| JM-BIBLE-203 | Export Validation Pipeline | accepted | partial | [`09-foundry/203-export-validation-pipeline.md`](../09-foundry/203-export-validation-pipeline.md) |
+| JM-BIBLE-204 | Export Diagnostics | accepted | partial | [`09-foundry/204-export-diagnostics.md`](../09-foundry/204-export-diagnostics.md) |
+| JM-BIBLE-205 | Export Failure and Partial Success | accepted | planned | [`09-foundry/205-export-failure-and-partial-success.md`](../09-foundry/205-export-failure-and-partial-success.md) |
+| JM-BIBLE-206 | Filename and Path Safety | accepted | current | [`09-foundry/206-filename-and-path-safety.md`](../09-foundry/206-filename-and-path-safety.md) |
+| JM-BIBLE-207 | Temp-File Lifecycle | accepted | current | [`09-foundry/207-temp-file-lifecycle.md`](../09-foundry/207-temp-file-lifecycle.md) |
+| JM-BIBLE-208 | Export Version Fingerprint | accepted | planned | [`09-foundry/208-export-version-fingerprint.md`](../09-foundry/208-export-version-fingerprint.md) |
+| JM-BIBLE-209 | CAD Interoperability Philosophy | accepted | current | [`09-foundry/209-cad-interoperability-philosophy.md`](../09-foundry/209-cad-interoperability-philosophy.md) |
+| JM-BIBLE-210 | STEP Interoperability Boundaries | accepted | current | [`09-foundry/210-step-interoperability-boundaries.md`](../09-foundry/210-step-interoperability-boundaries.md) |
+| JM-BIBLE-211 | STL Interoperability Boundaries | accepted | current | [`09-foundry/211-stl-interoperability-boundaries.md`](../09-foundry/211-stl-interoperability-boundaries.md) |
+| JM-BIBLE-212 | Unit and Scale Contract | accepted | current | [`09-foundry/212-unit-and-scale-contract.md`](../09-foundry/212-unit-and-scale-contract.md) |
+| JM-BIBLE-213 | Multi-Solid and Fusion Policy | accepted | current | [`09-foundry/213-multi-solid-and-fusion-policy.md`](../09-foundry/213-multi-solid-and-fusion-policy.md) |
+| JM-BIBLE-214 | Export Roundtrip Validation | accepted | current | [`09-foundry/214-export-roundtrip-validation.md`](../09-foundry/214-export-roundtrip-validation.md) |
+| JM-BIBLE-215 | Foundry Performance Model | accepted | current | [`09-foundry/215-foundry-performance-model.md`](../09-foundry/215-foundry-performance-model.md) |
+| JM-BIBLE-216 | Foundry Security and Resource Limits | accepted | current | [`09-foundry/216-foundry-security-and-resource-limits.md`](../09-foundry/216-foundry-security-and-resource-limits.md) |
+| JM-BIBLE-217 | Current Exporter Code Mapping | accepted | current | [`09-foundry/217-current-exporter-code-mapping.md`](../09-foundry/217-current-exporter-code-mapping.md) |
+| JM-BIBLE-218 | Foundry Gap Analysis | accepted | current | [`09-foundry/218-foundry-gap-analysis.md`](../09-foundry/218-foundry-gap-analysis.md) |
+| JM-BIBLE-219 | Open Foundry Questions | accepted | current | [`09-foundry/219-open-foundry-questions.md`](../09-foundry/219-open-foundry-questions.md) |
+| JM-BIBLE-SPRINT7-REPORT | Sprint 7 Validation Report | accepted | current | [`09-foundry/SPRINT-7-VALIDATION-REPORT.md`](../09-foundry/SPRINT-7-VALIDATION-REPORT.md) |
+| JM-BIBLE-A34 | Appendix: Foundry Artifact Catalog | accepted | current | [`appendices/foundry-artifact-catalog.md`](foundry-artifact-catalog.md) |
+| JM-BIBLE-A35 | Appendix: Foundry MIME Type Catalog | accepted | current | [`appendices/foundry-mime-type-catalog.md`](foundry-mime-type-catalog.md) |
+| JM-BIBLE-A36 | Appendix: Foundry Component Inclusion Matrix | accepted | current | [`appendices/foundry-component-inclusion-matrix.md`](foundry-component-inclusion-matrix.md) |
+| JM-BIBLE-A37 | Appendix: Foundry Export Diagnostic Catalog | accepted | partial | [`appendices/foundry-export-diagnostic-catalog.md`](foundry-export-diagnostic-catalog.md) |
+| JM-BIBLE-A38 | Appendix: Foundry Export Test Matrix | accepted | current | [`appendices/foundry-export-test-matrix.md`](foundry-export-test-matrix.md) |
+| JM-BIBLE-A39 | Appendix: Foundry Code Mapping | accepted | current | [`appendices/foundry-code-mapping.md`](foundry-code-mapping.md) |
+| JM-BIBLE-A40 | Appendix: Foundry Interoperability Matrix | accepted | current | [`appendices/foundry-interoperability-matrix.md`](foundry-interoperability-matrix.md) |
+
+## Machine-readable Foundry specification — `specs/foundry/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/foundry/v1/README.md`](../../../specs/foundry/v1/README.md) |
+| Artifact request schema | Yes | [`specs/foundry/v1/artifact-request.schema.json`](../../../specs/foundry/v1/artifact-request.schema.json) |
+| Artifact record schema | Yes | [`specs/foundry/v1/artifact-record.schema.json`](../../../specs/foundry/v1/artifact-record.schema.json) |
+| Artifact manifest schema | Yes | [`specs/foundry/v1/artifact-manifest.schema.json`](../../../specs/foundry/v1/artifact-manifest.schema.json) |
+| Export diagnostic schema | Yes | [`specs/foundry/v1/export-diagnostic.schema.json`](../../../specs/foundry/v1/export-diagnostic.schema.json) |
+| Export validation result schema | Yes | [`specs/foundry/v1/export-validation-result.schema.json`](../../../specs/foundry/v1/export-validation-result.schema.json) |
+| Export version fingerprint schema | Yes | [`specs/foundry/v1/export-version-fingerprint.schema.json`](../../../specs/foundry/v1/export-version-fingerprint.schema.json) |
+| Examples (real, generated) | Yes | [`specs/foundry/v1/examples/`](../../../specs/foundry/v1/examples/) |
+| Test vectors | Yes | [`specs/foundry/v1/test-vectors/`](../../../specs/foundry/v1/test-vectors/) |
 
 ## Machine-readable Alchemist specification — `specs/alchemist/v1/`
 

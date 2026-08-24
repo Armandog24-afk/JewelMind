@@ -1,0 +1,12 @@
+{
+  "description": "Overall-status outcomes for combinations of per-artifact success/failure and required/optional flags, per docs/bible/09-foundry/205-export-failure-and-partial-success.md.",
+  "vocabulary": ["ALL_REQUESTED_SUCCEEDED", "PARTIAL_SUCCESS", "FAILED_REQUIRED_ARTIFACT", "NO_ARTIFACTS_GENERATED"],
+  "vectors": [
+    { "requested": [{ "type": "STEP", "required": true, "outcome": "SUCCEEDED" }], "overallStatus": "ALL_REQUESTED_SUCCEEDED" },
+    { "requested": [{ "type": "STEP", "required": true, "outcome": "SUCCEEDED" }, { "type": "STL", "required": false, "outcome": "FAILED" }], "overallStatus": "PARTIAL_SUCCESS" },
+    { "requested": [{ "type": "STEP", "required": true, "outcome": "FAILED" }, { "type": "STL", "required": false, "outcome": "SUCCEEDED" }], "overallStatus": "FAILED_REQUIRED_ARTIFACT" },
+    { "requested": [{ "type": "STEP", "required": true, "outcome": "FAILED" }], "overallStatus": "FAILED_REQUIRED_ARTIFACT" },
+    { "requested": [], "overallStatus": "NO_ARTIFACTS_GENERATED" }
+  ],
+  "currentImplementationCaveat": "No current code computes or returns any of these four overallStatus values explicitly. Each export endpoint is called and evaluated independently by the client; the client itself effectively determines the overall outcome by observing which of its own independent calls succeeded or failed. This vocabulary is the TARGET shape for a future unified export-orchestration response — see docs/bible/08-alchemist/173-partial-compilation-policy.md for the identical finding at the compiler level."
+}

@@ -44,3 +44,7 @@ Whether an artifact's failure should block overall compilation success (see [`17
 ## Not part of `CompilationInput` today
 
 Each `ArtifactRequest` is a separate, later HTTP call today — see [`163-compilation-input-contract.md`](163-compilation-input-contract.md)'s `requestedArtifacts` field, marked PLANNED for exactly this reason. Open question `ALCHEMIST-OQ-004` in [`188-open-alchemist-questions.md`](188-open-alchemist-questions.md) records whether this should ever change.
+
+## Relationship to Foundry (Sprint 7)
+
+`specs/foundry/v1/artifact-request.schema.json` is a deliberate, documented superset of this schema, scoped to production/technical artifacts only (`STEP | STL | JSON | TECHNICAL_SPECIFICATION` — no `PREVIEW_MESH`, which stays this schema's and Vision's concern). This schema remains authoritative for the minimal cross-cutting request shape; Foundry's schema is authoritative for the richer fields production exports specifically need. See [`09-foundry/193-artifact-request-contract.md`](../09-foundry/193-artifact-request-contract.md) for the exact reconciliation, field by field.

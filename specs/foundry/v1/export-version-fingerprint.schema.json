@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/export-version-fingerprint.schema.json",
+  "title": "Export Version Fingerprint v1",
+  "description": "Structural schema for ExportVersionFingerprint — addresses the Sprint 6 gap (ALCHEMIST-GAP: missing version fingerprints) specifically for exported artifacts. See docs/bible/09-foundry/208-export-version-fingerprint.md for the exact CURRENT/PARTIAL/PLANNED status of each field, verified by inspection during Sprint 7.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifactType"],
+  "properties": {
+    "artifactType": { "enum": ["STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+    "foundryVersion": { "type": ["string", "null"], "description": "PLANNED — no distinct Foundry version constant exists." },
+    "exporterImplementationVersion": { "type": ["string", "null"], "description": "PLANNED — no per-exporter-file version exists." },
+    "cadQueryVersion": { "type": ["string", "null"], "description": "PARTIAL — installable, but never recorded on any generated artifact; see backend/requirements.txt's cadquery>=2.5 minimum pin." },
+    "openCascadeVersion": { "type": ["string", "null"], "description": "PARTIAL — JewelMind never queries or records this as structured metadata, but it is empirically present inside every exported STEP file's own header (confirmed during Sprint 7: 'Open CASCADE 7.9' / 'Open CASCADE STEP processor 7.9'), just not extracted or surfaced by any JewelMind code." },
+    "meshToleranceMm": { "type": ["number", "null"], "description": "CURRENT for STL only — the actual tolerance used for this specific export." },
+    "angularToleranceRadians": { "type": ["number", "null"], "description": "CURRENT for STL only." },
+    "formatSpecificOptions": { "type": "object", "description": "e.g. {\"includeStoneReference\": false} for STEP/STL — CURRENT." },
+    "sourceCompilationHash": { "type": ["string", "null"], "description": "PLANNED — see docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md." }
+  }
+}

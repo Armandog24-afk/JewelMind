@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/foundry/v1/export-validation-result.schema.json",
+  "title": "Foundry Export Validation Result v1",
+  "description": "Structural schema for one export-validation check result. See docs/bible/09-foundry/202-artifact-integrity-model.md and 203-export-validation-pipeline.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["level", "status", "artifactType"],
+  "properties": {
+    "level": {
+      "enum": [
+        "FILE_EXISTENCE", "NON_ZERO_SIZE", "EXPECTED_EXTENSION", "EXPECTED_MIME",
+        "CHECKSUM", "FORMAT_SIGNATURE", "PARSER_OR_REIMPORT_VALIDATION",
+        "GEOMETRIC_ROUNDTRIP_VALIDATION"
+      ]
+    },
+    "status": { "enum": ["PASS", "FAIL", "NOT_EXECUTED"] },
+    "artifactType": { "enum": ["STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+    "measuredValue": {},
+    "message": { "type": ["string", "null"] }
+  }
+}

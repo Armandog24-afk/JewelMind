@@ -30,6 +30,7 @@ from jewelmind.api.schemas import (
 )
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.exporters.filenames import sanitize_filename
+from jewelmind.exporters.integrity import sha256_checksum
 from jewelmind.services.cad_engine import cad_engine_error, cad_engine_ready
 from jewelmind.validation.engine import has_errors, validate_definition
 
@@ -176,6 +177,7 @@ def export_step_route(payload: ExportStepRequest) -> FileResponse:
         raise StepExportFailedError(f"STEP export failed: {exc}") from exc
 
     filename = sanitize_filename(record.definition.project.name, default="jewelmind-model") + ".step"
+    checksum = sha256_checksum(path)
     # The exported file is a unique per-request temp file (see
     # ModelService.export_step_file); delete it once the response has
     # finished streaming so temp files never accumulate.
@@ -183,6 +185,7 @@ def export_step_route(payload: ExportStepRequest) -> FileResponse:
         path,
         media_type="application/step",
         filename=filename,
+        headers={"X-Content-SHA256": checksum},
         background=BackgroundTask(_delete_file, path),
     )
 
@@ -202,10 +205,12 @@ def export_stl_route(payload: ExportStlRequest) -> FileResponse:
         raise StlExportFailedError(f"STL export failed: {exc}") from exc
 
     filename = sanitize_filename(record.definition.project.name, default="jewelmind-model") + ".stl"
+    checksum = sha256_checksum(path)
     return FileResponse(
         path,
         media_type="model/stl",
         filename=filename,
+        headers={"X-Content-SHA256": checksum},
         background=BackgroundTask(_delete_file, path),
     )
 

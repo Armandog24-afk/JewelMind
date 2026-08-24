@@ -36,3 +36,7 @@ Restating [`129-mesh-model.md`](129-mesh-model.md) specifically for this artifac
 ## Relationship to preview tessellation
 
 STL export tessellates `combined_metal` (the fused/compound production-metal shape, post-fuse); preview tessellates each of the four original pre-fuse components individually (see [`144-preview-mesh-contract.md`](144-preview-mesh-contract.md)). These are genuinely two different tessellation operations over two different shape graphs, even though they typically use the same default tolerance values — see open question `ATLAS-OQ-007` in [`151-open-atlas-questions.md`](151-open-atlas-questions.md) for whether they should ever be required to match exactly.
+
+## Sprint 7 update
+
+The shape-selection logic (`combined_metal`, optionally compounded with `stone_reference`) now comes from a shared function, `exporters/selection.py::select_export_shapes()`, also used by `export_step()` — a pure refactor, no behavior change. Sprint 7 also confirmed, by parsing a real exported file's binary header, that this exact function's output is byte-for-byte deterministic across repeated exports (unlike STEP's — see [`09-foundry/198-stl-export-contract.md`](../09-foundry/198-stl-export-contract.md)), and added a SHA-256 checksum plus a non-empty-file check before any STL file is returned to a caller.

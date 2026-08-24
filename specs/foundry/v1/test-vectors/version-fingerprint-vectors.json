@@ -1,0 +1,62 @@
+{
+  "description": "Real values for each export-version-fingerprint field, checked against the actual installed environment and actual exported file headers during Sprint 7. addresses the Sprint 6 gap noted in docs/bible/08-alchemist/174-determinism-and-version-fingerprint.md: no code currently assembles these into a single recorded fingerprint object. Do not guess: every 'CURRENT'/'PARTIAL' value below was obtained by running real code or inspecting a real exported file.",
+  "vectors": [
+    {
+      "field": "cadQueryVersion",
+      "realValue": "2.8.0",
+      "howObtained": "importlib.metadata.version('cadquery') against the actual installed backend/.venv environment.",
+      "status": "PARTIAL",
+      "statusReason": "The real value exists and is queryable right now with one line of code, but no JewelMind code currently queries or records it anywhere at runtime."
+    },
+    {
+      "field": "openCascadeVersion",
+      "realValue": "7.9.3.1.1 (OCP binding version); STEP headers independently show 'Open CASCADE 7.9' / 'Open CASCADE STEP processor 7.9'",
+      "howObtained": "importlib.metadata.version('cadquery-ocp') against the same environment, cross-checked against the literal text found inside a real exported STEP file's own header during this Sprint's roundtrip investigation.",
+      "status": "PARTIAL",
+      "statusReason": "Empirically present in two independent places (the installed package metadata and every STEP file's own header text) but never extracted or surfaced by any JewelMind code as structured metadata."
+    },
+    {
+      "field": "meshTolerance",
+      "realValue": 0.1,
+      "howObtained": "jewelmind.domain.schema PreviewSettings.meshTolerance default, read directly from backend/jewelmind/domain/schema.py.",
+      "status": "CURRENT",
+      "statusReason": "Already part of the JewelryDefinition and already passed into export_stl(); this is the one fingerprint field that is fully recorded today, just not under the name 'export version fingerprint' — it lives on the definition itself, not on an artifact record."
+    },
+    {
+      "field": "angularTolerance",
+      "realValue": 0.2,
+      "howObtained": "jewelmind.domain.schema PreviewSettings.angularTolerance default.",
+      "status": "CURRENT",
+      "statusReason": "Same as meshTolerance."
+    },
+    {
+      "field": "generatorVersion",
+      "realValue": "0.1.0",
+      "howObtained": "GENERATOR_VERSION constant in backend/jewelmind/geometry/constants.py, already returned in every GeneratedModel and every API response.",
+      "status": "CURRENT",
+      "statusReason": "Already recorded and returned today, but scoped to the geometry generator only — it does not capture the exporter or CAD kernel versions."
+    },
+    {
+      "field": "sourceCompilationHash",
+      "realValue": null,
+      "howObtained": "Not applicable — compilationHash itself does not exist yet per docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md.",
+      "status": "PLANNED",
+      "statusReason": "Depends on a field that has not been implemented in any prior sprint."
+    },
+    {
+      "field": "stepFormatOptions",
+      "realValue": "No format-specific options are passed to Shape.exportStep() anywhere in the codebase — it is called with only a destination path.",
+      "howObtained": "Direct inspection of backend/jewelmind/exporters/step_exporter.py.",
+      "status": "PLANNED",
+      "statusReason": "There is currently nothing to record because no STEP-specific option (schema variant, AP214 vs AP242, etc.) is ever chosen or passed."
+    },
+    {
+      "field": "stlFormatOptions",
+      "realValue": "binary (CadQuery's exportStl() default; ASCII is never requested anywhere in the codebase)",
+      "howObtained": "Direct inspection of backend/jewelmind/exporters/stl_exporter.py plus the binary-header parse performed in backend/tests/test_export_integrity.py, which would fail if the output were ever ASCII.",
+      "status": "PARTIAL",
+      "statusReason": "The real behaviour (always binary) is known and test-verified, but it is not recorded as structured metadata anywhere a caller can read."
+    }
+  ],
+  "assemblyStatus": "No code anywhere in the backend currently assembles the fields above into a single ExportVersionFingerprint object. This test-vector file itself is the first place these values have been collected together, for the purpose of grounding specs/foundry/v1/export-version-fingerprint.schema.json in real, checked values rather than invented ones."
+}

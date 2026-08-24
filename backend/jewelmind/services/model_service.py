@@ -20,6 +20,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.exporters.integrity import validate_non_empty
 from jewelmind.exporters.json_exporter import export_json
 from jewelmind.exporters.specification import build_specification
 from jewelmind.exporters.step_exporter import export_step
@@ -131,7 +132,9 @@ class ModelService:
         record = self.get_record(model_id)
         destination = self._unique_temp_path(model_id, ".step")
         try:
-            return export_step(record.generated_model, destination, include_stone=include_stone)
+            path = export_step(record.generated_model, destination, include_stone=include_stone)
+            validate_non_empty(path, artifact_type="STEP")
+            return path
         except Exception:
             destination.unlink(missing_ok=True)
             raise
@@ -147,7 +150,7 @@ class ModelService:
         record = self.get_record(model_id)
         destination = self._unique_temp_path(model_id, ".stl")
         try:
-            return export_stl(
+            path = export_stl(
                 record.generated_model,
                 record.definition,
                 destination,
@@ -155,6 +158,8 @@ class ModelService:
                 mesh_tolerance=mesh_tolerance,
                 angular_tolerance=angular_tolerance,
             )
+            validate_non_empty(path, artifact_type="STL")
+            return path
         except Exception:
             destination.unlink(missing_ok=True)
             raise

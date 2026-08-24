@@ -25,10 +25,11 @@ flowchart LR
     G[Compilation geometry: cached ModelRecord] --> E[Export eligibility: get_record succeeds]
     E --> R[Artifact request: POST /export/*]
     R --> X[Exporter: step_exporter / stl_exporter / json_exporter / specification]
-    X --> V[Response streamed as FileResponse/Response]
+    X --> I[Integrity validation: non-empty + checksum, STEP/STL only]
+    I --> V[Response streamed as FileResponse/Response]
 ```
 
-There is no distinct "artifact validation" step between the exporter writing a file and the response being streamed — the exporter either successfully writes a real file (which is then streamed) or raises (caught and converted to an `AppError`).
+As of Sprint 7, STEP and STL exports pass through a real, distinct integrity-validation step (`validate_non_empty()` + `sha256_checksum()`, both in `exporters/integrity.py`) between the exporter writing a file and the response being streamed — see [`09-foundry/203-export-validation-pipeline.md`](../09-foundry/203-export-validation-pipeline.md). JSON and the technical specification still have no such step.
 
 ## Mapping per artifact
 
@@ -43,6 +44,6 @@ There is no distinct "artifact validation" step between the exporter writing a f
 
 `ModelService.get_record(model_id)` — the sole eligibility check. If it succeeds, export proceeds; there is no additional, distinct "is this model eligible for export" check beyond "does a cached record exist" (which itself implies the model already passed Forge validation and Atlas construction at generation time).
 
-## No artifact validation step
+## Artifact validation step, updated for Sprint 7
 
-Confirmed: no code re-checks the exported file for correctness (e.g. re-importing the STEP file, re-parsing the STL) after writing it — the exporter's own success (no exception raised) is treated as sufficient. See [`187-alchemist-gap-analysis.md`](187-alchemist-gap-analysis.md) for this recorded as a gap (`ALCHEMIST-GAP`-adjacent to Sprint 5's `ATLAS-GAP-014`/`ATLAS-GAP-015`).
+Partially superseded: as of Sprint 7, `validate_non_empty()` runs for every real STEP/STL export (rejecting a missing or empty file), and `sha256_checksum()` is always computed and returned via the `X-Content-SHA256` response header. What remains true, and is now stated precisely rather than as a blanket "no validation": no code re-*imports* or re-*parses* the exported file to confirm its internal structure at request time — that deeper check (re-importing the STEP file, parsing the STL binary header) exists only in the test suite, never for a real user's request. See [`09-foundry/202-artifact-integrity-model.md`](../09-foundry/202-artifact-integrity-model.md) for the exact 8-level breakdown of what runs when, and [`187-alchemist-gap-analysis.md`](187-alchemist-gap-analysis.md) for the now-partially-closed gap.

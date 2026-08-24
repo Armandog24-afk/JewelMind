@@ -1,0 +1,8 @@
+{
+  "code": "FOUNDRY_EXPORT_BLOCKED",
+  "artifactType": "STEP",
+  "message": "No generated model found for id 'unknown-model-id'.",
+  "realCurrentCode": "MODEL_NOT_FOUND",
+  "blocking": true,
+  "technicalCause": null
+}

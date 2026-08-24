@@ -32,7 +32,8 @@ The normative shape is `specs/alchemist/v1/artifact-manifest.schema.json`; real 
 | `status` | CURRENT, implicit — HTTP 200 vs. an error status |
 | `filename` | CURRENT — `sanitize_filename(project.name) + extension` |
 | `mimeType` | CURRENT — `application/step`, `model/stl`, `application/json`, `text/markdown` |
-| `byteSize` | PLANNED — never reported as a structured field |
+| `byteSize` | PARTIAL as of Sprint 7 — computed for STEP/STL (`validate_non_empty()`'s return value) but never returned to the caller as a structured field, only used internally |
+| `checksum` | PARTIAL as of Sprint 7 — SHA-256, computed for STEP/STL and returned via the `X-Content-SHA256` response header, but not part of any JSON body field (not a field this schema originally defined; see Foundry's richer `artifact-record.schema.json`) |
 | `sourceDefinitionHash` | CURRENT — implicit via `modelId` |
 | `compilationHash` | PLANNED |
 | `includedComponents` / `excludedComponents` | CURRENT, implicit — `includeStoneReference` determines this, but it is never itself returned as an explicit list |
@@ -48,3 +49,7 @@ Confirmed by inspection: every export response uses `FileResponse`/`Response` wi
 ## Real example, condensed
 
 From `specs/alchemist/v1/test-vectors/artifact-manifest-vectors.json`: `PREVIEW_MESH` for `band` → `band.stl`, `model/stl`; `STEP` for the default definition → `includedComponents: ["band", "prongs", "basket_support"]`, `excludedComponents: ["stone_reference"]` — matching LAW-006's default exclusion exactly.
+
+## Relationship to Foundry (Sprint 7)
+
+`specs/foundry/v1/artifact-record.schema.json` and `artifact-manifest.schema.json` are a genuine, richer extension of this schema for production/technical artifacts specifically — carrying integrity/checksum/versioning detail (`checksum`, `integrityStatus`, `unitContract`, `exporterVersion`) this schema does not define. This schema remains authoritative for the minimal cross-cutting shape (including `PREVIEW_MESH`, which Foundry's schema does not cover); Foundry's schema is authoritative for the export-integrity detail. See [`09-foundry/201-artifact-manifest-model.md`](../09-foundry/201-artifact-manifest-model.md) for the full field-by-field reconciliation.
