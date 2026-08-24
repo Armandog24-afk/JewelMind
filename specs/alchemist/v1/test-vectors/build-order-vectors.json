@@ -1,0 +1,23 @@
+{
+  "description": "The real dependency structure among the four solitaire components, determined by inspecting geometry/assemblies/solitaire.py and geometry/components/*.py directly during Sprint 6 — not assumed from call order.",
+  "trueDataDependencies": [
+    { "from": "solitaire_assembly", "to": "band", "reason": "_fuse_metal(band, prongs, basket) requires band.shape" },
+    { "from": "solitaire_assembly", "to": "prongs", "reason": "_fuse_metal requires prongs.shape" },
+    { "from": "solitaire_assembly", "to": "basket_support", "reason": "_fuse_metal requires basket_support.shape" }
+  ],
+  "noTrueDependencyBetween": [
+    ["band", "stone_reference"],
+    ["band", "prongs"],
+    ["band", "basket_support"],
+    ["stone_reference", "prongs"],
+    ["stone_reference", "basket_support"],
+    ["prongs", "basket_support"]
+  ],
+  "sharedDerivedValueRelationships": [
+    { "components": ["band", "stone_reference", "prongs", "basket_support"], "sharedValue": "band_top_z(definition)", "note": "Each independently calls this pure function; none reads another's built shape." },
+    { "components": ["prongs", "basket_support"], "sharedValue": "prong_center_radius(definition)", "note": "Both independently derive the same radius from stone.diameter and setting.prongDiameter." }
+  ],
+  "currentCodeCallOrder": ["band", "stone_reference", "prongs", "basket_support"],
+  "callOrderIsDependencyDriven": false,
+  "conclusion": "stone_reference is NOT required for the fuse step (only band, prongs, basket_support are), and none of the four component builders has a true data dependency on another's output. The current call order in build_solitaire_ring() is an arbitrary but stable ordering choice, not a topological-sort result — see docs/bible/08-alchemist/169-component-build-order.md."
+}

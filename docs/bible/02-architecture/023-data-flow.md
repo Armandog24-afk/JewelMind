@@ -13,6 +13,7 @@ related_documents:
   - JM-BIBLE-A03
   - JM-BIBLE-063
   - JM-BIBLE-132
+  - JM-BIBLE-161
 implementation_status: current
 ---
 
@@ -36,6 +37,16 @@ sequence (four component builders → boolean fuse → assembly) is the
 concrete instance of Atlas's twelve-stage construction pipeline,
 `ATLAS-0`..`ATLAS-11` — see
 [`07-atlas/132-construction-pipeline.md`](../07-atlas/132-construction-pipeline.md).
+
+**Relationship to Alchemist (Sprint 6):** the `POST /api/models/generate`
+flow above is the concrete instance of Alchemist's compilation
+architecture — see
+[`08-alchemist/161-compiler-architecture-overview.md`](../08-alchemist/161-compiler-architecture-overview.md).
+Sprint 6 identifies that the `PV->>MS: preview manifest` step in the
+generate sequence above happens **inline**, inside the same call as
+geometry generation, rather than as an independently-failable step like
+the export flows below it — see
+[`08-alchemist/173-partial-compilation-policy.md`](../08-alchemist/173-partial-compilation-policy.md).
 
 ## `POST /api/models/validate`
 

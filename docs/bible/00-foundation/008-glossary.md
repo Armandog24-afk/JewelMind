@@ -13,6 +13,7 @@ related_documents:
   - JM-BIBLE-JDL-README
   - JM-BIBLE-FORGE-README
   - JM-BIBLE-ATLAS-README
+  - JM-BIBLE-ALCHEMIST-README
 implementation_status: current
 ---
 
@@ -355,3 +356,44 @@ parametric source geometry every component builder constructs; a mesh
 (used only for preview and STL export) is a derived, lossy
 approximation that must never become the source of B-Rep truth. See
 [`07-atlas/129-mesh-model.md`](../07-atlas/129-mesh-model.md).
+
+## Alchemist terms (Sprint 6)
+
+> Authoritative source for every term in this section:
+> [`08-alchemist/`](../08-alchemist/README.md) (Sprint 6).
+
+**Alchemist** — the compilation orchestration layer: the translation
+from validated JDL and Forge evaluation into a deterministic
+`GeometryPlan`, Atlas execution, and an artifact manifest. Alchemist
+coordinates the pipeline and preserves traceability; it owns no
+jewelry-domain thresholds, no CAD-kernel algorithms, and no artifact
+serialization details. See
+[`08-alchemist/161-compiler-architecture-overview.md`](../08-alchemist/161-compiler-architecture-overview.md).
+
+**GeometryPlan** — a deterministic intermediate representation between
+a valid JDL Canonical Document and Atlas execution: derived, not
+user-authored, not a CAD file, not JDL itself. **PLANNED — no such
+object exists in the current backend**; `build_solitaire_ring()` still
+computes and consumes derived values inline. See
+[`08-alchemist/166-geometry-plan-model.md`](../08-alchemist/166-geometry-plan-model.md).
+
+**CompilationResult** — the conceptual full output of a compilation:
+status, version fingerprints, the normalized definition, Forge
+evaluation, geometry metadata, diagnostics, artifacts, and timings.
+Partially mapped to the real `GenerateResponse`/`ModelMetadataResponse`
+today, with several fields (`compilationId`, `compilationHash`,
+`kernelVersion`) still PLANNED. See
+[`08-alchemist/171-compilation-result-model.md`](../08-alchemist/171-compilation-result-model.md).
+
+**Compilation hash** — a PROPOSED (not implemented) identifier
+combining `definitionHash` with compiler/generator/rule-set version, so
+a version change can be detected even when design intent is unchanged.
+Additive to, never replacing, the existing `definitionHash`. See
+[`08-alchemist/175-definition-hash-vs-compilation-hash.md`](../08-alchemist/175-definition-hash-vs-compilation-hash.md).
+
+**Foundry** — the artifact production/export layer (STEP, STL, JSON,
+technical specification), named in this Sprint's architecture but not
+yet formalized as its own Bible section — see Sprint 7.
+
+**Vision** — the preview/rendering layer, named in this Sprint's
+architecture but not yet formalized as its own Bible section.

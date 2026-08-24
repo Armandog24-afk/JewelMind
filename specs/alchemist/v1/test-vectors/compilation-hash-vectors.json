@@ -1,0 +1,32 @@
+{
+  "description": "compilationHash does NOT exist in the current implementation. This file documents a PROPOSED formula (never implemented, never used to produce a real API response) and shows real, deterministically-computed example values for that formula, so a future implementation has a concrete, tested target rather than a vague description. See docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md.",
+  "status": "PROPOSED, NOT IMPLEMENTED",
+  "proposedFormula": "sha256(f'{definitionHash}|{compilerVersion}|{geometryGeneratorVersion}|{forgeRuleSetVersion}').hexdigest()[:16] — deliberately modeled on the existing definition_hash() truncation scheme in backend/jewelmind/utils/hashing.py, not a new hashing convention.",
+  "vectors": [
+    {
+      "definitionHash": "355ddca57e7e49ad",
+      "compilerVersion": "0.1.0",
+      "geometryGeneratorVersion": "0.1.0",
+      "forgeRuleSetVersion": "none",
+      "proposedCompilationHash": "49092ec7ab9154a8"
+    },
+    {
+      "definitionHash": "fc385afc962b175d",
+      "compilerVersion": "0.1.0",
+      "geometryGeneratorVersion": "0.1.0",
+      "forgeRuleSetVersion": "none",
+      "proposedCompilationHash": "87833266dfc3d97b",
+      "note": "Different definitionHash (four-prong-solitaire) yields a different compilationHash, as expected."
+    },
+    {
+      "definitionHash": "355ddca57e7e49ad",
+      "compilerVersion": "0.2.0",
+      "geometryGeneratorVersion": "0.1.0",
+      "forgeRuleSetVersion": "none",
+      "proposedCompilationHash": "be7fb8f04b7282e5",
+      "note": "Same definitionHash, hypothetically-different compilerVersion, yields a different compilationHash — this is the entire point of a separate compilationHash: it changes when ANY output-affecting version changes, even if design intent (definitionHash) did not."
+    }
+  ],
+  "whyForgeRuleSetVersionIsPlaceholder": "No aggregate Forge rule-set version currently exists (each of the 21 rules is independently versioned — see specs/forge/v1/current-rule-registry.json); 'none' is used as a placeholder string in these vectors, not a real value.",
+  "doNotSilentlyReplaceDefinitionHash": "definitionHash (backend/jewelmind/utils/hashing.py::definition_hash()) is unchanged by this proposal and remains the current, real, tested model-cache key. compilationHash would be a NEW, additive identifier layered on top, never a replacement."
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/compilation-result.schema.json",
+  "title": "Compilation Result v1",
+  "description": "Structural schema for a conceptual CompilationResult. See docs/bible/08-alchemist/171-compilation-result-model.md for the exact CURRENT/PARTIAL/PLANNED status of every field, mapped to the real GenerateResponse/ModelRecord/GeneratedModel shapes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "schemaVersion", "compilerVersion", "sourceDefinitionHash"],
+  "properties": {
+    "compilationId": { "type": ["string", "null"], "description": "PLANNED — the current modelId (= definitionHash) serves a similar purpose but is not a distinct per-attempt compilation identifier." },
+    "status": {
+      "enum": [
+        "RECEIVED", "NORMALIZING", "VALIDATING", "BLOCKED", "PLANNING",
+        "GENERATING", "INSPECTING", "ARTIFACT_GENERATION",
+        "COMPLETED", "COMPLETED_WITH_WARNINGS", "FAILED", "CANCELLED"
+      ]
+    },
+    "schemaVersion": { "type": "string", "description": "CURRENT: JewelryDefinition.schemaVersion." },
+    "compilerVersion": { "type": "string", "description": "PLANNED as a distinct concept — see docs/bible/08-alchemist/182-compiler-versioning.md; no compiler-specific version constant currently exists separate from GENERATOR_VERSION." },
+    "geometryGeneratorVersion": { "type": "string", "description": "CURRENT: GeneratedModel.generator_version." },
+    "forgeRuleSetVersion": { "type": ["string", "null"], "description": "PARTIAL — every Forge rule is individually versioned (specs/forge/v1/current-rule-registry.json) but no single aggregate rule-set version exists." },
+    "kernelVersion": { "type": ["string", "null"], "description": "PLANNED — CadQuery/OpenCascade version is never recorded on any generated model; see docs/bible/07-atlas/137-determinism-and-reproducibility.md." },
+    "sourceDefinitionHash": { "type": "string" },
+    "compilationHash": { "type": ["string", "null"], "description": "PLANNED — does not exist; see docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md." },
+    "normalizedDefinition": { "type": "object", "description": "CURRENT: the JewelryDefinition instance itself, post-Pydantic-defaulting." },
+    "forgeEvaluation": { "type": "array", "items": { "type": "object" }, "description": "CURRENT: the list[ValidationResult] from validate_definition()." },
+    "geometryPlanSummary": { "type": ["object", "null"], "description": "PLANNED — no GeometryPlan exists to summarize." },
+    "componentManifest": { "type": "object", "description": "CURRENT: ModelRecord.preview_manifest." },
+    "geometryMetadata": { "type": "object", "description": "CURRENT: GeneratedModel's volume/bounding-box/warnings fields." },
+    "diagnostics": { "type": "array", "items": { "type": "object" }, "description": "CURRENT (as ValidationResult list) + PARTIAL (compiler-level diagnostics per compiler-diagnostic.schema.json don't exist as a distinct list today)." },
+    "artifacts": { "type": "array", "items": { "type": "object" }, "description": "PARTIAL — each artifact is generated on-demand by a separate HTTP call today, not aggregated into one manifest returned by compilation itself." },
+    "timings": { "type": "object", "description": "CURRENT (generation_duration_s only) + PLANNED (per-stage timings; see docs/bible/08-alchemist/185-compiler-performance-model.md)." },
+    "fallbacks": { "type": "array", "items": { "type": "string" }, "description": "CURRENT: a subset of GeneratedModel.warnings, not a distinct structured list." },
+    "cacheStatus": { "enum": ["HIT", "MISS", "EVICTED", null], "description": "PARTIAL — ModelService's cache behavior exists, but no field surfaces hit/miss/evicted status to the API caller today." },
+    "createdAt": { "type": ["string", "null"], "description": "CURRENT: ModelRecord.generated_at." }
+  }
+}

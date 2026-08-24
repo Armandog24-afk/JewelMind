@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/geometry-plan-component.schema.json",
+  "title": "Geometry Component Plan v1",
+  "description": "Structural schema for one GeometryComponentPlan entry inside a GeometryPlan. See docs/bible/08-alchemist/166-geometry-plan-model.md and 167-geometry-plan-generation.md. This is a PLANNED abstraction — no such object is materialized anywhere in the current backend; component construction parameters are computed inline, at the top of each build_* function, not as a separate upfront plan.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentPlanId", "componentType", "canonicalName", "sourceJDLPaths", "required"],
+  "properties": {
+    "componentPlanId": { "type": "string" },
+    "componentType": { "enum": ["solid", "compound"] },
+    "canonicalName": { "type": "string", "description": "e.g. \"band\", \"prongs\" — matches the current GeneratedComponent.name values exactly." },
+    "sourceJDLPaths": { "type": "array", "items": { "type": "string" } },
+    "parentAssembly": { "type": ["string", "null"] },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other componentPlanIds this one's build operation reads derived values from, e.g. prongs and basket_support both depend on the same prong_center_radius derivation that stone.diameter feeds."
+    },
+    "buildOperation": {
+      "type": "string",
+      "description": "A human-readable name for the construction strategy, e.g. \"revolve_flat_profile\", \"revolve_comfort_fit_profile\", \"loft_stone_reference\", \"extrude_prong_cylinder\", \"cut_basket_shell\"."
+    },
+    "directParameters": {
+      "type": "object",
+      "description": "JDL field values copied straight through, e.g. band.width, band.thickness."
+    },
+    "derivedParameters": {
+      "type": "object",
+      "description": "Values computed before construction, e.g. inner_radius, outer_radius, prong_center_radius, band_top_z."
+    },
+    "coordinatePlacement": {
+      "type": "object",
+      "description": "PLANNED — no component plan currently records an explicit placement separate from the derived parameters used inline during construction; see docs/bible/07-atlas/125-transformations.md."
+    },
+    "productionRole": { "enum": ["included_by_default", "excluded_by_default", "never_included"] },
+    "previewRole": { "enum": ["visible", "hidden"] },
+    "required": { "type": "boolean", "description": "CURRENT: all four solitaire components are required; none is optional." },
+    "fallbackPolicy": {
+      "type": "string",
+      "description": "e.g. \"fallback_to_unfilleted_solid\" (band), \"fallback_to_compound\" (assembly-level fuse, not a single component's own policy), \"none\" (stone, prongs, basket)."
+    },
+    "inspectionRequirements": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "checkType values from specs/atlas/v1/geometry-inspection-result.schema.json this component plan expects to be checked."
+    }
+  }
+}

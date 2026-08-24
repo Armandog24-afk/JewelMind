@@ -11,12 +11,20 @@ depends_on:
 related_documents:
   - JM-BIBLE-096
   - JM-BIBLE-132
+  - JM-BIBLE-161
 implementation_status: partial
 professional_validation: not_required
 normative: false
 ---
 
 # Atlas Architecture Overview
+
+**Relationship to Alchemist (Sprint 6):** [`08-alchemist/161-compiler-architecture-overview.md`](../08-alchemist/161-compiler-architecture-overview.md)
+places this document's pipeline inside the larger five-layer
+JDL→Forge→Alchemist→Atlas→Foundry/Vision architecture, and formalizes
+the missing link between Forge eligibility and Atlas execution as a
+PLANNED `GeometryPlan` object (see
+[`08-alchemist/166-geometry-plan-model.md`](../08-alchemist/166-geometry-plan-model.md)).
 
 ## Conceptual pipeline
 

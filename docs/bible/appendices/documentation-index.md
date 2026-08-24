@@ -195,6 +195,60 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A24 | Appendix: Atlas Inspection Catalog | accepted | current | [`appendices/atlas-inspection-catalog.md`](atlas-inspection-catalog.md) |
 | JM-BIBLE-A25 | Appendix: Atlas Fallback Register | accepted | current | [`appendices/atlas-fallback-register.md`](atlas-fallback-register.md) |
 | JM-BIBLE-A26 | Appendix: Atlas Code Mapping | accepted | current | [`appendices/atlas-code-mapping.md`](atlas-code-mapping.md) |
+| JM-BIBLE-ALCHEMIST-README | Alchemist Compiler v1 — Index | accepted | partial | [`08-alchemist/README.md`](../08-alchemist/README.md) |
+| JM-BIBLE-160 | Alchemist Governance | accepted | current | [`08-alchemist/160-alchemist-governance.md`](../08-alchemist/160-alchemist-governance.md) |
+| JM-BIBLE-161 | Compiler Architecture Overview | accepted | partial | [`08-alchemist/161-compiler-architecture-overview.md`](../08-alchemist/161-compiler-architecture-overview.md) |
+| JM-BIBLE-162 | Compiler Boundaries | accepted | current | [`08-alchemist/162-compiler-boundaries.md`](../08-alchemist/162-compiler-boundaries.md) |
+| JM-BIBLE-163 | Compilation Input Contract | accepted | partial | [`08-alchemist/163-compilation-input-contract.md`](../08-alchemist/163-compilation-input-contract.md) |
+| JM-BIBLE-164 | Normalization Stage | accepted | current | [`08-alchemist/164-normalization-stage.md`](../08-alchemist/164-normalization-stage.md) |
+| JM-BIBLE-165 | Forge Evaluation Integration | accepted | partial | [`08-alchemist/165-forge-evaluation-integration.md`](../08-alchemist/165-forge-evaluation-integration.md) |
+| JM-BIBLE-166 | Geometry Plan Model | accepted | planned | [`08-alchemist/166-geometry-plan-model.md`](../08-alchemist/166-geometry-plan-model.md) |
+| JM-BIBLE-167 | Geometry Plan Generation | accepted | planned | [`08-alchemist/167-geometry-plan-generation.md`](../08-alchemist/167-geometry-plan-generation.md) |
+| JM-BIBLE-168 | Atlas Execution Contract | accepted | partial | [`08-alchemist/168-atlas-execution-contract.md`](../08-alchemist/168-atlas-execution-contract.md) |
+| JM-BIBLE-169 | Component Build Order | accepted | current | [`08-alchemist/169-component-build-order.md`](../08-alchemist/169-component-build-order.md) |
+| JM-BIBLE-170 | Compilation State Machine | accepted | planned | [`08-alchemist/170-compilation-state-machine.md`](../08-alchemist/170-compilation-state-machine.md) |
+| JM-BIBLE-171 | Compilation Result Model | accepted | partial | [`08-alchemist/171-compilation-result-model.md`](../08-alchemist/171-compilation-result-model.md) |
+| JM-BIBLE-172 | Diagnostics and Failure Propagation | accepted | current | [`08-alchemist/172-diagnostics-and-failure-propagation.md`](../08-alchemist/172-diagnostics-and-failure-propagation.md) |
+| JM-BIBLE-173 | Partial Compilation Policy | accepted | partial | [`08-alchemist/173-partial-compilation-policy.md`](../08-alchemist/173-partial-compilation-policy.md) |
+| JM-BIBLE-174 | Determinism and Version Fingerprint | accepted | partial | [`08-alchemist/174-determinism-and-version-fingerprint.md`](../08-alchemist/174-determinism-and-version-fingerprint.md) |
+| JM-BIBLE-175 | Definition Hash vs. Compilation Hash | accepted | planned | [`08-alchemist/175-definition-hash-vs-compilation-hash.md`](../08-alchemist/175-definition-hash-vs-compilation-hash.md) |
+| JM-BIBLE-176 | Compilation Cache Model | accepted | current | [`08-alchemist/176-compilation-cache-model.md`](../08-alchemist/176-compilation-cache-model.md) |
+| JM-BIBLE-177 | Artifact Request Model | accepted | partial | [`08-alchemist/177-artifact-request-model.md`](../08-alchemist/177-artifact-request-model.md) |
+| JM-BIBLE-178 | Artifact Manifest Contract | accepted | partial | [`08-alchemist/178-artifact-manifest-contract.md`](../08-alchemist/178-artifact-manifest-contract.md) |
+| JM-BIBLE-179 | Preview Generation Integration | accepted | current | [`08-alchemist/179-preview-generation-integration.md`](../08-alchemist/179-preview-generation-integration.md) |
+| JM-BIBLE-180 | Export Generation Integration | accepted | current | [`08-alchemist/180-export-generation-integration.md`](../08-alchemist/180-export-generation-integration.md) |
+| JM-BIBLE-181 | Compiler Capability Model | accepted | planned | [`08-alchemist/181-compiler-capability-model.md`](../08-alchemist/181-compiler-capability-model.md) |
+| JM-BIBLE-182 | Compiler Versioning | accepted | planned | [`08-alchemist/182-compiler-versioning.md`](../08-alchemist/182-compiler-versioning.md) |
+| JM-BIBLE-183 | Current Backend to Compiler Mapping | accepted | current | [`08-alchemist/183-current-backend-to-compiler-mapping.md`](../08-alchemist/183-current-backend-to-compiler-mapping.md) |
+| JM-BIBLE-184 | Compiler Observability | accepted | planned | [`08-alchemist/184-compiler-observability.md`](../08-alchemist/184-compiler-observability.md) |
+| JM-BIBLE-185 | Compiler Performance Model | accepted | partial | [`08-alchemist/185-compiler-performance-model.md`](../08-alchemist/185-compiler-performance-model.md) |
+| JM-BIBLE-186 | Compiler Security and Resource Limits | accepted | current | [`08-alchemist/186-compiler-security-and-resource-limits.md`](../08-alchemist/186-compiler-security-and-resource-limits.md) |
+| JM-BIBLE-187 | Alchemist Gap Analysis | accepted | current | [`08-alchemist/187-alchemist-gap-analysis.md`](../08-alchemist/187-alchemist-gap-analysis.md) |
+| JM-BIBLE-188 | Open Alchemist Questions | accepted | current | [`08-alchemist/188-open-alchemist-questions.md`](../08-alchemist/188-open-alchemist-questions.md) |
+| JM-BIBLE-SPRINT6-REPORT | Sprint 6 Validation Report | accepted | current | [`08-alchemist/SPRINT-6-VALIDATION-REPORT.md`](../08-alchemist/SPRINT-6-VALIDATION-REPORT.md) |
+| JM-BIBLE-A27 | Appendix: Alchemist Stage Catalog | accepted | partial | [`appendices/alchemist-stage-catalog.md`](alchemist-stage-catalog.md) |
+| JM-BIBLE-A28 | Appendix: Alchemist State Transition Matrix | accepted | planned | [`appendices/alchemist-state-transition-matrix.md`](alchemist-state-transition-matrix.md) |
+| JM-BIBLE-A29 | Appendix: Geometry Plan Field Catalog | accepted | planned | [`appendices/geometry-plan-field-catalog.md`](geometry-plan-field-catalog.md) |
+| JM-BIBLE-A30 | Appendix: Compilation Result Field Catalog | accepted | partial | [`appendices/compilation-result-field-catalog.md`](compilation-result-field-catalog.md) |
+| JM-BIBLE-A31 | Appendix: Compiler Diagnostic Catalog | accepted | current | [`appendices/compiler-diagnostic-catalog.md`](compiler-diagnostic-catalog.md) |
+| JM-BIBLE-A32 | Appendix: Compiler Code Mapping | accepted | current | [`appendices/compiler-code-mapping.md`](compiler-code-mapping.md) |
+| JM-BIBLE-A33 | Appendix: Compiler Test Matrix | accepted | current | [`appendices/compiler-test-matrix.md`](compiler-test-matrix.md) |
+
+## Machine-readable Alchemist specification — `specs/alchemist/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/alchemist/v1/README.md`](../../../specs/alchemist/v1/README.md) |
+| Compilation input schema | Yes | [`specs/alchemist/v1/compilation-input.schema.json`](../../../specs/alchemist/v1/compilation-input.schema.json) |
+| Geometry plan schema | Yes | [`specs/alchemist/v1/geometry-plan.schema.json`](../../../specs/alchemist/v1/geometry-plan.schema.json) |
+| Geometry plan component schema | Yes | [`specs/alchemist/v1/geometry-plan-component.schema.json`](../../../specs/alchemist/v1/geometry-plan-component.schema.json) |
+| Compilation result schema | Yes | [`specs/alchemist/v1/compilation-result.schema.json`](../../../specs/alchemist/v1/compilation-result.schema.json) |
+| Compiler diagnostic schema | Yes | [`specs/alchemist/v1/compiler-diagnostic.schema.json`](../../../specs/alchemist/v1/compiler-diagnostic.schema.json) |
+| Artifact request schema | Yes | [`specs/alchemist/v1/artifact-request.schema.json`](../../../specs/alchemist/v1/artifact-request.schema.json) |
+| Artifact manifest schema | Yes | [`specs/alchemist/v1/artifact-manifest.schema.json`](../../../specs/alchemist/v1/artifact-manifest.schema.json) |
+| Compiler capabilities schema | Yes | [`specs/alchemist/v1/compiler-capabilities.schema.json`](../../../specs/alchemist/v1/compiler-capabilities.schema.json) |
+| Examples (real, generated) | Yes | [`specs/alchemist/v1/examples/`](../../../specs/alchemist/v1/examples/) |
+| Test vectors | Yes | [`specs/alchemist/v1/test-vectors/`](../../../specs/alchemist/v1/test-vectors/) |
 
 ## Machine-readable Atlas specification — `specs/atlas/v1/`
 

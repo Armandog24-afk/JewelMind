@@ -10,12 +10,19 @@ depends_on:
   - JM-BIBLE-121
 related_documents:
   - JM-BIBLE-096
+  - JM-BIBLE-168
 implementation_status: partial
 professional_validation: not_required
 normative: true
 ---
 
 # Construction Pipeline (ATLAS-0..ATLAS-11)
+
+**Relationship to Alchemist (Sprint 6):** [`08-alchemist/168-atlas-execution-contract.md`](../08-alchemist/168-atlas-execution-contract.md)
+defines the conceptual `execute_geometry_plan(plan) -> AtlasExecutionResult`
+interface Alchemist would call to trigger this pipeline, and confirms
+the current real call (`build_solitaire_ring(definition)`) takes the
+definition directly rather than a `GeometryPlan`, since none exists.
 
 | Stage | Inputs | Outputs | Possible failures | Current status | Related code |
 |---|---|---|---|---|---|

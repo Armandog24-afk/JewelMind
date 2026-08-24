@@ -1,0 +1,26 @@
+{
+  "description": "The real current capability set, populated by reading backend/jewelmind/domain/schema.py Literal types and backend/jewelmind/api/routes.py's actual endpoints directly during Sprint 6. No roadmap/planned value is marked supported.",
+  "currentCapabilities": {
+    "supportedJDLVersions": ["0.1.0"],
+    "supportedJewelryCategories": ["ring"],
+    "supportedStyles": ["solitaire"],
+    "supportedBandProfiles": ["comfort_fit", "flat"],
+    "supportedStoneShapes": ["round"],
+    "supportedSettings": ["prong"],
+    "supportedProngCounts": [4, 6],
+    "supportedArtifacts": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"],
+    "supportedManufacturingContexts": ["lost_wax_casting", "direct_resin_printing"],
+    "supportedPreviewFormats": ["STL"]
+  },
+  "notSupported": [
+    "Any jewelry category other than ring",
+    "Any ring style other than solitaire",
+    "Any band profile other than comfort_fit/flat",
+    "Any stone shape other than round",
+    "Any setting type other than prong",
+    "Any prong count other than 4 or 6",
+    "GLB/glTF preview format (evaluated and explicitly not implemented — see docs/known-limitations.md)",
+    "Any manufacturing method other than lost_wax_casting/direct_resin_printing",
+    "YAML or textual-DSL JDL input (Sprint 3, PLANNED)"
+  ]
+}

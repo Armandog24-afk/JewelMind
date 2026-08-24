@@ -11,12 +11,20 @@ depends_on:
   - JM-BIBLE-098
 related_documents:
   - JM-BIBLE-023
+  - JM-BIBLE-165
 implementation_status: partial
 professional_validation: not_required
 normative: true
 ---
 
 # Forge API Contract
+
+**Relationship to Alchemist (Sprint 6):** [`08-alchemist/165-forge-evaluation-integration.md`](../08-alchemist/165-forge-evaluation-integration.md)
+defines exactly how the compiler consumes this contract's conceptual
+`evaluate()` output (passed rules, diagnostics, blockers, advisory
+warnings) and confirms `professionalReviewRequired` would always be
+`false` today, since zero rules currently have
+`professionalValidationStatus: required`.
 
 ## Conceptual future API
 

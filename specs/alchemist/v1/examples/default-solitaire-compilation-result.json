@@ -1,0 +1,47 @@
+{
+  "compilationId": null,
+  "status": "COMPLETED",
+  "schemaVersion": "0.1.0",
+  "compilerVersion": "0.1.0",
+  "geometryGeneratorVersion": "0.1.0",
+  "forgeRuleSetVersion": null,
+  "kernelVersion": null,
+  "sourceDefinitionHash": "355ddca57e7e49ad",
+  "compilationHash": null,
+  "normalizedDefinition": {
+    "schemaVersion": "0.1.0",
+    "project": { "name": "Solitaire Ring", "units": "mm" },
+    "jewelry": { "category": "ring", "style": "solitaire" },
+    "ring": { "sizeSystem": "EU", "size": 16.0, "innerDiameter": 17.8 },
+    "band": { "width": 2.4, "thickness": 1.8, "profile": "comfort_fit" },
+    "stone": { "shape": "round", "diameter": 6.5, "depth": 4.0 },
+    "setting": { "type": "prong", "prongCount": 6, "prongDiameter": 1.1, "prongHeight": 4.8, "basketHeight": 3.5 },
+    "material": { "metal": "yellow_gold_18k" },
+    "manufacturing": { "method": "lost_wax_casting" },
+    "preview": { "meshTolerance": 0.1, "angularTolerance": 0.2 }
+  },
+  "forgeEvaluation": [],
+  "geometryPlanSummary": null,
+  "componentManifest": {
+    "band": { "file": "band.stl", "vertexCount": 3260, "triangleCount": 5670 },
+    "stone_reference": { "file": "stone_reference.stl", "vertexCount": 485, "triangleCount": 632 },
+    "prongs": { "file": "prongs.stl", "vertexCount": 1524, "triangleCount": 1488 },
+    "basket_support": { "file": "basket_support.stl", "vertexCount": 508, "triangleCount": 504 }
+  },
+  "geometryMetadata": {
+    "componentVolumesMm3": {
+      "band": 250.99168317654699,
+      "stone_reference": 58.22141924499569,
+      "prongs": 29.650351464580467,
+      "basket_support": 83.15575842566426
+    },
+    "combinedMetalVolumeMm3": 341.44334316909976,
+    "boundingBoxMm": { "xmin": -10.7000001, "xmax": 10.7000001, "ymin": -3.635, "ymax": 3.635, "zmin": -10.7000001, "zmax": 15.6000001 }
+  },
+  "diagnostics": [],
+  "artifacts": [],
+  "timings": { "generationDurationS": 0.730515600182116 },
+  "fallbacks": [],
+  "cacheStatus": null,
+  "createdAt": "2026-08-24T00:00:00+00:00"
+}

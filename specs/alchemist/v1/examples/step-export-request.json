@@ -1,0 +1,7 @@
+{
+  "artifactType": "STEP",
+  "options": {
+    "includeStoneReference": false
+  },
+  "required": true
+}

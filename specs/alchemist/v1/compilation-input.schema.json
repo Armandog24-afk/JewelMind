@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/compilation-input.schema.json",
+  "title": "Alchemist Compilation Input v1",
+  "description": "Structural schema for a conceptual CompilationInput — what Alchemist receives before compiling. CURRENT implementation note: no single object like this exists in code; the API layer (backend/jewelmind/api/routes.py::generate_model) receives a bare JewelryDefinition and no other field here. See docs/bible/08-alchemist/163-compilation-input-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["canonicalJDL"],
+  "properties": {
+    "canonicalJDL": {
+      "type": "object",
+      "description": "The JDL Canonical Document being compiled — structurally, a document conforming to specs/jdl/v1/jdl.schema.json."
+    },
+    "requestedArtifacts": {
+      "type": "array",
+      "items": { "enum": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+      "description": "PARTIAL — the current backend does not accept this list upfront; each artifact is a separate, later HTTP call (/api/models/export/step, etc.) against an already-generated modelId, not part of one combined compilation request."
+    },
+    "compilerOptions": {
+      "type": "object",
+      "description": "PARTIAL — the only current option-like fields are STL export overrides (meshTolerance, angularTolerance) on a per-export-request basis (api/schemas.py::ExportStlRequest), not a general compiler-options bag."
+    },
+    "capabilityRequirements": {
+      "type": "object",
+      "description": "PLANNED — no capability-requirement negotiation exists; see specs/alchemist/v1/compiler-capabilities.schema.json."
+    },
+    "requestContext": {
+      "type": "object",
+      "description": "PARTIAL — a requestId exists at the HTTP error-response layer (ErrorDetail.requestId) but is not threaded into a request-context object for successful compilations."
+    },
+    "expectedSchemaVersion": {
+      "type": "string",
+      "description": "PARTIAL — implicitly enforced via JewelryDefinition.schemaVersion's Literal[\"0.1.0\"] constraint; not a separate negotiated field."
+    },
+    "previousCompilationReference": {
+      "type": ["string", "null"],
+      "description": "PLANNED — no compilation-to-compilation reference concept exists; the closest current analogue is re-submitting the same definition and reusing the cached ModelRecord keyed by definitionHash."
+    }
+  }
+}

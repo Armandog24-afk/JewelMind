@@ -1,0 +1,49 @@
+{
+  "description": "How real failures actually propagate through the current pipeline, confirmed by inspecting backend/jewelmind/services/model_service.py and api/routes.py directly.",
+  "scenarios": [
+    {
+      "scenario": "Invalid JDL (structural)",
+      "example": "schemaVersion: \"0.2.0\"",
+      "propagation": "Rejected at FastAPI/Pydantic request parsing, before validate_definition() or any compilation stage runs — REQUEST_VALIDATION_ERROR, HTTP 422.",
+      "conceptualStatus": "FAILED (never reaches RECEIVED in the compiler state machine's meaningful sense — rejected at the transport boundary)"
+    },
+    {
+      "scenario": "Forge generation blocker",
+      "example": "band.width: -2.4 (fires JM-BAND-001, JM-GEOMETRY-001)",
+      "propagation": "validate_definition() returns error-severity results; ModelService.generate() raises ValidationBlockedError before build_solitaire_ring() is ever called — HTTP 422, VALIDATION_BLOCKED.",
+      "conceptualStatus": "BLOCKED",
+      "realExample": "specs/alchemist/v1/examples/failed-validation-compilation-result.json"
+    },
+    {
+      "scenario": "Required component construction failure (hypothetical — never observed)",
+      "example": "An unhandled exception inside build_ring_band()",
+      "propagation": "Propagates out of build_solitaire_ring() (nothing catches it there), then out of ModelService.generate(), caught by api/routes.py::generate_model()'s generic except clause -> ModelGenerationFailedError, HTTP 500, MODEL_GENERATION_FAILED. No partial ModelRecord is ever cached.",
+      "conceptualStatus": "FAILED"
+    },
+    {
+      "scenario": "Combined-metal fuse failure",
+      "example": "band.fuse(basket).fuse(prongs) raises or yields zero solids",
+      "propagation": "Caught internally by _fuse_metal()'s own try/except; falls back to a 3-solid compound with a warning. Generation still SUCCEEDS overall — this is NOT a failure path, it's a documented degradation.",
+      "conceptualStatus": "COMPLETED_WITH_WARNINGS (conceptually) / COMPLETED (actual current behavior — no distinct 'with warnings' status exists in the real API response, only the warnings list itself)"
+    },
+    {
+      "scenario": "Preview mesh failure after valid B-Rep (hypothetical — never observed)",
+      "example": "component.shape.exportStl() raises for one component during write_component_previews()",
+      "propagation": "Would propagate uncaught out of write_component_previews(), out of ModelService.generate() (since preview generation happens inside generate(), not as a separate later step) — the ENTIRE generation would fail as MODEL_GENERATION_FAILED, even though the underlying B-Rep geometry was valid. This is a real current coupling, not by design choice documented anywhere before this Sprint.",
+      "conceptualStatus": "FAILED (current) vs. COMPLETED_WITH_WARNINGS (target, per docs/bible/08-alchemist/173-partial-compilation-policy.md) — a genuine gap"
+    },
+    {
+      "scenario": "STEP export failure",
+      "example": "shape.exportStep() raises",
+      "propagation": "Caught in api/routes.py::export_step_route()'s try/except -> StepExportFailedError, HTTP 500, STEP_EXPORT_FAILED. The underlying generated model (and its modelId) remains valid and cached — a caller can still retry the export or request STL/JSON/specification instead.",
+      "conceptualStatus": "Geometry compilation itself already COMPLETED; only the STEP artifact request FAILED — this is the one current example of correct partial-success behavior (export failure is decoupled from generation)"
+    },
+    {
+      "scenario": "Export against an unknown/evicted modelId",
+      "example": "A modelId not present in ModelService._records (never generated, or evicted from the 20-entry LRU cache)",
+      "propagation": "ModelService.get_record() raises ModelNotFoundError, HTTP 404, MODEL_NOT_FOUND.",
+      "conceptualStatus": "FAILED (for that specific artifact request only)"
+    }
+  ],
+  "keyFinding": "Preview generation is currently coupled to core geometry generation (both happen inside one ModelService.generate() call), while export generation is correctly decoupled (a separate later call, against an already-cached modelId). This asymmetry means a preview-tessellation failure today would incorrectly fail the entire compilation, even though STEP/STL export failures correctly do not. Recorded as a gap in docs/bible/08-alchemist/187-alchemist-gap-analysis.md."
+}

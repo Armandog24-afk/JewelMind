@@ -1,0 +1,98 @@
+{
+  "planVersion": "1.0.0",
+  "sourceDefinitionHash": "355ddca57e7e49ad",
+  "compilerVersion": "0.1.0",
+  "coordinateFrame": "global Y = finger-hole axis; band lies in X/Z plane; assembly anchor axis x=0,y=0 parallel to Z from z=band_top_z upward",
+  "assemblyPlan": {
+    "assemblyId": "solitaire",
+    "requiredComponentPlanIds": ["band", "stone_reference", "prongs", "basket_support"]
+  },
+  "componentPlans": [
+    {
+      "componentPlanId": "band",
+      "componentType": "solid",
+      "canonicalName": "band",
+      "sourceJDLPaths": ["ring.innerDiameter", "band.width", "band.thickness", "band.profile"],
+      "parentAssembly": "solitaire",
+      "dependencies": [],
+      "buildOperation": "revolve_comfort_fit_profile",
+      "directParameters": { "width": 2.4, "thickness": 1.8, "profile": "comfort_fit" },
+      "derivedParameters": { "innerRadiusMm": 8.9, "outerRadiusMm": 10.700000000000001 },
+      "coordinatePlacement": {},
+      "productionRole": "included_by_default",
+      "previewRole": "visible",
+      "required": true,
+      "fallbackPolicy": "fallback_to_unfilleted_solid",
+      "inspectionRequirements": ["VOLUME", "BOUNDING_BOX"]
+    },
+    {
+      "componentPlanId": "stone_reference",
+      "componentType": "solid",
+      "canonicalName": "stone_reference",
+      "sourceJDLPaths": ["stone.diameter", "stone.depth", "setting.basketHeight"],
+      "parentAssembly": "solitaire",
+      "dependencies": [],
+      "buildOperation": "loft_stone_reference",
+      "directParameters": { "diameter": 6.5, "depth": 4.0 },
+      "derivedParameters": { "girdleRadiusMm": 3.25, "girdleZMm": 14.200000000000001 },
+      "coordinatePlacement": {},
+      "productionRole": "excluded_by_default",
+      "previewRole": "visible",
+      "required": true,
+      "fallbackPolicy": "none",
+      "inspectionRequirements": ["VOLUME", "CONNECTIVITY"]
+    },
+    {
+      "componentPlanId": "prongs",
+      "componentType": "compound",
+      "canonicalName": "prongs",
+      "sourceJDLPaths": ["setting.prongCount", "setting.prongDiameter", "setting.prongHeight", "stone.diameter"],
+      "parentAssembly": "solitaire",
+      "dependencies": [],
+      "buildOperation": "extrude_prong_cylinders",
+      "directParameters": { "prongCount": 6, "prongDiameter": 1.1, "prongHeight": 4.8 },
+      "derivedParameters": { "prongRadiusMm": 0.55, "centerRadiusMm": 3.085 },
+      "coordinatePlacement": {},
+      "productionRole": "included_by_default",
+      "previewRole": "visible",
+      "required": true,
+      "fallbackPolicy": "none",
+      "inspectionRequirements": ["COMPONENT_COUNT", "VOLUME"]
+    },
+    {
+      "componentPlanId": "basket_support",
+      "componentType": "solid",
+      "canonicalName": "basket_support",
+      "sourceJDLPaths": ["setting.basketHeight", "setting.prongDiameter"],
+      "parentAssembly": "solitaire",
+      "dependencies": [],
+      "buildOperation": "cut_basket_shell",
+      "directParameters": { "basketHeight": 3.5 },
+      "derivedParameters": { "outerRadiusMm": 3.635, "innerRadiusMm": 2.535 },
+      "coordinatePlacement": {},
+      "productionRole": "included_by_default",
+      "previewRole": "visible",
+      "required": true,
+      "fallbackPolicy": "none",
+      "inspectionRequirements": ["VOLUME"]
+    }
+  ],
+  "dependencies": [
+    { "from": "solitaire", "to": "band", "reason": "boolean fuse (_fuse_metal) requires band.shape as an input" },
+    { "from": "solitaire", "to": "prongs", "reason": "boolean fuse requires prongs.shape as an input" },
+    { "from": "solitaire", "to": "basket_support", "reason": "boolean fuse requires basket_support.shape as an input" }
+  ],
+  "buildOrderNote": "band, stone_reference, prongs, and basket_support have NO true data dependency on each other's build output — each independently derives its placement from shared pure functions of the definition (geometry/constants.py), never from another component's actual shape. The current code's call order (band, stone, prongs, basket, inside build_solitaire_ring) is incidental to how the function was written, not a dependency requirement. Only the assembly/fuse step has a real dependency: it requires band, prongs, and basket_support (not stone_reference) to already exist. See docs/bible/08-alchemist/169-component-build-order.md.",
+  "buildOrder": ["band", "stone_reference", "prongs", "basket_support", "solitaire"],
+  "derivedParameters": {
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "bandTopZMm": 10.700000000000001,
+    "prongCenterRadiusMm": 3.085,
+    "embedMm": 0.4
+  },
+  "inspectionRequests": [
+    { "checkId": "solid-count-after-fuse", "checkType": "SOLID_COUNT", "component": "combined_metal" }
+  ],
+  "artifactHints": ["PREVIEW_MESH"]
+}

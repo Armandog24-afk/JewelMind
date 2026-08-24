@@ -1,0 +1,39 @@
+{
+  "compilationId": null,
+  "status": "BLOCKED",
+  "schemaVersion": "0.1.0",
+  "compilerVersion": "0.1.0",
+  "geometryGeneratorVersion": "0.1.0",
+  "forgeRuleSetVersion": null,
+  "kernelVersion": null,
+  "sourceDefinitionHash": "545c730b7a0a7b61",
+  "compilationHash": null,
+  "normalizedDefinition": {
+    "schemaVersion": "0.1.0",
+    "project": { "name": "Solitaire Ring", "units": "mm" },
+    "jewelry": { "category": "ring", "style": "solitaire" },
+    "ring": { "sizeSystem": "EU", "size": 16.0, "innerDiameter": 17.8 },
+    "band": { "width": -2.4, "thickness": 1.8, "profile": "comfort_fit" },
+    "stone": { "shape": "round", "diameter": 6.5, "depth": 4.0 },
+    "setting": { "type": "prong", "prongCount": 6, "prongDiameter": 1.1, "prongHeight": 4.8, "basketHeight": 3.5 },
+    "material": { "metal": "yellow_gold_18k" },
+    "manufacturing": { "method": "lost_wax_casting" },
+    "preview": { "meshTolerance": 0.1, "angularTolerance": 0.2 }
+  },
+  "forgeEvaluation": [
+    { "ruleId": "JM-BAND-001", "severity": "error", "message": "Band width below 1.5 mm is not supported.", "parameter": "band.width", "suggestedValue": 1.5 },
+    { "ruleId": "JM-GEOMETRY-001", "severity": "error", "message": "Band width must be positive to produce valid band geometry.", "parameter": "band.width", "suggestedValue": null }
+  ],
+  "geometryPlanSummary": null,
+  "componentManifest": {},
+  "geometryMetadata": {},
+  "diagnostics": [
+    { "stage": "BLOCKED", "severity": "ERROR", "message": "Compilation blocked: 2 error-severity Forge diagnostics on band.width.", "component": null, "artifactType": null, "sourceRuleId": "JM-BAND-001", "blocking": true, "technicalCause": null },
+    { "stage": "BLOCKED", "severity": "ERROR", "message": "Compilation blocked: 2 error-severity Forge diagnostics on band.width.", "component": null, "artifactType": null, "sourceRuleId": "JM-GEOMETRY-001", "blocking": true, "technicalCause": null }
+  ],
+  "artifacts": [],
+  "timings": {},
+  "fallbacks": [],
+  "cacheStatus": null,
+  "createdAt": null
+}

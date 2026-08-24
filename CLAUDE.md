@@ -353,3 +353,65 @@ Future coding agents must:
 - **Require an RFC for a new geometric component family** — a new
   component type beyond band/stone_reference/prongs/basket_support, or a
   new ring style's geometry; see the same document.
+
+## ALCHEMIST RULES
+
+`docs/bible/08-alchemist/` is the authoritative Alchemist Compiler
+specification — start at
+[`docs/bible/08-alchemist/README.md`](docs/bible/08-alchemist/README.md).
+The machine-readable half lives in
+[`specs/alchemist/v1/`](specs/alchemist/v1/README.md). Future coding
+agents must:
+
+- **Read `docs/bible/08-alchemist/README.md` before changing
+  compilation orchestration** — before modifying
+  `backend/jewelmind/services/model_service.py` or how
+  generation/export/preview sequencing works.
+- **Preserve the JDL → Forge → Alchemist → Atlas separation** — Forge
+  owns thresholds, Atlas owns geometry, Alchemist only orchestrates
+  (ALCHEMIST-GOV-001, ALCHEMIST-GOV-002).
+- **Never put jewelry thresholds in compiler/orchestration code** — a
+  jewelry-domain constant belongs in `backend/jewelmind/validation/`
+  with a Forge rule ID, never in `services/model_service.py` or
+  `api/routes.py`.
+- **Never construct kernel geometry directly inside compiler
+  orchestration** — `services/model_service.py` and `api/routes.py`
+  must never import `cadquery`; geometry construction belongs in
+  `backend/jewelmind/geometry/` (see
+  `docs/bible/08-alchemist/168-atlas-execution-contract.md` for the one
+  currently-tolerated exception: `exporters/step_exporter.py`/
+  `stl_exporter.py` combining pre-built shapes for export).
+- **Keep `GeometryPlan` deterministic** if and when it is ever
+  implemented — same inputs, same plan, every time (ALCHEMIST-GOV-004).
+- **Keep artifact requests explicit** — never generate an artifact as a
+  side effect the caller didn't ask for (ALCHEMIST-GOV-008).
+- **Record required version fingerprints** when adding a new version
+  axis (compiler, Forge rule-set, kernel) — see
+  `docs/bible/08-alchemist/174-determinism-and-version-fingerprint.md`
+  (ALCHEMIST-GOV-009).
+- **Preserve `definitionHash`'s meaning** — never repurpose it to also
+  encode compiler/kernel version; that is what a future
+  `compilationHash` is for (ALCHEMIST-GOV-010; see
+  `docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md`).
+- **Update `compilationHash` rules when output-affecting versions
+  change**, once `compilationHash` is implemented.
+- **Never silently ignore component failures** — restates
+  ATLAS-GOV-006/LAW-005 at the compiler level (ALCHEMIST-GOV-007).
+- **Never report complete success when required components/artifacts
+  fail** — see
+  `docs/bible/08-alchemist/173-partial-compilation-policy.md`.
+- **Update compiler capabilities when adding supported features** —
+  `specs/alchemist/v1/compiler-capabilities.schema.json` and
+  `specs/alchemist/v1/test-vectors/capability-vectors.json`, in the
+  same change as a new supported band profile, stone shape, setting
+  type, prong count, or artifact type.
+- **Update test vectors after compiler-semantic changes** —
+  `backend/tests/test_alchemist_registry.py` and the relevant
+  `specs/alchemist/v1/test-vectors/*.json` file.
+- **Create an ADR for compiler architecture changes** — materializing
+  `GeometryPlan`, changing which stage produces which artifact,
+  introducing `compilationHash`, or changing cache-key strategy; see
+  `docs/bible/08-alchemist/160-alchemist-governance.md`.
+- **Create an RFC for major pipeline changes** — asynchronous
+  compilation, component-level regeneration, or restructuring the
+  five-layer pipeline itself; see the same document.

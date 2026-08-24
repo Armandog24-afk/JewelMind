@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/compiler-diagnostic.schema.json",
+  "title": "Compiler Diagnostic v1",
+  "description": "Structural schema for a diagnostic surfaced by the compilation pipeline itself (as opposed to a Forge ValidationResult or an Atlas inspection fact). See docs/bible/08-alchemist/172-diagnostics-and-failure-propagation.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stage", "severity", "message", "blocking"],
+  "properties": {
+    "stage": {
+      "enum": [
+        "RECEIVED", "NORMALIZING", "VALIDATING", "BLOCKED", "PLANNING",
+        "GENERATING", "INSPECTING", "ARTIFACT_GENERATION",
+        "COMPLETED", "COMPLETED_WITH_WARNINGS", "FAILED", "CANCELLED"
+      ]
+    },
+    "severity": { "enum": ["INFORMATION", "WARNING", "ERROR", "FATAL"] },
+    "message": { "type": "string" },
+    "component": { "type": ["string", "null"] },
+    "artifactType": { "enum": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION", null] },
+    "sourceRuleId": {
+      "type": ["string", "null"],
+      "description": "If this diagnostic originated from a Forge rule, its ruleId — never a new, separately-invented compiler-level jewelry threshold."
+    },
+    "blocking": { "type": "boolean" },
+    "technicalCause": { "type": ["string", "null"] }
+  }
+}

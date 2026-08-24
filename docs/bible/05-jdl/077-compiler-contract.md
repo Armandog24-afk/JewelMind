@@ -12,6 +12,7 @@ depends_on:
 related_documents:
   - JM-BIBLE-078
   - JM-BIBLE-121
+  - JM-BIBLE-161
 implementation_status: partial
 professional_validation: not_required
 normative: true
@@ -26,6 +27,12 @@ give the "Plan + Generate" phase below its own twelve-stage breakdown
 document already makes: no separate geometry-plan object exists between
 validation and construction — `build_solitaire_ring()` still does both
 in one call.
+
+**Relationship to Alchemist (Sprint 6):** [`08-alchemist/166-geometry-plan-model.md`](../08-alchemist/166-geometry-plan-model.md)
+formally names the missing object this document's "Plan + Generate"
+phase describes — `GeometryPlan` — and marks it PLANNED, with a
+normative target schema (`specs/alchemist/v1/geometry-plan.schema.json`)
+ready for whenever it is actually built.
 
 The field-by-field mapping onto current backend types is in [`specs/jdl/v1/compiler-contract.md`](../../../specs/jdl/v1/compiler-contract.md). This document states the contract's intent and the prohibitions that make it a *contract* rather than just a description of what the code happens to do.
 

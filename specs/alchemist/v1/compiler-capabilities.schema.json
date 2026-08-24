@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/compiler-capabilities.schema.json",
+  "title": "Compiler Capabilities v1",
+  "description": "Structural schema for a conceptual compiler capability declaration. PLANNED — no capability-declaration endpoint or object exists anywhere in the current backend; this schema exists so a future implementation has a normative shape, populated only with what is genuinely supported today. See docs/bible/08-alchemist/181-compiler-capability-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["supportedJDLVersions", "supportedJewelryCategories", "supportedStyles"],
+  "properties": {
+    "supportedJDLVersions": { "type": "array", "items": { "type": "string" } },
+    "supportedJewelryCategories": { "type": "array", "items": { "type": "string" } },
+    "supportedStyles": { "type": "array", "items": { "type": "string" } },
+    "supportedBandProfiles": { "type": "array", "items": { "type": "string" } },
+    "supportedStoneShapes": { "type": "array", "items": { "type": "string" } },
+    "supportedSettings": { "type": "array", "items": { "type": "string" } },
+    "supportedProngCounts": { "type": "array", "items": { "type": "integer" } },
+    "supportedArtifacts": { "type": "array", "items": { "enum": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] } },
+    "supportedManufacturingContexts": { "type": "array", "items": { "type": "string" } },
+    "supportedPreviewFormats": { "type": "array", "items": { "type": "string" } }
+  }
+}

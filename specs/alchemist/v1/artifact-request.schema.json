@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/artifact-request.schema.json",
+  "title": "Artifact Request v1",
+  "description": "Structural schema for an explicit ArtifactRequest. Maps to the real backend/jewelmind/api/schemas.py request models (ExportStepRequest, ExportStlRequest, ExportJsonRequest, SpecificationRequest) — one HTTP endpoint per artifact type today, not a single unified request object. See docs/bible/08-alchemist/177-artifact-request-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifactType", "required"],
+  "properties": {
+    "artifactType": { "enum": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "includeStoneReference": { "type": "boolean", "default": false, "description": "CURRENT for STEP and STL (api/schemas.py::ExportStepRequest.includeStoneReference, ExportStlRequest.includeStoneReference)." },
+        "meshTolerance": { "type": ["number", "null"], "exclusiveMinimum": 0, "description": "CURRENT for STL only (ExportStlRequest.meshTolerance) — no equivalent override exists for PREVIEW_MESH generation." },
+        "angularTolerance": { "type": ["number", "null"], "exclusiveMinimum": 0, "description": "CURRENT for STL only (ExportStlRequest.angularTolerance), radians." }
+      }
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether this artifact's failure should block overall compilation success — see docs/bible/08-alchemist/173-partial-compilation-policy.md. Not a real field anywhere in current code; every current export request is independently issued and independently succeeds or fails, with no concept of one artifact being 'required' relative to another."
+    }
+  }
+}

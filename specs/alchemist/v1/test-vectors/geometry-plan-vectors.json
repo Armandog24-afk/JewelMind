@@ -1,0 +1,14 @@
+{
+  "description": "Derived plan-level values for the default definition, identical to specs/atlas/v1/test-vectors/coordinate-vectors.json (Sprint 5) — GeometryPlan.derivedParameters conceptually holds exactly these values, since no separate plan-generation code path exists yet; these are the actual values geometry/constants.py computes today.",
+  "definitionHash": "355ddca57e7e49ad",
+  "derivedParameters": {
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "bandTopZMm": 10.700000000000001,
+    "prongCenterRadiusMm": 3.085,
+    "embedMm": 0.4
+  },
+  "componentPlanIds": ["band", "stone_reference", "prongs", "basket_support"],
+  "buildOrder": ["band", "stone_reference", "prongs", "basket_support", "solitaire"],
+  "note": "This vector file exists to prove GeometryPlan's derivedParameters would be deterministic and traceable if materialized — see docs/bible/08-alchemist/166-geometry-plan-model.md and 167-geometry-plan-generation.md. No GeometryPlan object is actually constructed by any current code path; build_solitaire_ring() computes and immediately consumes these same values inline."
+}

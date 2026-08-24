@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/geometry-plan.schema.json",
+  "title": "Geometry Plan v1",
+  "description": "Structural schema for a GeometryPlan — the deterministic intermediate representation between validated JDL and Atlas execution. PLANNED: no such object is materialized in the current backend; build_solitaire_ring() goes directly from JewelryDefinition to GeneratedModel with no separate plan value in between. See docs/bible/08-alchemist/166-geometry-plan-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["planVersion", "sourceDefinitionHash", "compilerVersion", "componentPlans", "buildOrder"],
+  "properties": {
+    "planVersion": { "type": "string" },
+    "sourceDefinitionHash": { "type": "string" },
+    "compilerVersion": { "type": "string" },
+    "coordinateFrame": {
+      "type": "string",
+      "description": "A fixed, non-negotiable constant today — see docs/bible/07-atlas/123-coordinate-system-and-orientation.md. Recorded here for future-proofing only, in case a second coordinate convention is ever introduced."
+    },
+    "assemblyPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assemblyId": { "type": "string" },
+        "requiredComponentPlanIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "componentPlans": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "Each item conforms to geometry-plan-component.schema.json."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "buildOrder": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Topologically-ordered componentPlanIds, terminating with the assembly step."
+    },
+    "buildOrderNote": {
+      "type": "string",
+      "description": "Free-text clarification of which build-order entries are true data dependencies vs. incidental code ordering. See docs/bible/08-alchemist/169-component-build-order.md."
+    },
+    "derivedParameters": {
+      "type": "object",
+      "description": "Plan-level derived values shared by more than one component, e.g. band_top_z, prong_center_radius, EMBED_MM."
+    },
+    "inspectionRequests": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "Requested AtlasInspection checks — see specs/atlas/v1/geometry-inspection-result.schema.json."
+    },
+    "artifactHints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "PLANNED — a forward hint of which artifacts will likely be requested, so Atlas execution could (in a future implementation) skip unnecessary work; not used by anything today."
+    }
+  }
+}

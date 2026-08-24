@@ -10,6 +10,7 @@ depends_on:
   - JM-BIBLE-078
 related_documents:
   - JM-BIBLE-083
+  - JM-BIBLE-178
 implementation_status: current
 professional_validation: not_required
 normative: true
@@ -18,6 +19,12 @@ normative: true
 # Artifact Generation Contract
 
 **No artifact produced by this pipeline may be described as manufacturing-ready** (LAW-010). Every specification export and the frontend's permanent header notice restate this; this contract does not weaken that requirement.
+
+**Relationship to Alchemist (Sprint 6):** [`08-alchemist/177-artifact-request-model.md`](../08-alchemist/177-artifact-request-model.md)
+and [`178-artifact-manifest-contract.md`](../08-alchemist/178-artifact-manifest-contract.md)
+formalize this same artifact set as `ArtifactRequest`/`ArtifactManifest`
+target shapes, confirming no unified manifest aggregating all artifact
+types exists today — each remains a separate, independently-issued call.
 
 | Artifact | Purpose | Source data | Inclusion/exclusion rule | MIME type | Extension | Naming | Deterministic? | Stone-inclusion default | Prerequisites | Known limitations |
 |---|---|---|---|---|---|---|---|---|---|---|

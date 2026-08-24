@@ -13,6 +13,7 @@ related_documents:
   - JM-BIBLE-022
   - JM-BIBLE-ADR-008
   - JM-BIBLE-121
+  - JM-BIBLE-161
 implementation_status: current
 ---
 
@@ -97,6 +98,18 @@ Two engines run the same sixteen rules: `backend/jewelmind/validation/engine.py`
 instant feedback only). The backend always re-validates before generation
 and export regardless of what the frontend believes — see Product
 Principle 6.
+
+## Compilation orchestration
+
+`ModelService.generate()` (`backend/jewelmind/services/model_service.py`)
+is the closest current analogue to what Sprint 6 formalizes as
+**"Alchemist"** — the compilation orchestration layer that sequences
+Forge validation, Atlas geometry construction, and preview generation.
+See [`08-alchemist/README.md`](../08-alchemist/README.md) for the full
+specification, including the one concrete architectural gap it
+identifies: preview generation is currently coupled to core geometry
+generation inside this same function, while STEP/STL/JSON/specification
+export is correctly decoupled into separate, later calls.
 
 ## State management
 

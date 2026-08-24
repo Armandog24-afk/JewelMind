@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/alchemist/v1/artifact-manifest.schema.json",
+  "title": "Artifact Manifest v1",
+  "description": "Structural schema for one ArtifactManifest entry. See docs/bible/08-alchemist/178-artifact-manifest-contract.md. No unified manifest aggregating all artifact types exists today — the closest CURRENT analogue is the per-component preview_manifest (backend/jewelmind/preview/mesh.py) for PREVIEW_MESH only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifactId", "artifactType", "status"],
+  "properties": {
+    "artifactId": { "type": "string" },
+    "artifactType": { "enum": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"] },
+    "status": { "enum": ["SUCCEEDED", "FAILED", "SKIPPED"] },
+    "filename": { "type": ["string", "null"], "description": "CURRENT: sanitize_filename(project.name) + extension, computed at the API layer, never persisted server-side beyond one response." },
+    "mimeType": { "type": ["string", "null"], "description": "CURRENT: application/step, model/stl, application/json, text/markdown." },
+    "byteSize": { "type": ["integer", "null"], "description": "PLANNED — not currently reported anywhere; a caller only learns file size from the HTTP Content-Length header, not a structured field." },
+    "sourceDefinitionHash": { "type": "string" },
+    "compilationHash": { "type": ["string", "null"], "description": "PLANNED — see compilation-result.schema.json." },
+    "includedComponents": { "type": "array", "items": { "type": "string" } },
+    "excludedComponents": { "type": "array", "items": { "type": "string" } },
+    "generationDuration": { "type": ["number", "null"], "description": "PLANNED — no per-artifact timing is recorded today; only overall geometry generation_duration_s exists." },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "error": { "type": ["string", "null"] },
+    "createdAt": { "type": ["string", "null"] }
+  }
+}
