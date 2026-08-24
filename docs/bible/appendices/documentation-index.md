@@ -120,6 +120,53 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A11 | Appendix: JDL Error Code Catalog | accepted | current | [`appendices/jdl-error-code-catalog.md`](jdl-error-code-catalog.md) |
 | JM-BIBLE-A12 | Appendix: JDL Version Compatibility Matrix | accepted | current | [`appendices/jdl-version-compatibility-matrix.md`](jdl-version-compatibility-matrix.md) |
 | JM-BIBLE-A13 | Appendix: JDL Example Index | accepted | current | [`appendices/jdl-example-index.md`](jdl-example-index.md) |
+| JM-BIBLE-FORGE-README | Forge Rule System v1 — Index | accepted | partial | [`06-forge/README.md`](../06-forge/README.md) |
+| JM-BIBLE-090 | Forge Governance | accepted | current | [`06-forge/090-forge-governance.md`](../06-forge/090-forge-governance.md) |
+| JM-BIBLE-091 | Rule System Overview | accepted | partial | [`06-forge/091-rule-system-overview.md`](../06-forge/091-rule-system-overview.md) |
+| JM-BIBLE-092 | Rule Anatomy | accepted | partial | [`06-forge/092-rule-anatomy.md`](../06-forge/092-rule-anatomy.md) |
+| JM-BIBLE-093 | Rule Classification Model | accepted | current | [`06-forge/093-rule-classification-model.md`](../06-forge/093-rule-classification-model.md) |
+| JM-BIBLE-094 | Rule Provenance Model | accepted | current | [`06-forge/094-rule-provenance-model.md`](../06-forge/094-rule-provenance-model.md) |
+| JM-BIBLE-095 | Rule Lifecycle | accepted | current | [`06-forge/095-rule-lifecycle.md`](../06-forge/095-rule-lifecycle.md) |
+| JM-BIBLE-096 | Rule Evaluation Pipeline | accepted | partial | [`06-forge/096-rule-evaluation-pipeline.md`](../06-forge/096-rule-evaluation-pipeline.md) |
+| JM-BIBLE-097 | Rule Context Model | accepted | partial | [`06-forge/097-rule-context-model.md`](../06-forge/097-rule-context-model.md) |
+| JM-BIBLE-098 | Rule Result and Diagnostics | accepted | partial | [`06-forge/098-rule-result-and-diagnostics.md`](../06-forge/098-rule-result-and-diagnostics.md) |
+| JM-BIBLE-099 | Severity and Blocking Semantics | accepted | partial | [`06-forge/099-severity-and-blocking-semantics.md`](../06-forge/099-severity-and-blocking-semantics.md) |
+| JM-BIBLE-100 | Rule Dependencies and Ordering | accepted | current | [`06-forge/100-rule-dependencies-and-ordering.md`](../06-forge/100-rule-dependencies-and-ordering.md) |
+| JM-BIBLE-101 | Conflicts, Precedence, and Resolution | accepted | planned | [`06-forge/101-conflicts-precedence-and-resolution.md`](../06-forge/101-conflicts-precedence-and-resolution.md) |
+| JM-BIBLE-102 | Suggestions and Auto-Fix Contract | accepted | partial | [`06-forge/102-suggestions-and-auto-fix-contract.md`](../06-forge/102-suggestions-and-auto-fix-contract.md) |
+| JM-BIBLE-103 | Professional Validation Lifecycle | accepted | planned | [`06-forge/103-professional-validation-lifecycle.md`](../06-forge/103-professional-validation-lifecycle.md) |
+| JM-BIBLE-104 | Manufacturing Profile Rules | accepted | partial | [`06-forge/104-manufacturing-profile-rules.md`](../06-forge/104-manufacturing-profile-rules.md) |
+| JM-BIBLE-105 | Geometry Precondition Rules | accepted | current | [`06-forge/105-geometry-precondition-rules.md`](../06-forge/105-geometry-precondition-rules.md) |
+| JM-BIBLE-106 | Generated Geometry Inspection Rules | accepted | partial | [`06-forge/106-generated-geometry-inspection-rules.md`](../06-forge/106-generated-geometry-inspection-rules.md) |
+| JM-BIBLE-107 | Export Precondition Rules | accepted | current | [`06-forge/107-export-precondition-rules.md`](../06-forge/107-export-precondition-rules.md) |
+| JM-BIBLE-108 | Rule Versioning | accepted | current | [`06-forge/108-rule-versioning.md`](../06-forge/108-rule-versioning.md) |
+| JM-BIBLE-109 | Rule Registry | accepted | current | [`06-forge/109-rule-registry.md`](../06-forge/109-rule-registry.md) |
+| JM-BIBLE-110 | Current Rule Inventory | accepted | current | [`06-forge/110-current-rule-inventory.md`](../06-forge/110-current-rule-inventory.md) |
+| JM-BIBLE-111 | Domain Rule Gap Analysis | accepted | current | [`06-forge/111-domain-rule-gap-analysis.md`](../06-forge/111-domain-rule-gap-analysis.md) |
+| JM-BIBLE-112 | Rule Testing Strategy | accepted | partial | [`06-forge/112-rule-testing-strategy.md`](../06-forge/112-rule-testing-strategy.md) |
+| JM-BIBLE-113 | Forge API Contract | accepted | partial | [`06-forge/113-forge-api-contract.md`](../06-forge/113-forge-api-contract.md) |
+| JM-BIBLE-114 | Future AI-Assisted Rule Discovery | draft | vision | [`06-forge/114-future-ai-assisted-rule-discovery.md`](../06-forge/114-future-ai-assisted-rule-discovery.md) |
+| JM-BIBLE-115 | Open Forge Questions | accepted | current | [`06-forge/115-open-forge-questions.md`](../06-forge/115-open-forge-questions.md) |
+| JM-BIBLE-SPRINT4-REPORT | Sprint 4 Validation Report | accepted | current | [`06-forge/SPRINT-4-VALIDATION-REPORT.md`](../06-forge/SPRINT-4-VALIDATION-REPORT.md) |
+| JM-BIBLE-A14 | Appendix: Forge Rule Catalog | accepted | current | [`appendices/forge-rule-catalog.md`](forge-rule-catalog.md) |
+| JM-BIBLE-A15 | Appendix: Forge Rule Provenance Register | accepted | current | [`appendices/forge-rule-provenance-register.md`](forge-rule-provenance-register.md) |
+| JM-BIBLE-A16 | Appendix: Forge Severity Matrix | accepted | current | [`appendices/forge-severity-matrix.md`](forge-severity-matrix.md) |
+| JM-BIBLE-A17 | Appendix: Forge Professional Validation Matrix | accepted | current | [`appendices/forge-professional-validation-matrix.md`](forge-professional-validation-matrix.md) |
+| JM-BIBLE-A18 | Appendix: Forge Rule Dependency Matrix | accepted | current | [`appendices/forge-rule-dependency-matrix.md`](forge-rule-dependency-matrix.md) |
+| JM-BIBLE-A19 | Appendix: Forge Rule Test Matrix | accepted | current | [`appendices/forge-rule-test-matrix.md`](forge-rule-test-matrix.md) |
+
+## Machine-readable Forge specification — `specs/forge/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/forge/v1/README.md`](../../../specs/forge/v1/README.md) |
+| Rule schema | Yes | [`specs/forge/v1/rule.schema.json`](../../../specs/forge/v1/rule.schema.json) |
+| Rule result schema | Yes | [`specs/forge/v1/rule-result.schema.json`](../../../specs/forge/v1/rule-result.schema.json) |
+| Rule context schema | Yes | [`specs/forge/v1/rule-context.schema.json`](../../../specs/forge/v1/rule-context.schema.json) |
+| Rule registry schema | Yes | [`specs/forge/v1/rule-registry.schema.json`](../../../specs/forge/v1/rule-registry.schema.json) |
+| Current rule registry (21 rules) | Yes | [`specs/forge/v1/current-rule-registry.json`](../../../specs/forge/v1/current-rule-registry.json) |
+| Examples (valid + invalid) | Yes | [`specs/forge/v1/examples/`](../../../specs/forge/v1/examples/) |
+| Test vectors | Yes | [`specs/forge/v1/test-vectors/`](../../../specs/forge/v1/test-vectors/) |
 
 ## Machine-readable JDL specification — `specs/jdl/v1/`
 

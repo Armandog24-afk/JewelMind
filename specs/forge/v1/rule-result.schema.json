@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/forge/v1/rule-result.schema.json",
+  "title": "Forge Rule Result v1",
+  "description": "Structural schema for a ForgeRuleResult — one diagnostic produced by evaluating one rule against one ForgeEvaluationContext. The CURRENT backend's ValidationResult (backend/jewelmind/validation/rules.py) is a strict subset of this shape: ruleId, severity, message, parameter (-> fieldPath), suggestedValue. Every additional field here is either PLANNED or derivable at the API layer today. See docs/bible/06-forge/098-rule-result-and-diagnostics.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ruleId", "ruleVersion", "status", "severity", "message", "fieldPath", "blocking", "stage"],
+  "properties": {
+    "ruleId": { "type": "string" },
+    "ruleVersion": { "type": "string" },
+    "status": {
+      "enum": ["PASSED", "FAILED", "SKIPPED", "NOT_APPLICABLE"],
+      "description": "CURRENT behavior only ever surfaces FAILED results (validate_definition() returns diagnostics only for rules that fired, per backend/jewelmind/validation/engine.py). PASSED/SKIPPED/NOT_APPLICABLE are PLANNED, for a future full-evaluation-trace mode."
+    },
+    "severity": { "enum": ["INFORMATION", "WARNING", "ERROR", "FATAL"] },
+    "message": { "type": "string" },
+    "fieldPath": { "type": "string" },
+    "affectedComponent": { "type": ["string", "null"] },
+    "actualValue": {},
+    "expectedConstraint": { "type": ["string", "null"] },
+    "suggestedValue": {},
+    "suggestionText": { "type": ["string", "null"] },
+    "blocking": { "type": "boolean" },
+    "blockingScope": {
+      "type": "array",
+      "items": { "enum": ["NONE", "GENERATION", "PREVIEW", "STEP_EXPORT", "STL_EXPORT", "ALL_EXPORTS", "WORKFLOW"] }
+    },
+    "provenanceStatus": {
+      "enum": [
+        "implementation_necessity", "mathematical_constraint", "geometry_engine_constraint",
+        "prototype_heuristic", "professional_review", "published_technical_reference",
+        "manufacturer_specification", "regulatory_or_standards_body",
+        "experimental_observation", "migrated_legacy_rule", "unknown"
+      ]
+    },
+    "professionalValidationStatus": {
+      "enum": ["not_required", "preliminary", "required", "validated"]
+    },
+    "stage": {
+      "enum": ["FORGE-0", "FORGE-1", "FORGE-2", "FORGE-3", "FORGE-4", "FORGE-5", "FORGE-6", "FORGE-7", "FORGE-8", "FORGE-9"]
+    },
+    "timestamp": { "type": ["string", "null"], "description": "PLANNED — the current ValidationResult carries no timestamp; generation-level timestamps live on ModelRecord.generated_at instead, outside this result shape." },
+    "metadata": { "type": "object" }
+  }
+}

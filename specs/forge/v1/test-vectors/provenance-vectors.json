@@ -1,0 +1,39 @@
+{
+  "description": "provenanceType assigned to each of the 21 currently registered rules, determined by inspecting what actually justifies each rule's condition (a real formula/geometric necessity vs. a chosen-for-prototype-safety threshold). No rule is assigned professional_review, manufacturer_specification, or regulatory_or_standards_body, because none currently has that provenance — assigning one would violate FORGE-GOV-003.",
+  "vectors": [
+    { "ruleId": "JM-RING-001", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-RING-002", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-RING-003", "provenanceType": "mathematical_constraint", "notes": "The size<->diameter formula (EU/French convention, size = pi*diameter - 40) is a real, named sizing convention; the 0.15mm/0.5mm discrepancy thresholds that decide when to flag it are separately a prototype_heuristic choice." },
+    { "ruleId": "JM-BAND-001", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-BAND-002", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-BAND-003", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-STONE-001", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-STONE-002", "provenanceType": "mathematical_constraint", "notes": "A stone's depth exceeding its own diameter is geometrically implausible for the lofted round-brilliant approximation used here, independent of any specific numeric threshold." },
+    { "ruleId": "JM-PRONG-001", "provenanceType": "prototype_heuristic", "notes": "The {4,6} set reflects what the current prong geometry builder supports, not a jewelry-industry standard prong count." },
+    { "ruleId": "JM-PRONG-002", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-PRONG-003", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-PRONG-004", "provenanceType": "geometry_engine_constraint", "notes": "If prongs do not rise above the basket, the current geometry builder cannot produce a coherent stone-holding structure." },
+    { "ruleId": "JM-SETTING-001", "provenanceType": "implementation_necessity", "notes": "A zero or negative basket height cannot be constructed into a real solid by the current builder." },
+    { "ruleId": "JM-SETTING-002", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-MANUFACTURING-001", "provenanceType": "prototype_heuristic" },
+    { "ruleId": "JM-GEOMETRY-001", "provenanceType": "implementation_necessity", "notes": "The band builder requires a positive outer-minus-inner dimension and a positive width to construct any solid at all." },
+    { "ruleId": "FORGE-SCHEMA-001", "provenanceType": "implementation_necessity" },
+    { "ruleId": "FORGE-SAFETY-001", "provenanceType": "implementation_necessity" },
+    { "ruleId": "FORGE-SAFETY-002", "provenanceType": "implementation_necessity" },
+    { "ruleId": "FORGE-GEOM-001", "provenanceType": "geometry_engine_constraint" },
+    { "ruleId": "FORGE-EXPORT-001", "provenanceType": "implementation_necessity" }
+  ],
+  "summary": {
+    "prototype_heuristic": 11,
+    "mathematical_constraint": 2,
+    "geometry_engine_constraint": 2,
+    "implementation_necessity": 6,
+    "professional_review": 0,
+    "manufacturer_specification": 0,
+    "regulatory_or_standards_body": 0,
+    "published_technical_reference": 0,
+    "experimental_observation": 0,
+    "migrated_legacy_rule": 0,
+    "unknown": 0
+  }
+}

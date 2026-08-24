@@ -11,12 +11,15 @@ depends_on:
   - JM-BIBLE-074
 related_documents:
   - JM-BIBLE-080
+  - JM-BIBLE-096
 implementation_status: partial
 professional_validation: preliminary
 normative: true
 ---
 
 # Validation Pipeline
+
+**Relationship to Forge (Sprint 4):** [`06-forge/096-rule-evaluation-pipeline.md`](../06-forge/096-rule-evaluation-pipeline.md) is Forge's own view of this same pipeline, expressed as ten stages (`FORGE-0`..`FORGE-9`) with a full rule-classification, provenance, and lifecycle model layered on top. Layers 1–6 below correspond to `FORGE-0`..`FORGE-5`; layer 7 corresponds to `FORGE-6`/`FORGE-7`; layer 8 corresponds to `FORGE-8`; layer 9 corresponds to `FORGE-9`. This document remains authoritative for the JDL-level layer definitions; Forge is authoritative for how individual rules are classified, versioned, and professionally validated within them.
 
 **Passing every layer below does not certify manufacturability.** No layer in this pipeline, individually or combined, constitutes professional review — see LAW-010 and [`04-jewelry-domain/040-domain-governance.md`](../04-jewelry-domain/040-domain-governance.md).
 

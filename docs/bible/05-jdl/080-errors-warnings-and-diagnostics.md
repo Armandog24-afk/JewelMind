@@ -10,12 +10,15 @@ depends_on:
   - JM-BIBLE-075
 related_documents:
   - JM-BIBLE-A11
+  - JM-BIBLE-098
 implementation_status: current
 professional_validation: not_required
 normative: true
 ---
 
 # Errors, Warnings, and Diagnostics
+
+**Relationship to Forge (Sprint 4):** [`06-forge/098-rule-result-and-diagnostics.md`](../06-forge/098-rule-result-and-diagnostics.md) defines a superset conceptual `ForgeRuleResult` shape (adding `ruleVersion`, `status`, `blockingScope`, `provenanceStatus`, `professionalValidationStatus`, `stage`, and more) and maps every field back to the current `ValidationResult`/`AppError` shapes documented below. No code or public diagnostic shape changed as a result — this document remains the authority on what the running system actually returns today.
 
 ## Conceptual unified diagnostic shape
 

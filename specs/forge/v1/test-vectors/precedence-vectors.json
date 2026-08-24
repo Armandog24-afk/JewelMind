@@ -1,0 +1,42 @@
+{
+  "description": "The current implementation has NO conflict-resolution or precedence mechanism. This file documents that honestly rather than inventing a precedence outcome that does not exist. See docs/bible/06-forge/101-conflicts-precedence-and-resolution.md.",
+  "vectors": [
+    {
+      "scenario": "Two independent rules fire on the same document",
+      "example": "band.width=1.0 AND setting.prongCount=5 in one document",
+      "actualBehavior": "Both JM-BAND-001 and JM-PRONG-001 are returned in the results list, in _RULE_GROUPS order (ring, band, stone, prong, setting, manufacturing, geometry). Neither suppresses, overrides, or reorders the other.",
+      "precedenceApplied": false
+    },
+    {
+      "scenario": "Same field, two thresholds within one rule (not two competing rules)",
+      "example": "band.thickness = 1.5 fires JM-BAND-002 at 'warning'; band.thickness = 1.3 fires JM-BAND-002 at 'error'",
+      "actualBehavior": "This is one rule with two branches (if/elif), not two separate rules in conflict — no precedence question arises because only one branch can match a given value.",
+      "precedenceApplied": "not_applicable"
+    },
+    {
+      "scenario": "Manufacturing-context-specific rule alongside a generic rule",
+      "example": "manufacturing.method='direct_resin_printing' with band.thickness=0.75",
+      "actualBehavior": "Both JM-BAND-002 (thickness < 1.4, a generic error) and JM-MANUFACTURING-001 (thickness < 0.8, a resin-specific warning) can fire on the same field simultaneously — the resin-specific rule does NOT override or take precedence over the generic one; both diagnostics are returned.",
+      "precedenceApplied": false
+    },
+    {
+      "scenario": "Material-specific override rule",
+      "example": "n/a",
+      "actualBehavior": "No material-specific rule exists in the current codebase at all (material.metal has zero validation rules referencing it) — there is nothing to demonstrate a real override with.",
+      "precedenceApplied": "not_applicable — no such rule exists"
+    },
+    {
+      "scenario": "Experimental vs. accepted rule conflict",
+      "example": "n/a",
+      "actualBehavior": "No rule in the current registry has lifecycleState other than ACCEPTED — there is no experimental rule to conflict with an accepted one.",
+      "precedenceApplied": "not_applicable — no such rule exists"
+    },
+    {
+      "scenario": "Professional reviewer disagreement",
+      "example": "n/a",
+      "actualBehavior": "Zero rules are professionally validated (professionalValidationStatus is 'preliminary' or 'not_required' for all 21 registered rules) — there is no reviewer disagreement to record.",
+      "precedenceApplied": "not_applicable — no such rule exists"
+    }
+  ],
+  "conclusion": "Every 'conflict' and 'precedence' scenario the Forge specification defines conceptually is currently either non-existent (no two rules actually disagree about the same field with different severities/thresholds) or trivially resolved by simple list concatenation with no ordering logic beyond the fixed _RULE_GROUPS sequence. The conceptual precedence model in 101-conflicts-precedence-and-resolution.md is therefore PLANNED for a future state where such conflicts can actually arise (e.g. once a second manufacturing profile or material-specific rule set exists)."
+}

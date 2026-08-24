@@ -225,3 +225,64 @@ examples, and test vectors). Future coding agents must:
 - **Update `specs/jdl/v1/` and `backend/tests/test_jdl_schema_examples.py`
   together** with any schema change, so the specification cannot silently
   drift from the running implementation.
+
+## FORGE RULES
+
+`docs/bible/06-forge/` is the authoritative Forge Rule System
+specification — start at
+[`docs/bible/06-forge/README.md`](docs/bible/06-forge/README.md). The
+machine-readable half lives in
+[`specs/forge/v1/`](specs/forge/v1/README.md) (rule/result/context/registry
+JSON Schemas, the real 21-rule `current-rule-registry.json`, examples, and
+test vectors). Future coding agents must:
+
+- **Read `docs/bible/06-forge/README.md` before modifying validation or
+  jewelry rules** — before adding, changing, or removing anything in
+  `backend/jewelmind/validation/`, `shared/validation/`, or a
+  jewelry-domain threshold anywhere else in the codebase.
+- **Use stable rule IDs** — never rename or reuse one (FORGE-GOV-001).
+- **Add provenance for new rules** — every new rule declares a
+  `provenanceType` from `docs/bible/06-forge/094-rule-provenance-model.md`;
+  `unknown` is honest and acceptable, an absent declaration is not
+  (FORGE-GOV-002).
+- **Never call an unvalidated threshold an industry standard** — a rule
+  with `provenanceType` of `prototype_heuristic`, `mathematical_constraint`,
+  `geometry_engine_constraint`, or `implementation_necessity` can never be
+  described as `professionalValidationStatus: validated` (FORGE-GOV-003).
+- **Update `specs/forge/v1/current-rule-registry.json`** and
+  `docs/bible/appendices/forge-rule-catalog.md` in the same change as any
+  rule addition, removal, or reclassification.
+- **Update tests** — `backend/tests/test_forge_registry.py` and the
+  relevant rule's own test file (FORGE-GOV-011, FORGE-GOV-014).
+- **Document blocking behavior** — every rule declares its
+  `blockingScope`; see `docs/bible/06-forge/099-severity-and-blocking-semantics.md`
+  (FORGE-GOV-006).
+- **Document evaluation stage** — `FORGE-0` through `FORGE-9`; see
+  `docs/bible/06-forge/096-rule-evaluation-pipeline.md` (FORGE-GOV-013).
+- **Document professional validation status explicitly** —
+  `not_required | preliminary | required | validated`; there is no
+  implicit default (FORGE-GOV-008).
+- **Never hide jewelry rules inside geometry code** — a jewelry-domain
+  threshold belongs in `backend/jewelmind/validation/` with a rule ID, not
+  hardcoded inside `backend/jewelmind/geometry/components/*.py`
+  (FORGE-GOV-005; see `docs/bible/06-forge/111-domain-rule-gap-analysis.md`
+  for where this boundary is already imperfect and tracked).
+- **Never silently change rule thresholds** — a changed threshold,
+  severity, or blocking behavior is a MAJOR rule-version change; see
+  `docs/bible/06-forge/108-rule-versioning.md` (FORGE-GOV-007, FORGE-GOV-015).
+- **Require an RFC for a major new rule family** (a new manufacturing
+  profile, a new professional-validation domain, or a new rule category)
+  — see `docs/bible/06-forge/090-forge-governance.md`.
+- **Require an ADR for an architecture-level Forge change** — moving
+  validation authority, changing blocking semantics, or introducing an
+  executable rule-condition DSL; see the same document.
+- **Preserve backend authority** — `shared/validation/engine.ts` may only
+  mirror a subset of `backend/jewelmind/validation/engine.py`; it must
+  never enforce something the backend does not, and the backend's verdict
+  always wins (FORGE-GOV-004).
+- **Keep frontend validation aligned** — a rule threshold changed on the
+  backend must be changed identically on the frontend mirror in the same
+  change, or explicitly documented as a deliberate, temporary divergence.
+- **Report code/Forge contradictions** — per the Bible's fundamental
+  rule, never silently change the meaning of a rule to make a
+  contradiction with `docs/bible/06-forge/` disappear.

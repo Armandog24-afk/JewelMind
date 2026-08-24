@@ -1,0 +1,14 @@
+{
+  "name": "Minimum band width",
+  "description": "Band width below 1.5 mm is not supported.",
+  "version": "1.0.0",
+  "category": "PROTOTYPE_HEURISTIC",
+  "stage": "FORGE-4",
+  "severity": "ERROR",
+  "blockingScope": ["GENERATION"],
+  "condition": "band.width < 1.5",
+  "targetFields": ["band.width"],
+  "provenance": { "provenanceType": "prototype_heuristic" },
+  "professionalValidationStatus": "preliminary",
+  "introducedIn": "1.0.0"
+}

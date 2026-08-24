@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/forge/v1/rule-context.schema.json",
+  "title": "Forge Evaluation Context v1",
+  "description": "Structural schema for a ForgeEvaluationContext — everything a rule may read besides the raw canonical document. Contains no secrets and no executable content. See docs/bible/06-forge/097-rule-context-model.md. CURRENT implementation note: the running validation engine (backend/jewelmind/validation/engine.py) only ever receives 'document' — every other field here is either derivable at the API layer (compilerVersion, geometryGeneratorVersion) or PLANNED (generatedGeometryMetadata, componentManifest are populated only after generation, and no current rule reads them back).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["document"],
+  "properties": {
+    "document": {
+      "type": "object",
+      "description": "The JDL Canonical Document being evaluated — structurally, a document conforming to specs/jdl/v1/jdl.schema.json. Not $ref'd directly to avoid cross-file resolution fragility in this specification; a full-context validator should validate this sub-object against that schema separately."
+    },
+    "jewelryCategory": { "type": "string" },
+    "style": { "type": "string" },
+    "materialContext": { "type": ["string", "null"] },
+    "manufacturingContext": { "type": ["string", "null"] },
+    "requestedArtifacts": {
+      "type": "array",
+      "items": { "enum": ["step", "stl", "json", "specification", "preview"] }
+    },
+    "compilerVersion": { "type": "string" },
+    "geometryGeneratorVersion": { "type": "string" },
+    "generatedGeometryMetadata": {
+      "type": ["object", "null"],
+      "description": "PLANNED — populated only once FORGE-6 (geometry generation) has run; null before that stage. No CURRENT rule reads this."
+    },
+    "componentManifest": {
+      "type": ["object", "null"],
+      "description": "PLANNED — mirrors GeneratedModel.components once generation has occurred; null before that stage."
+    },
+    "featureCapabilities": {
+      "type": "object",
+      "description": "PLANNED — see docs/bible/05-jdl/082-extension-and-capability-model.md; no current implementation."
+    },
+    "professionalRuleProfile": {
+      "type": ["string", "null"],
+      "description": "PLANNED — a named bundle of professionally-validated rules for a given scope. No profile exists today because zero rules are professionally validated."
+    }
+  }
+}

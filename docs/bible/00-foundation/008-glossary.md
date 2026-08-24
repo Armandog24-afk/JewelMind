@@ -11,6 +11,7 @@ related_documents:
   - JM-BIBLE-001
   - JM-BIBLE-DOMAIN-README
   - JM-BIBLE-JDL-README
+  - JM-BIBLE-FORGE-README
 implementation_status: current
 ---
 
@@ -284,3 +285,37 @@ kept separate from semantic/business-rule validation. See
 `JDL-COMPILER`, `JDL-EXPORTER`, `JDL-FULL-V1`, describing how much of the
 JDL pipeline an implementation supports. See
 [`05-jdl/085-conformance-and-test-vectors.md`](../05-jdl/085-conformance-and-test-vectors.md).
+
+## Forge terms (Sprint 4)
+
+> Authoritative source for every term in this section:
+> [`06-forge/`](../06-forge/README.md) (Sprint 4).
+
+**Forge** — the authoritative rule system for jewelry-domain rules: a
+specification and classification layer over the existing validation
+engine (`backend/jewelmind/validation/`), covering schema integrity,
+semantic compatibility, domain invariants, geometry preconditions,
+geometry inspection, prototype heuristics, manufacturing context, export
+preconditions, and (in the future) professionally validated rules. See
+[`06-forge/091-rule-system-overview.md`](../06-forge/091-rule-system-overview.md).
+
+**ForgeRule** — the normative model of one rule: ID, category, stage,
+severity, blocking scope, condition, target fields, provenance,
+professional-validation status, applicability, and version. See
+[`06-forge/092-rule-anatomy.md`](../06-forge/092-rule-anatomy.md).
+
+**Rule provenance** — where a rule's justification comes from: an
+implementation necessity, a mathematical/geometric constraint, a
+prototype heuristic, or (not yet used by any current rule) a professional
+review or published reference. See
+[`06-forge/094-rule-provenance-model.md`](../06-forge/094-rule-provenance-model.md).
+
+**Rule lifecycle** — the 8-state progression a rule moves through:
+`PROPOSED`, `EXPERIMENTAL`, `PRELIMINARY`, `UNDER_REVIEW`, `VALIDATED`,
+`ACCEPTED`, `DEPRECATED`, `REJECTED`. See
+[`06-forge/095-rule-lifecycle.md`](../06-forge/095-rule-lifecycle.md).
+
+**Blocking scope** — which workflow(s) a rule can block if it fires:
+`NONE`, `GENERATION`, `PREVIEW`, `STEP_EXPORT`, `STL_EXPORT`,
+`ALL_EXPORTS`, or `WORKFLOW` — a separate axis from severity. See
+[`06-forge/099-severity-and-blocking-semantics.md`](../06-forge/099-severity-and-blocking-semantics.md).

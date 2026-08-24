@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/forge/v1/rule.schema.json",
+  "title": "Forge Rule v1",
+  "description": "Structural schema for a ForgeRule definition — the normative shape of a rule entry in the Forge Rule Registry. This schema does NOT define an executable condition language: 'condition' is a human-readable description of the check, not code the compiler evaluates. See docs/bible/06-forge/092-rule-anatomy.md for the full field-by-field rationale and docs/bible/06-forge/109-rule-registry.md for how rules are aggregated into a registry.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ruleId", "name", "description", "version", "category", "stage",
+    "severity", "blockingScope", "condition", "targetFields",
+    "provenance", "professionalValidationStatus", "introducedIn"
+  ],
+  "properties": {
+    "ruleId": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+-[0-9]{3}$",
+      "description": "Stable identifier, e.g. JM-BAND-001 or FORGE-SYS-001. Never renamed once published (FORGE-GOV-001)."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Rule semantic version, independent of JDL/product/compiler/geometry versions — see docs/bible/06-forge/108-rule-versioning.md."
+    },
+    "category": {
+      "enum": [
+        "SCHEMA_INTEGRITY", "SEMANTIC_COMPATIBILITY", "DOMAIN_INVARIANT",
+        "GEOMETRY_PRECONDITION", "GEOMETRY_INSPECTION", "PROTOTYPE_HEURISTIC",
+        "MANUFACTURING_CONTEXT", "EXPORT_PRECONDITION", "PROFESSIONAL_CANDIDATE",
+        "PROFESSIONALLY_VALIDATED", "SYSTEM_SAFETY"
+      ]
+    },
+    "stage": {
+      "enum": [
+        "FORGE-0", "FORGE-1", "FORGE-2", "FORGE-3", "FORGE-4",
+        "FORGE-5", "FORGE-6", "FORGE-7", "FORGE-8", "FORGE-9"
+      ],
+      "description": "See docs/bible/06-forge/096-rule-evaluation-pipeline.md."
+    },
+    "severity": {
+      "enum": ["INFORMATION", "WARNING", "ERROR", "FATAL"]
+    },
+    "blockingScope": {
+      "type": "array",
+      "items": {
+        "enum": ["NONE", "GENERATION", "PREVIEW", "STEP_EXPORT", "STL_EXPORT", "ALL_EXPORTS", "WORKFLOW"]
+      },
+      "minItems": 1,
+      "description": "One rule may block more than one scope (e.g. GENERATION and, transitively, ALL_EXPORTS). NONE must be the sole element when present."
+    },
+    "condition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable description of the check performed, optionally naming the exact function that implements it (e.g. 'band.width < 1.5mm, see validation/engine.py::_band_rules'). Never an executable expression — no condition DSL exists in v1 (see docs/bible/06-forge/092-rule-anatomy.md)."
+    },
+    "targetFields": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Canonical JDL field paths this rule reads, e.g. ['band.width']."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "ruleIds that must be evaluated (and not fatally blocking) before this rule can run meaningfully. See docs/bible/06-forge/100-rule-dependencies-and-ordering.md."
+    },
+    "evaluationContext": {
+      "type": "array",
+      "items": { "enum": ["DOCUMENT_ONLY", "GENERATED_GEOMETRY", "EXPORT_REQUEST"] },
+      "description": "What ForgeEvaluationContext data this rule needs beyond the raw document."
+    },
+    "resultCode": {
+      "type": "string",
+      "description": "Usually identical to ruleId; kept distinct only for rules that can emit more than one diagnostic shape."
+    },
+    "messageTemplate": { "type": "string" },
+    "suggestedCorrection": { "type": ["string", "null"] },
+    "autoFixCapability": {
+      "enum": ["NONE", "SUGGEST_ONLY", "SAFE_NORMALIZATION"],
+      "description": "See docs/bible/06-forge/102-suggestions-and-auto-fix-contract.md. No rule in v1 has anything other than NONE or SUGGEST_ONLY — SAFE_NORMALIZATION is a defined-but-unused category."
+    },
+    "provenance": { "$ref": "#/$defs/Provenance" },
+    "professionalValidationStatus": {
+      "enum": ["not_required", "preliminary", "required", "validated"]
+    },
+    "applicableJewelryCategories": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "e.g. ['ring']. Empty/omitted means 'all currently supported categories'."
+    },
+    "applicableStyles": { "type": "array", "items": { "type": "string" } },
+    "applicableMaterials": { "type": "array", "items": { "type": "string" } },
+    "applicableManufacturingMethods": { "type": "array", "items": { "type": "string" } },
+    "introducedIn": {
+      "type": "string",
+      "description": "The rule version this ruleId first appeared at, e.g. '1.0.0'."
+    },
+    "deprecatedIn": {
+      "type": ["string", "null"],
+      "description": "The rule version this ruleId was deprecated at, or null if still active."
+    },
+    "lifecycleState": {
+      "enum": ["PROPOSED", "EXPERIMENTAL", "PRELIMINARY", "UNDER_REVIEW", "VALIDATED", "ACCEPTED", "DEPRECATED", "REJECTED"]
+    },
+    "tests": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repository-relative test identifiers, e.g. 'backend/tests/test_validation.py::test_band_width_below_minimum_is_error'."
+    },
+    "relatedDocuments": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenanceType"],
+      "properties": {
+        "provenanceType": {
+          "enum": [
+            "implementation_necessity", "mathematical_constraint", "geometry_engine_constraint",
+            "prototype_heuristic", "professional_review", "published_technical_reference",
+            "manufacturer_specification", "regulatory_or_standards_body",
+            "experimental_observation", "migrated_legacy_rule", "unknown"
+          ]
+        },
+        "sourceTitle": { "type": ["string", "null"] },
+        "sourceAuthor": { "type": ["string", "null"] },
+        "sourceOrganization": { "type": ["string", "null"] },
+        "sourceReference": { "type": ["string", "null"] },
+        "sourceVersion": { "type": ["string", "null"] },
+        "geographicScope": { "type": ["string", "null"] },
+        "manufacturingScope": { "type": ["string", "null"] },
+        "reviewer": { "type": ["string", "null"] },
+        "reviewDate": { "type": ["string", "null"], "format": "date" },
+        "confidence": { "enum": ["low", "medium", "high", null] },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

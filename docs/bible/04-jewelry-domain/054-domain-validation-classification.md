@@ -4,18 +4,21 @@ title: Domain Validation Classification
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-24
 source_of_truth: true
 depends_on:
   - JM-BIBLE-040
 related_documents:
   - JM-BIBLE-053
   - JM-BIBLE-058
+  - JM-BIBLE-093
 implementation_status: current
 professional_validation: preliminary
 ---
 
 # Domain Validation Classification
+
+**Relationship to Forge (Sprint 4):** [`06-forge/093-rule-classification-model.md`](../06-forge/093-rule-classification-model.md) reclassifies these same sixteen rules (plus five newly-named cross-cutting rules) into Forge's eleven-category system (`SCHEMA_INTEGRITY`, `SEMANTIC_COMPATIBILITY`, `DOMAIN_INVARIANT`, `PROTOTYPE_HEURISTIC`, etc.) and adds a formal provenance, lifecycle, and evaluation-stage model around them. This document remains authoritative for the schema-integrity/geometry-feasibility/prototype-safety/professional-validation classification below; Forge is authoritative for the rule *system's* architecture built on top of it.
 
 > **Implemented validation is not equivalent to professional
 > manufacturability certification.** Every rule below is, at most, a
