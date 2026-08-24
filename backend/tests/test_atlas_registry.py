@@ -13,9 +13,20 @@ import json
 from pathlib import Path
 
 import jsonschema
+import pytest
 
 from jewelmind.domain.defaults import default_definition
 from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
+
+# OpenCascade boolean/tessellation results (volumes, bounding boxes) can
+# legitimately differ in the last few significant digits across OCCT
+# builds/platforms — this is documented as an open reproducibility
+# question in docs/bible/07-atlas/137-determinism-and-reproducibility.md
+# (ATLAS-OQ-009), not a defect. Pure-Python values derived only from the
+# definition itself (hash, version, counts, geometry/constants.py
+# arithmetic) are compared exactly; OCCT-kernel-derived floats use a
+# relative tolerance instead.
+_KERNEL_FLOAT_REL_TOLERANCE = 1e-6
 
 SPECS_DIR = Path(__file__).resolve().parents[2] / "specs" / "atlas" / "v1"
 
@@ -68,9 +79,15 @@ def test_metadata_vectors_match_live_geometry_generation():
 
     assert model.definition_hash == vectors["definitionHash"]
     assert model.generator_version == vectors["generatorVersion"]
-    assert model.combined_metal_volume_mm3 == vectors["totalProductionMetalVolume"]
-    assert model.component_volumes() == vectors["componentVolumes"]
-    assert model.bounding_box.as_dict() == vectors["aggregateBoundingBox"]
+    assert model.combined_metal_volume_mm3 == pytest.approx(
+        vectors["totalProductionMetalVolume"], rel=_KERNEL_FLOAT_REL_TOLERANCE
+    )
+    assert model.component_volumes() == pytest.approx(
+        vectors["componentVolumes"], rel=_KERNEL_FLOAT_REL_TOLERANCE
+    )
+    assert model.bounding_box.as_dict() == pytest.approx(
+        vectors["aggregateBoundingBox"], rel=_KERNEL_FLOAT_REL_TOLERANCE
+    )
     assert model.components["prongs"].metadata["generatedCount"] == vectors["generatedProngCount"]
 
 

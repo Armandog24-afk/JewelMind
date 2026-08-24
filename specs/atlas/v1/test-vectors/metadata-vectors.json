@@ -1,5 +1,5 @@
 {
-  "description": "Real GeneratedModel metadata for the default JewelryDefinition, produced by running build_solitaire_ring() directly during Sprint 5. Not invented.",
+  "description": "Real GeneratedModel metadata for the default JewelryDefinition, produced by running build_solitaire_ring() directly during Sprint 5. Not invented. Volumes and the bounding box are OCCT boolean/tessellation results and were empirically observed (via CI, on a different OS/OCCT build than the value below was generated on) to differ from this exact figure starting around the 9th-10th significant digit — this is the real, previously-hypothesized cross-platform reproducibility gap documented in docs/bible/07-atlas/137-determinism-and-reproducibility.md (ATLAS-OQ-009). backend/tests/test_atlas_registry.py compares these fields with a relative tolerance (1e-6) rather than exact equality for this reason; definitionHash, generatorVersion, and generatedProngCount are pure-Python values and are still compared exactly.",
   "definitionHash": "355ddca57e7e49ad",
   "generatorVersion": "0.1.0",
   "generationDurationS": 0.730515600182116,

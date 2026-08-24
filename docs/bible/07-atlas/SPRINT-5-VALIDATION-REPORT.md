@@ -72,6 +72,10 @@ See "Geometry fallbacks discovered" above (2).
 
 **16**, cataloged in [`150-atlas-gap-analysis.md`](150-atlas-gap-analysis.md): runtime topology validation, runtime connectivity inspection, systematic boolean diagnostics, local-thickness analysis, general intersection analysis, stone-metal clearance analysis, support continuity verification, geometry plan abstraction, component graph, kernel-version recording, deterministic per-prong identity, a general fallback policy, geometry regression fixtures, STEP re-import validation, STL mesh validation, and performance benchmarks. Zero gaps require jewelry expertise on the Atlas side; where a gap's *result* needs domain interpretation, that step correctly belongs to Forge.
 
+## A real cross-platform reproducibility gap, caught by CI
+
+The first CI run of this Sprint's commit **failed** one new test: `test_atlas_registry.py::test_metadata_vectors_match_live_geometry_generation` asserted exact equality on `combined_metal_volume_mm3` (`341.44334316907685` on CI's Linux/OCCT build vs. `341.44334316909976` on the Windows machine the vector was generated on — a difference starting at the 9th significant digit). This is precisely the risk [`137-determinism-and-reproducibility.md`](137-determinism-and-reproducibility.md) (open question `ATLAS-OQ-009`) predicted and flagged as untested — CI just supplied the first real evidence that it occurs. **Fix applied**: the test now compares OCCT-kernel-derived floats (volumes, bounding boxes) with a relative tolerance (`pytest.approx(..., rel=1e-6)`) instead of exact equality, while keeping exact equality for pure-Python values (`definitionHash`, `generatorVersion`, `generatedProngCount`) that have no floating-point-kernel dependency. `specs/atlas/v1/test-vectors/metadata-vectors.json` was annotated with this finding. No geometry code, threshold, or checked-in vector value was changed — only the test's comparison strictness, to match what the Sprint's own documentation already said was and wasn't guaranteed.
+
 ## Tests passed
 
 | Suite | Result |
