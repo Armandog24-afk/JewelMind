@@ -137,6 +137,19 @@ export is correctly decoupled into separate, later calls.
   `useProjectStore` and never calls `generate()`, so a view/camera/
   material change can never trigger geometry regeneration; see
   [`10-vision/221-vision-architecture-overview.md`](../10-vision/221-vision-architecture-overview.md).
+  As of Sprint 9, `useVisionStore` also persists `viewMode` (only) across
+  reloads, and gained `requestCapture()`/`captureRequestToken` so
+  Studio's consolidated Outputs panel can trigger a Presentation-mode
+  image capture without holding a direct reference into the viewport
+  component.
+- **Frontend, product-workspace logic:** `frontend/src/studio/` (new,
+  Sprint 9) holds pure, store-independent functions —
+  `computeModelState()` (the 7-value model-lifecycle status),
+  `computeOutputEligibility()` (the 5-value per-artifact export
+  eligibility), and `keyboardShortcuts.ts` (the small Generate/Fit/
+  camera-preset shortcut set) — consumed by, but never owning, the two
+  stores above. See
+  [`11-studio/278-frontend-state-architecture.md`](../11-studio/278-frontend-state-architecture.md).
 - **Local persistence:** `localStorage`, one project slot, validated on
   load (`frontend/src/store/persistence.ts`).
 - **Server-side model cache:** an in-memory, process-lifetime cache of

@@ -1,0 +1,17 @@
+{
+  "description": "Real localStorage keys and fallback behavior, confirmed by inspection of frontend/src/store/persistence.ts and useVisionStore.ts during Sprint 9.",
+  "keys": [
+    { "key": "jewelmind:project-definition:v1", "holds": "JewelryDefinition", "addedInSprint": "pre-existing", "invalidValueFallback": "createDefaultDefinition()" },
+    { "key": "jewelmind:vision-view-mode:v1", "holds": "'technical' | 'presentation'", "addedInSprint": 9, "invalidValueFallback": "'technical'" }
+  ],
+  "neverPersisted": [
+    "generatedModel", "lastSuccessfulPreview", "componentVisibility", "selectedComponent",
+    "cameraPosition", "exportStatus", "exportError", "any Object URL"
+  ],
+  "failureModes": [
+    { "condition": "localStorage unavailable (private browsing)", "behavior": "treated as 'nothing saved', no exception thrown" },
+    { "condition": "corrupted JSON", "behavior": "loadDefinition() returns null, falls back to default" },
+    { "condition": "structurally invalid definition (e.g. obsolete schema)", "behavior": "isValidJewelryDefinition() rejects it, falls back to default" },
+    { "condition": "unrecognized viewMode string", "behavior": "loadStoredViewMode() falls back to 'technical'" }
+  ]
+}

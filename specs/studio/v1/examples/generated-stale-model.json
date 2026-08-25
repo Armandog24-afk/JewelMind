@@ -1,0 +1,22 @@
+{
+  "session": {
+    "projectName": "Solitaire Ring",
+    "definitionHash": "355ddca57e7e49ad",
+    "viewMode": "technical",
+    "hasGeneratedModel": true,
+    "isStale": true
+  },
+  "generation": {
+    "key": "STALE",
+    "label": "Design changed",
+    "detail": "Parameters changed since this model was generated — regenerate to update it."
+  },
+  "outputs": [
+    { "artifact": "step", "eligibility": "STALE_BLOCKED", "statusLabel": "Design changed — regenerate first" },
+    { "artifact": "stl", "eligibility": "STALE_BLOCKED", "statusLabel": "Design changed — regenerate first" },
+    { "artifact": "json", "eligibility": "STALE_BLOCKED", "statusLabel": "Design changed — regenerate first" },
+    { "artifact": "specification", "eligibility": "STALE_BLOCKED", "statusLabel": "Design changed — regenerate first" },
+    { "artifact": "presentation_png", "eligibility": "STALE_BLOCKED", "statusLabel": "Design changed — regenerate first" }
+  ],
+  "validationSummary": { "errorCount": 0, "warningCount": 0, "informationCount": 0 }
+}

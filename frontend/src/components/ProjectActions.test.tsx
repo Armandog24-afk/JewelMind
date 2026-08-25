@@ -51,24 +51,41 @@ describe('ProjectActions', () => {
     expect(screen.getByText(/Generate model/)).not.toBeDisabled()
   })
 
-  it('keeps export buttons disabled until a compatible model has been generated', () => {
+  it('labels the primary action "Generate model" before any model exists', () => {
     render(<ProjectActions />)
-    expect(screen.getByText('Export STEP')).toBeDisabled()
-    expect(screen.getByText('Export STL')).toBeDisabled()
-    expect(screen.getByText('Export JSON')).toBeDisabled()
+    expect(screen.getByText('Generate model')).toBeInTheDocument()
   })
 
-  it('enables export buttons once a model is generated and definition is not stale', () => {
+  it('relabels the primary action "Regenerate model" once a model exists', () => {
     useProjectStore.setState({ generatedModel: FAKE_MODEL, isStale: false })
     render(<ProjectActions />)
-    expect(screen.getByText('Export STEP')).not.toBeDisabled()
-    expect(screen.getByText('Export STL')).not.toBeDisabled()
-    expect(screen.getByText('Export JSON')).not.toBeDisabled()
+    expect(screen.getByText('Regenerate model')).toBeInTheDocument()
   })
 
-  it('disables export buttons again once the definition becomes stale', () => {
-    useProjectStore.setState({ generatedModel: FAKE_MODEL, isStale: true })
+  it('never renders a per-artifact export button — those moved to the consolidated Outputs panel', () => {
+    useProjectStore.setState({ generatedModel: FAKE_MODEL, isStale: false })
     render(<ProjectActions />)
-    expect(screen.getByText('Export STEP')).toBeDisabled()
+    expect(screen.queryByText(/Export STEP/)).toBeNull()
+    expect(screen.queryByText(/Export STL/)).toBeNull()
+    expect(screen.queryByText(/Export JSON/)).toBeNull()
+  })
+
+  it('asks for confirmation before resetting, and does not reset when the user cancels', () => {
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false)
+    useProjectStore.getState().updateBand({ width: 13 })
+    render(<ProjectActions />)
+    screen.getByText('Reset project').click()
+    expect(confirmSpy).toHaveBeenCalled()
+    expect(useProjectStore.getState().currentDefinition.band.width).toBe(13)
+    confirmSpy.mockRestore()
+  })
+
+  it('resets when the user confirms', () => {
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true)
+    useProjectStore.getState().updateBand({ width: 13 })
+    render(<ProjectActions />)
+    screen.getByText('Reset project').click()
+    expect(useProjectStore.getState().currentDefinition.band.width).not.toBe(13)
+    confirmSpy.mockRestore()
   })
 })

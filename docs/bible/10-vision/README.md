@@ -60,6 +60,10 @@ Vision owns no jewelry-domain thresholds (Forge), no geometry construction (Atla
 
 **Vision v1 is a real product improvement, not only a specification.** Prior sprints formalized architecture that already existed in the running application; this Sprint ships new, user-visible functionality — a Technical/Presentation view switch, 5 camera presets, centralized 5-metal material presentation, StoneReference-distinct presentation materials, studio lighting with a procedural (non-CDN) environment, contact-shadow grounding, and client-side PNG capture — while proving, via the full test suite and a live generation run, that none of it altered STEP/STL export output or the pre-existing stale/last-good-preview guarantees. See [`SPRINT-8-VALIDATION-REPORT.md`](SPRINT-8-VALIDATION-REPORT.md).
 
+## Relationship to Sprint 9
+
+[`11-studio/`](../11-studio/README.md) (Sprint 9) preserved every Vision v1 guarantee unchanged (Technical/Presentation views, camera presets, materials, PNG capture) while adding a second capture entry point (the consolidated Outputs panel, via `useVisionStore.requestCapture()`), a persisted `viewMode` across reloads, keyboard shortcuts for the 4 non-perspective camera presets and Fit, and a model-status banner inside `ModelViewport.tsx` sourced from Studio's `computeModelState()` rather than a separately-worded string. See [`11-studio/263-presentation-review-workspace.md`](../11-studio/263-presentation-review-workspace.md) and [`262-technical-review-workspace.md`](../11-studio/262-technical-review-workspace.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-8-VALIDATION-REPORT.md`](SPRINT-8-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

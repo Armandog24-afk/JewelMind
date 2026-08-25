@@ -565,3 +565,73 @@ Future coding agents must:
 - **Create an RFC for a new visual artifact class** — e.g. turntable
   video, AR preview, or a server-side rendering pipeline; see the same
   document.
+
+## STUDIO RULES
+
+`docs/bible/11-studio/` is the authoritative Studio product-workspace
+specification — start at
+[`docs/bible/11-studio/README.md`](docs/bible/11-studio/README.md). The
+machine-readable half lives in
+[`specs/studio/v1/`](specs/studio/v1/README.md) (studio state, project
+session, generation state, output state, and notification JSON
+Schemas, real examples, and test vectors). Future coding agents must:
+
+- **Read `docs/bible/11-studio/README.md` before changing product
+  workflow** — before modifying `frontend/src/studio/`,
+  `ConfigurationPanel.tsx`, `AppHeader.tsx`, `ProjectActions.tsx`,
+  `OutputsPanel.tsx`, or `RightPanelTabs.tsx`.
+- **Preserve separation between design state and generated-model
+  state** — `useProjectStore.currentDefinition` (design) and
+  `{generatedModel, lastSuccessfulPreview, generationStatus, isStale}`
+  (generated-model state) must never be merged into one field or
+  written from the same action (STUDIO-GOV-004/013).
+- **Never mark visual-only changes as design changes** — a `useVisionStore`
+  change (view mode, camera, component visibility, material
+  presentation) must never set `isStale` or call `generate()`
+  (STUDIO-GOV-003).
+- **Mark geometry-driving edits stale** — every `useProjectStore.updateXxx()`
+  action must continue to set `isStale: true` via `withUpdatedDefinition()`
+  when a model already exists (STUDIO-GOV-004).
+- **Preserve last-good preview** — a failed generation or export must
+  never clear `lastSuccessfulPreview` or the currently rendered geometry
+  (STUDIO-GOV-006).
+- **Keep outputs tied to the correct generated model** — every artifact's
+  eligibility (STEP, STL, JSON, technical specification, Presentation
+  PNG) must be computed through `computeOutputEligibility()` (or the
+  equivalent `captureBlockedReason()` for PNG), never a bespoke
+  per-artifact check (STUDIO-GOV-007).
+- **Keep backend validation authoritative** — a `NumericField`'s
+  `min`/`max` or any other client-side check is advisory only; the
+  backend's `validate_definition()` result always wins (STUDIO-GOV-001/002).
+- **Use JewelMind controlled terminology** — consult
+  `docs/bible/00-foundation/008-glossary.md` and
+  `docs/bible/04-jewelry-domain/` before introducing a new user-facing
+  term; never invent a competing vocabulary (STUDIO-GOV-011).
+- **Avoid exposing architecture-internal names to normal users** — never
+  put "Forge," "Atlas," "Alchemist," "Foundry," or "Vision" in
+  user-facing UI copy; these are Bible/architecture names only
+  (STUDIO-GOV-011; see `docs/bible/11-studio/280-product-copy-and-terminology.md`).
+- **Maintain accessible primary controls** — every interactive control
+  must be a real, labeled, keyboard-focusable element with a visible
+  `:focus-visible` state; never an icon-only or unlabeled control
+  (STUDIO-GOV-014; see `docs/bible/11-studio/272-accessibility-contract.md`).
+- **Preserve responsive behaviour** — do not remove or narrow the
+  `1180px`/`980px` breakpoints in `frontend/src/styles/global.css`
+  without re-verifying the viewport's `min-height` floor still holds on
+  a stacked mobile layout.
+- **Update Studio state schemas when product-state semantics change** —
+  `specs/studio/v1/` and `backend/tests/test_studio_schemas.py`, plus
+  the relevant frontend unit tests under `frontend/src/studio/*.test.ts`,
+  in the same change.
+- **Update test vectors after workflow changes** — a changed
+  `ModelStateKey`/`OutputEligibilityKey` precedence rule must update
+  `specs/studio/v1/test-vectors/` in the same change (this is a MAJOR,
+  documented change, never a silent one).
+- **Create an ADR for major frontend state architecture changes** —
+  merging `useProjectStore`/`useVisionStore`, moving model-status or
+  output-eligibility computation into a different layer, or introducing
+  a second design-definition schema; see
+  `docs/bible/11-studio/250-studio-governance.md`.
+- **Create an RFC for new major product workflows** — a project
+  dashboard, multiple open designs, undo/redo, or autosave; see the same
+  document.

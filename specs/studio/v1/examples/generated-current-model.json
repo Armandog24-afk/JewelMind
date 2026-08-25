@@ -1,0 +1,22 @@
+{
+  "session": {
+    "projectName": "Solitaire Ring",
+    "definitionHash": "355ddca57e7e49ad",
+    "viewMode": "presentation",
+    "hasGeneratedModel": true,
+    "isStale": false
+  },
+  "generation": {
+    "key": "CURRENT",
+    "label": "Current model",
+    "detail": "This preview matches your current parameters."
+  },
+  "outputs": [
+    { "artifact": "step", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "stl", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "json", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "specification", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "presentation_png", "eligibility": "AVAILABLE", "statusLabel": "Available" }
+  ],
+  "validationSummary": { "errorCount": 0, "warningCount": 0, "informationCount": 0 }
+}

@@ -1,0 +1,22 @@
+{
+  "session": {
+    "projectName": "Solitaire Ring",
+    "definitionHash": null,
+    "viewMode": "technical",
+    "hasGeneratedModel": false,
+    "isStale": false
+  },
+  "generation": {
+    "key": "NO_MODEL",
+    "label": "No model yet",
+    "detail": "Configure your design and generate a model to begin."
+  },
+  "outputs": [
+    { "artifact": "step", "eligibility": "UNAVAILABLE", "statusLabel": "Generate a model first" },
+    { "artifact": "stl", "eligibility": "UNAVAILABLE", "statusLabel": "Generate a model first" },
+    { "artifact": "json", "eligibility": "UNAVAILABLE", "statusLabel": "Generate a model first" },
+    { "artifact": "specification", "eligibility": "UNAVAILABLE", "statusLabel": "Generate a model first" },
+    { "artifact": "presentation_png", "eligibility": "UNAVAILABLE", "statusLabel": "Generate a model first" }
+  ],
+  "validationSummary": { "errorCount": 0, "warningCount": 1, "informationCount": 0 }
+}

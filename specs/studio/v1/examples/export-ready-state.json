@@ -1,0 +1,22 @@
+{
+  "session": {
+    "projectName": "Solitaire Ring",
+    "definitionHash": "355ddca57e7e49ad",
+    "viewMode": "technical",
+    "hasGeneratedModel": true,
+    "isStale": false
+  },
+  "generation": {
+    "key": "CURRENT",
+    "label": "Current model",
+    "detail": "This preview matches your current parameters."
+  },
+  "outputs": [
+    { "artifact": "step", "eligibility": "EXPORTING", "statusLabel": "Preparing…" },
+    { "artifact": "stl", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "json", "eligibility": "AVAILABLE", "statusLabel": "Available" },
+    { "artifact": "specification", "eligibility": "FAILED", "statusLabel": "Last attempt failed — try again", "errorMessage": "Specification export failed: backend request timed out." },
+    { "artifact": "presentation_png", "eligibility": "AVAILABLE", "statusLabel": "Available" }
+  ],
+  "validationSummary": { "errorCount": 0, "warningCount": 0, "informationCount": 0 }
+}

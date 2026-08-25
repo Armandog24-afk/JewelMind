@@ -1,0 +1,13 @@
+{
+  "description": "Real computeModelState() outputs from frontend/src/studio/modelState.ts, run during Sprint 9 (see modelState.test.ts).",
+  "vectors": [
+    { "generationStatus": "idle", "hasLastGoodPreview": false, "isStale": false, "expected": "NO_MODEL" },
+    { "generationStatus": "generating", "hasLastGoodPreview": false, "isStale": false, "expected": "GENERATING_FIRST_MODEL" },
+    { "generationStatus": "generating", "hasLastGoodPreview": true, "isStale": true, "expected": "REGENERATING" },
+    { "generationStatus": "success", "hasLastGoodPreview": true, "isStale": false, "expected": "CURRENT" },
+    { "generationStatus": "success", "hasLastGoodPreview": true, "isStale": true, "expected": "STALE" },
+    { "generationStatus": "error", "hasLastGoodPreview": false, "isStale": false, "expected": "FAILED_NO_MODEL" },
+    { "generationStatus": "error", "hasLastGoodPreview": true, "isStale": false, "expected": "FAILED_WITH_LAST_GOOD" },
+    { "generationStatus": "error", "hasLastGoodPreview": true, "isStale": true, "expected": "STALE", "note": "A new edit after a failure supersedes the stale reading of that failure." }
+  ]
+}

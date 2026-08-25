@@ -5,6 +5,7 @@ import {
   type JewelryDefinition,
   type ManufacturingSpec,
   type MaterialSpec,
+  type PreviewSpec,
   type ProjectInfo,
   type RingSpec,
   type SettingSpec,
@@ -50,6 +51,7 @@ interface ProjectState {
   updateSetting: (patch: Partial<SettingSpec>) => void
   updateMaterial: (patch: Partial<MaterialSpec>) => void
   updateManufacturing: (patch: Partial<ManufacturingSpec>) => void
+  updatePreview: (patch: Partial<PreviewSpec>) => void
   setIncludeStoneReferenceInExport: (value: boolean) => void
 
   resetProject: () => void
@@ -138,6 +140,14 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
       withUpdatedDefinition(state, {
         ...state.currentDefinition,
         manufacturing: { ...state.currentDefinition.manufacturing, ...patch },
+      }),
+    ),
+
+  updatePreview: (patch) =>
+    set((state) =>
+      withUpdatedDefinition(state, {
+        ...state.currentDefinition,
+        preview: { ...state.currentDefinition.preview, ...patch },
       }),
     ),
 

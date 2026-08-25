@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/studio/v1/generation-state.schema.json",
+  "title": "Studio Generation State v1",
+  "description": "The 7-value model-lifecycle state, exactly matching frontend/src/studio/modelState.ts::ModelStateKey. See docs/bible/11-studio/259-model-state-experience.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["key", "label", "detail"],
+  "properties": {
+    "key": {
+      "enum": [
+        "NO_MODEL",
+        "GENERATING_FIRST_MODEL",
+        "CURRENT",
+        "STALE",
+        "REGENERATING",
+        "FAILED_NO_MODEL",
+        "FAILED_WITH_LAST_GOOD"
+      ]
+    },
+    "label": { "type": "string", "minLength": 1, "description": "Short label — e.g. 'Current model'." },
+    "detail": { "type": "string", "minLength": 1, "description": "Plain-language sentence — never relies on the label/tone alone (STUDIO-GOV-005/009)." }
+  }
+}

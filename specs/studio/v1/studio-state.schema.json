@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/studio/v1/studio-state.schema.json",
+  "title": "Studio State Snapshot v1",
+  "description": "A composed, point-in-time snapshot of the whole workspace's product state — session + generation + outputs + a validation summary. Like Vision's scene-state.schema.json (Sprint 8), this documents a useful composed shape; no runtime code assembles one object of this exact shape today (PARTIAL) — each piece is independently real and reachable from useProjectStore/useVisionStore. See docs/bible/11-studio/278-frontend-state-architecture.md for why the underlying stores are kept separate. Sub-shapes are inlined here rather than cross-referenced via $ref to their own schema files, to keep this specification's validation simple and dependency-free (see project-session.schema.json, generation-state.schema.json, and output-state.schema.json for the same shapes documented standalone).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["session", "generation", "outputs", "validationSummary"],
+  "properties": {
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectName", "definitionHash", "viewMode", "hasGeneratedModel", "isStale"],
+      "properties": {
+        "projectName": { "type": "string" },
+        "definitionHash": { "type": ["string", "null"] },
+        "viewMode": { "enum": ["technical", "presentation"] },
+        "hasGeneratedModel": { "type": "boolean" },
+        "isStale": { "type": "boolean" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label", "detail"],
+      "properties": {
+        "key": {
+          "enum": [
+            "NO_MODEL",
+            "GENERATING_FIRST_MODEL",
+            "CURRENT",
+            "STALE",
+            "REGENERATING",
+            "FAILED_NO_MODEL",
+            "FAILED_WITH_LAST_GOOD"
+          ]
+        },
+        "label": { "type": "string", "minLength": 1 },
+        "detail": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "description": "Exactly the 5 current artifact types, in a fixed order: step, stl, json, specification, presentation_png.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact", "eligibility", "statusLabel"],
+        "properties": {
+          "artifact": { "enum": ["step", "stl", "json", "specification", "presentation_png"] },
+          "eligibility": { "enum": ["AVAILABLE", "UNAVAILABLE", "EXPORTING", "FAILED", "STALE_BLOCKED"] },
+          "statusLabel": { "type": "string", "minLength": 1 },
+          "errorMessage": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "validationSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errorCount", "warningCount", "informationCount"],
+      "properties": {
+        "errorCount": { "type": "integer", "minimum": 0 },
+        "warningCount": { "type": "integer", "minimum": 0 },
+        "informationCount": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

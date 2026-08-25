@@ -1,6 +1,6 @@
 import { Environment, OrbitControls, PerspectiveCamera, ContactShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { RoomEnvironment } from 'three-stdlib'
 import { triggerBrowserDownload } from '../api/client'
@@ -13,6 +13,9 @@ import type { BoundingBoxMm } from '../vision/camera'
 import type { CameraPresetKey } from '../vision/types'
 import { buildCaptureFilename } from '../vision/filename'
 import { CAPTURE_BLOCKED_MESSAGES, captureBlockedReason } from '../vision/capture'
+import { computeModelState, describeModelState } from '../studio/modelState'
+import { resolveShortcutKey, shouldIgnoreShortcut } from '../studio/keyboardShortcuts'
+import { hasErrors } from '@shared/validation/engine'
 import { ComponentMesh } from './ComponentMesh'
 import { ComponentVisibilityPanel } from './ComponentVisibilityPanel'
 import { ErrorBanner } from './ErrorBanner'
@@ -30,6 +33,8 @@ export function ModelViewport() {
   const generationStatus = useProjectStore((s) => s.generationStatus)
   const generationError = useProjectStore((s) => s.generationError)
   const isStale = useProjectStore((s) => s.isStale)
+  const validationResults = useProjectStore((s) => s.validationResults)
+  const generate = useProjectStore((s) => s.generate)
 
   const viewMode = useVisionStore((s) => s.viewMode)
   const setViewMode = useVisionStore((s) => s.setViewMode)
@@ -43,6 +48,7 @@ export function ModelViewport() {
   const showAxesSetting = useVisionStore((s) => s.showAxes)
   const toggleShowGrid = useVisionStore((s) => s.toggleShowGrid)
   const toggleShowAxes = useVisionStore((s) => s.toggleShowAxes)
+  const captureRequestToken = useVisionStore((s) => s.captureRequestToken)
 
   const [isCapturing, setIsCapturing] = useState(false)
 
@@ -152,7 +158,83 @@ export function ModelViewport() {
   const captureBlockedReasonKey = captureBlockedReason(lastSuccessfulPreview !== null, isStale)
   const captureBlockedMessage = captureBlockedReasonKey ? CAPTURE_BLOCKED_MESSAGES[captureBlockedReasonKey] : null
 
+  // Lets Studio's consolidated Outputs panel (outside this component
+  // tree's props) trigger a capture without either side holding a
+  // direct reference to the other — see useVisionStore.requestCapture().
+  // handleCapture is re-created every render, so it's stashed in a ref
+  // (kept fresh via its own effect) rather than listed as this effect's
+  // dependency — listing it directly would re-run the capture on every
+  // unrelated re-render, not just on an actual capture request.
+  const handleCaptureRef = useRef(handleCapture)
+  useEffect(() => {
+    handleCaptureRef.current = handleCapture
+  })
+
+  const isFirstCaptureTokenRender = useRef(true)
+  useEffect(() => {
+    if (isFirstCaptureTokenRender.current) {
+      isFirstCaptureTokenRender.current = false
+      return
+    }
+    handleCaptureRef.current()
+  }, [captureRequestToken])
+
+  // A small, discoverable keyboard shortcut set (G/F/1-4) — see
+  // docs/bible/11-studio/273-keyboard-and-input-model.md. Kept behind a
+  // ref of "latest callbacks" so the actual `keydown` listener is
+  // attached exactly once, never re-attached on every render.
+  const latestShortcutActions = useRef({
+    generate: () => void generate(),
+    fitToView: () => fitToView(),
+    handleCameraPreset: (preset: CameraPresetKey) => handleCameraPreset(preset),
+    canGenerate: () => generationStatus !== 'generating' && !hasErrors(validationResults),
+  })
+  useEffect(() => {
+    latestShortcutActions.current = {
+      generate: () => void generate(),
+      fitToView: () => fitToView(),
+      handleCameraPreset: (preset) => handleCameraPreset(preset),
+      canGenerate: () => generationStatus !== 'generating' && !hasErrors(validationResults),
+    }
+  })
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (shouldIgnoreShortcut(event.target, event.metaKey || event.ctrlKey || event.altKey)) return
+      const key = resolveShortcutKey(event.key)
+      if (!key) return
+      const actions = latestShortcutActions.current
+      switch (key) {
+        case 'g':
+          if (actions.canGenerate()) actions.generate()
+          break
+        case 'f':
+          actions.fitToView()
+          break
+        case '1':
+          actions.handleCameraPreset('front')
+          break
+        case '2':
+          actions.handleCameraPreset('side')
+          break
+        case '3':
+          actions.handleCameraPreset('top')
+          break
+        case '4':
+          actions.handleCameraPreset('three_quarter')
+          break
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+
   const showEmptyState = !lastSuccessfulPreview && generationStatus !== 'generating'
+  const viewportModelState = computeModelState({
+    generationStatus,
+    hasLastGoodPreview: lastSuccessfulPreview !== null,
+    isStale,
+  })
 
   return (
     <div className="viewport">
@@ -272,7 +354,9 @@ export function ModelViewport() {
       ) : previewMeshError ? (
         <ErrorBanner message="Could not load the 3D preview mesh from the backend. Showing the last successful preview, if any." />
       ) : null}
-      {isStale ? <div className="stale-banner">Parameters changed — regenerate model.</div> : null}
+      {viewportModelState === 'STALE' || viewportModelState === 'FAILED_WITH_LAST_GOOD' ? (
+        <div className="stale-banner">{describeModelState(viewportModelState).label}</div>
+      ) : null}
       {showEmptyState ? (
         <p
           className="empty-state"

@@ -27,6 +27,15 @@ const PRONG_COUNT_OPTIONS = [
   { value: '6', label: '6 prongs' },
 ]
 
+/**
+ * Design parameters vs. advanced/technical parameters — see
+ * docs/bible/11-studio/255-design-editing-contract.md and
+ * 256-parameter-editor-model.md for which fields ended up in which
+ * group and why (in short: a field moves to Advanced only when a more
+ * commonly-understood equivalent already exists in the Design group,
+ * e.g. ring size vs. exact inner diameter, or when it controls preview
+ * rendering rather than the design itself).
+ */
 export function ConfigurationPanel() {
   const definition = useProjectStore((s) => s.currentDefinition)
   const updateProject = useProjectStore((s) => s.updateProject)
@@ -36,6 +45,7 @@ export function ConfigurationPanel() {
   const updateSetting = useProjectStore((s) => s.updateSetting)
   const updateMaterial = useProjectStore((s) => s.updateMaterial)
   const updateManufacturing = useProjectStore((s) => s.updateManufacturing)
+  const updatePreview = useProjectStore((s) => s.updatePreview)
 
   return (
     <div>
@@ -60,16 +70,6 @@ export function ConfigurationPanel() {
           step={0.5}
           min={1}
           max={49.9}
-        />
-        <NumericField
-          id="ring-inner-diameter"
-          label="Inner diameter"
-          unit="mm"
-          value={definition.ring.innerDiameter}
-          onChange={(innerDiameter) => updateRing({ innerDiameter })}
-          step={0.1}
-          min={10.1}
-          max={29.9}
         />
       </FormSection>
 
@@ -115,16 +115,6 @@ export function ConfigurationPanel() {
           min={0.5}
           max={20}
         />
-        <NumericField
-          id="stone-depth"
-          label="Depth"
-          unit="mm"
-          value={definition.stone.depth}
-          onChange={(depth) => updateStone({ depth })}
-          step={0.1}
-          min={0.1}
-          max={20}
-        />
       </FormSection>
 
       <FormSection title="Setting">
@@ -134,36 +124,6 @@ export function ConfigurationPanel() {
           value={String(definition.setting.prongCount)}
           options={PRONG_COUNT_OPTIONS}
           onChange={(value) => updateSetting({ prongCount: Number(value) })}
-        />
-        <NumericField
-          id="prong-diameter"
-          label="Prong diameter"
-          unit="mm"
-          value={definition.setting.prongDiameter}
-          onChange={(prongDiameter) => updateSetting({ prongDiameter })}
-          step={0.05}
-          min={0.1}
-          max={5}
-        />
-        <NumericField
-          id="prong-height"
-          label="Prong height"
-          unit="mm"
-          value={definition.setting.prongHeight}
-          onChange={(prongHeight) => updateSetting({ prongHeight })}
-          step={0.1}
-          min={0.1}
-          max={15}
-        />
-        <NumericField
-          id="basket-height"
-          label="Basket height"
-          unit="mm"
-          value={definition.setting.basketHeight}
-          onChange={(basketHeight) => updateSetting({ basketHeight })}
-          step={0.1}
-          min={0.1}
-          max={15}
         />
       </FormSection>
 
@@ -188,6 +148,96 @@ export function ConfigurationPanel() {
           wide
         />
       </FormSection>
+
+      <details className="advanced-parameters">
+        <summary>Advanced / technical parameters</summary>
+        <p className="advanced-parameters__hint">
+          These control exact dimensions and preview quality directly. Most designs only need the parameters
+          above.
+        </p>
+
+        <FormSection title="Ring — exact diameter">
+          <NumericField
+            id="ring-inner-diameter"
+            label="Inner diameter"
+            unit="mm"
+            value={definition.ring.innerDiameter}
+            onChange={(innerDiameter) => updateRing({ innerDiameter })}
+            step={0.1}
+            min={10.1}
+            max={29.9}
+          />
+        </FormSection>
+
+        <FormSection title="Stone — depth">
+          <NumericField
+            id="stone-depth"
+            label="Depth"
+            unit="mm"
+            value={definition.stone.depth}
+            onChange={(depth) => updateStone({ depth })}
+            step={0.1}
+            min={0.1}
+            max={20}
+          />
+        </FormSection>
+
+        <FormSection title="Setting — dimensions">
+          <NumericField
+            id="prong-diameter"
+            label="Prong diameter"
+            unit="mm"
+            value={definition.setting.prongDiameter}
+            onChange={(prongDiameter) => updateSetting({ prongDiameter })}
+            step={0.05}
+            min={0.1}
+            max={5}
+          />
+          <NumericField
+            id="prong-height"
+            label="Prong height"
+            unit="mm"
+            value={definition.setting.prongHeight}
+            onChange={(prongHeight) => updateSetting({ prongHeight })}
+            step={0.1}
+            min={0.1}
+            max={15}
+          />
+          <NumericField
+            id="basket-height"
+            label="Basket height"
+            unit="mm"
+            value={definition.setting.basketHeight}
+            onChange={(basketHeight) => updateSetting({ basketHeight })}
+            step={0.1}
+            min={0.1}
+            max={15}
+          />
+        </FormSection>
+
+        <FormSection title="Preview tessellation">
+          <NumericField
+            id="preview-mesh-tolerance"
+            label="Mesh tolerance"
+            unit="mm"
+            value={definition.preview.meshTolerance}
+            onChange={(meshTolerance) => updatePreview({ meshTolerance })}
+            step={0.01}
+            min={0.01}
+            max={2}
+          />
+          <NumericField
+            id="preview-angular-tolerance"
+            label="Angular tolerance"
+            unit="rad"
+            value={definition.preview.angularTolerance}
+            onChange={(angularTolerance) => updatePreview({ angularTolerance })}
+            step={0.01}
+            min={0.01}
+            max={1}
+          />
+        </FormSection>
+      </details>
     </div>
   )
 }

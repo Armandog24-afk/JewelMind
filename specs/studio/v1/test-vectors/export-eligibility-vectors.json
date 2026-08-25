@@ -1,0 +1,14 @@
+{
+  "description": "Real computeOutputEligibility() outputs from frontend/src/studio/outputEligibility.ts, run during Sprint 9 (see outputEligibility.test.ts).",
+  "vectors": [
+    { "hasModel": false, "isStale": false, "hasBlockingValidationErrors": false, "phase": "idle", "expected": "UNAVAILABLE" },
+    { "hasModel": true, "isStale": false, "hasBlockingValidationErrors": false, "phase": "idle", "expected": "AVAILABLE" },
+    { "hasModel": true, "isStale": true, "hasBlockingValidationErrors": false, "phase": "idle", "expected": "STALE_BLOCKED" },
+    { "hasModel": true, "isStale": false, "hasBlockingValidationErrors": true, "phase": "idle", "expected": "STALE_BLOCKED" },
+    { "hasModel": true, "isStale": true, "hasBlockingValidationErrors": false, "phase": "exporting", "expected": "EXPORTING" },
+    { "hasModel": true, "isStale": false, "hasBlockingValidationErrors": false, "phase": "error", "expected": "FAILED" },
+    { "hasModel": true, "isStale": true, "hasBlockingValidationErrors": false, "phase": "error", "expected": "STALE_BLOCKED" },
+    { "hasModel": false, "isStale": true, "hasBlockingValidationErrors": false, "phase": "error", "expected": "UNAVAILABLE" }
+  ],
+  "precedence": ["EXPORTING", "UNAVAILABLE", "STALE_BLOCKED", "FAILED", "AVAILABLE"]
+}

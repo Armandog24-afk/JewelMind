@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/studio/v1/notification.schema.json",
+  "title": "Studio Notification v1",
+  "description": "A conceptual transient-notification shape. PLANNED — no toast/snackbar component exists in the running application; feedback today is always inline (a banner, a badge, a disabled button with a title). See docs/bible/11-studio/267-status-and-feedback-system.md. This schema documents the target shape a future implementation could adopt, grounded in the severity vocabulary that already exists (ValidationResult.severity).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["level", "message"],
+  "properties": {
+    "level": {
+      "enum": ["INFO", "SUCCESS", "WARNING", "ERROR"],
+      "description": "INFO maps to the existing 'information' ValidationResult severity; WARNING/ERROR map to 'warning'/'error'. SUCCESS has no existing backend equivalent — it would be a purely frontend-originated notification (e.g. 'Export complete')."
+    },
+    "message": { "type": "string", "minLength": 1 },
+    "relatedParameter": {
+      "type": ["string", "null"],
+      "description": "Mirrors ValidationResult.parameter when the notification originates from a validation diagnostic."
+    }
+  }
+}

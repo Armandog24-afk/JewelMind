@@ -2,13 +2,15 @@ import { useState } from 'react'
 import { useProjectStore } from '../store/useProjectStore'
 import { JsonViewer } from './JsonViewer'
 import { ModelInformation } from './ModelInformation'
+import { OutputsPanel } from './OutputsPanel'
 import { TechnicalSpecification } from './TechnicalSpecification'
 import { ValidationPanel } from './ValidationPanel'
 
-type TabKey = 'validation' | 'specification' | 'json' | 'model-info'
+type TabKey = 'validation' | 'outputs' | 'specification' | 'json' | 'model-info'
 
 const TABS: Array<{ key: TabKey; label: string }> = [
   { key: 'validation', label: 'Validation' },
+  { key: 'outputs', label: 'Outputs' },
   { key: 'specification', label: 'Specification' },
   { key: 'json', label: 'JSON' },
   { key: 'model-info', label: 'Model info' },
@@ -38,6 +40,7 @@ export function RightPanelTabs() {
       </div>
       <div className="tab-panel" role="tabpanel">
         {active === 'validation' ? <ValidationPanel /> : null}
+        {active === 'outputs' ? <OutputsPanel /> : null}
         {active === 'specification' ? <TechnicalSpecification /> : null}
         {active === 'json' ? <JsonViewer /> : null}
         {active === 'model-info' ? <ModelInformation /> : null}

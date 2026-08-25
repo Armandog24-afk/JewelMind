@@ -463,3 +463,34 @@ exports, decomposed into 5 levels (`GEOMETRY_SOURCE_CONSISTENT`,
 `COMPONENT_SET_CONSISTENT`, `SCALE_CONSISTENT`,
 `MATERIAL_METADATA_CONSISTENT`, `CAMERA_ONLY_TRANSFORMATION`). See
 [`10-vision/244-visual-consistency-contract.md`](../10-vision/244-visual-consistency-contract.md).
+
+## Studio terms (Sprint 9)
+
+> Authoritative source for every term in this section:
+> [`11-studio/`](../11-studio/README.md) (Sprint 9).
+
+**Studio** — the product-workspace layer: it owns end-to-end user
+workflow (input → validation → generation → review → output) around
+JDL/Forge/Alchemist/Atlas/Foundry/Vision, but owns none of their
+underlying rules, geometry, or rendering. See
+[`11-studio/251-product-workspace-overview.md`](../11-studio/251-product-workspace-overview.md).
+
+**Model state** — the 7-value lifecycle status of the currently
+generated model (`NO_MODEL`, `GENERATING_FIRST_MODEL`, `CURRENT`,
+`STALE`, `REGENERATING`, `FAILED_NO_MODEL`, `FAILED_WITH_LAST_GOOD`),
+computed by `computeModelState()` and shown identically by the header's
+`ModelStatusBadge` and the in-viewport banner. See
+[`11-studio/259-model-state-experience.md`](../11-studio/259-model-state-experience.md).
+
+**Output eligibility** — the 5-value availability state
+(`AVAILABLE`, `UNAVAILABLE`, `EXPORTING`, `FAILED`, `STALE_BLOCKED`) of
+one artifact in the consolidated Outputs area, computed by
+`computeOutputEligibility()` and shared identically across STEP, STL,
+JDL JSON, the technical specification, and the Presentation PNG. See
+[`11-studio/261-export-experience.md`](../11-studio/261-export-experience.md).
+
+**Advanced / technical parameters** — the collapsed-by-default group of
+design-editor fields (exact inner diameter, stone depth, prong/basket
+dimensions, preview tessellation tolerances) that refine an
+already-made design decision rather than represent a first choice. See
+[`11-studio/256-parameter-editor-model.md`](../11-studio/256-parameter-editor-model.md).

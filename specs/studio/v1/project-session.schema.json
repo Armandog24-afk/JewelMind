@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/studio/v1/project-session.schema.json",
+  "title": "Studio Project Session v1",
+  "description": "The conceptual current-session shape — one project, one design, per docs/bible/11-studio/254-project-session-model.md. PARTIAL: definitionHash/projectName/viewMode are each independently real (persisted or derivable); no runtime code assembles them into one object today.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projectName", "definitionHash", "viewMode", "hasGeneratedModel", "isStale"],
+  "properties": {
+    "projectName": { "type": "string", "description": "JewelryDefinition.project.name — a design field, not a project-management record." },
+    "definitionHash": {
+      "type": ["string", "null"],
+      "description": "Null until the first successful generation — the definitionHash of the currently-edited design is not computed client-side until the backend returns it."
+    },
+    "viewMode": { "enum": ["technical", "presentation"], "description": "Persisted across reloads as of Sprint 9 — see docs/bible/11-studio/274-local-persistence-model.md." },
+    "hasGeneratedModel": { "type": "boolean" },
+    "isStale": { "type": "boolean" }
+  }
+}

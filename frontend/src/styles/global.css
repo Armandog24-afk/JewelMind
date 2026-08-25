@@ -209,12 +209,6 @@ button {
   font-size: 13px;
 }
 
-.form-field input:focus,
-.form-field select:focus {
-  outline: none;
-  border-color: var(--color-gold);
-}
-
 .form-field__unit {
   color: var(--color-text-faint);
   font-size: 11px;
@@ -638,4 +632,183 @@ button {
   color: var(--color-text-muted);
   font-size: 13px;
   text-align: center;
+}
+
+/* ---------- focus visibility (Studio v1 accessibility pass) ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 1px;
+  border-color: var(--color-gold);
+}
+
+/* ---------- form field invalid state ---------- */
+
+.form-field__input--invalid {
+  border-color: var(--color-error) !important;
+}
+
+.form-field__error {
+  color: var(--color-error);
+  font-size: 11px;
+}
+
+/* ---------- advanced parameters disclosure ---------- */
+
+.advanced-parameters {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-3);
+}
+
+.advanced-parameters summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-5);
+}
+
+.advanced-parameters summary:hover {
+  color: var(--color-text);
+}
+
+.advanced-parameters__hint {
+  margin: 0 0 var(--space-2);
+  padding: 0 var(--space-5);
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+/* ---------- model status (Studio v1) ---------- */
+
+.model-status {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+  font-size: 12px;
+}
+
+.model-status__label {
+  font-weight: 700;
+}
+
+.model-status__detail {
+  color: var(--color-text-muted);
+}
+
+.model-status--neutral .model-status__label {
+  color: var(--color-text-muted);
+}
+
+.model-status--success {
+  border-color: var(--color-success);
+}
+.model-status--success .model-status__label {
+  color: var(--color-success);
+}
+
+.model-status--warning {
+  border-color: var(--color-warning);
+  background: var(--color-warning-muted);
+}
+.model-status--warning .model-status__label {
+  color: var(--color-warning);
+}
+
+.model-status--error {
+  border-color: var(--color-error);
+  background: var(--color-error-muted);
+}
+.model-status--error .model-status__label {
+  color: var(--color-error);
+}
+
+.model-status--progress .model-status__label {
+  color: var(--color-info);
+}
+
+/* ---------- outputs panel (Studio v1) ---------- */
+
+.outputs-panel {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.outputs-panel__intro {
+  font-size: 12px;
+  color: var(--color-text-faint);
+  margin: 0 0 var(--space-1);
+}
+
+.artifact-row {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.artifact-row--stale_blocked {
+  border-color: var(--color-warning-muted);
+}
+
+.artifact-row--failed {
+  border-color: var(--color-error);
+}
+
+.artifact-row__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.artifact-row__name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.artifact-row__purpose {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.artifact-row__action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.artifact-row__status {
+  font-size: 11px;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+.artifact-row__error {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--color-error);
+  font-size: 11px;
 }

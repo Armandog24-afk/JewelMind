@@ -62,6 +62,10 @@ Alchemist does **not** own jewelry-domain thresholds (Forge's job), CAD-kernel a
 
 **Preview generation is coupled to core geometry generation; export generation is correctly decoupled.** `ModelService.generate()` calls `write_component_previews()` inline — a hypothetical preview-tessellation failure today would fail the *entire* compilation (`MODEL_GENERATION_FAILED`), even though the underlying B-Rep geometry was completely valid. STEP/STL export, by contrast, is a genuinely separate later call against an already-cached model, so an export failure correctly never invalidates the geometry that was already generated. See [`173-partial-compilation-policy.md`](173-partial-compilation-policy.md) and [`187-alchemist-gap-analysis.md`](187-alchemist-gap-analysis.md).
 
+## Relationship to Sprint 9
+
+[`11-studio/`](../11-studio/README.md) (Sprint 9) is the human-facing workflow layer around Alchemist's compilation pipeline — its `computeModelState()`/`ModelStatusBadge` name the same generation lifecycle this Sprint's `170-compilation-state-machine.md` already modeled conceptually, now given a real, visible, 7-state frontend implementation. Studio orchestrates when the user *sees* a compilation result; it never orchestrates the compilation itself.
+
 ## Validation of this sprint
 
 See [`SPRINT-6-VALIDATION-REPORT.md`](SPRINT-6-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

@@ -1,0 +1,13 @@
+{
+  "description": "Real session-recovery behavior on page reload, confirmed by inspection and by a live cross-session check during Sprint 9 (a band.profile change to 'flat' made in an earlier session was still present after reopening the app in a fresh browser tab).",
+  "onReload": {
+    "restoredDesign": "the last saved, structurally-valid JewelryDefinition, or the default if none/invalid",
+    "validationResults": "always recomputed fresh from the restored definition, never restored from storage",
+    "generatedModel": null,
+    "lastSuccessfulPreview": null,
+    "modelStatusAfterReload": "NO_MODEL, even though the design itself was restored",
+    "viewMode": "restored from its own storage key",
+    "componentVisibility": "reset to default (all visible)"
+  },
+  "principle": "Restored design intent and restored generated geometry are never conflated — a returning user always sees their parameters exactly as left, but must regenerate to see geometry again."
+}

@@ -60,6 +60,10 @@ As of this Sprint, **0 of the 21 registered Forge rules are professionally valid
 
 Sprint 2 ([`04-jewelry-domain/`](../04-jewelry-domain/README.md)) established the classification of jewelry-domain statements (IMPLEMENTED FACT / PRELIMINARY SOFTWARE RULE / PROFESSIONALLY VALIDATED RULE / etc.) and the 16 current validation rules. Sprint 3 ([`05-jdl/`](../05-jdl/README.md)) formalized the language those rules operate over and folded semantic/domain validation into JDL stages JDL-5/JDL-6. **Sprint 4 does not redefine either** — it gives the rule *system itself* (not the document format, not individual domain facts) a formal architecture: anatomy, provenance, lifecycle, evaluation pipeline, and professional-validation process. [`04-jewelry-domain/054-domain-validation-classification.md`](../04-jewelry-domain/054-domain-validation-classification.md) and [`05-jdl/075-validation-pipeline.md`](../05-jdl/075-validation-pipeline.md) were both updated this Sprint to cross-reference Forge rather than duplicate it.
 
+## Relationship to Sprint 9
+
+[`11-studio/`](../11-studio/README.md) (Sprint 9) presents Forge's diagnostics (`ValidationResult`) to the user via `ValidationPanel`/`ValidationItem`, unchanged this Sprint, and never filters, reclassifies, or hides a diagnostic Forge returns (STUDIO-GOV-010). Studio's own client-side `NumericField` `min`/`max` hints are advisory UI feedback only, never a duplicate of a Forge rule threshold (STUDIO-GOV-001) — the backend's evaluation remains the sole authority.
+
 ## Validation of this sprint
 
 See [`SPRINT-4-VALIDATION-REPORT.md`](SPRINT-4-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

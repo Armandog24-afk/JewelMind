@@ -310,6 +310,64 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A45 | Appendix: Vision Diagnostic Catalog | accepted | planned | [`appendices/vision-diagnostic-catalog.md`](vision-diagnostic-catalog.md) |
 | JM-BIBLE-A46 | Appendix: Vision Code Mapping | accepted | current | [`appendices/vision-code-mapping.md`](vision-code-mapping.md) |
 | JM-BIBLE-A47 | Appendix: Vision Test Matrix | accepted | current | [`appendices/vision-test-matrix.md`](vision-test-matrix.md) |
+| JM-BIBLE-STUDIO-README | Studio v1 — Index | accepted | current | [`11-studio/README.md`](../11-studio/README.md) |
+| JM-BIBLE-250 | Studio Governance | accepted | current | [`11-studio/250-studio-governance.md`](../11-studio/250-studio-governance.md) |
+| JM-BIBLE-251 | Product Workspace Overview | accepted | current | [`11-studio/251-product-workspace-overview.md`](../11-studio/251-product-workspace-overview.md) |
+| JM-BIBLE-252 | Information Architecture | accepted | current | [`11-studio/252-information-architecture.md`](../11-studio/252-information-architecture.md) |
+| JM-BIBLE-253 | User Workflow Model | accepted | current | [`11-studio/253-user-workflow-model.md`](../11-studio/253-user-workflow-model.md) |
+| JM-BIBLE-254 | Project Session Model | accepted | current | [`11-studio/254-project-session-model.md`](../11-studio/254-project-session-model.md) |
+| JM-BIBLE-255 | Design Editing Contract | accepted | current | [`11-studio/255-design-editing-contract.md`](../11-studio/255-design-editing-contract.md) |
+| JM-BIBLE-256 | Parameter Editor Model | accepted | current | [`11-studio/256-parameter-editor-model.md`](../11-studio/256-parameter-editor-model.md) |
+| JM-BIBLE-257 | Validation Experience | accepted | current | [`11-studio/257-validation-experience.md`](../11-studio/257-validation-experience.md) |
+| JM-BIBLE-258 | Generation Experience | accepted | current | [`11-studio/258-generation-experience.md`](../11-studio/258-generation-experience.md) |
+| JM-BIBLE-259 | Model State Experience | accepted | current | [`11-studio/259-model-state-experience.md`](../11-studio/259-model-state-experience.md) |
+| JM-BIBLE-260 | Output Review Experience | accepted | current | [`11-studio/260-output-review-experience.md`](../11-studio/260-output-review-experience.md) |
+| JM-BIBLE-261 | Export Experience | accepted | current | [`11-studio/261-export-experience.md`](../11-studio/261-export-experience.md) |
+| JM-BIBLE-262 | Technical Review Workspace | accepted | current | [`11-studio/262-technical-review-workspace.md`](../11-studio/262-technical-review-workspace.md) |
+| JM-BIBLE-263 | Presentation Review Workspace | accepted | current | [`11-studio/263-presentation-review-workspace.md`](../11-studio/263-presentation-review-workspace.md) |
+| JM-BIBLE-264 | Navigation Model | accepted | current | [`11-studio/264-navigation-model.md`](../11-studio/264-navigation-model.md) |
+| JM-BIBLE-265 | Layout System | accepted | current | [`11-studio/265-layout-system.md`](../11-studio/265-layout-system.md) |
+| JM-BIBLE-266 | Responsive Behaviour | accepted | partial | [`11-studio/266-responsive-behaviour.md`](../11-studio/266-responsive-behaviour.md) |
+| JM-BIBLE-267 | Status and Feedback System | accepted | current | [`11-studio/267-status-and-feedback-system.md`](../11-studio/267-status-and-feedback-system.md) |
+| JM-BIBLE-268 | Loading and Progress Model | accepted | current | [`11-studio/268-loading-and-progress-model.md`](../11-studio/268-loading-and-progress-model.md) |
+| JM-BIBLE-269 | Error Recovery Model | accepted | current | [`11-studio/269-error-recovery-model.md`](../11-studio/269-error-recovery-model.md) |
+| JM-BIBLE-270 | Empty State Model | accepted | current | [`11-studio/270-empty-state-model.md`](../11-studio/270-empty-state-model.md) |
+| JM-BIBLE-271 | Confirmation and Destructive Actions | accepted | current | [`11-studio/271-confirmation-and-destructive-actions.md`](../11-studio/271-confirmation-and-destructive-actions.md) |
+| JM-BIBLE-272 | Accessibility Contract | accepted | partial | [`11-studio/272-accessibility-contract.md`](../11-studio/272-accessibility-contract.md) |
+| JM-BIBLE-273 | Keyboard and Input Model | accepted | current | [`11-studio/273-keyboard-and-input-model.md`](../11-studio/273-keyboard-and-input-model.md) |
+| JM-BIBLE-274 | Local Persistence Model | accepted | current | [`11-studio/274-local-persistence-model.md`](../11-studio/274-local-persistence-model.md) |
+| JM-BIBLE-275 | Session Recovery | accepted | current | [`11-studio/275-session-recovery.md`](../11-studio/275-session-recovery.md) |
+| JM-BIBLE-276 | Design System Foundations | accepted | current | [`11-studio/276-design-system-foundations.md`](../11-studio/276-design-system-foundations.md) |
+| JM-BIBLE-277 | UI Component Architecture | accepted | current | [`11-studio/277-ui-component-architecture.md`](../11-studio/277-ui-component-architecture.md) |
+| JM-BIBLE-278 | Frontend State Architecture | accepted | current | [`11-studio/278-frontend-state-architecture.md`](../11-studio/278-frontend-state-architecture.md) |
+| JM-BIBLE-279 | API Interaction Model | accepted | current | [`11-studio/279-api-interaction-model.md`](../11-studio/279-api-interaction-model.md) |
+| JM-BIBLE-280 | Product Copy and Terminology | accepted | current | [`11-studio/280-product-copy-and-terminology.md`](../11-studio/280-product-copy-and-terminology.md) |
+| JM-BIBLE-281 | User Guidance Model | accepted | current | [`11-studio/281-user-guidance-model.md`](../11-studio/281-user-guidance-model.md) |
+| JM-BIBLE-282 | Current UI Code Mapping | accepted | current | [`11-studio/282-current-ui-code-mapping.md`](../11-studio/282-current-ui-code-mapping.md) |
+| JM-BIBLE-283 | Studio Gap Analysis | accepted | current | [`11-studio/283-studio-gap-analysis.md`](../11-studio/283-studio-gap-analysis.md) |
+| JM-BIBLE-284 | Open Studio Questions | accepted | current | [`11-studio/284-open-studio-questions.md`](../11-studio/284-open-studio-questions.md) |
+| JM-BIBLE-SPRINT9-REPORT | Sprint 9 Validation Report | accepted | current | [`11-studio/SPRINT-9-VALIDATION-REPORT.md`](../11-studio/SPRINT-9-VALIDATION-REPORT.md) |
+| JM-BIBLE-A48 | Appendix: Studio Screen Catalog | accepted | current | [`appendices/studio-screen-catalog.md`](studio-screen-catalog.md) |
+| JM-BIBLE-A49 | Appendix: Studio State Catalog | accepted | current | [`appendices/studio-state-catalog.md`](studio-state-catalog.md) |
+| JM-BIBLE-A50 | Appendix: Studio Action Catalog | accepted | current | [`appendices/studio-action-catalog.md`](studio-action-catalog.md) |
+| JM-BIBLE-A51 | Appendix: Studio Status Catalog | accepted | current | [`appendices/studio-status-catalog.md`](studio-status-catalog.md) |
+| JM-BIBLE-A52 | Appendix: Studio UI Component Catalog | accepted | current | [`appendices/studio-ui-component-catalog.md`](studio-ui-component-catalog.md) |
+| JM-BIBLE-A53 | Appendix: Studio Copy Catalog | accepted | current | [`appendices/studio-copy-catalog.md`](studio-copy-catalog.md) |
+| JM-BIBLE-A54 | Appendix: Studio Code Mapping | accepted | current | [`appendices/studio-code-mapping.md`](studio-code-mapping.md) |
+| JM-BIBLE-A55 | Appendix: Studio Test Matrix | accepted | current | [`appendices/studio-test-matrix.md`](studio-test-matrix.md) |
+
+## Machine-readable Studio specification — `specs/studio/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/studio/v1/README.md`](../../../specs/studio/v1/README.md) |
+| Studio state schema | Yes | [`specs/studio/v1/studio-state.schema.json`](../../../specs/studio/v1/studio-state.schema.json) |
+| Project session schema | Yes | [`specs/studio/v1/project-session.schema.json`](../../../specs/studio/v1/project-session.schema.json) |
+| Generation state schema | Yes | [`specs/studio/v1/generation-state.schema.json`](../../../specs/studio/v1/generation-state.schema.json) |
+| Output state schema | Yes | [`specs/studio/v1/output-state.schema.json`](../../../specs/studio/v1/output-state.schema.json) |
+| Notification schema | Yes | [`specs/studio/v1/notification.schema.json`](../../../specs/studio/v1/notification.schema.json) |
+| Examples (real, generated) | Yes | [`specs/studio/v1/examples/`](../../../specs/studio/v1/examples/) |
+| Test vectors | Yes | [`specs/studio/v1/test-vectors/`](../../../specs/studio/v1/test-vectors/) |
 
 ## Machine-readable Vision specification — `specs/vision/v1/`
 

@@ -1,0 +1,10 @@
+{
+  "description": "Real, live-verified stale-state behavior during Sprint 9's browser session, against the default solitaire (definitionHash 355ddca57e7e49ad).",
+  "sequence": [
+    { "action": "generate", "modelStatusLabel": "Current model", "outputsEligibility": "AVAILABLE (all 5)" },
+    { "action": "export STEP", "networkRequest": "POST /api/models/export/step -> 200 OK" },
+    { "action": "edit band.width to 3.0", "modelStatusLabel": "Design changed", "outputsEligibility": "STALE_BLOCKED (all 5)" },
+    { "action": "press G (regenerate)", "networkRequest": "POST /api/models/generate -> 200 OK", "modelStatusLabel": "Current model", "outputsEligibility": "AVAILABLE (all 5)" }
+  ],
+  "confirmedLive": true
+}

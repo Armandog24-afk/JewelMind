@@ -61,6 +61,10 @@ Foundry does not own jewelry-domain thresholds (Forge's job), geometry construct
 
 **STEP and STL export have opposite determinism profiles, and this was previously undocumented.** STL export is byte-for-byte deterministic across repeated exports of the same design (identical SHA-256 checksums, confirmed this Sprint). STEP export is not: two exports of an identical model differ in exactly 2 of ~4315 lines — an embedded wall-clock timestamp and an incrementing OpenCascade translator-instance counter — while every line of actual geometry data is identical. This means a STEP checksum cannot serve as a stable content-identity proxy the way an STL checksum can, a fact with direct consequences for any future caching or deduplication strategy built on export checksums. See [`197-step-export-contract.md`](197-step-export-contract.md) and [`202-artifact-integrity-model.md`](202-artifact-integrity-model.md).
 
+## Relationship to Sprint 9
+
+[`11-studio/`](../11-studio/README.md) (Sprint 9) consolidated every Foundry artifact's download trigger (STEP, STL, JDL JSON, technical specification) plus Vision's Presentation PNG into one Outputs area, gated by a single `computeOutputEligibility()` function — discovering in the process that the specification's download had no button anywhere in the pre-Sprint-9 UI. This changed nothing about Foundry's export contracts or artifact integrity guarantees, only where and how consistently the existing exports are triggered — see [`11-studio/260-output-review-experience.md`](../11-studio/260-output-review-experience.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-7-VALIDATION-REPORT.md`](SPRINT-7-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

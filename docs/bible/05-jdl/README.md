@@ -75,6 +75,10 @@ This is independent of `implementation_status` and `professional_validation`: a 
 
 JDL does not redefine jewelry-domain concepts. [`04-jewelry-domain/044-solitaire-domain-model.md`](../04-jewelry-domain/044-solitaire-domain-model.md) and [`052-parametric-dependency-model.md`](../04-jewelry-domain/052-parametric-dependency-model.md) remain the authority on *what a solitaire ring is*; this section is the authority on *how that model is expressed, validated, and compiled as a language*. Both documents were updated in this Sprint to cross-reference JDL rather than duplicate it.
 
+## Relationship to Sprint 9
+
+[`11-studio/`](../11-studio/README.md) (Sprint 9) is the frontend workflow layer sitting above JDL — it edits `JewelryDefinition` fields through `ConfigurationPanel`/`useProjectStore`, but never redefines a JDL field, type, or validation rule. Studio's "Design vs. Advanced" parameter grouping is a presentation-only reorganization of existing JDL fields, never a second schema — see [`11-studio/255-design-editing-contract.md`](../11-studio/255-design-editing-contract.md) and STUDIO-GOV-013.
+
 ## Validation of this sprint
 
 See [`SPRINT-3-VALIDATION-REPORT.md`](SPRINT-3-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

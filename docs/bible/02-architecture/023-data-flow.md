@@ -147,7 +147,12 @@ STL follows the same shape, with an additional tolerance-validation step
 in `api/schemas.py::ExportStlRequest` before the request even reaches the
 handler (see [`013-functional-requirements.md`](../01-product/013-functional-requirements.md)
 JM-FR-019/020). `validate_non_empty()` and `sha256_checksum()` (both
-added in Sprint 7) are the same functions for both STEP and STL.
+added in Sprint 7) are the same functions for both STEP and STL. As of
+Sprint 9, every export button that triggers this flow lives in one
+consolidated Studio component (`OutputsPanel.tsx`) rather than being
+scattered across the header and multiple tabs — this changed nothing
+about the flow itself, only where the trigger lives; see
+[`11-studio/260-output-review-experience.md`](../11-studio/260-output-review-experience.md).
 
 ## `POST /api/models/export/json` and `/specification`
 
@@ -168,3 +173,4 @@ already present on it (`record.definition` and, for the specification,
 | Visual rendering (Sprint 8) | `frontend/src/vision/`, `ModelViewport.tsx` | User, via Technical/Presentation view |
 | File export | `exporters/` | Frontend, via download |
 | Export integrity validation (Sprint 7) | `exporters/integrity.py` | API response header (`X-Content-SHA256`) |
+| Output eligibility + workflow status (Sprint 9) | `frontend/src/studio/{modelState,outputEligibility}.ts` | User, via the header's model-status badge and the consolidated Outputs tab |

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/studio/v1/output-state.schema.json",
+  "title": "Studio Output State v1",
+  "description": "One artifact's eligibility state in the consolidated Outputs area. See docs/bible/11-studio/261-export-experience.md and frontend/src/studio/outputEligibility.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact", "eligibility", "statusLabel"],
+  "properties": {
+    "artifact": {
+      "enum": ["step", "stl", "json", "specification", "presentation_png"],
+      "description": "step/stl/json/specification match useProjectStore's ExportKind; presentation_png is Vision's capture, gated by the equivalent captureBlockedReason() logic."
+    },
+    "eligibility": {
+      "enum": ["AVAILABLE", "UNAVAILABLE", "EXPORTING", "FAILED", "STALE_BLOCKED"]
+    },
+    "statusLabel": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Matches OUTPUT_ELIGIBILITY_LABELS exactly."
+    },
+    "errorMessage": {
+      "type": ["string", "null"],
+      "description": "Only meaningful when eligibility is FAILED. PARTIAL: useProjectStore.exportError is a single shared field today, not one per artifact — see docs/bible/11-studio/261-export-experience.md."
+    }
+  }
+}

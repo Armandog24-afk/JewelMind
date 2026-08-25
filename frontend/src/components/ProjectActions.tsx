@@ -1,18 +1,28 @@
 import { hasErrors } from '@shared/validation/engine'
 import { useProjectStore } from '../store/useProjectStore'
 
+/**
+ * Studio v1: the single, obvious primary generation action, plus Reset.
+ * Per-artifact export actions moved to the consolidated Outputs tab
+ * (see OutputsPanel.tsx) — see
+ * docs/bible/11-studio/261-export-experience.md for why scattering
+ * export buttons across the header was replaced.
+ */
 export function ProjectActions() {
   const validationResults = useProjectStore((s) => s.validationResults)
   const generationStatus = useProjectStore((s) => s.generationStatus)
   const generatedModel = useProjectStore((s) => s.generatedModel)
-  const isStale = useProjectStore((s) => s.isStale)
-  const exportStatus = useProjectStore((s) => s.exportStatus)
   const generate = useProjectStore((s) => s.generate)
-  const runExport = useProjectStore((s) => s.runExport)
   const resetProject = useProjectStore((s) => s.resetProject)
 
   const blockedByErrors = hasErrors(validationResults)
-  const canExport = generatedModel !== null && !isStale && !blockedByErrors
+
+  function handleReset() {
+    const confirmed = window.confirm(
+      'Reset the current design? This discards your parameters and any generated model, and cannot be undone.',
+    )
+    if (confirmed) resetProject()
+  }
 
   return (
     <div className="project-actions">
@@ -20,6 +30,11 @@ export function ProjectActions() {
         type="button"
         className="btn btn--primary"
         disabled={blockedByErrors || generationStatus === 'generating'}
+        title={
+          blockedByErrors
+            ? 'Resolve the blocking validation errors first'
+            : 'Generate the model (shortcut: G, while not typing in a field)'
+        }
         onClick={() => void generate()}
       >
         {generationStatus === 'generating'
@@ -29,34 +44,7 @@ export function ProjectActions() {
             : 'Generate model'}
       </button>
 
-      <button
-        type="button"
-        className="btn"
-        disabled={!canExport || exportStatus.step === 'exporting'}
-        onClick={() => void runExport('step')}
-      >
-        Export STEP
-      </button>
-
-      <button
-        type="button"
-        className="btn"
-        disabled={!canExport || exportStatus.stl === 'exporting'}
-        onClick={() => void runExport('stl')}
-      >
-        Export STL
-      </button>
-
-      <button
-        type="button"
-        className="btn"
-        disabled={!canExport || exportStatus.json === 'exporting'}
-        onClick={() => void runExport('json')}
-      >
-        Export JSON
-      </button>
-
-      <button type="button" className="btn btn--ghost btn--danger" onClick={resetProject}>
+      <button type="button" className="btn btn--ghost btn--danger" onClick={handleReset}>
         Reset project
       </button>
     </div>

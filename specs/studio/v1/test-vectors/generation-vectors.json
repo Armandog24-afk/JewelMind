@@ -1,0 +1,10 @@
+{
+  "description": "Real Generate/Regenerate button label and disabled-state vectors from frontend/src/components/ProjectActions.tsx, confirmed by ProjectActions.test.tsx and live browser verification during Sprint 9.",
+  "vectors": [
+    { "hasBlockingValidationErrors": true, "generationStatus": "idle", "hasGeneratedModel": false, "buttonLabel": "Generate model", "disabled": true },
+    { "hasBlockingValidationErrors": false, "generationStatus": "idle", "hasGeneratedModel": false, "buttonLabel": "Generate model", "disabled": false },
+    { "hasBlockingValidationErrors": false, "generationStatus": "generating", "hasGeneratedModel": false, "buttonLabel": "Generating…", "disabled": true },
+    { "hasBlockingValidationErrors": false, "generationStatus": "success", "hasGeneratedModel": true, "buttonLabel": "Regenerate model", "disabled": false },
+    { "hasBlockingValidationErrors": true, "generationStatus": "success", "hasGeneratedModel": true, "buttonLabel": "Regenerate model", "disabled": true }
+  ]
+}
