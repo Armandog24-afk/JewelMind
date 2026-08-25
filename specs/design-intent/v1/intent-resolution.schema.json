@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/intent-resolution.schema.json",
+  "title": "Design Intent Resolution v1",
+  "description": "A record of how one IntentStatement was, or wasn't, resolved. Not currently persisted anywhere in v1 — modeled so a future profile-driven resolution step has a real target shape. See docs/bible/13-design-intent/348-intent-resolution-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intentId", "status", "resolutionMethod"],
+  "properties": {
+    "intentId": { "type": "string" },
+    "status": {
+      "enum": ["UNRESOLVED", "PRESERVED", "DETERMINISTICALLY_RESOLVED", "USER_RESOLVED", "PROFILE_RESOLVED", "UNSUPPORTED", "CONFLICTING"]
+    },
+    "resultingJDLChanges": { "type": "array", "items": { "type": "string" } },
+    "resolutionMethod": { "enum": ["NONE", "DETERMINISTIC_RULE", "USER_CONFIRMATION", "PROFILE"] },
+    "ruleOrProfile": { "type": ["string", "null"] },
+    "userConfirmationRequired": { "type": "boolean" },
+    "notes": { "type": "string" }
+  }
+}

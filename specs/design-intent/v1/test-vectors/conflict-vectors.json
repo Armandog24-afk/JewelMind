@@ -1,0 +1,31 @@
+{
+  "description": "Real detect_conflicts() outputs.",
+  "vectors": [
+    {
+      "label": "delicate vs bold",
+      "conflictCount": 1,
+      "conflictTypes": [
+        "EXPLICIT_CONTRADICTION"
+      ]
+    },
+    {
+      "label": "delicate vs light (adjacent, no conflict)",
+      "conflictCount": 0,
+      "conflictTypes": []
+    },
+    {
+      "label": "minimal vs ornate",
+      "conflictCount": 1,
+      "conflictTypes": [
+        "EXPLICIT_CONTRADICTION"
+      ]
+    },
+    {
+      "label": "understated vs statement",
+      "conflictCount": 1,
+      "conflictTypes": [
+        "EXPLICIT_CONTRADICTION"
+      ]
+    }
+  ]
+}

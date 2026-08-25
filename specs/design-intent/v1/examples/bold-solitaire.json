@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "sourceText": "Make it bold and substantial.",
+  "statements": [
+    {
+      "intentId": "intent-98425da5-1a29-40dc-acd2-d7bd07d4772f",
+      "target": "RING",
+      "concept": "VISUAL_WEIGHT",
+      "value": "BOLD",
+      "strength": "PREFERRED",
+      "priority": 0,
+      "provenance": "AI_NORMALIZED",
+      "confidenceClass": "EXACT",
+      "sourceText": "bold",
+      "resolutionStatus": "PRESERVED",
+      "relatedJDLPaths": [],
+      "diagnostics": []
+    },
+    {
+      "intentId": "intent-14156ec5-df4e-4d06-8826-8a993ec5b07f",
+      "target": "RING",
+      "concept": "VISUAL_WEIGHT",
+      "value": "SUBSTANTIAL",
+      "strength": "PREFERRED",
+      "priority": 0,
+      "provenance": "AI_NORMALIZED",
+      "confidenceClass": "EXACT",
+      "sourceText": "substantial",
+      "resolutionStatus": "PRESERVED",
+      "relatedJDLPaths": [],
+      "diagnostics": []
+    }
+  ],
+  "relationships": [],
+  "unresolvedDescriptors": [],
+  "conflicts": [],
+  "profile": null,
+  "diagnostics": []
+}

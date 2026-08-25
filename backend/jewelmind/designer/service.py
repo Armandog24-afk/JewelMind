@@ -16,6 +16,7 @@ from typing import Any
 from pydantic import ValidationError
 
 from jewelmind.api.errors import AppError
+from jewelmind.design_intent.resolver import RawRelationInput, RawStatementInput, build_design_intent
 from jewelmind.designer import capability, normalizer
 from jewelmind.designer.errors import (
     DESIGNER_AMBIGUOUS_REQUEST,
@@ -73,7 +74,11 @@ class DesignerService:
             if request.interactionMode == "CREATE"
             else (request.currentJDL or JewelryDefinition())
         )
-        context = DesignerContext(currentJDL=base, interactionMode=request.interactionMode)
+        context = DesignerContext(
+            currentJDL=base,
+            interactionMode=request.interactionMode,
+            currentDesignIntent=request.currentDesignIntent,
+        )
 
         try:
             raw = self._provider.interpret(request, context)
@@ -274,6 +279,34 @@ class DesignerService:
             )
 
         unresolved_intent = list(raw.unresolvedDescriptors)
+
+        design_intent = build_design_intent(
+            source_text=request.text,
+            mode=request.interactionMode,
+            previous=request.currentDesignIntent,
+            raw_statements=[
+                RawStatementInput(
+                    target=s.target,
+                    concept=s.concept,
+                    value=s.value,
+                    strength=s.strength,
+                    sourceText=s.sourceText or s.value,
+                )
+                for s in raw.designIntentStatements
+            ],
+            raw_relations=[
+                RawRelationInput(
+                    subject=r.subject,
+                    predicate=r.predicate,
+                    object=r.object,
+                    strength=r.strength,
+                    sourceText=r.sourceText,
+                )
+                for r in raw.designIntentRelations
+            ],
+            raw_unresolved_descriptors=list(raw.unresolvedDescriptors),
+        )
+
         candidate = _apply_patch(base, patch) if patch or request.interactionMode == "CREATE" else base
 
         if candidate is None:
@@ -291,9 +324,14 @@ class DesignerService:
         else:
             validation = validate_definition(candidate)
             forge_evaluation = ForgeEvaluationSummary(results=validation, hasErrors=has_errors(validation))
-            diff = normalizer.compute_diff(
-                request.currentJDL if request.interactionMode == "MODIFY" else None, candidate
-            )
+            # Compared against whatever the caller says is currently loaded,
+            # regardless of interactionMode — CREATE's `base` still starts
+            # from schema defaults (unaffected), but the diff itself always
+            # reflects "what would actually change in the design currently
+            # open in Studio," which is what the frontend uses to decide
+            # whether applying this proposal should mark the model stale
+            # (see docs/bible/13-design-intent/353-intent-preservation.md).
+            diff = normalizer.compute_diff(request.currentJDL, candidate)
             status = self._resolve_status(
                 clarification_questions, unsupported_features, proposed_fields, unresolved_intent
             )
@@ -312,6 +350,7 @@ class DesignerService:
             forgeEvaluation=forge_evaluation,
             diff=diff,
             proposalStatus=status,
+            designIntent=design_intent,
         )
 
     @staticmethod

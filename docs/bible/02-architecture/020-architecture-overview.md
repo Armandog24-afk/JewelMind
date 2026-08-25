@@ -77,6 +77,23 @@ Alchemist, or Foundry directly, and never generates geometry itself.
 This layer is formalized as **"Designer"** in Sprint 10 — see
 [`12-designer/README.md`](../12-designer/README.md).
 
+## Design Intent (aesthetic semantic layer)
+
+As of Sprint 11, `backend/jewelmind/design_intent/` sits between
+Designer and JDL, with zero authority over either: it separates the
+*subjective* remainder of a natural-language request (e.g. "delicate",
+"minimal") from the *technical* fields Designer already resolves,
+structures it into a `DesignIntent` (statements, relations, conflicts,
+unresolved descriptors), and passes it back on `DesignerProposal.designIntent`
+for review in the Studio UI's "Design intent" section — but it never
+writes to a JDL dotted path, never touches `candidateJDL`, and never
+influences the same JDL-validation/Forge-evaluation gate Designer's
+technical fields pass through. Design Intent never talks to Atlas,
+Alchemist, or Foundry directly, and registers zero automatic
+subjective-to-numeric mappings in v1 by design. This layer is
+formalized as **"Design Intent"** in Sprint 11 — see
+[`13-design-intent/README.md`](../13-design-intent/README.md).
+
 ## CadQuery / OpenCascade as the geometry core
 
 All 3D geometry is constructed through CadQuery

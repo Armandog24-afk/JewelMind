@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/design-intent.schema.json",
+  "title": "Design Intent v1",
+  "description": "The full structured aesthetic intent extracted from one request — never geometry, never JDL, never a manufacturing rule. Sub-shapes are inlined here (not $ref'd), matching every prior sprint's specs/*/v1/ convention. See docs/bible/13-design-intent/332-intent-domain-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "sourceText", "statements", "relationships", "unresolvedDescriptors", "conflicts", "diagnostics"],
+  "properties": {
+    "version": { "type": "string" },
+    "sourceText": { "type": "string" },
+    "statements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["intentId", "target", "concept", "value", "provenance", "confidenceClass", "sourceText", "resolutionStatus"],
+        "properties": {
+          "intentId": { "type": "string" },
+          "target": { "enum": ["JEWELRY_PRODUCT", "RING", "BAND", "STONE", "SETTING", "PRONGS", "BASKET", "MATERIAL_APPEARANCE", "OVERALL_PROPORTION", "VISUAL_HIERARCHY"] },
+          "concept": { "enum": ["VISUAL_WEIGHT", "SIMPLICITY", "STYLE_TEMPORALITY", "VISUAL_EMPHASIS", "PROPORTIONAL_CHARACTER", "STRUCTURAL_CHARACTER"] },
+          "value": { "type": "string" },
+          "strength": { "enum": ["OPTIONAL", "PREFERRED", "IMPORTANT", "REQUIRED"] },
+          "priority": { "type": "integer" },
+          "provenance": { "enum": ["USER_EXPLICIT", "USER_CONTEXT", "AI_NORMALIZED", "SYSTEM_PROFILE", "EXISTING_PROJECT", "CLARIFICATION_RESPONSE", "DERIVED_RELATION", "UNRESOLVED"] },
+          "confidenceClass": { "enum": ["EXACT", "HIGH_CONFIDENCE_NORMALIZATION", "AMBIGUOUS", "INFERRED", "UNRESOLVED"] },
+          "sourceText": { "type": "string" },
+          "resolutionStatus": { "enum": ["UNRESOLVED", "PRESERVED", "DETERMINISTICALLY_RESOLVED", "USER_RESOLVED", "PROFILE_RESOLVED", "UNSUPPORTED", "CONFLICTING"] },
+          "relatedJDLPaths": { "type": "array", "items": { "type": "string" } },
+          "diagnostics": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relationId", "subject", "predicate", "object", "provenance", "resolutionStatus"],
+        "properties": {
+          "relationId": { "type": "string" },
+          "subject": { "enum": ["JEWELRY_PRODUCT", "RING", "BAND", "STONE", "SETTING", "PRONGS", "BASKET", "MATERIAL_APPEARANCE", "OVERALL_PROPORTION", "VISUAL_HIERARCHY"] },
+          "predicate": { "enum": ["NARROWER_THAN", "BROADER_THAN", "DOMINANT_OVER", "SUBORDINATE_TO", "DISCREET_RELATIVE_TO", "BALANCED_WITH"] },
+          "object": { "enum": ["JEWELRY_PRODUCT", "RING", "BAND", "STONE", "SETTING", "PRONGS", "BASKET", "MATERIAL_APPEARANCE", "OVERALL_PROPORTION", "VISUAL_HIERARCHY"] },
+          "strength": { "enum": ["OPTIONAL", "PREFERRED", "IMPORTANT", "REQUIRED"] },
+          "provenance": { "enum": ["USER_EXPLICIT", "USER_CONTEXT", "AI_NORMALIZED", "SYSTEM_PROFILE", "EXISTING_PROJECT", "CLARIFICATION_RESPONSE", "DERIVED_RELATION", "UNRESOLVED"] },
+          "resolutionStatus": { "enum": ["UNRESOLVED", "PRESERVED", "DETERMINISTICALLY_RESOLVED", "USER_RESOLVED", "PROFILE_RESOLVED", "UNSUPPORTED", "CONFLICTING"] },
+          "sourceText": { "type": "string" }
+        }
+      }
+    },
+    "unresolvedDescriptors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Subjective language preserved verbatim — never converted into an invented dimension."
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["conflictId", "type", "description"],
+        "properties": {
+          "conflictId": { "type": "string" },
+          "type": { "enum": ["EXPLICIT_CONTRADICTION", "SOFT_TENSION", "TARGET_CONFLICT", "PRIORITY_CONFLICT", "RESOLUTION_CONFLICT"] },
+          "statementIds": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "profile": {
+      "type": ["string", "null"],
+      "description": "An IntentProfile id if this intent was ever resolved through one — always null in v1."
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": {
+            "enum": [
+              "INTENT_UNKNOWN_DESCRIPTOR", "INTENT_AMBIGUOUS_DESCRIPTOR", "INTENT_CONFLICT",
+              "INTENT_UNSUPPORTED_TARGET", "INTENT_NO_DETERMINISTIC_RESOLUTION", "INTENT_PROFILE_UNAVAILABLE",
+              "INTENT_RESOLUTION_REQUIRES_CONFIRMATION", "INTENT_INVALID_RELATION", "INTENT_PRESERVED_UNRESOLVED"
+            ]
+          },
+          "severity": { "enum": ["info", "warning", "error"] },
+          "message": { "type": "string" },
+          "statementId": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

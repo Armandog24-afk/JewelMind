@@ -17,6 +17,7 @@ vi.mock('../api/client', () => ({
 }))
 
 import { generateModel } from '../api/client'
+import { useDesignIntentStore } from './useDesignIntentStore'
 import { useProjectStore } from './useProjectStore'
 
 function fakeModel(overrides: Partial<GenerateResponse> = {}): GenerateResponse {
@@ -51,6 +52,38 @@ describe('useProjectStore', () => {
 
     useProjectStore.getState().resetProject()
     expect(useProjectStore.getState().currentDefinition).toEqual(createDefaultDefinition())
+  })
+
+  it('reset also clears any stored design intent', () => {
+    useDesignIntentStore.getState().applyIntent({
+      version: '1.0.0',
+      sourceText: 'delicate',
+      statements: [
+        {
+          intentId: 'i1',
+          target: 'RING',
+          concept: 'VISUAL_WEIGHT',
+          value: 'DELICATE',
+          strength: 'PREFERRED',
+          priority: 0,
+          provenance: 'AI_NORMALIZED',
+          confidenceClass: 'HIGH_CONFIDENCE_NORMALIZATION',
+          sourceText: 'delicato',
+          resolutionStatus: 'PRESERVED',
+          relatedJDLPaths: [],
+          diagnostics: [],
+        },
+      ],
+      relationships: [],
+      unresolvedDescriptors: [],
+      conflicts: [],
+      profile: null,
+      diagnostics: [],
+    })
+    expect(useDesignIntentStore.getState().currentIntent).not.toBeNull()
+
+    useProjectStore.getState().resetProject()
+    expect(useDesignIntentStore.getState().currentIntent).toBeNull()
   })
 
   it('marks the definition stale after a parameter changes post-generation', async () => {

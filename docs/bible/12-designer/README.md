@@ -78,6 +78,10 @@ Designer never communicates geometric construction instructions to Atlas, never 
 
 Designer adds exactly one new Studio surface — `DesignerPanel`, rendered between the professional-review notice and `ConfigurationPanel` — and one new store action, `useProjectStore.applyDesignerProposal()`. It changes nothing about Studio's existing model-status, output-eligibility, or generation contracts: applying a proposal only ever writes to `currentDefinition` through the same `withUpdatedDefinition()` path every other `updateXxx()` action already uses, so a proposal that changes a geometry-driving field correctly marks the current model stale, and Generate/Regenerate remains a separate, deliberate action Designer never triggers automatically. See [`320-current-studio-integration.md`](320-current-studio-integration.md).
 
+## Relationship to Sprint 11
+
+[`13-design-intent/`](../13-design-intent/README.md) (Sprint 11) extends Designer's own structured-output contract without changing any Sprint 10 guarantee: `RawDesignerResponse` (`designer/schemas.py`) gains `designIntentStatements`/`designIntentRelations` (provider-reported aesthetic descriptors and relations), and `DesignerProposal` gains one new required field, `designIntent` (a `DesignIntent`, always present, possibly empty). Every existing Sprint 10 guarantee is unchanged: `candidateJDL` is still built exclusively from `proposedCanonicalValues` via `JewelryDefinition.model_validate()`, the same JDL schema validation and Forge evaluation still run over it, and CI still exercises only `FakeDesignerProvider` — Design Intent's own deterministic pipeline (`backend/jewelmind/design_intent/`) runs entirely independently of, and after, Designer's technical-field resolution in `service.py::_build_proposal()`. See [`13-design-intent/356-designer-intent-extraction.md`](../13-design-intent/356-designer-intent-extraction.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-10-VALIDATION-REPORT.md`](SPRINT-10-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

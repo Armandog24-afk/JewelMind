@@ -1,0 +1,17 @@
+{
+  "description": "Real compute_intent_diff() output for the delicate -> +minimal MODIFY case.",
+  "vectors": [
+    {
+      "key": "RING.SIMPLICITY",
+      "previousValue": null,
+      "newValue": "MINIMAL",
+      "changeType": "ADDED"
+    },
+    {
+      "key": "RING.VISUAL_WEIGHT",
+      "previousValue": "DELICATE",
+      "newValue": "DELICATE",
+      "changeType": "UNCHANGED"
+    }
+  ]
+}

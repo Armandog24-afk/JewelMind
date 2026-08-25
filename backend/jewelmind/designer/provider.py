@@ -17,6 +17,7 @@ import os
 from dataclasses import dataclass, field
 from typing import Protocol
 
+from jewelmind.design_intent.schemas import DesignIntent
 from jewelmind.designer.errors import (
     DesignerInvalidResponseError,
     DesignerProviderError,
@@ -51,6 +52,34 @@ _TOOL_INPUT_SCHEMA: dict = {
             },
         },
         "unresolvedDescriptors": {"type": "array", "items": {"type": "string"}},
+        "designIntentStatements": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "target": {"type": "string"},
+                    "concept": {"type": "string"},
+                    "value": {"type": "string"},
+                    "strength": {"type": ["string", "null"]},
+                    "sourceText": {"type": "string"},
+                },
+                "required": ["target", "concept", "value"],
+            },
+        },
+        "designIntentRelations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "subject": {"type": "string"},
+                    "predicate": {"type": "string"},
+                    "object": {"type": "string"},
+                    "strength": {"type": ["string", "null"]},
+                    "sourceText": {"type": "string"},
+                },
+                "required": ["subject", "predicate", "object"],
+            },
+        },
         "detectedUnsupportedFeatures": {
             "type": "array",
             "items": {
@@ -91,6 +120,8 @@ _TOOL_INPUT_SCHEMA: dict = {
     "required": [
         "proposedCanonicalValues",
         "unresolvedDescriptors",
+        "designIntentStatements",
+        "designIntentRelations",
         "detectedUnsupportedFeatures",
         "ambiguities",
         "clarificationCandidates",
@@ -102,6 +133,7 @@ _TOOL_INPUT_SCHEMA: dict = {
 class DesignerContext:
     currentJDL: JewelryDefinition
     interactionMode: InteractionMode
+    currentDesignIntent: DesignIntent | None = None
 
 
 class DesignerProvider(Protocol):
@@ -163,7 +195,9 @@ class AnthropicDesignerProvider:
     ) -> RawDesignerResponse:
         import anthropic
 
-        system_prompt = build_system_prompt(context.currentJDL, context.interactionMode)
+        system_prompt = build_system_prompt(
+            context.currentJDL, context.interactionMode, context.currentDesignIntent
+        )
         user_message = build_user_message(request.text, request.locale)
 
         try:

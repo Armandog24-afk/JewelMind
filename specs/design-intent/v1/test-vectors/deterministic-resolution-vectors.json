@@ -1,0 +1,17 @@
+{
+  "description": "Every recognized statement in v1 resolves to PRESERVED, never DETERMINISTICALLY_RESOLVED — zero automatic subjective-to-numeric mappings are registered (see 349-deterministic-resolution-policy.md).",
+  "vectors": [
+    {
+      "resolutionStatus": "PRESERVED",
+      "value": "DELICATE"
+    },
+    {
+      "resolutionStatus": "PRESERVED",
+      "value": "DELICATE"
+    },
+    {
+      "resolutionStatus": "PRESERVED",
+      "value": "MINIMAL"
+    }
+  ]
+}

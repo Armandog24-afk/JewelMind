@@ -547,3 +547,56 @@ before a request can be resolved into a proposed field, because the
 request is ambiguous or under-specified in a way that materially
 affects design intent. See
 [`12-designer/300-clarification-policy.md`](../12-designer/300-clarification-policy.md).
+
+## Design Intent terms (Sprint 11)
+
+> Authoritative source for every term in this section:
+> [`13-design-intent/`](../13-design-intent/README.md) (Sprint 11).
+
+**Design Intent** — the formal semantic layer between subjective
+aesthetic language ("delicate", "minimal", "classic", "bold") and
+JewelMind's deterministic `JewelryDefinition` (`DesignIntent` in
+`backend/jewelmind/design_intent/schemas.py`). Subjective language may
+be structured, stored, and reviewed without ever being numerically
+resolved — Design Intent sits between Designer and JDL and has zero
+authority to bypass either. See
+[`13-design-intent/README.md`](../13-design-intent/README.md).
+
+**Intent Statement** — one recognized aesthetic descriptor
+(`IntentStatement`): a target, a concept category, a value on that
+concept's continuum, a strength, a provenance, a confidence class, and
+a resolution status. Never carries a numeric geometry value —
+`relatedJDLPaths` is always empty in v1. See
+[`13-design-intent/332-intent-domain-model.md`](../13-design-intent/332-intent-domain-model.md).
+
+**Intent Relation** — a relative (not absolute-numeric) statement
+between two `IntentTarget`s (`IntentRelation`), e.g. "the band should
+look narrower than the stone" (`BAND NARROWER_THAN STONE`). See
+[`13-design-intent/332-intent-domain-model.md`](../13-design-intent/332-intent-domain-model.md).
+
+**Concept Category** — one of the 6 controlled semantic axes an intent
+statement can target (`VISUAL_WEIGHT`, `SIMPLICITY`,
+`STYLE_TEMPORALITY`, `VISUAL_EMPHASIS`, `PROPORTIONAL_CHARACTER`,
+`STRUCTURAL_CHARACTER`), each an ordered continuum of canonical values,
+never a numeric score. See
+[`13-design-intent/333-intent-vocabulary.md`](../13-design-intent/333-intent-vocabulary.md).
+
+**Style Continuum** — the ordered sequence of canonical values within
+one concept category (e.g. `DELICATE` -> `LIGHT` -> `BALANCED` ->
+`SUBSTANTIAL` -> `BOLD` for `VISUAL_WEIGHT`), used to measure relative
+distance between two statements on the same axis without ever assigning
+a millimeter or numeric value to either end. See
+[`13-design-intent/338-style-continuum-model.md`](../13-design-intent/338-style-continuum-model.md).
+
+**Intent Conflict** — a detected tension or contradiction between two
+intent statements or relations (`IntentConflict`), always recorded and
+surfaced, never silently rejected, and never blocking a proposal from
+being returned. See
+[`13-design-intent/346-intent-conflict-model.md`](../13-design-intent/346-intent-conflict-model.md).
+
+**Deterministic Resolution Policy** — the rule that only an explicit,
+deterministic, versioned, and reviewed intent-to-JDL mapping may ever
+automatically influence a JDL field; v1 registers zero such mappings,
+which is the deliberately correct, safe state, not an unfinished
+feature. See
+[`13-design-intent/349-deterministic-resolution-policy.md`](../13-design-intent/349-deterministic-resolution-policy.md).

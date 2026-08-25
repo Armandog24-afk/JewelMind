@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/intent-relation.schema.json",
+  "title": "Design Intent Relation v1",
+  "description": "A relative proportional relationship between two targets — never an absolute dimension. See docs/bible/13-design-intent/336-relative-proportion-intent.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["relationId", "subject", "predicate", "object", "provenance", "resolutionStatus"],
+  "properties": {
+    "relationId": { "type": "string" },
+    "subject": {
+      "enum": ["JEWELRY_PRODUCT", "RING", "BAND", "STONE", "SETTING", "PRONGS", "BASKET", "MATERIAL_APPEARANCE", "OVERALL_PROPORTION", "VISUAL_HIERARCHY"]
+    },
+    "predicate": {
+      "enum": ["NARROWER_THAN", "BROADER_THAN", "DOMINANT_OVER", "SUBORDINATE_TO", "DISCREET_RELATIVE_TO", "BALANCED_WITH"]
+    },
+    "object": {
+      "enum": ["JEWELRY_PRODUCT", "RING", "BAND", "STONE", "SETTING", "PRONGS", "BASKET", "MATERIAL_APPEARANCE", "OVERALL_PROPORTION", "VISUAL_HIERARCHY"]
+    },
+    "strength": { "enum": ["OPTIONAL", "PREFERRED", "IMPORTANT", "REQUIRED"] },
+    "provenance": {
+      "enum": ["USER_EXPLICIT", "USER_CONTEXT", "AI_NORMALIZED", "SYSTEM_PROFILE", "EXISTING_PROJECT", "CLARIFICATION_RESPONSE", "DERIVED_RELATION", "UNRESOLVED"]
+    },
+    "resolutionStatus": {
+      "enum": ["UNRESOLVED", "PRESERVED", "DETERMINISTICALLY_RESOLVED", "USER_RESOLVED", "PROFILE_RESOLVED", "UNSUPPORTED", "CONFLICTING"]
+    },
+    "sourceText": { "type": "string" }
+  }
+}

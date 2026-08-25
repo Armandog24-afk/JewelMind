@@ -25,6 +25,7 @@ import {
 import { ApiError } from '../api/types'
 import type { GenerateResponse } from '../api/types'
 import { clearDefinition, loadDefinition, saveDefinition } from './persistence'
+import { useDesignIntentStore } from './useDesignIntentStore'
 
 export type GenerationStatus = 'idle' | 'generating' | 'success' | 'error'
 export type BackendStatus = 'checking' | 'online' | 'offline'
@@ -163,6 +164,7 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
 
   resetProject: () => {
     clearDefinition()
+    useDesignIntentStore.getState().clearIntent()
     const fresh = createDefaultDefinition()
     saveDefinition(fresh)
     set({

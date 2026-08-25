@@ -68,6 +68,10 @@ Sprint 2 ([`04-jewelry-domain/`](../04-jewelry-domain/README.md)) established th
 
 [`12-designer/`](../12-designer/README.md) (Sprint 10) adds Designer, a natural-language interpretation layer whose every candidate proposal is evaluated through this exact same Forge engine (`validation.engine.validate_definition()`/`has_errors()`) as any manually-edited design — with zero special-casing and zero Designer-invented rule. Designer's `capability.py` and `UnsupportedFeature` model describe only *support* (whether a JDL field/enum value exists at all), never a manufacturability or jewelry-domain verdict; that distinction remains exclusively Forge's to make. See [`12-designer/309-designer-forge-integration.md`](../12-designer/309-designer-forge-integration.md).
 
+## Relationship to Sprint 11
+
+[`13-design-intent/`](../13-design-intent/README.md) (Sprint 11) adds Design Intent, and Forge has zero awareness of it: `validation/engine.py` evaluates only `candidateJDL`, never a `DesignIntent`, and no rule anywhere in the registry references `backend/jewelmind/design_intent/`. Forge will never judge subjective aesthetic quality ("is this delicate enough") — that is not a jewelry-domain or manufacturing fact Forge is positioned to evaluate, and Design Intent's own resolver never asks it to. See [`13-design-intent/351-intent-to-forge-boundary.md`](../13-design-intent/351-intent-to-forge-boundary.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-4-VALIDATION-REPORT.md`](SPRINT-4-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

@@ -1,16 +1,19 @@
 import { useId, useState, type FormEvent } from 'react'
 import { interpretDesignRequest } from '../api/client'
 import { ApiError } from '../api/types'
-import type { DesignerInteractionMode, DesignerResult, ProposedField } from '../api/types'
+import type { DesignerInteractionMode, DesignerResult, IntentStatement, ProposedField } from '../api/types'
+import { useDesignIntentStore } from '../store/useDesignIntentStore'
 import { useProjectStore } from '../store/useProjectStore'
 
 /**
  * Designer v1's natural-language entry point into Studio. This is another
  * way to edit the structured design, not a chatbot replacing the
  * parameter editor — ConfigurationPanel stays visible and authoritative at
- * all times, before, during, and after a proposal review. See
- * docs/bible/12-designer/310-user-review-and-acceptance.md and
- * 320-current-studio-integration.md.
+ * all times, before, during, and after a proposal review. Sprint 11 (Design
+ * Intent Model) adds a second, explicitly separate review section for
+ * aesthetic intent — never merged into the technical field list, and never
+ * converted into a dimension. See docs/bible/12-designer/310-user-review-and-acceptance.md,
+ * docs/bible/13-design-intent/357-studio-intent-review.md.
  */
 
 const PROVENANCE_LABEL: Record<string, string> = {
@@ -28,10 +31,35 @@ function fieldLabel(field: ProposedField): string {
   return PROVENANCE_LABEL[field.provenance] ?? field.provenance
 }
 
+const RESOLUTION_LABEL: Record<string, string> = {
+  PRESERVED: 'Preserved — not yet technically resolved',
+  CONFLICTING: 'Conflicting — needs your attention',
+  UNRESOLVED: 'Unresolved',
+  UNSUPPORTED: 'Not currently supported',
+  DETERMINISTICALLY_RESOLVED: 'Resolved',
+  USER_RESOLVED: 'Resolved by you',
+  PROFILE_RESOLVED: 'Resolved from a profile',
+}
+
+function resolutionLabel(statement: IntentStatement): string {
+  return RESOLUTION_LABEL[statement.resolutionStatus] ?? statement.resolutionStatus
+}
+
+function intentStatementLabel(statement: IntentStatement): string {
+  const concept = statement.concept.replace(/_/g, ' ').toLowerCase()
+  const target = statement.target.replace(/_/g, ' ').toLowerCase()
+  const value = statement.value.replace(/_/g, ' ').toLowerCase()
+  return `${target}: ${value} (${concept})`
+}
+
 export function DesignerPanel() {
   const textId = useId()
   const applyDesignerProposal = useProjectStore((s) => s.applyDesignerProposal)
   const currentDefinition = useProjectStore((s) => s.currentDefinition)
+  const currentIntent = useDesignIntentStore((s) => s.currentIntent)
+  const applyIntent = useDesignIntentStore((s) => s.applyIntent)
+  const removeStatement = useDesignIntentStore((s) => s.removeStatement)
+  const removeUnresolvedDescriptor = useDesignIntentStore((s) => s.removeUnresolvedDescriptor)
 
   const [text, setText] = useState('')
   const [mode, setMode] = useState<DesignerInteractionMode>('MODIFY')
@@ -50,7 +78,14 @@ export function DesignerPanel() {
         requestId: `req-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         text: requestText,
         interactionMode: mode,
-        currentJDL: mode === 'MODIFY' ? currentDefinition : null,
+        // Always sent, regardless of mode: CREATE still starts from schema
+        // defaults (base construction is unaffected), but the backend uses
+        // this to diff the proposal against what's actually loaded right
+        // now — the signal handleApply() below uses to decide whether
+        // applying should mark the current model stale. See
+        // docs/bible/13-design-intent/353-intent-preservation.md.
+        currentJDL: currentDefinition,
+        currentDesignIntent: currentIntent,
       })
       setResult(response)
     } catch (err) {
@@ -78,8 +113,26 @@ export function DesignerPanel() {
   }
 
   const handleApply = () => {
-    if (!result?.proposal.candidateJDL) return
-    applyDesignerProposal(result.proposal.candidateJDL)
+    const proposal = result?.proposal
+    if (!proposal) return
+
+    // Only touch JDL/staleness when a real technical field actually
+    // changed — a pure design-intent request (e.g. "make it more minimal")
+    // must never mark the current model stale. See
+    // docs/bible/13-design-intent/353-intent-preservation.md and
+    // INTENT-GOV: "intent-only changes must not mark geometry stale."
+    const hasTechnicalChange = proposal.diff.some((d) => d.changed)
+    if (proposal.candidateJDL && hasTechnicalChange) {
+      applyDesignerProposal(proposal.candidateJDL)
+    }
+
+    const intent = proposal.designIntent
+    const hasIntentContent =
+      intent.statements.length > 0 || intent.relationships.length > 0 || intent.unresolvedDescriptors.length > 0
+    if (hasIntentContent) {
+      applyIntent(intent)
+    }
+
     setResult(null)
     setText('')
   }
@@ -153,6 +206,42 @@ export function DesignerPanel() {
         </p>
       ) : null}
 
+      {!proposal &&
+      currentIntent &&
+      (currentIntent.statements.length > 0 || currentIntent.unresolvedDescriptors.length > 0) ? (
+        <div className="designer-intent-summary" role="region" aria-label="Current design intent">
+          <h3>Design intent</h3>
+          <ul className="designer-intent-summary__tags">
+            {currentIntent.statements.map((s) => (
+              <li key={s.intentId} className="designer-intent-summary__tag">
+                <span>{intentStatementLabel(s)}</span>
+                <button
+                  type="button"
+                  className="designer-intent-summary__remove"
+                  aria-label={`Remove ${intentStatementLabel(s)} from design intent`}
+                  onClick={() => removeStatement(s.intentId)}
+                >
+                  ×
+                </button>
+              </li>
+            ))}
+            {currentIntent.unresolvedDescriptors.map((d) => (
+              <li key={d} className="designer-intent-summary__tag designer-intent-summary__tag--unresolved">
+                <span>{d} (unresolved)</span>
+                <button
+                  type="button"
+                  className="designer-intent-summary__remove"
+                  aria-label={`Remove ${d} from design intent`}
+                  onClick={() => removeUnresolvedDescriptor(d)}
+                >
+                  ×
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
       {proposal ? (
         <div className="designer-proposal" role="region" aria-label="Design proposal review">
           <div className="designer-proposal__section">
@@ -175,12 +264,40 @@ export function DesignerPanel() {
             </div>
           ) : null}
 
-          {proposal.unresolvedIntent.length > 0 ? (
+          {proposal.designIntent.statements.length > 0 ? (
+            <div className="designer-proposal__section">
+              <h3>Design intent</h3>
+              <ul className="designer-proposal__field-list">
+                {proposal.designIntent.statements.map((s) => (
+                  <li key={s.intentId}>
+                    <span className="designer-proposal__field-path">{intentStatementLabel(s)}</span>
+                    <span className="designer-proposal__field-provenance">{resolutionLabel(s)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {proposal.designIntent.conflicts.length > 0 ? (
+            <div className="designer-proposal__section designer-proposal__section--unsupported">
+              <h3>Conflicting intent</h3>
+              <ul className="designer-proposal__plain-list">
+                {proposal.designIntent.conflicts.map((c) => (
+                  <li key={c.conflictId}>{c.description}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {proposal.designIntent.unresolvedDescriptors.length > 0 ? (
             <div className="designer-proposal__section">
               <h3>Not yet mapped to a technical parameter</h3>
               <ul className="designer-proposal__plain-list">
-                {proposal.unresolvedIntent.map((text_) => (
-                  <li key={text_}>{text_}</li>
+                {proposal.designIntent.unresolvedDescriptors.map((d) => (
+                  <li key={d}>
+                    &lsquo;{d}&rsquo; has been preserved as design intent. JewelMind does not currently
+                    convert this subjective preference into arbitrary dimensions.
+                  </li>
                 ))}
               </ul>
             </div>

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/intent-target.schema.json",
+  "title": "Design Intent Target v1",
+  "description": "What an intent statement or relation is about. Current target support reflects the current solitaire domain only — see docs/bible/13-design-intent/334-intent-target-model.md.",
+  "enum": [
+    "JEWELRY_PRODUCT",
+    "RING",
+    "BAND",
+    "STONE",
+    "SETTING",
+    "PRONGS",
+    "BASKET",
+    "MATERIAL_APPEARANCE",
+    "OVERALL_PROPORTION",
+    "VISUAL_HIERARCHY"
+  ]
+}

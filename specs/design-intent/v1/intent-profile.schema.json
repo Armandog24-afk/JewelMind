@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/intent-profile.schema.json",
+  "title": "Design Intent Profile v1",
+  "description": "A future, versioned, deterministic intent-to-JDL mapping. No profile is registered in v1 — see docs/bible/13-design-intent/355-intent-profile-model.md and 349-deterministic-resolution-policy.md for why zero automatic subjective-to-numeric mappings is the correct, deliberate v1 state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileId", "version", "supportedDomain", "provenance"],
+  "properties": {
+    "profileId": { "type": "string" },
+    "version": { "type": "string" },
+    "supportedDomain": { "type": "string" },
+    "resolvedIntent": { "type": "array", "items": { "type": "string" } },
+    "jdlMapping": {
+      "type": "object",
+      "description": "Deterministic field-path -> value mapping this profile would apply. Empty in every v1 profile."
+    },
+    "provenance": { "type": "string" },
+    "professionalReview": { "enum": ["not_required", "preliminary", "required", "validated"] },
+    "deterministicMapping": { "type": "boolean" },
+    "applicableCapabilityVersion": { "type": "string" }
+  }
+}

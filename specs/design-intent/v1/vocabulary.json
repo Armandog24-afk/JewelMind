@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "concepts": {
+    "VISUAL_WEIGHT": {
+      "order": [
+        "DELICATE",
+        "LIGHT",
+        "BALANCED",
+        "SUBSTANTIAL",
+        "BOLD"
+      ],
+      "synonyms": {
+        "delicate": "DELICATE",
+        "delicato": "DELICATE",
+        "delicata": "DELICATE",
+        "fine": "DELICATE",
+        "light": "LIGHT",
+        "leggero": "LIGHT",
+        "leggera": "LIGHT",
+        "lightweight-looking": "LIGHT",
+        "balanced": "BALANCED",
+        "bilanciato": "BALANCED",
+        "bilanciata": "BALANCED",
+        "substantial": "SUBSTANTIAL",
+        "sostanzioso": "SUBSTANTIAL",
+        "sostanziosa": "SUBSTANTIAL",
+        "bold": "BOLD",
+        "audace": "BOLD"
+      }
+    },
+    "SIMPLICITY": {
+      "order": [
+        "MINIMAL",
+        "CLEAN",
+        "BALANCED",
+        "DETAILED",
+        "ORNATE"
+      ],
+      "synonyms": {
+        "minimal": "MINIMAL",
+        "minimalista": "MINIMAL",
+        "clean": "CLEAN",
+        "pulito": "CLEAN",
+        "pulita": "CLEAN",
+        "simple": "CLEAN",
+        "semplice": "CLEAN",
+        "balanced": "BALANCED",
+        "bilanciato": "BALANCED",
+        "bilanciata": "BALANCED",
+        "detailed": "DETAILED",
+        "dettagliato": "DETAILED",
+        "dettagliata": "DETAILED",
+        "ornate": "ORNATE",
+        "elaborato": "ORNATE",
+        "elaborata": "ORNATE"
+      }
+    },
+    "STYLE_TEMPORALITY": {
+      "order": [
+        "CLASSIC",
+        "TIMELESS",
+        "CONTEMPORARY",
+        "MODERN"
+      ],
+      "synonyms": {
+        "classic": "CLASSIC",
+        "classico": "CLASSIC",
+        "classica": "CLASSIC",
+        "timeless": "TIMELESS",
+        "contemporary": "CONTEMPORARY",
+        "contemporaneo": "CONTEMPORARY",
+        "contemporanea": "CONTEMPORARY",
+        "modern": "MODERN",
+        "moderno": "MODERN",
+        "moderna": "MODERN"
+      }
+    },
+    "VISUAL_EMPHASIS": {
+      "order": [
+        "UNDERSTATED",
+        "BALANCED",
+        "CENTER_FOCUSED",
+        "STATEMENT"
+      ],
+      "synonyms": {
+        "understated": "UNDERSTATED",
+        "discreto": "UNDERSTATED",
+        "discreta": "UNDERSTATED",
+        "sobrio": "UNDERSTATED",
+        "sobria": "UNDERSTATED",
+        "balanced": "BALANCED",
+        "statement": "STATEMENT",
+        "vistoso": "STATEMENT",
+        "vistosa": "STATEMENT"
+      }
+    },
+    "PROPORTIONAL_CHARACTER": {
+      "order": [
+        "SLIM",
+        "BALANCED",
+        "BROAD"
+      ],
+      "synonyms": {
+        "slim": "SLIM",
+        "sottile": "SLIM",
+        "snella": "SLIM",
+        "narrow": "SLIM",
+        "balanced": "BALANCED",
+        "broad": "BROAD",
+        "largo": "BROAD",
+        "larga": "BROAD",
+        "ampio": "BROAD",
+        "ampia": "BROAD"
+      }
+    },
+    "STRUCTURAL_CHARACTER": {
+      "order": [
+        "SOFT",
+        "CLEAN",
+        "STRONG"
+      ],
+      "synonyms": {
+        "soft": "SOFT",
+        "morbido": "SOFT",
+        "morbida": "SOFT",
+        "clean": "CLEAN",
+        "pulito": "CLEAN",
+        "pulita": "CLEAN",
+        "strong": "STRONG",
+        "robusto": "STRONG",
+        "robusta": "STRONG",
+        "solido": "STRONG",
+        "solida": "STRONG"
+      }
+    }
+  },
+  "targetSynonyms": {
+    "ring": "RING",
+    "anello": "RING",
+    "whole ring": "RING",
+    "overall": "RING",
+    "band": "BAND",
+    "fascia": "BAND",
+    "stone": "STONE",
+    "pietra": "STONE",
+    "diamond": "STONE",
+    "diamante": "STONE",
+    "setting": "SETTING",
+    "castone": "SETTING",
+    "prongs": "PRONGS",
+    "griffe": "PRONGS",
+    "basket": "BASKET",
+    "jewelry": "JEWELRY_PRODUCT",
+    "gioiello": "JEWELRY_PRODUCT",
+    "product": "JEWELRY_PRODUCT"
+  },
+  "relationPredicates": [
+    "NARROWER_THAN",
+    "BROADER_THAN",
+    "DOMINANT_OVER",
+    "SUBORDINATE_TO",
+    "DISCREET_RELATIVE_TO",
+    "BALANCED_WITH"
+  ]
+}

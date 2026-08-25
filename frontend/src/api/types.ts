@@ -100,6 +100,127 @@ export interface NaturalLanguageDesignRequest {
   locale?: 'it' | 'en' | null
   interactionMode: DesignerInteractionMode
   currentJDL?: JewelryDefinition | null
+  currentDesignIntent?: DesignIntent | null
+}
+
+// --- Design Intent Model v1 (docs/bible/13-design-intent/) -------------
+
+export type IntentTarget =
+  | 'JEWELRY_PRODUCT'
+  | 'RING'
+  | 'BAND'
+  | 'STONE'
+  | 'SETTING'
+  | 'PRONGS'
+  | 'BASKET'
+  | 'MATERIAL_APPEARANCE'
+  | 'OVERALL_PROPORTION'
+  | 'VISUAL_HIERARCHY'
+
+export type IntentConceptCategory =
+  | 'VISUAL_WEIGHT'
+  | 'SIMPLICITY'
+  | 'STYLE_TEMPORALITY'
+  | 'VISUAL_EMPHASIS'
+  | 'PROPORTIONAL_CHARACTER'
+  | 'STRUCTURAL_CHARACTER'
+
+export type IntentStrength = 'OPTIONAL' | 'PREFERRED' | 'IMPORTANT' | 'REQUIRED'
+
+export type IntentProvenance =
+  | 'USER_EXPLICIT'
+  | 'USER_CONTEXT'
+  | 'AI_NORMALIZED'
+  | 'SYSTEM_PROFILE'
+  | 'EXISTING_PROJECT'
+  | 'CLARIFICATION_RESPONSE'
+  | 'DERIVED_RELATION'
+  | 'UNRESOLVED'
+
+export type IntentConfidence = 'EXACT' | 'HIGH_CONFIDENCE_NORMALIZATION' | 'AMBIGUOUS' | 'INFERRED' | 'UNRESOLVED'
+
+export type IntentResolutionStatus =
+  | 'UNRESOLVED'
+  | 'PRESERVED'
+  | 'DETERMINISTICALLY_RESOLVED'
+  | 'USER_RESOLVED'
+  | 'PROFILE_RESOLVED'
+  | 'UNSUPPORTED'
+  | 'CONFLICTING'
+
+export type IntentConflictType =
+  | 'EXPLICIT_CONTRADICTION'
+  | 'SOFT_TENSION'
+  | 'TARGET_CONFLICT'
+  | 'PRIORITY_CONFLICT'
+  | 'RESOLUTION_CONFLICT'
+
+export type RelationPredicate =
+  | 'NARROWER_THAN'
+  | 'BROADER_THAN'
+  | 'DOMINANT_OVER'
+  | 'SUBORDINATE_TO'
+  | 'DISCREET_RELATIVE_TO'
+  | 'BALANCED_WITH'
+
+export interface IntentStatement {
+  intentId: string
+  target: IntentTarget
+  concept: IntentConceptCategory
+  value: string
+  strength: IntentStrength
+  priority: number
+  provenance: IntentProvenance
+  confidenceClass: IntentConfidence
+  sourceText: string
+  resolutionStatus: IntentResolutionStatus
+  relatedJDLPaths: string[]
+  diagnostics: string[]
+}
+
+export interface IntentRelation {
+  relationId: string
+  subject: IntentTarget
+  predicate: RelationPredicate
+  object: IntentTarget
+  strength: IntentStrength
+  provenance: IntentProvenance
+  resolutionStatus: IntentResolutionStatus
+  sourceText: string
+}
+
+export interface IntentConflict {
+  conflictId: string
+  type: IntentConflictType
+  statementIds: string[]
+  description: string
+}
+
+export interface IntentDiagnostic {
+  code:
+    | 'INTENT_UNKNOWN_DESCRIPTOR'
+    | 'INTENT_AMBIGUOUS_DESCRIPTOR'
+    | 'INTENT_CONFLICT'
+    | 'INTENT_UNSUPPORTED_TARGET'
+    | 'INTENT_NO_DETERMINISTIC_RESOLUTION'
+    | 'INTENT_PROFILE_UNAVAILABLE'
+    | 'INTENT_RESOLUTION_REQUIRES_CONFIRMATION'
+    | 'INTENT_INVALID_RELATION'
+    | 'INTENT_PRESERVED_UNRESOLVED'
+  severity: 'info' | 'warning' | 'error'
+  message: string
+  statementId: string | null
+}
+
+export interface DesignIntent {
+  version: string
+  sourceText: string
+  statements: IntentStatement[]
+  relationships: IntentRelation[]
+  unresolvedDescriptors: string[]
+  conflicts: IntentConflict[]
+  profile: string | null
+  diagnostics: IntentDiagnostic[]
 }
 
 export interface ProposedField {
@@ -166,6 +287,7 @@ export interface DesignerProposal {
   forgeEvaluation: ForgeEvaluationSummary | null
   diff: FieldDiff[]
   proposalStatus: ProposalStatus
+  designIntent: DesignIntent
 }
 
 export interface DesignerResult {

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/design-intent/v1/intent-diagnostic.schema.json",
+  "title": "Design Intent Diagnostic v1",
+  "description": "One diagnostic entry. Never fails a request — an unresolved or conflicting intent is a normal outcome. See docs/bible/13-design-intent/358-intent-diagnostics.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "severity", "message"],
+  "properties": {
+    "code": {
+      "enum": [
+        "INTENT_UNKNOWN_DESCRIPTOR",
+        "INTENT_AMBIGUOUS_DESCRIPTOR",
+        "INTENT_CONFLICT",
+        "INTENT_UNSUPPORTED_TARGET",
+        "INTENT_NO_DETERMINISTIC_RESOLUTION",
+        "INTENT_PROFILE_UNAVAILABLE",
+        "INTENT_RESOLUTION_REQUIRES_CONFIRMATION",
+        "INTENT_INVALID_RELATION",
+        "INTENT_PRESERVED_UNRESOLVED"
+      ]
+    },
+    "severity": { "enum": ["info", "warning", "error"] },
+    "message": { "type": "string" },
+    "statementId": { "type": ["string", "null"] }
+  }
+}

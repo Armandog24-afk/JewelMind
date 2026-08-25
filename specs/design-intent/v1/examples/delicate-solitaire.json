@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "sourceText": "Fammi un solitario delicato in oro rosa con sei griffe.",
+  "statements": [
+    {
+      "intentId": "intent-c91da797-151a-48df-bfbb-49a2a2b7a0fb",
+      "target": "RING",
+      "concept": "VISUAL_WEIGHT",
+      "value": "DELICATE",
+      "strength": "PREFERRED",
+      "priority": 0,
+      "provenance": "AI_NORMALIZED",
+      "confidenceClass": "HIGH_CONFIDENCE_NORMALIZATION",
+      "sourceText": "delicato",
+      "resolutionStatus": "PRESERVED",
+      "relatedJDLPaths": [],
+      "diagnostics": []
+    }
+  ],
+  "relationships": [],
+  "unresolvedDescriptors": [],
+  "conflicts": [],
+  "profile": null,
+  "diagnostics": []
+}

@@ -1,0 +1,66 @@
+{
+  "before": {
+    "version": "1.0.0",
+    "sourceText": "Fammi un anello delicato.",
+    "statements": [
+      {
+        "intentId": "intent-d767616a-7cf5-4bb4-bb72-3f5ffa4312a9",
+        "target": "RING",
+        "concept": "VISUAL_WEIGHT",
+        "value": "DELICATE",
+        "strength": "PREFERRED",
+        "priority": 0,
+        "provenance": "AI_NORMALIZED",
+        "confidenceClass": "EXACT",
+        "sourceText": "delicato",
+        "resolutionStatus": "PRESERVED",
+        "relatedJDLPaths": [],
+        "diagnostics": []
+      }
+    ],
+    "relationships": [],
+    "unresolvedDescriptors": [],
+    "conflicts": [],
+    "profile": null,
+    "diagnostics": []
+  },
+  "after": {
+    "version": "1.0.0",
+    "sourceText": "Rendilo più minimal.",
+    "statements": [
+      {
+        "intentId": "intent-d767616a-7cf5-4bb4-bb72-3f5ffa4312a9",
+        "target": "RING",
+        "concept": "VISUAL_WEIGHT",
+        "value": "DELICATE",
+        "strength": "PREFERRED",
+        "priority": 0,
+        "provenance": "AI_NORMALIZED",
+        "confidenceClass": "EXACT",
+        "sourceText": "delicato",
+        "resolutionStatus": "PRESERVED",
+        "relatedJDLPaths": [],
+        "diagnostics": []
+      },
+      {
+        "intentId": "intent-c71b6eda-90b5-413f-8303-3dfe084a77ba",
+        "target": "RING",
+        "concept": "SIMPLICITY",
+        "value": "MINIMAL",
+        "strength": "PREFERRED",
+        "priority": 0,
+        "provenance": "AI_NORMALIZED",
+        "confidenceClass": "EXACT",
+        "sourceText": "minimal",
+        "resolutionStatus": "PRESERVED",
+        "relatedJDLPaths": [],
+        "diagnostics": []
+      }
+    ],
+    "relationships": [],
+    "unresolvedDescriptors": [],
+    "conflicts": [],
+    "profile": null,
+    "diagnostics": []
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "description": "Real normalize_descriptor() outputs.",
+  "vectors": [
+    {
+      "inputText": "delicato",
+      "concept": "VISUAL_WEIGHT",
+      "rawValue": "delicato",
+      "canonicalValue": "DELICATE"
+    },
+    {
+      "inputText": "delicate",
+      "concept": "VISUAL_WEIGHT",
+      "rawValue": "delicate",
+      "canonicalValue": "DELICATE"
+    },
+    {
+      "inputText": "leggero visivamente",
+      "concept": "VISUAL_WEIGHT",
+      "rawValue": "leggero",
+      "canonicalValue": "LIGHT"
+    },
+    {
+      "inputText": "sostanzioso",
+      "concept": "VISUAL_WEIGHT",
+      "rawValue": "sostanzioso",
+      "canonicalValue": "SUBSTANTIAL"
+    },
+    {
+      "inputText": "audace",
+      "concept": "VISUAL_WEIGHT",
+      "rawValue": "audace",
+      "canonicalValue": "BOLD"
+    },
+    {
+      "inputText": "minimal",
+      "concept": "SIMPLICITY",
+      "rawValue": "minimal",
+      "canonicalValue": "MINIMAL"
+    },
+    {
+      "inputText": "pulito",
+      "concept": "SIMPLICITY",
+      "rawValue": "pulito",
+      "canonicalValue": "CLEAN"
+    },
+    {
+      "inputText": "elaborato",
+      "concept": "SIMPLICITY",
+      "rawValue": "elaborato",
+      "canonicalValue": "ORNATE"
+    },
+    {
+      "inputText": "classico",
+      "concept": "STYLE_TEMPORALITY",
+      "rawValue": "classico",
+      "canonicalValue": "CLASSIC"
+    },
+    {
+      "inputText": "timeless",
+      "concept": "STYLE_TEMPORALITY",
+      "rawValue": "timeless",
+      "canonicalValue": "TIMELESS"
+    },
+    {
+      "inputText": "vistoso",
+      "concept": "VISUAL_EMPHASIS",
+      "rawValue": "vistoso",
+      "canonicalValue": "STATEMENT"
+    },
+    {
+      "inputText": "sobrio",
+      "concept": "VISUAL_EMPHASIS",
+      "rawValue": "sobrio",
+      "canonicalValue": "UNDERSTATED"
+    },
+    {
+      "inputText": "sottile",
+      "concept": "PROPORTIONAL_CHARACTER",
+      "rawValue": "sottile",
+      "canonicalValue": "SLIM"
+    },
+    {
+      "inputText": "ampio",
+      "concept": "PROPORTIONAL_CHARACTER",
+      "rawValue": "ampio",
+      "canonicalValue": "BROAD"
+    },
+    {
+      "inputText": "morbido",
+      "concept": "STRUCTURAL_CHARACTER",
+      "rawValue": "morbido",
+      "canonicalValue": "SOFT"
+    },
+    {
+      "inputText": "robusto",
+      "concept": "STRUCTURAL_CHARACTER",
+      "rawValue": "robusto",
+      "canonicalValue": "STRONG"
+    }
+  ]
+}

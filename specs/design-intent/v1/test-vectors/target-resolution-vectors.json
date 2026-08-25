@@ -1,0 +1,61 @@
+{
+  "description": "Real normalize_target() outputs.",
+  "vectors": [
+    {
+      "inputTarget": "ring",
+      "resolvedTarget": "RING"
+    },
+    {
+      "inputTarget": "anello",
+      "resolvedTarget": "RING"
+    },
+    {
+      "inputTarget": "band",
+      "resolvedTarget": "BAND"
+    },
+    {
+      "inputTarget": "fascia",
+      "resolvedTarget": "BAND"
+    },
+    {
+      "inputTarget": "stone",
+      "resolvedTarget": "STONE"
+    },
+    {
+      "inputTarget": "pietra",
+      "resolvedTarget": "STONE"
+    },
+    {
+      "inputTarget": "setting",
+      "resolvedTarget": "SETTING"
+    },
+    {
+      "inputTarget": "castone",
+      "resolvedTarget": "SETTING"
+    },
+    {
+      "inputTarget": "prongs",
+      "resolvedTarget": "PRONGS"
+    },
+    {
+      "inputTarget": "griffe",
+      "resolvedTarget": "PRONGS"
+    },
+    {
+      "inputTarget": "basket",
+      "resolvedTarget": "BASKET"
+    },
+    {
+      "inputTarget": "jewelry",
+      "resolvedTarget": "JEWELRY_PRODUCT"
+    },
+    {
+      "inputTarget": "gioiello",
+      "resolvedTarget": "JEWELRY_PRODUCT"
+    },
+    {
+      "inputTarget": "nonsense",
+      "resolvedTarget": null
+    }
+  ]
+}

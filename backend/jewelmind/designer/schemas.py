@@ -13,6 +13,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from jewelmind.design_intent.schemas import DesignIntent
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.validation.rules import ValidationResult
 
@@ -80,6 +81,11 @@ class NaturalLanguageDesignRequest(DesignerModel):
     locale: SupportedLocale | None = None
     interactionMode: InteractionMode = "CREATE"
     currentJDL: JewelryDefinition | None = None
+    # Sprint 11 (Design Intent Model v1) — the current, previously-preserved
+    # DesignIntent, required for a meaningful MODIFY merge (see
+    # jewelmind.design_intent.resolver.build_design_intent) and ignored for
+    # CREATE, exactly parallel to currentJDL.
+    currentDesignIntent: DesignIntent | None = None
 
 
 # --- Raw provider output (constrained structured output contract) ---------
@@ -117,16 +123,45 @@ class RawClarification(DesignerModel):
     options: list[str] = Field(default_factory=list)
 
 
+class RawIntentStatement(DesignerModel):
+    """One aesthetic (non-technical) descriptor the provider extracted.
+
+    `target`/`concept` are the provider's classification of what the
+    descriptor is about and which of the 6 controlled concept categories
+    it belongs to — see docs/bible/13-design-intent/356-designer-intent-extraction.md.
+    Re-validated deterministically against the real vocabulary in
+    `jewelmind.design_intent.normalizer`, never trusted as-is.
+    """
+
+    target: str
+    concept: str
+    value: str
+    strength: str | None = None
+    sourceText: str = ""
+
+
+class RawIntentRelation(DesignerModel):
+    subject: str
+    predicate: str
+    object: str
+    strength: str | None = None
+    sourceText: str = ""
+
+
 class RawDesignerResponse(DesignerModel):
     """The exact shape a provider's structured output must validate against.
 
     JewelMind's own deterministic code (service.py/normalizer.py), never
     the provider, turns this into a candidate JDL — see
-    305-structured-output-contract.md.
+    305-structured-output-contract.md. `designIntentStatements`/
+    `designIntentRelations` (Sprint 11) are the provider's separated-out
+    aesthetic intent — see 332-intent-domain-model.md.
     """
 
     proposedCanonicalValues: list[RawProposedValue] = Field(default_factory=list)
     unresolvedDescriptors: list[str] = Field(default_factory=list)
+    designIntentStatements: list[RawIntentStatement] = Field(default_factory=list)
+    designIntentRelations: list[RawIntentRelation] = Field(default_factory=list)
     detectedUnsupportedFeatures: list[RawUnsupportedFeature] = Field(default_factory=list)
     ambiguities: list[RawAmbiguity] = Field(default_factory=list)
     clarificationCandidates: list[RawClarification] = Field(default_factory=list)
@@ -184,6 +219,9 @@ class DesignerProposal(DesignerModel):
     proposalId: str
     sourceText: str
     interactionMode: InteractionMode
+    # Kept for backwards compatibility with Sprint 10 — a mirror of
+    # `designIntent.unresolvedDescriptors` (see build_proposal's
+    # construction). New code should read `designIntent` instead.
     unresolvedIntent: list[str] = Field(default_factory=list)
     unsupportedFeatures: list[UnsupportedFeature] = Field(default_factory=list)
     proposedFields: list[ProposedField] = Field(default_factory=list)
@@ -194,6 +232,10 @@ class DesignerProposal(DesignerModel):
     forgeEvaluation: ForgeEvaluationSummary | None = None
     diff: list[FieldDiff] = Field(default_factory=list)
     proposalStatus: ProposalStatus
+    # Sprint 11 (Design Intent Model v1) — the aesthetic intent separated
+    # out of this same request, always present (possibly empty), never
+    # merged into candidateJDL — see 350-intent-to-jdl-boundary.md.
+    designIntent: DesignIntent
 
 
 class DesignerResult(DesignerModel):

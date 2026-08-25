@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "sourceText": "Setting and stone should feel balanced with each other.",
+  "statements": [],
+  "relationships": [
+    {
+      "relationId": "relation-2ea61ead-eaa2-43af-9ffd-985729124bb1",
+      "subject": "SETTING",
+      "predicate": "BALANCED_WITH",
+      "object": "STONE",
+      "strength": "PREFERRED",
+      "provenance": "AI_NORMALIZED",
+      "resolutionStatus": "PRESERVED",
+      "sourceText": "setting balanced with stone"
+    }
+  ],
+  "unresolvedDescriptors": [],
+  "conflicts": [],
+  "profile": null,
+  "diagnostics": []
+}

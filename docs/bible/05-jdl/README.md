@@ -83,6 +83,10 @@ JDL does not redefine jewelry-domain concepts. [`04-jewelry-domain/044-solitaire
 
 [`12-designer/`](../12-designer/README.md) (Sprint 10) adds Designer, a new, non-authoritative producer of JDL candidates: a natural-language request becomes a `candidateJDL` field on a `DesignerProposal`, built by `JewelryDefinition.model_validate()` exactly like any other caller. Designer sits entirely upstream of JDL's own structural/semantic validation stages — it never skips them, never grants itself a second schema, and never marks a candidate valid on its own authority. A proposal only reaches `currentDefinition` after explicit user acceptance, at which point it is indistinguishable from a manually-entered `JewelryDefinition` to every downstream JDL stage. See [`12-designer/295-designer-to-jdl-contract.md`](../12-designer/295-designer-to-jdl-contract.md).
 
+## Relationship to Sprint 11
+
+[`13-design-intent/`](../13-design-intent/README.md) (Sprint 11) adds Design Intent, the semantic layer between subjective aesthetic language and JDL. Design Intent is explicitly **not** part of JDL and never will be without a deliberate future JDL schema evolution: `DesignIntent` (`backend/jewelmind/design_intent/schemas.py`) and `JewelryDefinition` (`backend/jewelmind/domain/schema.py`) share zero fields, and no code path in `design_intent/` writes to a JDL dotted path — `IntentStatement.relatedJDLPaths` stays empty in v1. See [`13-design-intent/350-intent-to-jdl-boundary.md`](../13-design-intent/350-intent-to-jdl-boundary.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-3-VALIDATION-REPORT.md`](SPRINT-3-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

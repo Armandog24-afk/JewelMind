@@ -92,6 +92,25 @@ classification rule, and
 [`054-domain-validation-classification.md`](054-domain-validation-classification.md)
 for every current rule classified individually.
 
+## Relationship to Sprint 11 (Design Intent)
+
+Sprint 11 ([`13-design-intent/`](../13-design-intent/README.md))
+introduces a controlled aesthetic vocabulary ("delicate", "minimal",
+"classic", "bold") for describing a design in subjective terms. This is
+deliberately **not** a jewelry-domain measurement or threshold: it never
+adds a stone shape, setting type, manufacturing value, or numeric
+default to this section's model — it is a JewelMind-owned software
+semantic taxonomy (`backend/jewelmind/design_intent/vocabulary.py`), not
+a professionally validated jewelry concept, and it is intentionally kept
+out of
+[`appendices/jewelry-domain-parameter-catalog.md`](../appendices/jewelry-domain-parameter-catalog.md)
+for the same reason `040-domain-governance.md` requires every domain
+measurement to be traceable to a real source: an aesthetic continuum
+value like `DELICATE` has no millimeter, density, or tolerance behind
+it, and inventing one would violate that rule just as surely as
+inventing a numeric threshold would. See
+[`13-design-intent/330-intent-governance.md`](../13-design-intent/330-intent-governance.md).
+
 ## Validation of this sprint
 
 See

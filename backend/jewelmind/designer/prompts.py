@@ -10,25 +10,41 @@ from __future__ import annotations
 
 import json
 
+from jewelmind.design_intent.schemas import DesignIntent
+from jewelmind.design_intent.vocabulary import CATEGORIES
 from jewelmind.designer.capability import current_capabilities
 from jewelmind.designer.schemas import InteractionMode
 from jewelmind.domain.schema import JewelryDefinition
 
 SYSTEM_CONTRACT = """You are JewelMind Designer, a natural-language interpretation layer for a \
 parametric jewelry CAD system. You do not design jewelry and you do not decide what is \
-manufacturable. Your only job is to extract, from the user's request, values for the fields \
-listed in CURRENT JDL FIELDS below, using only the enum values listed in CURRENT CAPABILITIES.
+manufacturable. Your job has two separate parts, which you must never mix:
+
+PART 1 — TECHNICAL FIELDS: extract values for the fields listed in CURRENT JDL FIELDS below, \
+using only the enum values listed in CURRENT CAPABILITIES.
+
+PART 2 — AESTHETIC DESIGN INTENT: extract subjective/aesthetic descriptors (e.g. "delicate", \
+"minimal", "classic", "bold") separately, using only the controlled concepts and values listed \
+in DESIGN INTENT VOCABULARY below. These NEVER become a numeric dimension — you only classify \
+which target (e.g. ring, band, stone) and which concept/value they describe.
 
 Rules you must follow exactly:
 - Never invent a field that is not listed in CURRENT JDL FIELDS.
 - Never propose an enum value that is not listed in CURRENT CAPABILITIES for that field.
+- Never convert an aesthetic descriptor into a numeric CURRENT JDL FIELDS value (e.g. never let \
+"delicate" become a band.width number) — report it as a designIntentStatements entry instead.
 - If the user names a concept with no field/enum match (e.g. a stone shape, setting type, or \
 category not listed), report it in detectedUnsupportedFeatures — never approximate it as a \
 supported value.
 - If a term names a category of value without picking one supported member of it (e.g. "gold" \
 without a color), report it in ambiguities — never guess.
-- Preserve non-technical descriptive language (e.g. "delicate", "bold", "elegant") in \
-unresolvedDescriptors verbatim — never convert it into a numeric dimension.
+- If an aesthetic word matches one of the DESIGN INTENT VOCABULARY concepts/values, report it in \
+designIntentStatements with its target, concept, and value. If it does not clearly match any \
+listed concept/value (e.g. "elegant", a genuinely ambiguous or unlisted word), leave it out of \
+designIntentStatements and instead put the exact phrase in unresolvedDescriptors verbatim.
+- A relative comparison between two components (e.g. "the band should look slim compared with \
+the stone") goes in designIntentRelations, using only the controlled predicates listed below —
+never as a numeric ratio.
 - Never fabricate a professional manufacturing rule or claim manufacturability.
 - Respond only via the structured output tool call. Do not include prose outside of it.
 """
@@ -48,6 +64,26 @@ def build_capabilities_block() -> str:
     return "CURRENT CAPABILITIES (json):\n" + json.dumps(current_capabilities())
 
 
+def build_intent_vocabulary_block() -> str:
+    vocabulary = {concept: list(category.order) for concept, category in CATEGORIES.items()}
+    targets = (
+        "JEWELRY_PRODUCT, RING, BAND, STONE, SETTING, PRONGS, BASKET, MATERIAL_APPEARANCE, "
+        "OVERALL_PROPORTION, VISUAL_HIERARCHY"
+    )
+    predicates = (
+        "NARROWER_THAN, BROADER_THAN, DOMINANT_OVER, SUBORDINATE_TO, DISCREET_RELATIVE_TO, "
+        "BALANCED_WITH"
+    )
+    return (
+        "DESIGN INTENT VOCABULARY:\nTargets: "
+        + targets
+        + "\nConcepts and ordered values (json): "
+        + json.dumps(vocabulary)
+        + "\nRelation predicates: "
+        + predicates
+    )
+
+
 def build_current_design_block(current: JewelryDefinition, mode: InteractionMode) -> str:
     if mode == "CREATE":
         return (
@@ -63,24 +99,40 @@ def build_current_design_block(current: JewelryDefinition, mode: InteractionMode
     )
 
 
+def build_current_intent_block(current_intent: DesignIntent | None, mode: InteractionMode) -> str:
+    if mode == "CREATE" or current_intent is None:
+        return "CURRENT DESIGN INTENT: none preserved yet."
+    return (
+        "CURRENT DESIGN INTENT (already preserved from earlier requests — only report new or "
+        "changed statements; unmentioned ones are kept automatically):\n"
+        + current_intent.model_dump_json()
+    )
+
+
 def build_output_schema_block() -> str:
     return (
         "OUTPUT SCHEMA: call the `submit_design_interpretation` tool with an object matching "
         "RawDesignerResponse: proposedCanonicalValues (list of {field, value, sourceText}), "
-        "unresolvedDescriptors (list of strings), detectedUnsupportedFeatures (list of "
-        "{feature, sourceText, suggestedSupportedAlternative}), ambiguities (list of "
+        "unresolvedDescriptors (list of strings), designIntentStatements (list of "
+        "{target, concept, value, strength, sourceText}), designIntentRelations (list of "
+        "{subject, predicate, object, strength, sourceText}), detectedUnsupportedFeatures (list "
+        "of {feature, sourceText, suggestedSupportedAlternative}), ambiguities (list of "
         "{field, sourceText, candidateValues}), clarificationCandidates (list of "
         "{field, question, options})."
     )
 
 
-def build_system_prompt(current: JewelryDefinition, mode: InteractionMode) -> str:
+def build_system_prompt(
+    current: JewelryDefinition, mode: InteractionMode, current_intent: DesignIntent | None = None
+) -> str:
     return "\n\n".join(
         [
             SYSTEM_CONTRACT,
             build_jdl_fields_block(),
             build_capabilities_block(),
+            build_intent_vocabulary_block(),
             build_current_design_block(current, mode),
+            build_current_intent_block(current_intent, mode),
             build_output_schema_block(),
         ]
     )

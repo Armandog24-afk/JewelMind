@@ -692,3 +692,57 @@ diagnostic JSON Schemas, real examples generated against
 - **Create an RFC before adding a major new natural-language
   capability** — multi-turn conversation, image/sketch input, or a new
   intent category; see the same document's "When an RFC is required."
+
+## DESIGN INTENT RULES
+
+`docs/bible/13-design-intent/` is the authoritative Design Intent Model
+specification — start at
+[`docs/bible/13-design-intent/README.md`](docs/bible/13-design-intent/README.md).
+The machine-readable half lives in
+[`specs/design-intent/v1/`](specs/design-intent/v1/README.md) (target/
+statement/relation/diagnostic/resolution/profile JSON Schemas, a
+`vocabulary.json` controlled-vocabulary source of truth, real examples,
+and test vectors). Future coding agents must:
+
+- **Read `docs/bible/13-design-intent/README.md` before changing
+  semantic intent** — before adding, changing, or removing anything in
+  `backend/jewelmind/design_intent/` or the design-intent parts of
+  `frontend/src/components/DesignerPanel.tsx`.
+- **Never convert subjective descriptors into arbitrary numeric
+  parameters** — no code path in `design_intent/` may write to a JDL
+  dotted path; `IntentStatement.relatedJDLPaths` stays empty in v1.
+- **Keep `DesignIntent` separate from canonical JDL** — no field
+  overlap between `design_intent/schemas.py` and `domain/schema.py`.
+- **Preserve intent provenance** — every `IntentStatement`/
+  `IntentRelation` must carry a real `IntentProvenance` value; never
+  construct one that omits or fakes it.
+- **Preserve unresolved intent** — never discard a descriptor
+  `normalize_descriptor()` can't classify; it must end up in
+  `unresolvedDescriptors`, not silently dropped.
+- **Use the controlled vocabulary in `vocabulary.py`** — never invent a
+  new concept category or continuum value inline in application code.
+- **Preserve language-neutral canonical concepts** — a synonym table
+  entry must resolve to one of the real canonical values, never a
+  one-off per-language special case.
+- **Distinguish intent normalization from technical mapping** —
+  matching a word to the controlled vocabulary and writing a JDL field
+  are structurally different code paths; they must stay that way.
+- **Only allow deterministic, approved intent resolution to touch JDL
+  automatically** — see `349-deterministic-resolution-policy.md`'s 7
+  conditions; v1 has zero such mappings, which is correct, not a gap to
+  "fix" casually.
+- **Require user review for any non-trivial technical resolution
+  derived from intent**, if that capability is ever added.
+- **Never put manufacturing rules into `design_intent/`** — that
+  boundary belongs to Forge (`validation/`).
+- **Never mark an intent-only change as making the geometry stale** —
+  `DesignerPanel.tsx::handleApply()`'s `proposal.diff.some(d =>
+  d.changed)` gate is the mechanism; never call
+  `applyDesignerProposal()` unconditionally.
+- **Update the design-intent test corpus**
+  (`backend/tests/test_design_intent_corpus.py`) after any vocabulary
+  or normalization change.
+- **Create an ADR for major intent-model changes** — see
+  `330-intent-governance.md`'s "When an ADR is required."
+- **Create an RFC for new major semantic intent families** — see the
+  same document's "When an RFC is required."

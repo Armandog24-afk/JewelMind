@@ -1,0 +1,56 @@
+{
+  "version": "1.0.0",
+  "sourceText": "delicate but very substantial",
+  "statements": [
+    {
+      "intentId": "intent-fe963d79-23a9-44b2-b42a-b79b9da5cb76",
+      "target": "RING",
+      "concept": "VISUAL_WEIGHT",
+      "value": "DELICATE",
+      "strength": "PREFERRED",
+      "priority": 0,
+      "provenance": "AI_NORMALIZED",
+      "confidenceClass": "EXACT",
+      "sourceText": "delicate",
+      "resolutionStatus": "CONFLICTING",
+      "relatedJDLPaths": [],
+      "diagnostics": []
+    },
+    {
+      "intentId": "intent-b1f628a7-7338-4de2-b3d8-107b078700c1",
+      "target": "RING",
+      "concept": "VISUAL_WEIGHT",
+      "value": "SUBSTANTIAL",
+      "strength": "PREFERRED",
+      "priority": 0,
+      "provenance": "AI_NORMALIZED",
+      "confidenceClass": "EXACT",
+      "sourceText": "very substantial",
+      "resolutionStatus": "CONFLICTING",
+      "relatedJDLPaths": [],
+      "diagnostics": []
+    }
+  ],
+  "relationships": [],
+  "unresolvedDescriptors": [],
+  "conflicts": [
+    {
+      "conflictId": "conflict-intent-fe963d79-23a9-44b2-b42a-b79b9da5cb76-intent-b1f628a7-7338-4de2-b3d8-107b078700c1",
+      "type": "SOFT_TENSION",
+      "statementIds": [
+        "intent-fe963d79-23a9-44b2-b42a-b79b9da5cb76",
+        "intent-b1f628a7-7338-4de2-b3d8-107b078700c1"
+      ],
+      "description": "RING.VISUAL_WEIGHT: 'DELICATE' ('delicate') vs 'SUBSTANTIAL' ('very substantial')"
+    }
+  ],
+  "profile": null,
+  "diagnostics": [
+    {
+      "code": "INTENT_CONFLICT",
+      "severity": "warning",
+      "message": "RING.VISUAL_WEIGHT: 'DELICATE' ('delicate') vs 'SUBSTANTIAL' ('very substantial')",
+      "statementId": null
+    }
+  ]
+}

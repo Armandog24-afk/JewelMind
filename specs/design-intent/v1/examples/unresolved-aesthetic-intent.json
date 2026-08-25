@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "sourceText": "Rendilo più elegante.",
+  "statements": [],
+  "relationships": [],
+  "unresolvedDescriptors": [
+    "elegante"
+  ],
+  "conflicts": [],
+  "profile": null,
+  "diagnostics": [
+    {
+      "code": "INTENT_PRESERVED_UNRESOLVED",
+      "severity": "info",
+      "message": "'elegante' has been preserved as design intent, not converted into a dimension.",
+      "statementId": null
+    }
+  ]
+}

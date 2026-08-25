@@ -390,6 +390,42 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-321 | Designer Gap Analysis | accepted | current | [`12-designer/321-designer-gap-analysis.md`](../12-designer/321-designer-gap-analysis.md) |
 | JM-BIBLE-322 | Open Designer Questions | accepted | current | [`12-designer/322-open-designer-questions.md`](../12-designer/322-open-designer-questions.md) |
 | JM-BIBLE-SPRINT10-REPORT | Sprint 10 Validation Report | accepted | current | [`12-designer/SPRINT-10-VALIDATION-REPORT.md`](../12-designer/SPRINT-10-VALIDATION-REPORT.md) |
+| JM-BIBLE-DESIGN-INTENT-README | Design Intent Model v1 — Index | accepted | current | [`13-design-intent/README.md`](../13-design-intent/README.md) |
+| JM-BIBLE-330 | Intent Governance | accepted | current | [`13-design-intent/330-intent-governance.md`](../13-design-intent/330-intent-governance.md) |
+| JM-BIBLE-331 | Design Intent Architecture | accepted | current | [`13-design-intent/331-design-intent-architecture.md`](../13-design-intent/331-design-intent-architecture.md) |
+| JM-BIBLE-332 | Intent Domain Model | accepted | current | [`13-design-intent/332-intent-domain-model.md`](../13-design-intent/332-intent-domain-model.md) |
+| JM-BIBLE-333 | Intent Vocabulary | accepted | current | [`13-design-intent/333-intent-vocabulary.md`](../13-design-intent/333-intent-vocabulary.md) |
+| JM-BIBLE-334 | Intent Target Model | accepted | current | [`13-design-intent/334-intent-target-model.md`](../13-design-intent/334-intent-target-model.md) |
+| JM-BIBLE-335 | Aesthetic Descriptor Model | accepted | current | [`13-design-intent/335-aesthetic-descriptor-model.md`](../13-design-intent/335-aesthetic-descriptor-model.md) |
+| JM-BIBLE-336 | Relative Proportion Intent | accepted | current | [`13-design-intent/336-relative-proportion-intent.md`](../13-design-intent/336-relative-proportion-intent.md) |
+| JM-BIBLE-337 | Visual Weight Model | accepted | current | [`13-design-intent/337-visual-weight-model.md`](../13-design-intent/337-visual-weight-model.md) |
+| JM-BIBLE-338 | Style Continuum Model | accepted | current | [`13-design-intent/338-style-continuum-model.md`](../13-design-intent/338-style-continuum-model.md) |
+| JM-BIBLE-339 | Emphasis And Hierarchy Model | accepted | current | [`13-design-intent/339-emphasis-and-hierarchy-model.md`](../13-design-intent/339-emphasis-and-hierarchy-model.md) |
+| JM-BIBLE-340 | Symmetry And Balance Model | accepted | current | [`13-design-intent/340-symmetry-and-balance-model.md`](../13-design-intent/340-symmetry-and-balance-model.md) |
+| JM-BIBLE-341 | Simplicity And Complexity Model | accepted | current | [`13-design-intent/341-simplicity-and-complexity-model.md`](../13-design-intent/341-simplicity-and-complexity-model.md) |
+| JM-BIBLE-342 | Classic Contemporary Model | accepted | current | [`13-design-intent/342-classic-contemporary-model.md`](../13-design-intent/342-classic-contemporary-model.md) |
+| JM-BIBLE-343 | Intent Strength And Priority | accepted | current | [`13-design-intent/343-intent-strength-and-priority.md`](../13-design-intent/343-intent-strength-and-priority.md) |
+| JM-BIBLE-344 | Intent Provenance | accepted | current | [`13-design-intent/344-intent-provenance.md`](../13-design-intent/344-intent-provenance.md) |
+| JM-BIBLE-345 | Intent Confidence | accepted | current | [`13-design-intent/345-intent-confidence.md`](../13-design-intent/345-intent-confidence.md) |
+| JM-BIBLE-346 | Intent Conflict Model | accepted | current | [`13-design-intent/346-intent-conflict-model.md`](../13-design-intent/346-intent-conflict-model.md) |
+| JM-BIBLE-347 | Intent Compatibility Model | accepted | current | [`13-design-intent/347-intent-compatibility-model.md`](../13-design-intent/347-intent-compatibility-model.md) |
+| JM-BIBLE-348 | Intent Resolution Model | accepted | current | [`13-design-intent/348-intent-resolution-model.md`](../13-design-intent/348-intent-resolution-model.md) |
+| JM-BIBLE-349 | Deterministic Resolution Policy | accepted | current | [`13-design-intent/349-deterministic-resolution-policy.md`](../13-design-intent/349-deterministic-resolution-policy.md) |
+| JM-BIBLE-350 | Intent To JDL Boundary | accepted | current | [`13-design-intent/350-intent-to-jdl-boundary.md`](../13-design-intent/350-intent-to-jdl-boundary.md) |
+| JM-BIBLE-351 | Intent To Forge Boundary | accepted | current | [`13-design-intent/351-intent-to-forge-boundary.md`](../13-design-intent/351-intent-to-forge-boundary.md) |
+| JM-BIBLE-352 | Unresolved Intent Lifecycle | accepted | current | [`13-design-intent/352-unresolved-intent-lifecycle.md`](../13-design-intent/352-unresolved-intent-lifecycle.md) |
+| JM-BIBLE-353 | Intent Preservation | accepted | current | [`13-design-intent/353-intent-preservation.md`](../13-design-intent/353-intent-preservation.md) |
+| JM-BIBLE-354 | Intent Diff Model | accepted | current | [`13-design-intent/354-intent-diff-model.md`](../13-design-intent/354-intent-diff-model.md) |
+| JM-BIBLE-355 | Intent Profile Model | accepted | current | [`13-design-intent/355-intent-profile-model.md`](../13-design-intent/355-intent-profile-model.md) |
+| JM-BIBLE-356 | Designer Intent Extraction | accepted | current | [`13-design-intent/356-designer-intent-extraction.md`](../13-design-intent/356-designer-intent-extraction.md) |
+| JM-BIBLE-357 | Studio Intent Review | accepted | current | [`13-design-intent/357-studio-intent-review.md`](../13-design-intent/357-studio-intent-review.md) |
+| JM-BIBLE-358 | Intent Diagnostics | accepted | current | [`13-design-intent/358-intent-diagnostics.md`](../13-design-intent/358-intent-diagnostics.md) |
+| JM-BIBLE-359 | Intent Evaluation Framework | accepted | current | [`13-design-intent/359-intent-evaluation-framework.md`](../13-design-intent/359-intent-evaluation-framework.md) |
+| JM-BIBLE-360 | Intent Test Corpus | accepted | current | [`13-design-intent/360-intent-test-corpus.md`](../13-design-intent/360-intent-test-corpus.md) |
+| JM-BIBLE-361 | Current Code Mapping | accepted | current | [`13-design-intent/361-current-code-mapping.md`](../13-design-intent/361-current-code-mapping.md) |
+| JM-BIBLE-362 | Design Intent Gap Analysis | accepted | current | [`13-design-intent/362-design-intent-gap-analysis.md`](../13-design-intent/362-design-intent-gap-analysis.md) |
+| JM-BIBLE-363 | Open Design Intent Questions | accepted | current | [`13-design-intent/363-open-design-intent-questions.md`](../13-design-intent/363-open-design-intent-questions.md) |
+| JM-BIBLE-SPRINT11-REPORT | Sprint 11 Validation Report | accepted | current | [`13-design-intent/SPRINT-11-VALIDATION-REPORT.md`](../13-design-intent/SPRINT-11-VALIDATION-REPORT.md) |
 | JM-BIBLE-A56 | Appendix: Designer Supported Intent Catalog | accepted | current | [`appendices/designer-supported-intent-catalog.md`](designer-supported-intent-catalog.md) |
 | JM-BIBLE-A57 | Appendix: Designer Field Provenance Catalog | accepted | current | [`appendices/designer-field-provenance-catalog.md`](designer-field-provenance-catalog.md) |
 | JM-BIBLE-A58 | Appendix: Designer Clarification Catalog | accepted | current | [`appendices/designer-clarification-catalog.md`](designer-clarification-catalog.md) |
@@ -398,6 +434,15 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A61 | Appendix: Designer Test Case Catalog | accepted | current | [`appendices/designer-test-case-catalog.md`](designer-test-case-catalog.md) |
 | JM-BIBLE-A62 | Appendix: Designer Code Mapping | accepted | current | [`appendices/designer-code-mapping.md`](designer-code-mapping.md) |
 | JM-BIBLE-A63 | Appendix: Designer Test Matrix | accepted | current | [`appendices/designer-test-matrix.md`](designer-test-matrix.md) |
+| JM-BIBLE-A64 | Appendix: Intent Vocabulary Catalog | accepted | current | [`appendices/intent-vocabulary-catalog.md`](intent-vocabulary-catalog.md) |
+| JM-BIBLE-A65 | Appendix: Intent Target Catalog | accepted | current | [`appendices/intent-target-catalog.md`](intent-target-catalog.md) |
+| JM-BIBLE-A66 | Appendix: Intent Relation Catalog | accepted | current | [`appendices/intent-relation-catalog.md`](intent-relation-catalog.md) |
+| JM-BIBLE-A67 | Appendix: Intent Resolution Catalog | accepted | current | [`appendices/intent-resolution-catalog.md`](intent-resolution-catalog.md) |
+| JM-BIBLE-A68 | Appendix: Intent Conflict Catalog | accepted | current | [`appendices/intent-conflict-catalog.md`](intent-conflict-catalog.md) |
+| JM-BIBLE-A69 | Appendix: Intent Diagnostic Catalog | accepted | current | [`appendices/intent-diagnostic-catalog.md`](intent-diagnostic-catalog.md) |
+| JM-BIBLE-A70 | Appendix: Intent Test Case Catalog | accepted | current | [`appendices/intent-test-case-catalog.md`](intent-test-case-catalog.md) |
+| JM-BIBLE-A71 | Appendix: Intent Code Mapping | accepted | current | [`appendices/intent-code-mapping.md`](intent-code-mapping.md) |
+| JM-BIBLE-A72 | Appendix: Intent Test Matrix | accepted | current | [`appendices/intent-test-matrix.md`](intent-test-matrix.md) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 
@@ -509,6 +554,22 @@ front-matter convention and are listed here for completeness, per
 | Designer result schema | Yes | [`specs/designer/v1/designer-result.schema.json`](../../../specs/designer/v1/designer-result.schema.json) |
 | Examples (real, generated) | Yes | [`specs/designer/v1/examples/`](../../../specs/designer/v1/examples/) |
 | Test vectors | Yes | [`specs/designer/v1/test-vectors/`](../../../specs/designer/v1/test-vectors/) |
+
+## Machine-readable Design Intent specification — `specs/design-intent/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/design-intent/v1/README.md`](../../../specs/design-intent/v1/README.md) |
+| Intent target schema | Yes | [`specs/design-intent/v1/intent-target.schema.json`](../../../specs/design-intent/v1/intent-target.schema.json) |
+| Intent statement schema | Yes | [`specs/design-intent/v1/intent-statement.schema.json`](../../../specs/design-intent/v1/intent-statement.schema.json) |
+| Intent relation schema | Yes | [`specs/design-intent/v1/intent-relation.schema.json`](../../../specs/design-intent/v1/intent-relation.schema.json) |
+| Intent diagnostic schema | Yes | [`specs/design-intent/v1/intent-diagnostic.schema.json`](../../../specs/design-intent/v1/intent-diagnostic.schema.json) |
+| Intent resolution schema | Yes | [`specs/design-intent/v1/intent-resolution.schema.json`](../../../specs/design-intent/v1/intent-resolution.schema.json) |
+| Intent profile schema | Yes | [`specs/design-intent/v1/intent-profile.schema.json`](../../../specs/design-intent/v1/intent-profile.schema.json) |
+| Design intent schema | Yes | [`specs/design-intent/v1/design-intent.schema.json`](../../../specs/design-intent/v1/design-intent.schema.json) |
+| Controlled vocabulary source of truth | Yes | [`specs/design-intent/v1/vocabulary.json`](../../../specs/design-intent/v1/vocabulary.json) |
+| Examples (real, generated) | Yes | [`specs/design-intent/v1/examples/`](../../../specs/design-intent/v1/examples/) |
+| Test vectors | Yes | [`specs/design-intent/v1/test-vectors/`](../../../specs/design-intent/v1/test-vectors/) |
 
 ## Pre-existing technical reference — `docs/`
 
