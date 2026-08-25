@@ -1,0 +1,60 @@
+{
+  "vectors": [
+    {
+      "text": "Allarga la fascia.",
+      "lastReferencedTarget": null,
+      "resolvedTarget": "BAND",
+      "isAmbiguous": false,
+      "preserveTarget": null
+    },
+    {
+      "text": "Make the stone bolder.",
+      "lastReferencedTarget": null,
+      "resolvedTarget": "STONE",
+      "isAmbiguous": false,
+      "preserveTarget": null
+    },
+    {
+      "text": "make it wider",
+      "lastReferencedTarget": null,
+      "resolvedTarget": null,
+      "isAmbiguous": true,
+      "preserveTarget": null
+    },
+    {
+      "text": "make it wider",
+      "lastReferencedTarget": "BAND",
+      "resolvedTarget": "BAND",
+      "isAmbiguous": false,
+      "preserveTarget": null
+    },
+    {
+      "text": "make it rose gold",
+      "lastReferencedTarget": null,
+      "resolvedTarget": "MATERIAL_APPEARANCE",
+      "isAmbiguous": false,
+      "preserveTarget": null
+    },
+    {
+      "text": "Make it more classic.",
+      "lastReferencedTarget": null,
+      "resolvedTarget": null,
+      "isAmbiguous": false,
+      "preserveTarget": null
+    },
+    {
+      "text": "leave the stone as is",
+      "lastReferencedTarget": null,
+      "resolvedTarget": "STONE",
+      "isAmbiguous": false,
+      "preserveTarget": "STONE"
+    },
+    {
+      "text": "keep the band",
+      "lastReferencedTarget": null,
+      "resolvedTarget": "BAND",
+      "isAmbiguous": false,
+      "preserveTarget": "BAND"
+    }
+  ]
+}

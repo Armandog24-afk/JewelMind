@@ -443,6 +443,51 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A70 | Appendix: Intent Test Case Catalog | accepted | current | [`appendices/intent-test-case-catalog.md`](intent-test-case-catalog.md) |
 | JM-BIBLE-A71 | Appendix: Intent Code Mapping | accepted | current | [`appendices/intent-code-mapping.md`](intent-code-mapping.md) |
 | JM-BIBLE-A72 | Appendix: Intent Test Matrix | accepted | current | [`appendices/intent-test-matrix.md`](intent-test-matrix.md) |
+| JM-BIBLE-CONVERSATION-README | Conversation Engine v1 — Index | accepted | current | [`14-conversation/README.md`](../14-conversation/README.md) |
+| JM-BIBLE-370 | Conversation Governance | accepted | current | [`14-conversation/370-conversation-governance.md`](../14-conversation/370-conversation-governance.md) |
+| JM-BIBLE-371 | Conversation Architecture | accepted | current | [`14-conversation/371-conversation-architecture.md`](../14-conversation/371-conversation-architecture.md) |
+| JM-BIBLE-372 | Conversation Domain Model | accepted | current | [`14-conversation/372-conversation-domain-model.md`](../14-conversation/372-conversation-domain-model.md) |
+| JM-BIBLE-373 | Conversation Session Lifecycle | accepted | current | [`14-conversation/373-conversation-session-lifecycle.md`](../14-conversation/373-conversation-session-lifecycle.md) |
+| JM-BIBLE-374 | Conversation Turn Model | accepted | current | [`14-conversation/374-conversation-turn-model.md`](../14-conversation/374-conversation-turn-model.md) |
+| JM-BIBLE-375 | Turn Context Model | accepted | current | [`14-conversation/375-turn-context-model.md`](../14-conversation/375-turn-context-model.md) |
+| JM-BIBLE-376 | Conversation State Machine | accepted | current | [`14-conversation/376-conversation-state-machine.md`](../14-conversation/376-conversation-state-machine.md) |
+| JM-BIBLE-377 | Design State Synchronization | accepted | current | [`14-conversation/377-design-state-synchronization.md`](../14-conversation/377-design-state-synchronization.md) |
+| JM-BIBLE-378 | Turn Role and Message Model | accepted | current | [`14-conversation/378-turn-role-and-message-model.md`](../14-conversation/378-turn-role-and-message-model.md) |
+| JM-BIBLE-379 | Reference Resolution | accepted | current | [`14-conversation/379-reference-resolution.md`](../14-conversation/379-reference-resolution.md) |
+| JM-BIBLE-380 | Pronoun and Implicit Target Resolution | accepted | current | [`14-conversation/380-pronoun-and-implicit-target-resolution.md`](../14-conversation/380-pronoun-and-implicit-target-resolution.md) |
+| JM-BIBLE-381 | Clarification Thread Model | accepted | current | [`14-conversation/381-clarification-thread-model.md`](../14-conversation/381-clarification-thread-model.md) |
+| JM-BIBLE-382 | Clarification Answer Resolution | accepted | current | [`14-conversation/382-clarification-answer-resolution.md`](../14-conversation/382-clarification-answer-resolution.md) |
+| JM-BIBLE-383 | Correction Model | accepted | current | [`14-conversation/383-correction-model.md`](../14-conversation/383-correction-model.md) |
+| JM-BIBLE-384 | Accept Reject Cancel Semantics | accepted | current | [`14-conversation/384-accept-reject-cancel-semantics.md`](../14-conversation/384-accept-reject-cancel-semantics.md) |
+| JM-BIBLE-385 | Conversational Diff Model | accepted | current | [`14-conversation/385-conversational-diff-model.md`](../14-conversation/385-conversational-diff-model.md) |
+| JM-BIBLE-386 | State Preservation Policy | accepted | current | [`14-conversation/386-state-preservation-policy.md`](../14-conversation/386-state-preservation-policy.md) |
+| JM-BIBLE-387 | Context Window Policy | accepted | current | [`14-conversation/387-context-window-policy.md`](../14-conversation/387-context-window-policy.md) |
+| JM-BIBLE-388 | History Compaction Model | accepted | current | [`14-conversation/388-history-compaction-model.md`](../14-conversation/388-history-compaction-model.md) |
+| JM-BIBLE-389 | Conversation Summary Model | accepted | current | [`14-conversation/389-conversation-summary-model.md`](../14-conversation/389-conversation-summary-model.md) |
+| JM-BIBLE-390 | Provider Context Contract | accepted | current | [`14-conversation/390-provider-context-contract.md`](../14-conversation/390-provider-context-contract.md) |
+| JM-BIBLE-391 | Conversation Designer Integration | accepted | current | [`14-conversation/391-conversation-designer-integration.md`](../14-conversation/391-conversation-designer-integration.md) |
+| JM-BIBLE-392 | Conversation Intent Integration | accepted | current | [`14-conversation/392-conversation-intent-integration.md`](../14-conversation/392-conversation-intent-integration.md) |
+| JM-BIBLE-393 | Conversation JDL Integration | accepted | current | [`14-conversation/393-conversation-jdl-integration.md`](../14-conversation/393-conversation-jdl-integration.md) |
+| JM-BIBLE-394 | Conversation Forge Integration | accepted | current | [`14-conversation/394-conversation-forge-integration.md`](../14-conversation/394-conversation-forge-integration.md) |
+| JM-BIBLE-395 | Studio Integration | accepted | current | [`14-conversation/395-studio-integration.md`](../14-conversation/395-studio-integration.md) |
+| JM-BIBLE-396 | Conversational Error Model | accepted | current | [`14-conversation/396-conversational-error-model.md`](../14-conversation/396-conversational-error-model.md) |
+| JM-BIBLE-397 | Conversation Security | accepted | current | [`14-conversation/397-conversation-security.md`](../14-conversation/397-conversation-security.md) |
+| JM-BIBLE-398 | Conversation Privacy | accepted | current | [`14-conversation/398-conversation-privacy.md`](../14-conversation/398-conversation-privacy.md) |
+| JM-BIBLE-399 | Conversation Observability | accepted | current | [`14-conversation/399-conversation-observability.md`](../14-conversation/399-conversation-observability.md) |
+| JM-BIBLE-400 | Conversation Evaluation Framework | accepted | current | [`14-conversation/400-conversation-evaluation-framework.md`](../14-conversation/400-conversation-evaluation-framework.md) |
+| JM-BIBLE-401 | Conversation Test Corpus | accepted | current | [`14-conversation/401-conversation-test-corpus.md`](../14-conversation/401-conversation-test-corpus.md) |
+| JM-BIBLE-402 | Stale Context and Concurrent Editing | accepted | current | [`14-conversation/402-stale-context-and-concurrent-editing.md`](../14-conversation/402-stale-context-and-concurrent-editing.md) |
+| JM-BIBLE-403 | Current Code Mapping | accepted | current | [`14-conversation/403-current-code-mapping.md`](../14-conversation/403-current-code-mapping.md) |
+| JM-BIBLE-404 | Conversation Gap Analysis and Open Questions | accepted | current | [`14-conversation/404-conversation-gap-analysis-and-open-questions.md`](../14-conversation/404-conversation-gap-analysis-and-open-questions.md) |
+| JM-BIBLE-SPRINT12-REPORT | Sprint 12 Validation Report | accepted | current | [`14-conversation/SPRINT-12-VALIDATION-REPORT.md`](../14-conversation/SPRINT-12-VALIDATION-REPORT.md) |
+| JM-BIBLE-A73 | Appendix: Conversation Action Catalog | accepted | current | [`appendices/conversation-action-catalog.md`](conversation-action-catalog.md) |
+| JM-BIBLE-A74 | Appendix: Conversation State Catalog | accepted | current | [`appendices/conversation-state-catalog.md`](conversation-state-catalog.md) |
+| JM-BIBLE-A75 | Appendix: Conversation Reference Catalog | accepted | current | [`appendices/conversation-reference-catalog.md`](conversation-reference-catalog.md) |
+| JM-BIBLE-A76 | Appendix: Clarification Type Catalog | accepted | current | [`appendices/clarification-type-catalog.md`](clarification-type-catalog.md) |
+| JM-BIBLE-A77 | Appendix: Conversation Diagnostic Catalog | accepted | current | [`appendices/conversation-diagnostic-catalog.md`](conversation-diagnostic-catalog.md) |
+| JM-BIBLE-A78 | Appendix: Conversation Test Case Catalog | accepted | current | [`appendices/conversation-test-case-catalog.md`](conversation-test-case-catalog.md) |
+| JM-BIBLE-A79 | Appendix: Conversation Code Mapping | accepted | current | [`appendices/conversation-code-mapping.md`](conversation-code-mapping.md) |
+| JM-BIBLE-A80 | Appendix: Conversation Test Matrix | accepted | current | [`appendices/conversation-test-matrix.md`](conversation-test-matrix.md) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 
@@ -570,6 +615,23 @@ front-matter convention and are listed here for completeness, per
 | Controlled vocabulary source of truth | Yes | [`specs/design-intent/v1/vocabulary.json`](../../../specs/design-intent/v1/vocabulary.json) |
 | Examples (real, generated) | Yes | [`specs/design-intent/v1/examples/`](../../../specs/design-intent/v1/examples/) |
 | Test vectors | Yes | [`specs/design-intent/v1/test-vectors/`](../../../specs/design-intent/v1/test-vectors/) |
+
+## Machine-readable Conversation specification — `specs/conversation/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/conversation/v1/README.md`](../../../specs/conversation/v1/README.md) |
+| Conversation action schema | Yes | [`specs/conversation/v1/conversation-action.schema.json`](../../../specs/conversation/v1/conversation-action.schema.json) |
+| Clarification thread schema | Yes | [`specs/conversation/v1/clarification-thread.schema.json`](../../../specs/conversation/v1/clarification-thread.schema.json) |
+| Clarification answer schema | Yes | [`specs/conversation/v1/clarification-answer.schema.json`](../../../specs/conversation/v1/clarification-answer.schema.json) |
+| Conversation state schema | Yes | [`specs/conversation/v1/conversation-state.schema.json`](../../../specs/conversation/v1/conversation-state.schema.json) |
+| Turn context schema | Yes | [`specs/conversation/v1/turn-context.schema.json`](../../../specs/conversation/v1/turn-context.schema.json) |
+| Conversation turn schema | Yes | [`specs/conversation/v1/conversation-turn.schema.json`](../../../specs/conversation/v1/conversation-turn.schema.json) |
+| Conversation summary schema | Yes | [`specs/conversation/v1/conversation-summary.schema.json`](../../../specs/conversation/v1/conversation-summary.schema.json) |
+| Conversation session schema | Yes | [`specs/conversation/v1/conversation-session.schema.json`](../../../specs/conversation/v1/conversation-session.schema.json) |
+| Conversation result schema | Yes | [`specs/conversation/v1/conversation-result.schema.json`](../../../specs/conversation/v1/conversation-result.schema.json) |
+| Examples (real, generated) | Yes | [`specs/conversation/v1/examples/`](../../../specs/conversation/v1/examples/) |
+| Test vectors | Yes | [`specs/conversation/v1/test-vectors/`](../../../specs/conversation/v1/test-vectors/) |
 
 ## Pre-existing technical reference — `docs/`
 

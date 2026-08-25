@@ -1,0 +1,292 @@
+{
+  "turns": [
+    {
+      "session": {
+        "sessionId": "session-93b046a6-5324-4794-9121-97d8915bc29a",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-f5f376c8-3e60-44d1-bba8-56ec6c2a4fcf",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Lascia la pietra cos\u00ec e cambia solo il materiale.",
+            "timestamp": "2026-08-25T15:27:20.458425+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-10553955-5328-4679-92c9-11c12ff6fa5d",
+            "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": {
+          "proposalId": "conv-proposal-10553955-5328-4679-92c9-11c12ff6fa5d",
+          "turnId": "turn-f5f376c8-3e60-44d1-bba8-56ec6c2a4fcf",
+          "baseDefinitionHash": "355ddca57e7e49ad",
+          "baseIntentHash": "120c58f04f73bc92",
+          "designerProposal": {
+            "proposalId": "proposal-160fd4c3-66b6-4946-9962-a79a01b51c8d",
+            "sourceText": "Lascia la pietra cos\u00ec e cambia solo il materiale.",
+            "interactionMode": "MODIFY",
+            "unresolvedIntent": [],
+            "unsupportedFeatures": [],
+            "proposedFields": [
+              {
+                "path": "material.metal",
+                "value": "platinum",
+                "provenance": "AI_INTERPRETATION",
+                "confidence": "NORMALIZED",
+                "sourceText": null,
+                "previousValue": null
+              }
+            ],
+            "clarificationQuestions": [],
+            "diagnostics": [],
+            "candidateJDL": {
+              "schemaVersion": "0.1.0",
+              "project": {
+                "name": "Solitaire Ring",
+                "units": "mm"
+              },
+              "jewelry": {
+                "category": "ring",
+                "style": "solitaire"
+              },
+              "ring": {
+                "sizeSystem": "EU",
+                "size": 16.0,
+                "innerDiameter": 17.8
+              },
+              "band": {
+                "width": 2.4,
+                "thickness": 1.8,
+                "profile": "comfort_fit"
+              },
+              "stone": {
+                "shape": "round",
+                "diameter": 6.5,
+                "depth": 4.0
+              },
+              "setting": {
+                "type": "prong",
+                "prongCount": 6,
+                "prongDiameter": 1.1,
+                "prongHeight": 4.8,
+                "basketHeight": 3.5
+              },
+              "material": {
+                "metal": "platinum"
+              },
+              "manufacturing": {
+                "method": "lost_wax_casting"
+              },
+              "preview": {
+                "meshTolerance": 0.1,
+                "angularTolerance": 0.2
+              }
+            },
+            "validation": [],
+            "forgeEvaluation": {
+              "results": [],
+              "hasErrors": false
+            },
+            "diff": [
+              {
+                "path": "project.name",
+                "previousValue": "Solitaire Ring",
+                "proposedValue": "Solitaire Ring",
+                "changed": false
+              },
+              {
+                "path": "project.units",
+                "previousValue": "mm",
+                "proposedValue": "mm",
+                "changed": false
+              },
+              {
+                "path": "jewelry.category",
+                "previousValue": "ring",
+                "proposedValue": "ring",
+                "changed": false
+              },
+              {
+                "path": "jewelry.style",
+                "previousValue": "solitaire",
+                "proposedValue": "solitaire",
+                "changed": false
+              },
+              {
+                "path": "ring.sizeSystem",
+                "previousValue": "EU",
+                "proposedValue": "EU",
+                "changed": false
+              },
+              {
+                "path": "ring.size",
+                "previousValue": 16.0,
+                "proposedValue": 16.0,
+                "changed": false
+              },
+              {
+                "path": "ring.innerDiameter",
+                "previousValue": 17.8,
+                "proposedValue": 17.8,
+                "changed": false
+              },
+              {
+                "path": "band.width",
+                "previousValue": 2.4,
+                "proposedValue": 2.4,
+                "changed": false
+              },
+              {
+                "path": "band.thickness",
+                "previousValue": 1.8,
+                "proposedValue": 1.8,
+                "changed": false
+              },
+              {
+                "path": "band.profile",
+                "previousValue": "comfort_fit",
+                "proposedValue": "comfort_fit",
+                "changed": false
+              },
+              {
+                "path": "stone.shape",
+                "previousValue": "round",
+                "proposedValue": "round",
+                "changed": false
+              },
+              {
+                "path": "stone.diameter",
+                "previousValue": 6.5,
+                "proposedValue": 6.5,
+                "changed": false
+              },
+              {
+                "path": "stone.depth",
+                "previousValue": 4.0,
+                "proposedValue": 4.0,
+                "changed": false
+              },
+              {
+                "path": "setting.type",
+                "previousValue": "prong",
+                "proposedValue": "prong",
+                "changed": false
+              },
+              {
+                "path": "setting.prongCount",
+                "previousValue": 6,
+                "proposedValue": 6,
+                "changed": false
+              },
+              {
+                "path": "setting.prongDiameter",
+                "previousValue": 1.1,
+                "proposedValue": 1.1,
+                "changed": false
+              },
+              {
+                "path": "setting.prongHeight",
+                "previousValue": 4.8,
+                "proposedValue": 4.8,
+                "changed": false
+              },
+              {
+                "path": "setting.basketHeight",
+                "previousValue": 3.5,
+                "proposedValue": 3.5,
+                "changed": false
+              },
+              {
+                "path": "material.metal",
+                "previousValue": "yellow_gold_18k",
+                "proposedValue": "platinum",
+                "changed": true
+              },
+              {
+                "path": "manufacturing.method",
+                "previousValue": "lost_wax_casting",
+                "proposedValue": "lost_wax_casting",
+                "changed": false
+              },
+              {
+                "path": "preview.meshTolerance",
+                "previousValue": 0.1,
+                "proposedValue": 0.1,
+                "changed": false
+              },
+              {
+                "path": "preview.angularTolerance",
+                "previousValue": 0.2,
+                "proposedValue": 0.2,
+                "changed": false
+              }
+            ],
+            "proposalStatus": "COMPLETE",
+            "designIntent": {
+              "version": "1.0.0",
+              "sourceText": "Lascia la pietra cos\u00ec e cambia solo il materiale.",
+              "statements": [],
+              "relationships": [],
+              "unresolvedDescriptors": [],
+              "conflicts": [],
+              "profile": null,
+              "diagnostics": []
+            }
+          },
+          "status": "ACTIVE"
+        },
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "STONE",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "PROPOSAL_READY",
+        "createdAt": "2026-08-25T15:27:20.458425+00:00",
+        "updatedAt": "2026-08-25T15:27:20.458425+00:00"
+      },
+      "turn": {
+        "turnId": "turn-f5f376c8-3e60-44d1-bba8-56ec6c2a4fcf",
+        "sequence": 1,
+        "role": "user",
+        "sourceText": "Lascia la pietra cos\u00ec e cambia solo il materiale.",
+        "timestamp": "2026-08-25T15:27:20.458425+00:00",
+        "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+        "references": [],
+        "technicalChanges": [
+          "material.metal"
+        ],
+        "intentChanges": [],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-10553955-5328-4679-92c9-11c12ff6fa5d",
+        "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    }
+  ]
+}

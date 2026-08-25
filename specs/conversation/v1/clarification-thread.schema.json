@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/clarification-thread.schema.json",
+  "title": "Clarification Thread v1",
+  "description": "One structured question opened when a turn is genuinely ambiguous — never a free-form chat prompt. See docs/bible/14-conversation/381-clarification-thread-model.md and backend/jewelmind/conversation/schemas.py::ClarificationThread.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["clarificationId", "originatingTurnId", "question", "expectedAnswerType", "status", "createdAt"],
+  "properties": {
+    "clarificationId": { "type": "string" },
+    "originatingTurnId": { "type": "string" },
+    "question": { "type": "string", "minLength": 1 },
+    "target": {
+      "type": ["string", "null"],
+      "description": "A field path or intent target the question concerns, when known."
+    },
+    "expectedAnswerType": { "enum": ["NUMERIC", "ENUM_CHOICE", "FREE_TEXT", "CONFIRMATION"] },
+    "allowedChoices": { "type": "array", "items": { "type": "string" } },
+    "required": { "type": "boolean" },
+    "status": { "enum": ["OPEN", "ANSWERED", "CANCELLED", "SUPERSEDED"] },
+    "createdAt": { "type": "string" },
+    "resolvedAt": { "type": ["string", "null"] },
+    "answer": { "type": ["string", "null"] }
+  }
+}

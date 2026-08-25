@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/conversation-result.schema.json",
+  "title": "Conversation Result v1",
+  "description": "The full response body of POST /api/conversation/turn — the updated session (for the caller to carry forward on the next request) plus the turn just produced. See backend/jewelmind/conversation/schemas.py::ConversationResult and backend/jewelmind/api/routes.py::conversation_turn_route.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["session", "turn"],
+  "properties": {
+    "session": {
+      "type": "object",
+      "description": "A full ConversationSession — see conversation-session.schema.json."
+    },
+    "turn": {
+      "type": "object",
+      "description": "The ConversationTurn just produced — see conversation-turn.schema.json. Also appended as the last element of session.turns."
+    }
+  }
+}

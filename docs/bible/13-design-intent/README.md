@@ -88,6 +88,10 @@ Design Intent is not geometry, not JDL, not a manufacturing rule, and not an LLM
 
 Design Intent extends Designer's structured-output contract with two new fields (`designIntentStatements`, `designIntentRelations` on `RawDesignerResponse`) and one new proposal field (`designIntent` on `DesignerProposal`) — every Sprint 10 guarantee (JDL/Forge validation, provider abstraction, `FakeDesignerProvider`-only CI, the 108 pre-existing backend tests) is unchanged. See [`356-designer-intent-extraction.md`](356-designer-intent-extraction.md).
 
+## Relationship to Sprint 12
+
+[`14-conversation/`](../14-conversation/README.md) (Sprint 12) routes multi-turn review of Design Intent's own statements through Conversation Engine, via the same Designer pipeline this Sprint already extended — a `ConversationProposal`'s `designerProposal.designIntent` field is the exact, unmodified `DesignIntent` Designer's `build_design_intent()` already produces. Conversation adds zero duplication of Design Intent's own normalization, conflict-detection, or resolution logic: it only adds the `MODIFY_INTENT` action label (assigned when a resolved proposal has intent statements but no changed technical fields) and the guarantee, restated as CONV-GOV-011, that an intent-only accepted change can never mark geometry stale. See [`14-conversation/392-conversation-intent-integration.md`](../14-conversation/392-conversation-intent-integration.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-11-VALIDATION-REPORT.md`](SPRINT-11-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

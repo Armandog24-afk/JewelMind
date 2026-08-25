@@ -1047,3 +1047,65 @@ summary:focus-visible,
 .designer-intent-summary__remove:hover {
   color: var(--color-error);
 }
+
+/* ---------- conversation panel (Sprint 12) ---------- */
+
+.conversation-panel {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.conversation-panel__history {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.conversation-turn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.conversation-turn:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.conversation-turn__user,
+.conversation-turn__system {
+  margin: 0;
+  font-size: 12px;
+}
+
+.conversation-turn__user {
+  color: var(--color-text);
+}
+
+.conversation-turn__system {
+  color: var(--color-text-muted);
+}
+
+.conversation-turn__role {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-faint);
+}
+
+.conversation-turn__action {
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.conversation-panel__cancel {
+  margin-top: var(--space-2);
+}

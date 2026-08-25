@@ -1,0 +1,30 @@
+{
+  "vectors": [
+    {
+      "sourceText": "Lascia la pietra cos\u00ec e cambia solo il materiale.",
+      "changedFields": [
+        "material.metal"
+      ],
+      "unchangedFieldSample": [
+        "project.name",
+        "project.units",
+        "jewelry.category",
+        "jewelry.style",
+        "ring.sizeSystem"
+      ]
+    },
+    {
+      "sourceText": "Only change the band width to 3mm.",
+      "changedFields": [
+        "band.width"
+      ],
+      "unchangedFieldSample": [
+        "project.name",
+        "project.units",
+        "jewelry.category",
+        "jewelry.style",
+        "ring.sizeSystem"
+      ]
+    }
+  ]
+}

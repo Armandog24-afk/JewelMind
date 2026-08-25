@@ -95,6 +95,65 @@ already uses, so it is indistinguishable from a manual edit to every
 downstream flow described below. See
 [`12-designer/295-designer-to-jdl-contract.md`](../12-designer/295-designer-to-jdl-contract.md).
 
+## `POST /api/conversation/turn` (Sprint 12)
+
+As of Sprint 12, a natural-language request can flow through
+Conversation Engine before it reaches Designer at all — Conversation
+sits entirely upstream of the Designer flow above, adding a
+deterministic classification and interaction-state step, but never
+constructing a candidate JDL itself. It is stateless per request in
+exactly the same way Designer already is: the entire `ConversationSession`
+(turn history, pending clarification, active proposal) round-trips
+through the caller on every call, and the route constructs a fresh
+`ConversationEngine`/`DesignerService` per request — honest about
+provider availability, no server-persisted session (see
+[`14-conversation/373-conversation-session-lifecycle.md`](../14-conversation/373-conversation-session-lifecycle.md)):
+
+```mermaid
+sequenceDiagram
+    participant FE as Frontend (ConversationPanel)
+    participant API as api/routes.py
+    participant CE as conversation/service.py
+    participant ACT as conversation/actions.py
+    participant REF as conversation/references.py
+    participant DS as designer/service.py
+    FE->>API: ConversationTurnRequest (text, currentJDL, currentDesignIntent, session)
+    API->>CE: process_turn(request)
+    CE->>CE: detect_prompt_injection_risk(text)
+    alt flagged
+        CE-->>API: raise DesignerSecurityRejectedError
+        API-->>FE: 400 DESIGNER_SECURITY_REJECTED
+    else not flagged
+        CE->>ACT: classify_action(text, session)
+        ACT->>REF: resolve_implicit_target() / find_preserve_target()
+        REF-->>ACT: target, is_ambiguous
+        ACT-->>CE: ConversationActionType
+        alt routes to Designer (CREATE/MODIFY/answer-clarification)
+            CE->>DS: interpret(NaturalLanguageDesignRequest)
+            DS-->>CE: DesignerResult (DesignerProposal)
+            CE-->>API: ConversationResult (updated session, turn)
+        else resolved without Designer (accept/reject/cancel/no-op/preserve)
+            CE-->>API: ConversationResult (updated session, turn)
+        end
+        API-->>FE: session + turn for review
+    end
+```
+
+Exactly as with Designer, nothing here writes to `currentDefinition` or
+`useDesignIntentStore` — only an explicit `ACCEPT_PROPOSAL` turn,
+reviewed and confirmed by the user in `ConversationPanel`, causes the
+frontend to call the same `applyDesignerProposal()`/`applyIntent()`
+actions Designer's UI has used since Sprint 10, through the same
+`withUpdatedDefinition()` path every manual parameter edit already uses.
+`state.is_proposal_stale()` guards that call: if the caller's current
+JDL/DesignIntent no longer match the proposal's own
+`baseDefinitionHash`/`baseIntentHash` (e.g. a concurrent manual edit),
+acceptance is rejected with `409 CONVERSATION_STALE_CONTEXT` rather than
+silently applied. See
+[`14-conversation/391-conversation-designer-integration.md`](../14-conversation/391-conversation-designer-integration.md)
+and
+[`14-conversation/402-stale-context-and-concurrent-editing.md`](../14-conversation/402-stale-context-and-concurrent-editing.md).
+
 ## `POST /api/models/validate`
 
 ```mermaid
@@ -222,3 +281,4 @@ already present on it (`record.definition` and, for the specification,
 | Export integrity validation (Sprint 7) | `exporters/integrity.py` | API response header (`X-Content-SHA256`) |
 | Output eligibility + workflow status (Sprint 9) | `frontend/src/studio/{modelState,outputEligibility}.ts` | User, via the header's model-status badge and the consolidated Outputs tab |
 | Natural-language interpretation (Sprint 10) | `designer/service.py`, `designer/provider.py` | User review, via `DesignerPanel`; JDL/Forge validation on the candidate, unchanged |
+| Multi-turn interaction state and action classification (Sprint 12) | `conversation/service.py`, `conversation/actions.py`, `conversation/references.py` | Designer's `interpret()` for any turn requiring technical extraction; user review via `ConversationPanel`; JDL/Forge validation on the candidate, unchanged |

@@ -1,0 +1,33 @@
+{
+  "maxRecentTurnsInContext": 6,
+  "totalTurnsAtSample": [
+    4,
+    9
+  ],
+  "contextNeedsSummary": [
+    false,
+    true
+  ],
+  "sampledContexts": [
+    {
+      "activeProposalId": null,
+      "pendingClarificationQuestion": null,
+      "recentAcceptedChanges": [],
+      "compactConversationSummary": null,
+      "modelCurrentOrStale": "CURRENT"
+    },
+    {
+      "activeProposalId": null,
+      "pendingClarificationQuestion": null,
+      "recentAcceptedChanges": [],
+      "compactConversationSummary": {
+        "acceptedDecisions": [],
+        "intentThemes": [],
+        "unresolvedQuestions": [],
+        "rejectedDirections": [],
+        "unsupportedDiscussed": []
+      },
+      "modelCurrentOrStale": "CURRENT"
+    }
+  ]
+}

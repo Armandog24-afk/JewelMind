@@ -2,6 +2,8 @@ import type { JewelryDefinition } from '@shared/types/jewelry-definition'
 import {
   ApiError,
   type ApiErrorBody,
+  type ConversationResult,
+  type ConversationTurnRequest,
   type DesignerResult,
   type GenerateResponse,
   type HealthResponse,
@@ -65,6 +67,15 @@ export async function interpretDesignRequest(
   return request<DesignerResult>('/api/designer/interpret', {
     method: 'POST',
     body: JSON.stringify(designerRequest),
+  })
+}
+
+export async function interpretConversationTurn(
+  turnRequest: ConversationTurnRequest,
+): Promise<ConversationResult> {
+  return request<ConversationResult>('/api/conversation/turn', {
+    method: 'POST',
+    body: JSON.stringify(turnRequest),
   })
 }
 

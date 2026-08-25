@@ -1,0 +1,46 @@
+{
+  "vectors": [
+    {
+      "scenario": "create_then_accept",
+      "from": "IDLE",
+      "to": "PROPOSAL_READY",
+      "trigger": "MODIFY_DESIGN_PROPOSAL",
+      "sourceText": "Fammi un solitario in oro rosa con sei griffe."
+    },
+    {
+      "scenario": "create_then_accept",
+      "from": "PROPOSAL_READY",
+      "to": "ACTIVE",
+      "trigger": "ACCEPT_PROPOSAL",
+      "sourceText": "ok"
+    },
+    {
+      "scenario": "propose_then_reject",
+      "from": "IDLE",
+      "to": "PROPOSAL_READY",
+      "trigger": "MODIFY_DESIGN_PROPOSAL",
+      "sourceText": "Usa il platino."
+    },
+    {
+      "scenario": "propose_then_reject",
+      "from": "PROPOSAL_READY",
+      "to": "IDLE",
+      "trigger": "REJECT_PROPOSAL",
+      "sourceText": "no"
+    },
+    {
+      "scenario": "clarification_then_cancel",
+      "from": "IDLE",
+      "to": "WAITING_FOR_CLARIFICATION",
+      "trigger": "REQUEST_CLARIFICATION",
+      "sourceText": "Allarga la fascia."
+    },
+    {
+      "scenario": "clarification_then_cancel",
+      "from": "WAITING_FOR_CLARIFICATION",
+      "to": "WAITING_FOR_CLARIFICATION",
+      "trigger": "ANSWER_CLARIFICATION",
+      "sourceText": "annulla"
+    }
+  ]
+}

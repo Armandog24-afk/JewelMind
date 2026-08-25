@@ -1,0 +1,29 @@
+{
+  "vectors": [
+    {
+      "text": "Actually use silver instead.",
+      "sessionHasActiveProposal": true,
+      "classifiedAction": "MODIFY_DESIGN_PROPOSAL"
+    },
+    {
+      "text": "yes",
+      "sessionHasActiveProposal": true,
+      "classifiedAction": "ACCEPT_PROPOSAL"
+    },
+    {
+      "text": "no",
+      "sessionHasActiveProposal": true,
+      "classifiedAction": "REJECT_PROPOSAL"
+    },
+    {
+      "text": "cancel",
+      "sessionHasActiveProposal": true,
+      "classifiedAction": "REJECT_PROPOSAL"
+    },
+    {
+      "text": "undo",
+      "sessionHasActiveProposal": true,
+      "classifiedAction": "CANCEL_INTERACTION"
+    }
+  ]
+}

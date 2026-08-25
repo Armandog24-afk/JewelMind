@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/conversation-turn.schema.json",
+  "title": "Conversation Turn v1",
+  "description": "One structured design transaction — never a raw prose exchange. Sub-shapes are inlined here (not $ref'd), matching every prior sprint's specs/*/v1/ convention. See docs/bible/14-conversation/374-conversation-turn-model.md and backend/jewelmind/conversation/schemas.py::ConversationTurn.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "turnId", "sequence", "role", "sourceText", "timestamp", "interpretedAction",
+    "result", "relatedJDLHashBefore", "relatedJDLHashAfter", "relatedIntentHashBefore", "relatedIntentHashAfter"
+  ],
+  "properties": {
+    "turnId": { "type": "string" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "role": { "enum": ["user", "system"] },
+    "sourceText": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "interpretedAction": {
+      "enum": [
+        "CREATE_DESIGN_PROPOSAL", "MODIFY_DESIGN_PROPOSAL", "ADD_INTENT", "MODIFY_INTENT",
+        "REMOVE_INTENT", "PRESERVE_TARGET", "REQUEST_CLARIFICATION", "ANSWER_CLARIFICATION",
+        "REPORT_UNSUPPORTED", "ACCEPT_PROPOSAL", "REJECT_PROPOSAL", "CANCEL_INTERACTION", "NO_CHANGE"
+      ]
+    },
+    "references": { "type": "array", "items": { "type": "string" } },
+    "technicalChanges": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Dotted JDL field paths this turn proposed changing — deterministic diff paths, never AI-generated diff text."
+    },
+    "intentChanges": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "target.concept keys this turn proposed as DesignIntent statements."
+    },
+    "clarification": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["clarificationId", "originatingTurnId", "question", "expectedAnswerType", "status", "createdAt"],
+      "properties": {
+        "clarificationId": { "type": "string" },
+        "originatingTurnId": { "type": "string" },
+        "question": { "type": "string" },
+        "target": { "type": ["string", "null"] },
+        "expectedAnswerType": { "enum": ["NUMERIC", "ENUM_CHOICE", "FREE_TEXT", "CONFIRMATION"] },
+        "allowedChoices": { "type": "array", "items": { "type": "string" } },
+        "required": { "type": "boolean" },
+        "status": { "enum": ["OPEN", "ANSWERED", "CANCELLED", "SUPERSEDED"] },
+        "createdAt": { "type": "string" },
+        "resolvedAt": { "type": ["string", "null"] },
+        "answer": { "type": ["string", "null"] }
+      }
+    },
+    "unsupportedFeatures": { "type": "array", "items": { "type": "string" } },
+    "proposalId": { "type": ["string", "null"] },
+    "result": { "type": "string" },
+    "accepted": { "type": ["boolean", "null"] },
+    "relatedJDLHashBefore": { "type": "string" },
+    "relatedJDLHashAfter": { "type": "string" },
+    "relatedIntentHashBefore": { "type": "string" },
+    "relatedIntentHashAfter": { "type": "string" },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": { "enum": ["CONVERSATION_REFERENCE_AMBIGUOUS", "CONVERSATION_CLARIFICATION_INVALID", "CONVERSATION_STATE_SYNC_FAILED"] },
+          "severity": { "enum": ["info", "warning", "error"] },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  }
+}

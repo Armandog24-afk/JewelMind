@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/clarification-answer.schema.json",
+  "title": "Clarification Answer v1",
+  "description": "The validated (or rejected) outcome of one attempt to answer an open ClarificationThread. A resolved answer closes only the thread it targets — CONV-GOV-007. See docs/bible/14-conversation/382-clarification-answer-resolution.md and backend/jewelmind/conversation/schemas.py::ClarificationAnswer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["clarificationId", "turnId", "rawAnswer", "accepted"],
+  "properties": {
+    "clarificationId": { "type": "string" },
+    "turnId": { "type": "string" },
+    "rawAnswer": { "type": "string" },
+    "resolvedValue": {
+      "type": ["string", "number", "null"],
+      "description": "Null when the answer did not validate against expectedAnswerType (accepted: false)."
+    },
+    "accepted": { "type": "boolean" }
+  }
+}

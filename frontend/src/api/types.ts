@@ -304,6 +304,126 @@ export interface ApiErrorBody {
   }
 }
 
+// --- Conversation Engine v1 (docs/bible/14-conversation/) --------------
+
+export type ConversationActionType =
+  | 'CREATE_DESIGN_PROPOSAL'
+  | 'MODIFY_DESIGN_PROPOSAL'
+  | 'ADD_INTENT'
+  | 'MODIFY_INTENT'
+  | 'REMOVE_INTENT'
+  | 'PRESERVE_TARGET'
+  | 'REQUEST_CLARIFICATION'
+  | 'ANSWER_CLARIFICATION'
+  | 'REPORT_UNSUPPORTED'
+  | 'ACCEPT_PROPOSAL'
+  | 'REJECT_PROPOSAL'
+  | 'CANCEL_INTERACTION'
+  | 'NO_CHANGE'
+
+export type ConversationSessionStatus =
+  | 'ACTIVE'
+  | 'WAITING_FOR_CLARIFICATION'
+  | 'PROPOSAL_READY'
+  | 'WAITING_FOR_ACCEPTANCE'
+  | 'IDLE'
+  | 'CLOSED'
+  | 'FAILED'
+
+export type ClarificationStatus = 'OPEN' | 'ANSWERED' | 'CANCELLED' | 'SUPERSEDED'
+
+export type ExpectedAnswerType = 'NUMERIC' | 'ENUM_CHOICE' | 'FREE_TEXT' | 'CONFIRMATION'
+
+export type ConversationProposalStatus = 'ACTIVE' | 'ACCEPTED' | 'REJECTED' | 'SUPERSEDED' | 'STALE'
+
+export interface ClarificationThread {
+  clarificationId: string
+  originatingTurnId: string
+  question: string
+  target: string | null
+  expectedAnswerType: ExpectedAnswerType
+  allowedChoices: string[]
+  required: boolean
+  status: ClarificationStatus
+  createdAt: string
+  resolvedAt: string | null
+  answer: string | null
+}
+
+export interface ConversationProposal {
+  proposalId: string
+  turnId: string
+  baseDefinitionHash: string
+  baseIntentHash: string
+  designerProposal: DesignerProposal
+  status: ConversationProposalStatus
+}
+
+export interface ConversationSummary {
+  acceptedDecisions: string[]
+  intentThemes: string[]
+  unresolvedQuestions: string[]
+  rejectedDirections: string[]
+  unsupportedDiscussed: string[]
+}
+
+export interface ConversationDiagnostic {
+  code: 'CONVERSATION_REFERENCE_AMBIGUOUS' | 'CONVERSATION_CLARIFICATION_INVALID' | 'CONVERSATION_STATE_SYNC_FAILED'
+  severity: 'info' | 'warning' | 'error'
+  message: string
+}
+
+export interface ConversationTurn {
+  turnId: string
+  sequence: number
+  role: 'user' | 'system'
+  sourceText: string
+  timestamp: string
+  interpretedAction: ConversationActionType
+  references: string[]
+  technicalChanges: string[]
+  intentChanges: string[]
+  clarification: ClarificationThread | null
+  unsupportedFeatures: string[]
+  proposalId: string | null
+  result: string
+  accepted: boolean | null
+  relatedJDLHashBefore: string
+  relatedJDLHashAfter: string
+  relatedIntentHashBefore: string
+  relatedIntentHashAfter: string
+  diagnostics: ConversationDiagnostic[]
+}
+
+export interface ConversationSession {
+  sessionId: string
+  sessionVersion: string
+  currentJDLHash: string
+  currentIntentHash: string
+  turns: ConversationTurn[]
+  pendingClarification: ClarificationThread | null
+  activeProposal: ConversationProposal | null
+  acceptedChangeHistory: string[]
+  lastReferencedTarget: string | null
+  summary: ConversationSummary
+  status: ConversationSessionStatus
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ConversationTurnRequest {
+  text: string
+  locale?: 'it' | 'en' | null
+  currentJDL: JewelryDefinition
+  currentDesignIntent: DesignIntent
+  session?: ConversationSession | null
+}
+
+export interface ConversationResult {
+  session: ConversationSession
+  turn: ConversationTurn
+}
+
 export class ApiError extends Error {
   code: string
   requestId: string

@@ -1,0 +1,597 @@
+{
+  "turns": [
+    {
+      "session": {
+        "sessionId": "session-d7aab501-7f42-4527-88a7-b59de57fea38",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-e3f53aaa-5357-4357-b42f-e31ac657f5c5",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fammi un solitario con sei griffe.",
+            "timestamp": "2026-08-25T15:27:20.439687+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-f48c2267-e131-4cd1-8ea5-2726ab52fa37",
+            "result": "Proposal ready: 0 technical change(s), 0 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": {
+          "proposalId": "conv-proposal-f48c2267-e131-4cd1-8ea5-2726ab52fa37",
+          "turnId": "turn-e3f53aaa-5357-4357-b42f-e31ac657f5c5",
+          "baseDefinitionHash": "355ddca57e7e49ad",
+          "baseIntentHash": "120c58f04f73bc92",
+          "designerProposal": {
+            "proposalId": "proposal-3d3367d0-5998-4aca-9d28-e25ba0077644",
+            "sourceText": "Fammi un solitario con sei griffe.",
+            "interactionMode": "MODIFY",
+            "unresolvedIntent": [],
+            "unsupportedFeatures": [],
+            "proposedFields": [
+              {
+                "path": "setting.prongCount",
+                "value": 6,
+                "provenance": "AI_INTERPRETATION",
+                "confidence": "NORMALIZED",
+                "sourceText": null,
+                "previousValue": null
+              }
+            ],
+            "clarificationQuestions": [],
+            "diagnostics": [],
+            "candidateJDL": {
+              "schemaVersion": "0.1.0",
+              "project": {
+                "name": "Solitaire Ring",
+                "units": "mm"
+              },
+              "jewelry": {
+                "category": "ring",
+                "style": "solitaire"
+              },
+              "ring": {
+                "sizeSystem": "EU",
+                "size": 16.0,
+                "innerDiameter": 17.8
+              },
+              "band": {
+                "width": 2.4,
+                "thickness": 1.8,
+                "profile": "comfort_fit"
+              },
+              "stone": {
+                "shape": "round",
+                "diameter": 6.5,
+                "depth": 4.0
+              },
+              "setting": {
+                "type": "prong",
+                "prongCount": 6,
+                "prongDiameter": 1.1,
+                "prongHeight": 4.8,
+                "basketHeight": 3.5
+              },
+              "material": {
+                "metal": "yellow_gold_18k"
+              },
+              "manufacturing": {
+                "method": "lost_wax_casting"
+              },
+              "preview": {
+                "meshTolerance": 0.1,
+                "angularTolerance": 0.2
+              }
+            },
+            "validation": [],
+            "forgeEvaluation": {
+              "results": [],
+              "hasErrors": false
+            },
+            "diff": [
+              {
+                "path": "project.name",
+                "previousValue": "Solitaire Ring",
+                "proposedValue": "Solitaire Ring",
+                "changed": false
+              },
+              {
+                "path": "project.units",
+                "previousValue": "mm",
+                "proposedValue": "mm",
+                "changed": false
+              },
+              {
+                "path": "jewelry.category",
+                "previousValue": "ring",
+                "proposedValue": "ring",
+                "changed": false
+              },
+              {
+                "path": "jewelry.style",
+                "previousValue": "solitaire",
+                "proposedValue": "solitaire",
+                "changed": false
+              },
+              {
+                "path": "ring.sizeSystem",
+                "previousValue": "EU",
+                "proposedValue": "EU",
+                "changed": false
+              },
+              {
+                "path": "ring.size",
+                "previousValue": 16.0,
+                "proposedValue": 16.0,
+                "changed": false
+              },
+              {
+                "path": "ring.innerDiameter",
+                "previousValue": 17.8,
+                "proposedValue": 17.8,
+                "changed": false
+              },
+              {
+                "path": "band.width",
+                "previousValue": 2.4,
+                "proposedValue": 2.4,
+                "changed": false
+              },
+              {
+                "path": "band.thickness",
+                "previousValue": 1.8,
+                "proposedValue": 1.8,
+                "changed": false
+              },
+              {
+                "path": "band.profile",
+                "previousValue": "comfort_fit",
+                "proposedValue": "comfort_fit",
+                "changed": false
+              },
+              {
+                "path": "stone.shape",
+                "previousValue": "round",
+                "proposedValue": "round",
+                "changed": false
+              },
+              {
+                "path": "stone.diameter",
+                "previousValue": 6.5,
+                "proposedValue": 6.5,
+                "changed": false
+              },
+              {
+                "path": "stone.depth",
+                "previousValue": 4.0,
+                "proposedValue": 4.0,
+                "changed": false
+              },
+              {
+                "path": "setting.type",
+                "previousValue": "prong",
+                "proposedValue": "prong",
+                "changed": false
+              },
+              {
+                "path": "setting.prongCount",
+                "previousValue": 6,
+                "proposedValue": 6,
+                "changed": false
+              },
+              {
+                "path": "setting.prongDiameter",
+                "previousValue": 1.1,
+                "proposedValue": 1.1,
+                "changed": false
+              },
+              {
+                "path": "setting.prongHeight",
+                "previousValue": 4.8,
+                "proposedValue": 4.8,
+                "changed": false
+              },
+              {
+                "path": "setting.basketHeight",
+                "previousValue": 3.5,
+                "proposedValue": 3.5,
+                "changed": false
+              },
+              {
+                "path": "material.metal",
+                "previousValue": "yellow_gold_18k",
+                "proposedValue": "yellow_gold_18k",
+                "changed": false
+              },
+              {
+                "path": "manufacturing.method",
+                "previousValue": "lost_wax_casting",
+                "proposedValue": "lost_wax_casting",
+                "changed": false
+              },
+              {
+                "path": "preview.meshTolerance",
+                "previousValue": 0.1,
+                "proposedValue": 0.1,
+                "changed": false
+              },
+              {
+                "path": "preview.angularTolerance",
+                "previousValue": 0.2,
+                "proposedValue": 0.2,
+                "changed": false
+              }
+            ],
+            "proposalStatus": "COMPLETE",
+            "designIntent": {
+              "version": "1.0.0",
+              "sourceText": "Fammi un solitario con sei griffe.",
+              "statements": [],
+              "relationships": [],
+              "unresolvedDescriptors": [],
+              "conflicts": [],
+              "profile": null,
+              "diagnostics": []
+            }
+          },
+          "status": "ACTIVE"
+        },
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "PRONGS",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "PROPOSAL_READY",
+        "createdAt": "2026-08-25T15:27:20.439687+00:00",
+        "updatedAt": "2026-08-25T15:27:20.439687+00:00"
+      },
+      "turn": {
+        "turnId": "turn-e3f53aaa-5357-4357-b42f-e31ac657f5c5",
+        "sequence": 1,
+        "role": "user",
+        "sourceText": "Fammi un solitario con sei griffe.",
+        "timestamp": "2026-08-25T15:27:20.439687+00:00",
+        "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+        "references": [],
+        "technicalChanges": [],
+        "intentChanges": [],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-f48c2267-e131-4cd1-8ea5-2726ab52fa37",
+        "result": "Proposal ready: 0 technical change(s), 0 intent statement(s).",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    },
+    {
+      "session": {
+        "sessionId": "session-d7aab501-7f42-4527-88a7-b59de57fea38",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-e3f53aaa-5357-4357-b42f-e31ac657f5c5",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fammi un solitario con sei griffe.",
+            "timestamp": "2026-08-25T15:27:20.439687+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-f48c2267-e131-4cd1-8ea5-2726ab52fa37",
+            "result": "Proposal ready: 0 technical change(s), 0 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-af01cbbb-79ef-4e6a-98f5-9ad544b163dc",
+            "sequence": 2,
+            "role": "user",
+            "sourceText": "No, quattro griffe.",
+            "timestamp": "2026-08-25T15:27:20.446664+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "setting.prongCount"
+            ],
+            "intentChanges": [],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-08188c3b-cced-4837-bb43-ed921f3ceedb",
+            "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": {
+          "proposalId": "conv-proposal-08188c3b-cced-4837-bb43-ed921f3ceedb",
+          "turnId": "turn-af01cbbb-79ef-4e6a-98f5-9ad544b163dc",
+          "baseDefinitionHash": "355ddca57e7e49ad",
+          "baseIntentHash": "120c58f04f73bc92",
+          "designerProposal": {
+            "proposalId": "proposal-d9fcec3c-430d-4d57-966f-d29d29eacdbc",
+            "sourceText": "No, quattro griffe.",
+            "interactionMode": "MODIFY",
+            "unresolvedIntent": [],
+            "unsupportedFeatures": [],
+            "proposedFields": [
+              {
+                "path": "setting.prongCount",
+                "value": 4,
+                "provenance": "AI_INTERPRETATION",
+                "confidence": "NORMALIZED",
+                "sourceText": null,
+                "previousValue": null
+              }
+            ],
+            "clarificationQuestions": [],
+            "diagnostics": [],
+            "candidateJDL": {
+              "schemaVersion": "0.1.0",
+              "project": {
+                "name": "Solitaire Ring",
+                "units": "mm"
+              },
+              "jewelry": {
+                "category": "ring",
+                "style": "solitaire"
+              },
+              "ring": {
+                "sizeSystem": "EU",
+                "size": 16.0,
+                "innerDiameter": 17.8
+              },
+              "band": {
+                "width": 2.4,
+                "thickness": 1.8,
+                "profile": "comfort_fit"
+              },
+              "stone": {
+                "shape": "round",
+                "diameter": 6.5,
+                "depth": 4.0
+              },
+              "setting": {
+                "type": "prong",
+                "prongCount": 4,
+                "prongDiameter": 1.1,
+                "prongHeight": 4.8,
+                "basketHeight": 3.5
+              },
+              "material": {
+                "metal": "yellow_gold_18k"
+              },
+              "manufacturing": {
+                "method": "lost_wax_casting"
+              },
+              "preview": {
+                "meshTolerance": 0.1,
+                "angularTolerance": 0.2
+              }
+            },
+            "validation": [],
+            "forgeEvaluation": {
+              "results": [],
+              "hasErrors": false
+            },
+            "diff": [
+              {
+                "path": "project.name",
+                "previousValue": "Solitaire Ring",
+                "proposedValue": "Solitaire Ring",
+                "changed": false
+              },
+              {
+                "path": "project.units",
+                "previousValue": "mm",
+                "proposedValue": "mm",
+                "changed": false
+              },
+              {
+                "path": "jewelry.category",
+                "previousValue": "ring",
+                "proposedValue": "ring",
+                "changed": false
+              },
+              {
+                "path": "jewelry.style",
+                "previousValue": "solitaire",
+                "proposedValue": "solitaire",
+                "changed": false
+              },
+              {
+                "path": "ring.sizeSystem",
+                "previousValue": "EU",
+                "proposedValue": "EU",
+                "changed": false
+              },
+              {
+                "path": "ring.size",
+                "previousValue": 16.0,
+                "proposedValue": 16.0,
+                "changed": false
+              },
+              {
+                "path": "ring.innerDiameter",
+                "previousValue": 17.8,
+                "proposedValue": 17.8,
+                "changed": false
+              },
+              {
+                "path": "band.width",
+                "previousValue": 2.4,
+                "proposedValue": 2.4,
+                "changed": false
+              },
+              {
+                "path": "band.thickness",
+                "previousValue": 1.8,
+                "proposedValue": 1.8,
+                "changed": false
+              },
+              {
+                "path": "band.profile",
+                "previousValue": "comfort_fit",
+                "proposedValue": "comfort_fit",
+                "changed": false
+              },
+              {
+                "path": "stone.shape",
+                "previousValue": "round",
+                "proposedValue": "round",
+                "changed": false
+              },
+              {
+                "path": "stone.diameter",
+                "previousValue": 6.5,
+                "proposedValue": 6.5,
+                "changed": false
+              },
+              {
+                "path": "stone.depth",
+                "previousValue": 4.0,
+                "proposedValue": 4.0,
+                "changed": false
+              },
+              {
+                "path": "setting.type",
+                "previousValue": "prong",
+                "proposedValue": "prong",
+                "changed": false
+              },
+              {
+                "path": "setting.prongCount",
+                "previousValue": 6,
+                "proposedValue": 4,
+                "changed": true
+              },
+              {
+                "path": "setting.prongDiameter",
+                "previousValue": 1.1,
+                "proposedValue": 1.1,
+                "changed": false
+              },
+              {
+                "path": "setting.prongHeight",
+                "previousValue": 4.8,
+                "proposedValue": 4.8,
+                "changed": false
+              },
+              {
+                "path": "setting.basketHeight",
+                "previousValue": 3.5,
+                "proposedValue": 3.5,
+                "changed": false
+              },
+              {
+                "path": "material.metal",
+                "previousValue": "yellow_gold_18k",
+                "proposedValue": "yellow_gold_18k",
+                "changed": false
+              },
+              {
+                "path": "manufacturing.method",
+                "previousValue": "lost_wax_casting",
+                "proposedValue": "lost_wax_casting",
+                "changed": false
+              },
+              {
+                "path": "preview.meshTolerance",
+                "previousValue": 0.1,
+                "proposedValue": 0.1,
+                "changed": false
+              },
+              {
+                "path": "preview.angularTolerance",
+                "previousValue": 0.2,
+                "proposedValue": 0.2,
+                "changed": false
+              }
+            ],
+            "proposalStatus": "COMPLETE",
+            "designIntent": {
+              "version": "1.0.0",
+              "sourceText": "No, quattro griffe.",
+              "statements": [],
+              "relationships": [],
+              "unresolvedDescriptors": [],
+              "conflicts": [],
+              "profile": null,
+              "diagnostics": []
+            }
+          },
+          "status": "ACTIVE"
+        },
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "PRONGS",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "PROPOSAL_READY",
+        "createdAt": "2026-08-25T15:27:20.439687+00:00",
+        "updatedAt": "2026-08-25T15:27:20.446664+00:00"
+      },
+      "turn": {
+        "turnId": "turn-af01cbbb-79ef-4e6a-98f5-9ad544b163dc",
+        "sequence": 2,
+        "role": "user",
+        "sourceText": "No, quattro griffe.",
+        "timestamp": "2026-08-25T15:27:20.446664+00:00",
+        "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+        "references": [],
+        "technicalChanges": [
+          "setting.prongCount"
+        ],
+        "intentChanges": [],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-08188c3b-cced-4837-bb43-ed921f3ceedb",
+        "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    }
+  ]
+}

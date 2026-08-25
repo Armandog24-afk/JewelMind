@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/conversation-summary.schema.json",
+  "title": "Conversation Summary v1",
+  "description": "A deterministically-rebuilt digest of turns that have scrolled out of the recent-turn window — informative context only, never authoritative (CONV-GOV-016). Never LLM-generated; see compact_summary() and docs/bible/14-conversation/389-conversation-summary-model.md. Structured state (accepted JDL, DesignIntent, an open clarification, an active proposal) is never itself summarized away — only prose-level turn history is compacted here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["acceptedDecisions", "intentThemes", "unresolvedQuestions", "rejectedDirections", "unsupportedDiscussed"],
+  "properties": {
+    "acceptedDecisions": { "type": "array", "items": { "type": "string" } },
+    "intentThemes": { "type": "array", "items": { "type": "string" } },
+    "unresolvedQuestions": { "type": "array", "items": { "type": "string" } },
+    "rejectedDirections": { "type": "array", "items": { "type": "string" } },
+    "unsupportedDiscussed": { "type": "array", "items": { "type": "string" } }
+  }
+}

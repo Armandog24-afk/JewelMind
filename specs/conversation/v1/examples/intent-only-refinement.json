@@ -1,0 +1,770 @@
+{
+  "turns": [
+    {
+      "session": {
+        "sessionId": "session-f1dede1c-b8f7-4c8a-b815-f25794d902b3",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-5c00cd31-a6c3-4bed-9aae-276725f964c9",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [
+              "RING.SIMPLICITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+            "result": "Proposal ready: 1 technical change(s), 1 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": {
+          "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+          "turnId": "turn-5c00cd31-a6c3-4bed-9aae-276725f964c9",
+          "baseDefinitionHash": "355ddca57e7e49ad",
+          "baseIntentHash": "120c58f04f73bc92",
+          "designerProposal": {
+            "proposalId": "proposal-2bef3573-653c-4bcc-a2d2-ff413f4b45e9",
+            "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+            "interactionMode": "MODIFY",
+            "unresolvedIntent": [],
+            "unsupportedFeatures": [],
+            "proposedFields": [
+              {
+                "path": "material.metal",
+                "value": "rose_gold_18k",
+                "provenance": "AI_INTERPRETATION",
+                "confidence": "NORMALIZED",
+                "sourceText": null,
+                "previousValue": null
+              },
+              {
+                "path": "setting.prongCount",
+                "value": 6,
+                "provenance": "AI_INTERPRETATION",
+                "confidence": "NORMALIZED",
+                "sourceText": null,
+                "previousValue": null
+              }
+            ],
+            "clarificationQuestions": [],
+            "diagnostics": [],
+            "candidateJDL": {
+              "schemaVersion": "0.1.0",
+              "project": {
+                "name": "Solitaire Ring",
+                "units": "mm"
+              },
+              "jewelry": {
+                "category": "ring",
+                "style": "solitaire"
+              },
+              "ring": {
+                "sizeSystem": "EU",
+                "size": 16.0,
+                "innerDiameter": 17.8
+              },
+              "band": {
+                "width": 2.4,
+                "thickness": 1.8,
+                "profile": "comfort_fit"
+              },
+              "stone": {
+                "shape": "round",
+                "diameter": 6.5,
+                "depth": 4.0
+              },
+              "setting": {
+                "type": "prong",
+                "prongCount": 6,
+                "prongDiameter": 1.1,
+                "prongHeight": 4.8,
+                "basketHeight": 3.5
+              },
+              "material": {
+                "metal": "rose_gold_18k"
+              },
+              "manufacturing": {
+                "method": "lost_wax_casting"
+              },
+              "preview": {
+                "meshTolerance": 0.1,
+                "angularTolerance": 0.2
+              }
+            },
+            "validation": [],
+            "forgeEvaluation": {
+              "results": [],
+              "hasErrors": false
+            },
+            "diff": [
+              {
+                "path": "project.name",
+                "previousValue": "Solitaire Ring",
+                "proposedValue": "Solitaire Ring",
+                "changed": false
+              },
+              {
+                "path": "project.units",
+                "previousValue": "mm",
+                "proposedValue": "mm",
+                "changed": false
+              },
+              {
+                "path": "jewelry.category",
+                "previousValue": "ring",
+                "proposedValue": "ring",
+                "changed": false
+              },
+              {
+                "path": "jewelry.style",
+                "previousValue": "solitaire",
+                "proposedValue": "solitaire",
+                "changed": false
+              },
+              {
+                "path": "ring.sizeSystem",
+                "previousValue": "EU",
+                "proposedValue": "EU",
+                "changed": false
+              },
+              {
+                "path": "ring.size",
+                "previousValue": 16.0,
+                "proposedValue": 16.0,
+                "changed": false
+              },
+              {
+                "path": "ring.innerDiameter",
+                "previousValue": 17.8,
+                "proposedValue": 17.8,
+                "changed": false
+              },
+              {
+                "path": "band.width",
+                "previousValue": 2.4,
+                "proposedValue": 2.4,
+                "changed": false
+              },
+              {
+                "path": "band.thickness",
+                "previousValue": 1.8,
+                "proposedValue": 1.8,
+                "changed": false
+              },
+              {
+                "path": "band.profile",
+                "previousValue": "comfort_fit",
+                "proposedValue": "comfort_fit",
+                "changed": false
+              },
+              {
+                "path": "stone.shape",
+                "previousValue": "round",
+                "proposedValue": "round",
+                "changed": false
+              },
+              {
+                "path": "stone.diameter",
+                "previousValue": 6.5,
+                "proposedValue": 6.5,
+                "changed": false
+              },
+              {
+                "path": "stone.depth",
+                "previousValue": 4.0,
+                "proposedValue": 4.0,
+                "changed": false
+              },
+              {
+                "path": "setting.type",
+                "previousValue": "prong",
+                "proposedValue": "prong",
+                "changed": false
+              },
+              {
+                "path": "setting.prongCount",
+                "previousValue": 6,
+                "proposedValue": 6,
+                "changed": false
+              },
+              {
+                "path": "setting.prongDiameter",
+                "previousValue": 1.1,
+                "proposedValue": 1.1,
+                "changed": false
+              },
+              {
+                "path": "setting.prongHeight",
+                "previousValue": 4.8,
+                "proposedValue": 4.8,
+                "changed": false
+              },
+              {
+                "path": "setting.basketHeight",
+                "previousValue": 3.5,
+                "proposedValue": 3.5,
+                "changed": false
+              },
+              {
+                "path": "material.metal",
+                "previousValue": "yellow_gold_18k",
+                "proposedValue": "rose_gold_18k",
+                "changed": true
+              },
+              {
+                "path": "manufacturing.method",
+                "previousValue": "lost_wax_casting",
+                "proposedValue": "lost_wax_casting",
+                "changed": false
+              },
+              {
+                "path": "preview.meshTolerance",
+                "previousValue": 0.1,
+                "proposedValue": 0.1,
+                "changed": false
+              },
+              {
+                "path": "preview.angularTolerance",
+                "previousValue": 0.2,
+                "proposedValue": 0.2,
+                "changed": false
+              }
+            ],
+            "proposalStatus": "COMPLETE",
+            "designIntent": {
+              "version": "1.0.0",
+              "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+              "statements": [
+                {
+                  "intentId": "intent-80df0912-3e53-4b53-bf01-2603868c04e1",
+                  "target": "RING",
+                  "concept": "SIMPLICITY",
+                  "value": "MINIMAL",
+                  "strength": "PREFERRED",
+                  "priority": 0,
+                  "provenance": "AI_NORMALIZED",
+                  "confidenceClass": "EXACT",
+                  "sourceText": "minimal",
+                  "resolutionStatus": "PRESERVED",
+                  "relatedJDLPaths": [],
+                  "diagnostics": []
+                }
+              ],
+              "relationships": [],
+              "unresolvedDescriptors": [],
+              "conflicts": [],
+              "profile": null,
+              "diagnostics": []
+            }
+          },
+          "status": "ACTIVE"
+        },
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "PRONGS",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "PROPOSAL_READY",
+        "createdAt": "2026-08-25T15:27:20.405460+00:00",
+        "updatedAt": "2026-08-25T15:27:20.405460+00:00"
+      },
+      "turn": {
+        "turnId": "turn-5c00cd31-a6c3-4bed-9aae-276725f964c9",
+        "sequence": 1,
+        "role": "user",
+        "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+        "timestamp": "2026-08-25T15:27:20.405460+00:00",
+        "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+        "references": [],
+        "technicalChanges": [
+          "material.metal"
+        ],
+        "intentChanges": [
+          "RING.SIMPLICITY"
+        ],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+        "result": "Proposal ready: 1 technical change(s), 1 intent statement(s).",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    },
+    {
+      "session": {
+        "sessionId": "session-f1dede1c-b8f7-4c8a-b815-f25794d902b3",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-5c00cd31-a6c3-4bed-9aae-276725f964c9",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [
+              "RING.SIMPLICITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+            "result": "Proposal ready: 1 technical change(s), 1 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-aa5a88cf-a0ac-4b96-acc0-fca255c3a0e2",
+            "sequence": 2,
+            "role": "user",
+            "sourceText": "ok",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "ACCEPT_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [
+              "RING.SIMPLICITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+            "result": "Proposal accepted.",
+            "accepted": true,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": null,
+        "acceptedChangeHistory": [
+          "material.metal"
+        ],
+        "lastReferencedTarget": "PRONGS",
+        "summary": {
+          "acceptedDecisions": [
+            "material.metal"
+          ],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "ACTIVE",
+        "createdAt": "2026-08-25T15:27:20.405460+00:00",
+        "updatedAt": "2026-08-25T15:27:20.405460+00:00"
+      },
+      "turn": {
+        "turnId": "turn-aa5a88cf-a0ac-4b96-acc0-fca255c3a0e2",
+        "sequence": 2,
+        "role": "user",
+        "sourceText": "ok",
+        "timestamp": "2026-08-25T15:27:20.405460+00:00",
+        "interpretedAction": "ACCEPT_PROPOSAL",
+        "references": [],
+        "technicalChanges": [
+          "material.metal"
+        ],
+        "intentChanges": [
+          "RING.SIMPLICITY"
+        ],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+        "result": "Proposal accepted.",
+        "accepted": true,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    },
+    {
+      "session": {
+        "sessionId": "session-f1dede1c-b8f7-4c8a-b815-f25794d902b3",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-5c00cd31-a6c3-4bed-9aae-276725f964c9",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fammi un solitario minimal in oro rosa con sei griffe.",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [
+              "RING.SIMPLICITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+            "result": "Proposal ready: 1 technical change(s), 1 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-aa5a88cf-a0ac-4b96-acc0-fca255c3a0e2",
+            "sequence": 2,
+            "role": "user",
+            "sourceText": "ok",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "ACCEPT_PROPOSAL",
+            "references": [],
+            "technicalChanges": [
+              "material.metal"
+            ],
+            "intentChanges": [
+              "RING.SIMPLICITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-8276c8e7-ae6b-463c-a5c7-3dc99d9dab2e",
+            "result": "Proposal accepted.",
+            "accepted": true,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-628d692b-492e-44cf-9720-0774eaad9e3a",
+            "sequence": 3,
+            "role": "user",
+            "sourceText": "Pi\u00f9 classico.",
+            "timestamp": "2026-08-25T15:27:20.405460+00:00",
+            "interpretedAction": "MODIFY_INTENT",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [
+              "RING.STYLE_TEMPORALITY"
+            ],
+            "clarification": null,
+            "unsupportedFeatures": [],
+            "proposalId": "conv-proposal-84cd407e-ffbe-4abb-a584-c1f6e373496e",
+            "result": "Proposal ready: 0 technical change(s), 1 intent statement(s).",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": null,
+        "activeProposal": {
+          "proposalId": "conv-proposal-84cd407e-ffbe-4abb-a584-c1f6e373496e",
+          "turnId": "turn-628d692b-492e-44cf-9720-0774eaad9e3a",
+          "baseDefinitionHash": "355ddca57e7e49ad",
+          "baseIntentHash": "120c58f04f73bc92",
+          "designerProposal": {
+            "proposalId": "proposal-4f2503b3-a009-4778-a51f-dee12e5f17ba",
+            "sourceText": "Pi\u00f9 classico.",
+            "interactionMode": "MODIFY",
+            "unresolvedIntent": [],
+            "unsupportedFeatures": [],
+            "proposedFields": [],
+            "clarificationQuestions": [],
+            "diagnostics": [],
+            "candidateJDL": {
+              "schemaVersion": "0.1.0",
+              "project": {
+                "name": "Solitaire Ring",
+                "units": "mm"
+              },
+              "jewelry": {
+                "category": "ring",
+                "style": "solitaire"
+              },
+              "ring": {
+                "sizeSystem": "EU",
+                "size": 16.0,
+                "innerDiameter": 17.8
+              },
+              "band": {
+                "width": 2.4,
+                "thickness": 1.8,
+                "profile": "comfort_fit"
+              },
+              "stone": {
+                "shape": "round",
+                "diameter": 6.5,
+                "depth": 4.0
+              },
+              "setting": {
+                "type": "prong",
+                "prongCount": 6,
+                "prongDiameter": 1.1,
+                "prongHeight": 4.8,
+                "basketHeight": 3.5
+              },
+              "material": {
+                "metal": "yellow_gold_18k"
+              },
+              "manufacturing": {
+                "method": "lost_wax_casting"
+              },
+              "preview": {
+                "meshTolerance": 0.1,
+                "angularTolerance": 0.2
+              }
+            },
+            "validation": [],
+            "forgeEvaluation": {
+              "results": [],
+              "hasErrors": false
+            },
+            "diff": [
+              {
+                "path": "project.name",
+                "previousValue": "Solitaire Ring",
+                "proposedValue": "Solitaire Ring",
+                "changed": false
+              },
+              {
+                "path": "project.units",
+                "previousValue": "mm",
+                "proposedValue": "mm",
+                "changed": false
+              },
+              {
+                "path": "jewelry.category",
+                "previousValue": "ring",
+                "proposedValue": "ring",
+                "changed": false
+              },
+              {
+                "path": "jewelry.style",
+                "previousValue": "solitaire",
+                "proposedValue": "solitaire",
+                "changed": false
+              },
+              {
+                "path": "ring.sizeSystem",
+                "previousValue": "EU",
+                "proposedValue": "EU",
+                "changed": false
+              },
+              {
+                "path": "ring.size",
+                "previousValue": 16.0,
+                "proposedValue": 16.0,
+                "changed": false
+              },
+              {
+                "path": "ring.innerDiameter",
+                "previousValue": 17.8,
+                "proposedValue": 17.8,
+                "changed": false
+              },
+              {
+                "path": "band.width",
+                "previousValue": 2.4,
+                "proposedValue": 2.4,
+                "changed": false
+              },
+              {
+                "path": "band.thickness",
+                "previousValue": 1.8,
+                "proposedValue": 1.8,
+                "changed": false
+              },
+              {
+                "path": "band.profile",
+                "previousValue": "comfort_fit",
+                "proposedValue": "comfort_fit",
+                "changed": false
+              },
+              {
+                "path": "stone.shape",
+                "previousValue": "round",
+                "proposedValue": "round",
+                "changed": false
+              },
+              {
+                "path": "stone.diameter",
+                "previousValue": 6.5,
+                "proposedValue": 6.5,
+                "changed": false
+              },
+              {
+                "path": "stone.depth",
+                "previousValue": 4.0,
+                "proposedValue": 4.0,
+                "changed": false
+              },
+              {
+                "path": "setting.type",
+                "previousValue": "prong",
+                "proposedValue": "prong",
+                "changed": false
+              },
+              {
+                "path": "setting.prongCount",
+                "previousValue": 6,
+                "proposedValue": 6,
+                "changed": false
+              },
+              {
+                "path": "setting.prongDiameter",
+                "previousValue": 1.1,
+                "proposedValue": 1.1,
+                "changed": false
+              },
+              {
+                "path": "setting.prongHeight",
+                "previousValue": 4.8,
+                "proposedValue": 4.8,
+                "changed": false
+              },
+              {
+                "path": "setting.basketHeight",
+                "previousValue": 3.5,
+                "proposedValue": 3.5,
+                "changed": false
+              },
+              {
+                "path": "material.metal",
+                "previousValue": "yellow_gold_18k",
+                "proposedValue": "yellow_gold_18k",
+                "changed": false
+              },
+              {
+                "path": "manufacturing.method",
+                "previousValue": "lost_wax_casting",
+                "proposedValue": "lost_wax_casting",
+                "changed": false
+              },
+              {
+                "path": "preview.meshTolerance",
+                "previousValue": 0.1,
+                "proposedValue": 0.1,
+                "changed": false
+              },
+              {
+                "path": "preview.angularTolerance",
+                "previousValue": 0.2,
+                "proposedValue": 0.2,
+                "changed": false
+              }
+            ],
+            "proposalStatus": "COMPLETE",
+            "designIntent": {
+              "version": "1.0.0",
+              "sourceText": "Pi\u00f9 classico.",
+              "statements": [
+                {
+                  "intentId": "intent-45841c41-0e4b-4570-bdb7-3f68a83fe008",
+                  "target": "RING",
+                  "concept": "STYLE_TEMPORALITY",
+                  "value": "CLASSIC",
+                  "strength": "PREFERRED",
+                  "priority": 0,
+                  "provenance": "AI_NORMALIZED",
+                  "confidenceClass": "HIGH_CONFIDENCE_NORMALIZATION",
+                  "sourceText": "classico",
+                  "resolutionStatus": "PRESERVED",
+                  "relatedJDLPaths": [],
+                  "diagnostics": []
+                }
+              ],
+              "relationships": [],
+              "unresolvedDescriptors": [],
+              "conflicts": [],
+              "profile": null,
+              "diagnostics": []
+            }
+          },
+          "status": "ACTIVE"
+        },
+        "acceptedChangeHistory": [
+          "material.metal"
+        ],
+        "lastReferencedTarget": "PRONGS",
+        "summary": {
+          "acceptedDecisions": [
+            "material.metal"
+          ],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "PROPOSAL_READY",
+        "createdAt": "2026-08-25T15:27:20.405460+00:00",
+        "updatedAt": "2026-08-25T15:27:20.405460+00:00"
+      },
+      "turn": {
+        "turnId": "turn-628d692b-492e-44cf-9720-0774eaad9e3a",
+        "sequence": 3,
+        "role": "user",
+        "sourceText": "Pi\u00f9 classico.",
+        "timestamp": "2026-08-25T15:27:20.405460+00:00",
+        "interpretedAction": "MODIFY_INTENT",
+        "references": [],
+        "technicalChanges": [],
+        "intentChanges": [
+          "RING.STYLE_TEMPORALITY"
+        ],
+        "clarification": null,
+        "unsupportedFeatures": [],
+        "proposalId": "conv-proposal-84cd407e-ffbe-4abb-a584-c1f6e373496e",
+        "result": "Proposal ready: 0 technical change(s), 1 intent statement(s).",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    }
+  ]
+}

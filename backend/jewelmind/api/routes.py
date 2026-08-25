@@ -28,6 +28,8 @@ from jewelmind.api.schemas import (
     SpecificationRequest,
     ValidateResponse,
 )
+from jewelmind.conversation.schemas import ConversationResult, ConversationTurnRequest
+from jewelmind.conversation.service import ConversationEngine
 from jewelmind.designer.schemas import DesignerResult, NaturalLanguageDesignRequest
 from jewelmind.designer.service import DesignerService
 from jewelmind.domain.schema import JewelryDefinition
@@ -240,6 +242,20 @@ def designer_interpret_route(request: NaturalLanguageDesignRequest) -> DesignerR
 
     service = DesignerService(provider=get_designer_provider())
     return service.interpret(request)
+
+
+@router.post("/api/conversation/turn", response_model=ConversationResult)
+def conversation_turn_route(request: ConversationTurnRequest) -> ConversationResult:
+    # Same per-request construction rationale as designer_interpret_route:
+    # honest about provider availability, no server-persisted session
+    # (Conversation Engine is stateless per request — the caller's own
+    # `request.session` round-trip carries turn history; see
+    # docs/bible/14-conversation/373-conversation-session-lifecycle.md).
+    from jewelmind.designer.provider import get_designer_provider
+
+    designer_service = DesignerService(provider=get_designer_provider())
+    engine = ConversationEngine(designer_service=designer_service)
+    return engine.process_turn(request)
 
 
 @router.post("/api/models/specification")

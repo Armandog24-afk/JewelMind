@@ -1,0 +1,58 @@
+{
+  "vectors": [
+    {
+      "expectedAnswerType": "NUMERIC",
+      "rawAnswer": "2.7 mm",
+      "resolvedValue": 2.7,
+      "accepted": true
+    },
+    {
+      "expectedAnswerType": "NUMERIC",
+      "rawAnswer": "not a number",
+      "resolvedValue": null,
+      "accepted": false
+    },
+    {
+      "expectedAnswerType": "ENUM_CHOICE",
+      "rawAnswer": "rose_gold_18k",
+      "resolvedValue": "rose_gold_18k",
+      "accepted": true
+    },
+    {
+      "expectedAnswerType": "ENUM_CHOICE",
+      "rawAnswer": "platinum",
+      "resolvedValue": null,
+      "accepted": false
+    },
+    {
+      "expectedAnswerType": "CONFIRMATION",
+      "rawAnswer": "yes",
+      "resolvedValue": "yes",
+      "accepted": true
+    },
+    {
+      "expectedAnswerType": "CONFIRMATION",
+      "rawAnswer": "no",
+      "resolvedValue": "no",
+      "accepted": true
+    },
+    {
+      "expectedAnswerType": "CONFIRMATION",
+      "rawAnswer": "maybe",
+      "resolvedValue": null,
+      "accepted": false
+    },
+    {
+      "expectedAnswerType": "FREE_TEXT",
+      "rawAnswer": "make it sparkle",
+      "resolvedValue": "make it sparkle",
+      "accepted": true
+    },
+    {
+      "expectedAnswerType": "FREE_TEXT",
+      "rawAnswer": "",
+      "resolvedValue": null,
+      "accepted": false
+    }
+  ]
+}

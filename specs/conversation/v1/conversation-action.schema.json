@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/conversation-action.schema.json",
+  "title": "Conversation Action v1",
+  "description": "The 13 canonical outcomes a conversational turn can resolve into — the authoritative list superseding the Sprint 12 brief's earlier conceptual list. Every meaningful turn maps to exactly one of these via deterministic classification (`classify_action()`), never LLM judgment for this meta-level decision. See docs/bible/14-conversation/README.md and CONV-GOV-020: conversation cannot bypass Designer/JDL validation/Forge by inventing an action outside this set.",
+  "enum": [
+    "CREATE_DESIGN_PROPOSAL",
+    "MODIFY_DESIGN_PROPOSAL",
+    "ADD_INTENT",
+    "MODIFY_INTENT",
+    "REMOVE_INTENT",
+    "PRESERVE_TARGET",
+    "REQUEST_CLARIFICATION",
+    "ANSWER_CLARIFICATION",
+    "REPORT_UNSUPPORTED",
+    "ACCEPT_PROPOSAL",
+    "REJECT_PROPOSAL",
+    "CANCEL_INTERACTION",
+    "NO_CHANGE"
+  ]
+}

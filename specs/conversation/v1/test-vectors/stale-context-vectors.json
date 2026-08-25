@@ -1,0 +1,16 @@
+{
+  "vectors": [
+    {
+      "scenario": "unchanged_jdl_and_intent",
+      "isStale": false
+    },
+    {
+      "scenario": "jdl_changed_since_proposal",
+      "isStale": true
+    },
+    {
+      "scenario": "intent_changed_since_proposal",
+      "isStale": true
+    }
+  ]
+}

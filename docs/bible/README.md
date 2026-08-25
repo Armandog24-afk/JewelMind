@@ -146,6 +146,26 @@ This Bible now spans six Sprints:
   an unfinished feature** — every recognized aesthetic statement resolves
   to `resolutionStatus: PRESERVED`, never to a JDL field. Start there at
   [`13-design-intent/README.md`](13-design-intent/README.md).
+- **Sprint 12 — Conversation Engine v1**
+  ([`14-conversation/`](14-conversation/)), formalizing the interaction-state
+  layer sitting above Designer (Sprint 10) and Design Intent (Sprint 11),
+  orchestrating multi-turn natural-language design refinement without
+  duplicating either's logic: every meaningful turn resolves
+  deterministically into one of 13 canonical `ConversationActionType`
+  values — never a stream of free-form assistant prose treated as ground
+  truth. Also not documentation-only: ships a real backend package
+  (`backend/jewelmind/conversation/`), a real `POST /api/conversation/turn`
+  endpoint, and a real Studio UI (`ConversationPanel.tsx`, now the natural-
+  language surface actually mounted in `App.tsx`, superseding
+  `DesignerPanel.tsx` there while `DesignerPanel.tsx` itself remains and
+  stays tested standalone), while finding that **the backend is stateless
+  per request, exactly like Designer** — `ConversationEngine` never
+  persists a `ConversationSession` server-side, and `ACCEPT_PROPOSAL` only
+  confirms a proposal is safe to apply (via real content-hash staleness
+  comparison) before returning the already-computed values for the caller
+  to apply through the same `applyDesignerProposal()`/`applyIntent()`
+  paths Designer's own UI has used since Sprint 10. Start there at
+  [`14-conversation/README.md`](14-conversation/README.md).
 
 ## How this relates to the existing `docs/` folder
 
@@ -402,6 +422,40 @@ truth, 7 examples, and 6 test-vector files) plus
 `backend/tests/test_design_intent.py`, `test_design_intent_corpus.py` (an
 88-case natural-language corpus across 9 categories),
 `test_design_intent_schemas.py`, and `test_designer_intent_integration.py`.
+
+**Technical Bible Sprint 12 — Conversation Engine v1** formalizes
+Conversation, the interaction-state layer sitting above Designer and
+Design Intent: a sequence of natural-language turns becomes a sequence of
+structured design transactions — never a stream of authoritative prose —
+so a user can say "make it more classic", then "leave the stone as is",
+then "make the band wider", across multiple turns, with each turn
+classified deterministically (`classify_action()`, never an AI judgment
+call for this meta-level decision) into one of 13 canonical
+`ConversationActionType` values. Like Sprints 8-11, this Sprint ships
+real code: a backend `jewelmind.conversation` package (deterministic
+action classification, reference resolution reusing Design Intent's own
+`TARGET_SYNONYMS`, clarification-thread lifecycle, real content-hash
+proposal-staleness detection, and bounded/deterministic history
+summarization), a real `POST /api/conversation/turn` endpoint, and a real
+Studio UI (`ConversationPanel.tsx`), now the natural-language surface
+actually mounted in `App.tsx` in place of `DesignerPanel.tsx` (which
+remains in the codebase and stays tested standalone). Its most
+significant finding: **the backend is stateless per request, exactly
+like Designer** — `ConversationEngine` never persists a
+`ConversationSession` server-side and never mutates a stored design
+itself; the entire session round-trips through the caller on every
+request, and accepting a proposal only confirms it is safe to apply
+(`state.is_proposal_stale()`, comparing real content hashes) before
+returning the already-computed values for the caller to apply through
+the same `applyDesignerProposal()`/`applyIntent()` paths Designer's own
+UI has used since Sprint 10 — there is no new server-side mutation
+surface. It adds the machine-readable specification under
+[`../../specs/conversation/v1/`](../../specs/conversation/v1/README.md)
+(9 JSON Schemas, 7 examples, and 7 test-vector files) plus
+`backend/tests/test_conversation.py`, `test_conversation_engine.py` (the
+6 required CASE A-F multi-turn scenarios), `test_conversation_api.py`,
+`test_conversation_corpus.py` (an 80-case natural-language corpus across
+17 categories), and `test_conversation_schemas.py`.
 
 All nine Sprints are grounded in the real, running application, but
 differ in kind: Sprints 1–6 changed no application code behavior beyond

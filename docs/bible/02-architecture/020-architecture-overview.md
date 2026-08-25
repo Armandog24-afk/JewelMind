@@ -60,6 +60,28 @@ has zero dependency on FastAPI or HTTP concerns. This separation is what
 [`022-domain-boundaries.md`](022-domain-boundaries.md) exists to enforce
 and document.
 
+## Conversation Engine (interaction-state layer)
+
+As of Sprint 12, `backend/jewelmind/conversation/` and
+`frontend/src/components/ConversationPanel.tsx` add an interaction-state
+layer sitting above Designer and Design Intent, with zero authority over
+either: a sequence of natural-language turns is classified
+deterministically (`classify_action()`) into one of 13 canonical
+`ConversationActionType` values and orchestrated around the existing
+`DesignerService.interpret()` call — Conversation adds no new technical
+extraction, no new JDL proposal construction, and no direct `cadquery`
+import anywhere in the package. `ConversationPanel` is now the
+natural-language surface actually mounted in `App.tsx`, superseding
+`DesignerPanel` there (`DesignerPanel.tsx` itself remains in the codebase
+and stays tested standalone). Like Designer, the backend is stateless per
+request: `ConversationEngine` never persists a `ConversationSession`
+server-side, and accepting a proposal only confirms — via real
+content-hash staleness comparison — that it is safe for the caller to
+apply through the same `applyDesignerProposal()`/`applyIntent()` paths
+already in use since Sprint 10. This layer is formalized as
+**"Conversation Engine"** in Sprint 12 — see
+[`14-conversation/README.md`](../14-conversation/README.md).
+
 ## Designer (natural-language input layer)
 
 As of Sprint 10, `backend/jewelmind/designer/` and

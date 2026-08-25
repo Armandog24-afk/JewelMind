@@ -83,3 +83,22 @@ See [`SPRINT-9-VALIDATION-REPORT.md`](SPRINT-9-VALIDATION-REPORT.md) for the che
 ## Relationship to Sprint 11
 
 [`13-design-intent/`](../13-design-intent/README.md) (Sprint 11) adds a new, independent Zustand store, `useDesignIntentStore` (`currentIntent`, `applyIntent()`, `removeStatement()`, `removeUnresolvedDescriptor()`, `clearIntent()`), and a new "Design intent" review section inside `DesignerPanel.tsx`, separate from its existing "JewelMind understood" technical section. Applying a design-intent-only proposal never affects Studio's model-status or staleness computation — `DesignerPanel.tsx::handleApply()` only calls `applyDesignerProposal()` (the existing, unchanged Sprint 10 path into `withUpdatedDefinition()`) when `proposal.diff.some(d => d.changed)` is true, i.e. when a real technical JDL field actually changed; `applyIntent()` is a wholly separate call that writes only to `useDesignIntentStore`, never to `useProjectStore.currentDefinition`, `computeModelState()`, or `computeOutputEligibility()`. See [`13-design-intent/357-studio-intent-review.md`](../13-design-intent/357-studio-intent-review.md).
+
+## Relationship to Sprint 12
+
+As of Sprint 12, Studio's natural-language entry point is
+[`14-conversation/`](../14-conversation/README.md)'s `ConversationPanel`,
+which supersedes single-turn `DesignerPanel` as the component actually
+mounted in `frontend/src/App.tsx`. `DesignerPanel.tsx` itself is not
+removed — it remains in the codebase and stays covered by its own
+standalone test suite (`DesignerPanel.test.tsx`) — but a real user
+session in Studio today drives natural-language design through
+`ConversationPanel`'s multi-turn interface instead. `ConversationPanel`
+reuses the same underlying acceptance path Designer's own UI has used
+since Sprint 10: accepting a proposal calls
+`useProjectStore.applyDesignerProposal()`/`useDesignIntentStore.applyIntent()`
+exactly as before, so every existing Studio guarantee —
+`computeModelState()`, `computeOutputEligibility()`,
+`withUpdatedDefinition()`'s staleness marking — is unchanged by this
+Sprint. See
+[`14-conversation/395-studio-integration.md`](../14-conversation/395-studio-integration.md).

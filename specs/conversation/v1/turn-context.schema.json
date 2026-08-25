@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/turn-context.schema.json",
+  "title": "Turn Context v1",
+  "description": "What a real provider would receive when interpreting one turn — compact, bounded, never raw CAD geometry, never the full turn history. See docs/bible/14-conversation/375-turn-context-model.md, 387-context-window-policy.md, and backend/jewelmind/conversation/schemas.py::TurnContext. Built by build_turn_context(); never constructed by hand.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["recentAcceptedChanges", "modelCurrentOrStale"],
+  "properties": {
+    "activeProposalId": { "type": ["string", "null"] },
+    "pendingClarificationQuestion": { "type": ["string", "null"] },
+    "recentAcceptedChanges": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Bounded to MAX_RECENT_TURNS_IN_CONTEXT (a turn-count bound, not an invented token budget)."
+    },
+    "compactConversationSummary": {
+      "description": "A ConversationSummary (see conversation-summary.schema.json), present only once the session has more turns than fit in the recent window; null otherwise.",
+      "type": ["object", "null"]
+    },
+    "modelCurrentOrStale": { "enum": ["CURRENT", "STALE", "NONE"] }
+  }
+}

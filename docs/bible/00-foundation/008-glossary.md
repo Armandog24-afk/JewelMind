@@ -600,3 +600,60 @@ automatically influence a JDL field; v1 registers zero such mappings,
 which is the deliberately correct, safe state, not an unfinished
 feature. See
 [`13-design-intent/349-deterministic-resolution-policy.md`](../13-design-intent/349-deterministic-resolution-policy.md).
+
+## Conversation terms (Sprint 12)
+
+> Authoritative source for every term in this section:
+> [`14-conversation/`](../14-conversation/README.md) (Sprint 12).
+
+**Conversation Turn** — one structured design transaction
+(`ConversationTurn` in `backend/jewelmind/conversation/schemas.py`): the
+user's raw text, the deterministically classified
+`ConversationActionType`, any references/technical changes/intent
+changes/unsupported features it produced, and the before/after JDL and
+DesignIntent content hashes. Never itself a source of design truth — see
+"Structured Design Transaction" below.
+
+**Conversation Session** — the full, client-carried interaction state
+(`ConversationSession`): the turn history, an optional pending
+clarification, an optional active proposal, accepted-change history, and
+a deterministically-rebuilt summary. The backend never persists a
+session server-side — it round-trips through the caller on every
+`POST /api/conversation/turn` request, exactly like Designer's own
+per-request statelessness. See
+[`373-conversation-session-lifecycle.md`](../14-conversation/373-conversation-session-lifecycle.md).
+
+**Clarification Thread** — one open-or-resolved question
+(`ClarificationThread`) Conversation must ask before a turn can be
+resolved further, because a reference was ambiguous or Designer itself
+requested more information. Resolves only the question it was opened for
+— never an unrelated open question. See
+[`381-clarification-thread-model.md`](../14-conversation/381-clarification-thread-model.md).
+
+**Conversation Proposal** — the interaction-layer wrapper around one
+Designer-produced `DesignerProposal` (`ConversationProposal`), adding a
+`baseDefinitionHash`/`baseIntentHash` pair recording exactly which JDL/
+DesignIntent state it was computed against, for staleness detection.
+Applying it is still only ever an explicit `ACCEPT_PROPOSAL` action, via
+the same `applyDesignerProposal()`/`applyIntent()` paths Designer's own
+UI has used since Sprint 10. See
+[`385-conversational-diff-model.md`](../14-conversation/385-conversational-diff-model.md).
+
+**Structured Design Transaction** — this Sprint's core, non-negotiable
+principle: conversation is a sequence of structured design transactions,
+never a stream of authoritative prose. Every meaningful turn resolves
+deterministically (`classify_action()`, never an AI judgment call for
+this meta-level decision) into exactly one of 13 canonical
+`ConversationActionType` values, and every action either produces a
+structured, reviewable artifact or an explicit no-op — never a mutation
+the user didn't structurally approve. See
+[`14-conversation/README.md`](../14-conversation/README.md).
+
+**Stale Proposal / Staleness Detection** — the guarantee that an active
+`ConversationProposal` is never applied if the design or intent it was
+computed against has since changed (e.g. a concurrent manual edit in
+`ConfigurationPanel`). `state.is_proposal_stale()` recomputes the
+caller's current JDL/DesignIntent content hashes on every request and
+compares them against the proposal's own `baseDefinitionHash`/
+`baseIntentHash` before `ACCEPT_PROPOSAL` is allowed to succeed. See
+[`402-stale-context-and-concurrent-editing.md`](../14-conversation/402-stale-context-and-concurrent-editing.md).

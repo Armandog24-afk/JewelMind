@@ -1,0 +1,439 @@
+{
+  "turns": [
+    {
+      "session": {
+        "sessionId": "session-2d70a96f-f1e1-4cf7-bda7-f5d05f7a344a",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fai la fascia pi\u00f9 larga.",
+            "timestamp": "2026-08-25T15:27:20.424940+00:00",
+            "interpretedAction": "REQUEST_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          }
+        ],
+        "pendingClarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "activeProposal": null,
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "BAND",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "WAITING_FOR_CLARIFICATION",
+        "createdAt": "2026-08-25T15:27:20.424940+00:00",
+        "updatedAt": "2026-08-25T15:27:20.424940+00:00"
+      },
+      "turn": {
+        "turnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+        "sequence": 1,
+        "role": "user",
+        "sourceText": "Fai la fascia pi\u00f9 larga.",
+        "timestamp": "2026-08-25T15:27:20.424940+00:00",
+        "interpretedAction": "REQUEST_CLARIFICATION",
+        "references": [],
+        "technicalChanges": [],
+        "intentChanges": [],
+        "clarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "unsupportedFeatures": [],
+        "proposalId": null,
+        "result": "What width would you like?",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": []
+      }
+    },
+    {
+      "session": {
+        "sessionId": "session-2d70a96f-f1e1-4cf7-bda7-f5d05f7a344a",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fai la fascia pi\u00f9 larga.",
+            "timestamp": "2026-08-25T15:27:20.424940+00:00",
+            "interpretedAction": "REQUEST_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-12f2adf5-a919-45f7-a04d-52633130b8fa",
+            "sequence": 2,
+            "role": "user",
+            "sourceText": "2.7 mm.",
+            "timestamp": "2026-08-25T15:27:20.428969+00:00",
+            "interpretedAction": "ANSWER_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "Could not understand that as an answer to: What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": [
+              {
+                "code": "CONVERSATION_CLARIFICATION_INVALID",
+                "severity": "warning",
+                "message": "'2.7 mm.' did not match the expected answer type for this question."
+              }
+            ]
+          }
+        ],
+        "pendingClarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "activeProposal": null,
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "BAND",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "WAITING_FOR_CLARIFICATION",
+        "createdAt": "2026-08-25T15:27:20.424940+00:00",
+        "updatedAt": "2026-08-25T15:27:20.428969+00:00"
+      },
+      "turn": {
+        "turnId": "turn-12f2adf5-a919-45f7-a04d-52633130b8fa",
+        "sequence": 2,
+        "role": "user",
+        "sourceText": "2.7 mm.",
+        "timestamp": "2026-08-25T15:27:20.428969+00:00",
+        "interpretedAction": "ANSWER_CLARIFICATION",
+        "references": [],
+        "technicalChanges": [],
+        "intentChanges": [],
+        "clarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "unsupportedFeatures": [],
+        "proposalId": null,
+        "result": "Could not understand that as an answer to: What width would you like?",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": [
+          {
+            "code": "CONVERSATION_CLARIFICATION_INVALID",
+            "severity": "warning",
+            "message": "'2.7 mm.' did not match the expected answer type for this question."
+          }
+        ]
+      }
+    },
+    {
+      "session": {
+        "sessionId": "session-2d70a96f-f1e1-4cf7-bda7-f5d05f7a344a",
+        "sessionVersion": "1.0.0",
+        "currentJDLHash": "355ddca57e7e49ad",
+        "currentIntentHash": "120c58f04f73bc92",
+        "turns": [
+          {
+            "turnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+            "sequence": 1,
+            "role": "user",
+            "sourceText": "Fai la fascia pi\u00f9 larga.",
+            "timestamp": "2026-08-25T15:27:20.424940+00:00",
+            "interpretedAction": "REQUEST_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": []
+          },
+          {
+            "turnId": "turn-12f2adf5-a919-45f7-a04d-52633130b8fa",
+            "sequence": 2,
+            "role": "user",
+            "sourceText": "2.7 mm.",
+            "timestamp": "2026-08-25T15:27:20.428969+00:00",
+            "interpretedAction": "ANSWER_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "Could not understand that as an answer to: What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": [
+              {
+                "code": "CONVERSATION_CLARIFICATION_INVALID",
+                "severity": "warning",
+                "message": "'2.7 mm.' did not match the expected answer type for this question."
+              }
+            ]
+          },
+          {
+            "turnId": "turn-5f0606c3-48f1-4b70-9f8a-dd2dd7438a96",
+            "sequence": 3,
+            "role": "user",
+            "sourceText": "ok",
+            "timestamp": "2026-08-25T15:27:20.428969+00:00",
+            "interpretedAction": "ANSWER_CLARIFICATION",
+            "references": [],
+            "technicalChanges": [],
+            "intentChanges": [],
+            "clarification": {
+              "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+              "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+              "question": "What width would you like?",
+              "target": "band.width",
+              "expectedAnswerType": "NUMERIC",
+              "allowedChoices": [],
+              "required": true,
+              "status": "OPEN",
+              "createdAt": "2026-08-25T15:27:20.424940+00:00",
+              "resolvedAt": null,
+              "answer": null
+            },
+            "unsupportedFeatures": [],
+            "proposalId": null,
+            "result": "Could not understand that as an answer to: What width would you like?",
+            "accepted": null,
+            "relatedJDLHashBefore": "355ddca57e7e49ad",
+            "relatedJDLHashAfter": "355ddca57e7e49ad",
+            "relatedIntentHashBefore": "120c58f04f73bc92",
+            "relatedIntentHashAfter": "120c58f04f73bc92",
+            "diagnostics": [
+              {
+                "code": "CONVERSATION_CLARIFICATION_INVALID",
+                "severity": "warning",
+                "message": "'ok' did not match the expected answer type for this question."
+              }
+            ]
+          }
+        ],
+        "pendingClarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "activeProposal": null,
+        "acceptedChangeHistory": [],
+        "lastReferencedTarget": "BAND",
+        "summary": {
+          "acceptedDecisions": [],
+          "intentThemes": [],
+          "unresolvedQuestions": [],
+          "rejectedDirections": [],
+          "unsupportedDiscussed": []
+        },
+        "status": "WAITING_FOR_CLARIFICATION",
+        "createdAt": "2026-08-25T15:27:20.424940+00:00",
+        "updatedAt": "2026-08-25T15:27:20.428969+00:00"
+      },
+      "turn": {
+        "turnId": "turn-5f0606c3-48f1-4b70-9f8a-dd2dd7438a96",
+        "sequence": 3,
+        "role": "user",
+        "sourceText": "ok",
+        "timestamp": "2026-08-25T15:27:20.428969+00:00",
+        "interpretedAction": "ANSWER_CLARIFICATION",
+        "references": [],
+        "technicalChanges": [],
+        "intentChanges": [],
+        "clarification": {
+          "clarificationId": "clarification-cc5df05d-418a-4361-afa9-ce8e452decea",
+          "originatingTurnId": "turn-73b06a7d-b606-4dee-a844-4cda54b992db",
+          "question": "What width would you like?",
+          "target": "band.width",
+          "expectedAnswerType": "NUMERIC",
+          "allowedChoices": [],
+          "required": true,
+          "status": "OPEN",
+          "createdAt": "2026-08-25T15:27:20.424940+00:00",
+          "resolvedAt": null,
+          "answer": null
+        },
+        "unsupportedFeatures": [],
+        "proposalId": null,
+        "result": "Could not understand that as an answer to: What width would you like?",
+        "accepted": null,
+        "relatedJDLHashBefore": "355ddca57e7e49ad",
+        "relatedJDLHashAfter": "355ddca57e7e49ad",
+        "relatedIntentHashBefore": "120c58f04f73bc92",
+        "relatedIntentHashAfter": "120c58f04f73bc92",
+        "diagnostics": [
+          {
+            "code": "CONVERSATION_CLARIFICATION_INVALID",
+            "severity": "warning",
+            "message": "'ok' did not match the expected answer type for this question."
+          }
+        ]
+      }
+    }
+  ]
+}

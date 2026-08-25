@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/conversation/v1/conversation-session.schema.json",
+  "title": "Conversation Session v1",
+  "description": "The full client-carried interaction state for one multi-turn design conversation. Never a replacement for canonical JDL/DesignIntent (CONV-GOV-001/002/003) and never a Project-persistence mechanism — the backend is stateless per request and never stores this server-side; the entire session round-trips through the caller on every request, exactly mirroring Designer's Sprint 10 architecture. Sub-shapes are inlined here (not $ref'd), matching every prior sprint's specs/*/v1/ convention. See docs/bible/14-conversation/372-conversation-domain-model.md and backend/jewelmind/conversation/schemas.py::ConversationSession.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sessionId", "sessionVersion", "currentJDLHash", "currentIntentHash", "turns", "status", "createdAt", "updatedAt"],
+  "properties": {
+    "sessionId": { "type": "string" },
+    "sessionVersion": { "type": "string" },
+    "currentJDLHash": {
+      "type": "string",
+      "description": "definition_hash() of the caller's currentJDL as of this request — recomputed fresh every call, never cached/trusted from an earlier turn (CONV-GOV-008)."
+    },
+    "currentIntentHash": {
+      "type": "string",
+      "description": "intent_hash() of the caller's currentDesignIntent as of this request, computed the same way."
+    },
+    "turns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "turnId", "sequence", "role", "sourceText", "timestamp", "interpretedAction",
+          "result", "relatedJDLHashBefore", "relatedJDLHashAfter", "relatedIntentHashBefore", "relatedIntentHashAfter"
+        ],
+        "properties": {
+          "turnId": { "type": "string" },
+          "sequence": { "type": "integer", "minimum": 1 },
+          "role": { "enum": ["user", "system"] },
+          "sourceText": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "interpretedAction": {
+            "enum": [
+              "CREATE_DESIGN_PROPOSAL", "MODIFY_DESIGN_PROPOSAL", "ADD_INTENT", "MODIFY_INTENT",
+              "REMOVE_INTENT", "PRESERVE_TARGET", "REQUEST_CLARIFICATION", "ANSWER_CLARIFICATION",
+              "REPORT_UNSUPPORTED", "ACCEPT_PROPOSAL", "REJECT_PROPOSAL", "CANCEL_INTERACTION", "NO_CHANGE"
+            ]
+          },
+          "references": { "type": "array", "items": { "type": "string" } },
+          "technicalChanges": { "type": "array", "items": { "type": "string" } },
+          "intentChanges": { "type": "array", "items": { "type": "string" } },
+          "clarification": { "type": ["object", "null"] },
+          "unsupportedFeatures": { "type": "array", "items": { "type": "string" } },
+          "proposalId": { "type": ["string", "null"] },
+          "result": { "type": "string" },
+          "accepted": { "type": ["boolean", "null"] },
+          "relatedJDLHashBefore": { "type": "string" },
+          "relatedJDLHashAfter": { "type": "string" },
+          "relatedIntentHashBefore": { "type": "string" },
+          "relatedIntentHashAfter": { "type": "string" },
+          "diagnostics": { "type": "array" }
+        }
+      }
+    },
+    "pendingClarification": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["clarificationId", "originatingTurnId", "question", "expectedAnswerType", "status", "createdAt"],
+      "properties": {
+        "clarificationId": { "type": "string" },
+        "originatingTurnId": { "type": "string" },
+        "question": { "type": "string" },
+        "target": { "type": ["string", "null"] },
+        "expectedAnswerType": { "enum": ["NUMERIC", "ENUM_CHOICE", "FREE_TEXT", "CONFIRMATION"] },
+        "allowedChoices": { "type": "array", "items": { "type": "string" } },
+        "required": { "type": "boolean" },
+        "status": { "enum": ["OPEN", "ANSWERED", "CANCELLED", "SUPERSEDED"] },
+        "createdAt": { "type": "string" },
+        "resolvedAt": { "type": ["string", "null"] },
+        "answer": { "type": ["string", "null"] }
+      }
+    },
+    "activeProposal": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["proposalId", "turnId", "baseDefinitionHash", "baseIntentHash", "designerProposal", "status"],
+      "properties": {
+        "proposalId": { "type": "string" },
+        "turnId": { "type": "string" },
+        "baseDefinitionHash": {
+          "type": "string",
+          "description": "The JDL hash this proposal was computed against — used by is_proposal_stale() to detect concurrent manual edits (CONV-GOV-008, the Sprint 12 brief's section 42)."
+        },
+        "baseIntentHash": { "type": "string" },
+        "designerProposal": {
+          "type": "object",
+          "description": "A full DesignerProposal — see specs/designer/v1/design-proposal.schema.json. Conversation never duplicates Designer's technical extraction/proposal construction; it only wraps the real result."
+        },
+        "status": { "enum": ["ACTIVE", "ACCEPTED", "REJECTED", "SUPERSEDED", "STALE"] }
+      }
+    },
+    "acceptedChangeHistory": { "type": "array", "items": { "type": "string" } },
+    "lastReferencedTarget": { "type": ["string", "null"] },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptedDecisions", "intentThemes", "unresolvedQuestions", "rejectedDirections", "unsupportedDiscussed"],
+      "properties": {
+        "acceptedDecisions": { "type": "array", "items": { "type": "string" } },
+        "intentThemes": { "type": "array", "items": { "type": "string" } },
+        "unresolvedQuestions": { "type": "array", "items": { "type": "string" } },
+        "rejectedDirections": { "type": "array", "items": { "type": "string" } },
+        "unsupportedDiscussed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "status": {
+      "enum": ["ACTIVE", "WAITING_FOR_CLARIFICATION", "PROPOSAL_READY", "WAITING_FOR_ACCEPTANCE", "IDLE", "CLOSED", "FAILED"]
+    },
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  }
+}
