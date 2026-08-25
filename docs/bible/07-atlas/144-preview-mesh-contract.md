@@ -29,7 +29,7 @@ flowchart LR
 
 ## Component manifest, exactly
 
-`write_component_previews()` returns, per component: `file` (the STL filename, or `null` if the component has zero solids), `vertexCount`, `triangleCount`, `volumeMm3`, `boundingBox`, `warnings`. Real values for the default definition are in `specs/atlas/v1/test-vectors/component-manifest-vectors.json` (e.g. `band`: 3260 vertices, 5670 triangles).
+`write_component_previews()` returns, per component: `file` (the STL filename, or `null` if the component has zero solids), `vertexCount`, `triangleCount`, `volumeMm3`, `boundingBox`, `warnings`, and, as of Sprint 8, `geometryRole`, `productionRole`, `meshSource`, and `generationStatus` — see [`223-atlas-to-vision-contract`](../10-vision/223-atlas-to-vision-contract.md) for the last four. Real values for the default definition are in `specs/atlas/v1/test-vectors/component-manifest-vectors.json` (e.g. `band`: 3260 vertices, 5670 triangles).
 
 ## Mesh tolerances
 
@@ -37,11 +37,11 @@ Both `preview.meshTolerance` (default 0.1mm) and `preview.angularTolerance` (def
 
 ## Material-role metadata
 
-**Not currently a distinct manifest field.** The frontend infers material role (metal vs. stone) from the component *name* (`stone_reference` vs. the other three), not from an explicit `geometryRole`/`materialRole` field in the manifest itself — see [`130-component-contract.md`](130-component-contract.md) for the conceptual field this could become.
+**As of Sprint 8, a distinct manifest field.** `geometryRole` (`production_metal` or `stone_reference`) is now an explicit field in the manifest, matching the vocabulary [`130-component-contract.md`](130-component-contract.md) had already named as a CURRENT-but-derivable concept since Sprint 5. Vision (`ModelViewport.tsx`) checks this field first, falling back to name-based inference (`stone_reference` vs. the other three) only if the field is absent — see [`10-vision/223-atlas-to-vision-contract.md`](../10-vision/223-atlas-to-vision-contract.md).
 
 ## Visibility
 
-Every component is always included in the manifest and always visible in the frontend viewer — there is no current per-component visibility toggle beyond what the frontend chooses to render.
+Every component is always included in the manifest. As of Sprint 8, the frontend (Vision) provides a real per-component visibility toggle (`useVisionStore.componentVisibility`) — this remains a purely frontend/Vision-layer concern, never a backend manifest field, and never affects what the manifest itself contains or what an export includes; see [`10-vision/236-component-visibility-model.md`](../10-vision/236-component-visibility-model.md).
 
 ## Cache and staleness
 
@@ -49,7 +49,7 @@ Preview files live in `ModelService`'s per-model temp directory, capped at `MAX_
 
 ## Last-successful-preview behavior
 
-The frontend keeps the last successfully-loaded preview visible if a subsequent generation request fails, rather than clearing the viewport — this is a frontend UX behavior, not an Atlas-level geometry guarantee (Atlas has no concept of "keeping" anything; each generation call is independent).
+The frontend keeps the last successfully-loaded preview visible if a subsequent generation request fails, rather than clearing the viewport — this is a frontend UX behavior, not an Atlas-level geometry guarantee (Atlas has no concept of "keeping" anything; each generation call is independent). Preserved unchanged by Sprint 8's Vision work — see [`10-vision/240-stale-and-last-good-preview.md`](../10-vision/240-stale-and-last-good-preview.md), which also documents that Vision's new presentation-image capture is blocked outright while the model is stale.
 
 ## Preview must not become an independent geometry implementation
 

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/camera-state.schema.json",
+  "title": "Vision Camera State v1",
+  "description": "Plain-number camera state — never a THREE.Vector3 or THREE.Camera instance. See docs/bible/10-vision/229-camera-system.md and 239-render-state-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["preset", "position", "target"],
+  "properties": {
+    "preset": {
+      "enum": ["perspective", "front", "side", "top", "three_quarter", null],
+      "description": "The last named preset applied, or null if the camera has since been freely orbited away from any preset. Not persisted across a page reload."
+    },
+    "position": {
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "[x, y, z] in scene units (mm-equivalent, post coordinate-transform). Null only if no camera has mounted yet."
+    },
+    "target": {
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "OrbitControls.target, [x, y, z]."
+    }
+  }
+}

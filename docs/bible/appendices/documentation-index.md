@@ -272,6 +272,58 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A38 | Appendix: Foundry Export Test Matrix | accepted | current | [`appendices/foundry-export-test-matrix.md`](foundry-export-test-matrix.md) |
 | JM-BIBLE-A39 | Appendix: Foundry Code Mapping | accepted | current | [`appendices/foundry-code-mapping.md`](foundry-code-mapping.md) |
 | JM-BIBLE-A40 | Appendix: Foundry Interoperability Matrix | accepted | current | [`appendices/foundry-interoperability-matrix.md`](foundry-interoperability-matrix.md) |
+| JM-BIBLE-VISION-README | Vision v1 — Index | accepted | partial | [`10-vision/README.md`](../10-vision/README.md) |
+| JM-BIBLE-220 | Vision Governance | accepted | current | [`10-vision/220-vision-governance.md`](../10-vision/220-vision-governance.md) |
+| JM-BIBLE-221 | Vision Architecture Overview | accepted | current | [`10-vision/221-vision-architecture-overview.md`](../10-vision/221-vision-architecture-overview.md) |
+| JM-BIBLE-222 | Visual Representation Model | accepted | current | [`10-vision/222-visual-representation-model.md`](../10-vision/222-visual-representation-model.md) |
+| JM-BIBLE-223 | Atlas to Vision Contract | accepted | current | [`10-vision/223-atlas-to-vision-contract.md`](../10-vision/223-atlas-to-vision-contract.md) |
+| JM-BIBLE-224 | Preview Mesh Contract (Vision) | accepted | current | [`10-vision/224-preview-mesh-contract.md`](../10-vision/224-preview-mesh-contract.md) |
+| JM-BIBLE-225 | Scene Graph Model | accepted | current | [`10-vision/225-scene-graph-model.md`](../10-vision/225-scene-graph-model.md) |
+| JM-BIBLE-226 | Component Visual Identity | accepted | current | [`10-vision/226-component-visual-identity.md`](../10-vision/226-component-visual-identity.md) |
+| JM-BIBLE-227 | Technical View Contract | accepted | current | [`10-vision/227-technical-view-contract.md`](../10-vision/227-technical-view-contract.md) |
+| JM-BIBLE-228 | Presentation View Contract | accepted | current | [`10-vision/228-presentation-view-contract.md`](../10-vision/228-presentation-view-contract.md) |
+| JM-BIBLE-229 | Camera System | accepted | current | [`10-vision/229-camera-system.md`](../10-vision/229-camera-system.md) |
+| JM-BIBLE-230 | Lighting System | accepted | current | [`10-vision/230-lighting-system.md`](../10-vision/230-lighting-system.md) |
+| JM-BIBLE-231 | Material System | accepted | current | [`10-vision/231-material-system.md`](../10-vision/231-material-system.md) |
+| JM-BIBLE-232 | Metal Material Model | accepted | current | [`10-vision/232-metal-material-model.md`](../10-vision/232-metal-material-model.md) |
+| JM-BIBLE-233 | Stone Material Model | accepted | current | [`10-vision/233-stone-material-model.md`](../10-vision/233-stone-material-model.md) |
+| JM-BIBLE-234 | Background and Environment Model | accepted | current | [`10-vision/234-background-and-environment-model.md`](../10-vision/234-background-and-environment-model.md) |
+| JM-BIBLE-235 | Shadows and Grounding | accepted | current | [`10-vision/235-shadows-and-grounding.md`](../10-vision/235-shadows-and-grounding.md) |
+| JM-BIBLE-236 | Component Visibility Model | accepted | current | [`10-vision/236-component-visibility-model.md`](../10-vision/236-component-visibility-model.md) |
+| JM-BIBLE-237 | Model Framing and Fit | accepted | current | [`10-vision/237-model-framing-and-fit.md`](../10-vision/237-model-framing-and-fit.md) |
+| JM-BIBLE-238 | Image Capture Contract | accepted | current | [`10-vision/238-image-capture-contract.md`](../10-vision/238-image-capture-contract.md) |
+| JM-BIBLE-239 | Render State Model | accepted | partial | [`10-vision/239-render-state-model.md`](../10-vision/239-render-state-model.md) |
+| JM-BIBLE-240 | Stale and Last-Good Preview | accepted | current | [`10-vision/240-stale-and-last-good-preview.md`](../10-vision/240-stale-and-last-good-preview.md) |
+| JM-BIBLE-241 | Rendering Errors and Diagnostics | accepted | planned | [`10-vision/241-rendering-errors-and-diagnostics.md`](../10-vision/241-rendering-errors-and-diagnostics.md) |
+| JM-BIBLE-242 | Performance and GPU Resource Model | accepted | partial | [`10-vision/242-performance-and-gpu-resource-model.md`](../10-vision/242-performance-and-gpu-resource-model.md) |
+| JM-BIBLE-243 | Accessibility and Input Model | accepted | partial | [`10-vision/243-accessibility-and-input-model.md`](../10-vision/243-accessibility-and-input-model.md) |
+| JM-BIBLE-244 | Visual Consistency Contract | accepted | current | [`10-vision/244-visual-consistency-contract.md`](../10-vision/244-visual-consistency-contract.md) |
+| JM-BIBLE-245 | Visual Regression Strategy | accepted | planned | [`10-vision/245-visual-regression-strategy.md`](../10-vision/245-visual-regression-strategy.md) |
+| JM-BIBLE-246 | Current Viewer Code Mapping | accepted | current | [`10-vision/246-current-viewer-code-mapping.md`](../10-vision/246-current-viewer-code-mapping.md) |
+| JM-BIBLE-247 | Vision Gap Analysis | accepted | current | [`10-vision/247-vision-gap-analysis.md`](../10-vision/247-vision-gap-analysis.md) |
+| JM-BIBLE-248 | Open Vision Questions | accepted | current | [`10-vision/248-open-vision-questions.md`](../10-vision/248-open-vision-questions.md) |
+| JM-BIBLE-SPRINT8-REPORT | Sprint 8 Validation Report | accepted | current | [`10-vision/SPRINT-8-VALIDATION-REPORT.md`](../10-vision/SPRINT-8-VALIDATION-REPORT.md) |
+| JM-BIBLE-A41 | Appendix: Vision Component Style Catalog | accepted | current | [`appendices/vision-component-style-catalog.md`](vision-component-style-catalog.md) |
+| JM-BIBLE-A42 | Appendix: Vision Camera Preset Catalog | accepted | current | [`appendices/vision-camera-preset-catalog.md`](vision-camera-preset-catalog.md) |
+| JM-BIBLE-A43 | Appendix: Vision Material Catalog | accepted | current | [`appendices/vision-material-catalog.md`](vision-material-catalog.md) |
+| JM-BIBLE-A44 | Appendix: Vision Render State Catalog | accepted | partial | [`appendices/vision-render-state-catalog.md`](vision-render-state-catalog.md) |
+| JM-BIBLE-A45 | Appendix: Vision Diagnostic Catalog | accepted | planned | [`appendices/vision-diagnostic-catalog.md`](vision-diagnostic-catalog.md) |
+| JM-BIBLE-A46 | Appendix: Vision Code Mapping | accepted | current | [`appendices/vision-code-mapping.md`](vision-code-mapping.md) |
+| JM-BIBLE-A47 | Appendix: Vision Test Matrix | accepted | current | [`appendices/vision-test-matrix.md`](vision-test-matrix.md) |
+
+## Machine-readable Vision specification — `specs/vision/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/vision/v1/README.md`](../../../specs/vision/v1/README.md) |
+| Scene state schema | Yes | [`specs/vision/v1/scene-state.schema.json`](../../../specs/vision/v1/scene-state.schema.json) |
+| Camera state schema | Yes | [`specs/vision/v1/camera-state.schema.json`](../../../specs/vision/v1/camera-state.schema.json) |
+| Component visual state schema | Yes | [`specs/vision/v1/component-visual-state.schema.json`](../../../specs/vision/v1/component-visual-state.schema.json) |
+| Material presentation schema | Yes | [`specs/vision/v1/material-presentation.schema.json`](../../../specs/vision/v1/material-presentation.schema.json) |
+| Render result schema | Yes | [`specs/vision/v1/render-result.schema.json`](../../../specs/vision/v1/render-result.schema.json) |
+| Image capture request schema | Yes | [`specs/vision/v1/image-capture-request.schema.json`](../../../specs/vision/v1/image-capture-request.schema.json) |
+| Examples (real, generated) | Yes | [`specs/vision/v1/examples/`](../../../specs/vision/v1/examples/) |
+| Test vectors | Yes | [`specs/vision/v1/test-vectors/`](../../../specs/vision/v1/test-vectors/) |
 
 ## Machine-readable Foundry specification — `specs/foundry/v1/`
 

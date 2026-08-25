@@ -45,13 +45,6 @@ class ModelGenerationFailedError(AppError):
     code = "MODEL_GENERATION_FAILED"
 
 
-class ExportFailedError(AppError):
-    """Generic export failure (JSON / specification exports)."""
-
-    status_code = 500
-    code = "EXPORT_FAILED"
-
-
 class StepExportFailedError(AppError):
     status_code = 500
     code = "STEP_EXPORT_FAILED"

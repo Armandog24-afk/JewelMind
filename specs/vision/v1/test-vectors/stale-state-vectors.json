@@ -1,0 +1,19 @@
+{
+  "description": "Real captureBlockedReason() outcomes from frontend/src/vision/capture.ts, and the pre-existing (unchanged) isStale/lastSuccessfulPreview behavior from useProjectStore.ts, confirmed during Sprint 8.",
+  "captureGatingVectors": [
+    { "hasModel": false, "isStale": false, "blockedReason": "no_model" },
+    { "hasModel": true, "isStale": true, "blockedReason": "stale" },
+    { "hasModel": true, "isStale": false, "blockedReason": null },
+    { "hasModel": false, "isStale": true, "blockedReason": "no_model", "note": "no_model takes priority — nothing to regenerate" }
+  ],
+  "staleTransition": {
+    "before": { "generatedModel": null, "isStale": false },
+    "afterFirstGenerate": { "generatedModel": "present", "isStale": false },
+    "afterParameterEdit": { "generatedModel": "present (unchanged)", "isStale": true },
+    "afterFailedRegeneration": { "generatedModel": "unchanged from before the failed attempt", "lastSuccessfulPreview": "unchanged", "isStale": true, "generationStatus": "error" }
+  },
+  "unchangedThisSprintTests": [
+    "useProjectStore.test.ts::marks the definition stale after a parameter changes post-generation",
+    "useProjectStore.test.ts::keeps the last successful preview visible when a later generation fails"
+  ]
+}

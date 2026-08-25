@@ -1,0 +1,19 @@
+{
+  "description": "Real useVisionStore initial-state and transition vectors, confirmed by frontend/src/store/useVisionStore.test.ts during Sprint 8.",
+  "initialState": {
+    "viewMode": "technical",
+    "componentVisibility": {},
+    "selectedComponent": null,
+    "showGrid": true,
+    "showAxes": false
+  },
+  "vectors": [
+    { "action": "setViewMode('presentation')", "field": "viewMode", "before": "technical", "after": "presentation" },
+    { "action": "setViewMode('presentation') then setViewMode('technical')", "assertion": "useProjectStore state (definitionHash, isStale, generationStatus) is byte-identical before and after — confirmed by useVisionStore.test.ts" },
+    { "action": "toggleShowGrid()", "field": "showGrid", "before": true, "after": false },
+    { "action": "selectComponent('prongs')", "field": "selectedComponent", "before": null, "after": "prongs" }
+  ],
+  "presentationModeForcesGridAxesOff": {
+    "note": "showGrid/showAxes remain whatever the user set them to in useVisionStore, but ModelViewport.tsx computes the RENDERED showGrid/showAxes as `viewMode === 'technical' && storedValue` — so Presentation mode always visually hides them regardless of the stored toggle, without needing to reset the stored value itself."
+  }
+}

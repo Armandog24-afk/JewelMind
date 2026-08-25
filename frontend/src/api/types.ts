@@ -20,6 +20,13 @@ export interface PreviewComponentEntry {
   boundingBox: Record<'xmin' | 'xmax' | 'ymin' | 'ymax' | 'zmin' | 'zmax', number>
   warnings: string[]
   url: string | null
+  /** Explicit component identity for Vision (Sprint 8) — see
+   * docs/bible/10-vision/223-atlas-to-vision-contract.md. Optional so
+   * this type still matches a backend that predates this field. */
+  geometryRole?: 'production_metal' | 'stone_reference' | 'support' | 'preview_only'
+  productionRole?: 'included_by_default' | 'excluded_by_default' | 'never_included'
+  meshSource?: 'stl'
+  generationStatus?: 'SUCCEEDED' | 'SUCCEEDED_WITH_FALLBACK' | 'FAILED' | 'EMPTY'
 }
 
 export interface GenerateResponse {
@@ -31,7 +38,7 @@ export interface GenerateResponse {
     generationDurationSeconds: number
     componentVolumesMm3: Record<string, number>
     combinedMetalVolumeMm3: number
-    boundingBoxMm: Record<string, number>
+    boundingBoxMm: Record<'xmin' | 'xmax' | 'ymin' | 'ymax' | 'zmin' | 'zmax', number>
     prongs: {
       requestedCount: number
       generatedCount: number
@@ -53,7 +60,7 @@ export interface ModelMetadataResponse {
   generationDurationSeconds: number
   componentVolumesMm3: Record<string, number>
   combinedMetalVolumeMm3: number
-  boundingBoxMm: Record<string, number>
+  boundingBoxMm: Record<'xmin' | 'xmax' | 'ymin' | 'ymax' | 'zmin' | 'zmax', number>
   warnings: string[]
   validation: ValidationResult[]
 }

@@ -1,0 +1,12 @@
+{
+  "description": "Real useVisionStore behavior, run during Sprint 8 (see frontend/src/store/useVisionStore.test.ts).",
+  "componentNames": ["band", "stone_reference", "prongs", "basket_support"],
+  "metalComponentNames": ["band", "prongs", "basket_support"],
+  "vectors": [
+    { "action": "default state", "expectedVisible": { "band": true, "stone_reference": true, "prongs": true, "basket_support": true } },
+    { "action": "toggleComponentVisible('stone_reference')", "expectedVisible": { "band": true, "stone_reference": false, "prongs": true, "basket_support": true } },
+    { "action": "showOnlyComponents(componentNames, metalComponentNames)  // 'Metal only'", "expectedVisible": { "band": true, "stone_reference": false, "prongs": true, "basket_support": true } },
+    { "action": "showAllComponents(componentNames)  // 'Show all'", "expectedVisible": { "band": true, "stone_reference": true, "prongs": true, "basket_support": true } }
+  ],
+  "neverAffects": ["definitionHash", "includeStoneReferenceInExport", "STEP export component set", "STL export component set"]
+}

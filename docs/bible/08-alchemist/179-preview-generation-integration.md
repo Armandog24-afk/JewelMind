@@ -35,6 +35,10 @@ Restates and cross-references Sprint 5's [`07-atlas/144-preview-mesh-contract.md
 
 Both are **frontend-only** concepts (`useProjectStore.ts`'s `isStale` and `lastSuccessfulPreview` fields) — the backend has no notion of preview staleness; every `generate()` call produces a fresh, complete preview manifest with no relationship to any previous one. This was already noted in Sprint 5's [`06-forge/107-export-precondition-rules.md`](../06-forge/107-export-precondition-rules.md) for exports; the same gap applies identically to preview.
 
-## No frontend rendering redesign
+## No frontend rendering redesign (as of Sprint 6)
 
-Per this Sprint's explicit instruction, this document does not propose or make any change to `frontend/src/components/ModelViewport.tsx` or `useComponentGeometries.ts` — it only documents where preview generation sits in the backend compilation flow.
+Per Sprint 6's explicit instruction, this document did not propose or make any change to `frontend/src/components/ModelViewport.tsx` or `useComponentGeometries.ts` — it only documented where preview generation sits in the backend compilation flow.
+
+## Sprint 8 update: the manifest gained explicit component-identity fields
+
+`write_component_previews()` now also emits `geometryRole`, `productionRole`, `meshSource`, and `generationStatus` per component — a small, additive extension to the same manifest this document describes, made specifically so the frontend's new Vision layer never has to infer a component's role from its name. See [`10-vision/223-atlas-to-vision-contract.md`](../10-vision/223-atlas-to-vision-contract.md). This did not change the flow described above: the manifest is still produced inline inside `ModelService.generate()`, and the failure-independence gap noted above is unchanged.

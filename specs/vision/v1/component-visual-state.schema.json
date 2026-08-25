@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/component-visual-state.schema.json",
+  "title": "Vision Component Visual State v1",
+  "description": "Per-component visual identity, sourced from the explicit Atlas-to-Vision manifest fields (see docs/bible/10-vision/223-atlas-to-vision-contract.md), never inferred from render order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "geometryRole", "visible", "generationStatus"],
+  "properties": {
+    "name": { "type": "string", "description": "e.g. \"band\", \"stone_reference\" — the real component key, identical to the backend's." },
+    "geometryRole": {
+      "enum": ["production_metal", "stone_reference", "support", "preview_only"],
+      "description": "CURRENT mapping: band/prongs/basket_support -> production_metal; stone_reference -> stone_reference. Matches specs/atlas/v1/geometry-component.schema.json's enum exactly — this is the same vocabulary, now also surfaced to Vision."
+    },
+    "visible": { "type": "boolean", "description": "Vision-only state (useVisionStore.componentVisibility) — never affects STEP/STL export inclusion." },
+    "generationStatus": {
+      "enum": ["SUCCEEDED", "SUCCEEDED_WITH_FALLBACK", "FAILED", "EMPTY"],
+      "description": "CURRENT: mapped from the backend's has_geometry check to SUCCEEDED or EMPTY only; SUCCEEDED_WITH_FALLBACK/FAILED are not currently distinguished at the component level."
+    }
+  }
+}

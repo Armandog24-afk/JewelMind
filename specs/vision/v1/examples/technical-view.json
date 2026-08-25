@@ -1,0 +1,21 @@
+{
+  "viewMode": "technical",
+  "camera": {
+    "preset": "perspective",
+    "position": [34.66020406028231, 28.445153045211732, 34.66020406028231],
+    "target": [0, 2.45, 0]
+  },
+  "components": [
+    { "name": "band", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "prongs", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "basket_support", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "stone_reference", "geometryRole": "stone_reference", "visible": true, "generationStatus": "SUCCEEDED" }
+  ],
+  "material": {
+    "metal": "yellow_gold_18k",
+    "stonePresentationEnabled": false
+  },
+  "stale": false,
+  "modelId": "355ddca57e7e49ad",
+  "definitionHash": "355ddca57e7e49ad"
+}

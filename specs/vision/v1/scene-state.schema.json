@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/scene-state.schema.json",
+  "title": "Vision Scene State Snapshot v1",
+  "description": "A composed, point-in-time snapshot of Vision state, assembled from useVisionStore + useProjectStore at the moment it's needed — never a literal 1:1 mirror of either store's internal shape, and never containing a THREE.js object. See docs/bible/10-vision/239-render-state-model.md: this snapshot type is CURRENT only as a type definition; no runtime code constructs one yet (PLANNED). Component/camera/material shapes are inlined here rather than cross-referenced via $ref to their own schema files, to keep this specification's validation simple and dependency-free (see camera-state.schema.json, component-visual-state.schema.json, and material-presentation.schema.json for the same shapes documented standalone).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["viewMode", "camera", "components", "material", "stale", "modelId", "definitionHash"],
+  "properties": {
+    "viewMode": { "enum": ["technical", "presentation"] },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preset", "position", "target"],
+      "properties": {
+        "preset": { "enum": ["perspective", "front", "side", "top", "three_quarter", null] },
+        "position": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+        "target": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 3, "maxItems": 3 }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "geometryRole", "visible", "generationStatus"],
+        "properties": {
+          "name": { "type": "string" },
+          "geometryRole": { "enum": ["production_metal", "stone_reference", "support", "preview_only"] },
+          "visible": { "type": "boolean" },
+          "generationStatus": { "enum": ["SUCCEEDED", "SUCCEEDED_WITH_FALLBACK", "FAILED", "EMPTY"] }
+        }
+      }
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metal", "stonePresentationEnabled"],
+      "properties": {
+        "metal": { "enum": ["yellow_gold_18k", "white_gold_18k", "rose_gold_18k", "platinum", "silver"] },
+        "stonePresentationEnabled": { "type": "boolean" }
+      }
+    },
+    "stale": { "type": "boolean", "description": "Mirrors useProjectStore.isStale at snapshot time." },
+    "modelId": { "type": ["string", "null"] },
+    "definitionHash": { "type": ["string", "null"] }
+  }
+}

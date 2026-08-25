@@ -391,9 +391,9 @@ a version change can be detected even when design intent is unchanged.
 Additive to, never replacing, the existing `definitionHash`. See
 [`08-alchemist/175-definition-hash-vs-compilation-hash.md`](../08-alchemist/175-definition-hash-vs-compilation-hash.md).
 
-**Vision** — the preview/rendering layer, named since Sprint 6's
-architecture but not yet formalized as its own Bible section — planned
-for Sprint 8.
+**Vision** — the visual-output layer, named since Sprint 6's
+architecture and formalized as its own Bible section in Sprint 8 — see
+the "Vision terms (Sprint 8)" section below.
 
 ## Foundry terms (Sprint 7)
 
@@ -425,3 +425,41 @@ OpenCascade, tessellation tolerances). **PLANNED** — every individual
 field is independently queryable today, but none is assembled together.
 See
 [`09-foundry/208-export-version-fingerprint.md`](../09-foundry/208-export-version-fingerprint.md).
+
+## Vision terms (Sprint 8)
+
+> Authoritative source for every term in this section:
+> [`10-vision/`](../10-vision/README.md) (Sprint 8).
+
+**Vision** — the visual-output layer: the boundary between an
+already-generated Atlas geometry and what a person actually sees,
+across two views (Technical and Presentation) that consume the same
+mesh data. Unlike Foundry, Vision v1 both formalizes architecture and
+ships new, user-visible functionality in the same Sprint. See
+[`10-vision/221-vision-architecture-overview.md`](../10-vision/221-vision-architecture-overview.md).
+
+**Technical View** — the inspection-oriented Vision mode: orbit/zoom,
+bounding-box-driven camera presets, component visibility, and a
+flatter, non-reflective material rendering that still follows the
+JDL-selected metal color. See
+[`10-vision/227-technical-view-contract.md`](../10-vision/227-technical-view-contract.md).
+
+**Presentation View** (also "Presentation Rendering") — the
+display-oriented Vision mode: full PBR metal materials, a transmissive
+StoneReference material, studio lighting, a procedural environment, and
+contact-shadow grounding. Never described as photorealistic,
+cinematic, or path-traced — it is real-time WebGL rasterization. See
+[`10-vision/228-presentation-view-contract.md`](../10-vision/228-presentation-view-contract.md).
+
+**Geometry role** (Vision-facing) — an explicit per-component field
+(`production_metal` or `stone_reference`) added to the preview manifest
+in Sprint 8, so Vision never has to infer a component's material
+category by string-matching its name. See
+[`10-vision/223-atlas-to-vision-contract.md`](../10-vision/223-atlas-to-vision-contract.md).
+
+**Visual consistency contract** — the guarantee that the object shown
+in Vision is derived from the same generated geometry used for
+exports, decomposed into 5 levels (`GEOMETRY_SOURCE_CONSISTENT`,
+`COMPONENT_SET_CONSISTENT`, `SCALE_CONSISTENT`,
+`MATERIAL_METADATA_CONSISTENT`, `CAMERA_ONLY_TRANSFORMATION`). See
+[`10-vision/244-visual-consistency-contract.md`](../10-vision/244-visual-consistency-contract.md).

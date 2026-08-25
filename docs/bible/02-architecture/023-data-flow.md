@@ -93,6 +93,15 @@ sequenceDiagram
     end
 ```
 
+As of Sprint 8, `write_component_previews()`'s manifest also carries
+explicit `geometryRole`/`productionRole`/`meshSource`/`generationStatus`
+fields per component — additive, backward-compatible fields that flow
+through `API-->>FE` unchanged (the response's `previewComponents` field
+was already loosely typed). Vision (`ModelViewport.tsx`) reads these
+directly rather than inferring a component's material role from its
+name string — see
+[`10-vision/223-atlas-to-vision-contract.md`](../10-vision/223-atlas-to-vision-contract.md).
+
 ## `GET /api/models/{modelId}/preview/{componentName}`
 
 The frontend calls this once per visible component after a successful
@@ -156,5 +165,6 @@ already present on it (`record.definition` and, for the specification,
 | Assembly + hashing | `geometry/assemblies/solitaire.py` | Model service cache |
 | Caching + temp files | `services/model_service.py` | Preview / export on demand |
 | Preview tessellation | `preview/mesh.py` | Frontend, via URL |
+| Visual rendering (Sprint 8) | `frontend/src/vision/`, `ModelViewport.tsx` | User, via Technical/Presentation view |
 | File export | `exporters/` | Frontend, via download |
 | Export integrity validation (Sprint 7) | `exporters/integrity.py` | API response header (`X-Content-SHA256`) |

@@ -17,6 +17,24 @@ from typing import Any
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.model import GeneratedModel
 
+# Mirrors the CURRENT (derivable) mapping already documented in
+# docs/bible/07-atlas/130-component-contract.md, now made an explicit,
+# additive manifest field for Vision (Sprint 8) to consume instead of
+# inferring role from the component name string. Adding a new component
+# name here requires an accompanying Atlas/Vision documentation update.
+_GEOMETRY_ROLE = {
+    "band": "production_metal",
+    "prongs": "production_metal",
+    "basket_support": "production_metal",
+    "stone_reference": "stone_reference",
+}
+_PRODUCTION_ROLE = {
+    "band": "included_by_default",
+    "prongs": "included_by_default",
+    "basket_support": "included_by_default",
+    "stone_reference": "excluded_by_default",
+}
+
 
 def _component_filename(name: str) -> str:
     return f"{name}.stl"
@@ -58,6 +76,13 @@ def write_component_previews(
             "volumeMm3": component.volume_mm3,
             "boundingBox": component.bounding_box.as_dict(),
             "warnings": component.warnings,
+            # Additive metadata for Vision (Sprint 8): explicit component
+            # identity so the frontend never has to infer role from name
+            # string-matching. See docs/bible/10-vision/223-atlas-to-vision-contract.md.
+            "geometryRole": _GEOMETRY_ROLE.get(name, "production_metal"),
+            "productionRole": _PRODUCTION_ROLE.get(name, "included_by_default"),
+            "meshSource": "stl",
+            "generationStatus": "SUCCEEDED" if has_geometry else "EMPTY",
         }
 
     return manifest

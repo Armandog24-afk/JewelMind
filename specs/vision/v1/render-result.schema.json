@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/render-result.schema.json",
+  "title": "Vision Render Result v1",
+  "description": "The conceptual outcome of one image-capture attempt. See docs/bible/10-vision/238-image-capture-contract.md. PARTIAL: the real handleCapture() function does not return a structured object of this shape today — this documents the target shape a future refactor could adopt without changing capture behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ok", "width", "height", "filename", "capturedAtDefinitionHash", "blockedReason"],
+  "properties": {
+    "ok": { "type": "boolean" },
+    "width": { "type": "integer" },
+    "height": { "type": "integer" },
+    "filename": { "type": "string" },
+    "capturedAtDefinitionHash": {
+      "type": ["string", "null"],
+      "description": "The definitionHash of the model actually captured, so a caller can later confirm which design the PNG represents — not currently recorded anywhere by real code."
+    },
+    "blockedReason": {
+      "enum": ["stale", "no_model", null],
+      "description": "Matches frontend/src/vision/capture.ts::CaptureBlockedReason exactly."
+    }
+  }
+}

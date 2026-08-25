@@ -77,10 +77,18 @@ remain owned exclusively by Forge ([`06-forge/README.md`](../06-forge/README.md)
 The backend tessellates each named solid to its own binary STL file
 (`preview/mesh.py`) rather than packaging everything into one GLB — see
 [ADR-007](../03-decisions/ADR-007-backend-generated-preview.md) and
-`docs/known-limitations.md` for the reasoning. The frontend fetches and
-parses these directly (`frontend/src/hooks/useComponentGeometries.ts`),
-never rendering anything not derived from real backend geometry
-(LAW-002).
+`docs/known-limitations.md` for the reasoning. As of Sprint 8, each
+component's manifest entry also carries explicit `geometryRole`/
+`productionRole`/`meshSource`/`generationStatus` fields, so the frontend
+never has to infer a component's material category from its name
+string. The frontend fetches and parses these directly
+(`frontend/src/hooks/useComponentGeometries.ts`), never rendering
+anything not derived from real backend geometry (LAW-002). This layer
+is formalized as **"Vision"** in Sprint 8 — see
+[`10-vision/README.md`](../10-vision/README.md) — which adds a
+Technical/Presentation view split, camera presets, a centralized
+material system, and client-side PNG capture, all consuming this exact
+same preview geometry.
 
 ## Export pipeline
 
@@ -121,7 +129,14 @@ export is correctly decoupled into separate, later calls.
 - **Frontend:** one Zustand store (`frontend/src/store/useProjectStore.ts`)
   holds `currentDefinition`, `validationResults`, `generatedModel`,
   `generationStatus`, `exportStatus`, `backendStatus`,
-  `lastSuccessfulPreview`, and `isStale`.
+  `lastSuccessfulPreview`, and `isStale`. As of Sprint 8, a second,
+  deliberately separate Zustand store
+  (`frontend/src/store/useVisionStore.ts`) holds Vision-only
+  presentation state (`viewMode`, `componentVisibility`,
+  `selectedComponent`, `showGrid`, `showAxes`) — it has zero import of
+  `useProjectStore` and never calls `generate()`, so a view/camera/
+  material change can never trigger geometry regeneration; see
+  [`10-vision/221-vision-architecture-overview.md`](../10-vision/221-vision-architecture-overview.md).
 - **Local persistence:** `localStorage`, one project slot, validated on
   load (`frontend/src/store/persistence.ts`).
 - **Server-side model cache:** an in-memory, process-lifetime cache of

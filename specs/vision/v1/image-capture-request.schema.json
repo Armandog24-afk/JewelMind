@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/image-capture-request.schema.json",
+  "title": "Vision Image Capture Request v1",
+  "description": "The conceptual request behind a 'Save render' click. See docs/bible/10-vision/238-image-capture-contract.md — width/height are CURRENT and fixed at 1920x1080; filename is CURRENT, generated client-side.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["width", "height", "filename"],
+  "properties": {
+    "width": { "type": "integer", "const": 1920, "description": "CURRENT: fixed. A second size (e.g. a square product image) is PLANNED — see VISION-GAP-004." },
+    "height": { "type": "integer", "const": 1080 },
+    "filename": {
+      "type": "string",
+      "pattern": "^jewelmind-.+-(technical|presentation)-.+\\.png$",
+      "description": "Built by frontend/src/vision/filename.ts::buildCaptureFilename() — never contains a raw model ID or definition hash."
+    }
+  }
+}

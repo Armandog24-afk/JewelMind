@@ -490,3 +490,78 @@ Future coding agents must:
 - **Require an RFC for a new artifact format** beyond STEP/STL/JSON/
   technical specification, or a structural change to how artifacts are
   requested/manifested across the whole pipeline; see the same document.
+
+## VISION RULES
+
+`docs/bible/10-vision/` is the authoritative Vision visual-output
+specification — start at
+[`docs/bible/10-vision/README.md`](docs/bible/10-vision/README.md). The
+machine-readable half lives in
+[`specs/vision/v1/`](specs/vision/v1/README.md) (scene state, camera
+state, component visual state, material presentation, render result, and
+image capture request JSON Schemas, real examples, and test vectors).
+Future coding agents must:
+
+- **Read `docs/bible/10-vision/README.md` before modifying the viewer**
+  — before changing anything in `frontend/src/components/ModelViewport.tsx`,
+  `frontend/src/vision/`, or `frontend/src/store/useVisionStore.ts`.
+- **Never reconstruct jewelry geometry in the frontend** — every mesh
+  Vision renders must come from `useComponentGeometries()` parsing a
+  real backend-generated STL; no frontend code may read a JDL dimension
+  to build a `THREE.BufferGeometry` (VISION-GOV-001, VISION-GOV-002).
+- **Use Atlas-derived preview geometry** — the visual model and the
+  exported CAD model must share the same geometric origin
+  (VISION-GOV-003); see `docs/bible/10-vision/223-atlas-to-vision-contract.md`.
+- **Preserve component identity** — all component visibility and
+  stone/metal classification must use the explicit `geometryRole`/name
+  fields from the preview manifest, never render order or array index
+  (VISION-GOV-011).
+- **Preserve StoneReference distinction** — the stone must remain
+  semantically distinct from production metal in both Technical and
+  Presentation views, and must never be fused into metal geometry
+  (VISION-GOV-006, restating LAW-006).
+- **Keep visual state separate from JDL design intent** — Vision-only
+  state (view mode, camera, material style, component visibility) lives
+  in `useVisionStore`, never in `useProjectStore`, and must never change
+  `definitionHash` (VISION-GOV-014).
+- **Never trigger geometry regeneration for camera/material/view-only
+  changes** — switching view mode, camera preset, or component
+  visibility must never call `generate()` or touch `useProjectStore`
+  (VISION-GOV-014).
+- **Centralize material presets** — every metal color and the stone's
+  color/transmission parameters live only in
+  `frontend/src/vision/materials.ts`; never hardcode a color elsewhere
+  (see `docs/bible/10-vision/231-material-system.md`).
+- **Dispose GPU resources** — geometry disposal in
+  `useComponentGeometries.ts` and material disposal via React Three
+  Fiber's own unmount guarantee must be preserved; never cache a Three.js
+  object outside the R3F tree without an explicit disposal path
+  (VISION-GOV-004, see `docs/bible/10-vision/242-performance-and-gpu-resource-model.md`).
+- **Preserve last-good preview** — a rendering or regeneration failure
+  must never destroy `lastSuccessfulPreview` or the geometry currently
+  on screen (VISION-GOV-007, VISION-GOV-009).
+- **Identify stale models** — the existing `isStale` flag and stale
+  banner must remain accurate in both view modes, and image capture must
+  stay blocked (not merely labeled) while a model is stale
+  (VISION-GOV-008, VISION-GOV-012).
+- **Keep screenshot output derived from current generated geometry** —
+  never substitute an AI-generated image for the actual CAD-derived
+  render (VISION-GOV-012, VISION-GOV-013).
+- **Never call Presentation View a manufacturing proof** — restates
+  LAW-010 at the Vision layer; never describe Presentation rendering as
+  photorealistic, cinematic, or path-traced without measurable evidence
+  (VISION-GOV-005).
+- **Update Vision schemas/tests after rendering-contract changes** —
+  `specs/vision/v1/` and `backend/tests/test_vision_schemas.py`, plus
+  the relevant frontend unit tests under `frontend/src/vision/*.test.ts`
+  and `frontend/src/store/useVisionStore.test.ts`, in the same change.
+- **Never introduce a hidden external-runtime dependency** — no remote
+  HDRI, no CDN asset, no paid asset pack; use procedural/bundled
+  alternatives like `three-stdlib`'s `RoomEnvironment` (VISION-GOV-010).
+- **Create an ADR for a major rendering architecture change** —
+  replacing Three.js/React Three Fiber, moving Vision state into
+  `useProjectStore`, or changing the Atlas-to-scene coordinate transform;
+  see `docs/bible/10-vision/220-vision-governance.md`.
+- **Create an RFC for a new visual artifact class** — e.g. turntable
+  video, AR preview, or a server-side rendering pipeline; see the same
+  document.

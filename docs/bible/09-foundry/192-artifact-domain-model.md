@@ -24,7 +24,7 @@ normative: true
 | `PRODUCTION_ARTIFACT` | Intended to inform or feed physical manufacturing | STEP, STL |
 | `TECHNICAL_ARTIFACT` | Human-readable technical documentation of the design | Technical specification (Markdown) |
 | `DESIGN_DEFINITION_ARTIFACT` | The canonical, re-loadable design intent itself | Canonical JDL JSON |
-| `PREVIEW_ARTIFACT` | Renders/tessellations for on-screen display only, never manufacturing | Per-component preview STL (see [`08-alchemist/179-preview-generation-integration.md`](../08-alchemist/179-preview-generation-integration.md)); owned jointly with the future Vision layer |
+| `PREVIEW_ARTIFACT` | Renders/tessellations for on-screen display only, never manufacturing | Per-component preview STL (see [`08-alchemist/179-preview-generation-integration.md`](../08-alchemist/179-preview-generation-integration.md)); owned jointly with Vision, formalized in Sprint 8 (see [`10-vision/README.md`](../10-vision/README.md)) — Vision's own client-side PNG capture output is a further downstream artifact, never a Foundry-generated one |
 | `METADATA_ARTIFACT` | Data *about* an artifact, not an artifact itself | Checksums, artifact records, manifests (all PLANNED as structured objects; the checksum value itself is CURRENT) |
 
 A `PRODUCTION_ARTIFACT` label is a statement about *intent*, not a manufacturing-readiness guarantee — FOUNDRY-GOV-005 still requires every one of them to carry the professional-review disclaimer somewhere in its accompanying documentation.
@@ -53,4 +53,4 @@ stateDiagram-v2
 
 ## Relationship to Alchemist's artifact vocabulary
 
-Sprint 6 already defined a minimal `ArtifactRequest`/`ArtifactManifest` pair in `specs/alchemist/v1/`, scoped to 4 artifact types across export *and* preview. Foundry's `specs/foundry/v1/artifact-request.schema.json` and `artifact-record.schema.json` are a genuine superset for production/technical artifacts specifically — richer integrity/checksum/versioning fields Alchemist's schema does not carry — not a duplicate. `PREVIEW_MESH` remains Alchemist/Vision's concern, not Foundry's; see [`193-artifact-request-contract.md`](193-artifact-request-contract.md) for the exact reconciliation.
+Sprint 6 already defined a minimal `ArtifactRequest`/`ArtifactManifest` pair in `specs/alchemist/v1/`, scoped to 4 artifact types across export *and* preview. Foundry's `specs/foundry/v1/artifact-request.schema.json` and `artifact-record.schema.json` are a genuine superset for production/technical artifacts specifically — richer integrity/checksum/versioning fields Alchemist's schema does not carry — not a duplicate. `PREVIEW_MESH` remains Alchemist/Vision's concern, not Foundry's — confirmed unchanged by Sprint 8, which formalized Vision without adding it to Foundry's schema; see [`193-artifact-request-contract.md`](193-artifact-request-contract.md) for the exact reconciliation.

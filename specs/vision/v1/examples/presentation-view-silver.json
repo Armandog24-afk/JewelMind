@@ -1,0 +1,21 @@
+{
+  "viewMode": "presentation",
+  "camera": {
+    "preset": "three_quarter",
+    "position": [34.14767102869004, 29.76813682295203, 34.14767102869004],
+    "target": [0, 2.45, 0]
+  },
+  "components": [
+    { "name": "band", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "prongs", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "basket_support", "geometryRole": "production_metal", "visible": true, "generationStatus": "SUCCEEDED" },
+    { "name": "stone_reference", "geometryRole": "stone_reference", "visible": true, "generationStatus": "SUCCEEDED" }
+  ],
+  "material": {
+    "metal": "silver",
+    "stonePresentationEnabled": true
+  },
+  "stale": false,
+  "modelId": "355ddca57e7e49ad",
+  "definitionHash": "355ddca57e7e49ad"
+}

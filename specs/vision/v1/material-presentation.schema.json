@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/vision/v1/material-presentation.schema.json",
+  "title": "Vision Material Presentation v1",
+  "description": "The metal/stone presentation choice actually in effect. Metal always follows the live JDL selection (see docs/bible/10-vision/244-visual-consistency-contract.md's MATERIAL_METADATA_CONSISTENT level) — this is never an independent override.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metal", "stonePresentationEnabled"],
+  "properties": {
+    "metal": {
+      "enum": ["yellow_gold_18k", "white_gold_18k", "rose_gold_18k", "platinum", "silver"],
+      "description": "Identical enum to shared/types/jewelry-definition.ts's MetalType — always mirrors JewelryDefinition.material.metal, never a separate Vision-only choice."
+    },
+    "stonePresentationEnabled": {
+      "type": "boolean",
+      "description": "True in Presentation mode (transmissive stone look), false in Technical mode (opaque reference look). Not independently toggleable by the user — derived entirely from viewMode."
+    }
+  }
+}

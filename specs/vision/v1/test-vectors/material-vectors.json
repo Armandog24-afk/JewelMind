@@ -1,0 +1,21 @@
+{
+  "description": "Real resolveComponentMaterial() outputs from frontend/src/vision/materials.ts, run during Sprint 8.",
+  "metalVectors": [
+    { "metal": "yellow_gold_18k", "mode": "presentation", "color": "#d4af37", "metalness": 0.95, "roughness": 0.28, "envMapIntensity": 1 },
+    { "metal": "yellow_gold_18k", "mode": "technical", "color": "#d4af37", "metalness": 0.55, "roughness": 0.55, "envMapIntensity": 0 },
+    { "metal": "white_gold_18k", "mode": "presentation", "color": "#e7e7ea", "metalness": 0.95, "roughness": 0.20, "envMapIntensity": 1 },
+    { "metal": "rose_gold_18k", "mode": "presentation", "color": "#e3b7a4", "metalness": 0.95, "roughness": 0.30, "envMapIntensity": 1 },
+    { "metal": "platinum", "mode": "presentation", "color": "#dcdcdc", "metalness": 0.95, "roughness": 0.18, "envMapIntensity": 1 },
+    { "metal": "silver", "mode": "presentation", "color": "#c8c8ce", "metalness": 0.95, "roughness": 0.24, "envMapIntensity": 1 },
+    { "metal": "unobtainium (unrecognized)", "mode": "presentation", "color": "#d4af37", "note": "falls back to yellow_gold_18k rather than throwing" }
+  ],
+  "stoneVectors": [
+    { "mode": "technical", "color": "#bfe3ff", "metalness": 0.1, "roughness": 0.05, "opacity": 0.55, "transmission": 0, "ior": 1.0, "thickness": 0, "clearcoat": 0 },
+    { "mode": "presentation", "color": "#eaf6ff", "metalness": 0, "roughness": 0.03, "opacity": 1, "transmission": 0.92, "ior": 2.4, "thickness": 1.2, "clearcoat": 1 }
+  ],
+  "distinctColorCount": {
+    "presentationMetals": 5,
+    "technicalMetals": 5,
+    "note": "All 5 metals produce a visibly distinct color in both modes — verified by materials.test.ts asserting Set size == 5."
+  }
+}
