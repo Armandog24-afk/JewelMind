@@ -64,6 +64,10 @@ Sprint 2 ([`04-jewelry-domain/`](../04-jewelry-domain/README.md)) established th
 
 [`11-studio/`](../11-studio/README.md) (Sprint 9) presents Forge's diagnostics (`ValidationResult`) to the user via `ValidationPanel`/`ValidationItem`, unchanged this Sprint, and never filters, reclassifies, or hides a diagnostic Forge returns (STUDIO-GOV-010). Studio's own client-side `NumericField` `min`/`max` hints are advisory UI feedback only, never a duplicate of a Forge rule threshold (STUDIO-GOV-001) — the backend's evaluation remains the sole authority.
 
+## Relationship to Sprint 10
+
+[`12-designer/`](../12-designer/README.md) (Sprint 10) adds Designer, a natural-language interpretation layer whose every candidate proposal is evaluated through this exact same Forge engine (`validation.engine.validate_definition()`/`has_errors()`) as any manually-edited design — with zero special-casing and zero Designer-invented rule. Designer's `capability.py` and `UnsupportedFeature` model describe only *support* (whether a JDL field/enum value exists at all), never a manufacturability or jewelry-domain verdict; that distinction remains exclusively Forge's to make. See [`12-designer/309-designer-forge-integration.md`](../12-designer/309-designer-forge-integration.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-4-VALIDATION-REPORT.md`](SPRINT-4-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

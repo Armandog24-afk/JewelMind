@@ -1,0 +1,40 @@
+{
+  "description": "Real ambiguity classification outcomes.",
+  "vectors": [
+    {
+      "id": "bare-gold",
+      "inputText": "Fammi un anello in oro.",
+      "proposalStatus": "NEEDS_CLARIFICATION",
+      "clarificationQuestions": [
+        {
+          "field": "material.metal",
+          "question": "You asked for 'gold'. Which supported option do you mean?",
+          "options": [
+            "yellow_gold_18k",
+            "white_gold_18k",
+            "rose_gold_18k",
+            "platinum",
+            "silver"
+          ],
+          "ambiguityLevel": "HIGH_IMPACT_AMBIGUITY"
+        }
+      ]
+    },
+    {
+      "id": "provider-ambiguity",
+      "inputText": "metal: gold or maybe rose?",
+      "proposalStatus": "NEEDS_CLARIFICATION",
+      "clarificationQuestions": [
+        {
+          "field": "material.metal",
+          "question": "'gold or maybe rose' could mean more than one supported thing — which do you mean?",
+          "options": [
+            "yellow_gold_18k",
+            "rose_gold_18k"
+          ],
+          "ambiguityLevel": "HIGH_IMPACT_AMBIGUITY"
+        }
+      ]
+    }
+  ]
+}

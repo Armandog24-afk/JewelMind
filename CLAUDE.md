@@ -635,3 +635,60 @@ Schemas, real examples, and test vectors). Future coding agents must:
 - **Create an RFC for new major product workflows** — a project
   dashboard, multiple open designs, undo/redo, or autosave; see the same
   document.
+
+## DESIGNER RULES
+
+`docs/bible/12-designer/` is the authoritative Designer natural-language
+design-interpretation specification — start at
+[`docs/bible/12-designer/README.md`](docs/bible/12-designer/README.md).
+The machine-readable half lives in
+[`specs/designer/v1/`](specs/designer/v1/README.md) (request/proposal/
+diagnostic JSON Schemas, real examples generated against
+`FakeDesignerProvider`, and test vectors). Future coding agents must:
+
+- **Read `docs/bible/12-designer/README.md` before changing anything in
+  `backend/jewelmind/designer/` or `frontend/src/components/DesignerPanel.tsx`.**
+- **Preserve Designer as proposal-only** — nothing in
+  `backend/jewelmind/designer/` may write to `currentDefinition`; only
+  an explicit user acceptance through
+  `useProjectStore.applyDesignerProposal()` may do that.
+- **Never let Designer call geometry code directly** —
+  `backend/jewelmind/designer/` must never import `cadquery` or anything
+  under `jewelmind.geometry`; a candidate design is data, not a
+  construction instruction.
+- **Never bypass JDL/Forge validation for a Designer-originated
+  candidate** — every `candidateJDL` goes through the real
+  `JewelryDefinition.model_validate()` and `validate_definition()`, the
+  same as every other entry point, with no Designer-specific shortcut.
+- **Preserve field provenance** — every `ProposedField` must carry a
+  `FieldProvenance` value; never construct one that omits or fakes it.
+- **Distinguish system defaults from AI inference** — a field left
+  unspecified by the user and filled from the schema default must never
+  be labeled as though the AI inferred it.
+- **Reject unsupported fields/enum values deterministically** — gate
+  every field and enum value through `capability.py`
+  (`is_known_field`/`is_supported_enum_value`) rather than trusting a
+  provider to only ever report supported concepts.
+- **Report unsupported requested features explicitly** — an
+  `UnsupportedFeature` must never be silently dropped or approximated as
+  something the schema does support.
+- **Preserve unspecified current values during a MODIFY interpretation**
+  — an untouched field must keep its value from `currentJDL`, never
+  reset to the schema default.
+- **Keep provider integrations behind the `DesignerProvider` interface**
+  — a vendor-specific response shape must never leak past
+  `designer/provider.py`; `DesignerService` depends only on
+  `RawDesignerResponse`.
+- **Keep API secrets backend-only** — `ANTHROPIC_API_KEY` must never
+  reach the frontend bundle, a client-visible response, or a log line.
+- **Keep CI independent from external AI services** — every automated
+  test must use `FakeDesignerProvider`, never a live provider call.
+- **Update the Designer natural-language test corpus** —
+  `backend/tests/test_designer_corpus.py` — after any semantic change to
+  normalization or capability logic.
+- **Create an ADR before changing Designer's provider architecture** —
+  see "When an ADR is required" in
+  `docs/bible/12-designer/290-designer-governance.md`.
+- **Create an RFC before adding a major new natural-language
+  capability** — multi-turn conversation, image/sketch input, or a new
+  intent category; see the same document's "When an RFC is required."

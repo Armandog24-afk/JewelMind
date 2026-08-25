@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/designer-diagnostic.schema.json",
+  "title": "Designer Diagnostic v1",
+  "description": "One diagnostic entry, using the same 11-code DESIGNER_* vocabulary as the HTTP error model. Only the 5 non-fatal codes appear here — the other 6 always fail the whole request instead (see 312-designer-error-model.md). Never exposes a raw provider stack trace.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "severity", "message"],
+  "properties": {
+    "code": {
+      "enum": [
+        "DESIGNER_UNSUPPORTED_FEATURE",
+        "DESIGNER_AMBIGUOUS_REQUEST",
+        "DESIGNER_CLARIFICATION_REQUIRED",
+        "DESIGNER_PROPOSAL_INVALID",
+        "DESIGNER_CAPABILITY_MISMATCH"
+      ]
+    },
+    "severity": { "enum": ["info", "warning", "error"] },
+    "message": { "type": "string" },
+    "field": { "type": ["string", "null"] }
+  }
+}

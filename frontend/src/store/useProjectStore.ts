@@ -53,6 +53,12 @@ interface ProjectState {
   updateManufacturing: (patch: Partial<ManufacturingSpec>) => void
   updatePreview: (patch: Partial<PreviewSpec>) => void
   setIncludeStoneReferenceInExport: (value: boolean) => void
+  /** Applies an accepted Designer proposal's candidate JDL wholesale — see
+   * docs/bible/12-designer/310-user-review-and-acceptance.md. Never called
+   * automatically; only after explicit user review/acceptance. Does not
+   * trigger generation — the existing Generate/Regenerate action remains a
+   * separate, deliberate step. */
+  applyDesignerProposal: (definition: JewelryDefinition) => void
 
   resetProject: () => void
   checkBackendHealth: () => Promise<void>
@@ -152,6 +158,8 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
     ),
 
   setIncludeStoneReferenceInExport: (value) => set({ includeStoneReferenceInExport: value }),
+
+  applyDesignerProposal: (definition) => set((state) => withUpdatedDefinition(state, definition)),
 
   resetProject: () => {
     clearDefinition()

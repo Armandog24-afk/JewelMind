@@ -79,6 +79,10 @@ JDL does not redefine jewelry-domain concepts. [`04-jewelry-domain/044-solitaire
 
 [`11-studio/`](../11-studio/README.md) (Sprint 9) is the frontend workflow layer sitting above JDL — it edits `JewelryDefinition` fields through `ConfigurationPanel`/`useProjectStore`, but never redefines a JDL field, type, or validation rule. Studio's "Design vs. Advanced" parameter grouping is a presentation-only reorganization of existing JDL fields, never a second schema — see [`11-studio/255-design-editing-contract.md`](../11-studio/255-design-editing-contract.md) and STUDIO-GOV-013.
 
+## Relationship to Sprint 10
+
+[`12-designer/`](../12-designer/README.md) (Sprint 10) adds Designer, a new, non-authoritative producer of JDL candidates: a natural-language request becomes a `candidateJDL` field on a `DesignerProposal`, built by `JewelryDefinition.model_validate()` exactly like any other caller. Designer sits entirely upstream of JDL's own structural/semantic validation stages — it never skips them, never grants itself a second schema, and never marks a candidate valid on its own authority. A proposal only reaches `currentDefinition` after explicit user acceptance, at which point it is indistinguishable from a manually-entered `JewelryDefinition` to every downstream JDL stage. See [`12-designer/295-designer-to-jdl-contract.md`](../12-designer/295-designer-to-jdl-contract.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-3-VALIDATION-REPORT.md`](SPRINT-3-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

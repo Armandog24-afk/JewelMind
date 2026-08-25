@@ -48,6 +48,53 @@ geometry generation, rather than as an independently-failable step like
 the export flows below it — see
 [`08-alchemist/173-partial-compilation-policy.md`](../08-alchemist/173-partial-compilation-policy.md).
 
+## `POST /api/designer/interpret` (Sprint 10)
+
+As of Sprint 10, a natural-language request can flow through Designer
+before it ever becomes a `JewelryDefinition` the rest of this document
+describes. Designer sits entirely upstream of the JDL processing model
+above — it produces a *candidate* JDL document, never a validated one on
+its own, and the candidate still passes through the exact same
+`validate_definition()` (Forge) call as any manually-edited definition:
+
+```mermaid
+sequenceDiagram
+    participant FE as Frontend (DesignerPanel)
+    participant API as api/routes.py
+    participant DS as designer/service.py
+    participant NORM as designer/normalizer.py
+    participant PROV as designer/provider.py
+    participant VAL as validation/engine.py
+    FE->>API: NaturalLanguageDesignRequest
+    API->>DS: interpret(request)
+    DS->>NORM: detect_prompt_injection_risk(text)
+    alt flagged
+        NORM-->>DS: reason
+        DS-->>API: raise DesignerSecurityRejectedError
+        API-->>FE: 400 DESIGNER_SECURITY_REJECTED
+    else no provider configured
+        DS-->>API: raise DesignerProviderUnavailableError
+        API-->>FE: 503 DESIGNER_PROVIDER_UNAVAILABLE
+    else provider available
+        DS->>PROV: provider.interpret(request, context)
+        PROV-->>DS: RawDesignerResponse
+        DS->>NORM: normalize enum tokens, compute diff
+        DS->>DS: JewelryDefinition.model_validate(patch) (candidate JDL)
+        DS->>VAL: validate_definition(candidate)
+        VAL-->>DS: ValidationResult list (Forge evaluation)
+        DS-->>API: DesignerResult (DesignerProposal)
+        API-->>FE: proposal for review
+    end
+```
+
+The proposal returned here has no effect on `currentDefinition` until a
+user explicitly reviews it and calls
+`useProjectStore.applyDesignerProposal()` — that action writes through
+the same `withUpdatedDefinition()` path every manual parameter edit
+already uses, so it is indistinguishable from a manual edit to every
+downstream flow described below. See
+[`12-designer/295-designer-to-jdl-contract.md`](../12-designer/295-designer-to-jdl-contract.md).
+
 ## `POST /api/models/validate`
 
 ```mermaid
@@ -174,3 +221,4 @@ already present on it (`record.definition` and, for the specification,
 | File export | `exporters/` | Frontend, via download |
 | Export integrity validation (Sprint 7) | `exporters/integrity.py` | API response header (`X-Content-SHA256`) |
 | Output eligibility + workflow status (Sprint 9) | `frontend/src/studio/{modelState,outputEligibility}.ts` | User, via the header's model-status badge and the consolidated Outputs tab |
+| Natural-language interpretation (Sprint 10) | `designer/service.py`, `designer/provider.py` | User review, via `DesignerPanel`; JDL/Forge validation on the candidate, unchanged |

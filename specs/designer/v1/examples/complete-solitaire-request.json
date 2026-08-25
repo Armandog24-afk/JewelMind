@@ -1,0 +1,221 @@
+{
+  "requestId": "ex-complete-01",
+  "proposal": {
+    "proposalId": "proposal-24d84f8b-d0e4-4978-981f-793c472350d0",
+    "sourceText": "Fammi un solitario in oro rosa con sei griffe e fascia comfort fit.",
+    "interactionMode": "CREATE",
+    "unresolvedIntent": [],
+    "unsupportedFeatures": [],
+    "proposedFields": [
+      {
+        "path": "material.metal",
+        "value": "rose_gold_18k",
+        "provenance": "AI_INTERPRETATION",
+        "confidence": "NORMALIZED",
+        "sourceText": "oro rosa",
+        "previousValue": null
+      },
+      {
+        "path": "setting.prongCount",
+        "value": 6,
+        "provenance": "AI_INTERPRETATION",
+        "confidence": "NORMALIZED",
+        "sourceText": "sei griffe",
+        "previousValue": null
+      },
+      {
+        "path": "band.profile",
+        "value": "comfort_fit",
+        "provenance": "AI_INTERPRETATION",
+        "confidence": "NORMALIZED",
+        "sourceText": "fascia comfort fit",
+        "previousValue": null
+      }
+    ],
+    "clarificationQuestions": [],
+    "diagnostics": [],
+    "candidateJDL": {
+      "schemaVersion": "0.1.0",
+      "project": {
+        "name": "Solitaire Ring",
+        "units": "mm"
+      },
+      "jewelry": {
+        "category": "ring",
+        "style": "solitaire"
+      },
+      "ring": {
+        "sizeSystem": "EU",
+        "size": 16.0,
+        "innerDiameter": 17.8
+      },
+      "band": {
+        "width": 2.4,
+        "thickness": 1.8,
+        "profile": "comfort_fit"
+      },
+      "stone": {
+        "shape": "round",
+        "diameter": 6.5,
+        "depth": 4.0
+      },
+      "setting": {
+        "type": "prong",
+        "prongCount": 6,
+        "prongDiameter": 1.1,
+        "prongHeight": 4.8,
+        "basketHeight": 3.5
+      },
+      "material": {
+        "metal": "rose_gold_18k"
+      },
+      "manufacturing": {
+        "method": "lost_wax_casting"
+      },
+      "preview": {
+        "meshTolerance": 0.1,
+        "angularTolerance": 0.2
+      }
+    },
+    "validation": [],
+    "forgeEvaluation": {
+      "results": [],
+      "hasErrors": false
+    },
+    "diff": [
+      {
+        "path": "project.name",
+        "previousValue": null,
+        "proposedValue": "Solitaire Ring",
+        "changed": false
+      },
+      {
+        "path": "project.units",
+        "previousValue": null,
+        "proposedValue": "mm",
+        "changed": false
+      },
+      {
+        "path": "jewelry.category",
+        "previousValue": null,
+        "proposedValue": "ring",
+        "changed": false
+      },
+      {
+        "path": "jewelry.style",
+        "previousValue": null,
+        "proposedValue": "solitaire",
+        "changed": false
+      },
+      {
+        "path": "ring.sizeSystem",
+        "previousValue": null,
+        "proposedValue": "EU",
+        "changed": false
+      },
+      {
+        "path": "ring.size",
+        "previousValue": null,
+        "proposedValue": 16.0,
+        "changed": false
+      },
+      {
+        "path": "ring.innerDiameter",
+        "previousValue": null,
+        "proposedValue": 17.8,
+        "changed": false
+      },
+      {
+        "path": "band.width",
+        "previousValue": null,
+        "proposedValue": 2.4,
+        "changed": false
+      },
+      {
+        "path": "band.thickness",
+        "previousValue": null,
+        "proposedValue": 1.8,
+        "changed": false
+      },
+      {
+        "path": "band.profile",
+        "previousValue": null,
+        "proposedValue": "comfort_fit",
+        "changed": false
+      },
+      {
+        "path": "stone.shape",
+        "previousValue": null,
+        "proposedValue": "round",
+        "changed": false
+      },
+      {
+        "path": "stone.diameter",
+        "previousValue": null,
+        "proposedValue": 6.5,
+        "changed": false
+      },
+      {
+        "path": "stone.depth",
+        "previousValue": null,
+        "proposedValue": 4.0,
+        "changed": false
+      },
+      {
+        "path": "setting.type",
+        "previousValue": null,
+        "proposedValue": "prong",
+        "changed": false
+      },
+      {
+        "path": "setting.prongCount",
+        "previousValue": null,
+        "proposedValue": 6,
+        "changed": false
+      },
+      {
+        "path": "setting.prongDiameter",
+        "previousValue": null,
+        "proposedValue": 1.1,
+        "changed": false
+      },
+      {
+        "path": "setting.prongHeight",
+        "previousValue": null,
+        "proposedValue": 4.8,
+        "changed": false
+      },
+      {
+        "path": "setting.basketHeight",
+        "previousValue": null,
+        "proposedValue": 3.5,
+        "changed": false
+      },
+      {
+        "path": "material.metal",
+        "previousValue": null,
+        "proposedValue": "rose_gold_18k",
+        "changed": false
+      },
+      {
+        "path": "manufacturing.method",
+        "previousValue": null,
+        "proposedValue": "lost_wax_casting",
+        "changed": false
+      },
+      {
+        "path": "preview.meshTolerance",
+        "previousValue": null,
+        "proposedValue": 0.1,
+        "changed": false
+      },
+      {
+        "path": "preview.angularTolerance",
+        "previousValue": null,
+        "proposedValue": 0.2,
+        "changed": false
+      }
+    ],
+    "proposalStatus": "COMPLETE"
+  }
+}

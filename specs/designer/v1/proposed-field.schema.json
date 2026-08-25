@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/proposed-field.schema.json",
+  "title": "Designer Proposed Field v1",
+  "description": "One field Designer proposes changing/setting, with mandatory provenance and confidence. See docs/bible/12-designer/303-field-provenance-model.md and 302-confidence-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["path", "value", "provenance", "confidence"],
+  "properties": {
+    "path": { "type": "string", "description": "Dotted JDL field path, e.g. 'material.metal'." },
+    "value": { "type": ["string", "number", "boolean"] },
+    "provenance": {
+      "enum": [
+        "USER_EXPLICIT",
+        "USER_CONTEXT",
+        "CURRENT_DESIGN",
+        "SYSTEM_DEFAULT",
+        "DETERMINISTIC_DERIVATION",
+        "AI_INTERPRETATION",
+        "CLARIFICATION_RESPONSE",
+        "UNRESOLVED"
+      ]
+    },
+    "confidence": {
+      "enum": ["EXACT", "NORMALIZED", "INFERRED", "DEFAULTED", "AMBIGUOUS", "UNSUPPORTED"]
+    },
+    "sourceText": { "type": ["string", "null"] },
+    "previousValue": { "type": ["string", "number", "boolean", "null"] }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/natural-language-request.schema.json",
+  "title": "Designer Natural-Language Design Request v1",
+  "description": "The body of POST /api/designer/interpret. See docs/bible/12-designer/292-natural-language-input-contract.md and backend/jewelmind/designer/schemas.py::NaturalLanguageDesignRequest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requestId", "text", "interactionMode"],
+  "properties": {
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "The user's natural-language design request or change, in Italian or English."
+    },
+    "locale": {
+      "enum": ["it", "en", null],
+      "description": "Optional hint only — Designer must produce the same canonical enum values regardless of input language."
+    },
+    "interactionMode": {
+      "enum": ["CREATE", "MODIFY"],
+      "description": "CREATE starts from JewelMind's schema defaults; MODIFY preserves every unspecified field of currentJDL."
+    },
+    "currentJDL": {
+      "type": ["object", "null"],
+      "description": "The current JewelryDefinition (see specs/jdl/v1/jdl.schema.json), required for a meaningful MODIFY and ignored for CREATE."
+    }
+  }
+}

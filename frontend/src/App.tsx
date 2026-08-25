@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { AppHeader } from './components/AppHeader'
 import { ConfigurationPanel } from './components/ConfigurationPanel'
+import { DesignerPanel } from './components/DesignerPanel'
 import { ModelViewport } from './components/ModelViewport'
 import { ProfessionalReviewNotice } from './components/ProfessionalReviewNotice'
 import { RightPanelTabs } from './components/RightPanelTabs'
@@ -23,6 +24,7 @@ function App() {
       <div className="app-body">
         <div className="panel panel--left">
           <ProfessionalReviewNotice />
+          <DesignerPanel />
           <ConfigurationPanel />
         </div>
         <div className="panel panel--center">

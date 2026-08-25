@@ -2,9 +2,11 @@ import type { JewelryDefinition } from '@shared/types/jewelry-definition'
 import {
   ApiError,
   type ApiErrorBody,
+  type DesignerResult,
   type GenerateResponse,
   type HealthResponse,
   type ModelMetadataResponse,
+  type NaturalLanguageDesignRequest,
   type ValidateResponse,
 } from './types'
 
@@ -55,6 +57,15 @@ export async function generateModel(definition: JewelryDefinition): Promise<Gene
 
 export async function fetchModelMetadata(modelId: string): Promise<ModelMetadataResponse> {
   return request<ModelMetadataResponse>(`/api/models/${modelId}/metadata`)
+}
+
+export async function interpretDesignRequest(
+  designerRequest: NaturalLanguageDesignRequest,
+): Promise<DesignerResult> {
+  return request<DesignerResult>('/api/designer/interpret', {
+    method: 'POST',
+    body: JSON.stringify(designerRequest),
+  })
 }
 
 export function previewUrl(modelId: string, componentName: string): string {

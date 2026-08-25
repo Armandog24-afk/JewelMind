@@ -75,3 +75,7 @@ Vision + Foundry
 ## Validation of this sprint
 
 See [`SPRINT-9-VALIDATION-REPORT.md`](SPRINT-9-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.
+
+## Relationship to Sprint 10
+
+[`12-designer/`](../12-designer/README.md) (Sprint 10) adds exactly one new Studio surface, `DesignerPanel` (rendered between the professional-review notice and `ConfigurationPanel`), and one new store action, `useProjectStore.applyDesignerProposal()`. `DesignerPanel` sends a natural-language request to `POST /api/designer/interpret`, renders the returned `DesignerProposal` for review ("JewelMind understood"/unsupported-feature/clarification sections), and only calls `applyDesignerProposal()` on an explicit user click — that action writes through the same `withUpdatedDefinition()` path every other `updateXxx()` action already uses, so a proposal that changes a geometry-driving field correctly marks the current model stale through the existing mechanism. This Sprint changes nothing about `computeModelState()`, `computeOutputEligibility()`, or any other existing Studio guarantee: Designer is additive UI and one additive store action, not a new state model. See [`12-designer/320-current-studio-integration.md`](../12-designer/320-current-studio-integration.md).

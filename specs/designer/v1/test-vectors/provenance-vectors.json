@@ -1,0 +1,22 @@
+{
+  "description": "Real field provenance/confidence tagging: an AI-interpreted field is never labeled as a plain SYSTEM_DEFAULT.",
+  "vectors": [
+    {
+      "id": "ai-interpreted-vs-system-default",
+      "aiInterpretedField": {
+        "path": "material.metal",
+        "value": "rose_gold_18k",
+        "provenance": "AI_INTERPRETATION",
+        "confidence": "NORMALIZED",
+        "sourceText": "oro rosa",
+        "previousValue": null
+      },
+      "systemDefaultExampleField": {
+        "path": "setting.prongCount",
+        "value": 6,
+        "provenance": "SYSTEM_DEFAULT",
+        "note": "not literally emitted by the pipeline (unspecified fields are simply not in proposedFields) — shown here only to contrast the two provenance concepts."
+      }
+    }
+  ]
+}

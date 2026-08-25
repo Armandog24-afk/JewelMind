@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/unsupported-feature.schema.json",
+  "title": "Designer Unsupported Feature v1",
+  "description": "A requested feature JewelMind cannot currently produce, reported explicitly rather than silently dropped or approximated. See docs/bible/12-designer/301-unsupported-request-handling.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["feature", "sourceText", "reason", "blocking"],
+  "properties": {
+    "feature": { "type": "string" },
+    "sourceText": { "type": "string" },
+    "reason": { "type": "string" },
+    "currentCapability": { "type": ["string", "null"] },
+    "futureRoadmapReference": { "type": ["string", "null"] },
+    "blocking": { "type": "boolean" },
+    "suggestedSupportedAlternative": { "type": ["string", "null"] }
+  }
+}

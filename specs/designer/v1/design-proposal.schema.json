@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/design-proposal.schema.json",
+  "title": "Designer Proposal v1",
+  "description": "The full structured, reviewable output of one interpretation — never geometry, never a bypass of JDL/Forge. Sub-shapes are inlined here (not $ref'd) to match every prior sprint's specs/*/v1/ convention. See docs/bible/12-designer/294-design-proposal-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposalId",
+    "sourceText",
+    "interactionMode",
+    "unresolvedIntent",
+    "unsupportedFeatures",
+    "proposedFields",
+    "clarificationQuestions",
+    "diagnostics",
+    "candidateJDL",
+    "validation",
+    "diff",
+    "proposalStatus"
+  ],
+  "properties": {
+    "proposalId": { "type": "string" },
+    "sourceText": { "type": "string" },
+    "interactionMode": { "enum": ["CREATE", "MODIFY"] },
+    "unresolvedIntent": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Non-mappable descriptive language (e.g. 'delicate') preserved verbatim — never converted into an invented dimension."
+    },
+    "unsupportedFeatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["feature", "sourceText", "reason", "blocking"],
+        "properties": {
+          "feature": { "type": "string" },
+          "sourceText": { "type": "string" },
+          "reason": { "type": "string" },
+          "currentCapability": { "type": ["string", "null"] },
+          "futureRoadmapReference": { "type": ["string", "null"] },
+          "blocking": { "type": "boolean" },
+          "suggestedSupportedAlternative": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "proposedFields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "value", "provenance", "confidence"],
+        "properties": {
+          "path": { "type": "string" },
+          "value": { "type": ["string", "number", "boolean"] },
+          "provenance": {
+            "enum": [
+              "USER_EXPLICIT", "USER_CONTEXT", "CURRENT_DESIGN", "SYSTEM_DEFAULT",
+              "DETERMINISTIC_DERIVATION", "AI_INTERPRETATION", "CLARIFICATION_RESPONSE", "UNRESOLVED"
+            ]
+          },
+          "confidence": { "enum": ["EXACT", "NORMALIZED", "INFERRED", "DEFAULTED", "AMBIGUOUS", "UNSUPPORTED"] },
+          "sourceText": { "type": ["string", "null"] },
+          "previousValue": { "type": ["string", "number", "boolean", "null"] }
+        }
+      }
+    },
+    "clarificationQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "ambiguityLevel"],
+        "properties": {
+          "field": { "type": ["string", "null"] },
+          "question": { "type": "string" },
+          "options": { "type": "array", "items": { "type": "string" } },
+          "ambiguityLevel": { "enum": ["LOW_IMPACT_AMBIGUITY", "HIGH_IMPACT_AMBIGUITY", "UNSUPPORTED_AMBIGUITY"] }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": {
+            "enum": [
+              "DESIGNER_UNSUPPORTED_FEATURE", "DESIGNER_AMBIGUOUS_REQUEST", "DESIGNER_CLARIFICATION_REQUIRED",
+              "DESIGNER_PROPOSAL_INVALID", "DESIGNER_CAPABILITY_MISMATCH"
+            ]
+          },
+          "severity": { "enum": ["info", "warning", "error"] },
+          "message": { "type": "string" },
+          "field": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "candidateJDL": {
+      "type": ["object", "null"],
+      "description": "A full JewelryDefinition (see specs/jdl/v1/jdl.schema.json) when the proposed values could form a valid one, else null (proposalStatus INVALID)."
+    },
+    "validation": {
+      "type": "array",
+      "description": "The real Forge validation results for candidateJDL (see specs/forge/v1/) — empty when candidateJDL is null.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ruleId": { "type": "string" },
+          "severity": { "enum": ["error", "warning", "information"] },
+          "message": { "type": "string" },
+          "parameter": { "type": "string" },
+          "suggestedValue": { "type": ["number", "string", "null"] }
+        }
+      }
+    },
+    "forgeEvaluation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["results", "hasErrors"],
+      "properties": {
+        "results": { "type": "array" },
+        "hasErrors": { "type": "boolean" }
+      }
+    },
+    "diff": {
+      "type": "array",
+      "description": "Deterministic before/after field diff — never LLM-generated. See 311-proposal-diff-model.md.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "changed"],
+        "properties": {
+          "path": { "type": "string" },
+          "previousValue": { "type": ["string", "number", "boolean", "null"] },
+          "proposedValue": { "type": ["string", "number", "boolean", "null"] },
+          "changed": { "type": "boolean" }
+        }
+      }
+    },
+    "proposalStatus": {
+      "enum": [
+        "COMPLETE", "NEEDS_CLARIFICATION", "PARTIALLY_SUPPORTED", "UNSUPPORTED",
+        "INVALID", "READY_FOR_REVIEW", "ACCEPTED", "REJECTED"
+      ]
+    }
+  }
+}

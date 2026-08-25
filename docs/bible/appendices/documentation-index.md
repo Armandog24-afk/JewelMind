@@ -355,6 +355,49 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A53 | Appendix: Studio Copy Catalog | accepted | current | [`appendices/studio-copy-catalog.md`](studio-copy-catalog.md) |
 | JM-BIBLE-A54 | Appendix: Studio Code Mapping | accepted | current | [`appendices/studio-code-mapping.md`](studio-code-mapping.md) |
 | JM-BIBLE-A55 | Appendix: Studio Test Matrix | accepted | current | [`appendices/studio-test-matrix.md`](studio-test-matrix.md) |
+| JM-BIBLE-DESIGNER-README | Designer v1 — Index | accepted | current | [`12-designer/README.md`](../12-designer/README.md) |
+| JM-BIBLE-290 | Designer Governance | accepted | current | [`12-designer/290-designer-governance.md`](../12-designer/290-designer-governance.md) |
+| JM-BIBLE-291 | Designer Architecture Overview | accepted | current | [`12-designer/291-designer-architecture-overview.md`](../12-designer/291-designer-architecture-overview.md) |
+| JM-BIBLE-292 | Natural Language Input Contract | accepted | current | [`12-designer/292-natural-language-input-contract.md`](../12-designer/292-natural-language-input-contract.md) |
+| JM-BIBLE-293 | Intent Extraction Model | accepted | current | [`12-designer/293-intent-extraction-model.md`](../12-designer/293-intent-extraction-model.md) |
+| JM-BIBLE-294 | Design Proposal Model | accepted | current | [`12-designer/294-design-proposal-model.md`](../12-designer/294-design-proposal-model.md) |
+| JM-BIBLE-295 | Designer To JDL Contract | accepted | current | [`12-designer/295-designer-to-jdl-contract.md`](../12-designer/295-designer-to-jdl-contract.md) |
+| JM-BIBLE-296 | Capability Awareness | accepted | current | [`12-designer/296-capability-awareness.md`](../12-designer/296-capability-awareness.md) |
+| JM-BIBLE-297 | Supported Language Scope | accepted | current | [`12-designer/297-supported-language-scope.md`](../12-designer/297-supported-language-scope.md) |
+| JM-BIBLE-298 | Defaulting Policy | accepted | current | [`12-designer/298-defaulting-policy.md`](../12-designer/298-defaulting-policy.md) |
+| JM-BIBLE-299 | Ambiguity Model | accepted | current | [`12-designer/299-ambiguity-model.md`](../12-designer/299-ambiguity-model.md) |
+| JM-BIBLE-300 | Clarification Policy | accepted | current | [`12-designer/300-clarification-policy.md`](../12-designer/300-clarification-policy.md) |
+| JM-BIBLE-301 | Unsupported Request Handling | accepted | current | [`12-designer/301-unsupported-request-handling.md`](../12-designer/301-unsupported-request-handling.md) |
+| JM-BIBLE-302 | Confidence Model | accepted | current | [`12-designer/302-confidence-model.md`](../12-designer/302-confidence-model.md) |
+| JM-BIBLE-303 | Field Provenance Model | accepted | current | [`12-designer/303-field-provenance-model.md`](../12-designer/303-field-provenance-model.md) |
+| JM-BIBLE-304 | AI Output Constraining | accepted | current | [`12-designer/304-ai-output-constraining.md`](../12-designer/304-ai-output-constraining.md) |
+| JM-BIBLE-305 | Structured Output Contract | accepted | current | [`12-designer/305-structured-output-contract.md`](../12-designer/305-structured-output-contract.md) |
+| JM-BIBLE-306 | Prompt Architecture | accepted | current | [`12-designer/306-prompt-architecture.md`](../12-designer/306-prompt-architecture.md) |
+| JM-BIBLE-307 | Provider Abstraction | accepted | partial | [`12-designer/307-provider-abstraction.md`](../12-designer/307-provider-abstraction.md) |
+| JM-BIBLE-308 | Designer Validation Pipeline | accepted | current | [`12-designer/308-designer-validation-pipeline.md`](../12-designer/308-designer-validation-pipeline.md) |
+| JM-BIBLE-309 | Designer Forge Integration | accepted | current | [`12-designer/309-designer-forge-integration.md`](../12-designer/309-designer-forge-integration.md) |
+| JM-BIBLE-310 | User Review and Acceptance | accepted | current | [`12-designer/310-user-review-and-acceptance.md`](../12-designer/310-user-review-and-acceptance.md) |
+| JM-BIBLE-311 | Proposal Diff Model | accepted | current | [`12-designer/311-proposal-diff-model.md`](../12-designer/311-proposal-diff-model.md) |
+| JM-BIBLE-312 | Designer Error Model | accepted | current | [`12-designer/312-designer-error-model.md`](../12-designer/312-designer-error-model.md) |
+| JM-BIBLE-313 | Designer Security Model | accepted | current | [`12-designer/313-designer-security-model.md`](../12-designer/313-designer-security-model.md) |
+| JM-BIBLE-314 | Prompt Injection and Untrusted Input | accepted | current | [`12-designer/314-prompt-injection-and-untrusted-input.md`](../12-designer/314-prompt-injection-and-untrusted-input.md) |
+| JM-BIBLE-315 | Privacy and Data Boundaries | accepted | current | [`12-designer/315-privacy-and-data-boundaries.md`](../12-designer/315-privacy-and-data-boundaries.md) |
+| JM-BIBLE-316 | Designer Observability | accepted | current | [`12-designer/316-designer-observability.md`](../12-designer/316-designer-observability.md) |
+| JM-BIBLE-317 | Designer Cost and Latency Model | accepted | current | [`12-designer/317-designer-cost-and-latency-model.md`](../12-designer/317-designer-cost-and-latency-model.md) |
+| JM-BIBLE-318 | Designer Evaluation Framework | accepted | current | [`12-designer/318-designer-evaluation-framework.md`](../12-designer/318-designer-evaluation-framework.md) |
+| JM-BIBLE-319 | Designer Test Corpus | accepted | current | [`12-designer/319-designer-test-corpus.md`](../12-designer/319-designer-test-corpus.md) |
+| JM-BIBLE-320 | Current Studio Integration | accepted | current | [`12-designer/320-current-studio-integration.md`](../12-designer/320-current-studio-integration.md) |
+| JM-BIBLE-321 | Designer Gap Analysis | accepted | current | [`12-designer/321-designer-gap-analysis.md`](../12-designer/321-designer-gap-analysis.md) |
+| JM-BIBLE-322 | Open Designer Questions | accepted | current | [`12-designer/322-open-designer-questions.md`](../12-designer/322-open-designer-questions.md) |
+| JM-BIBLE-SPRINT10-REPORT | Sprint 10 Validation Report | accepted | current | [`12-designer/SPRINT-10-VALIDATION-REPORT.md`](../12-designer/SPRINT-10-VALIDATION-REPORT.md) |
+| JM-BIBLE-A56 | Appendix: Designer Supported Intent Catalog | accepted | current | [`appendices/designer-supported-intent-catalog.md`](designer-supported-intent-catalog.md) |
+| JM-BIBLE-A57 | Appendix: Designer Field Provenance Catalog | accepted | current | [`appendices/designer-field-provenance-catalog.md`](designer-field-provenance-catalog.md) |
+| JM-BIBLE-A58 | Appendix: Designer Clarification Catalog | accepted | current | [`appendices/designer-clarification-catalog.md`](designer-clarification-catalog.md) |
+| JM-BIBLE-A59 | Appendix: Designer Unsupported Feature Catalog | accepted | current | [`appendices/designer-unsupported-feature-catalog.md`](designer-unsupported-feature-catalog.md) |
+| JM-BIBLE-A60 | Appendix: Designer Diagnostic Catalog | accepted | current | [`appendices/designer-diagnostic-catalog.md`](designer-diagnostic-catalog.md) |
+| JM-BIBLE-A61 | Appendix: Designer Test Case Catalog | accepted | current | [`appendices/designer-test-case-catalog.md`](designer-test-case-catalog.md) |
+| JM-BIBLE-A62 | Appendix: Designer Code Mapping | accepted | current | [`appendices/designer-code-mapping.md`](designer-code-mapping.md) |
+| JM-BIBLE-A63 | Appendix: Designer Test Matrix | accepted | current | [`appendices/designer-test-matrix.md`](designer-test-matrix.md) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 
@@ -451,6 +494,21 @@ front-matter convention and are listed here for completeness, per
 | Compiler contract reference | Yes (CURRENT rows) | [`specs/jdl/v1/compiler-contract.md`](../../../specs/jdl/v1/compiler-contract.md) |
 | Examples (valid + invalid) | Yes | [`specs/jdl/v1/examples/`](../../../specs/jdl/v1/examples/) |
 | Test vectors | Yes | [`specs/jdl/v1/test-vectors/`](../../../specs/jdl/v1/test-vectors/) |
+
+## Machine-readable Designer specification — `specs/designer/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/designer/v1/README.md`](../../../specs/designer/v1/README.md) |
+| Natural-language request schema | Yes | [`specs/designer/v1/natural-language-request.schema.json`](../../../specs/designer/v1/natural-language-request.schema.json) |
+| Proposed field schema | Yes | [`specs/designer/v1/proposed-field.schema.json`](../../../specs/designer/v1/proposed-field.schema.json) |
+| Clarification question schema | Yes | [`specs/designer/v1/clarification-question.schema.json`](../../../specs/designer/v1/clarification-question.schema.json) |
+| Unsupported feature schema | Yes | [`specs/designer/v1/unsupported-feature.schema.json`](../../../specs/designer/v1/unsupported-feature.schema.json) |
+| Designer diagnostic schema | Yes | [`specs/designer/v1/designer-diagnostic.schema.json`](../../../specs/designer/v1/designer-diagnostic.schema.json) |
+| Design proposal schema | Yes | [`specs/designer/v1/design-proposal.schema.json`](../../../specs/designer/v1/design-proposal.schema.json) |
+| Designer result schema | Yes | [`specs/designer/v1/designer-result.schema.json`](../../../specs/designer/v1/designer-result.schema.json) |
+| Examples (real, generated) | Yes | [`specs/designer/v1/examples/`](../../../specs/designer/v1/examples/) |
+| Test vectors | Yes | [`specs/designer/v1/test-vectors/`](../../../specs/designer/v1/test-vectors/) |
 
 ## Pre-existing technical reference — `docs/`
 

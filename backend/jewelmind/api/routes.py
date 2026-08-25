@@ -28,6 +28,8 @@ from jewelmind.api.schemas import (
     SpecificationRequest,
     ValidateResponse,
 )
+from jewelmind.designer.schemas import DesignerResult, NaturalLanguageDesignRequest
+from jewelmind.designer.service import DesignerService
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.exporters.filenames import sanitize_filename
 from jewelmind.exporters.integrity import sha256_checksum
@@ -226,6 +228,18 @@ def export_json_route(payload: ExportJsonRequest) -> Response:
         media_type="application/json",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
+
+
+@router.post("/api/designer/interpret", response_model=DesignerResult)
+def designer_interpret_route(request: NaturalLanguageDesignRequest) -> DesignerResult:
+    # Constructed per-request, not cached module-level: get_designer_provider()
+    # re-reads environment configuration every call, which keeps this route
+    # honest about provider availability without requiring a process restart
+    # in dev/test setups that toggle DESIGNER_PROVIDER/ANTHROPIC_API_KEY.
+    from jewelmind.designer.provider import get_designer_provider
+
+    service = DesignerService(provider=get_designer_provider())
+    return service.interpret(request)
 
 
 @router.post("/api/models/specification")

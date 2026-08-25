@@ -60,6 +60,23 @@ has zero dependency on FastAPI or HTTP concerns. This separation is what
 [`022-domain-boundaries.md`](022-domain-boundaries.md) exists to enforce
 and document.
 
+## Designer (natural-language input layer)
+
+As of Sprint 10, `backend/jewelmind/designer/` and
+`frontend/src/components/DesignerPanel.tsx` add a natural-language input
+layer sitting upstream of every other layer in this diagram, with zero
+authority over any of them: a user's Italian- or English-language
+request is turned into a structured `DesignerProposal` (candidate JDL
+fields, unsupported-feature/ambiguity/clarification diagnostics, a
+diff), but that candidate is only ever a proposal — it still passes
+through the exact same `JewelryDefinition.model_validate()` and
+`validate_definition()` (Forge) calls as any manually-edited definition,
+and only an explicit user action (`useProjectStore.applyDesignerProposal()`)
+can write it into `currentDefinition`. Designer never talks to Atlas,
+Alchemist, or Foundry directly, and never generates geometry itself.
+This layer is formalized as **"Designer"** in Sprint 10 — see
+[`12-designer/README.md`](../12-designer/README.md).
+
 ## CadQuery / OpenCascade as the geometry core
 
 All 3D geometry is constructed through CadQuery

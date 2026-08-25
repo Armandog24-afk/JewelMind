@@ -494,3 +494,56 @@ design-editor fields (exact inner diameter, stone depth, prong/basket
 dimensions, preview tessellation tolerances) that refine an
 already-made design decision rather than represent a first choice. See
 [`11-studio/256-parameter-editor-model.md`](../11-studio/256-parameter-editor-model.md).
+
+## Designer terms (Sprint 10)
+
+> Authoritative source for every term in this section:
+> [`12-designer/`](../12-designer/README.md) (Sprint 10).
+
+**Designer** — the first controlled natural-language design layer: a
+user describes a design or a change to one, in Italian or English, and
+receives a structured, reviewable `DesignerProposal`. Designer sits
+upstream of every existing layer and is authoritative over none of
+them — it never bypasses JDL schema validation or Forge evaluation and
+never writes to the authoritative design state itself. See
+[`12-designer/README.md`](../12-designer/README.md).
+
+**Design Proposal** — the structured, reviewable result of one
+Designer interpretation (`DesignerProposal` in
+`backend/jewelmind/designer/schemas.py`): proposed fields, unsupported
+features, clarification questions, diagnostics, a candidate JDL, a
+Forge evaluation, a diff, and an overall proposal status. Never applied
+to `currentDefinition` automatically — only an explicit user action
+does that. See
+[`12-designer/294-design-proposal-model.md`](../12-designer/294-design-proposal-model.md).
+
+**Field Provenance** — the required, non-optional tag on every
+`ProposedField` recording where its value came from (e.g.
+`AI_INTERPRETATION`); part of the 8-value `FieldProvenance` enum. See
+[`12-designer/303-field-provenance-model.md`](../12-designer/303-field-provenance-model.md).
+
+**Confidence Category** — a `ProposedField`'s confidence in its own
+proposed value (`EXACT`, `NORMALIZED`, `INFERRED`, `DEFAULTED`,
+`AMBIGUOUS`, `UNSUPPORTED`), derived entirely by JewelMind's own
+deterministic code from provenance/normalization facts — never a raw
+score read from an AI provider. See
+[`12-designer/302-confidence-model.md`](../12-designer/302-confidence-model.md).
+
+**Ambiguity Level** — how much a `ClarificationQuestion` matters to
+design intent (`LOW_IMPACT_AMBIGUITY`, `HIGH_IMPACT_AMBIGUITY`,
+`UNSUPPORTED_AMBIGUITY`) — a bare, recognized-but-incomplete reference
+like "gold"/"oro" always triggers clarification rather than a guessed
+value. See
+[`12-designer/299-ambiguity-model.md`](../12-designer/299-ambiguity-model.md).
+
+**Unsupported Feature** — a requested concept that has no mapping in
+the current JDL schema or geometry (e.g. a halo setting, an oval
+stone), surfaced explicitly on the proposal rather than approximated as
+supported or silently dropped. See
+[`12-designer/301-unsupported-request-handling.md`](../12-designer/301-unsupported-request-handling.md).
+
+**Clarification Question** — a question Designer must ask the user
+before a request can be resolved into a proposed field, because the
+request is ambiguous or under-specified in a way that materially
+affects design intent. See
+[`12-designer/300-clarification-policy.md`](../12-designer/300-clarification-policy.md).

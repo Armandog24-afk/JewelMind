@@ -1,0 +1,68 @@
+{
+  "description": "Real normalizer.normalize_enum_token()/service.py outputs for supported synonym text.",
+  "vectors": [
+    {
+      "inputText": "oro giallo",
+      "field": "material.metal",
+      "rawValue": "oro giallo",
+      "canonicalValue": "yellow_gold_18k",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "yellow gold",
+      "field": "material.metal",
+      "rawValue": "yellow gold",
+      "canonicalValue": "yellow_gold_18k",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "oro rosa",
+      "field": "material.metal",
+      "rawValue": "oro rosa",
+      "canonicalValue": "rose_gold_18k",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "platino",
+      "field": "material.metal",
+      "rawValue": "platino",
+      "canonicalValue": "platinum",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "argento",
+      "field": "material.metal",
+      "rawValue": "argento",
+      "canonicalValue": "silver",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "sei griffe",
+      "field": "setting.prongCount",
+      "rawValue": "sei",
+      "canonicalValue": 6,
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "quattro griffe",
+      "field": "setting.prongCount",
+      "rawValue": "quattro",
+      "canonicalValue": 4,
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "fascia piatta",
+      "field": "band.profile",
+      "rawValue": "fascia piatta",
+      "canonicalValue": "flat",
+      "confidence": "NORMALIZED"
+    },
+    {
+      "inputText": "round stone",
+      "field": "stone.shape",
+      "rawValue": "round",
+      "canonicalValue": "round",
+      "confidence": "EXACT"
+    }
+  ]
+}

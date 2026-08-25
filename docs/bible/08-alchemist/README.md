@@ -66,6 +66,10 @@ Alchemist does **not** own jewelry-domain thresholds (Forge's job), CAD-kernel a
 
 [`11-studio/`](../11-studio/README.md) (Sprint 9) is the human-facing workflow layer around Alchemist's compilation pipeline — its `computeModelState()`/`ModelStatusBadge` name the same generation lifecycle this Sprint's `170-compilation-state-machine.md` already modeled conceptually, now given a real, visible, 7-state frontend implementation. Studio orchestrates when the user *sees* a compilation result; it never orchestrates the compilation itself.
 
+## Relationship to Sprint 10
+
+[`12-designer/`](../12-designer/README.md) (Sprint 10) never touches Alchemist orchestration directly — `backend/jewelmind/designer/` has no import of, or call into, `services/model_service.py`. An accepted Designer proposal only ever updates design state (`currentDefinition`, via `useProjectStore.applyDesignerProposal()`) the same way a manual parameter edit does; Alchemist's compilation pipeline reads that state on the next `generate()` call exactly as before, with no awareness that a particular edit originated from natural language rather than a form field. See [`12-designer/320-current-studio-integration.md`](../12-designer/320-current-studio-integration.md).
+
 ## Validation of this sprint
 
 See [`SPRINT-6-VALIDATION-REPORT.md`](SPRINT-6-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/designer/v1/clarification-question.schema.json",
+  "title": "Designer Clarification Question v1",
+  "description": "A single, structured clarification question — never open-ended chat when a constrained choice set exists. See docs/bible/12-designer/300-clarification-policy.md and 299-ambiguity-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["question", "ambiguityLevel"],
+  "properties": {
+    "field": { "type": ["string", "null"] },
+    "question": { "type": "string", "minLength": 1 },
+    "options": { "type": "array", "items": { "type": "string" } },
+    "ambiguityLevel": {
+      "enum": ["LOW_IMPACT_AMBIGUITY", "HIGH_IMPACT_AMBIGUITY", "UNSUPPORTED_AMBIGUITY"]
+    }
+  }
+}

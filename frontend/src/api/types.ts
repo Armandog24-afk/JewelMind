@@ -1,3 +1,4 @@
+import type { JewelryDefinition } from '@shared/types/jewelry-definition'
 import type { ValidationResult } from '@shared/validation/rules'
 
 export interface HealthResponse {
@@ -63,6 +64,113 @@ export interface ModelMetadataResponse {
   boundingBoxMm: Record<'xmin' | 'xmax' | 'ymin' | 'ymax' | 'zmin' | 'zmax', number>
   warnings: string[]
   validation: ValidationResult[]
+}
+
+// --- Designer v1 (docs/bible/12-designer/) -----------------------------
+
+export type FieldProvenance =
+  | 'USER_EXPLICIT'
+  | 'USER_CONTEXT'
+  | 'CURRENT_DESIGN'
+  | 'SYSTEM_DEFAULT'
+  | 'DETERMINISTIC_DERIVATION'
+  | 'AI_INTERPRETATION'
+  | 'CLARIFICATION_RESPONSE'
+  | 'UNRESOLVED'
+
+export type ConfidenceCategory = 'EXACT' | 'NORMALIZED' | 'INFERRED' | 'DEFAULTED' | 'AMBIGUOUS' | 'UNSUPPORTED'
+
+export type AmbiguityLevel = 'LOW_IMPACT_AMBIGUITY' | 'HIGH_IMPACT_AMBIGUITY' | 'UNSUPPORTED_AMBIGUITY'
+
+export type ProposalStatus =
+  | 'COMPLETE'
+  | 'NEEDS_CLARIFICATION'
+  | 'PARTIALLY_SUPPORTED'
+  | 'UNSUPPORTED'
+  | 'INVALID'
+  | 'READY_FOR_REVIEW'
+  | 'ACCEPTED'
+  | 'REJECTED'
+
+export type DesignerInteractionMode = 'CREATE' | 'MODIFY'
+
+export interface NaturalLanguageDesignRequest {
+  requestId: string
+  text: string
+  locale?: 'it' | 'en' | null
+  interactionMode: DesignerInteractionMode
+  currentJDL?: JewelryDefinition | null
+}
+
+export interface ProposedField {
+  path: string
+  value: string | number | boolean
+  provenance: FieldProvenance
+  confidence: ConfidenceCategory
+  sourceText: string | null
+  previousValue: string | number | boolean | null
+}
+
+export interface ClarificationQuestion {
+  field: string | null
+  question: string
+  options: string[]
+  ambiguityLevel: AmbiguityLevel
+}
+
+export interface UnsupportedFeature {
+  feature: string
+  sourceText: string
+  reason: string
+  currentCapability: string | null
+  futureRoadmapReference: string | null
+  blocking: boolean
+  suggestedSupportedAlternative: string | null
+}
+
+export interface DesignerDiagnostic {
+  code:
+    | 'DESIGNER_UNSUPPORTED_FEATURE'
+    | 'DESIGNER_AMBIGUOUS_REQUEST'
+    | 'DESIGNER_CLARIFICATION_REQUIRED'
+    | 'DESIGNER_PROPOSAL_INVALID'
+    | 'DESIGNER_CAPABILITY_MISMATCH'
+  severity: 'info' | 'warning' | 'error'
+  message: string
+  field: string | null
+}
+
+export interface FieldDiff {
+  path: string
+  previousValue: string | number | boolean | null
+  proposedValue: string | number | boolean | null
+  changed: boolean
+}
+
+export interface ForgeEvaluationSummary {
+  results: ValidationResult[]
+  hasErrors: boolean
+}
+
+export interface DesignerProposal {
+  proposalId: string
+  sourceText: string
+  interactionMode: DesignerInteractionMode
+  unresolvedIntent: string[]
+  unsupportedFeatures: UnsupportedFeature[]
+  proposedFields: ProposedField[]
+  clarificationQuestions: ClarificationQuestion[]
+  diagnostics: DesignerDiagnostic[]
+  candidateJDL: JewelryDefinition | null
+  validation: ValidationResult[]
+  forgeEvaluation: ForgeEvaluationSummary | null
+  diff: FieldDiff[]
+  proposalStatus: ProposalStatus
+}
+
+export interface DesignerResult {
+  requestId: string
+  proposal: DesignerProposal
 }
 
 export interface ApiErrorBody {
