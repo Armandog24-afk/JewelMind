@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/shank/v1/section-profile.schema.json",
+  "title": "ShankSectionProfile",
+  "description": "The real cross-section produced by backend/jewelmind/geometry/shank/profile.py::build_profile() for one angular position around the shank. Not a JDL-facing structure — the JDL field is the single enum string band.profile; this schema documents the geometric contract that string resolves to. See docs/bible/19-shank/545-section-profile-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileType", "innerRadiusMm", "outerRadiusMm", "halfWidthMm"],
+  "properties": {
+    "profileType": {
+      "type": "string",
+      "enum": ["flat", "comfort_fit"],
+      "description": "KNIFE_EDGE and any other profile type is PLANNED, not implemented in v1."
+    },
+    "innerRadiusMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Minimum radial distance from the ring axis. For comfort_fit, this is the value at the profile's longitudinal center — the profile only ever flares outward from here, never inward, so the requested finger opening is never reduced."
+    },
+    "outerRadiusMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Maximum radial distance from the ring axis, at this section's resolved thickness."
+    },
+    "halfWidthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Half of this section's resolved width, in the shank's local axial/width direction."
+    },
+    "comfortFlareMm": {
+      "type": "number",
+      "const": 0.3,
+      "description": "Fixed constant (COMFORT_FLARE_MM in profile.py), only meaningful when profileType=comfort_fit. Not user-configurable in v1."
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "description": "Thickness-only taper: full thickness at the head, 50% at the bottom.",
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5
+    }
+  },
+  "generatedMetadata": {
+    "profile": "comfort_fit",
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "filletApplied": false,
+    "filletSkippedReason": "Outer-rim fillet is not yet implemented for a tapered shank (v1 limitation).",
+    "variation": "TAPERED",
+    "widthTaperMode": "NONE",
+    "widthTaperBottomRatio": 1.0,
+    "thicknessTaperMode": "TOWARD_BOTTOM",
+    "thicknessTaperBottomRatio": 0.5,
+    "sectionCount": 48,
+    "widthSamplesMm": {
+      "headMm": 2.4,
+      "bottomMm": 2.4
+    },
+    "thicknessSamplesMm": {
+      "headMm": 1.8000000000000007,
+      "bottomMm": 0.9000000000000004
+    },
+    "connectionInterface": {
+      "topZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "headCenterRadiusMm": 3.085
+    }
+  },
+  "volumeMm3": 181.689556,
+  "boundingBox": {
+    "minMm": [
+      -10.2500001,
+      -1.2000001000000002,
+      -9.8000001
+    ],
+    "maxMm": [
+      10.2500001,
+      1.2000001000000007,
+      10.7000001
+    ]
+  }
+}

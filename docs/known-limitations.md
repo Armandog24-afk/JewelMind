@@ -30,6 +30,14 @@ to every limitation below and to the design as a whole.
   model's `warnings` list (and in the technical specification export).
   Comfort-fit's inner arc does not use a fillet and has no such fallback
   path.
+- **Tapered bands never apply the outer-rim fillet.** When a real width
+  and/or thickness taper is requested (`band.widthTaper`/
+  `band.thicknessTaper`, Sprint 17), the shank is built as a
+  multi-section loft rather than a solid of revolution, so there is no
+  single "circle at radius X" to select for a fillet. This is a real v1
+  limitation, always recorded (`filletApplied: false`, an explicit
+  `filletSkippedReason`) — see
+  `docs/bible/19-shank/545-section-profile-contract.md`.
 - **No manufacturing-grade tolerancing.** Wall thicknesses, minimum
   feature sizes, and draft angles are not validated against any specific
   casting house's or printer's process capabilities beyond the conservative

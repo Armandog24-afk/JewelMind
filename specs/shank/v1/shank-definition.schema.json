@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/shank/v1/shank-definition.schema.json",
+  "title": "ShankDefinition",
+  "description": "Two real, distinct shapes: the JDL-facing 'band' input (backend/jewelmind/domain/schema.py::BandSpec, unchanged public name — see docs/bible/19-shank/556-current-band-migration.md) and the generatedMetadata a real build_shank() call actually returns on the resulting GeneratedComponent, which differs structurally between the UNIFORM and TAPERED construction paths (backend/jewelmind/geometry/shank/builder.py). This is documentation of an existing runtime contract, not a request/validation schema — the authoritative validator remains BandSpec/JewelryDefinition. See docs/bible/19-shank/542-shank-domain-model.md.",
+  "$defs": {
+    "bandTaper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "bottomRatio"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"], "default": "NONE" },
+        "bottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 1.0 }
+      },
+      "description": "Inlined copy of taper-definition.schema.json's shape (this codebase's specs convention avoids cross-file $ref — see specs/geometry-inspection/v2/README.md)."
+    },
+    "connectionInterface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topZMm", "embedMm", "headCenterRadiusMm"],
+      "properties": {
+        "topZMm": { "type": "number" },
+        "embedMm": { "type": "number" },
+        "headCenterRadiusMm": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "description": "Inlined copy of connection-interface.schema.json's shape."
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["band"],
+  "properties": {
+    "band": {
+      "type": "object",
+      "description": "The JDL-facing input. Mirrors BandSpec exactly.",
+      "additionalProperties": false,
+      "required": ["width", "thickness", "profile", "widthTaper", "thicknessTaper"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0, "default": 2.4 },
+        "thickness": { "type": "number", "exclusiveMinimum": 0, "default": 1.8 },
+        "profile": { "type": "string", "enum": ["flat", "comfort_fit"], "default": "comfort_fit" },
+        "widthTaper": { "$ref": "#/$defs/bandTaper" },
+        "thicknessTaper": { "$ref": "#/$defs/bandTaper" }
+      }
+    },
+    "generatedMetadata": {
+      "description": "The metadata dict on the GeneratedComponent named 'band' — shape depends on variation.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "UniformShankMetadata",
+          "additionalProperties": false,
+          "required": [
+            "profile", "innerRadiusMm", "outerRadiusMm", "filletApplied",
+            "variation", "widthTaperMode", "thicknessTaperMode", "sectionCount",
+            "connectionInterface"
+          ],
+          "properties": {
+            "profile": { "type": "string", "enum": ["flat", "comfort_fit"] },
+            "innerRadiusMm": { "type": "number" },
+            "outerRadiusMm": { "type": "number" },
+            "filletApplied": { "type": "boolean" },
+            "variation": { "const": "UNIFORM" },
+            "widthTaperMode": { "const": "NONE" },
+            "thicknessTaperMode": { "const": "NONE" },
+            "sectionCount": { "const": 1 },
+            "connectionInterface": { "$ref": "#/$defs/connectionInterface" }
+          }
+        },
+        {
+          "type": "object",
+          "title": "TaperedShankMetadata",
+          "additionalProperties": false,
+          "required": [
+            "profile", "innerRadiusMm", "outerRadiusMm", "filletApplied",
+            "filletSkippedReason", "variation", "widthTaperMode",
+            "widthTaperBottomRatio", "thicknessTaperMode",
+            "thicknessTaperBottomRatio", "sectionCount",
+            "widthSamplesMm", "thicknessSamplesMm", "connectionInterface"
+          ],
+          "properties": {
+            "profile": { "type": "string", "enum": ["flat", "comfort_fit"] },
+            "innerRadiusMm": { "type": "number" },
+            "outerRadiusMm": { "type": "number" },
+            "filletApplied": { "const": false },
+            "filletSkippedReason": { "type": "string" },
+            "variation": { "const": "TAPERED" },
+            "widthTaperMode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"] },
+            "widthTaperBottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "thicknessTaperMode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"] },
+            "thicknessTaperBottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "sectionCount": { "const": 48 },
+            "widthSamplesMm": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["headMm", "bottomMm"],
+              "properties": { "headMm": { "type": "number" }, "bottomMm": { "type": "number" } },
+              "description": "CONSTRUCTION_PARAMETER, not independently re-measured geometry — computed from the same taper function used to build the loft. See docs/bible/19-shank/553-shank-inspection-contract.md."
+            },
+            "thicknessSamplesMm": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["headMm", "bottomMm"],
+              "properties": { "headMm": { "type": "number" }, "bottomMm": { "type": "number" } },
+              "description": "CONSTRUCTION_PARAMETER — see widthSamplesMm."
+            },
+            "connectionInterface": { "$ref": "#/$defs/connectionInterface" }
+          }
+        }
+      ]
+    },
+    "description": { "type": "string" },
+    "volumeMm3": { "type": "number", "exclusiveMinimum": 0 },
+    "boundingBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minMm", "maxMm"],
+      "properties": {
+        "minMm": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+        "maxMm": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 }
+      }
+    }
+  }
+}

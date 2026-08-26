@@ -4,7 +4,7 @@ title: "Appendix: Jewelry Domain Status Matrix"
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-07-31
+last_updated: 2026-08-26
 source_of_truth: true
 depends_on: []
 related_documents:
@@ -21,12 +21,14 @@ Sprint 2 domain model, in one place.
 
 ## CURRENT
 
-Ring, Solitaire style, Band (flat + comfort-fit profiles), Center stone
-reference (round only), Prong setting (4 or 6 prongs), Basket support
-(hollow cylindrical wall), Material metadata (5 metals, cosmetic),
-Manufacturing context (2 methods, 1 validation rule), Preview
-configuration, Validation engine (16 rules), Generated model identity
-(hash-based), STEP/STL/JSON/specification export, EU/French ring sizing.
+Ring, Solitaire style, Band (flat + comfort-fit profiles), Band width
+and/or thickness taper (linear, head-anchored, `TOWARD_BOTTOM` only —
+Sprint 17, [`19-shank/`](../19-shank/README.md)), Center stone reference
+(round only), Prong setting (4 or 6 prongs), Basket support (hollow
+cylindrical wall), Material metadata (5 metals, cosmetic), Manufacturing
+context (2 methods, 1 validation rule), Preview configuration,
+Validation engine (16 rules), Generated model identity (hash-based),
+STEP/STL/JSON/specification export, EU/French ring sizing.
 
 ## PARTIAL
 
@@ -47,10 +49,12 @@ Halo arrangement (setting types —
 Emerald, Cushion, Pear, Marquise, Radiant, Asscher, Heart (stone shapes —
 [`046`](../04-jewelry-domain/046-stone-domain.md)); Claw shape, double
 claw, taper, inclination, tip geometry, seat/bearing cut (prong
-refinements — [`048`](../04-jewelry-domain/048-prong-domain.md)); Band
-taper, shoulder width, outer contour, edge radius, split shank, cathedral
-rise (band refinements —
-[`045`](../04-jewelry-domain/045-band-domain.md)); Gallery, Bridge,
+refinements — [`048`](../04-jewelry-domain/048-prong-domain.md));
+Non-linear/`TOWARD_HEAD` band taper, tapered-shank outer-rim fillet,
+shoulder width, outer contour, edge radius, split shank, cathedral rise,
+knife-edge profile, Euro shank, twisted shank (band/shank refinements —
+[`045`](../04-jewelry-domain/045-band-domain.md),
+[`19-shank/README.md`](../19-shank/README.md)); Gallery, Bridge,
 Shoulders (ring anatomy —
 [`043`](../04-jewelry-domain/043-ring-anatomy.md)); Material density,
 estimated weight, alloy variation, casting shrinkage context, structural

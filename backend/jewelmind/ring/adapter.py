@@ -39,6 +39,8 @@ def ring_definition_from_jdl(definition: JewelryDefinition) -> RingDefinition:
             profile=definition.band.profile,
             widthMm=definition.band.width,
             thicknessMm=definition.band.thickness,
+            widthTaper=definition.band.widthTaper.model_copy(),
+            thicknessTaper=definition.band.thicknessTaper.model_copy(),
         ),
         shoulders=ShoulderDefinition(),
         head=RingHeadDefinition(basketHeightMm=definition.setting.basketHeight),

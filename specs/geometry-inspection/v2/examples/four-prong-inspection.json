@@ -1,7 +1,7 @@
 {
   "inspectionId": "inspection-7cf9a584-fce1-492a-b6a9-d328ea37f105",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "fc385afc962b175d",
+  "definitionHash": "1af3aa14ea3537e0",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
   "startedAt": "2026-08-26T07:56:49.598810+00:00",
@@ -42,7 +42,16 @@
         "profile": "comfort_fit",
         "innerRadiusMm": 8.9,
         "outerRadiusMm": 10.700000000000001,
-        "filletApplied": true
+        "filletApplied": true,
+        "variation": "UNIFORM",
+        "widthTaperMode": "NONE",
+        "thicknessTaperMode": "NONE",
+        "sectionCount": 1,
+        "connectionInterface": {
+          "topZMm": 10.700000000000001,
+          "embedMm": 0.4,
+          "headCenterRadiusMm": 3.085
+        }
       },
       "diagnostics": []
     },

@@ -1,0 +1,18 @@
+{
+  "vectors": [
+    {
+      "profile": "flat",
+      "innerRadiusMm": 8.0,
+      "outerRadiusMm": 9.8,
+      "halfWidthMm": 1.2,
+      "note": "Rectangular cross-section, 4 vertices."
+    },
+    {
+      "profile": "comfort_fit",
+      "innerRadiusMm": 8.0,
+      "outerRadiusMm": 9.8,
+      "halfWidthMm": 1.2,
+      "note": "Inner edge flares outward by COMFORT_FLARE_MM=0.3mm toward the edges; minimum inner radius stays exactly innerRadiusMm at the center."
+    }
+  ]
+}

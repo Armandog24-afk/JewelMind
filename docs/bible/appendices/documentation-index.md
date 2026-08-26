@@ -642,6 +642,32 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A107 | Appendix: Ring Family Catalog | accepted | current | [`appendices/ring-family-catalog.md`](ring-family-catalog.md) |
 | JM-BIBLE-A108 | Appendix: Shared Jewelry System Catalog | accepted | current | [`appendices/shared-jewelry-system-catalog.md`](shared-jewelry-system-catalog.md) |
 | JM-BIBLE-A109 | Appendix: Ring Architecture Test Matrix | accepted | current | [`appendices/ring-architecture-test-matrix.md`](ring-architecture-test-matrix.md) |
+| JM-BIBLE-SHANK-README | Band & Shank System v1 — Index | accepted | current | [`19-shank/README.md`](../19-shank/README.md) |
+| JM-BIBLE-540 | Shank Governance | accepted | current | [`19-shank/540-shank-governance.md`](../19-shank/540-shank-governance.md) |
+| JM-BIBLE-541 | Shank Architecture Overview | accepted | current | [`19-shank/541-shank-architecture-overview.md`](../19-shank/541-shank-architecture-overview.md) |
+| JM-BIBLE-542 | Shank Domain Model | accepted | current | [`19-shank/542-shank-domain-model.md`](../19-shank/542-shank-domain-model.md) |
+| JM-BIBLE-543 | Shank Coordinate Model | accepted | current | [`19-shank/543-shank-coordinate-model.md`](../19-shank/543-shank-coordinate-model.md) |
+| JM-BIBLE-544 | Shank Path Contract | accepted | current | [`19-shank/544-shank-path-contract.md`](../19-shank/544-shank-path-contract.md) |
+| JM-BIBLE-545 | Section Profile Contract | accepted | current | [`19-shank/545-section-profile-contract.md`](../19-shank/545-section-profile-contract.md) |
+| JM-BIBLE-546 | Width Function Model | accepted | current | [`19-shank/546-width-function-model.md`](../19-shank/546-width-function-model.md) |
+| JM-BIBLE-547 | Thickness Function Model | accepted | current | [`19-shank/547-thickness-function-model.md`](../19-shank/547-thickness-function-model.md) |
+| JM-BIBLE-548 | Taper Model | accepted | current | [`19-shank/548-taper-model.md`](../19-shank/548-taper-model.md) |
+| JM-BIBLE-549 | Shoulder Transition Model | accepted | current | [`19-shank/549-shoulder-transition-model.md`](../19-shank/549-shoulder-transition-model.md) |
+| JM-BIBLE-550 | Head Connection Interface | accepted | current | [`19-shank/550-head-connection-interface.md`](../19-shank/550-head-connection-interface.md) |
+| JM-BIBLE-551 | Shank Generation Pipeline | accepted | current | [`19-shank/551-shank-generation-pipeline.md`](../19-shank/551-shank-generation-pipeline.md) |
+| JM-BIBLE-552 | Shank Continuity Model | accepted | current | [`19-shank/552-shank-continuity-model.md`](../19-shank/552-shank-continuity-model.md) |
+| JM-BIBLE-553 | Shank Inspection Contract | accepted | current | [`19-shank/553-shank-inspection-contract.md`](../19-shank/553-shank-inspection-contract.md) |
+| JM-BIBLE-554 | Shank Forge Boundary | accepted | current | [`19-shank/554-shank-forge-boundary.md`](../19-shank/554-shank-forge-boundary.md) |
+| JM-BIBLE-555 | Shank Golden Strategy | accepted | current | [`19-shank/555-shank-golden-strategy.md`](../19-shank/555-shank-golden-strategy.md) |
+| JM-BIBLE-556 | Current Band Migration | accepted | current | [`19-shank/556-current-band-migration.md`](../19-shank/556-current-band-migration.md) |
+| JM-BIBLE-557 | Shank Capability Model | accepted | current | [`19-shank/557-shank-capability-model.md`](../19-shank/557-shank-capability-model.md) |
+| JM-BIBLE-558 | Current Code Mapping and Gaps | accepted | current | [`19-shank/558-current-code-mapping-and-gaps.md`](../19-shank/558-current-code-mapping-and-gaps.md) |
+| JM-BIBLE-559 | Open Shank Questions | accepted | current | [`19-shank/559-open-shank-questions.md`](../19-shank/559-open-shank-questions.md) |
+| JM-BIBLE-SPRINT17-REPORT | Sprint 17 Validation Report — Band & Shank System v1 | accepted | current | [`19-shank/SPRINT-17-VALIDATION-REPORT.md`](../19-shank/SPRINT-17-VALIDATION-REPORT.md) |
+| JM-BIBLE-A110 | Appendix: Shank Profile Catalog | accepted | current | [`appendices/shank-profile-catalog.md`](shank-profile-catalog.md) |
+| JM-BIBLE-A111 | Appendix: Shank Capability Catalog | accepted | current | [`appendices/shank-capability-catalog.md`](shank-capability-catalog.md) |
+| JM-BIBLE-A112 | Appendix: Shank Inspection Fact Catalog | accepted | partial | [`appendices/shank-inspection-fact-catalog.md`](shank-inspection-fact-catalog.md) |
+| JM-BIBLE-A113 | Appendix: Shank Test Matrix | accepted | current | [`appendices/shank-test-matrix.md`](shank-test-matrix.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 

@@ -52,7 +52,15 @@
       "band": {
         "width": 2.4,
         "thickness": 1.8,
-        "profile": "comfort_fit"
+        "profile": "comfort_fit",
+        "widthTaper": {
+          "mode": "NONE",
+          "bottomRatio": 1.0
+        },
+        "thicknessTaper": {
+          "mode": "NONE",
+          "bottomRatio": 1.0
+        }
       },
       "stone": {
         "shape": "round",
@@ -141,6 +149,30 @@
         "path": "band.profile",
         "previousValue": null,
         "proposedValue": "comfort_fit",
+        "changed": false
+      },
+      {
+        "path": "band.widthTaper.mode",
+        "previousValue": null,
+        "proposedValue": "NONE",
+        "changed": false
+      },
+      {
+        "path": "band.widthTaper.bottomRatio",
+        "previousValue": null,
+        "proposedValue": 1.0,
+        "changed": false
+      },
+      {
+        "path": "band.thicknessTaper.mode",
+        "previousValue": null,
+        "proposedValue": "NONE",
+        "changed": false
+      },
+      {
+        "path": "band.thicknessTaper.bottomRatio",
+        "previousValue": null,
+        "proposedValue": 1.0,
         "changed": false
       },
       {

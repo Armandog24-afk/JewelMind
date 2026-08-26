@@ -6,6 +6,26 @@
   "type": "object",
   "additionalProperties": false,
   "required": [],
+  "$defs": {
+    "bandTaper": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "MINOR, additive Sprint 17 field (see docs/bible/19-shank/README.md and docs/bible/05-jdl/081-schema-versioning-and-migrations.md). mode=\"NONE\" (the default) is bit-identical to pre-Sprint-17 geometry; bottomRatio is ignored when mode=\"NONE\".",
+      "properties": {
+        "mode": {
+          "enum": ["NONE", "TOWARD_BOTTOM"],
+          "default": "NONE"
+        },
+        "bottomRatio": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "default": 1.0,
+          "description": "Fraction of the base (head) dimension retained at the bottom of the ring when mode=\"TOWARD_BOTTOM\"."
+        }
+      }
+    }
+  },
   "properties": {
     "schemaVersion": {
       "const": "0.1.0",
@@ -78,7 +98,9 @@
         "profile": {
           "enum": ["comfort_fit", "flat"],
           "default": "comfort_fit"
-        }
+        },
+        "widthTaper": { "$ref": "#/$defs/bandTaper" },
+        "thicknessTaper": { "$ref": "#/$defs/bandTaper" }
       }
     },
     "stone": {

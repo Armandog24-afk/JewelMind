@@ -1,0 +1,22 @@
+{
+  "vectors": [
+    {
+      "description": "bottomRatio must be > 0",
+      "field": "band.widthTaper.bottomRatio",
+      "value": 0.0,
+      "expectedError": "greater than 0"
+    },
+    {
+      "description": "bottomRatio must be <= 1",
+      "field": "band.widthTaper.bottomRatio",
+      "value": 1.5,
+      "expectedError": "less than or equal to 1"
+    },
+    {
+      "description": "mode must be a known enum value",
+      "field": "band.widthTaper.mode",
+      "value": "TOWARD_HEAD",
+      "expectedError": "not a valid enumeration member"
+    }
+  ]
+}

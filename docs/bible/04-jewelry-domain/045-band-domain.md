@@ -19,10 +19,18 @@ professional_validation: preliminary
 
 ## Identity
 
-The band is the ring's metal shank: a single closed solid of revolution
-(`backend/jewelmind/geometry/components/band.py`), revolved around the
-global Y axis per the coordinate convention in
-`docs/geometry-conventions.md`.
+The band is the ring's metal shank: a single closed solid, built by
+`backend/jewelmind/geometry/shank/build_shank()` (Sprint 17; the older
+`geometry/components/band.py` is now a thin re-export of that
+function). A **uniform** band (no taper requested) is a solid of
+revolution around the global Y axis, byte-identical to the
+pre-Sprint-17 construction, per the coordinate convention in
+`docs/geometry-conventions.md`. A **tapered** band (Sprint 17; see
+[`../19-shank/README.md`](../19-shank/README.md)) is a real,
+deterministic 48-section loft instead — this document describes the
+domain-level parameters and invariants for both; the full geometry
+subsystem, its governance, and machine-readable contract live in
+[`19-shank/`](../19-shank/README.md) and are not restated here.
 
 ## Parameters currently exposed (direct inputs)
 
@@ -32,6 +40,8 @@ global Y axis per the coordinate convention in
 | Width | `band.width` | float, mm | Extent along the finger axis. |
 | Thickness | `band.thickness` | float, mm | Radial metal thickness. |
 | Profile | `band.profile` | `"flat"` \| `"comfort_fit"` | Determines cross-section construction. |
+| Width taper (Sprint 17) | `band.widthTaper` | `{mode: "NONE"\|"TOWARD_BOTTOM", bottomRatio: float}` | Default `mode: "NONE"` (no change from pre-Sprint-17 behavior). See [`19-shank/548-taper-model.md`](../19-shank/548-taper-model.md). |
+| Thickness taper (Sprint 17) | `band.thicknessTaper` | `{mode: "NONE"\|"TOWARD_BOTTOM", bottomRatio: float}` | Default `mode: "NONE"`. Same model as width taper, applied independently. |
 
 Ring size (`ring.size`) is metadata *about* the inner diameter (a
 sizing-system label), not a band geometry input by itself — see
@@ -81,8 +91,16 @@ for everything built above it (stone, setting, basket). Full convention:
 ## Geometric output
 
 One `GeneratedComponent` named `"band"`, with `volume_mm3` and a
-`BoundingBox`. Metadata recorded: `profile`, `innerRadiusMm`,
-`outerRadiusMm`, `filletApplied` (`geometry/components/band.py`).
+`BoundingBox`. Metadata differs by variation (see
+[`19-shank/542-shank-domain-model.md`](../19-shank/542-shank-domain-model.md)
+for the full contract): a uniform band records `profile`,
+`innerRadiusMm`, `outerRadiusMm`, `filletApplied`, `variation:
+"UNIFORM"`; a tapered band additionally records
+`filletSkippedReason` (the fillet is not applied to a tapered outer
+rim — a real v1 limitation), `widthTaperMode`/`thicknessTaperMode`,
+and `widthSamplesMm`/`thicknessSamplesMm` — the latter two are
+CONSTRUCTION_PARAMETER (computed from the same taper function used to
+build the geometry), never independently re-measured.
 
 ## Dependency on ring dimensions
 

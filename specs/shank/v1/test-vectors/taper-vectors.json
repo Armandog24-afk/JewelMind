@@ -1,0 +1,144 @@
+{
+  "vectors": [
+    {
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.0,
+      "taperRatio": 1.0,
+      "angleDeg": -90.0
+    },
+    {
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.25,
+      "taperRatio": 1.0,
+      "angleDeg": 0.0
+    },
+    {
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.5,
+      "taperRatio": 1.0,
+      "angleDeg": 90.0
+    },
+    {
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.75,
+      "taperRatio": 1.0,
+      "angleDeg": 180.0
+    },
+    {
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.99,
+      "taperRatio": 1.0,
+      "angleDeg": 266.4
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.0,
+      "taperRatio": 1.0,
+      "angleDeg": -90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.25,
+      "taperRatio": 0.8,
+      "angleDeg": 0.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.5,
+      "taperRatio": 0.6,
+      "angleDeg": 90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.75,
+      "taperRatio": 0.8,
+      "angleDeg": 180.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.99,
+      "taperRatio": 0.992,
+      "angleDeg": 266.4
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5,
+      "u": 0.0,
+      "taperRatio": 1.0,
+      "angleDeg": -90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5,
+      "u": 0.25,
+      "taperRatio": 0.75,
+      "angleDeg": 0.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5,
+      "u": 0.5,
+      "taperRatio": 0.5,
+      "angleDeg": 90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5,
+      "u": 0.75,
+      "taperRatio": 0.75,
+      "angleDeg": 180.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.5,
+      "u": 0.99,
+      "taperRatio": 0.99,
+      "angleDeg": 266.4
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 1.0,
+      "u": 0.0,
+      "taperRatio": 1.0,
+      "angleDeg": -90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 1.0,
+      "u": 0.25,
+      "taperRatio": 1.0,
+      "angleDeg": 0.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 1.0,
+      "u": 0.5,
+      "taperRatio": 1.0,
+      "angleDeg": 90.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 1.0,
+      "u": 0.75,
+      "taperRatio": 1.0,
+      "angleDeg": 180.0
+    },
+    {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 1.0,
+      "u": 0.99,
+      "taperRatio": 1.0,
+      "angleDeg": 266.4
+    }
+  ]
+}

@@ -54,6 +54,8 @@ This is also the exact default definition (see `default_definition()` /
 | `band.width` | number, mm | Band extent along the finger axis. |
 | `band.thickness` | number, mm | Band extent radially (metal thickness). |
 | `band.profile` | `"comfort_fit"` \| `"flat"` | See `docs/geometry-conventions.md`. |
+| `band.widthTaper` | `{mode, bottomRatio}` | Optional width taper toward the bottom (Sprint 17). Default `mode: "NONE"`. See `docs/bible/19-shank/README.md`. |
+| `band.thicknessTaper` | `{mode, bottomRatio}` | Optional thickness taper toward the bottom (Sprint 17). Default `mode: "NONE"`. |
 | `stone.shape` | `"round"` | Only `round` is supported in this milestone. |
 | `stone.diameter` | number, mm | Girdle diameter of the stone reference. |
 | `stone.depth` | number, mm | Total culet-to-table height of the stone reference. |

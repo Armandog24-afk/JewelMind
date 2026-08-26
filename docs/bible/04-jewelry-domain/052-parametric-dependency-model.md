@@ -46,9 +46,11 @@ made explicit there for the first time.
 | Input | Directly affects | Code reference |
 |---|---|---|
 | `ring.innerDiameter` | `inner_radius`, `outer_radius`, `band_top_z` (and therefore the entire assembly's vertical anchor), band bounding box, total metal volume | `geometry/constants.py::inner_radius/outer_radius/band_top_z` |
-| `band.width` | Band cross-section (extent along Y), band volume, visual proportions | `geometry/components/band.py` |
-| `band.thickness` | Band cross-section (radial extent), `outer_radius` (and therefore `band_top_z`), band volume, `JM-BAND-002`/`JM-GEOMETRY-001` validation | `geometry/components/band.py`, `geometry/constants.py::outer_radius` |
-| `band.profile` | Which cross-section construction path runs (flat vs. comfort-fit), band volume | `geometry/components/band.py` |
+| `band.width` | Band cross-section (extent along Y) at the head (`u=0`), band volume, visual proportions | `geometry/shank/builder.py` |
+| `band.thickness` | Band cross-section (radial extent) at the head (`u=0`), `outer_radius` (and therefore `band_top_z`), band volume, `JM-BAND-002`/`JM-GEOMETRY-001` validation | `geometry/shank/builder.py`, `geometry/constants.py::outer_radius` |
+| `band.profile` | Which cross-section construction path runs (flat vs. comfort-fit) at every sampled section, band volume | `geometry/shank/profile.py` |
+| `band.widthTaper.mode`/`.bottomRatio` (Sprint 17) | Whether/how much `band.width` is reduced moving away from the head toward the bottom (`u=0.5`); selects the uniform-revolve vs 48-section tapered-loft construction path; band volume | `geometry/shank/taper.py`, `builder.py` |
+| `band.thicknessTaper.mode`/`.bottomRatio` (Sprint 17) | Whether/how much `band.thickness` is reduced moving away from the head toward the bottom (`u=0.5`); selects the uniform-revolve vs 48-section tapered-loft construction path; band volume | `geometry/shank/taper.py`, `builder.py` |
 | `stone.diameter` | Stone reference girdle radius, `prong_center_radius` (and therefore prong + basket positioning), `JM-STONE-001`/`JM-PRONG-003` validation | `geometry/constants.py::prong_center_radius`, `geometry/components/stone.py` |
 | `stone.depth` | Stone reference crown/pavilion heights (vertical geometry only — no downstream effect on prongs/basket), `JM-STONE-002` validation | `geometry/components/stone.py` |
 | `setting.prongCount` | Number of prong solids generated, angular distribution, `JM-PRONG-001`/`JM-PRONG-003` validation | `geometry/components/prongs.py::_prong_positions` |
@@ -64,7 +66,7 @@ made explicit there for the first time.
 | Direct (stored in `JewelryDefinition`) | Derived (computed, never stored) |
 |---|---|
 | `ring.innerDiameter`, `ring.size` | `inner_radius`, `outer_radius`, `band_top_z` |
-| `band.width`, `band.thickness`, `band.profile` | Band cross-section geometry |
+| `band.width`, `band.thickness`, `band.profile`, `band.widthTaper`, `band.thicknessTaper` | Band cross-section geometry (uniform or tapered) |
 | `stone.diameter`, `stone.depth` | Girdle radius, crown/pavilion heights, table radius |
 | `setting.prongCount`, `prongDiameter`, `prongHeight`, `basketHeight` | `prong_center_radius`, prong positions, basket inner/outer radii, stone girdle Z |
 | `material.metal`, `manufacturing.method` | (metadata only — nothing further derived) |
@@ -81,6 +83,8 @@ flowchart TD
     width["band.width"] --> bandGeom["Band cross-section / volume"]
     thickness --> bandGeom
     profile["band.profile"] --> bandGeom
+    widthTaper["band.widthTaper"] --> bandGeom
+    thicknessTaper["band.thicknessTaper"] --> bandGeom
 
     stoneDiameter["stone.diameter"] --> girdleRadius["girdle radius"]
     stoneDepth["stone.depth"] --> stoneHeights["crown / pavilion heights"]

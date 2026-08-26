@@ -69,9 +69,11 @@ changes, especially anything touching `backend/jewelmind/geometry/`,
   kept in sync by hand).
 - Validation rules: `backend/jewelmind/validation/engine.py` (authoritative)
   + `shared/validation/engine.ts` (frontend mirror).
-- Geometry builders: `backend/jewelmind/geometry/components/*.py` (band,
-  stone, prongs, basket) + `geometry/assemblies/solitaire.py` (combines
-  them).
+- Geometry builders: `backend/jewelmind/geometry/components/*.py` (band
+  — a thin re-export of `geometry/shank/build_shank()`, stone, prongs,
+  basket) + `geometry/shank/` (the real Shank subsystem: profile, taper,
+  builder, capability) + `geometry/connection.py` (Shank → RingHead
+  interface) + `geometry/assemblies/solitaire.py` (combines them).
 - Coordinate convention: `backend/jewelmind/geometry/constants.py`,
   documented in `docs/geometry-conventions.md`.
 - Exporters: `backend/jewelmind/exporters/` (STEP, STL, JSON,
@@ -1148,6 +1150,98 @@ Future coding agents must:
   import at package-init time (see `jewelry_category/dispatch.py`'s own
   docstring for the real bug this fixed).
 
+## SHANK SYSTEM RULES
+
+`docs/bible/19-shank/` is the authoritative Band & Shank System
+specification — start at
+[`docs/bible/19-shank/README.md`](docs/bible/19-shank/README.md),
+then [`540-shank-governance.md`](docs/bible/19-shank/540-shank-governance.md)
+for the full 15 SHANK-GOV rules. The machine-readable half lives in
+[`specs/shank/v1/`](specs/shank/v1/README.md) (6 JSON Schemas, a real
+capability registry generated from `geometry/shank/capability.py`,
+examples, and test vectors). Future coding agents must:
+
+- **Read `docs/bible/19-shank/README.md` before changing shank
+  geometry** — before modifying anything in
+  `backend/jewelmind/geometry/shank/`, `backend/jewelmind/geometry/connection.py`,
+  or `domain/schema.py::BandSpec`/`BandTaperSpec`.
+- **Never rename the public `band` JDL field to `shank`** — "Shank" is
+  an internal technical term only; it must never appear in JDL field
+  names, Studio UI copy, or Designer/Conversation user-facing text
+  (SHANK-GOV-002).
+- **Preserve the uniform-shank fast path byte-for-byte** — any request
+  with `widthTaper.mode == thicknessTaper.mode == "NONE"` must keep
+  using the exact pre-Sprint-17 `revolve()` construction in
+  `_build_uniform_shank()`; never route a no-taper request through the
+  loft-based tapered path "for consistency" (SHANK-GOV-003).
+- **Never mix longitudinal variation into a section-profile builder** —
+  `geometry/shank/profile.py::build_profile()` only ever sees one
+  section's already-resolved dimensions; taper interpolation belongs
+  exclusively in `taper.py`/`builder.py` (SHANK-GOV-004).
+- **Keep taper a pure function of angular distance from the head** —
+  never add a separately-duplicated "left shoulder"/"right shoulder"
+  taper parameter; `taper_ratio(u, taper)` must stay the single source
+  of both shoulders' behavior (SHANK-GOV-005).
+- **Never let `geometry/shank/` or `geometry/connection.py` import
+  `jewelmind.ring`** — these are Atlas-layer modules; Ring depends on
+  Atlas, never the reverse. A real circular import was found and fixed
+  this Sprint by relocating `connection.py` out of `jewelmind/ring/`
+  for exactly this reason (SHANK-GOV-006).
+- **Raise `ShankConstructionError` on a real construction failure —
+  never silently fall back to uniform geometry** — a failed/invalid
+  loft must be an observable error, not a quiet downgrade
+  (SHANK-GOV-007).
+- **Treat a changed `SECTION_COUNT`, head-anchoring convention, or
+  taper interpolation formula as a MAJOR change** — requires a new
+  Golden case or an explicit, documented Golden baseline update, never
+  a silent numeric drift (SHANK-GOV-008).
+- **Add new Golden cases for new Shank capabilities — never retrofit an
+  existing one** — SOL-001 through SOL-009 (Sprint 15) must never be
+  modified to add taper coverage; a new capability gets a new
+  `goldens/solitaire-v1/` case instead (SHANK-GOV-009).
+- **Route every Shank → RingHead placement through
+  `ShankConnectionInterface`** — never hardcode `topZMm`/`embedMm`/
+  `headCenterRadiusMm` independently inside `prongs.py`/`basket.py`
+  (SHANK-GOV-010).
+- **Never anchor taper anywhere but the head (`u=0`)** — the current
+  `TOWARD_BOTTOM` design guarantees the connection interface never
+  moves for any taper configuration; changing the anchor point is an
+  architecture-level change requiring an ADR (SHANK-GOV-011).
+- **Never invent a professional threshold or map a subjective
+  descriptor to an arbitrary taper value** — no code in
+  `geometry/shank/` or `design_intent/` may translate a word like "more
+  delicate" into a `bottomRatio` number; taper is requested explicitly
+  via JDL only (SHANK-GOV-012).
+- **Label constructed values honestly** — `widthSamplesMm`/
+  `thicknessSamplesMm` on tapered metadata are CONSTRUCTION_PARAMETER
+  (computed from the same taper function used to build the geometry),
+  never presented as independently re-measured MEASURED_GEOMETRY
+  (SHANK-GOV-013).
+- **Report every unimplemented capability as a real, documented
+  limitation** — e.g. the tapered path's missing outer-rim fillet sets
+  `filletApplied: false` with an explicit `filletSkippedReason`, and
+  every affected Golden case lists it under `knownLimitations`
+  (SHANK-GOV-014).
+- **Treat `geometry/shank/capability.py`'s `SHANK_CAPABILITIES` as the
+  single source of truth for CURRENT vs PLANNED** — never let
+  documentation, Designer's capability list, or Studio copy claim a
+  capability this registry marks `planned` (split shank, cathedral,
+  knife edge, Euro shank, twisted, multi-rail, tapered-shank fillet,
+  `TOWARD_HEAD` taper) (SHANK-GOV-015).
+- **Update the Ring Architecture v2 mirror when `BandSpec` changes** —
+  `ring/models.py::ShankDefinition` and `ring/adapter.py` claim to map
+  1:1 from `JewelryDefinition.band`; keep that claim true by updating
+  both, plus `specs/ring/v2/shank-definition.schema.json` and its
+  examples, in the same change (see
+  [`docs/bible/18-ring-architecture/526-shank-contract.md`](docs/bible/18-ring-architecture/526-shank-contract.md)).
+- **Require an ADR** for a new section-profile type, a new taper mode
+  beyond `NONE`/`TOWARD_BOTTOM`, a new centerline path (Euro shank),
+  multiple rails (split shank), or replacing loft with a different
+  construction primitive.
+- **Require an RFC** for a new ring style/setting type whose geometry
+  depends on Shank changes beyond what `540-shank-governance.md`
+  already reserves.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules from Sprint 15
-(above) — they apply to every future sprint, not only Geometry Quality
-or Ring Architecture changes.
+(above) — they apply to every future sprint, not only Geometry Quality,
+Ring Architecture, or Shank changes.

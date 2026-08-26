@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/shank/v1/connection-interface.schema.json",
+  "title": "ShankConnectionInterface",
+  "description": "Mirrors backend/jewelmind/geometry/connection.py::ShankConnectionInterface exactly — the explicit, named handoff between the Shank subsystem and RingHead component builders (prongs, basket). Every field stays exact for a tapered shank too: taper always preserves the full base width/thickness exactly at the head (u=0), so topZMm never moves. See docs/bible/19-shank/550-head-connection-interface.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["topZMm", "embedMm", "headCenterRadiusMm"],
+  "properties": {
+    "topZMm": {
+      "type": "number",
+      "description": "The Z coordinate of the shank's top surface at the head (u=0), matching geometry/constants.py::band_top_z(). This is where prong/basket geometry begins."
+    },
+    "embedMm": {
+      "type": "number",
+      "description": "The fixed embed depth (EMBED_MM in geometry/constants.py) prongs/basket sink into the shank for a robust boolean union — a kernel/manufacturing-adjacent constant, not a jewelry-domain rule threshold."
+    },
+    "headCenterRadiusMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The radial distance from the ring axis at which prong/basket centers are placed, matching geometry/constants.py::prong_center_radius()."
+    }
+  }
+}

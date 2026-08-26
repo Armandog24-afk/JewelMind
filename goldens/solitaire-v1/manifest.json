@@ -38,6 +38,18 @@
     {
       "goldenId": "SOL-009-warning-only-large-stone-four-prong",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-010-width-taper-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-011-thickness-taper-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-012-combined-taper-solitaire",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -54,7 +66,10 @@
     "SOL-006-band-dimension-variation",
     "SOL-007-stone-dimension-variation",
     "SOL-008-prong-basket-dimension-variation",
-    "SOL-009-warning-only-large-stone-four-prong"
+    "SOL-009-warning-only-large-stone-four-prong",
+    "SOL-010-width-taper-solitaire",
+    "SOL-011-thickness-taper-solitaire",
+    "SOL-012-combined-taper-solitaire"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

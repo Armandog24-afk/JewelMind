@@ -1,0 +1,46 @@
+{
+  "vectors": [
+    {
+      "baseMm": 1.8,
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.0,
+      "thicknessMm": 1.8
+    },
+    {
+      "baseMm": 1.8,
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 0.5,
+      "thicknessMm": 1.8
+    },
+    {
+      "baseMm": 1.8,
+      "mode": "NONE",
+      "bottomRatio": 1.0,
+      "u": 1.0,
+      "thicknessMm": 1.8
+    },
+    {
+      "baseMm": 1.8,
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.0,
+      "thicknessMm": 1.8
+    },
+    {
+      "baseMm": 1.8,
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 0.5,
+      "thicknessMm": 1.08
+    },
+    {
+      "baseMm": 1.8,
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6,
+      "u": 1.0,
+      "thicknessMm": 1.8
+    }
+  ]
+}

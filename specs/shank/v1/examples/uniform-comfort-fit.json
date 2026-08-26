@@ -1,0 +1,44 @@
+{
+  "description": "Default uniform comfort-fit shank (pre-Sprint-17 construction path).",
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
+  },
+  "generatedMetadata": {
+    "profile": "comfort_fit",
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "filletApplied": true,
+    "variation": "UNIFORM",
+    "widthTaperMode": "NONE",
+    "thicknessTaperMode": "NONE",
+    "sectionCount": 1,
+    "connectionInterface": {
+      "topZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "headCenterRadiusMm": 3.085
+    }
+  },
+  "volumeMm3": 250.991683,
+  "boundingBox": {
+    "minMm": [
+      -10.700000000000001,
+      -1.2000001,
+      -10.700000000000001
+    ],
+    "maxMm": [
+      10.700000000000001,
+      1.2000001000000002,
+      10.700000000000001
+    ]
+  }
+}

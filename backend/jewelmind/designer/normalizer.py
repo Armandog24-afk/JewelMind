@@ -149,16 +149,26 @@ def is_numeric_field(field: str) -> bool:
 
 
 def flatten_definition(definition: JewelryDefinition) -> dict[str, Any]:
-    """Dotted-path -> value for every leaf field in a JewelryDefinition."""
+    """Dotted-path -> value for every leaf field in a JewelryDefinition,
+    recursing into nested objects (e.g. `band.widthTaper.mode`, added
+    Sprint 17) so every reported value is a real scalar `FieldDiff` can
+    hold — never a raw nested dict."""
 
     out: dict[str, Any] = {}
     data = definition.model_dump(mode="json")
     for section, fields in data.items():
         if not isinstance(fields, dict):
             continue
-        for name, value in fields.items():
-            out[f"{section}.{name}"] = value
+        _flatten_into(out, section, fields)
     return out
+
+
+def _flatten_into(out: dict[str, Any], prefix: str, value: Any) -> None:
+    if isinstance(value, dict):
+        for key, sub_value in value.items():
+            _flatten_into(out, f"{prefix}.{key}", sub_value)
+    else:
+        out[prefix] = value
 
 
 def compute_diff(

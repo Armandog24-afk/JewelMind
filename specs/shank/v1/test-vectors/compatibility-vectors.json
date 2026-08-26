@@ -1,0 +1,13 @@
+{
+  "vectors": [
+    {
+      "description": "Uniform shank (no taper requested) must use the exact pre-Sprint-17 construction path.",
+      "widthTaperMode": "NONE",
+      "thicknessTaperMode": "NONE",
+      "expectedVariation": "UNIFORM",
+      "expectedSectionCount": 1,
+      "actualVariation": "UNIFORM",
+      "actualSectionCount": 1
+    }
+  ]
+}

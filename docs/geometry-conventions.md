@@ -16,11 +16,19 @@ STEP/STL file, and every dimension shown in the UI is in mm.
 
 - The world origin is the center of the ring (the center of the band's
   revolution, i.e. the center of the finger hole).
-- **The finger/hole axis is the global Y axis.** The band is a solid of
-  revolution around Y: its cross-section is drawn with local x = radial
-  distance from the axis and local y = position along the band's width,
-  then revolved 360° around Y (see `build_ring_band` in
-  `backend/jewelmind/geometry/components/band.py`).
+- **The finger/hole axis is the global Y axis.** A uniform (non-tapered)
+  band is a solid of revolution around Y: its cross-section is drawn
+  with local x = radial distance from the axis and local y = position
+  along the band's width, then revolved 360° around Y (see
+  `build_shank` in `backend/jewelmind/geometry/shank/builder.py`,
+  re-exported as `build_ring_band` from
+  `backend/jewelmind/geometry/components/band.py`). A tapered band
+  (Sprint 17) uses this same X/Z profile/Y-axis convention at every
+  sampled section, but is built as a multi-section loft instead of a
+  single revolve — see
+  `docs/bible/19-shank/543-shank-coordinate-model.md` for the
+  longitudinal `u ∈ [0,1)` parameter this introduces on top of the
+  convention below, unchanged.
 - Consequently the band's circular profile lies in the **X/Z plane** when
   viewed down the Y axis — the same way a ring looks when you look through
   the hole from the side.

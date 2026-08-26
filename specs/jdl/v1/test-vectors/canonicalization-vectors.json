@@ -4,14 +4,14 @@
   "vectors": [
     {
       "source": "examples/default-solitaire.json",
-      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"width\":2.4},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
-      "canonicalJsonLength": 537
+      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"thicknessTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"},\"width\":2.4,\"widthTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"}},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
+      "canonicalJsonLength": 635
     },
     {
       "source": "examples/minimal-solitaire.json",
       "note": "Authored input is only {\"schemaVersion\": \"0.1.0\"}; every omitted field resolves to its Pydantic default. Canonical form is byte-for-byte identical to default-solitaire.json.",
-      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"width\":2.4},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
-      "canonicalJsonLength": 537
+      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"thicknessTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"},\"width\":2.4,\"widthTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"}},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
+      "canonicalJsonLength": 635
     },
     {
       "source": "examples/six-prong-solitaire.json",
@@ -25,18 +25,18 @@
     },
     {
       "source": "examples/four-prong-solitaire.json",
-      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"width\":2.4},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":4,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
-      "canonicalJsonLength": 537
+      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"thicknessTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"},\"width\":2.4,\"widthTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"}},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":4,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
+      "canonicalJsonLength": 635
     },
     {
       "source": "examples/flat-band-solitaire.json",
-      "canonicalJson": "{\"band\":{\"profile\":\"flat\",\"thickness\":1.8,\"width\":2.4},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
-      "canonicalJsonLength": 530
+      "canonicalJson": "{\"band\":{\"profile\":\"flat\",\"thickness\":1.8,\"thicknessTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"},\"width\":2.4,\"widthTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"}},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"lost_wax_casting\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
+      "canonicalJsonLength": 628
     },
     {
       "source": "examples/direct-resin-printing-solitaire.json",
-      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"width\":2.4},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"direct_resin_printing\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
-      "canonicalJsonLength": 542
+      "canonicalJson": "{\"band\":{\"profile\":\"comfort_fit\",\"thickness\":1.8,\"thicknessTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"},\"width\":2.4,\"widthTaper\":{\"bottomRatio\":1.0,\"mode\":\"NONE\"}},\"jewelry\":{\"category\":\"ring\",\"style\":\"solitaire\"},\"manufacturing\":{\"method\":\"direct_resin_printing\"},\"material\":{\"metal\":\"yellow_gold_18k\"},\"preview\":{\"angularTolerance\":0.2,\"meshTolerance\":0.1},\"project\":{\"name\":\"Solitaire Ring\",\"units\":\"mm\"},\"ring\":{\"innerDiameter\":17.8,\"size\":16.0,\"sizeSystem\":\"EU\"},\"schemaVersion\":\"0.1.0\",\"setting\":{\"basketHeight\":3.5,\"prongCount\":6,\"prongDiameter\":1.1,\"prongHeight\":4.8,\"type\":\"prong\"},\"stone\":{\"depth\":4.0,\"diameter\":6.5,\"shape\":\"round\"}}",
+      "canonicalJsonLength": 640
     }
   ],
   "excludedFromCanonicalization": [

@@ -1,0 +1,44 @@
+{
+  "description": "Uniform flat-profile shank.",
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "flat",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
+  },
+  "generatedMetadata": {
+    "profile": "flat",
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "filletApplied": true,
+    "variation": "UNIFORM",
+    "widthTaperMode": "NONE",
+    "thicknessTaperMode": "NONE",
+    "sectionCount": 1,
+    "connectionInterface": {
+      "topZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "headCenterRadiusMm": 3.085
+    }
+  },
+  "volumeMm3": 264.210883,
+  "boundingBox": {
+    "minMm": [
+      -10.700000000000001,
+      -1.2000001,
+      -10.700000000000001
+    ],
+    "maxMm": [
+      10.700000000000001,
+      1.2000001,
+      10.700000000000001
+    ]
+  }
+}

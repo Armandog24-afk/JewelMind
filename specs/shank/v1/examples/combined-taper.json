@@ -1,0 +1,55 @@
+{
+  "description": "Combined width+thickness taper on a flat profile.",
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "flat",
+    "widthTaper": {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.7
+    },
+    "thicknessTaper": {
+      "mode": "TOWARD_BOTTOM",
+      "bottomRatio": 0.6
+    }
+  },
+  "generatedMetadata": {
+    "profile": "flat",
+    "innerRadiusMm": 8.9,
+    "outerRadiusMm": 10.700000000000001,
+    "filletApplied": false,
+    "filletSkippedReason": "Outer-rim fillet is not yet implemented for a tapered shank (v1 limitation).",
+    "variation": "TAPERED",
+    "widthTaperMode": "TOWARD_BOTTOM",
+    "widthTaperBottomRatio": 0.7,
+    "thicknessTaperMode": "TOWARD_BOTTOM",
+    "thicknessTaperBottomRatio": 0.6,
+    "sectionCount": 48,
+    "widthSamplesMm": {
+      "headMm": 2.4,
+      "bottomMm": 1.68
+    },
+    "thicknessSamplesMm": {
+      "headMm": 1.8000000000000007,
+      "bottomMm": 1.0800000000000003
+    },
+    "connectionInterface": {
+      "topZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "headCenterRadiusMm": 3.085
+    }
+  },
+  "volumeMm3": 180.126459,
+  "boundingBox": {
+    "minMm": [
+      -10.340000100000001,
+      -1.2000001,
+      -9.9800001
+    ],
+    "maxMm": [
+      10.340000100000001,
+      1.2000001,
+      10.7000001
+    ]
+  }
+}

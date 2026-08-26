@@ -2,13 +2,31 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jewelmind.example/specs/ring/v2/shank-definition.schema.json",
   "title": "Shank Definition v2",
-  "description": "Mirrors backend/jewelmind/ring/models.py::ShankDefinition. CURRENT: uniform plain shank only. Maps 1:1 from JewelryDefinition.band — see docs/bible/18-ring-architecture/526-shank-contract.md. 'Band' remains the user-facing/JDL name; 'Shank' is the internal architectural term.",
+  "description": "Mirrors backend/jewelmind/ring/models.py::ShankDefinition. CURRENT: uniform shank, plus real width/thickness taper (Sprint 17). Maps 1:1 from JewelryDefinition.band — see docs/bible/19-shank/556-current-band-migration.md. 'Band' remains the user-facing/JDL name; 'Shank' is the internal architectural term. The real geometry contract for widthTaper/thicknessTaper lives at specs/shank/v1/taper-definition.schema.json — this file only documents its presence on the Ring v2 domain model, never redefines it.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["profile", "widthMm", "thicknessMm"],
+  "required": ["profile", "widthMm", "thicknessMm", "widthTaper", "thicknessTaper"],
   "properties": {
     "profile": { "enum": ["comfort_fit", "flat"] },
     "widthMm": { "type": "number" },
-    "thicknessMm": { "type": "number" }
+    "thicknessMm": { "type": "number" },
+    "widthTaper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "bottomRatio"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"] },
+        "bottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "thicknessTaper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "bottomRatio"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"] },
+        "bottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    }
   }
 }

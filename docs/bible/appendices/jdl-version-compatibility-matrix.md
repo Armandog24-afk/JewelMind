@@ -41,3 +41,9 @@ Reflects only versions that actually exist. See [`081-schema-versioning-and-migr
 ## Migration paths implemented
 
 **None.** Only one schema version has ever existed, so no migration has ever been necessary or built. This row will be updated the day a second schema version ships, per [`081-schema-versioning-and-migrations.md`](../05-jdl/081-schema-versioning-and-migrations.md) rule 3.
+
+## MINOR change history (per JDL-GOV-002)
+
+| Sprint | Change | `schemaVersion` | Notes |
+|---|---|---|---|
+| 17 | Added `band.widthTaper`/`band.thicknessTaper` (`BandTaperSpec`: `mode`, `bottomRatio`), both optional with a `mode: "NONE"` default | `0.1.0` (unchanged) | An additive, backward-compatible MINOR change per [`081`](../05-jdl/081-schema-versioning-and-migrations.md)'s own definition and worked example. A real, discovered side effect: `definitionHash` changes for any previously-recorded document once regenerated under the new schema, because `canonical_json()` includes every field's default value — this is not a "migration silently altering a hash" (rule 4), since no transform is offered or applied to old documents; it is normalization-time default-filling producing a different (still deterministic, still correct) canonical form, the same mechanism rule 4 was written before this case existed. See [`docs/bible/19-shank/556-current-band-migration.md`](../19-shank/556-current-band-migration.md) for the full account and every spec/test-vector file updated because of it. |

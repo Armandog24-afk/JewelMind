@@ -14,7 +14,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
-from jewelmind.domain.schema import BandProfile, RingSizeSystem, SettingType, StoneSpec
+from jewelmind.domain.schema import BandProfile, BandTaperSpec, RingSizeSystem, SettingType, StoneSpec
 
 #: The full recognized ring-family vocabulary — "solitaire" is CURRENT
 #: (see families.py::RING_FAMILY_GENERATORS); every other value is a
@@ -49,13 +49,16 @@ class RingSizing(RingModel):
 
 
 class ShankDefinition(RingModel):
-    """CURRENT (uniform plain shank only). Maps 1:1 from
-    `JewelryDefinition.band`. Future PLANNED variation: tapering, split,
-    cathedral, knife-edge, Euro profiles — see 526-shank-contract.md."""
+    """CURRENT: uniform shank, plus real width/thickness taper (Sprint
+    17). Maps 1:1 from `JewelryDefinition.band`. Future PLANNED
+    variation: split, cathedral, knife-edge, Euro profiles — see
+    docs/bible/19-shank/556-current-band-migration.md."""
 
     profile: BandProfile
     widthMm: float
     thicknessMm: float
+    widthTaper: BandTaperSpec
+    thicknessTaper: BandTaperSpec
 
 
 class ShoulderDefinition(RingModel):

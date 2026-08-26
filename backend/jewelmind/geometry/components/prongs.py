@@ -12,7 +12,7 @@ import math
 import cadquery as cq
 
 from jewelmind.domain.schema import JewelryDefinition
-from jewelmind.geometry.constants import EMBED_MM, band_top_z, prong_center_radius
+from jewelmind.geometry.connection import shank_connection_interface
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent
 
 
@@ -36,10 +36,11 @@ def build_prongs(definition: JewelryDefinition) -> GeneratedComponent:
     requested_count = definition.setting.prongCount
     generated_count = requested_count if requested_count in (4, 6) else max(requested_count, 0)
 
+    interface = shank_connection_interface(definition)
     prong_r = definition.setting.prongDiameter / 2
-    center_r = prong_center_radius(definition)
-    base_z = band_top_z(definition) - EMBED_MM
-    height = definition.setting.prongHeight + EMBED_MM
+    center_r = interface.headCenterRadiusMm
+    base_z = interface.topZMm - interface.embedMm
+    height = definition.setting.prongHeight + interface.embedMm
 
     positions = _prong_positions(generated_count, center_r) if generated_count > 0 else []
 

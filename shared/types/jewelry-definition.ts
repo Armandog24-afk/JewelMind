@@ -42,10 +42,19 @@ export interface RingSpec {
   innerDiameter: number
 }
 
+export type BandTaperMode = 'NONE' | 'TOWARD_BOTTOM'
+
+export interface BandTaperSpec {
+  mode: BandTaperMode
+  bottomRatio: number
+}
+
 export interface BandSpec {
   width: number
   thickness: number
   profile: BandProfile
+  widthTaper: BandTaperSpec
+  thicknessTaper: BandTaperSpec
 }
 
 export interface StoneSpec {
@@ -96,6 +105,7 @@ const METAL_TYPES: readonly MetalType[] = [
   'silver',
 ]
 const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
+const BAND_TAPER_MODES: readonly BandTaperMode[] = ['NONE', 'TOWARD_BOTTOM']
 const MANUFACTURING_METHODS: readonly ManufacturingMethod[] = [
   'lost_wax_casting',
   'direct_resin_printing',
@@ -107,6 +117,13 @@ function isFiniteNumber(value: unknown): value is number {
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function isValidBandTaper(value: unknown): value is BandTaperSpec {
+  if (!isPlainObject(value)) return false
+  if (!BAND_TAPER_MODES.includes(value['mode'] as BandTaperMode)) return false
+  const ratio = value['bottomRatio']
+  return isFiniteNumber(ratio) && ratio > 0 && ratio <= 1
 }
 
 /**
@@ -148,7 +165,9 @@ export function isValidJewelryDefinition(value: unknown): value is JewelryDefini
     !isPlainObject(band) ||
     !isFiniteNumber(band['width']) ||
     !isFiniteNumber(band['thickness']) ||
-    !BAND_PROFILES.includes(band['profile'] as BandProfile)
+    !BAND_PROFILES.includes(band['profile'] as BandProfile) ||
+    !isValidBandTaper(band['widthTaper']) ||
+    !isValidBandTaper(band['thicknessTaper'])
   ) {
     return false
   }
@@ -208,7 +227,13 @@ export function createDefaultDefinition(): JewelryDefinition {
     project: { name: 'Solitaire Ring', units: 'mm' },
     jewelry: { category: 'ring', style: 'solitaire' },
     ring: { sizeSystem: 'EU', size: 16, innerDiameter: 17.8 },
-    band: { width: 2.4, thickness: 1.8, profile: 'comfort_fit' },
+    band: {
+      width: 2.4,
+      thickness: 1.8,
+      profile: 'comfort_fit',
+      widthTaper: { mode: 'NONE', bottomRatio: 1.0 },
+      thicknessTaper: { mode: 'NONE', bottomRatio: 1.0 },
+    },
     stone: { shape: 'round', diameter: 6.5, depth: 4.0 },
     setting: {
       type: 'prong',

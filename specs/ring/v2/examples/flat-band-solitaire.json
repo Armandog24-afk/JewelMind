@@ -8,7 +8,15 @@
   "shank": {
     "profile": "flat",
     "widthMm": 2.4,
-    "thicknessMm": 1.8
+    "thicknessMm": 1.8,
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
   },
   "shoulders": {
     "modeled": false

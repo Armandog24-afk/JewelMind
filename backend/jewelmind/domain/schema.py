@@ -74,10 +74,32 @@ class RingSpec(StrictModel):
     innerDiameter: float = Field(default=17.8, allow_inf_nan=False)
 
 
+BandTaperMode = Literal["NONE", "TOWARD_BOTTOM"]
+
+
+class BandTaperSpec(StrictModel):
+    """A MINOR, additive Sprint 17 field (see
+    docs/bible/05-jdl/081-schema-versioning-and-migrations.md's MINOR
+    definition) — every existing document omitting this field gets the
+    default below, which is bit-identical to pre-Sprint-17 geometry.
+
+    `mode="NONE"` means no taper: the dimension is constant all the way
+    around the ring, exactly as before this Sprint. `mode="TOWARD_BOTTOM"`
+    anchors the full base dimension at the head (u=0) and linearly tapers
+    it down to `bottomRatio * base` at the bottom (u=0.5), symmetric on
+    both shoulders. `bottomRatio` is ignored when `mode="NONE"`.
+    """
+
+    mode: BandTaperMode = "NONE"
+    bottomRatio: float = Field(default=1.0, gt=0, le=1, allow_inf_nan=False)
+
+
 class BandSpec(StrictModel):
     width: float = Field(default=2.4, allow_inf_nan=False)
     thickness: float = Field(default=1.8, allow_inf_nan=False)
     profile: BandProfile = "comfort_fit"
+    widthTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
+    thicknessTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
 
 
 class StoneSpec(StrictModel):

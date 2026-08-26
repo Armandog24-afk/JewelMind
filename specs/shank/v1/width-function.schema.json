@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/shank/v1/width-function.schema.json",
+  "title": "ShankWidthFunctionSample",
+  "description": "A real sample of the deterministic width function w(u) = baseWidthMm * taper_ratio(u, widthTaper), for u in [0, 1). Documents backend/jewelmind/geometry/shank/builder.py::_section_wire()'s width term and the widthSamplesMm.headMm/bottomMm fields on generated component metadata. See docs/bible/19-shank/546-width-function-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["baseMm", "mode", "bottomRatio", "u", "widthMm"],
+  "properties": {
+    "baseMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The unmodified JDL band.width value (mirrors baseHalfWidthMm*2 in builder.py)."
+    },
+    "mode": { "type": "string", "enum": ["NONE", "TOWARD_BOTTOM"] },
+    "bottomRatio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+    "u": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Longitudinal parameter; 0/1 is the head, 0.5 is the bottom."
+    },
+    "widthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "baseMm * taper_ratio(u, {mode, bottomRatio}) — always exactly baseMm at u=0/u=1 regardless of mode."
+    }
+  }
+}

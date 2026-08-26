@@ -109,9 +109,17 @@ decorative treatment — see
 Only `Solitaire` is implemented today.
 
 **Band** — the ring's circular metal body, defined by width, thickness,
-and profile (flat or comfort-fit). See
-`docs/geometry-conventions.md` and
-[`04-jewelry-domain/045-band-domain.md`](../04-jewelry-domain/045-band-domain.md).
+profile (flat or comfort-fit), and, since Sprint 17, optional width/
+thickness taper. The user-facing and JDL name for what the codebase
+internally calls **Shank** — see
+`docs/geometry-conventions.md`,
+[`04-jewelry-domain/045-band-domain.md`](../04-jewelry-domain/045-band-domain.md),
+and [`19-shank/README.md`](../19-shank/README.md).
+
+**Shank** — internal technical term (never user-facing) for the Band's
+reusable geometry-generation subsystem, `backend/jewelmind/geometry/shank/`.
+Never renamed the public `band` JDL field. See
+[`19-shank/README.md`](../19-shank/README.md).
 
 **Flat profile** — a band cross-section that is a plain rectangle
 (optionally with a small outer-rim fillet).
@@ -121,9 +129,16 @@ rather than flat, intended to feel rounder against the finger. *Note:*
 this project's implementation is a simplified geometric approximation of
 the concept, not a manufacturing-validated ergonomic profile.
 
+**Taper** — a real, deterministic linear reduction of a band's width
+and/or thickness moving away from the head toward the bottom of the
+ring (`BandTaperMode`: `NONE` or `TOWARD_BOTTOM`). Introduced Sprint
+17 — see [`19-shank/548-taper-model.md`](../19-shank/548-taper-model.md).
+
 **Shoulders** — the transitional band sections leading up to the setting
-(relevant to styles like cathedral). **Not implemented** — see
-[`04-jewelry-domain/043-ring-anatomy.md`](../04-jewelry-domain/043-ring-anatomy.md).
+(relevant to styles like cathedral). Still **not an independently
+modeled component** — see
+[`04-jewelry-domain/043-ring-anatomy.md`](../04-jewelry-domain/043-ring-anatomy.md)
+and [`19-shank/549-shoulder-transition-model.md`](../19-shank/549-shoulder-transition-model.md).
 
 **Head** — informal umbrella term for the setting + basket support
 combined. Not a named concept in current code — see

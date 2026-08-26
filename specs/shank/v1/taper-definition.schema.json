@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/shank/v1/taper-definition.schema.json",
+  "title": "ShankTaperDefinition",
+  "description": "A real, already-shipped Sprint 17 structure: mirrors backend/jewelmind/domain/schema.py::BandTaperSpec exactly (also exposed in JDL as band.widthTaper / band.thicknessTaper). mode=NONE means no taper (default); mode=TOWARD_BOTTOM anchors the full base dimension at the head (u=0) and linearly interpolates to bottomRatio*base at the bottom (u=0.5), symmetric in both directions from the head. See docs/bible/19-shank/548-taper-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mode", "bottomRatio"],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["NONE", "TOWARD_BOTTOM"],
+      "default": "NONE",
+      "description": "TOWARD_HEAD, symmetric two-point tapers, and non-linear taper curves are PLANNED, not implemented in v1 — see docs/bible/appendices/shank-capability-catalog.md."
+    },
+    "bottomRatio": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "default": 1.0,
+      "description": "Multiplier applied to the base dimension at the bottom (u=0.5) when mode=TOWARD_BOTTOM. Ignored when mode=NONE. Always in (0, 1] — a ratio above 1 (widening toward the bottom) is not supported in v1."
+    }
+  }
+}
