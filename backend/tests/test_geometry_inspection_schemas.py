@@ -13,6 +13,7 @@ pipeline drift.
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 
 import jsonschema
@@ -93,6 +94,28 @@ def test_determinism_vectors_show_equivalent_facts_across_two_runs():
     assert vectors[0]["bandVolumeMm3"] == vectors[1]["bandVolumeMm3"]
 
 
+def _approx_equal(a, b) -> bool:
+    """Structural equality that tolerates ULP-level float drift.
+
+    OCP's boolean-common (BRepAlgoAPI_Common) and distance
+    (BRepExtrema_DistShapeShape) operations are numerical algorithms
+    whose last few significant digits can differ between OS/compiler
+    builds of the same OCCT version (observed: Windows vs. Linux CI
+    disagreeing at the 14th significant digit of an intersection
+    volume). This is not a determinism violation of JewelMind's own
+    code — determinism means the same definition always produces the
+    same geometry *on a given kernel build*, not bit-identical output
+    across platforms. See 486-inspection-determinism.md.
+    """
+    if isinstance(a, float) and isinstance(b, float):
+        return math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-9)
+    if isinstance(a, dict) and isinstance(b, dict):
+        return a.keys() == b.keys() and all(_approx_equal(a[k], b[k]) for k in a)
+    if isinstance(a, list) and isinstance(b, list):
+        return len(a) == len(b) and all(_approx_equal(x, y) for x, y in zip(a, b))
+    return a == b
+
+
 def test_default_solitaire_example_is_reproducible_live():
     example = _load_json(SPECS_DIR / "examples" / "default-solitaire-inspection.json")
     model = build_solitaire_ring(default_definition())
@@ -108,4 +131,4 @@ def test_default_solitaire_example_is_reproducible_live():
         report["geometricFacts"] = [{**f, "generatedAt": None} for f in report["geometricFacts"]]
         return report
 
-    assert strip(live) == strip(example)
+    assert _approx_equal(strip(live), strip(example))
