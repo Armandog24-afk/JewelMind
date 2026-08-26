@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/ring-family.schema.json",
+  "title": "Ring Family v2",
+  "description": "One entry in the recognized ring-family vocabulary — mirrors RingFamilyId in backend/jewelmind/ring/models.py plus RING_FAMILY_GENERATORS/RESERVED_PLANNED_RING_FAMILIES in families.py. Only 'solitaire' has a real generator; the rest exist to prove the family dispatch boundary is not solitaire-specific (brief section 10). See docs/bible/18-ring-architecture/524-ring-family-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["family", "status"],
+  "properties": {
+    "family": {
+      "enum": ["solitaire", "three_stone", "toi_et_moi", "halo", "eternity", "signet", "plain_band", "cluster"]
+    },
+    "status": { "enum": ["current", "planned"] }
+  }
+}

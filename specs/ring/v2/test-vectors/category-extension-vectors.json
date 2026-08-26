@@ -1,0 +1,21 @@
+{
+  "vectors": [
+    {
+      "case": "test-only dummy category dispatches through the same generic function as ring",
+      "category": "dummy_pendant_TEST_ONLY",
+      "note": "Never present in CATEGORY_CAPABILITIES/CATEGORY_GENERATORS \u2014 see backend/tests/test_jewelry_category_extension.py.",
+      "realGeneratorsRegistered": [
+        "solitaire"
+      ],
+      "reservedPlannedRingFamilies": [
+        "cluster",
+        "eternity",
+        "halo",
+        "plain_band",
+        "signet",
+        "three_stone",
+        "toi_et_moi"
+      ]
+    }
+  ]
+}

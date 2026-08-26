@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/ring-component.schema.json",
+  "title": "Ring Component Graph Node v2",
+  "description": "Maps an architectural ring-composition node to the real Atlas component IDs it groups (geometric composition, not data-model field ownership — see docs/bible/18-ring-architecture/531-ring-component-graph.md and 528-head-contract.md for why prong DATA is owned by the setting object while the prongs COMPONENT is grouped under Head geometrically).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["node", "realComponentIds", "graphType"],
+  "properties": {
+    "node": { "enum": ["shank", "head", "stoneArrangement"] },
+    "realComponentIds": {
+      "type": "array",
+      "items": { "enum": ["band", "basket_support", "prongs", "stone_reference"] }
+    },
+    "graphType": { "enum": ["CURRENT", "TARGET"] }
+  }
+}

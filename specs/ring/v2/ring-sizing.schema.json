@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/ring-sizing.schema.json",
+  "title": "Ring Sizing v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::RingSizing. Maps 1:1 from JewelryDefinition.ring — see docs/bible/18-ring-architecture/525-ring-sizing-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sizeSystem", "size", "innerDiameter"],
+  "properties": {
+    "sizeSystem": { "enum": ["EU"] },
+    "size": { "type": "number" },
+    "innerDiameter": { "type": "number" }
+  }
+}

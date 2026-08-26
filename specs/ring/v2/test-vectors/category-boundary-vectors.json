@@ -1,0 +1,19 @@
+{
+  "vectors": [
+    {
+      "case": "unrecognized category",
+      "category": "brooch",
+      "errorCode": "JEWELRY_CATEGORY_UNSUPPORTED"
+    },
+    {
+      "case": "recognized but planned category",
+      "category": "earring",
+      "errorCode": "JEWELRY_CATEGORY_NOT_GENERATABLE"
+    },
+    {
+      "case": "supported category dispatches",
+      "category": "ring",
+      "result": "generated:payload"
+    }
+  ]
+}

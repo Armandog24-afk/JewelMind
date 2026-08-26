@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/jewelry-architecture/v1/category-contract.schema.json",
+  "title": "Category Extension Contract v1",
+  "description": "What a NEW jewelry category is expected to provide before it can move from 'planned' to 'current' — see docs/bible/18-ring-architecture/534-multi-category-readiness-contract.md. This schema describes the checklist itself, not a runtime object; nothing in the codebase currently satisfies it for any category other than ring.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["category", "requirements"],
+  "properties": {
+    "category": { "type": "string" },
+    "requirements": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["item", "satisfied"],
+        "properties": {
+          "item": {
+            "enum": [
+              "category_definition",
+              "category_capability_registration",
+              "category_validator",
+              "category_generator",
+              "category_forge_rules",
+              "category_inspector",
+              "studio_editor",
+              "designer_capability_declaration",
+              "golden_suite"
+            ]
+          },
+          "satisfied": { "type": "boolean" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "mustNotRequireRewriting": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "The platform-level systems a new category must never need to modify — JDL infrastructure, Forge engine, Alchemist orchestration, Atlas core, Foundry, Vision core, Designer core, Conversation core, Professional Validation, Geometry Quality."
+    }
+  }
+}

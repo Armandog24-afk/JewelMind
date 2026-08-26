@@ -1079,3 +1079,75 @@ only Geometry Quality changes:
   skip tests, weaken validation, remove error handling, omit an
   important architectural finding, hide a failure, or reduce regression
   coverage merely to finish faster or write less.
+
+## JEWELRY CATEGORY ARCHITECTURE RULES
+
+`docs/bible/18-ring-architecture/` is the authoritative Jewelry Category
+/ Ring Architecture specification — start at
+[`docs/bible/18-ring-architecture/README.md`](docs/bible/18-ring-architecture/README.md),
+then [`520-jewelry-category-architecture.md`](docs/bible/18-ring-architecture/520-jewelry-category-architecture.md)
+for the full 16 JEWELRY-ARCH-GOV rules. The machine-readable half lives
+in [`specs/jewelry-architecture/v1/`](specs/jewelry-architecture/v1/README.md)
+(category identity/capability, platform-level) and
+[`specs/ring/v2/`](specs/ring/v2/README.md) (the Ring category's internal
+domain contract, underneath JDL — never a second canonical JDL schema).
+Future coding agents must:
+
+- **Treat Ring as one jewelry category, not JewelMind's architectural
+  root** — before adding a "generic" service, check it does not assume
+  every definition has ring fields (`ring`, `band`, `setting`, prong
+  count, basket height).
+- **Never introduce a supposedly generic service that requires ring
+  fields** — a platform-level module (anything outside
+  `jewelmind.ring`/`jewelmind.geometry`/`jewelmind.validation`) must
+  reach ring-specific data only through `jewelmind.ring`'s own types,
+  never by assuming `definition.ring` exists as a platform guarantee.
+- **Keep category-specific fields inside the category domain** — a
+  future `earring.postType` belongs to an eventual `EarringDefinition`,
+  never a shared/global field, exactly as `ring.size` stays under
+  `RingDefinition` today (JEWELRY-ARCH-GOV-004).
+- **Prefer shared Stone/Setting/Material/Manufacturing systems where
+  semantically valid** — `RingDefinition` consumes `StoneSpec`/
+  `MaterialSpec`/`ManufacturingSpec` as-is; it never redefines them
+  (JEWELRY-ARCH-GOV-006/007). Reusable does not mean universal — don't
+  force reuse where semantics genuinely differ between categories.
+- **Do not advertise planned categories as supported** — a category with
+  `CategoryCapability.generationSupported: false` must never appear as
+  working in Designer, Studio, or any API response
+  (JEWELRY-ARCH-GOV-003).
+- **Add new categories through category capability/generator
+  contracts** — register a new entry in
+  `jewelmind.jewelry_category.registry.CATEGORY_CAPABILITIES` and a new
+  generator in the category-generator registry
+  (`jewelmind/jewelry_category/dispatch.py`); never branch on category
+  with an `if/elif` chain scattered across unrelated modules.
+- **Test non-ring extensibility** — a category-architecture change
+  should keep passing (or be accompanied by an updated)
+  `backend/tests/test_jewelry_category_extension.py`'s dummy-category
+  proof; that dummy category must never be added to
+  `CATEGORY_CAPABILITIES`, any production generator registry, Designer's
+  capabilities, or the JDL schema (JEWELRY-ARCH-GOV-011).
+- **Preserve backward compatibility unless an explicit JDL major-version
+  migration is approved** — `domain/schema.py` is not casually
+  restructured; prefer an additive adapter
+  (`jewelmind.ring.adapter.ring_definition_from_jdl()`) over a breaking
+  schema change (JEWELRY-ARCH-GOV-008).
+- **Run relevant Golden suites after category architecture changes** —
+  a dispatch/adapter change must produce zero Golden baseline updates
+  unless a geometry change was intentional and explicitly reviewed
+  (JEWELRY-ARCH-GOV-009/014).
+- **Keep category capability machine-readable** —
+  `specs/jewelry-architecture/v1/category-registry.json` is generated
+  from `CATEGORY_CAPABILITIES`, never hand-maintained as a second,
+  driftable copy (JEWELRY-ARCH-GOV-015).
+- **Watch for cross-package circular imports when a registry needs a
+  sibling package's contents** — `jewelmind.jewelry_category` and
+  `jewelmind.ring` import each other's error/model types; the
+  category-generator registry is built lazily inside a cached function,
+  never as a module-level constant, specifically to avoid a circular
+  import at package-init time (see `jewelry_category/dispatch.py`'s own
+  docstring for the real bug this fixed).
+
+Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules from Sprint 15
+(above) — they apply to every future sprint, not only Geometry Quality
+or Ring Architecture changes.

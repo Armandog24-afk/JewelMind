@@ -11,7 +11,6 @@ section).
 from __future__ import annotations
 
 from jewelmind.domain.schema import JewelryDefinition
-from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
 from jewelmind.geometry.inspection.inspector import inspect_model
 from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.geometry.model import GeneratedModel
@@ -24,6 +23,7 @@ from jewelmind.geometry_quality.models import (
     RelationshipSnapshot,
 )
 from jewelmind.geometry_quality.version import QUALITY_VERSION
+from jewelmind.jewelry_category.dispatch import generate_jewelry
 from jewelmind.validation.engine import has_errors, validate_definition
 
 
@@ -110,7 +110,10 @@ def generate_snapshot(
             f"valid definition: {[r.model_dump() for r in results if r.severity == 'error']}"
         )
 
-    model = build_solitaire_ring(definition)
+    # Dispatched by jewelry.category, exactly like production generation
+    # (ModelService.generate()) — see
+    # docs/bible/18-ring-architecture/532-ring-generation-contract.md.
+    model = generate_jewelry(definition)
     report = inspect_model(model)
     snapshot = build_snapshot_from_report(model.definition_hash, report)
     return snapshot, model, report

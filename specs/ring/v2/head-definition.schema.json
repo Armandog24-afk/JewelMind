@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/head-definition.schema.json",
+  "title": "Ring Head Definition v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::RingHeadDefinition. PARTIAL — the structural integration of the setting into the ring (currently just basket support height). Deliberately excludes prong/setting fields, which belong to the 'setting' object in ring-definition.schema.json. See docs/bible/18-ring-architecture/528-head-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["basketHeightMm"],
+  "properties": {
+    "basketHeightMm": { "type": "number" }
+  }
+}

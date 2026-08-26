@@ -1,0 +1,64 @@
+{
+  "vectors": [
+    {
+      "sourceJDL": {
+        "ring": {
+          "sizeSystem": "EU",
+          "size": 16,
+          "innerDiameter": 17.8
+        },
+        "band": {
+          "width": 2.4,
+          "thickness": 1.8,
+          "profile": "comfort_fit"
+        },
+        "stone": {
+          "shape": "round",
+          "diameter": 6.5,
+          "depth": 4.0
+        },
+        "setting": {
+          "type": "prong",
+          "prongCount": 6,
+          "prongDiameter": 1.1,
+          "prongHeight": 4.8,
+          "basketHeight": 3.5
+        }
+      },
+      "ringDefinitionV2": {
+        "family": "solitaire",
+        "sizing": {
+          "sizeSystem": "EU",
+          "size": 16.0,
+          "innerDiameter": 17.8
+        },
+        "shank": {
+          "profile": "comfort_fit",
+          "widthMm": 2.4,
+          "thicknessMm": 1.8
+        },
+        "shoulders": {
+          "modeled": false
+        },
+        "head": {
+          "basketHeightMm": 3.5
+        },
+        "stoneArrangement": {
+          "arrangement": "SINGLE_CENTER",
+          "stone": {
+            "shape": "round",
+            "diameter": 6.5,
+            "depth": 4.0
+          }
+        },
+        "setting": {
+          "settingType": "prong",
+          "prongCount": 6,
+          "prongDiameterMm": 1.1,
+          "prongHeightMm": 4.8
+        }
+      },
+      "note": "Field-by-field: ring->sizing, band->shank, stone(+SINGLE_CENTER)->stoneArrangement, setting.basketHeight->head, setting.{type,prongCount,prongDiameter,prongHeight}->setting."
+    }
+  ]
+}

@@ -79,9 +79,15 @@ def test_generation_failure_maps_to_model_generation_failed(client, monkeypatch)
     def _boom(definition):
         raise RuntimeError("simulated geometry crash")
 
-    monkeypatch.setattr(
-        "jewelmind.services.model_service.build_solitaire_ring", _boom
-    )
+    # Sprint 16: geometry generation is dispatched by jewelry.category
+    # through jewelmind.ring.families.RING_FAMILY_GENERATORS, a dict
+    # built once at import time — patch the dict entry itself, not the
+    # module-level function name, or the registered reference (captured
+    # at import time) would not change (see
+    # docs/bible/18-ring-architecture/532-ring-generation-contract.md).
+    import jewelmind.ring.families as ring_families
+
+    monkeypatch.setitem(ring_families.RING_FAMILY_GENERATORS, "solitaire", _boom)
     definition = default_definition().model_dump(mode="json")
     resp = client.post("/api/models/generate", json=definition)
     assert resp.status_code == 500

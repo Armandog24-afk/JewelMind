@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/shoulder-definition.schema.json",
+  "title": "Shoulder Definition v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::ShoulderDefinition. IMPLICIT/PARTIAL: the current solitaire has no independently modeled shoulder geometry — 'modeled' is always false today. See docs/bible/18-ring-architecture/527-shoulder-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["modeled"],
+  "properties": {
+    "modeled": { "const": false }
+  }
+}

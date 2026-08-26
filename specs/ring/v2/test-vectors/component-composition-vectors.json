@@ -1,0 +1,26 @@
+{
+  "vectors": [
+    {
+      "node": "shank",
+      "realComponentIds": [
+        "band"
+      ],
+      "graphType": "CURRENT"
+    },
+    {
+      "node": "head",
+      "realComponentIds": [
+        "basket_support",
+        "prongs"
+      ],
+      "graphType": "CURRENT"
+    },
+    {
+      "node": "stoneArrangement",
+      "realComponentIds": [
+        "stone_reference"
+      ],
+      "graphType": "CURRENT"
+    }
+  ]
+}

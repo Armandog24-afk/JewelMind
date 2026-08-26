@@ -807,3 +807,55 @@ set, compiler, Atlas generator, inspection, CAD kernel, OCP) attached to
 every Golden Model, so a kernel/dependency version change is visible
 rather than silently absorbed into a pass/fail result. See
 [`17-geometry-quality/510-version-fingerprint-policy.md`](../17-geometry-quality/510-version-fingerprint-policy.md).
+
+## Ring Architecture terms (Sprint 16)
+
+> Authoritative source for every term in this section:
+> [`18-ring-architecture/`](../18-ring-architecture/README.md) (Sprint 16).
+
+**Jewelry Category** — the platform-level product type
+(`ring`/`earring`/`pendant`/`bracelet`/`necklace`/`charm`); Ring is one
+category, never JewelMind's architectural root. Only `ring` currently
+has `status: current`/`generationSupported: true` — every other value
+is a recognized, versioned `planned` category, never advertised as
+working. See
+[`18-ring-architecture/520-jewelry-category-architecture.md`](../18-ring-architecture/520-jewelry-category-architecture.md).
+
+**Category Capability** — the real, machine-readable declaration
+(`CategoryCapability` in `backend/jewelmind/jewelry_category/models.py`)
+of what JewelMind can actually do for one category — generation,
+validation, preview, export support, supported families, shared vs.
+category-specific systems. Mirrored, not hand-duplicated, at
+`specs/jewelry-architecture/v1/category-registry.json`. See
+[`18-ring-architecture/520-jewelry-category-architecture.md`](../18-ring-architecture/520-jewelry-category-architecture.md).
+
+**Ring Family** — a style/variant within the Ring category (e.g.
+Solitaire); distinct from Category. Only `solitaire` has a real
+generator; 7 reserved family names exist solely to prove the family
+dispatch boundary is not solitaire-specific. See
+[`18-ring-architecture/524-ring-family-model.md`](../18-ring-architecture/524-ring-family-model.md).
+
+**RingDefinition (v2)** — the composed internal ring domain model
+(`backend/jewelmind/ring/models.py`) — sizing, shank, shoulders, head,
+stone arrangement, setting attachment — built from a real,
+UNMODIFIED `JewelryDefinition` by `ring_definition_from_jdl()`. A
+domain contract underneath JDL, never a second canonical JDL schema.
+See
+[`18-ring-architecture/523-ring-definition-model.md`](../18-ring-architecture/523-ring-definition-model.md).
+
+**Shank** — the internal architectural term for what the JDL/public API
+still calls `band` — deliberately not renamed at the API boundary. See
+[`18-ring-architecture/526-shank-contract.md`](../18-ring-architecture/526-shank-contract.md).
+
+**Ring Head** — the category-specific structural integration of a
+setting into a ring (currently just basket support height); explicitly
+separate from the setting itself, which is a potentially
+category-agnostic concept. See
+[`18-ring-architecture/528-head-contract.md`](../18-ring-architecture/528-head-contract.md).
+
+**Category Dispatch Boundary** — the generic function
+(`jewelmind.jewelry_category.dispatch.generate_for_category()`) that
+routes a category string and a payload to a registered generator — it
+has never heard of a ring field, proven by a test-only dummy category
+that dispatches through the exact same function. See
+[`18-ring-architecture/532-ring-generation-contract.md`](../18-ring-architecture/532-ring-generation-contract.md).

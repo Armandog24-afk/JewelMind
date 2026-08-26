@@ -25,10 +25,10 @@ from jewelmind.exporters.json_exporter import export_json
 from jewelmind.exporters.specification import build_specification
 from jewelmind.exporters.step_exporter import export_step
 from jewelmind.exporters.stl_exporter import export_stl
-from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
 from jewelmind.geometry.inspection.inspector import inspect_model
 from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.geometry.model import GeneratedModel
+from jewelmind.jewelry_category.dispatch import generate_jewelry
 from jewelmind.preview.mesh import write_component_previews
 from jewelmind.utils.logging import get_logger
 from jewelmind.validation.engine import has_errors, validate_definition
@@ -74,7 +74,10 @@ class ModelService:
                 details=[r.model_dump() for r in results],
             )
 
-        generated_model = build_solitaire_ring(definition)
+        # Dispatched by jewelry.category (currently always "ring") rather
+        # than calling a geometry builder directly — see
+        # docs/bible/18-ring-architecture/532-ring-generation-contract.md.
+        generated_model = generate_jewelry(definition)
         model_id = generated_model.definition_hash
 
         temp_dir = Path(tempfile.mkdtemp(prefix=f"jewelmind_{model_id}_"))

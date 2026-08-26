@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/stone-arrangement.schema.json",
+  "title": "Stone Arrangement Definition v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::StoneArrangementDefinition. CURRENT: SINGLE_CENTER only. A potentially SHARED jewelry concept beyond rings. Future PLANNED values are not accepted by this schema's enum yet — widening it is a deliberate future change, not an oversight. See docs/bible/18-ring-architecture/529-stone-arrangement-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["arrangement", "stone"],
+  "properties": {
+    "arrangement": { "const": "SINGLE_CENTER" },
+    "stone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shape", "diameter", "depth"],
+      "properties": {
+        "shape": { "const": "round" },
+        "diameter": { "type": "number" },
+        "depth": { "type": "number" }
+      }
+    }
+  }
+}

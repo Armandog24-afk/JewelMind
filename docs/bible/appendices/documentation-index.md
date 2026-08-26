@@ -8,6 +8,8 @@ last_updated: 2026-08-26
 source_of_truth: true
 depends_on: []
 related_documents: []
+professional_validation: not_required
+normative: false
 implementation_status: current
 ---
 
@@ -615,6 +617,31 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A102 | Appendix: Geometry Regression Metric Catalog | accepted | current | [`appendices/geometry-regression-metric-catalog.md`](geometry-regression-metric-catalog.md) |
 | JM-BIBLE-A103 | Appendix: Golden Update Register | accepted | current | [`appendices/golden-update-register.md`](golden-update-register.md) |
 | JM-BIBLE-A104 | Appendix: Geometry Quality Test Matrix | accepted | current | [`appendices/geometry-quality-test-matrix.md`](geometry-quality-test-matrix.md) |
+| JM-BIBLE-RING-README | Ring Architecture v2 / Multi-Category Ready — Index | accepted | current | [`18-ring-architecture/README.md`](../18-ring-architecture/README.md) |
+| JM-BIBLE-520 | Jewelry Category Architecture Governance | accepted | current | [`18-ring-architecture/520-jewelry-category-architecture.md`](../18-ring-architecture/520-jewelry-category-architecture.md) |
+| JM-BIBLE-521 | Shared vs. Category-Specific Domain | accepted | current | [`18-ring-architecture/521-shared-vs-category-specific-domain.md`](../18-ring-architecture/521-shared-vs-category-specific-domain.md) |
+| JM-BIBLE-522 | Ring Architecture Overview | accepted | current | [`18-ring-architecture/522-ring-architecture-overview.md`](../18-ring-architecture/522-ring-architecture-overview.md) |
+| JM-BIBLE-523 | RingDefinition Model | accepted | current | [`18-ring-architecture/523-ring-definition-model.md`](../18-ring-architecture/523-ring-definition-model.md) |
+| JM-BIBLE-524 | Ring Family Model | accepted | current | [`18-ring-architecture/524-ring-family-model.md`](../18-ring-architecture/524-ring-family-model.md) |
+| JM-BIBLE-525 | Ring Sizing Contract | accepted | current | [`18-ring-architecture/525-ring-sizing-contract.md`](../18-ring-architecture/525-ring-sizing-contract.md) |
+| JM-BIBLE-526 | Shank Contract | accepted | current | [`18-ring-architecture/526-shank-contract.md`](../18-ring-architecture/526-shank-contract.md) |
+| JM-BIBLE-527 | Shoulder Contract | accepted | current | [`18-ring-architecture/527-shoulder-contract.md`](../18-ring-architecture/527-shoulder-contract.md) |
+| JM-BIBLE-528 | Head Contract | accepted | current | [`18-ring-architecture/528-head-contract.md`](../18-ring-architecture/528-head-contract.md) |
+| JM-BIBLE-529 | Stone Arrangement Contract | accepted | current | [`18-ring-architecture/529-stone-arrangement-contract.md`](../18-ring-architecture/529-stone-arrangement-contract.md) |
+| JM-BIBLE-530 | Setting Attachment Contract | accepted | current | [`18-ring-architecture/530-setting-attachment-contract.md`](../18-ring-architecture/530-setting-attachment-contract.md) |
+| JM-BIBLE-531 | Ring Component Graph | accepted | current | [`18-ring-architecture/531-ring-component-graph.md`](../18-ring-architecture/531-ring-component-graph.md) |
+| JM-BIBLE-532 | Ring Generation Contract | accepted | current | [`18-ring-architecture/532-ring-generation-contract.md`](../18-ring-architecture/532-ring-generation-contract.md) |
+| JM-BIBLE-533 | Solitaire Migration Model | accepted | current | [`18-ring-architecture/533-solitaire-migration-model.md`](../18-ring-architecture/533-solitaire-migration-model.md) |
+| JM-BIBLE-534 | Multi-Category Readiness Contract | accepted | current | [`18-ring-architecture/534-multi-category-readiness-contract.md`](../18-ring-architecture/534-multi-category-readiness-contract.md) |
+| JM-BIBLE-535 | Category Extension Test Model | accepted | current | [`18-ring-architecture/535-category-extension-test-model.md`](../18-ring-architecture/535-category-extension-test-model.md) |
+| JM-BIBLE-536 | Current Code Mapping and Gaps | accepted | current | [`18-ring-architecture/536-current-code-mapping-and-gaps.md`](../18-ring-architecture/536-current-code-mapping-and-gaps.md) |
+| JM-BIBLE-537 | Open Ring Architecture Questions | accepted | current | [`18-ring-architecture/537-open-ring-architecture-questions.md`](../18-ring-architecture/537-open-ring-architecture-questions.md) |
+| JM-BIBLE-SPRINT16-REPORT | Sprint 16 Validation Report — Ring Architecture v2 / Multi-Category Ready | accepted | current | [`18-ring-architecture/SPRINT-16-VALIDATION-REPORT.md`](../18-ring-architecture/SPRINT-16-VALIDATION-REPORT.md) |
+| JM-BIBLE-A105 | Appendix: Jewelry Category Catalog | accepted | current | [`appendices/jewelry-category-catalog.md`](jewelry-category-catalog.md) |
+| JM-BIBLE-A106 | Appendix: Ring Component Catalog | accepted | current | [`appendices/ring-component-catalog.md`](ring-component-catalog.md) |
+| JM-BIBLE-A107 | Appendix: Ring Family Catalog | accepted | current | [`appendices/ring-family-catalog.md`](ring-family-catalog.md) |
+| JM-BIBLE-A108 | Appendix: Shared Jewelry System Catalog | accepted | current | [`appendices/shared-jewelry-system-catalog.md`](shared-jewelry-system-catalog.md) |
+| JM-BIBLE-A109 | Appendix: Ring Architecture Test Matrix | accepted | current | [`appendices/ring-architecture-test-matrix.md`](ring-architecture-test-matrix.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 
@@ -635,6 +662,23 @@ front-matter convention and are listed here for completeness, per
 | Fact registry (16 fact types, hand-authored, zero professional thresholds) | Yes | [`specs/geometry-inspection/v2/fact-registry.json`](../../../specs/geometry-inspection/v2/fact-registry.json) |
 | Examples (5, real generated inspection reports) | Yes | [`specs/geometry-inspection/v2/examples/`](../../../specs/geometry-inspection/v2/examples/) |
 | Test vectors (8 files) | Yes | [`specs/geometry-inspection/v2/test-vectors/`](../../../specs/geometry-inspection/v2/test-vectors/) |
+
+## Machine-readable Jewelry Architecture specification — `specs/jewelry-architecture/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/jewelry-architecture/v1/README.md`](../../../specs/jewelry-architecture/v1/README.md) |
+| Schemas (3 JSON Schemas: category identity, category capability, category extension contract) | Yes | [`specs/jewelry-architecture/v1/`](../../../specs/jewelry-architecture/v1/) |
+| Category registry (6 real entries, generated from `CATEGORY_CAPABILITIES`) | Yes | [`specs/jewelry-architecture/v1/category-registry.json`](../../../specs/jewelry-architecture/v1/category-registry.json) |
+
+## Machine-readable Ring v2 specification — `specs/ring/v2/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/ring/v2/README.md`](../../../specs/ring/v2/README.md) |
+| Schemas (8 JSON Schemas: definition/sizing/shank/shoulder/head/stone-arrangement/component/family) | Yes | [`specs/ring/v2/`](../../../specs/ring/v2/) |
+| Examples (3, real generated `RingDefinition` v2 objects) | Yes | [`specs/ring/v2/examples/`](../../../specs/ring/v2/examples/) |
+| Test vectors (4 files) | Yes | [`specs/ring/v2/test-vectors/`](../../../specs/ring/v2/test-vectors/) |
 
 ## Machine-readable Geometry Quality specification — `specs/geometry-quality/v1/`
 

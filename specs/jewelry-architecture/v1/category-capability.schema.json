@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/jewelry-architecture/v1/category-capability.schema.json",
+  "title": "Category Capability v1",
+  "description": "The real, machine-readable declaration of what JewelMind can do for one jewelry category — mirrors backend/jewelmind/jewelry_category/models.py::CategoryCapability. Never advertise a planned category as generatable. See docs/bible/18-ring-architecture/README.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "category", "status", "definitionVersion", "generationSupported",
+    "validationSupported", "previewSupported", "exportSupported"
+  ],
+  "properties": {
+    "category": { "type": "string" },
+    "status": { "enum": ["current", "planned"] },
+    "definitionVersion": { "type": "string" },
+    "generationSupported": { "type": "boolean" },
+    "validationSupported": { "type": "boolean" },
+    "previewSupported": { "type": "boolean" },
+    "exportSupported": { "type": "boolean" },
+    "supportedFamilies": { "type": "array", "items": { "type": "string" } },
+    "sharedSystems": { "type": "array", "items": { "type": "string" } },
+    "categorySpecificSystems": { "type": "array", "items": { "type": "string" } },
+    "message": { "type": "string" }
+  }
+}

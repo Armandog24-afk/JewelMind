@@ -16,6 +16,7 @@ from __future__ import annotations
 from typing import Any, get_args
 
 from jewelmind.domain import schema as S
+from jewelmind.jewelry_category.registry import get_capability
 
 # The Forge rule (validation/engine.py::_prong_rules) hardcodes this as
 # `(4, 6)`; kept as a literal tuple here too since the rule module doesn't
@@ -43,11 +44,22 @@ KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
     "bezel": "Only a prong setting is currently supported (setting.type).",
     "tension": "Only a prong setting is currently supported (setting.type).",
     "channel": "Only a prong setting is currently supported (setting.type).",
-    "necklace": "Only rings are currently supported (jewelry.category).",
-    "bracelet": "Only rings are currently supported (jewelry.category).",
-    "earring": "Only rings are currently supported (jewelry.category).",
-    "pendant": "Only rings are currently supported (jewelry.category).",
 }
+
+
+def _category_unsupported_message(category: str) -> str:
+    """Sourced from the real jewelry category capability registry
+    (Sprint 16), never a second hand-maintained roadmap string — see
+    docs/bible/18-ring-architecture/520-jewelry-category-architecture.md."""
+
+    capability = get_capability(category)
+    if capability is not None:
+        return f"{capability.message} (jewelry.category)."
+    return "Only rings are currently supported (jewelry.category)."
+
+
+for _category in ("necklace", "bracelet", "earring", "pendant"):
+    KNOWN_UNSUPPORTED_CONCEPTS[_category] = _category_unsupported_message(_category)
 
 
 def current_capabilities() -> dict[str, Any]:

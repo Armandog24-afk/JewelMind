@@ -1,0 +1,33 @@
+{
+  "family": "solitaire",
+  "sizing": {
+    "sizeSystem": "EU",
+    "size": 16.0,
+    "innerDiameter": 17.8
+  },
+  "shank": {
+    "profile": "flat",
+    "widthMm": 2.4,
+    "thicknessMm": 1.8
+  },
+  "shoulders": {
+    "modeled": false
+  },
+  "head": {
+    "basketHeightMm": 3.5
+  },
+  "stoneArrangement": {
+    "arrangement": "SINGLE_CENTER",
+    "stone": {
+      "shape": "round",
+      "diameter": 6.5,
+      "depth": 4.0
+    }
+  },
+  "setting": {
+    "settingType": "prong",
+    "prongCount": 6,
+    "prongDiameterMm": 1.1,
+    "prongHeightMm": 4.8
+  }
+}

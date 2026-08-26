@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/ring-definition.schema.json",
+  "title": "Ring Definition v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::RingDefinition — the composed internal ring domain model, built from a real JewelryDefinition by ring_definition_from_jdl(). This is a domain contract UNDERNEATH JDL, not a second canonical JDL schema: the authoritative external input format remains backend/jewelmind/domain/schema.py (mirrored at shared/types/jewelry-definition.ts); this schema describes the internal RingDefinition v2 model the adapter produces from it. See docs/bible/18-ring-architecture/523-ring-definition-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["family", "sizing", "shank", "shoulders", "head", "stoneArrangement", "setting"],
+  "properties": {
+    "family": {
+      "enum": ["solitaire", "three_stone", "toi_et_moi", "halo", "eternity", "signet", "plain_band", "cluster"],
+      "description": "See ring-family.schema.json. Only 'solitaire' is CURRENT."
+    },
+    "sizing": { "type": "object", "description": "See ring-sizing.schema.json." },
+    "shank": { "type": "object", "description": "See shank-definition.schema.json." },
+    "shoulders": { "type": "object", "description": "See shoulder-definition.schema.json." },
+    "head": { "type": "object", "description": "See head-definition.schema.json." },
+    "stoneArrangement": { "type": "object", "description": "See stone-arrangement.schema.json." },
+    "setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["settingType", "prongCount", "prongDiameterMm", "prongHeightMm"],
+      "description": "SettingAttachmentDefinition — the setting itself, separated from how it structurally attaches to the ring head (see 530-setting-attachment-contract.md). No dedicated file in this Sprint's spec set; defined inline here since it composes only into RingDefinition today.",
+      "properties": {
+        "settingType": { "const": "prong" },
+        "prongCount": { "type": "integer" },
+        "prongDiameterMm": { "type": "number" },
+        "prongHeightMm": { "type": "number" }
+      }
+    }
+  }
+}

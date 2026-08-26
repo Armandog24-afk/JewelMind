@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/ring/v2/shank-definition.schema.json",
+  "title": "Shank Definition v2",
+  "description": "Mirrors backend/jewelmind/ring/models.py::ShankDefinition. CURRENT: uniform plain shank only. Maps 1:1 from JewelryDefinition.band — see docs/bible/18-ring-architecture/526-shank-contract.md. 'Band' remains the user-facing/JDL name; 'Shank' is the internal architectural term.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "widthMm", "thicknessMm"],
+  "properties": {
+    "profile": { "enum": ["comfort_fit", "flat"] },
+    "widthMm": { "type": "number" },
+    "thicknessMm": { "type": "number" }
+  }
+}

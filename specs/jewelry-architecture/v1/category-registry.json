@@ -1,0 +1,126 @@
+{
+  "registryVersion": "1.0.0",
+  "categories": [
+    {
+      "category": "ring",
+      "status": "current",
+      "definitionVersion": "2.0.0",
+      "generationSupported": true,
+      "validationSupported": true,
+      "previewSupported": true,
+      "exportSupported": true,
+      "supportedFamilies": [
+        "solitaire"
+      ],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [
+        "sizing",
+        "shank",
+        "shoulders",
+        "head"
+      ],
+      "message": "Rings are fully supported."
+    },
+    {
+      "category": "earring",
+      "status": "planned",
+      "definitionVersion": "0.0.0",
+      "generationSupported": false,
+      "validationSupported": false,
+      "previewSupported": false,
+      "exportSupported": false,
+      "supportedFamilies": [],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [],
+      "message": "Earring is a recognized future jewelry category; generation is not yet supported."
+    },
+    {
+      "category": "pendant",
+      "status": "planned",
+      "definitionVersion": "0.0.0",
+      "generationSupported": false,
+      "validationSupported": false,
+      "previewSupported": false,
+      "exportSupported": false,
+      "supportedFamilies": [],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [],
+      "message": "Pendant is a recognized future jewelry category; generation is not yet supported."
+    },
+    {
+      "category": "bracelet",
+      "status": "planned",
+      "definitionVersion": "0.0.0",
+      "generationSupported": false,
+      "validationSupported": false,
+      "previewSupported": false,
+      "exportSupported": false,
+      "supportedFamilies": [],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [],
+      "message": "Bracelet is a recognized future jewelry category; generation is not yet supported."
+    },
+    {
+      "category": "necklace",
+      "status": "planned",
+      "definitionVersion": "0.0.0",
+      "generationSupported": false,
+      "validationSupported": false,
+      "previewSupported": false,
+      "exportSupported": false,
+      "supportedFamilies": [],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [],
+      "message": "Necklace is a recognized future jewelry category; generation is not yet supported."
+    },
+    {
+      "category": "charm",
+      "status": "planned",
+      "definitionVersion": "0.0.0",
+      "generationSupported": false,
+      "validationSupported": false,
+      "previewSupported": false,
+      "exportSupported": false,
+      "supportedFamilies": [],
+      "sharedSystems": [
+        "material",
+        "manufacturing",
+        "stone",
+        "setting",
+        "preview"
+      ],
+      "categorySpecificSystems": [],
+      "message": "Charm is a recognized future jewelry category; generation is not yet supported."
+    }
+  ]
+}

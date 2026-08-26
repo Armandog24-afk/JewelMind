@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/jewelry-architecture/v1/jewelry-category.schema.json",
+  "title": "Jewelry Category Identity v1",
+  "description": "A recognized, versioned jewelry category value. Ring is one category, never JewelMind's architectural root. See docs/bible/18-ring-architecture/520-jewelry-category-architecture.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["category", "status"],
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": ["ring", "earring", "pendant", "bracelet", "necklace", "charm"],
+      "description": "A fixed, versioned vocabulary — never an arbitrary string. Only 'ring' has an implemented JDL/generator; the rest are recognized-but-planned."
+    },
+    "status": { "enum": ["current", "planned"] }
+  }
+}
