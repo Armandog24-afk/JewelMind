@@ -23,6 +23,24 @@ register future reviews will populate — it does not, and must not,
 imply that any review has already happened merely because the register
 exists.
 
+## Superseded by Sprint 13
+
+The process sketched in this document is now formalized and
+machine-readably implemented by
+[`15-professional-validation/`](../15-professional-validation/README.md)
+(Sprint 13) — start at its
+[README](../15-professional-validation/README.md) and the real active
+registry,
+[`445-professional-validation-register.md`](../15-professional-validation/445-professional-validation-register.md).
+This document's historical content, including the empty "Current
+register" table and template below, is **preserved as-is** and remains
+accurate; it is not rewritten or deleted. Any new professional-validation
+entry — real or template — should go through the Sprint 13 framework
+(`backend/jewelmind/professional_validation/`,
+`specs/professional-validation/v1/current-validation-registry.json`)
+rather than this document's own table, which is no longer actively
+populated.
+
 ## Register fields
 
 | Field | Purpose |

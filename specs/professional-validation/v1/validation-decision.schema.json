@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/validation-decision.schema.json",
+  "title": "Validation Decision v1",
+  "description": "One reviewer's decision about one exact statement — never PASS/FAIL as the only vocabulary. Sub-shapes inlined, not $ref'd. See docs/bible/15-professional-validation/418-validation-decision-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "reviewerId", "statementValidated", "rationale", "reviewDate"],
+  "properties": {
+    "decision": {
+      "enum": ["ACCEPTED", "ACCEPTED_WITH_CONDITIONS", "REJECTED", "INSUFFICIENT_EVIDENCE", "OUT_OF_SCOPE", "SUPERSEDED"]
+    },
+    "reviewerId": { "type": "string", "minLength": 1 },
+    "statementValidated": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The precise claim being decided, e.g. 'JM-PRONG-003 v1.0.0: 4 prongs blocked when stone diameter > 8mm' — never the whole rule file or an ambiguous paraphrase."
+    },
+    "conditions": {
+      "type": ["string", "null"],
+      "description": "Required (non-empty) when decision is ACCEPTED_WITH_CONDITIONS (PROVAL-GOV-010)."
+    },
+    "rationale": { "type": "string", "minLength": 1 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jewelryCategory": { "type": ["string", "null"] },
+        "ringStyle": { "type": ["string", "null"] },
+        "component": { "type": ["string", "null"] },
+        "material": { "type": ["string", "null"] },
+        "alloy": { "type": ["string", "null"] },
+        "manufacturingMethod": { "type": ["string", "null"] },
+        "stoneShape": { "type": ["string", "null"] },
+        "stoneDimensionRangeMm": { "type": ["string", "null"] },
+        "settingType": { "type": ["string", "null"] },
+        "sizeRange": { "type": ["string", "null"] },
+        "cadApplication": { "type": ["string", "null"] },
+        "exporterVersion": { "type": ["string", "null"] },
+        "forgeRuleVersion": { "type": ["string", "null"] },
+        "atlasVersion": { "type": ["string", "null"] },
+        "jdlVersion": { "type": ["string", "null"] },
+        "geographicOrWorkshopConstraints": { "type": ["string", "null"] }
+      }
+    },
+    "evidenceIds": { "type": "array", "items": { "type": "string" } },
+    "reviewDate": { "type": "string" },
+    "revalidationTrigger": { "type": ["string", "null"] }
+  }
+}

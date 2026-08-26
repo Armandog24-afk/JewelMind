@@ -1109,3 +1109,33 @@ summary:focus-visible,
 .conversation-panel__cancel {
   margin-top: var(--space-2);
 }
+
+/* ---------- professional review panel (Sprint 13) ---------- */
+
+.professional-review-panel {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.professional-review-panel__case {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.professional-review-panel__case label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.professional-review-panel__case input {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  font-family: inherit;
+  font-size: 13px;
+}

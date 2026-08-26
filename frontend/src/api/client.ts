@@ -121,6 +121,20 @@ export async function exportSpecification(modelId: string) {
   return downloadPost('/api/models/specification', { modelId })
 }
 
+/**
+ * Professional Validation Framework v1 (Sprint 13) — generates a real
+ * review package ZIP from the current model's actual artifacts. Separate
+ * from the ordinary Foundry exports above: this is for putting the model
+ * in front of a real jewelry professional, not a production deliverable.
+ */
+export async function generateReviewPackage(modelId: string, caseId: string, includeStoneReference: boolean) {
+  return downloadPost('/api/professional-validation/review-package', {
+    modelId,
+    caseId,
+    includeStoneReference,
+  })
+}
+
 /** Fetches the specification as plain text for inline display (no download). */
 export async function fetchSpecificationText(modelId: string): Promise<string> {
   const response = await fetch(`${API_BASE_URL}/api/models/specification`, {

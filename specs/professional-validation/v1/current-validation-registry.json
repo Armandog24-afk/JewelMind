@@ -1,0 +1,5 @@
+{
+  "registryVersion": "1.0.0",
+  "description": "The single active professional-validation registry. Every entry in 'records' must be a real ValidationRecord backed by a real, identifiable reviewer and real evidence — see docs/bible/15-professional-validation/445-professional-validation-register.md. Example and template records live in examples/ and must never appear here.",
+  "records": []
+}

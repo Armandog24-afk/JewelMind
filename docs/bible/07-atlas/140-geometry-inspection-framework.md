@@ -60,3 +60,7 @@ An `AtlasInspection` result states a **fact**: a number, a boolean, a count — 
 ## No professional meaning inside Atlas inspection
 
 An `AtlasInspection` result's `message` field must state a fact ("1 solid detected") and never a judgment ("too thin," "not manufacturable," "acceptable"). Judgment vocabulary belongs exclusively to Forge's `ValidationResult.message` strings.
+
+## Relationship to Sprint 13
+
+This document's boundary — Atlas states geometric facts, never professional judgment — is exactly the boundary [`15-professional-validation/420-geometry-validation-process.md`](../15-professional-validation/420-geometry-validation-process.md) and [`15-professional-validation/436-validation-to-atlas-workflow.md`](../15-professional-validation/436-validation-to-atlas-workflow.md) build on: automated geometric inspection (this document's subject) can tell a reviewer *what* a shape is, but never *whether* it is professionally acceptable — that judgment belongs exclusively to a real, named jewelry professional, captured as a `ValidationRecord`.

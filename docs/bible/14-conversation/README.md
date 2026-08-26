@@ -91,6 +91,10 @@ A turn's raw text is classified deterministically (`classify_action()`, never an
 
 Conversation adds no new technical extraction, unsupported-feature detection, field-provenance logic, or JDL proposal construction — every one of those still lives exclusively in `backend/jewelmind/designer/` and is reused as-is via `DesignerService.interpret()`. Conversation adds interaction-only capabilities on top: turn history, reference resolution, clarification-thread lifecycle, proposal correction/staleness, and deterministic action classification. Every Sprint 10/11 guarantee (JDL/Forge validation, provider abstraction, `FakeDesignerProvider`-only CI) is unchanged. See [`391-conversation-designer-integration.md`](391-conversation-designer-integration.md) and [`392-conversation-intent-integration.md`](392-conversation-intent-integration.md).
 
+## Relationship to Sprint 13
+
+[`15-professional-validation/`](../15-professional-validation/README.md) (Sprint 13) does not change how Conversation works. A design produced or modified through a multi-turn conversation is exactly as preliminary and unvalidated as one produced any other way — accepting a conversational proposal never confers any professional-validation status, and no conversation turn can create, modify, or reference a `ValidationRecord`.
+
 ## Validation of this sprint
 
 See [`SPRINT-12-VALIDATION-REPORT.md`](SPRINT-12-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

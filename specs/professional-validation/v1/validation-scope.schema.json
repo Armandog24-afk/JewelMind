@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/validation-scope.schema.json",
+  "title": "Validation Scope v1",
+  "description": "What a validation decision actually covers — never broader than the evidence supports (PROVAL-GOV-015/016/017/018). Every field is optional; an empty scope is valid but maximally narrow. Mirrors backend/jewelmind/professional_validation/schemas.py::ValidationScope. See docs/bible/15-professional-validation/415-validation-scope-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "jewelryCategory": { "type": ["string", "null"] },
+    "ringStyle": { "type": ["string", "null"] },
+    "component": { "type": ["string", "null"] },
+    "material": { "type": ["string", "null"] },
+    "alloy": { "type": ["string", "null"] },
+    "manufacturingMethod": { "type": ["string", "null"] },
+    "stoneShape": { "type": ["string", "null"] },
+    "stoneDimensionRangeMm": { "type": ["string", "null"] },
+    "settingType": { "type": ["string", "null"] },
+    "sizeRange": { "type": ["string", "null"] },
+    "cadApplication": { "type": ["string", "null"] },
+    "exporterVersion": { "type": ["string", "null"] },
+    "forgeRuleVersion": { "type": ["string", "null"] },
+    "atlasVersion": { "type": ["string", "null"] },
+    "jdlVersion": { "type": ["string", "null"] },
+    "geographicOrWorkshopConstraints": { "type": ["string", "null"] }
+  }
+}

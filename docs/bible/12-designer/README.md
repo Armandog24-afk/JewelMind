@@ -86,6 +86,10 @@ Designer adds exactly one new Studio surface — `DesignerPanel`, rendered betwe
 
 [`14-conversation/`](../14-conversation/README.md) (Sprint 12) adds Conversation Engine, a multi-turn interaction-state layer that now orchestrates Designer for real Studio use — `ConversationPanel.tsx` supersedes `DesignerPanel.tsx` as the component actually mounted in `App.tsx` (though `DesignerPanel.tsx` remains in the codebase, tested standalone). Every `MODIFY_DESIGN_PROPOSAL`/`CREATE_DESIGN_PROPOSAL`-routed conversation turn still calls the exact same `DesignerService.interpret()` this Sprint built — Conversation adds zero duplication of Designer's technical extraction, unsupported-feature detection, field provenance, or JDL proposal construction; it only adds turn history, reference resolution, clarification-thread lifecycle, and proposal staleness on top. See [`14-conversation/391-conversation-designer-integration.md`](../14-conversation/391-conversation-designer-integration.md).
 
+## Relationship to Sprint 13
+
+[`15-professional-validation/`](../15-professional-validation/README.md) (Sprint 13) is the framework that would eventually review Designer's own output — a Designer-proposed `candidateJDL` is exactly the kind of preliminary software geometry this Sprint's framework exists to capture real professional review evidence about. Designer adds no new claim of readiness of its own; its output remains just as preliminary after Sprint 13 as before it, until a real `ValidationRecord` says otherwise for a specific object and version.
+
 ## Validation of this sprint
 
 See [`SPRINT-10-VALIDATION-REPORT.md`](SPRINT-10-VALIDATION-REPORT.md) for the checks run against this section and the findings from that pass.

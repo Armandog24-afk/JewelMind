@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/review-session.schema.json",
+  "title": "Review Session v1",
+  "description": "One real sitting with one reviewer across one or more review cases. Mirrors backend/jewelmind/professional_validation/schemas.py::ReviewSession. See docs/bible/15-professional-validation/416-review-session-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sessionId", "date", "reviewerId", "reviewType"],
+  "properties": {
+    "sessionId": { "type": "string", "minLength": 1 },
+    "date": { "type": "string" },
+    "reviewerId": { "type": "string", "minLength": 1 },
+    "reviewType": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jewelryCategory": { "type": ["string", "null"] },
+        "ringStyle": { "type": ["string", "null"] },
+        "component": { "type": ["string", "null"] },
+        "material": { "type": ["string", "null"] },
+        "alloy": { "type": ["string", "null"] },
+        "manufacturingMethod": { "type": ["string", "null"] },
+        "stoneShape": { "type": ["string", "null"] },
+        "stoneDimensionRangeMm": { "type": ["string", "null"] },
+        "settingType": { "type": ["string", "null"] },
+        "sizeRange": { "type": ["string", "null"] },
+        "cadApplication": { "type": ["string", "null"] },
+        "exporterVersion": { "type": ["string", "null"] },
+        "forgeRuleVersion": { "type": ["string", "null"] },
+        "atlasVersion": { "type": ["string", "null"] },
+        "jdlVersion": { "type": ["string", "null"] },
+        "geographicOrWorkshopConstraints": { "type": ["string", "null"] }
+      }
+    },
+    "jewelmindVersions": { "type": "object", "additionalProperties": { "type": "string" } },
+    "reviewedCaseIds": { "type": "array", "items": { "type": "string" } },
+    "evidenceIds": { "type": "array", "items": { "type": "string" } },
+    "observationIds": { "type": "array", "items": { "type": "string" } },
+    "decisionIds": { "type": "array", "items": { "type": "string" } },
+    "unresolvedQuestions": { "type": "array", "items": { "type": "string" } },
+    "followUpRequired": { "type": "boolean" }
+  }
+}

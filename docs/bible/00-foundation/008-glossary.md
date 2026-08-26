@@ -657,3 +657,58 @@ caller's current JDL/DesignIntent content hashes on every request and
 compares them against the proposal's own `baseDefinitionHash`/
 `baseIntentHash` before `ACCEPT_PROPOSAL` is allowed to succeed. See
 [`402-stale-context-and-concurrent-editing.md`](../14-conversation/402-stale-context-and-concurrent-editing.md).
+
+## Professional validation terms (Sprint 13)
+
+> Authoritative source for every term in this section:
+> [`15-professional-validation/`](../15-professional-validation/README.md) (Sprint 13).
+
+**Validation Record** — the atomic unit of professional validation
+(`ValidationRecord`): an exact object, an exact version, a defined
+scope, a qualified reviewer, a date, evidence, conditions (if any), and
+a decision. The active registry currently holds zero records. See
+[`15-professional-validation/412-validation-object-model.md`](../15-professional-validation/412-validation-object-model.md).
+
+**Reviewer Qualification** — the required statement of why a specific
+named reviewer is fit to review a specific item (`ReviewerQualification`):
+a role drawn from 8 defined roles plus a stated `professionalFocus` —
+never a generic credential or prestige claim. See
+[`15-professional-validation/414-reviewer-qualification-model.md`](../15-professional-validation/414-reviewer-qualification-model.md).
+
+**Validation Scope** — the explicit boundary a `ValidationRecord`
+claims to cover (`ValidationScope`): material, manufacturing method,
+size range, stone-dimension range, and more. An unset field constrains
+nothing; scope never silently broadens beyond what was actually
+reviewed. See
+[`15-professional-validation/415-validation-scope-model.md`](../15-professional-validation/415-validation-scope-model.md).
+
+**Review Case** — one bounded professional review engagement
+(`ReviewCase`) grouping a reviewer, a set of validation objects and
+scopes, evidence, checklists, and observations into a single auditable
+unit. See
+[`15-professional-validation/425-review-case-model.md`](../15-professional-validation/425-review-case-model.md).
+
+**Review Package** — the real, downloadable ZIP artifact
+(`POST /api/professional-validation/review-package`) bundling the
+current model's STEP, STL, JDL, technical specification, Forge report,
+geometry metadata, and an empty review form for a reviewer to fill in —
+never a pre-filled or simulated review. See
+[`15-professional-validation/446-review-package-generation.md`](../15-professional-validation/446-review-package-generation.md).
+
+**Validation Status** — the value naming how far a validation object
+has progressed (`not_required | preliminary | required | validated`),
+with no implicit default; every current jewelry-domain rule is
+`preliminary`. See
+[`15-professional-validation/410-validation-governance.md`](../15-professional-validation/410-validation-governance.md).
+
+**Professional Disagreement** — a recorded, never-merged conflict
+between two `ValidationRecord`s reaching different conclusions about
+the same object (`DisagreementRecord`), naming both `recordIds`
+explicitly rather than resolving or averaging them. See
+[`15-professional-validation/430-professional-disagreement-model.md`](../15-professional-validation/430-professional-disagreement-model.md).
+
+**Conditional Acceptance** — a validation decision of
+`ACCEPTED_WITH_CONDITIONS`, which must always carry a non-empty list of
+conditions; the conditions are preserved, never dropped, by every
+downstream consumer of the record. See
+[`15-professional-validation/431-conditional-acceptance-model.md`](../15-professional-validation/431-conditional-acceptance-model.md).

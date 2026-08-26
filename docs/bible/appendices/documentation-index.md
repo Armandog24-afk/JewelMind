@@ -488,6 +488,72 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A78 | Appendix: Conversation Test Case Catalog | accepted | current | [`appendices/conversation-test-case-catalog.md`](conversation-test-case-catalog.md) |
 | JM-BIBLE-A79 | Appendix: Conversation Code Mapping | accepted | current | [`appendices/conversation-code-mapping.md`](conversation-code-mapping.md) |
 | JM-BIBLE-A80 | Appendix: Conversation Test Matrix | accepted | current | [`appendices/conversation-test-matrix.md`](conversation-test-matrix.md) |
+| JM-BIBLE-PROVAL-README | Professional Validation Framework v1 — Index | accepted | current | [`15-professional-validation/README.md`](../15-professional-validation/README.md) |
+| JM-BIBLE-410 | Validation Governance | accepted | current | [`15-professional-validation/410-validation-governance.md`](../15-professional-validation/410-validation-governance.md) |
+| JM-BIBLE-411 | Professional Validation Overview | accepted | current | [`15-professional-validation/411-professional-validation-overview.md`](../15-professional-validation/411-professional-validation-overview.md) |
+| JM-BIBLE-412 | Validation Object Model | accepted | current | [`15-professional-validation/412-validation-object-model.md`](../15-professional-validation/412-validation-object-model.md) |
+| JM-BIBLE-413 | Reviewer Role Model | accepted | current | [`15-professional-validation/413-reviewer-role-model.md`](../15-professional-validation/413-reviewer-role-model.md) |
+| JM-BIBLE-414 | Reviewer Qualification Model | accepted | current | [`15-professional-validation/414-reviewer-qualification-model.md`](../15-professional-validation/414-reviewer-qualification-model.md) |
+| JM-BIBLE-415 | Validation Scope Model | accepted | current | [`15-professional-validation/415-validation-scope-model.md`](../15-professional-validation/415-validation-scope-model.md) |
+| JM-BIBLE-416 | Review Session Model | accepted | current | [`15-professional-validation/416-review-session-model.md`](../15-professional-validation/416-review-session-model.md) |
+| JM-BIBLE-417 | Review Evidence Model | accepted | current | [`15-professional-validation/417-review-evidence-model.md`](../15-professional-validation/417-review-evidence-model.md) |
+| JM-BIBLE-418 | Validation Decision Model | accepted | current | [`15-professional-validation/418-validation-decision-model.md`](../15-professional-validation/418-validation-decision-model.md) |
+| JM-BIBLE-419 | Rule Validation Process | accepted | current | [`15-professional-validation/419-rule-validation-process.md`](../15-professional-validation/419-rule-validation-process.md) |
+| JM-BIBLE-420 | Geometry Validation Process | accepted | current | [`15-professional-validation/420-geometry-validation-process.md`](../15-professional-validation/420-geometry-validation-process.md) |
+| JM-BIBLE-421 | Manufacturing Validation Process | accepted | current | [`15-professional-validation/421-manufacturing-validation-process.md`](../15-professional-validation/421-manufacturing-validation-process.md) |
+| JM-BIBLE-422 | Setting Validation Process | accepted | current | [`15-professional-validation/422-setting-validation-process.md`](../15-professional-validation/422-setting-validation-process.md) |
+| JM-BIBLE-423 | Material Validation Process | accepted | current | [`15-professional-validation/423-material-validation-process.md`](../15-professional-validation/423-material-validation-process.md) |
+| JM-BIBLE-424 | CAD Workflow Validation Process | accepted | current | [`15-professional-validation/424-cad-workflow-validation-process.md`](../15-professional-validation/424-cad-workflow-validation-process.md) |
+| JM-BIBLE-425 | Review Case Model | accepted | current | [`15-professional-validation/425-review-case-model.md`](../15-professional-validation/425-review-case-model.md) |
+| JM-BIBLE-426 | Review Package Contract | accepted | current | [`15-professional-validation/426-review-package-contract.md`](../15-professional-validation/426-review-package-contract.md) |
+| JM-BIBLE-427 | Review Checklist Model | accepted | current | [`15-professional-validation/427-review-checklist-model.md`](../15-professional-validation/427-review-checklist-model.md) |
+| JM-BIBLE-428 | Review Observation Model | accepted | current | [`15-professional-validation/428-review-observation-model.md`](../15-professional-validation/428-review-observation-model.md) |
+| JM-BIBLE-429 | Severity and Finding Classification | accepted | current | [`15-professional-validation/429-severity-and-finding-classification.md`](../15-professional-validation/429-severity-and-finding-classification.md) |
+| JM-BIBLE-430 | Professional Disagreement Model | accepted | current | [`15-professional-validation/430-professional-disagreement-model.md`](../15-professional-validation/430-professional-disagreement-model.md) |
+| JM-BIBLE-431 | Conditional Acceptance Model | accepted | current | [`15-professional-validation/431-conditional-acceptance-model.md`](../15-professional-validation/431-conditional-acceptance-model.md) |
+| JM-BIBLE-432 | Validation Versioning | accepted | current | [`15-professional-validation/432-validation-versioning.md`](../15-professional-validation/432-validation-versioning.md) |
+| JM-BIBLE-433 | Validation Expiration and Revalidation | accepted | current | [`15-professional-validation/433-validation-expiration-and-revalidation.md`](../15-professional-validation/433-validation-expiration-and-revalidation.md) |
+| JM-BIBLE-434 | Implementation Change Impact | accepted | current | [`15-professional-validation/434-implementation-change-impact.md`](../15-professional-validation/434-implementation-change-impact.md) |
+| JM-BIBLE-435 | Validation to Forge Workflow | accepted | current | [`15-professional-validation/435-validation-to-forge-workflow.md`](../15-professional-validation/435-validation-to-forge-workflow.md) |
+| JM-BIBLE-436 | Validation to Atlas Workflow | accepted | current | [`15-professional-validation/436-validation-to-atlas-workflow.md`](../15-professional-validation/436-validation-to-atlas-workflow.md) |
+| JM-BIBLE-437 | Validation to Product Workflow | accepted | current | [`15-professional-validation/437-validation-to-product-workflow.md`](../15-professional-validation/437-validation-to-product-workflow.md) |
+| JM-BIBLE-438 | Professional Review Audit Trail | accepted | current | [`15-professional-validation/438-professional-review-audit-trail.md`](../15-professional-validation/438-professional-review-audit-trail.md) |
+| JM-BIBLE-439 | Reviewer Independence and Conflicts | accepted | current | [`15-professional-validation/439-reviewer-independence-and-conflicts.md`](../15-professional-validation/439-reviewer-independence-and-conflicts.md) |
+| JM-BIBLE-440 | Evidence Quality Model | accepted | current | [`15-professional-validation/440-evidence-quality-model.md`](../15-professional-validation/440-evidence-quality-model.md) |
+| JM-BIBLE-441 | Review Sampling Strategy | accepted | current | [`15-professional-validation/441-review-sampling-strategy.md`](../15-professional-validation/441-review-sampling-strategy.md) |
+| JM-BIBLE-442 | Golden Review Models | accepted | current | [`15-professional-validation/442-golden-review-models.md`](../15-professional-validation/442-golden-review-models.md) |
+| JM-BIBLE-443 | Current Preliminary Rule Review Plan | accepted | current | [`15-professional-validation/443-current-preliminary-rule-review-plan.md`](../15-professional-validation/443-current-preliminary-rule-review-plan.md) |
+| JM-BIBLE-444 | Current Solitaire Review Plan | accepted | current | [`15-professional-validation/444-current-solitaire-review-plan.md`](../15-professional-validation/444-current-solitaire-review-plan.md) |
+| JM-BIBLE-445 | Professional Validation Register (Sprint 13) | accepted | current | [`15-professional-validation/445-professional-validation-register.md`](../15-professional-validation/445-professional-validation-register.md) |
+| JM-BIBLE-446 | Review Package Generation | accepted | current | [`15-professional-validation/446-review-package-generation.md`](../15-professional-validation/446-review-package-generation.md) |
+| JM-BIBLE-447 | Studio Professional Review Mode | accepted | current | [`15-professional-validation/447-studio-professional-review-mode.md`](../15-professional-validation/447-studio-professional-review-mode.md) |
+| JM-BIBLE-448 | Validation Security and Privacy | accepted | current | [`15-professional-validation/448-validation-security-and-privacy.md`](../15-professional-validation/448-validation-security-and-privacy.md) |
+| JM-BIBLE-449 | Validation Evaluation Framework | accepted | current | [`15-professional-validation/449-validation-evaluation-framework.md`](../15-professional-validation/449-validation-evaluation-framework.md) |
+| JM-BIBLE-450 | Current Code Mapping (Professional Validation) | accepted | current | [`15-professional-validation/450-current-code-mapping.md`](../15-professional-validation/450-current-code-mapping.md) |
+| JM-BIBLE-451 | Validation Gap Analysis | accepted | current | [`15-professional-validation/451-validation-gap-analysis.md`](../15-professional-validation/451-validation-gap-analysis.md) |
+| JM-BIBLE-452 | Open Professional Validation Questions | accepted | current | [`15-professional-validation/452-open-professional-validation-questions.md`](../15-professional-validation/452-open-professional-validation-questions.md) |
+| JM-BIBLE-SPRINT13-REPORT | Sprint 13 Validation Report | accepted | current | [`15-professional-validation/SPRINT-13-VALIDATION-REPORT.md`](../15-professional-validation/SPRINT-13-VALIDATION-REPORT.md) |
+| JM-BIBLE-A81 | Appendix: Professional Reviewer Role Catalog | accepted | current | [`appendices/professional-reviewer-role-catalog.md`](professional-reviewer-role-catalog.md) |
+| JM-BIBLE-A82 | Appendix: Professional Validation Object Catalog | accepted | current | [`appendices/professional-validation-object-catalog.md`](professional-validation-object-catalog.md) |
+| JM-BIBLE-A83 | Appendix: Professional Review Checklist Catalog | accepted | current | [`appendices/professional-review-checklist-catalog.md`](professional-review-checklist-catalog.md) |
+| JM-BIBLE-A84 | Appendix: Professional Validation Decision Catalog | accepted | current | [`appendices/professional-validation-decision-catalog.md`](professional-validation-decision-catalog.md) |
+| JM-BIBLE-A85 | Appendix: Professional Finding Catalog | accepted | current | [`appendices/professional-finding-catalog.md`](professional-finding-catalog.md) |
+| JM-BIBLE-A86 | Appendix: Professional Validation Status Matrix | accepted | current | [`appendices/professional-validation-status-matrix.md`](professional-validation-status-matrix.md) |
+| JM-BIBLE-A87 | Appendix: Professional Rule Review Matrix | accepted | current | [`appendices/professional-rule-review-matrix.md`](professional-rule-review-matrix.md) |
+| JM-BIBLE-A88 | Appendix: Professional Geometry Review Matrix | accepted | current | [`appendices/professional-geometry-review-matrix.md`](professional-geometry-review-matrix.md) |
+| JM-BIBLE-A89 | Appendix: Professional Evidence Catalog | accepted | current | [`appendices/professional-evidence-catalog.md`](professional-evidence-catalog.md) |
+| JM-BIBLE-A90 | Appendix: Professional Code Mapping | accepted | current | [`appendices/professional-code-mapping.md`](professional-code-mapping.md) |
+| JM-BIBLE-A91 | Appendix: Professional Test Matrix | accepted | current | [`appendices/professional-test-matrix.md`](professional-test-matrix.md) |
+
+## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/professional-validation/v1/README.md`](../../../specs/professional-validation/v1/README.md) |
+| Schemas (10 JSON Schemas covering validation record/target/scope/reviewer/qualification/evidence/decision/case/package/disagreement models) | Yes | [`specs/professional-validation/v1/`](../../../specs/professional-validation/v1/) |
+| Active validation registry (currently empty — zero records) | Yes | [`specs/professional-validation/v1/current-validation-registry.json`](../../../specs/professional-validation/v1/current-validation-registry.json) |
+| Example/template records (5) | Yes | [`specs/professional-validation/v1/examples/`](../../../specs/professional-validation/v1/examples/) |
+| Test vectors (6 files) | Yes | [`specs/professional-validation/v1/test-vectors/`](../../../specs/professional-validation/v1/test-vectors/) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 

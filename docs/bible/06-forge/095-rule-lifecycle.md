@@ -56,3 +56,7 @@ A rule may be rejected from `EXPERIMENTAL`, `PRELIMINARY`, or `UNDER_REVIEW` at 
 ## Current lifecycle state of every rule
 
 All 21 registered rules currently carry `lifecycleState: ACCEPTED` in `specs/forge/v1/current-rule-registry.json` — they are running, tested, unconditional parts of the current system, even though 16 of them are only `preliminary` on the professional-validation axis. No rule is currently `PROPOSED`, `EXPERIMENTAL`, `UNDER_REVIEW`, `VALIDATED` (in the professional sense — note this is a different word from the `professionalValidationStatus` field but shares its state name; a rule reaches lifecycle `VALIDATED` once professional review concludes positively, immediately before `ACCEPTED`), `DEPRECATED`, or `REJECTED`.
+
+## Relationship to Sprint 13
+
+If a rule ever does acquire a `ValidationRecord` (still zero today), a subsequent lifecycle change to that same rule — a threshold, severity, or blocking-scope change, per [`108-rule-versioning.md`](108-rule-versioning.md) — interacts with that record through [`15-professional-validation/432-validation-versioning.md`](../15-professional-validation/432-validation-versioning.md) and [`15-professional-validation/434-implementation-change-impact.md`](../15-professional-validation/434-implementation-change-impact.md): a MAJOR change to a validated rule triggers impact analysis and can downgrade the record's status rather than silently carrying validation forward onto changed semantics. This lifecycle model itself is unchanged by Sprint 13.

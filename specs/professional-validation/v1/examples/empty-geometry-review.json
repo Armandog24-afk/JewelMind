@@ -1,0 +1,43 @@
+{
+  "recordId": "JM-PV-TEMPLATE-GEOMETRY",
+  "target": {
+    "objectType": "GEOMETRY_COMPONENT",
+    "objectId": "prongs",
+    "version": "atlas-0.1.0",
+    "description": "The current parametric prong geometry builder's output.",
+    "implementationReferences": [
+      "backend/jewelmind/geometry/components/prongs.py"
+    ],
+    "relatedTests": [],
+    "currentValidationStatus": "NOT_REVIEWED"
+  },
+  "scope": {
+    "jewelryCategory": null,
+    "ringStyle": null,
+    "component": null,
+    "material": null,
+    "alloy": null,
+    "manufacturingMethod": null,
+    "stoneShape": null,
+    "stoneDimensionRangeMm": null,
+    "settingType": null,
+    "sizeRange": null,
+    "cadApplication": null,
+    "exporterVersion": null,
+    "forgeRuleVersion": null,
+    "atlasVersion": null,
+    "jdlVersion": null,
+    "geographicOrWorkshopConstraints": null
+  },
+  "reviewerId": "",
+  "sessionId": null,
+  "decision": "INSUFFICIENT_EVIDENCE",
+  "status": "NOT_REVIEWED",
+  "evidenceIds": [],
+  "conditions": null,
+  "rationale": "Template only \u2014 no review has occurred.",
+  "reviewDate": "",
+  "expirationOrReviewTrigger": null,
+  "supersedesRecordId": null,
+  "isTemplate": true
+}

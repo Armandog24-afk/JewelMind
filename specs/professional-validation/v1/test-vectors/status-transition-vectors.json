@@ -1,0 +1,54 @@
+{
+  "vectors": [
+    {
+      "from": "NOT_REVIEWED",
+      "to": "REVIEW_PLANNED",
+      "trigger": "A reviewer is assigned and scheduled."
+    },
+    {
+      "from": "REVIEW_PLANNED",
+      "to": "UNDER_REVIEW",
+      "trigger": "The review session begins."
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "VALIDATED",
+      "trigger": "Reviewer decision: ACCEPTED."
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "VALIDATED_WITH_CONDITIONS",
+      "trigger": "Reviewer decision: ACCEPTED_WITH_CONDITIONS."
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "REJECTED",
+      "trigger": "Reviewer decision: REJECTED."
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "INSUFFICIENT_EVIDENCE",
+      "trigger": "Reviewer decision: INSUFFICIENT_EVIDENCE."
+    },
+    {
+      "from": "VALIDATED",
+      "to": "REVALIDATION_REQUIRED",
+      "trigger": "A MAJOR change to the validated rule/geometry version invalidates the prior record."
+    },
+    {
+      "from": "VALIDATED_WITH_CONDITIONS",
+      "to": "REVALIDATION_REQUIRED",
+      "trigger": "Same as above \u2014 a conditional acceptance is equally invalidated by a MAJOR change."
+    },
+    {
+      "from": "VALIDATED",
+      "to": "SUPERSEDED",
+      "trigger": "A newer record for the same object/version is accepted."
+    },
+    {
+      "from": "REVALIDATION_REQUIRED",
+      "to": "UNDER_REVIEW",
+      "trigger": "Re-review begins at the new version."
+    }
+  ]
+}

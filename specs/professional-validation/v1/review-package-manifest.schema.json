@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/review-package-manifest.schema.json",
+  "title": "Review Package Manifest v1",
+  "description": "The manifest bundled inside every generated Professional Review Package ZIP. Every checksum here is a real SHA-256 of the actual bundled file content — see backend/jewelmind/professional_validation/review_package.py::build_review_package(). See docs/bible/15-professional-validation/426-review-package-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["packageId", "caseId", "generatedAt", "sourceDefinitionHash", "jdlVersion"],
+  "properties": {
+    "packageId": { "type": "string", "minLength": 1 },
+    "caseId": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string" },
+    "sourceDefinitionHash": { "type": "string" },
+    "jdlVersion": { "type": "string" },
+    "compilerVersion": { "type": ["string", "null"] },
+    "forgeVersion": { "type": ["string", "null"] },
+    "atlasVersion": { "type": ["string", "null"] },
+    "includedFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "sha256", "sizeBytes"],
+        "properties": {
+          "name": { "type": "string" },
+          "sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+          "sizeBytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "checksums": { "type": "object", "additionalProperties": { "type": "string" } },
+    "missingOptionalFiles": { "type": "array", "items": { "type": "string" } },
+    "knownLimitations": { "type": "array", "items": { "type": "string" } }
+  }
+}

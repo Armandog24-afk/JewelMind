@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/validation-evidence.schema.json",
+  "title": "Validation Evidence v1",
+  "description": "One piece of evidence backing a review observation or decision. AI_ASSISTED and SOFTWARE_ONLY quality classes can never alone create professional validation (see 440-evidence-quality-model.md). Mirrors backend/jewelmind/professional_validation/schemas.py::ValidationEvidence. See docs/bible/15-professional-validation/417-review-evidence-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidenceId", "type", "qualityClass", "source", "date", "description"],
+  "properties": {
+    "evidenceId": { "type": "string", "minLength": 1 },
+    "type": {
+      "enum": [
+        "LIVE_SOFTWARE_OBSERVATION", "CAD_FILE_INSPECTION", "STEP_IMPORT_INSPECTION", "STL_INSPECTION",
+        "PHYSICAL_PRINT", "CAST_SAMPLE", "BENCH_WORK", "STONE_SETTING_TEST", "MEASUREMENT",
+        "REFERENCE_DOCUMENT", "MANUFACTURER_GUIDANCE", "PROFESSIONAL_EXPERIENCE",
+        "COMPARATIVE_CAD_MODEL", "PHOTO", "VIDEO", "ANNOTATED_SCREENSHOT", "WRITTEN_REVIEW"
+      ]
+    },
+    "qualityClass": {
+      "description": "Never a numeric evidence score — a qualitative class only. See 440-evidence-quality-model.md.",
+      "enum": [
+        "DIRECT_PHYSICAL", "DIRECT_CAD", "DIRECT_WORKFLOW", "DOCUMENTED_REFERENCE",
+        "PROFESSIONAL_JUDGMENT", "SOFTWARE_ONLY", "AI_ASSISTED"
+      ]
+    },
+    "source": { "type": "string", "minLength": 1 },
+    "date": { "type": "string" },
+    "relatedReviewCaseId": { "type": ["string", "null"] },
+    "description": { "type": "string", "minLength": 1 },
+    "fileOrReference": { "type": ["string", "null"] },
+    "limitations": { "type": "string" }
+  }
+}

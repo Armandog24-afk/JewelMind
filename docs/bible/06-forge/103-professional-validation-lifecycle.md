@@ -20,6 +20,10 @@ normative: true
 
 This is the Forge-level formalization of the process [`04-jewelry-domain/058-professional-validation-register.md`](../04-jewelry-domain/058-professional-validation-register.md) already established in Sprint 2. **No rule has ever completed this process.**
 
+## Now the actual implemented framework: see Sprint 13
+
+The conceptual flow below remains accurate — it is not deleted, replaced, or contradicted. [`docs/bible/15-professional-validation/`](../15-professional-validation/README.md) (Sprint 13) is now the full, machine-readable implementation of this same lifecycle: real `ReviewerQualification`, `ValidationScope`, `ValidationEvidence`, `ValidationDecision`, and `ValidationRecord` schemas (`backend/jewelmind/professional_validation/schemas.py`), a real active registry (currently empty), and a documented step-by-step process in [`15-professional-validation/419-rule-validation-process.md`](../15-professional-validation/419-rule-validation-process.md) and [`15-professional-validation/435-validation-to-forge-workflow.md`](../15-professional-validation/435-validation-to-forge-workflow.md) that reconciles directly with this document's own Mermaid flowchart. Read [`15-professional-validation/410-validation-governance.md`](../15-professional-validation/410-validation-governance.md) for the 20 governing rules.
+
 ## Process
 
 ```mermaid
@@ -49,7 +53,7 @@ Per [`108-rule-versioning.md`](108-rule-versioning.md), professional validation 
 
 ## Current state: zero validated rules
 
-Every one of the 21 rules in `specs/forge/v1/current-rule-registry.json` has `professionalValidationStatus` of `preliminary` (the 16 `JM-*` domain rules) or `not_required` (the 5 `FORGE-*` system/structural rules). **No validation record exists in [`forge-rule-provenance-register.md`](../appendices/forge-rule-provenance-register.md) because no professional review has ever taken place.** This is stated here per this Sprint's explicit governing instruction: existing implementation does not itself count as professional validation, and no reviewer is invented to fill this gap.
+Every one of the 21 rules in `specs/forge/v1/current-rule-registry.json` has `professionalValidationStatus` of `preliminary` (the 16 `JM-*` domain rules) or `not_required` (the 5 `FORGE-*` system/structural rules). **No validation record exists in [`forge-rule-provenance-register.md`](../appendices/forge-rule-provenance-register.md) because no professional review has ever taken place.** This is stated here per this Sprint's explicit governing instruction: existing implementation does not itself count as professional validation, and no reviewer is invented to fill this gap. As of Sprint 13, this remains true and is now independently verified live: `specs/professional-validation/v1/current-validation-registry.json` contains zero records, and `backend/tests/test_professional_validation_registry.py::TestZeroValidationDefault` regression-tests this fact on every CI run.
 
 ## Do not invent validators
 

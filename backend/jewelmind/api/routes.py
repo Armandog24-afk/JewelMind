@@ -25,6 +25,7 @@ from jewelmind.api.schemas import (
     GenerateResponse,
     HealthResponse,
     ModelMetadataResponse,
+    ReviewPackageRequest,
     SpecificationRequest,
     ValidateResponse,
 )
@@ -35,6 +36,7 @@ from jewelmind.designer.service import DesignerService
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.exporters.filenames import sanitize_filename
 from jewelmind.exporters.integrity import sha256_checksum
+from jewelmind.professional_validation.review_package import build_review_package
 from jewelmind.services.cad_engine import cad_engine_error, cad_engine_ready
 from jewelmind.validation.engine import has_errors, validate_definition
 
@@ -271,4 +273,34 @@ def specification_route(payload: SpecificationRequest) -> PlainTextResponse:
         content=text,
         media_type="text/markdown",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@router.post("/api/professional-validation/review-package")
+def review_package_route(payload: ReviewPackageRequest) -> FileResponse:
+    # This is a Professional Validation Framework (Sprint 13) endpoint, not
+    # an ordinary Foundry export — it packages CURRENT real artifacts for a
+    # human reviewer, never a placeholder. See
+    # docs/bible/15-professional-validation/426-review-package-contract.md.
+    # Staleness protection (never packaging an out-of-date currentDefinition)
+    # is the same frontend gate every other export button already uses
+    # (isStale in useProjectStore) — the backend has no independent concept
+    # of "stale" since model_id IS the content hash of what was generated.
+    model_service = _get_model_service()
+    record = model_service.get_record(payload.modelId)
+    zip_path, manifest = build_review_package(
+        model_service,
+        payload.modelId,
+        case_id=payload.caseId,
+        include_stone_reference=payload.includeStoneReference,
+    )
+    base_name = sanitize_filename(record.definition.project.name, default="jewelmind-review")
+    filename = f"{base_name}-review-package.zip"
+    checksum = sha256_checksum(zip_path)
+    return FileResponse(
+        zip_path,
+        media_type="application/zip",
+        filename=filename,
+        headers={"X-Content-SHA256": checksum, "X-Package-Id": manifest.packageId},
+        background=BackgroundTask(_delete_file, zip_path),
     )

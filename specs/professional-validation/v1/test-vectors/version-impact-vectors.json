@@ -1,0 +1,24 @@
+{
+  "vectors": [
+    {
+      "scenario": "documentation_wording_change_only",
+      "changeType": "VALIDATION_VERSION_UNCHANGED",
+      "description": "Only prose wording in a Bible doc changes; the rule's threshold/severity/blocking is untouched."
+    },
+    {
+      "scenario": "minor_clarifying_code_comment",
+      "changeType": "REVIEW_REQUIRED",
+      "description": "A code comment or internal refactor changes with no behavioral difference \u2014 a human should confirm before assuming VALIDATION_VERSION_UNCHANGED."
+    },
+    {
+      "scenario": "forge_rule_threshold_changed",
+      "changeType": "REVALIDATION_REQUIRED",
+      "description": "A MAJOR rule-version change per 108-rule-versioning.md (changed threshold/severity/blocking) invalidates any prior professional validation of that rule."
+    },
+    {
+      "scenario": "prong_builder_algorithm_rewritten",
+      "changeType": "REVALIDATION_REQUIRED",
+      "description": "Existing professional validation of old prong geometry cannot automatically validate new generator output."
+    }
+  ]
+}

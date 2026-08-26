@@ -79,3 +79,9 @@ class ExportJsonRequest(_StrictRequest):
 
 class SpecificationRequest(_StrictRequest):
     modelId: str
+
+
+class ReviewPackageRequest(_StrictRequest):
+    modelId: str
+    caseId: str = Field(min_length=1, max_length=100)
+    includeStoneReference: bool = True

@@ -1,0 +1,128 @@
+{
+  "vectors": [
+    {
+      "scope": {
+        "jewelryCategory": null,
+        "ringStyle": null,
+        "component": null,
+        "material": null,
+        "alloy": null,
+        "manufacturingMethod": null,
+        "stoneShape": null,
+        "stoneDimensionRangeMm": null,
+        "settingType": null,
+        "sizeRange": null,
+        "cadApplication": null,
+        "exporterVersion": null,
+        "forgeRuleVersion": null,
+        "atlasVersion": null,
+        "jdlVersion": null,
+        "geographicOrWorkshopConstraints": null
+      },
+      "context": {
+        "stoneShape": "round",
+        "manufacturingMethod": "lost_wax_casting"
+      },
+      "matches": true
+    },
+    {
+      "scope": {
+        "jewelryCategory": null,
+        "ringStyle": null,
+        "component": null,
+        "material": null,
+        "alloy": null,
+        "manufacturingMethod": "lost_wax_casting",
+        "stoneShape": "round",
+        "stoneDimensionRangeMm": null,
+        "settingType": null,
+        "sizeRange": null,
+        "cadApplication": null,
+        "exporterVersion": null,
+        "forgeRuleVersion": null,
+        "atlasVersion": null,
+        "jdlVersion": null,
+        "geographicOrWorkshopConstraints": null
+      },
+      "context": {
+        "stoneShape": "round",
+        "manufacturingMethod": "lost_wax_casting"
+      },
+      "matches": true
+    },
+    {
+      "scope": {
+        "jewelryCategory": null,
+        "ringStyle": null,
+        "component": null,
+        "material": null,
+        "alloy": null,
+        "manufacturingMethod": "lost_wax_casting",
+        "stoneShape": "round",
+        "stoneDimensionRangeMm": null,
+        "settingType": null,
+        "sizeRange": null,
+        "cadApplication": null,
+        "exporterVersion": null,
+        "forgeRuleVersion": null,
+        "atlasVersion": null,
+        "jdlVersion": null,
+        "geographicOrWorkshopConstraints": null
+      },
+      "context": {
+        "stoneShape": "oval",
+        "manufacturingMethod": "direct_resin_printing"
+      },
+      "matches": false
+    },
+    {
+      "scope": {
+        "jewelryCategory": null,
+        "ringStyle": null,
+        "component": null,
+        "material": null,
+        "alloy": null,
+        "manufacturingMethod": "lost_wax_casting",
+        "stoneShape": null,
+        "stoneDimensionRangeMm": null,
+        "settingType": null,
+        "sizeRange": null,
+        "cadApplication": null,
+        "exporterVersion": null,
+        "forgeRuleVersion": null,
+        "atlasVersion": null,
+        "jdlVersion": null,
+        "geographicOrWorkshopConstraints": null
+      },
+      "context": {
+        "manufacturingMethod": "lost_wax_casting",
+        "stoneShape": "oval"
+      },
+      "matches": true
+    },
+    {
+      "scope": {
+        "jewelryCategory": null,
+        "ringStyle": null,
+        "component": null,
+        "material": null,
+        "alloy": null,
+        "manufacturingMethod": "lost_wax_casting",
+        "stoneShape": null,
+        "stoneDimensionRangeMm": null,
+        "settingType": null,
+        "sizeRange": null,
+        "cadApplication": null,
+        "exporterVersion": null,
+        "forgeRuleVersion": null,
+        "atlasVersion": null,
+        "jdlVersion": null,
+        "geographicOrWorkshopConstraints": null
+      },
+      "context": {
+        "stoneShape": "round"
+      },
+      "matches": false
+    }
+  ]
+}

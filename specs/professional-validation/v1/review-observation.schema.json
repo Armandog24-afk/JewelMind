@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/review-observation.schema.json",
+  "title": "Review Observation v1",
+  "description": "One reviewer note about the model or a rule — never itself a validation decision (an observation has no decision/status field at all). Sub-shapes inlined, not $ref'd, matching every prior sprint's specs/*/v1/ convention. See docs/bible/15-professional-validation/428-review-observation-model.md and 429-severity-and-finding-classification.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["observationId", "caseId", "reviewerId", "target", "category", "severity", "observation"],
+  "properties": {
+    "observationId": { "type": "string", "minLength": 1 },
+    "caseId": { "type": "string", "minLength": 1 },
+    "reviewerId": { "type": "string", "minLength": 1 },
+    "target": { "type": "string", "description": "What is being observed, e.g. 'setting.prongs'." },
+    "category": { "type": "string" },
+    "severity": {
+      "description": "Deliberately separate from a software/Forge severity — never mechanically mapped. See 429.",
+      "enum": ["NOTE", "MINOR", "MODERATE", "MAJOR", "CRITICAL"]
+    },
+    "observation": { "type": "string", "minLength": 1 },
+    "evidenceIds": { "type": "array", "items": { "type": "string" } },
+    "suggestedChange": { "type": ["string", "null"] },
+    "blockingRecommendation": { "type": "boolean" },
+    "confidence": { "type": ["string", "null"] },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jewelryCategory": { "type": ["string", "null"] },
+        "ringStyle": { "type": ["string", "null"] },
+        "component": { "type": ["string", "null"] },
+        "material": { "type": ["string", "null"] },
+        "alloy": { "type": ["string", "null"] },
+        "manufacturingMethod": { "type": ["string", "null"] },
+        "stoneShape": { "type": ["string", "null"] },
+        "stoneDimensionRangeMm": { "type": ["string", "null"] },
+        "settingType": { "type": ["string", "null"] },
+        "sizeRange": { "type": ["string", "null"] },
+        "cadApplication": { "type": ["string", "null"] },
+        "exporterVersion": { "type": ["string", "null"] },
+        "forgeRuleVersion": { "type": ["string", "null"] },
+        "atlasVersion": { "type": ["string", "null"] },
+        "jdlVersion": { "type": ["string", "null"] },
+        "geographicOrWorkshopConstraints": { "type": ["string", "null"] }
+      }
+    },
+    "relatedRuleIds": { "type": "array", "items": { "type": "string" } },
+    "relatedComponentIds": { "type": "array", "items": { "type": "string" } }
+  }
+}

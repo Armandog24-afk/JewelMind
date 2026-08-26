@@ -1,0 +1,18 @@
+{
+  "vectors": [
+    {
+      "disagreement": {
+        "disagreementId": "disagreement-vector-1",
+        "objectId": "JM-PRONG-003",
+        "type": "SCOPE_DIFFERENCE",
+        "recordIds": [
+          "JM-PV-EXAMPLE-CONFLICT-A",
+          "JM-PV-EXAMPLE-CONFLICT-B"
+        ],
+        "description": "Accepted for lost-wax casting, rejected for resin printing at the same stone size."
+      },
+      "silentlyAveraged": false,
+      "bothRecordsRemainVisible": true
+    }
+  ]
+}

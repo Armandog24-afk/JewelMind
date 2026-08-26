@@ -166,6 +166,13 @@ This Bible now spans six Sprints:
   to apply through the same `applyDesignerProposal()`/`applyIntent()`
   paths Designer's own UI has used since Sprint 10. Start there at
   [`14-conversation/README.md`](14-conversation/README.md).
+- **Sprint 13 — Professional Validation Framework v1**
+  ([`15-professional-validation/`](15-professional-validation/)), the
+  controlled infrastructure for capturing real jewelry-professional
+  review as structured, versioned, auditable evidence (zero rules
+  validated as of this Sprint; the infrastructure exists, real review
+  has not yet occurred). Start there at
+  [`15-professional-validation/README.md`](15-professional-validation/README.md).
 
 ## How this relates to the existing `docs/` folder
 

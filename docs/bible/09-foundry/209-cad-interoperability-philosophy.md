@@ -37,3 +37,7 @@ The only real `IMPORT_TESTED`-equivalent check performed this Sprint is `cadquer
 ## The governing rule, restated plainly
 
 **Do not call an external CAD workflow "validated" unless actual testing exists.** A format being widely supported in the industry (STEP, STL) is a reasonable basis for *expecting* `IMPORT_TESTED` to succeed in a specific application — it is never a substitute for actually running that test and recording the result.
+
+## Relationship to Sprint 13
+
+The mechanism that would eventually produce a real `IMPORT_TESTED`/`WORKFLOW_VALIDATED` result now exists: [`15-professional-validation/424-cad-workflow-validation-process.md`](../15-professional-validation/424-cad-workflow-validation-process.md) formalizes this exact workflow at the professional-validation layer, and [`docs/professional-review/cad-interoperability-review-form.md`](../../professional-review/cad-interoperability-review-form.md) is a real, fillable form a `CAD_INTEROPERABILITY_SPECIALIST` reviewer would use to record one. As of this Sprint, this changes nothing about the finding above — zero external CAD workflows have been tested — it only builds the capture mechanism for when one eventually is.

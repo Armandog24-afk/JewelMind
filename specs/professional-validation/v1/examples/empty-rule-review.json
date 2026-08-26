@@ -1,0 +1,45 @@
+{
+  "recordId": "JM-PV-TEMPLATE-RULE",
+  "target": {
+    "objectType": "FORGE_RULE",
+    "objectId": "JM-PRONG-003",
+    "version": "1.0.0",
+    "description": "4 prongs are blocked when stone diameter exceeds 8mm.",
+    "implementationReferences": [
+      "backend/jewelmind/validation/engine.py::_prong_rules"
+    ],
+    "relatedTests": [
+      "backend/tests/test_validation.py"
+    ],
+    "currentValidationStatus": "NOT_REVIEWED"
+  },
+  "scope": {
+    "jewelryCategory": null,
+    "ringStyle": null,
+    "component": null,
+    "material": null,
+    "alloy": null,
+    "manufacturingMethod": null,
+    "stoneShape": null,
+    "stoneDimensionRangeMm": null,
+    "settingType": null,
+    "sizeRange": null,
+    "cadApplication": null,
+    "exporterVersion": null,
+    "forgeRuleVersion": null,
+    "atlasVersion": null,
+    "jdlVersion": null,
+    "geographicOrWorkshopConstraints": null
+  },
+  "reviewerId": "",
+  "sessionId": null,
+  "decision": "INSUFFICIENT_EVIDENCE",
+  "status": "NOT_REVIEWED",
+  "evidenceIds": [],
+  "conditions": null,
+  "rationale": "Template only \u2014 no review has occurred. Fill in reviewerId, evidence, and a real decision.",
+  "reviewDate": "",
+  "expirationOrReviewTrigger": null,
+  "supersedesRecordId": null,
+  "isTemplate": true
+}

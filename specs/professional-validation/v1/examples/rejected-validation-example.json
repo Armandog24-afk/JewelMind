@@ -1,0 +1,41 @@
+{
+  "recordId": "JM-PV-EXAMPLE-REJECTED",
+  "target": {
+    "objectType": "MANUFACTURING_PROFILE",
+    "objectId": "JM-MANUFACTURING-001",
+    "version": "1.0.0",
+    "description": "direct_resin_printing manufacturing-context rule.",
+    "implementationReferences": [],
+    "relatedTests": [],
+    "currentValidationStatus": "REJECTED"
+  },
+  "scope": {
+    "jewelryCategory": null,
+    "ringStyle": null,
+    "component": null,
+    "material": null,
+    "alloy": null,
+    "manufacturingMethod": null,
+    "stoneShape": null,
+    "stoneDimensionRangeMm": null,
+    "settingType": null,
+    "sizeRange": null,
+    "cadApplication": null,
+    "exporterVersion": null,
+    "forgeRuleVersion": null,
+    "atlasVersion": null,
+    "jdlVersion": null,
+    "geographicOrWorkshopConstraints": null
+  },
+  "reviewerId": "example-reviewer-illustrative-only",
+  "sessionId": null,
+  "decision": "REJECTED",
+  "status": "REJECTED",
+  "evidenceIds": [],
+  "conditions": null,
+  "rationale": "Illustrative example of a rejection shape \u2014 not a real review.",
+  "reviewDate": "2026-01-01",
+  "expirationOrReviewTrigger": null,
+  "supersedesRecordId": null,
+  "isTemplate": true
+}

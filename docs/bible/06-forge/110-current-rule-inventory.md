@@ -46,3 +46,7 @@ Every rule below was found by inspecting `backend/jewelmind/validation/rules.py`
 ## Frontend/backend rule mismatches found
 
 **None among the 16 `JM-*` rules.** `shared/validation/engine.ts` is a byte-for-byte behavioral mirror of `backend/jewelmind/validation/engine.py` — same rule IDs, same thresholds, same severities, same messages, confirmed by direct side-by-side inspection during this Sprint. The only genuine frontend/backend divergence found is **not** a rule-threshold mismatch but a **precondition-scope** mismatch: the frontend's `isStale` export gate has no backend-side equivalent (see [`107-export-precondition-rules.md`](107-export-precondition-rules.md)).
+
+## Relationship to Sprint 13
+
+Each `preliminary` rule above now has a documented professional-review priority and a suggested reviewer role in [`15-professional-validation/443-current-preliminary-rule-review-plan.md`](../15-professional-validation/443-current-preliminary-rule-review-plan.md) — for example, `JM-PRONG-003`'s 8mm threshold is planned as a `STONE_SETTER` review, `JM-BAND-001`/`002` as `GOLDSMITH_BENCH_JEWELER` reviews. The 5 `not_required` rules (`FORGE-SCHEMA-001`, `FORGE-SAFETY-001`/`002`, `FORGE-GEOM-001`, `FORGE-EXPORT-001`) are explicitly excluded from that review plan, for the same reason they're marked `not_required` here: they are software/structural/safety preconditions, not jewelry-domain judgment calls.

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/reviewer.schema.json",
+  "title": "Professional Reviewer Identity v1",
+  "description": "The minimal identity record for a real, named professional reviewer — separate from their fit-for-review profile (see reviewer-qualification.schema.json). No placeholder, generic, or invented reviewer may ever populate this shape in the active registry. See docs/bible/15-professional-validation/413-reviewer-role-model.md and 439-reviewer-independence-and-conflicts.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewerId", "role"],
+  "properties": {
+    "reviewerId": { "type": "string", "minLength": 1 },
+    "role": {
+      "enum": [
+        "JEWELRY_CAD_DESIGNER",
+        "GOLDSMITH_BENCH_JEWELER",
+        "STONE_SETTER",
+        "CASTING_SPECIALIST",
+        "RESIN_PRINTING_SPECIALIST",
+        "JEWELRY_MANUFACTURING_ENGINEER",
+        "GEMOLOGIST",
+        "CAD_INTEROPERABILITY_SPECIALIST"
+      ]
+    },
+    "displayName": {
+      "type": ["string", "null"],
+      "description": "The reviewer's real name, as they consent to have it recorded — never invented, never a placeholder like 'Reviewer A'."
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Disclosed potential conflicts (e.g. 'JewelMind contributor', 'vendor relationship') — recorded transparently, not a legal independence certification."
+    },
+    "verificationStatus": { "enum": ["UNVERIFIED", "SELF_ATTESTED", "VERIFIED"] }
+  }
+}

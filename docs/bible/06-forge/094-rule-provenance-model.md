@@ -58,3 +58,7 @@ Per this Sprint's explicit governing instruction, no source was invented for any
 ## Marking provenance UNKNOWN
 
 If a future rule's origin genuinely cannot be determined (e.g. inherited from an external contribution with no accompanying rationale), it must be marked `unknown` rather than assigned a plausible-sounding but unverified type. No current rule requires this marking — every one of the 21 traces cleanly to either a code necessity, a named formula, or an acknowledged prototype choice.
+
+## Relationship to Sprint 13
+
+A rule's `provenanceType` here and its `professionalValidationStatus` (see [`110-current-rule-inventory.md`](110-current-rule-inventory.md)) are the inputs a real professional review, when it eventually happens, actually reviews — see [`15-professional-validation/README.md`](../15-professional-validation/README.md) and [`15-professional-validation/419-rule-validation-process.md`](../15-professional-validation/419-rule-validation-process.md) for the now-implemented structured workflow a rule's provenance and classification feed into. This document's own provenance model is unchanged by Sprint 13; it only gains a real downstream consumer.

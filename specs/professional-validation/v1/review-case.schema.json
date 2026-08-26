@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/review-case.schema.json",
+  "title": "Review Case v1",
+  "description": "A reproducible unit of review: the same JDL document plus the same pinned Forge/Atlas versions must regenerate the same definitionHash and geometry. Mirrors backend/jewelmind/professional_validation/schemas.py::ReviewCase. See docs/bible/15-professional-validation/425-review-case-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["caseId", "purpose", "definitionHash", "forgeRuleSetVersion", "atlasVersion"],
+  "properties": {
+    "caseId": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "jdlDocument": {
+      "type": "object",
+      "description": "A full JewelryDefinition — see specs/jdl/v1/jdl.schema.json."
+    },
+    "definitionHash": { "type": "string" },
+    "compilationFingerprint": { "type": ["string", "null"] },
+    "forgeRuleSetVersion": { "type": "string" },
+    "atlasVersion": { "type": "string" },
+    "exportedArtifacts": { "type": "array", "items": { "type": "string" } },
+    "expectedQuestions": { "type": "array", "items": { "type": "string" } },
+    "reviewScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jewelryCategory": { "type": ["string", "null"] },
+        "ringStyle": { "type": ["string", "null"] },
+        "component": { "type": ["string", "null"] },
+        "material": { "type": ["string", "null"] },
+        "alloy": { "type": ["string", "null"] },
+        "manufacturingMethod": { "type": ["string", "null"] },
+        "stoneShape": { "type": ["string", "null"] },
+        "stoneDimensionRangeMm": { "type": ["string", "null"] },
+        "settingType": { "type": ["string", "null"] },
+        "sizeRange": { "type": ["string", "null"] },
+        "cadApplication": { "type": ["string", "null"] },
+        "exporterVersion": { "type": ["string", "null"] },
+        "forgeRuleVersion": { "type": ["string", "null"] },
+        "atlasVersion": { "type": ["string", "null"] },
+        "jdlVersion": { "type": ["string", "null"] },
+        "geographicOrWorkshopConstraints": { "type": ["string", "null"] }
+      }
+    },
+    "evidenceGeneratedIds": { "type": "array", "items": { "type": "string" } }
+  }
+}

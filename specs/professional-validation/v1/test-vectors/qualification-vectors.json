@@ -1,0 +1,68 @@
+{
+  "vectors": [
+    {
+      "qualification": {
+        "reviewerId": "q1",
+        "role": "STONE_SETTER",
+        "yearsOfExperience": null,
+        "professionalFocus": "prong and bezel settings",
+        "processes": [],
+        "materials": [],
+        "softwareExperience": [],
+        "relevantPortfolioOrEvidence": null,
+        "geographicPractice": null,
+        "qualificationNotes": "",
+        "verificationStatus": "UNVERIFIED"
+      },
+      "typicallyRelevantReviewAreas": [
+        "setting",
+        "prongs",
+        "seat/bearing",
+        "stone accessibility"
+      ]
+    },
+    {
+      "qualification": {
+        "reviewerId": "q2",
+        "role": "CASTING_SPECIALIST",
+        "yearsOfExperience": null,
+        "professionalFocus": "lost-wax casting production",
+        "processes": [
+          "lost_wax_casting"
+        ],
+        "materials": [],
+        "softwareExperience": [],
+        "relevantPortfolioOrEvidence": null,
+        "geographicPractice": null,
+        "qualificationNotes": "",
+        "verificationStatus": "UNVERIFIED"
+      },
+      "typicallyRelevantReviewAreas": [
+        "manufacturing method: lost_wax_casting",
+        "sprue/cleanup implications"
+      ]
+    },
+    {
+      "qualification": {
+        "reviewerId": "q3",
+        "role": "CAD_INTEROPERABILITY_SPECIALIST",
+        "yearsOfExperience": null,
+        "professionalFocus": "STEP import verification across CAD packages",
+        "processes": [],
+        "materials": [],
+        "softwareExperience": [
+          "Rhino",
+          "MatrixGold"
+        ],
+        "relevantPortfolioOrEvidence": null,
+        "geographicPractice": null,
+        "qualificationNotes": "",
+        "verificationStatus": "UNVERIFIED"
+      },
+      "typicallyRelevantReviewAreas": [
+        "export workflow",
+        "STEP/STL import fidelity"
+      ]
+    }
+  ]
+}

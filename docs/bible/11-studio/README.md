@@ -102,3 +102,7 @@ exactly as before, so every existing Studio guarantee —
 `withUpdatedDefinition()`'s staleness marking — is unchanged by this
 Sprint. See
 [`14-conversation/395-studio-integration.md`](../14-conversation/395-studio-integration.md).
+
+## Relationship to Sprint 13
+
+[`15-professional-validation/`](../15-professional-validation/README.md) (Sprint 13) adds a real "Review" tab to `RightPanelTabs.tsx` — `ProfessionalReviewPanel.tsx` generates a Professional Review Package for the currently-generated model, gated by the exact same `computeOutputEligibility()` function every other export tab (Outputs) already uses, so a stale or invalid model can never produce a review package. This adds no new model-status or staleness computation of its own — it reuses Studio's existing eligibility machinery unchanged. See [`15-professional-validation/447-studio-professional-review-mode.md`](../15-professional-validation/447-studio-professional-review-mode.md).

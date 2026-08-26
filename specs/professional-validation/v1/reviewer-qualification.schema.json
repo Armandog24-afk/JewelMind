@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/professional-validation/v1/reviewer-qualification.schema.json",
+  "title": "Reviewer Qualification v1",
+  "description": "A reviewer's fit-for-review profile — fit-for-review, not a prestige score (PROVAL-GOV-004). Never forces unnecessary personal information; never invents a credentialing standard that doesn't exist. Mirrors backend/jewelmind/professional_validation/schemas.py::ReviewerQualification. See docs/bible/15-professional-validation/414-reviewer-qualification-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewerId", "role", "professionalFocus"],
+  "properties": {
+    "reviewerId": { "type": "string", "minLength": 1 },
+    "role": {
+      "enum": [
+        "JEWELRY_CAD_DESIGNER",
+        "GOLDSMITH_BENCH_JEWELER",
+        "STONE_SETTER",
+        "CASTING_SPECIALIST",
+        "RESIN_PRINTING_SPECIALIST",
+        "JEWELRY_MANUFACTURING_ENGINEER",
+        "GEMOLOGIST",
+        "CAD_INTEROPERABILITY_SPECIALIST"
+      ]
+    },
+    "yearsOfExperience": { "type": ["number", "null"], "minimum": 0 },
+    "professionalFocus": { "type": "string", "minLength": 1 },
+    "processes": { "type": "array", "items": { "type": "string" } },
+    "materials": { "type": "array", "items": { "type": "string" } },
+    "softwareExperience": { "type": "array", "items": { "type": "string" } },
+    "relevantPortfolioOrEvidence": { "type": ["string", "null"] },
+    "geographicPractice": { "type": ["string", "null"] },
+    "qualificationNotes": { "type": "string" },
+    "verificationStatus": { "enum": ["UNVERIFIED", "SELF_ATTESTED", "VERIFIED"] }
+  }
+}

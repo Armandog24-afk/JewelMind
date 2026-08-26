@@ -3,10 +3,11 @@ import { useProjectStore } from '../store/useProjectStore'
 import { JsonViewer } from './JsonViewer'
 import { ModelInformation } from './ModelInformation'
 import { OutputsPanel } from './OutputsPanel'
+import { ProfessionalReviewPanel } from './ProfessionalReviewPanel'
 import { TechnicalSpecification } from './TechnicalSpecification'
 import { ValidationPanel } from './ValidationPanel'
 
-type TabKey = 'validation' | 'outputs' | 'specification' | 'json' | 'model-info'
+type TabKey = 'validation' | 'outputs' | 'specification' | 'json' | 'model-info' | 'review'
 
 const TABS: Array<{ key: TabKey; label: string }> = [
   { key: 'validation', label: 'Validation' },
@@ -14,6 +15,7 @@ const TABS: Array<{ key: TabKey; label: string }> = [
   { key: 'specification', label: 'Specification' },
   { key: 'json', label: 'JSON' },
   { key: 'model-info', label: 'Model info' },
+  { key: 'review', label: 'Review' },
 ]
 
 export function RightPanelTabs() {
@@ -44,6 +46,7 @@ export function RightPanelTabs() {
         {active === 'specification' ? <TechnicalSpecification /> : null}
         {active === 'json' ? <JsonViewer /> : null}
         {active === 'model-info' ? <ModelInformation /> : null}
+        {active === 'review' ? <ProfessionalReviewPanel /> : null}
       </div>
     </>
   )

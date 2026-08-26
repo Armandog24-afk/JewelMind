@@ -1,0 +1,40 @@
+{
+  "vectors": [
+    {
+      "trigger": "rule_semantic_change",
+      "example": "JM-PRONG-003 threshold changed from 8mm to 7mm."
+    },
+    {
+      "trigger": "geometry_algorithm_change",
+      "example": "Prong builder rewritten to add a taper."
+    },
+    {
+      "trigger": "new_material_added",
+      "example": "A 6th metal option is added to MaterialSpec."
+    },
+    {
+      "trigger": "new_manufacturing_process",
+      "example": "A 3rd ManufacturingMethod value is added."
+    },
+    {
+      "trigger": "new_stone_shape",
+      "example": "Oval stones are added beyond the current round-only support."
+    },
+    {
+      "trigger": "new_setting_system",
+      "example": "Bezel or pave settings are added beyond prong-only."
+    },
+    {
+      "trigger": "cad_kernel_major_change",
+      "example": "OpenCascade major version upgrade changes geometry output."
+    },
+    {
+      "trigger": "contradictory_field_evidence",
+      "example": "A production failure contradicts a prior VALIDATED record."
+    },
+    {
+      "trigger": "reviewer_imposed_expiration",
+      "example": "Reviewer explicitly states 'revisit in 12 months'."
+    }
+  ]
+}
