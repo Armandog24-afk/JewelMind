@@ -36,6 +36,7 @@ from jewelmind.designer.service import DesignerService
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.exporters.filenames import sanitize_filename
 from jewelmind.exporters.integrity import sha256_checksum
+from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.professional_validation.review_package import build_review_package
 from jewelmind.services.cad_engine import cad_engine_error, cad_engine_ready
 from jewelmind.validation.engine import has_errors, validate_definition
@@ -66,6 +67,27 @@ def _get_model_service() -> ModelService:
         ) from exc
     _model_service_instance = model_service
     return _model_service_instance
+
+
+def _inspection_summary(record) -> dict:
+    """A concise, model-metadata-sized inspection summary — never the full
+    `GeometryInspectionReport` (that's available separately via
+    `GET /api/models/{model_id}/inspection`). See
+    docs/bible/16-geometry-inspection/README.md's model-metadata contract."""
+
+    report = record.inspection_report
+    production_ids = set(report.assemblyResult.productionConnectivity.nodes)
+    production_solid_count = sum(
+        r.solidCount or 0 for r in report.componentResults if r.componentId in production_ids
+    )
+    return {
+        "status": report.status,
+        "version": report.inspectionVersion,
+        "componentCount": report.assemblyResult.componentCount,
+        "productionSolidCount": production_solid_count,
+        "disconnectedProductionGroups": report.assemblyResult.productionConnectivity.disconnectedGroupCount,
+        "diagnosticsCount": len(report.diagnostics),
+    }
 
 
 def _delete_file(path: str | Path) -> None:
@@ -138,6 +160,7 @@ def generate_model(definition: JewelryDefinition) -> GenerateResponse:
             "combinedMetalVolumeMm3": gm.combined_metal_volume_mm3,
             "boundingBoxMm": gm.bounding_box.as_dict(),
             "prongs": record.generated_model.components["prongs"].metadata,
+            "inspection": _inspection_summary(record),
         },
         previewComponents=preview_components,
         warnings=gm.warnings,
@@ -160,8 +183,18 @@ def model_metadata(model_id: str) -> ModelMetadataResponse:
         combinedMetalVolumeMm3=gm.combined_metal_volume_mm3,
         boundingBoxMm=gm.bounding_box.as_dict(),
         warnings=gm.warnings,
+        inspection=_inspection_summary(record),
         validation=record.validation_results,
     )
+
+
+@router.get("/api/models/{model_id}/inspection")
+def model_inspection(model_id: str) -> GeometryInspectionReport:
+    # The full GeometryInspectionReport, separate from the concise summary
+    # embedded in /generate and /metadata — see docs/bible/16-geometry-inspection/
+    # README.md's "why a separate endpoint" decision.
+    model_service = _get_model_service()
+    return model_service.inspection_report(model_id)
 
 
 @router.get("/api/models/{model_id}/preview/{component_name}")

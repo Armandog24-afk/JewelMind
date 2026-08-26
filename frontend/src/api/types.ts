@@ -47,10 +47,107 @@ export interface GenerateResponse {
       centerRadiusMm: number
       positions: Array<{ x: number; y: number }>
     }
+    inspection: InspectionSummary
   }
   previewComponents: Record<string, PreviewComponentEntry>
   warnings: string[]
   generatedAt: string
+}
+
+// --- Geometry Inspection v2 (docs/bible/16-geometry-inspection/) ------
+
+/** The concise inspection summary embedded in generate/metadata responses —
+ * never the full GeometryInspectionReport (see GET /api/models/{id}/inspection). */
+export interface InspectionSummary {
+  status: 'PASS' | 'FAIL' | 'UNKNOWN' | 'NOT_APPLICABLE' | 'NOT_IMPLEMENTED' | 'ERROR'
+  version: string
+  componentCount: number
+  productionSolidCount: number
+  disconnectedProductionGroups: number
+  diagnosticsCount: number
+}
+
+export interface BoundingBoxFact {
+  xmin: number
+  ymin: number
+  zmin: number
+  xmax: number
+  ymax: number
+  zmax: number
+  sizeX: number
+  sizeY: number
+  sizeZ: number
+  centerX: number
+  centerY: number
+  centerZ: number
+}
+
+export interface ComponentInspectionResult {
+  componentId: string
+  exists: boolean
+  status: InspectionSummary['status']
+  shapeType: string | null
+  solidCount: number | null
+  volumeMm3: number | null
+  boundingBox: BoundingBoxFact | null
+  shapeValid: boolean | null
+  fallbackUsed: boolean
+  metadata: Record<string, unknown>
+}
+
+export interface DistanceResult {
+  componentA: string
+  componentB: string
+  minDistanceMm: number | null
+  status: InspectionSummary['status']
+  unit: string
+  tolerance: number
+}
+
+export interface IntersectionResult {
+  componentA: string
+  componentB: string
+  status: 'INTERSECTS' | 'TOUCHES' | 'NO_INTERSECTION' | 'UNKNOWN'
+  intersectionVolumeMm3: number | null
+  intersectionSolidCount: number | null
+  unit: string
+  tolerance: number
+  note: string
+}
+
+export interface ConnectivityGraph {
+  graphType: 'PRODUCTION' | 'FULL_ASSEMBLY'
+  nodes: string[]
+  connectedGroups: string[][]
+  isFullyConnected: boolean
+  disconnectedGroupCount: number
+}
+
+export interface AssemblyInspectionResult {
+  requiredComponentsPresent: boolean
+  missingComponentIds: string[]
+  componentCount: number
+  productionComponentCount: number
+  referenceComponentCount: number
+  totalProductionVolumeMm3: number
+  assemblyBoundingBox: BoundingBoxFact
+  productionConnectivity: ConnectivityGraph
+  fullAssemblyConnectivity: ConnectivityGraph
+  intersections: IntersectionResult[]
+  distances: DistanceResult[]
+  prongCount: { requestedCount: number; generatedCount: number; matches: boolean; status: string }
+}
+
+/** The full report from GET /api/models/{modelId}/inspection — the
+ * concise `InspectionSummary` above is what's embedded in generate/metadata
+ * responses instead. */
+export interface GeometryInspectionReport {
+  inspectionId: string
+  inspectionVersion: string
+  definitionHash: string
+  status: InspectionSummary['status']
+  componentResults: ComponentInspectionResult[]
+  assemblyResult: AssemblyInspectionResult
 }
 
 export interface ModelMetadataResponse {
@@ -63,6 +160,7 @@ export interface ModelMetadataResponse {
   combinedMetalVolumeMm3: number
   boundingBoxMm: Record<'xmin' | 'xmax' | 'ymin' | 'ymax' | 'zmin' | 'zmax', number>
   warnings: string[]
+  inspection: InspectionSummary
   validation: ValidationResult[]
 }
 

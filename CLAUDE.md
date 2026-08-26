@@ -902,3 +902,81 @@ coding agents must:
 - **Require professional re-review when validated semantics materially
   change** — see
   [`434-implementation-change-impact.md`](docs/bible/15-professional-validation/434-implementation-change-impact.md).
+
+## GEOMETRY INSPECTION RULES
+
+`docs/bible/16-geometry-inspection/` is the authoritative Geometry
+Inspection specification — start at
+[`docs/bible/16-geometry-inspection/README.md`](docs/bible/16-geometry-inspection/README.md),
+then [`460-inspection-governance.md`](docs/bible/16-geometry-inspection/460-inspection-governance.md)
+for the full 20 INSPECT-GOV rules. The machine-readable half lives in
+[`specs/geometry-inspection/v2/`](specs/geometry-inspection/v2/README.md)
+(9 JSON Schemas, a hand-authored `fact-registry.json` with zero
+professional thresholds, real examples, and test vectors). Future
+coding agents must:
+
+- **Read `docs/bible/16-geometry-inspection/README.md` before changing
+  runtime geometry inspection** — before editing
+  `backend/jewelmind/geometry/inspection/` or how
+  `ModelService.generate()` calls `inspect_model()`.
+- **Keep inspection read-only** — no function under
+  `geometry/inspection/` may call `.fuse()`, `.cut()`, `.fillet()`, or
+  any other geometry-mutating method on a shape it inspects
+  (INSPECT-GOV-013).
+- **Report geometric facts rather than jewelry judgments** — a
+  `GeometricFact`/diagnostic message states a measurement ("1 solid
+  detected", "0.9mm minimum distance"), never a quality judgment ("too
+  thin", "not manufacturable") (INSPECT-GOV-001).
+- **Keep Forge responsible for domain interpretation** — no file under
+  `geometry/inspection/` may import `jewelmind.validation` or reference
+  a Forge rule ID (INSPECT-GOV-002).
+- **Never invent manufacturing tolerances** — `CONTACT_TOLERANCE_MM`
+  (`geometry/inspection/version.py`) is a pure kernel/geometric
+  tolerance; any new tolerance must be justified the same way, never a
+  guessed jewelry-domain value (INSPECT-GOV-012).
+- **Return `UNKNOWN`/`ERROR` instead of a fabricated `PASS`** — a
+  kernel exception in `distance.py`/`intersection.py`/`topology.py`
+  must produce an honest `UNKNOWN`/`ERROR` status, never an assumed
+  passing result (INSPECT-GOV-006).
+- **Preserve StoneReference identity** — a stone-metal separation check
+  must remain structural (whether the stone's shape was ever an
+  argument to a production-metal fuse call), never merely "zero
+  intersection volume" — the stone legitimately intersects production
+  components by design (INSPECT-GOV-008).
+- **Preserve component IDs** — every fact/result must stay traceable to
+  a real `componentId`/`componentIds` field; never an anonymous or
+  positional reference (INSPECT-GOV-015).
+- **Update the fact registry when adding inspections** —
+  `specs/geometry-inspection/v2/fact-registry.json` must gain a new
+  entry, with an honest `implementationStatus` and
+  `forgeConsumptionStatus`, alongside any new `FactType`.
+- **Update regression baselines when geometry intentionally changes** —
+  `specs/geometry-inspection/v2/test-vectors/regression-vectors.json`
+  and `backend/tests/test_geometry_inspection.py::TestInspectionRegression`
+  must be reviewed and updated together with any deliberate geometry
+  change, never silently left stale.
+- **Never weaken inspection merely to make tests pass** — if a real
+  finding (a disconnected group, an unexpected intersection) appears
+  for legitimate geometry, record and classify it; do not loosen the
+  check to hide it.
+- **Record kernel-specific assumptions** — every kernel API this
+  package relies on (`cadquery.Shape.distance()`/`.intersect()`/
+  `.isValid()`) must be verified against the actually-installed
+  CadQuery/OCP version before being used, not assumed from
+  documentation or a guessed method name.
+- **Keep raw CadQuery/OCP objects out of Forge contracts** — no field
+  in `geometry/inspection/models.py` may ever hold a `cadquery.Shape`,
+  `cadquery.Workplane`, or `OCP` object (INSPECT-GOV-016/017).
+- **Add tests for every new geometric fact** — mirroring
+  `backend/tests/test_geometry_inspection.py`'s existing coverage
+  pattern, including a real-solitaire case and, where relevant, a
+  clearly-labeled TEST-FIXTURE-ONLY broken-geometry case.
+- **Create an ADR for inspection architecture changes** — replacing the
+  underlying kernel-query mechanism, changing the definition of
+  "connected", or any change that violates INSPECT-GOV-001 through 020
+  without superseding `460-inspection-governance.md` first.
+- **Create an RFC for major new inspection families** — e.g. local
+  thickness, curvature, self-intersection beyond named-pair
+  intersection, mesh manifold checks; see
+  [`494-current-runtime-inspection-gap-analysis.md`](docs/bible/16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md)
+  for the candidates already identified but explicitly deferred.

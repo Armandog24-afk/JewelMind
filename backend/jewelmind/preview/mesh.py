@@ -16,24 +16,12 @@ from typing import Any
 
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.model import GeneratedModel
+from jewelmind.geometry.roles import GEOMETRY_ROLE as _GEOMETRY_ROLE
+from jewelmind.geometry.roles import PRODUCTION_ROLE as _PRODUCTION_ROLE
 
-# Mirrors the CURRENT (derivable) mapping already documented in
-# docs/bible/07-atlas/130-component-contract.md, now made an explicit,
-# additive manifest field for Vision (Sprint 8) to consume instead of
-# inferring role from the component name string. Adding a new component
-# name here requires an accompanying Atlas/Vision documentation update.
-_GEOMETRY_ROLE = {
-    "band": "production_metal",
-    "prongs": "production_metal",
-    "basket_support": "production_metal",
-    "stone_reference": "stone_reference",
-}
-_PRODUCTION_ROLE = {
-    "band": "included_by_default",
-    "prongs": "included_by_default",
-    "basket_support": "included_by_default",
-    "stone_reference": "excluded_by_default",
-}
+# The role mapping itself now lives in jewelmind.geometry.roles (Sprint 14
+# — Geometry Inspection v2 needed the same mapping and a second private
+# copy here would have drifted). See docs/bible/07-atlas/130-component-contract.md.
 
 
 def _component_filename(name: str) -> str:

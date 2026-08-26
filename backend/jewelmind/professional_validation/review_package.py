@@ -212,6 +212,13 @@ def build_review_package(
             "component-manifest.json": (
                 json.dumps(component_manifest, indent=2, sort_keys=True) + "\n"
             ).encode("utf-8"),
+            # Real runtime geometric facts (Sprint 14) — never presented as
+            # approval, only as evidence a reviewer can consult. See
+            # docs/bible/16-geometry-inspection/README.md's "Inspection +
+            # Professional Validation" integration note.
+            "geometry-inspection.json": (
+                record.inspection_report.model_dump_json(indent=2) + "\n"
+            ).encode("utf-8"),
             "model.step": exported_step.read_bytes(),
             "model.stl": exported_stl.read_bytes(),
         }

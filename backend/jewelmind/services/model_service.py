@@ -26,6 +26,8 @@ from jewelmind.exporters.specification import build_specification
 from jewelmind.exporters.step_exporter import export_step
 from jewelmind.exporters.stl_exporter import export_stl
 from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
+from jewelmind.geometry.inspection.inspector import inspect_model
+from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.geometry.model import GeneratedModel
 from jewelmind.preview.mesh import write_component_previews
 from jewelmind.utils.logging import get_logger
@@ -46,6 +48,7 @@ class ModelRecord:
     preview_manifest: dict
     temp_dir: Path
     generated_at: str
+    inspection_report: GeometryInspectionReport
 
 
 class ModelService:
@@ -77,6 +80,11 @@ class ModelService:
         temp_dir = Path(tempfile.mkdtemp(prefix=f"jewelmind_{model_id}_"))
         preview_manifest = write_component_previews(generated_model, definition, temp_dir)
 
+        # Real runtime geometry inspection (Sprint 14) — read-only, never
+        # blocks generation on its own result; see
+        # docs/bible/16-geometry-inspection/491-runtime-inspection-policy.md.
+        inspection_report = inspect_model(generated_model)
+
         record = ModelRecord(
             model_id=model_id,
             definition=definition,
@@ -85,6 +93,7 @@ class ModelService:
             preview_manifest=preview_manifest,
             temp_dir=temp_dir,
             generated_at=datetime.now(UTC).isoformat(),
+            inspection_report=inspection_report,
         )
 
         with self._lock:
@@ -175,7 +184,11 @@ class ModelService:
             record.generated_model,
             record.validation_results,
             generated_at=record.generated_at,
+            inspection_report=record.inspection_report,
         )
+
+    def inspection_report(self, model_id: str) -> GeometryInspectionReport:
+        return self.get_record(model_id).inspection_report
 
     @staticmethod
     def _unique_temp_path(model_id: str, suffix: str) -> Path:

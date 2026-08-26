@@ -1,0 +1,68 @@
+{
+  "description": "TEST FIXTURE ONLY \u2014 plain cube components, never a supported jewelry model. Demonstrates a real DISCONNECTED production-connectivity result.",
+  "connectivityGraph": {
+    "graphType": "PRODUCTION",
+    "nodes": [
+      "band",
+      "basket_support",
+      "prongs"
+    ],
+    "edges": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": false,
+        "basis": "DISTANCE"
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "basis": "DISTANCE"
+      },
+      {
+        "componentA": "basket_support",
+        "componentB": "prongs",
+        "connected": false,
+        "basis": "DISTANCE"
+      }
+    ],
+    "connectedGroups": [
+      [
+        "band",
+        "prongs"
+      ],
+      [
+        "basket_support"
+      ]
+    ],
+    "isFullyConnected": false,
+    "disconnectedGroupCount": 1
+  },
+  "distances": [
+    {
+      "componentA": "band",
+      "componentB": "basket_support",
+      "minDistanceMm": 171.47302994931886,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "band",
+      "componentB": "prongs",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "basket_support",
+      "componentB": "prongs",
+      "minDistanceMm": 171.18484161864333,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    }
+  ]
+}

@@ -46,6 +46,7 @@ class ModelMetadataResponse(BaseModel):
     combinedMetalVolumeMm3: float
     boundingBoxMm: dict[str, float]
     warnings: list[str]
+    inspection: dict[str, Any]
     validation: list[ValidationResult]
 
 

@@ -118,9 +118,14 @@ their `geometryRole`, sourced directly from
 `record.preview_manifest` — a reviewer never has to guess component
 identity from render order.
 
+## Sprint 14: real geometric facts now available before a reviewer even opens a CAD tool
+
+As of Sprint 14 (Geometry Inspection v2 — [`16-geometry-inspection/README.md`](../16-geometry-inspection/README.md)), every Professional Review Package includes a real `geometry-inspection.json` alongside `forge-report.json` — component volumes, bounding boxes, solid counts, pairwise intersections/distances between named components, production connectivity, and stone-metal separation, all computed from the actual reviewed model, never fabricated. This gives a reviewer real, structured geometric facts to consult before or alongside their own inspection — it is explicitly NOT a substitute for professional judgment, and is never presented as one: `GeometryInspectionReport.status` being `PASS` means the automated facts were successfully measured, not that a reviewer would approve the geometry. See [`16-geometry-inspection/487-forge-fact-contract.md`](../16-geometry-inspection/487-forge-fact-contract.md) for the same distinction stated at the Forge-consumption layer.
+
 ## Cross-references
 
 - [`412-validation-object-model.md`](412-validation-object-model.md) — `GEOMETRY_COMPONENT`/`GEOMETRY_RELATIONSHIP`/`COMPLETE_MODEL` as `ValidationObjectType` values a geometry finding can target.
 - [`417-review-evidence-model.md`](417-review-evidence-model.md) — how `CAD_FILE_INSPECTION`/`ANNOTATED_SCREENSHOT` evidence backs a geometry `ReviewObservation`.
 - [`07-atlas/README.md`](../07-atlas/README.md), [`07-atlas/149-current-solitaire-geometry-mapping.md`](../07-atlas/149-current-solitaire-geometry-mapping.md) — the authoritative geometry mapping this review process observes, never re-derives.
+- [`16-geometry-inspection/README.md`](../16-geometry-inspection/README.md) — the real runtime inspection subsystem behind `geometry-inspection.json`.
 - `docs/bible/appendices/atlas-component-catalog.md`, `docs/bible/appendices/atlas-fallback-register.md`.

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/component-inspection.schema.json",
+  "title": "Component Inspection Result v2",
+  "description": "Runtime inspection of one named geometry component (band, stone_reference, prongs, basket_support). See docs/bible/16-geometry-inspection/464-component-inspection-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentId", "exists", "status"],
+  "properties": {
+    "componentId": { "type": "string" },
+    "exists": { "type": "boolean" },
+    "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] },
+    "shapeType": { "type": ["string", "null"] },
+    "solidCount": { "type": ["integer", "null"] },
+    "volumeMm3": { "type": ["number", "null"] },
+    "boundingBox": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "xmin": { "type": "number" }, "ymin": { "type": "number" }, "zmin": { "type": "number" },
+        "xmax": { "type": "number" }, "ymax": { "type": "number" }, "zmax": { "type": "number" },
+        "sizeX": { "type": "number" }, "sizeY": { "type": "number" }, "sizeZ": { "type": "number" },
+        "centerX": { "type": "number" }, "centerY": { "type": "number" }, "centerZ": { "type": "number" }
+      }
+    },
+    "topology": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "solids": { "type": "integer" }, "shells": { "type": "integer" }, "faces": { "type": "integer" },
+        "edges": { "type": "integer" }, "vertices": { "type": "integer" }
+      }
+    },
+    "shapeValid": { "type": ["boolean", "null"] },
+    "fallbackUsed": { "type": "boolean" },
+    "metadata": { "type": "object" },
+    "diagnostics": {
+      "type": "array",
+      "items": { "type": "object", "description": "See inspection-diagnostic.schema.json." }
+    }
+  }
+}

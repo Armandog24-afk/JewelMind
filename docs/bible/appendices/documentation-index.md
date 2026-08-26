@@ -544,6 +544,52 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A89 | Appendix: Professional Evidence Catalog | accepted | current | [`appendices/professional-evidence-catalog.md`](professional-evidence-catalog.md) |
 | JM-BIBLE-A90 | Appendix: Professional Code Mapping | accepted | current | [`appendices/professional-code-mapping.md`](professional-code-mapping.md) |
 | JM-BIBLE-A91 | Appendix: Professional Test Matrix | accepted | current | [`appendices/professional-test-matrix.md`](professional-test-matrix.md) |
+| JM-BIBLE-INSPECTION-README | Geometry Inspection v2 — Index | accepted | current | [`16-geometry-inspection/README.md`](../16-geometry-inspection/README.md) |
+| JM-BIBLE-460 | Inspection Governance | accepted | current | [`16-geometry-inspection/460-inspection-governance.md`](../16-geometry-inspection/460-inspection-governance.md) |
+| JM-BIBLE-461 | Inspection Architecture Overview | accepted | current | [`16-geometry-inspection/461-inspection-architecture-overview.md`](../16-geometry-inspection/461-inspection-architecture-overview.md) |
+| JM-BIBLE-462 | Geometric Fact Model | accepted | current | [`16-geometry-inspection/462-geometric-fact-model.md`](../16-geometry-inspection/462-geometric-fact-model.md) |
+| JM-BIBLE-463 | Inspection Subsystem Model | accepted | current | [`16-geometry-inspection/463-inspection-subsystem-model.md`](../16-geometry-inspection/463-inspection-subsystem-model.md) |
+| JM-BIBLE-464 | Component Inspection Contract | accepted | current | [`16-geometry-inspection/464-component-inspection-contract.md`](../16-geometry-inspection/464-component-inspection-contract.md) |
+| JM-BIBLE-465 | Assembly Inspection Contract | accepted | current | [`16-geometry-inspection/465-assembly-inspection-contract.md`](../16-geometry-inspection/465-assembly-inspection-contract.md) |
+| JM-BIBLE-466 | Shape Validity Inspection | accepted | current | [`16-geometry-inspection/466-shape-validity-inspection.md`](../16-geometry-inspection/466-shape-validity-inspection.md) |
+| JM-BIBLE-467 | Solid Count Inspection | accepted | current | [`16-geometry-inspection/467-solid-count-inspection.md`](../16-geometry-inspection/467-solid-count-inspection.md) |
+| JM-BIBLE-468 | Volume Inspection | accepted | current | [`16-geometry-inspection/468-volume-inspection.md`](../16-geometry-inspection/468-volume-inspection.md) |
+| JM-BIBLE-469 | Bounding Box Inspection | accepted | current | [`16-geometry-inspection/469-bounding-box-inspection.md`](../16-geometry-inspection/469-bounding-box-inspection.md) |
+| JM-BIBLE-470 | Component Connectivity Model | accepted | current | [`16-geometry-inspection/470-component-connectivity-model.md`](../16-geometry-inspection/470-component-connectivity-model.md) |
+| JM-BIBLE-471 | Component Intersection Model | accepted | current | [`16-geometry-inspection/471-component-intersection-model.md`](../16-geometry-inspection/471-component-intersection-model.md) |
+| JM-BIBLE-472 | Component Distance Model | accepted | current | [`16-geometry-inspection/472-component-distance-model.md`](../16-geometry-inspection/472-component-distance-model.md) |
+| JM-BIBLE-473 | Production Metal Integrity | accepted | current | [`16-geometry-inspection/473-production-metal-integrity.md`](../16-geometry-inspection/473-production-metal-integrity.md) |
+| JM-BIBLE-474 | Stone-Metal Separation Inspection | accepted | current | [`16-geometry-inspection/474-stone-metal-separation-inspection.md`](../16-geometry-inspection/474-stone-metal-separation-inspection.md) |
+| JM-BIBLE-475 | Prong Count and Identity Inspection | accepted | current | [`16-geometry-inspection/475-prong-count-and-identity-inspection.md`](../16-geometry-inspection/475-prong-count-and-identity-inspection.md) |
+| JM-BIBLE-476 | Component Presence Inspection | accepted | current | [`16-geometry-inspection/476-component-presence-inspection.md`](../16-geometry-inspection/476-component-presence-inspection.md) |
+| JM-BIBLE-477 | Topology Inspection Model | accepted | current | [`16-geometry-inspection/477-topology-inspection-model.md`](../16-geometry-inspection/477-topology-inspection-model.md) |
+| JM-BIBLE-478 | Boolean Result Inspection | accepted | current | [`16-geometry-inspection/478-boolean-result-inspection.md`](../16-geometry-inspection/478-boolean-result-inspection.md) |
+| JM-BIBLE-479 | Fallback Result Inspection | accepted | current | [`16-geometry-inspection/479-fallback-result-inspection.md`](../16-geometry-inspection/479-fallback-result-inspection.md) |
+| JM-BIBLE-480 | Assembly Graph Model | accepted | current | [`16-geometry-inspection/480-assembly-graph-model.md`](../16-geometry-inspection/480-assembly-graph-model.md) |
+| JM-BIBLE-481 | Inspection Result Model | accepted | current | [`16-geometry-inspection/481-inspection-result-model.md`](../16-geometry-inspection/481-inspection-result-model.md) |
+| JM-BIBLE-482 | Inspection Status and Confidence | accepted | current | [`16-geometry-inspection/482-inspection-status-and-confidence.md`](../16-geometry-inspection/482-inspection-status-and-confidence.md) |
+| JM-BIBLE-483 | Inspection Error Model | accepted | current | [`16-geometry-inspection/483-inspection-error-model.md`](../16-geometry-inspection/483-inspection-error-model.md) |
+| JM-BIBLE-484 | Inspection Performance Model | accepted | current | [`16-geometry-inspection/484-inspection-performance-model.md`](../16-geometry-inspection/484-inspection-performance-model.md) |
+| JM-BIBLE-485 | Inspection Versioning | accepted | current | [`16-geometry-inspection/485-inspection-versioning.md`](../16-geometry-inspection/485-inspection-versioning.md) |
+| JM-BIBLE-486 | Inspection Determinism | accepted | current | [`16-geometry-inspection/486-inspection-determinism.md`](../16-geometry-inspection/486-inspection-determinism.md) |
+| JM-BIBLE-487 | Forge Fact Contract | accepted | current | [`16-geometry-inspection/487-forge-fact-contract.md`](../16-geometry-inspection/487-forge-fact-contract.md) |
+| JM-BIBLE-488 | Alchemist Inspection Integration | accepted | current | [`16-geometry-inspection/488-alchemist-inspection-integration.md`](../16-geometry-inspection/488-alchemist-inspection-integration.md) |
+| JM-BIBLE-489 | Foundry Inspection Integration | accepted | current | [`16-geometry-inspection/489-foundry-inspection-integration.md`](../16-geometry-inspection/489-foundry-inspection-integration.md) |
+| JM-BIBLE-490 | Vision Inspection Integration | accepted | current | [`16-geometry-inspection/490-vision-inspection-integration.md`](../16-geometry-inspection/490-vision-inspection-integration.md) |
+| JM-BIBLE-491 | Runtime Inspection Policy | accepted | current | [`16-geometry-inspection/491-runtime-inspection-policy.md`](../16-geometry-inspection/491-runtime-inspection-policy.md) |
+| JM-BIBLE-492 | Inspection Regression Model | accepted | current | [`16-geometry-inspection/492-inspection-regression-model.md`](../16-geometry-inspection/492-inspection-regression-model.md) |
+| JM-BIBLE-493 | Current Solitaire Inspection Map | accepted | current | [`16-geometry-inspection/493-current-solitaire-inspection-map.md`](../16-geometry-inspection/493-current-solitaire-inspection-map.md) |
+| JM-BIBLE-494 | Current Runtime Inspection Gap Analysis | accepted | current | [`16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md`](../16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md) |
+| JM-BIBLE-495 | Open Inspection Questions | accepted | current | [`16-geometry-inspection/495-open-inspection-questions.md`](../16-geometry-inspection/495-open-inspection-questions.md) |
+| JM-BIBLE-SPRINT14-REPORT | Sprint 14 Validation Report | accepted | current | [`16-geometry-inspection/SPRINT-14-VALIDATION-REPORT.md`](../16-geometry-inspection/SPRINT-14-VALIDATION-REPORT.md) |
+| JM-BIBLE-A92 | Appendix: Geometry Fact Catalog | accepted | current | [`appendices/geometry-fact-catalog.md`](geometry-fact-catalog.md) |
+| JM-BIBLE-A93 | Appendix: Inspection Type Catalog | accepted | current | [`appendices/inspection-type-catalog.md`](inspection-type-catalog.md) |
+| JM-BIBLE-A94 | Appendix: Component Connectivity Catalog | accepted | current | [`appendices/component-connectivity-catalog.md`](component-connectivity-catalog.md) |
+| JM-BIBLE-A95 | Appendix: Intersection Fact Catalog | accepted | current | [`appendices/intersection-fact-catalog.md`](intersection-fact-catalog.md) |
+| JM-BIBLE-A96 | Appendix: Inspection Diagnostic Catalog | accepted | current | [`appendices/inspection-diagnostic-catalog.md`](inspection-diagnostic-catalog.md) |
+| JM-BIBLE-A97 | Appendix: Inspection Code Mapping | accepted | current | [`appendices/inspection-code-mapping.md`](inspection-code-mapping.md) |
+| JM-BIBLE-A98 | Appendix: Inspection Test Matrix | accepted | current | [`appendices/inspection-test-matrix.md`](inspection-test-matrix.md) |
+| JM-BIBLE-A99 | Appendix: Solitaire Inspection Baseline | accepted | current | [`appendices/solitaire-inspection-baseline.md`](solitaire-inspection-baseline.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 
@@ -554,6 +600,16 @@ front-matter convention and are listed here for completeness, per
 | Active validation registry (currently empty — zero records) | Yes | [`specs/professional-validation/v1/current-validation-registry.json`](../../../specs/professional-validation/v1/current-validation-registry.json) |
 | Example/template records (5) | Yes | [`specs/professional-validation/v1/examples/`](../../../specs/professional-validation/v1/examples/) |
 | Test vectors (6 files) | Yes | [`specs/professional-validation/v1/test-vectors/`](../../../specs/professional-validation/v1/test-vectors/) |
+
+## Machine-readable Geometry Inspection specification — `specs/geometry-inspection/v2/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/geometry-inspection/v2/README.md`](../../../specs/geometry-inspection/v2/README.md) |
+| Schemas (9 JSON Schemas covering geometric-fact/component-inspection/assembly-inspection/connectivity/intersection/distance/report/diagnostic/version models) | Yes | [`specs/geometry-inspection/v2/`](../../../specs/geometry-inspection/v2/) |
+| Fact registry (16 fact types, hand-authored, zero professional thresholds) | Yes | [`specs/geometry-inspection/v2/fact-registry.json`](../../../specs/geometry-inspection/v2/fact-registry.json) |
+| Examples (5, real generated inspection reports) | Yes | [`specs/geometry-inspection/v2/examples/`](../../../specs/geometry-inspection/v2/examples/) |
+| Test vectors (8 files) | Yes | [`specs/geometry-inspection/v2/test-vectors/`](../../../specs/geometry-inspection/v2/test-vectors/) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 

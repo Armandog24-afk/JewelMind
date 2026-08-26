@@ -1,0 +1,72 @@
+---
+id: JM-BIBLE-465
+title: Assembly Inspection Contract
+version: 1.0.0
+status: accepted
+owner: JewelMind
+last_updated: 2026-08-26
+source_of_truth: true
+depends_on:
+  - JM-BIBLE-000
+  - JM-BIBLE-INSPECTION-README
+  - JM-BIBLE-460
+related_documents:
+  - JM-BIBLE-463
+  - JM-BIBLE-464
+  - JM-BIBLE-470
+  - JM-BIBLE-471
+  - JM-BIBLE-472
+  - JM-BIBLE-473
+implementation_status: current
+professional_validation: not_required
+normative: true
+---
+
+# Assembly Inspection Contract
+
+The normative function is `backend/jewelmind/geometry/inspection/assembly.py::inspect_assembly(model: GeneratedModel, component_results: dict[str, ComponentInspectionResult]) -> tuple[AssemblyInspectionResult, dict[str, float]]`.
+
+## Orchestration, in the order the real code runs it
+
+1. **Required-component check.** `REQUIRED_COMPONENT_NAMES = ("band", "stone_reference", "prongs", "basket_support")`. `missing` is every required name either absent from `model.components` or whose `component_results[n].exists` is `False`.
+2. **Pairwise distances — all `C(4,2) = 6` pairs.** `shapes = {name: c.shape for name, c in model.components.items()}`, then `pairwise_distances(shapes)` runs `inspect_distance()` over every combination — not a subset, not a sample. Timed (`distance_ms`).
+3. **Pairwise intersections — broad-phase-skipped where possible.** For each of the same 6 pairs (via `_ALL_PAIRS = combinations(REQUIRED_COMPONENT_NAMES, 2)`), the matching `DistanceResult` is looked up and `should_skip_intersection(d.minDistanceMm)` decides whether to pass `known_separated=True` into `inspect_intersection()`, skipping the actual `Shape.intersect()` call for a pair already proven separated. Timed (`intersection_ms`).
+4. **Two connectivity graphs.** `production_names = production_component_names(all_names)` (from `jewelmind.geometry.roles`), then `build_connectivity_graph(production_names, distances, "PRODUCTION")` and `build_connectivity_graph(all_names, distances, "FULL_ASSEMBLY")` — both built from the same real `distances` list computed in step 2, never a second, separate measurement pass.
+5. **Total production volume.** `sum(component_results[n].volumeMm3 or 0.0 for n in production_names if n in component_results)` — a plain sum of the per-component volumes already computed in step 1 of component inspection, not a re-derivation from the fused `combined_metal` shape (see [`468-volume-inspection.md`](468-volume-inspection.md) for why these two numbers legitimately differ).
+6. **Stone-metal separation.** `_stone_metal_separation(model, intersections, component_results)` — see below.
+7. **Prong count.** `_prong_count(model)` — see below.
+8. **Boolean-operation facts.** `_boolean_operations(model, component_results)`, timed as `topology_ms` (it calls `inspect_topology()` on `model.combined_metal`) — see below.
+
+## `_stone_metal_separation()`
+
+Checks `stone_reference` exists (via `component_results["stone_reference"].exists`); if not, returns `status="FAIL"` with `stoneReferenceExists=False`. Otherwise, filters the already-computed `intersections` list for pairs involving `stone_reference` where `status == "INTERSECTS"` and the other component `is_production_component()`, collecting those names into `intersectsProductionComponents`. `fusedIntoProductionMetal` is hardcoded `False` with an explanatory comment: the stone is never passed into `_fuse_metal()` at construction time (a structural guarantee — the function's own signature has no stone parameter, restating [`07-atlas/143-stone-metal-separation-contract.md`](../07-atlas/143-stone-metal-separation-contract.md)'s finding), so real geometric overlap with a production component (e.g. the grip realism from `EMBED_MM`) is expected and explicitly documented as *not* the same fact as fusion.
+
+## `_prong_count()`
+
+Reads `prongs.metadata.get("requestedCount")`/`.get("generatedCount")` — the same real metadata `inspect_component()` already carried forward. If either key is missing, returns `status="UNKNOWN"`. Otherwise `matches = requested == generated`, `status = "PASS" if matches else "FAIL"`.
+
+## `_boolean_operations()`
+
+For each of `("band", "basket_support", "prongs")`, builds a `BooleanOperationResult` from that component's already-computed `ComponentInspectionResult` (`succeeded=comp.exists`, `fallbackUsed=comp.fallbackUsed`, `outputSolidCount=comp.solidCount`, `outputVolumeMm3=comp.volumeMm3`, `note` joined from the real `GeneratedComponent.warnings`). The `operation` label is `"FUSE"` for `band`/`prongs` and `"CUT"` for `basket_support` (its real construction method — see `geometry/components/basket.py`'s hollow-cylinder-minus-inner-cylinder approach). Then appends one more entry for `combined_metal`: `inspect_topology(model.combined_metal)` supplies its solid count; `fallbackUsed = combined_solids.solids > 1` (more than one top-level solid in the fused body means `_fuse_metal()` fell back to a compound).
+
+## Real measured numbers for the default solitaire
+
+Generated by running the real pipeline against the default `JewelryDefinition` (`cadquery==2.8.0`), quoted here rather than re-derived:
+
+| Component | Volume (mm³) | Solids |
+|---|---|---|
+| `band` | 250.99 | 1 |
+| `stone_reference` | 58.22 | 1 |
+| `prongs` (6-prong default) | 29.65 | 6 |
+| `basket_support` | 83.16 | 1 |
+| `combined_metal` (band + prongs + basket, fused) | — | 1 (no fallback) |
+
+Pairwise intersection volumes (mm³): `band`↔`basket_support` 0.117, `basket_support`↔`prongs` 22.24, `prongs`↔`stone_reference` 2.10, `band`↔`stone_reference` 0.0 (`NO_INTERSECTION`), `basket_support`↔`stone_reference` 3.62, `band`↔`prongs` 0.022.
+
+Pairwise minimum distances (mm): `band`↔`stone_reference` 0.9 (the only separated pair); all other 5 pairs 0.0 (touching/overlapping).
+
+Production connectivity: fully connected, one group of `["band", "basket_support", "prongs"]`. Full-assembly connectivity (including `stone_reference`): also fully connected, one group of all 4 — `stone_reference` genuinely touches `prongs` and `basket_support` even though it is excluded from the production graph by definition (see [`470-component-connectivity-model.md`](470-component-connectivity-model.md)).
+
+## Cross-references
+
+[`470-component-connectivity-model.md`](470-component-connectivity-model.md), [`471-component-intersection-model.md`](471-component-intersection-model.md), [`472-component-distance-model.md`](472-component-distance-model.md), and [`473-production-metal-integrity.md`](473-production-metal-integrity.md) each expand one of the steps above. `backend/tests/test_geometry_inspection.py::TestAssemblyComponentCount`, `TestProngCountInspection`, `TestStoneReferenceRole`, `TestProductionConnectivity`, and `TestFallbackInspection` exercise this function (via `inspect_model()`) directly against the real solitaire.

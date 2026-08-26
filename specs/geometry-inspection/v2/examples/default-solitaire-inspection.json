@@ -1,0 +1,1186 @@
+{
+  "inspectionId": "inspection-6da27bd0-ca3e-44e3-9320-3da307178911",
+  "inspectionVersion": "1.0.0",
+  "definitionHash": "355ddca57e7e49ad",
+  "geometryGeneratorVersion": "0.1.0",
+  "kernelVersion": "2.8.0",
+  "startedAt": "2026-08-26T07:56:48.631431+00:00",
+  "completedAt": "2026-08-26T07:56:49.200612+00:00",
+  "status": "PASS",
+  "componentResults": [
+    {
+      "componentId": "band",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 1,
+      "volumeMm3": 250.99168317654699,
+      "boundingBox": {
+        "xmin": -10.700000000000001,
+        "ymin": -1.2000001,
+        "zmin": -10.700000000000001,
+        "xmax": 10.700000000000001,
+        "ymax": 1.2000001000000002,
+        "zmax": 10.700000000000001,
+        "sizeX": 21.400000000000002,
+        "sizeY": 2.4000002,
+        "sizeZ": 21.400000000000002,
+        "centerX": 0.0,
+        "centerY": 1.1102230246251565e-16,
+        "centerZ": 0.0
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 6,
+        "edges": 10,
+        "vertices": 6
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "profile": "comfort_fit",
+        "innerRadiusMm": 8.9,
+        "outerRadiusMm": 10.700000000000001,
+        "filletApplied": true
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "stone_reference",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Solid",
+      "solidCount": 1,
+      "volumeMm3": 58.22141924499569,
+      "boundingBox": {
+        "xmin": -3.2500001,
+        "ymin": -3.2500001,
+        "zmin": 11.599999900000002,
+        "xmax": 3.2500001,
+        "ymax": 3.2500001,
+        "zmax": 15.6000001,
+        "sizeX": 6.5000002,
+        "sizeY": 6.5000002,
+        "sizeZ": 4.000000199999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 13.600000000000001
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 4,
+        "edges": 5,
+        "vertices": 3
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "girdleRadiusMm": 3.25,
+        "girdleZMm": 14.200000000000001,
+        "crownHeightMm": 1.4,
+        "pavilionHeightMm": 2.6,
+        "tableRadiusMm": 1.8200000000000003,
+        "isGemologicalReproduction": false
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "prongs",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 6,
+      "volumeMm3": 29.650351464580467,
+      "boundingBox": {
+        "xmin": -3.635,
+        "ymin": -3.2216883706749933,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.2216883706749933,
+        "zmax": 15.5,
+        "sizeX": 7.27,
+        "sizeY": 6.4433767413499865,
+        "sizeZ": 5.199999999999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.9
+      },
+      "topology": {
+        "solids": 6,
+        "shells": 6,
+        "faces": 18,
+        "edges": 18,
+        "vertices": 12
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "requestedCount": 6,
+        "generatedCount": 6,
+        "prongRadiusMm": 0.55,
+        "centerRadiusMm": 3.085,
+        "positions": [
+          {
+            "x": 3.085,
+            "y": 0.0
+          },
+          {
+            "x": 1.5425000000000004,
+            "y": 2.671688370674993
+          },
+          {
+            "x": -1.5424999999999993,
+            "y": 2.6716883706749934
+          },
+          {
+            "x": -3.085,
+            "y": 3.778035375369585e-16
+          },
+          {
+            "x": -1.5425000000000013,
+            "y": -2.6716883706749925
+          },
+          {
+            "x": 1.5425000000000004,
+            "y": -2.671688370674993
+          }
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "basket_support",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 1,
+      "volumeMm3": 83.15575842566426,
+      "boundingBox": {
+        "xmin": -3.635,
+        "ymin": -3.635,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.635,
+        "zmax": 14.200000000000001,
+        "sizeX": 7.27,
+        "sizeY": 7.27,
+        "sizeZ": 3.9000000000000004,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.25
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 4,
+        "edges": 6,
+        "vertices": 4
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "outerRadiusMm": 3.635,
+        "innerRadiusMm": 2.535,
+        "baseZMm": 10.3,
+        "heightMm": 3.9
+      },
+      "diagnostics": []
+    }
+  ],
+  "assemblyResult": {
+    "requiredComponentsPresent": true,
+    "missingComponentIds": [],
+    "componentCount": 4,
+    "productionComponentCount": 3,
+    "referenceComponentCount": 1,
+    "totalProductionVolumeMm3": 363.7977930667917,
+    "assemblyBoundingBox": {
+      "xmin": -10.7000001,
+      "ymin": -3.635,
+      "zmin": -10.7000001,
+      "xmax": 10.7000001,
+      "ymax": 3.635,
+      "zmax": 15.6000001,
+      "sizeX": 21.4000002,
+      "sizeY": 7.27,
+      "sizeZ": 26.3000002,
+      "centerX": 0.0,
+      "centerY": 0.0,
+      "centerZ": 2.45
+    },
+    "productionConnectivity": {
+      "graphType": "PRODUCTION",
+      "nodes": [
+        "band",
+        "prongs",
+        "basket_support"
+      ],
+      "edges": [
+        {
+          "componentA": "band",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "prongs",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        }
+      ],
+      "connectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs"
+        ]
+      ],
+      "isFullyConnected": true,
+      "disconnectedGroupCount": 0
+    },
+    "fullAssemblyConnectivity": {
+      "graphType": "FULL_ASSEMBLY",
+      "nodes": [
+        "band",
+        "stone_reference",
+        "prongs",
+        "basket_support"
+      ],
+      "edges": [
+        {
+          "componentA": "band",
+          "componentB": "stone_reference",
+          "connected": false,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "stone_reference",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "stone_reference",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "prongs",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        }
+      ],
+      "connectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs",
+          "stone_reference"
+        ]
+      ],
+      "isFullyConnected": true,
+      "disconnectedGroupCount": 0
+    },
+    "intersections": [
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "status": "NO_INTERSECTION",
+        "intersectionVolumeMm3": 0.0,
+        "intersectionSolidCount": 0,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Skipped the boolean-common operation: a prior distance measurement already proved this pair is separated beyond the contact tolerance."
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "status": "INTERSECTS",
+        "intersectionVolumeMm3": 0.02226969629472863,
+        "intersectionSolidCount": 2,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+      },
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "status": "INTERSECTS",
+        "intersectionVolumeMm3": 0.11681963631847081,
+        "intersectionSolidCount": 2,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "status": "INTERSECTS",
+        "intersectionVolumeMm3": 2.1008137959215842,
+        "intersectionSolidCount": 6,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "status": "INTERSECTS",
+        "intersectionVolumeMm3": 3.6189901204267514,
+        "intersectionSolidCount": 1,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "status": "INTERSECTS",
+        "intersectionVolumeMm3": 22.237763598435365,
+        "intersectionSolidCount": 6,
+        "unit": "mm3",
+        "tolerance": 1e-06,
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+      }
+    ],
+    "distances": [
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "minDistanceMm": 0.9000000000000004,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "minDistanceMm": 0.0,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      },
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "minDistanceMm": 0.0,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "minDistanceMm": 0.0,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "minDistanceMm": 0.0,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "minDistanceMm": 0.0,
+        "status": "PASS",
+        "unit": "mm",
+        "tolerance": 1e-06
+      }
+    ],
+    "stoneMetalSeparation": {
+      "stoneReferenceExists": true,
+      "productionIncluded": false,
+      "intersectsProductionComponents": [
+        "prongs",
+        "basket_support"
+      ],
+      "fusedIntoProductionMetal": false,
+      "status": "PASS",
+      "note": "StoneReference intersecting a production component (e.g. prongs, for a physically plausible grip) is an expected reference relationship, never evidence that its geometry was fused into production metal."
+    },
+    "prongCount": {
+      "requestedCount": 6,
+      "generatedCount": 6,
+      "matches": true,
+      "status": "PASS"
+    },
+    "booleanOperations": [
+      {
+        "operation": "FUSE",
+        "inputComponentIds": [
+          "band"
+        ],
+        "outputComponentId": "band",
+        "succeeded": true,
+        "fallbackUsed": false,
+        "outputSolidCount": 1,
+        "outputVolumeMm3": 250.99168317654699,
+        "note": ""
+      },
+      {
+        "operation": "CUT",
+        "inputComponentIds": [
+          "basket_support"
+        ],
+        "outputComponentId": "basket_support",
+        "succeeded": true,
+        "fallbackUsed": false,
+        "outputSolidCount": 1,
+        "outputVolumeMm3": 83.15575842566426,
+        "note": ""
+      },
+      {
+        "operation": "FUSE",
+        "inputComponentIds": [
+          "prongs"
+        ],
+        "outputComponentId": "prongs",
+        "succeeded": true,
+        "fallbackUsed": false,
+        "outputSolidCount": 6,
+        "outputVolumeMm3": 29.650351464580467,
+        "note": ""
+      },
+      {
+        "operation": "FUSE",
+        "inputComponentIds": [
+          "band",
+          "prongs",
+          "basket_support"
+        ],
+        "outputComponentId": "combined_metal",
+        "succeeded": true,
+        "fallbackUsed": false,
+        "outputSolidCount": 1,
+        "outputVolumeMm3": 341.44334316909976,
+        "note": ""
+      }
+    ]
+  },
+  "geometricFacts": [
+    {
+      "factId": "component.band.exists",
+      "factType": "COMPONENT_PRESENT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "band"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.band.solidCount",
+      "factType": "SOLID_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "band"
+      ],
+      "value": 1,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.band.volume",
+      "factType": "VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "band"
+      ],
+      "value": 250.99168317654699,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Volume",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.band.shapeValid",
+      "factType": "SHAPE_VALID",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "band"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.isValid()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.band.boundingBox",
+      "factType": "BOUNDING_BOX",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "band"
+      ],
+      "value": null,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {
+        "xmin": -10.700000000000001,
+        "ymin": -1.2000001,
+        "zmin": -10.700000000000001,
+        "xmax": 10.700000000000001,
+        "ymax": 1.2000001000000002,
+        "zmax": 10.700000000000001,
+        "sizeX": 21.400000000000002,
+        "sizeY": 2.4000002,
+        "sizeZ": 21.400000000000002,
+        "centerX": 0.0,
+        "centerY": 1.1102230246251565e-16,
+        "centerZ": 0.0
+      }
+    },
+    {
+      "factId": "component.stone_reference.exists",
+      "factType": "COMPONENT_PRESENT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.solidCount",
+      "factType": "SOLID_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 1,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.volume",
+      "factType": "VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 58.22141924499569,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Volume",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.shapeValid",
+      "factType": "SHAPE_VALID",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.isValid()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.boundingBox",
+      "factType": "BOUNDING_BOX",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": null,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {
+        "xmin": -3.2500001,
+        "ymin": -3.2500001,
+        "zmin": 11.599999900000002,
+        "xmax": 3.2500001,
+        "ymax": 3.2500001,
+        "zmax": 15.6000001,
+        "sizeX": 6.5000002,
+        "sizeY": 6.5000002,
+        "sizeZ": 4.000000199999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 13.600000000000001
+      }
+    },
+    {
+      "factId": "component.prongs.exists",
+      "factType": "COMPONENT_PRESENT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.prongs.solidCount",
+      "factType": "SOLID_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 6,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.prongs.volume",
+      "factType": "VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 29.650351464580467,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Volume",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.prongs.shapeValid",
+      "factType": "SHAPE_VALID",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.isValid()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.prongs.boundingBox",
+      "factType": "BOUNDING_BOX",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": null,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {
+        "xmin": -3.635,
+        "ymin": -3.2216883706749933,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.2216883706749933,
+        "zmax": 15.5,
+        "sizeX": 7.27,
+        "sizeY": 6.4433767413499865,
+        "sizeZ": 5.199999999999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.9
+      }
+    },
+    {
+      "factId": "component.basket_support.exists",
+      "factType": "COMPONENT_PRESENT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "basket_support"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.basket_support.solidCount",
+      "factType": "SOLID_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "basket_support"
+      ],
+      "value": 1,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Solids()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.basket_support.volume",
+      "factType": "VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "basket_support"
+      ],
+      "value": 83.15575842566426,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.Volume",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.basket_support.shapeValid",
+      "factType": "SHAPE_VALID",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "basket_support"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.isValid()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.basket_support.boundingBox",
+      "factType": "BOUNDING_BOX",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "basket_support"
+      ],
+      "value": null,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {
+        "xmin": -3.635,
+        "ymin": -3.635,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.635,
+        "zmax": 14.200000000000001,
+        "sizeX": 7.27,
+        "sizeY": 7.27,
+        "sizeZ": 3.9000000000000004,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.25
+      }
+    },
+    {
+      "factId": "assembly.componentCount",
+      "factType": "COMPONENT_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "stone_reference",
+        "prongs",
+        "basket_support"
+      ],
+      "value": 4,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "len(model.components)",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "assembly.prongCount",
+      "factType": "PRONG_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 6,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "prongs.metadata",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {
+        "requestedCount": 6,
+        "generatedCount": 6,
+        "matches": true,
+        "status": "PASS"
+      }
+    },
+    {
+      "factId": "assembly.stoneMetalSeparate",
+      "factType": "STONE_METAL_SEPARATE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "assembly.stoneMetalSeparation",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.stone_reference.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "stone_reference"
+      ],
+      "value": 0.0,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.prongs.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "prongs"
+      ],
+      "value": 0.02226969629472863,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.basket_support.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "basket_support"
+      ],
+      "value": 0.11681963631847081,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.stone_reference.prongs.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "stone_reference",
+        "prongs"
+      ],
+      "value": 2.1008137959215842,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.stone_reference.basket_support.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "stone_reference",
+        "basket_support"
+      ],
+      "value": 3.6189901204267514,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.prongs.basket_support.intersectionVolume",
+      "factType": "INTERSECTION_VOLUME",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": 22.237763598435365,
+      "unit": "mm3",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.intersect()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.stone_reference.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "stone_reference"
+      ],
+      "value": 0.9000000000000004,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.prongs.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "prongs"
+      ],
+      "value": 0.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.band.basket_support.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "band",
+        "basket_support"
+      ],
+      "value": 0.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.stone_reference.prongs.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "stone_reference",
+        "prongs"
+      ],
+      "value": 0.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.stone_reference.basket_support.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "stone_reference",
+        "basket_support"
+      ],
+      "value": 0.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "pair.prongs.basket_support.minDistance",
+      "factType": "MIN_DISTANCE",
+      "inspectionVersion": "1.0.0",
+      "scope": "PAIR",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": 0.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": 1e-06,
+      "sourceOperation": "Shape.distance()",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "production.connectivity.group.band-basket_support-prongs",
+      "factType": "CONNECTED",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs"
+      ],
+      "value": true,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "connectivity graph (Shape.distance())",
+      "generatedAt": "2026-08-26T07:56:49.199619+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    }
+  ],
+  "diagnostics": [],
+  "performance": {
+    "totalDurationMs": 568.9377000089735,
+    "componentInspectionMs": 119.324700004654,
+    "distanceInspectionMs": 121.65659997845069,
+    "intersectionInspectionMs": 274.7032000042964,
+    "topologyInspectionMs": 51.601999992271885
+  },
+  "unavailableInspections": []
+}

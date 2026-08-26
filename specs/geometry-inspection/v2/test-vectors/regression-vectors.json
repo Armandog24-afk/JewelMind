@@ -1,0 +1,23 @@
+{
+  "vectors": [
+    {
+      "definitionHash": "355ddca57e7e49ad",
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "prongCount": {
+        "requestedCount": 6,
+        "generatedCount": 6,
+        "matches": true,
+        "status": "PASS"
+      },
+      "productionConnectivityFullyConnected": true,
+      "componentVolumesMm3": {
+        "band": 250.99168317654699,
+        "stone_reference": 58.22141924499569,
+        "prongs": 29.650351464580467,
+        "basket_support": 83.15575842566426
+      },
+      "toleranceNote": "Compare with a relative tolerance (e.g. 5%), never exact float equality \u2014 see 486-inspection-determinism.md."
+    }
+  ]
+}

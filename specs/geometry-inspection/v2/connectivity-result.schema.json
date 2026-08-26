@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/connectivity-result.schema.json",
+  "title": "Connectivity Graph v2",
+  "description": "A real connectivity graph built from pairwise distance measurements — never from component-name assumptions. Two distinct graph types always exist: PRODUCTION (metal-only) and FULL_ASSEMBLY (includes StoneReference). See docs/bible/16-geometry-inspection/470-component-connectivity-model.md and 480-assembly-graph-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["graphType", "nodes", "edges", "connectedGroups", "isFullyConnected", "disconnectedGroupCount"],
+  "properties": {
+    "graphType": { "enum": ["PRODUCTION", "FULL_ASSEMBLY"] },
+    "nodes": { "type": "array", "items": { "type": "string" } },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["componentA", "componentB", "connected", "basis"],
+        "properties": {
+          "componentA": { "type": "string" },
+          "componentB": { "type": "string" },
+          "connected": { "type": "boolean" },
+          "basis": { "enum": ["DISTANCE", "INTERSECTION", "UNKNOWN"] }
+        }
+      }
+    },
+    "connectedGroups": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+    "isFullyConnected": { "type": "boolean" },
+    "disconnectedGroupCount": { "type": "integer", "minimum": 0 }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "vectors": [
+    {
+      "componentA": "band",
+      "componentB": "stone_reference",
+      "minDistanceMm": 0.9000000000000004,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "band",
+      "componentB": "prongs",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "band",
+      "componentB": "basket_support",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "prongs",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "basket_support",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    },
+    {
+      "componentA": "prongs",
+      "componentB": "basket_support",
+      "minDistanceMm": 0.0,
+      "status": "PASS",
+      "unit": "mm",
+      "tolerance": 1e-06
+    }
+  ]
+}

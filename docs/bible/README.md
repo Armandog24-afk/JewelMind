@@ -173,6 +173,21 @@ This Bible now spans six Sprints:
   validated as of this Sprint; the infrastructure exists, real review
   has not yet occurred). Start there at
   [`15-professional-validation/README.md`](15-professional-validation/README.md).
+- **Sprint 14 — Geometry Inspection v2**
+  ([`16-geometry-inspection/`](16-geometry-inspection/)), a real,
+  runtime geometric-fact-reporting subsystem
+  (`backend/jewelmind/geometry/inspection/`) that now runs
+  unconditionally on every model generation — component volumes,
+  bounding boxes, solid counts, pairwise intersections/distances,
+  production connectivity, and stone-metal separation, all reported as
+  kernel-neutral facts, never a jewelry-domain or manufacturing
+  judgment (that remains exclusively Forge's job, and Forge does not
+  yet consume any of these facts — a real, honestly-documented gap).
+  Materially closes the single most important finding of Sprints 4-5:
+  before this Sprint, only one geometric property (a fuse-solid-count
+  check) affected a real API response; everything else was proven only
+  by tests. Start there at
+  [`16-geometry-inspection/README.md`](16-geometry-inspection/README.md).
 
 ## How this relates to the existing `docs/` folder
 
@@ -482,3 +497,30 @@ test-only dependency usage (`jsonschema`) and test files
 `test_export_integrity.py`, `test_filenames.py`,
 `test_foundry_registry.py`, `test_vision_schemas.py`,
 `test_studio_schemas.py`).
+
+**Technical Bible Sprint 14 — Geometry Inspection v2** turns Atlas
+inspection into a real runtime subsystem, closing the single most
+important honest finding of Sprints 4-5: before this Sprint, only one
+geometric property affected a real API response (`FORGE-GEOM-001`, a
+fuse-solid-count check); every other property this Bible documented as
+"current" was proven only by `test_geometry.py` at development/CI time.
+`ModelService.generate()` now calls
+`jewelmind.geometry.inspection.inspect_model()` unconditionally on
+every generation, producing a structured `GeometryInspectionReport`:
+per-component existence/volume/bounding-box/solid-count/shape-validity,
+real pairwise intersection and minimum-distance measurements between
+every named component (via `cadquery.Shape.intersect()`/`.distance()`,
+verified against the installed `cadquery==2.8.0` build rather than
+assumed), a real connectivity graph (union-find over real distance
+measurements, never a bounding-box shortcut), requested-vs-generated
+prong count, and a structural (not merely geometric) stone-metal
+separation check. Its most important architectural finding: **Atlas
+reports facts, Forge does not yet consume any of them** —
+`specs/geometry-inspection/v2/fact-registry.json` records every one of
+its 16 fact types as `"forgeConsumptionStatus": "not_consumed"`, a real
+and honestly-documented boundary, not an oversight. It adds the
+machine-readable specification under
+[`../../specs/geometry-inspection/v2/`](../../specs/geometry-inspection/v2/README.md)
+(9 JSON Schemas, a hand-authored `fact-registry.json`, 5 examples, and 8
+test-vector files) plus `backend/tests/test_geometry_inspection.py` (34
+tests) and `test_geometry_inspection_schemas.py` (6 tests).

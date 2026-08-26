@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/inspection-report.schema.json",
+  "title": "Geometry Inspection Report v2",
+  "description": "The complete result of inspect_model() for one generated model — the response body of GET /api/models/{modelId}/inspection. See docs/bible/16-geometry-inspection/481-inspection-result-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "inspectionId", "inspectionVersion", "definitionHash", "geometryGeneratorVersion",
+    "startedAt", "completedAt", "status", "componentResults", "assemblyResult", "geometricFacts", "performance"
+  ],
+  "properties": {
+    "inspectionId": { "type": "string" },
+    "inspectionVersion": { "type": "string" },
+    "definitionHash": { "type": "string" },
+    "geometryGeneratorVersion": { "type": "string" },
+    "kernelVersion": { "type": ["string", "null"] },
+    "startedAt": { "type": "string" },
+    "completedAt": { "type": "string" },
+    "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] },
+    "componentResults": {
+      "type": "array",
+      "items": { "type": "object", "description": "See component-inspection.schema.json." }
+    },
+    "assemblyResult": { "type": "object", "description": "See assembly-inspection.schema.json." },
+    "geometricFacts": {
+      "type": "array",
+      "items": { "type": "object", "description": "See geometric-fact.schema.json." }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": { "type": "object", "description": "See inspection-diagnostic.schema.json." }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalDurationMs", "componentInspectionMs", "distanceInspectionMs", "intersectionInspectionMs", "topologyInspectionMs"],
+      "properties": {
+        "totalDurationMs": { "type": "number" },
+        "componentInspectionMs": { "type": "number" },
+        "distanceInspectionMs": { "type": "number" },
+        "intersectionInspectionMs": { "type": "number" },
+        "topologyInspectionMs": { "type": "number" }
+      }
+    },
+    "unavailableInspections": { "type": "array", "items": { "type": "string" } }
+  }
+}

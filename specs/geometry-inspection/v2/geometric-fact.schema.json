@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/geometric-fact.schema.json",
+  "title": "Geometric Fact v2",
+  "description": "One kernel-neutral geometric fact — never a jewelry-domain or manufacturing judgment (INSPECT-GOV-001/002). Sub-shapes are inlined here (not $ref'd), matching every prior sprint's specs/*/v2/ convention. See docs/bible/16-geometry-inspection/462-geometric-fact-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["factId", "factType", "inspectionVersion", "scope", "status", "sourceOperation", "generatedAt"],
+  "properties": {
+    "factId": { "type": "string" },
+    "factType": {
+      "enum": [
+        "SHAPE_EXISTS", "SHAPE_VALID", "SOLID_COUNT", "VOLUME", "BOUNDING_BOX", "COMPONENT_COUNT",
+        "INTERSECTION_EXISTS", "INTERSECTION_VOLUME", "MIN_DISTANCE", "CONNECTED", "DISCONNECTED",
+        "COMPONENT_PRESENT", "PRONG_COUNT", "STONE_METAL_SEPARATE", "BOOLEAN_RESULT_VALID", "FALLBACK_USED"
+      ]
+    },
+    "inspectionVersion": { "type": "string" },
+    "scope": { "enum": ["COMPONENT", "ASSEMBLY", "PAIR"] },
+    "componentIds": { "type": "array", "items": { "type": "string" } },
+    "value": { "type": ["number", "boolean", "string", "null"] },
+    "unit": { "type": ["string", "null"] },
+    "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] },
+    "tolerance": { "type": ["number", "null"] },
+    "sourceOperation": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "diagnostic": {
+      "type": ["object", "null"],
+      "description": "See inspection-diagnostic.schema.json."
+    },
+    "metadata": { "type": "object" }
+  }
+}

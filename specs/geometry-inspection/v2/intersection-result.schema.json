@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/intersection-result.schema.json",
+  "title": "Intersection Result v2",
+  "description": "A real pairwise geometric intersection result. TOUCHES/NO_INTERSECTION with distance 0 can still mean a surface contact with zero enclosed volume — see docs/bible/16-geometry-inspection/471-component-intersection-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentA", "componentB", "status", "tolerance"],
+  "properties": {
+    "componentA": { "type": "string" },
+    "componentB": { "type": "string" },
+    "status": { "enum": ["INTERSECTS", "TOUCHES", "NO_INTERSECTION", "UNKNOWN"] },
+    "intersectionVolumeMm3": { "type": ["number", "null"] },
+    "intersectionSolidCount": { "type": ["integer", "null"] },
+    "unit": { "type": "string" },
+    "tolerance": { "type": "number" },
+    "note": { "type": "string" }
+  }
+}

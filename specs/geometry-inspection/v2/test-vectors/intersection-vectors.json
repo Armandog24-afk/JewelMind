@@ -1,0 +1,64 @@
+{
+  "vectors": [
+    {
+      "componentA": "band",
+      "componentB": "stone_reference",
+      "status": "NO_INTERSECTION",
+      "intersectionVolumeMm3": 0.0,
+      "intersectionSolidCount": 0,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "band",
+      "componentB": "prongs",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 0.02226969629472863,
+      "intersectionSolidCount": 2,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "band",
+      "componentB": "basket_support",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 0.11681963631847081,
+      "intersectionSolidCount": 2,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "prongs",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 2.1008137959215842,
+      "intersectionSolidCount": 6,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "basket_support",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 3.6189901204267514,
+      "intersectionSolidCount": 1,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "prongs",
+      "componentB": "basket_support",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 22.237763598435365,
+      "intersectionSolidCount": 6,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    }
+  ]
+}

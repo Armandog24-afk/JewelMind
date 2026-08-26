@@ -1,0 +1,16 @@
+{
+  "vectors": [
+    {
+      "prongCount": 4,
+      "prongsSolidCount": 4,
+      "bandSolidCount": 1,
+      "combinedMetalSolidCount": 1
+    },
+    {
+      "prongCount": 6,
+      "prongsSolidCount": 6,
+      "bandSolidCount": 1,
+      "combinedMetalSolidCount": 1
+    }
+  ]
+}

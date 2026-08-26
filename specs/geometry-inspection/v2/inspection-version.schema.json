@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/inspection-version.schema.json",
+  "title": "Inspection Version Impact v2",
+  "description": "Classifies what a change to inspection semantics or a version bump means for a prior GeometryInspectionReport/GeometricFact — independent of GENERATOR_VERSION. See docs/bible/16-geometry-inspection/485-inspection-versioning.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["inspectionVersion", "changeLevel", "description"],
+  "properties": {
+    "inspectionVersion": { "type": "string" },
+    "changeLevel": {
+      "enum": ["PATCH", "MINOR", "MAJOR"],
+      "description": "PATCH: diagnostic wording only. MINOR: a new optional fact. MAJOR: a changed definition of an existing fact (e.g. connectivity/intersection semantics)."
+    },
+    "description": { "type": "string" },
+    "affectedFactTypes": { "type": "array", "items": { "type": "string" } }
+  }
+}

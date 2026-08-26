@@ -1,0 +1,98 @@
+{
+  "vectors": [
+    {
+      "graphType": "PRODUCTION",
+      "nodes": [
+        "band",
+        "prongs",
+        "basket_support"
+      ],
+      "edges": [
+        {
+          "componentA": "band",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "prongs",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        }
+      ],
+      "connectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs"
+        ]
+      ],
+      "isFullyConnected": true,
+      "disconnectedGroupCount": 0
+    },
+    {
+      "graphType": "FULL_ASSEMBLY",
+      "nodes": [
+        "band",
+        "stone_reference",
+        "prongs",
+        "basket_support"
+      ],
+      "edges": [
+        {
+          "componentA": "band",
+          "componentB": "stone_reference",
+          "connected": false,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "band",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "stone_reference",
+          "componentB": "prongs",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "stone_reference",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        },
+        {
+          "componentA": "prongs",
+          "componentB": "basket_support",
+          "connected": true,
+          "basis": "DISTANCE"
+        }
+      ],
+      "connectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs",
+          "stone_reference"
+        ]
+      ],
+      "isFullyConnected": true,
+      "disconnectedGroupCount": 0
+    }
+  ]
+}

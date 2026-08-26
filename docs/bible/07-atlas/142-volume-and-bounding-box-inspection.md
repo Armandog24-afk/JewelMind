@@ -42,3 +42,7 @@ See [`139-geometry-metadata-model.md`](139-geometry-metadata-model.md) for the f
 ## Current test coverage, summarized
 
 Every one of the four components and the assembly has at least one volume and/or bounding-box test in `test_geometry.py` — see [`atlas-inspection-catalog.md`](../appendices/atlas-inspection-catalog.md) for the complete component-by-component mapping. No component currently lacks basic volume/bbox test coverage.
+
+## Sprint 14: volume and bounding-box checks are now also runtime
+
+`jewelmind.geometry.inspection.inspect_component()` (Sprint 14) now performs the SAME finiteness/non-negativity volume check and the same real `BoundingBox.from_shape()` computation as the test suite above, but on every real `ModelService.generate()` call, not only in `test_geometry.py` — see [`16-geometry-inspection/468-volume-inspection.md`](../16-geometry-inspection/468-volume-inspection.md) and [`469-bounding-box-inspection.md`](../16-geometry-inspection/469-bounding-box-inspection.md). This does not change either explicit limitation stated above: a runtime-checked positive volume and a runtime-checked bounding box still do not prove manufacturability or correct construction — Sprint 14 makes the same weak, honest checks real-time, it does not make them stronger checks.

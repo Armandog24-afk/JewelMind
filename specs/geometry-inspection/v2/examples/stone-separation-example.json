@@ -1,0 +1,45 @@
+{
+  "stoneMetalSeparation": {
+    "stoneReferenceExists": true,
+    "productionIncluded": false,
+    "intersectsProductionComponents": [
+      "prongs",
+      "basket_support"
+    ],
+    "fusedIntoProductionMetal": false,
+    "status": "PASS",
+    "note": "StoneReference intersecting a production component (e.g. prongs, for a physically plausible grip) is an expected reference relationship, never evidence that its geometry was fused into production metal."
+  },
+  "relevantIntersections": [
+    {
+      "componentA": "band",
+      "componentB": "stone_reference",
+      "status": "NO_INTERSECTION",
+      "intersectionVolumeMm3": 0.0,
+      "intersectionSolidCount": 0,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Skipped the boolean-common operation: a prior distance measurement already proved this pair is separated beyond the contact tolerance."
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "prongs",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 2.1008137959215842,
+      "intersectionSolidCount": 6,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    },
+    {
+      "componentA": "stone_reference",
+      "componentB": "basket_support",
+      "status": "INTERSECTS",
+      "intersectionVolumeMm3": 3.6189901204267514,
+      "intersectionSolidCount": 1,
+      "unit": "mm3",
+      "tolerance": 1e-06,
+      "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+    }
+  ]
+}

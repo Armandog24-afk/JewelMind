@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/distance-result.schema.json",
+  "title": "Distance Result v2",
+  "description": "Minimum real distance between two components — never an acceptable-jewelry-distance judgment. See docs/bible/16-geometry-inspection/472-component-distance-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["componentA", "componentB", "status", "tolerance"],
+  "properties": {
+    "componentA": { "type": "string" },
+    "componentB": { "type": "string" },
+    "minDistanceMm": { "type": ["number", "null"] },
+    "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] },
+    "unit": { "type": "string" },
+    "tolerance": { "type": "number" }
+  }
+}

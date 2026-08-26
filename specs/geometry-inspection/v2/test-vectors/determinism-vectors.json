@@ -1,0 +1,28 @@
+{
+  "vectors": [
+    {
+      "run": 1,
+      "componentCount": 4,
+      "productionConnectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs"
+        ]
+      ],
+      "bandVolumeMm3": 250.99168317654699
+    },
+    {
+      "run": 2,
+      "componentCount": 4,
+      "productionConnectedGroups": [
+        [
+          "band",
+          "basket_support",
+          "prongs"
+        ]
+      ],
+      "bandVolumeMm3": 250.99168317654699
+    }
+  ]
+}

@@ -712,3 +712,46 @@ explicitly rather than resolving or averaging them. See
 conditions; the conditions are preserved, never dropped, by every
 downstream consumer of the record. See
 [`15-professional-validation/431-conditional-acceptance-model.md`](../15-professional-validation/431-conditional-acceptance-model.md).
+
+## Geometry Inspection terms (Sprint 14)
+
+> Authoritative source for every term in this section:
+> [`16-geometry-inspection/`](../16-geometry-inspection/README.md) (Sprint 14).
+
+**Geometric Fact** — one kernel-neutral, structured measurement about
+generated geometry (`GeometricFact` in
+`backend/jewelmind/geometry/inspection/models.py`): a factId, a
+`factType` (one of 16 values — volume, bounding box, solid count,
+intersection, distance, connectivity, etc.), a value, and a status.
+Never a jewelry-domain or manufacturing judgment — that distinction is
+this Sprint's entire governing principle. See
+[`16-geometry-inspection/462-geometric-fact-model.md`](../16-geometry-inspection/462-geometric-fact-model.md).
+
+**Geometry Inspection Report** — the complete result of inspecting one
+generated model (`GeometryInspectionReport`): per-component results, an
+assembly-level result (connectivity, intersections, distances,
+stone-metal separation, prong count), the flattened list of geometric
+facts, diagnostics, and performance timing. Produced by
+`jewelmind.geometry.inspection.inspect_model()`, called unconditionally
+on every real `ModelService.generate()` call. See
+[`16-geometry-inspection/481-inspection-result-model.md`](../16-geometry-inspection/481-inspection-result-model.md).
+
+**Production Connectivity** — a real connectivity graph over only the
+production-metal components (band, prongs, basket_support — never the
+StoneReference), built from real pairwise `Shape.distance()`
+measurements against a pure kernel contact tolerance, never a
+bounding-box shortcut. See
+[`16-geometry-inspection/470-component-connectivity-model.md`](../16-geometry-inspection/470-component-connectivity-model.md).
+
+**Stone-Metal Separation (runtime)** — the Sprint 14 runtime check
+confirming the StoneReference's geometry was never an argument to the
+production-metal fuse operation — a structural guarantee, not merely an
+absence of geometric intersection (the stone genuinely does intersect
+production components like prongs by design, for a plausible grip). See
+[`16-geometry-inspection/474-stone-metal-separation-inspection.md`](../16-geometry-inspection/474-stone-metal-separation-inspection.md).
+
+**Contact Tolerance** — the fixed kernel/geometric tolerance
+(`CONTACT_TOLERANCE_MM = 1e-6`) inspection uses to classify two
+components as touching/overlapping versus separated — never an invented
+jewelry-domain tolerance. See
+[`16-geometry-inspection/460-inspection-governance.md`](../16-geometry-inspection/460-inspection-governance.md), INSPECT-GOV-012.

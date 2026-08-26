@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-inspection/v2/assembly-inspection.schema.json",
+  "title": "Assembly Inspection Result v2",
+  "description": "Assembly-level facts for one generated model: connectivity, intersections, distances, stone-metal separation, prong count, and production-metal integrity. Sub-shapes are inlined here (not $ref'd), matching every prior sprint's specs/*/v2/ convention. See docs/bible/16-geometry-inspection/465-assembly-inspection-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "requiredComponentsPresent", "componentCount", "productionComponentCount", "referenceComponentCount",
+    "totalProductionVolumeMm3", "assemblyBoundingBox", "productionConnectivity", "fullAssemblyConnectivity",
+    "intersections", "distances", "stoneMetalSeparation", "prongCount"
+  ],
+  "properties": {
+    "requiredComponentsPresent": { "type": "boolean" },
+    "missingComponentIds": { "type": "array", "items": { "type": "string" } },
+    "componentCount": { "type": "integer" },
+    "productionComponentCount": { "type": "integer" },
+    "referenceComponentCount": { "type": "integer" },
+    "totalProductionVolumeMm3": { "type": "number" },
+    "assemblyBoundingBox": {
+      "type": "object",
+      "description": "See component-inspection.schema.json's boundingBox shape."
+    },
+    "productionConnectivity": { "type": "object", "description": "See connectivity-result.schema.json." },
+    "fullAssemblyConnectivity": { "type": "object", "description": "See connectivity-result.schema.json." },
+    "intersections": {
+      "type": "array",
+      "items": { "type": "object", "description": "See intersection-result.schema.json." }
+    },
+    "distances": {
+      "type": "array",
+      "items": { "type": "object", "description": "See distance-result.schema.json." }
+    },
+    "stoneMetalSeparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stoneReferenceExists", "productionIncluded", "fusedIntoProductionMetal", "status"],
+      "properties": {
+        "stoneReferenceExists": { "type": "boolean" },
+        "productionIncluded": { "type": "boolean" },
+        "intersectsProductionComponents": { "type": "array", "items": { "type": "string" } },
+        "fusedIntoProductionMetal": { "type": "boolean" },
+        "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] },
+        "note": { "type": "string" }
+      }
+    },
+    "prongCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedCount", "generatedCount", "matches", "status"],
+      "properties": {
+        "requestedCount": { "type": "integer" },
+        "generatedCount": { "type": "integer" },
+        "matches": { "type": "boolean" },
+        "status": { "enum": ["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"] }
+      }
+    },
+    "booleanOperations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operation", "inputComponentIds", "outputComponentId", "succeeded", "fallbackUsed"],
+        "properties": {
+          "operation": { "enum": ["FUSE", "CUT", "COMMON"] },
+          "inputComponentIds": { "type": "array", "items": { "type": "string" } },
+          "outputComponentId": { "type": "string" },
+          "succeeded": { "type": "boolean" },
+          "fallbackUsed": { "type": "boolean" },
+          "outputSolidCount": { "type": ["integer", "null"] },
+          "outputVolumeMm3": { "type": ["number", "null"] },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

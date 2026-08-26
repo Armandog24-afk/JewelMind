@@ -1,0 +1,207 @@
+{
+  "vectors": [
+    {
+      "componentId": "band",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 1,
+      "volumeMm3": 250.99168317654699,
+      "boundingBox": {
+        "xmin": -10.700000000000001,
+        "ymin": -1.2000001,
+        "zmin": -10.700000000000001,
+        "xmax": 10.700000000000001,
+        "ymax": 1.2000001000000002,
+        "zmax": 10.700000000000001,
+        "sizeX": 21.400000000000002,
+        "sizeY": 2.4000002,
+        "sizeZ": 21.400000000000002,
+        "centerX": 0.0,
+        "centerY": 1.1102230246251565e-16,
+        "centerZ": 0.0
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 6,
+        "edges": 10,
+        "vertices": 6
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "profile": "comfort_fit",
+        "innerRadiusMm": 8.9,
+        "outerRadiusMm": 10.700000000000001,
+        "filletApplied": true
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "stone_reference",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Solid",
+      "solidCount": 1,
+      "volumeMm3": 58.22141924499569,
+      "boundingBox": {
+        "xmin": -3.2500001,
+        "ymin": -3.2500001,
+        "zmin": 11.599999900000002,
+        "xmax": 3.2500001,
+        "ymax": 3.2500001,
+        "zmax": 15.6000001,
+        "sizeX": 6.5000002,
+        "sizeY": 6.5000002,
+        "sizeZ": 4.000000199999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 13.600000000000001
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 4,
+        "edges": 5,
+        "vertices": 3
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "girdleRadiusMm": 3.25,
+        "girdleZMm": 14.200000000000001,
+        "crownHeightMm": 1.4,
+        "pavilionHeightMm": 2.6,
+        "tableRadiusMm": 1.8200000000000003,
+        "isGemologicalReproduction": false
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "prongs",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 6,
+      "volumeMm3": 29.650351464580467,
+      "boundingBox": {
+        "xmin": -3.635,
+        "ymin": -3.2216883706749933,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.2216883706749933,
+        "zmax": 15.5,
+        "sizeX": 7.27,
+        "sizeY": 6.4433767413499865,
+        "sizeZ": 5.199999999999999,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.9
+      },
+      "topology": {
+        "solids": 6,
+        "shells": 6,
+        "faces": 18,
+        "edges": 18,
+        "vertices": 12
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "requestedCount": 6,
+        "generatedCount": 6,
+        "prongRadiusMm": 0.55,
+        "centerRadiusMm": 3.085,
+        "positions": [
+          {
+            "x": 3.085,
+            "y": 0.0
+          },
+          {
+            "x": 1.5425000000000004,
+            "y": 2.671688370674993
+          },
+          {
+            "x": -1.5424999999999993,
+            "y": 2.6716883706749934
+          },
+          {
+            "x": -3.085,
+            "y": 3.778035375369585e-16
+          },
+          {
+            "x": -1.5425000000000013,
+            "y": -2.6716883706749925
+          },
+          {
+            "x": 1.5425000000000004,
+            "y": -2.671688370674993
+          }
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "basket_support",
+      "exists": true,
+      "status": "PASS",
+      "shapeType": "Compound",
+      "solidCount": 1,
+      "volumeMm3": 83.15575842566426,
+      "boundingBox": {
+        "xmin": -3.635,
+        "ymin": -3.635,
+        "zmin": 10.3,
+        "xmax": 3.635,
+        "ymax": 3.635,
+        "zmax": 14.200000000000001,
+        "sizeX": 7.27,
+        "sizeY": 7.27,
+        "sizeZ": 3.9000000000000004,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 12.25
+      },
+      "topology": {
+        "solids": 1,
+        "shells": 1,
+        "faces": 4,
+        "edges": 6,
+        "vertices": 4
+      },
+      "shapeValid": true,
+      "fallbackUsed": false,
+      "metadata": {
+        "outerRadiusMm": 3.635,
+        "innerRadiusMm": 2.535,
+        "baseZMm": 10.3,
+        "heightMm": 3.9
+      },
+      "diagnostics": []
+    },
+    {
+      "componentId": "prongs",
+      "exists": false,
+      "status": "FAIL",
+      "shapeType": null,
+      "solidCount": 0,
+      "volumeMm3": 0.0,
+      "boundingBox": null,
+      "topology": null,
+      "shapeValid": null,
+      "fallbackUsed": false,
+      "metadata": {},
+      "diagnostics": [
+        {
+          "code": "INSPECTION_COMPONENT_MISSING",
+          "severity": "warning",
+          "message": "Component 'prongs' generated no solids.",
+          "componentIds": [
+            "prongs"
+          ]
+        }
+      ]
+    }
+  ]
+}

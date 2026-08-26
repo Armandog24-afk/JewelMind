@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from jewelmind.domain.disclaimer import PROFESSIONAL_REVIEW_NOTICE
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.geometry.model import GeneratedModel
 from jewelmind.validation.rules import ValidationResult
 
@@ -17,6 +18,7 @@ def build_specification(
     model: GeneratedModel,
     validation_results: list[ValidationResult],
     generated_at: str,
+    inspection_report: GeometryInspectionReport | None = None,
 ) -> str:
     """Render the Markdown specification.
 
@@ -98,6 +100,27 @@ def build_specification(
         for w in model.warnings:
             lines.append(f"- {w}")
     lines.append("")
+
+    if inspection_report is not None:
+        lines.append("## Geometry inspection summary")
+        lines.append(f"- Inspection status: {inspection_report.status}")
+        lines.append(f"- Inspection version: {inspection_report.inspectionVersion}")
+        connectivity = inspection_report.assemblyResult.productionConnectivity
+        if connectivity.isFullyConnected:
+            connectivity_summary = "fully connected"
+        else:
+            connectivity_summary = f"{connectivity.disconnectedGroupCount} disconnected group(s)"
+        lines.append(f"- Production connectivity: {connectivity_summary}")
+        lines.append(
+            f"- Requested vs. generated prong count: "
+            f"{inspection_report.assemblyResult.prongCount.requestedCount} vs. "
+            f"{inspection_report.assemblyResult.prongCount.generatedCount}"
+        )
+        lines.append(
+            "- This is a geometric fact summary, not a manufacturability or "
+            "professional-quality assessment — see docs/bible/16-geometry-inspection/."
+        )
+        lines.append("")
 
     lines.append("## Professional review disclaimer")
     lines.append(PROFESSIONAL_REVIEW_NOTICE)

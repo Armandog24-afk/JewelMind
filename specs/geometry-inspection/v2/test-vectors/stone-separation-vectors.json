@@ -1,0 +1,26 @@
+{
+  "vectors": [
+    {
+      "stoneReferenceExists": true,
+      "productionIncluded": false,
+      "intersectsProductionComponents": [
+        "prongs",
+        "basket_support"
+      ],
+      "fusedIntoProductionMetal": false,
+      "status": "PASS",
+      "note": "StoneReference intersecting a production component (e.g. prongs, for a physically plausible grip) is an expected reference relationship, never evidence that its geometry was fused into production metal."
+    },
+    {
+      "stoneReferenceExists": true,
+      "productionIncluded": false,
+      "intersectsProductionComponents": [
+        "prongs",
+        "basket_support"
+      ],
+      "fusedIntoProductionMetal": false,
+      "status": "PASS",
+      "note": "StoneReference intersecting a production component (e.g. prongs, for a physically plausible grip) is an expected reference relationship, never evidence that its geometry was fused into production metal."
+    }
+  ]
+}

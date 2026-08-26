@@ -6,6 +6,7 @@ import {
   type ConversationTurnRequest,
   type DesignerResult,
   type GenerateResponse,
+  type GeometryInspectionReport,
   type HealthResponse,
   type ModelMetadataResponse,
   type NaturalLanguageDesignRequest,
@@ -59,6 +60,10 @@ export async function generateModel(definition: JewelryDefinition): Promise<Gene
 
 export async function fetchModelMetadata(modelId: string): Promise<ModelMetadataResponse> {
   return request<ModelMetadataResponse>(`/api/models/${modelId}/metadata`)
+}
+
+export async function fetchInspectionReport(modelId: string): Promise<GeometryInspectionReport> {
+  return request<GeometryInspectionReport>(`/api/models/${modelId}/inspection`)
 }
 
 export async function interpretDesignRequest(

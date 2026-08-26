@@ -23,30 +23,38 @@ is the full Atlas-level formalization of the finding below, with the
 complete GEOMETRIC-FACT-vs-FORGE-INTERPRETATION vocabulary
 (`checkType`, `status`: `PASS`/`FAIL`/`UNKNOWN`/`NOT_APPLICABLE`) this
 document's table anticipates but does not itself define. Nothing in
-Sprint 5 changes the finding immediately below — it remains the single
-most important open geometry-inspection gap in the system.
+Sprint 5 changes the finding immediately below.
 
-## CURRENT: one runtime rule, several test-time-only guarantees
+**Sprint 14 (Geometry Inspection v2) materially closes this gap** —
+see [`16-geometry-inspection/README.md`](../16-geometry-inspection/README.md).
+`backend/jewelmind/geometry/inspection/` now runs, unconditionally, on
+every real `ModelService.generate()` call — not only in
+`test_geometry.py`. The table below is updated to reflect the real
+current runtime/test-only split; see
+[`16-geometry-inspection/493-current-solitaire-inspection-map.md`](../16-geometry-inspection/493-current-solitaire-inspection-map.md)
+for the full per-relationship breakdown this table summarizes.
 
-**Only one geometry-inspection check runs at request time and can affect a real API response: `FORGE-GEOM-001`** — `_fuse_metal()`'s `if not fused.Solids(): raise ValueError(...)` (caught internally, triggering the documented compound fallback with a warning; see `backend/jewelmind/geometry/assemblies/solitaire.py`). This is the only geometry-inspection logic a live user request actually executes.
+## CURRENT: most of the table below is now genuinely runtime
 
-Everything else in the table below is verified **only by `backend/tests/test_geometry.py`**, at development/CI time, against a fixed set of test definitions — it is not re-checked for every real user-submitted definition, and no diagnostic is returned to an API caller if one of these properties happens to fail for their specific input.
+Before Sprint 14, only one geometry-inspection check ran at request time: `FORGE-GEOM-001` — `_fuse_metal()`'s `if not fused.Solids(): raise ValueError(...)` (caught internally, triggering the documented compound fallback with a warning; see `backend/jewelmind/geometry/assemblies/solitaire.py`). As of Sprint 14, `ModelService.generate()` also calls `jewelmind.geometry.inspection.inspect_model()` unconditionally on every real generation, and its result is stored on `ModelRecord.inspection_report` — most of the table below is now genuinely runtime, not test-only.
 
 | Property | Verified by | Runtime or test-only? |
 |---|---|---|
-| Component exists (band, stone_reference, prongs, basket_support all present) | `test_solitaire_assembly_has_all_required_components` | Test-only |
-| Shape not null / has solids | `test_flat_band_is_valid_solid_with_positive_volume`, `test_stone_reference_is_valid_and_separate_from_metal`, `test_basket_exists_and_has_positive_volume` | Test-only |
-| Positive volume | Same three tests, plus `test_solitaire_assembly_has_all_required_components` | Test-only |
-| Plausible bounding box | `test_band_bounding_box_is_plausible`, `test_solitaire_assembly_bounding_box_plausible` | Test-only |
-| Requested prong count equals generated count | `test_prongs_default_count_is_six`, `test_prongs_four_count`, `test_four_and_six_prong_models_visibly_differ` (via `component.metadata["generatedCount"]`) | Test-only |
-| Stone remains separate from metal | `test_stone_reference_is_valid_and_separate_from_metal` | Test-only |
-| Combined metal is a usable solid (or falls back to a compound) | `_fuse_metal()` (`FORGE-GEOM-001`) | **Runtime** |
-| Export shape exists | Implicit in `export_step`/`export_stl` succeeding; no dedicated pre-export geometry check | Test-only (via `backend/tests/test_api.py`'s export endpoint tests) |
+| Component exists (band, stone_reference, prongs, basket_support all present) | `test_solitaire_assembly_has_all_required_components` (dev-time) **and** `inspect_component()`/`AssemblyInspectionResult.requiredComponentsPresent` (Sprint 14) | **Runtime** |
+| Shape not null / has solids | Same dev-time tests **and** `ComponentInspectionResult.exists`/`solidCount` | **Runtime** |
+| Positive volume | Same dev-time tests **and** `ComponentInspectionResult.volumeMm3` (finite/non-negative check) | **Runtime** |
+| Plausible bounding box | Same dev-time tests **and** `ComponentInspectionResult.boundingBox` | **Runtime** (a real bounding box is now always computed; "plausibility" itself is still not interpreted — that remains Forge's job, unimplemented) |
+| Requested prong count equals generated count | Same dev-time tests **and** `AssemblyInspectionResult.prongCount` | **Runtime** |
+| Stone remains separate from metal | Same dev-time test **and** `AssemblyInspectionResult.stoneMetalSeparation` (structural — the stone's shape is never an argument to any fuse call) | **Runtime** |
+| Combined metal is a usable solid (or falls back to a compound) | `_fuse_metal()` (`FORGE-GEOM-001`) **and** `AssemblyInspectionResult.booleanOperations`'s `combined_metal` entry | **Runtime** (now doubly so: the original blocking check, plus a structured fact) |
+| Production connectivity (are band/prongs/basket_support geometrically one connected group?) | New in Sprint 14 — no prior test existed for this | **Runtime** (`AssemblyInspectionResult.productionConnectivity`) — a genuinely new fact this codebase could not previously state at all |
+| Pairwise component intersections/distances | New in Sprint 14 — no prior test existed for this | **Runtime** (`AssemblyInspectionResult.intersections`/`distances`) |
+| Export shape exists | Implicit in `export_step`/`export_stl` succeeding; still no dedicated pre-export geometry check | Test-only (via `backend/tests/test_api.py`'s export endpoint tests) — Sprint 14 deliberately did NOT make export depend on inspection, see [`16-geometry-inspection/489-foundry-inspection-integration.md`](../16-geometry-inspection/489-foundry-inspection-integration.md) |
 
-## This is a real, honest gap, not a documentation omission
+## What remains a real, honest gap after Sprint 14
 
-There is currently no runtime mechanism that would tell a caller "your specific definition produced a component with zero volume" or "your specific definition produced an implausible bounding box" — if such a defect ever occurred for a real user's input outside the fixed set of test cases, it would either surface as a downstream CadQuery exception (`MODEL_GENERATION_FAILED`) or pass through silently. See [`111-domain-rule-gap-analysis.md`](111-domain-rule-gap-analysis.md) for this recorded as a gap, and open question territory in [`115-open-forge-questions.md`](115-open-forge-questions.md).
+Sprint 14 reports real geometric facts; it still does not *interpret* any of them as a jewelry-domain or manufacturing violation — that remains exclusively Forge's job, and no Forge rule currently consumes a `GeometricFact` (see [`16-geometry-inspection/487-forge-fact-contract.md`](../16-geometry-inspection/487-forge-fact-contract.md)). So a caller still cannot get "your specific definition produced a component with implausible proportions" as a diagnosed rule violation — only the raw fact itself, via `GET /api/models/{id}/inspection` or the concise summary embedded in `/generate`/`/metadata`. See [`111-domain-rule-gap-analysis.md`](111-domain-rule-gap-analysis.md) and [`115-open-forge-questions.md`](115-open-forge-questions.md) for this remaining gap, and [`16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md`](../16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md) for the full Sprint 14 gap list.
 
-## PLANNED checks (not implemented, do not exist in any form)
+## PLANNED checks (still not implemented, do not exist in any form)
 
-Disconnected metal bodies detection, self-intersection detection, minimum local thickness analysis, non-manifold geometry detection, stone-metal interference detection, support continuity verification, trapped-volume detection, inaccessible-polishing-region detection. **None of these has any code, test, or partial implementation in this repository.** They are listed here only because Sprint 2/3's domain and JDL documents anticipate them as the kind of check a mature CAD-inspection pipeline would eventually need — see [`111-domain-rule-gap-analysis.md`](111-domain-rule-gap-analysis.md) for why each matters and what expertise would be needed to implement it correctly.
+Self-intersection detection (beyond pairwise named-component intersection), minimum local thickness analysis, non-manifold geometry detection (beyond the binary `isValid()` check), trapped-volume detection, inaccessible-polishing-region detection, support continuity verification. **None of these has any code, test, or partial implementation in this repository.** Disconnected-metal-bodies detection and stone-metal interference/separation detection — both listed as PLANNED in earlier Sprints — are the two items Sprint 14 actually implemented for real; they are removed from this list accordingly. See [`16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md`](../16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md) for why each remaining item matters and what expertise would be needed to implement it correctly.
