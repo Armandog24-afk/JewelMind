@@ -566,7 +566,7 @@ the one function that writes an accepted baseline
 inspect the relevant function's own source code. Adds the
 machine-readable specification under
 [`../../specs/geometry-quality/v1/`](../../specs/geometry-quality/v1/README.md)
-(6 JSON Schemas and 5 test-vector files) plus 4 new test files (47
+(6 JSON Schemas and 5 test-vector files) plus 4 new test files (49
 tests): `test_geometry_quality_snapshot.py`,
 `test_geometry_quality_harness.py`, `test_geometry_quality_artifacts.py`,
 and `test_geometry_quality_schemas.py`.

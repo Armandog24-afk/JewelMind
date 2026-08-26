@@ -41,9 +41,27 @@ class TestRealGeneration:
 
 
 class TestHumanReadableDiff:
-    def test_passing_diff_reads_as_no_regression(self):
+    def test_a_clean_diff_reads_as_no_regression(self):
+        golden = load_golden(GOLDEN_ID)
+        diff = compare_snapshot(
+            GOLDEN_ID,
+            golden.geometrySnapshot,
+            golden.geometrySnapshot,
+            golden.versionFingerprint,
+            golden.versionFingerprint,
+        )
+        assert diff.severity == "NONE"
+        assert "no regression detected" in diff.human_readable()
+
+    def test_a_real_verification_never_reports_a_false_regression(self):
+        # A real cross-platform rerun can legitimately differ from the
+        # recorded baseline at the ULP level (severity INFO, still within
+        # tolerance) — see 505-comparison-tolerance-policy.md. This must
+        # never read as a regression, but it is not guaranteed to be the
+        # literal string "no regression detected" on every platform.
         result = verify_golden(GOLDEN_ID)
-        assert "no regression detected" in result.diff.human_readable()
+        assert result.status in ("PASS", "PASS_WITH_KNOWN_LIMITATIONS")
+        assert result.diff.severity in ("NONE", "INFO")
 
     def test_failing_diff_names_the_metric_and_both_values(self):
         golden = load_golden(GOLDEN_ID)

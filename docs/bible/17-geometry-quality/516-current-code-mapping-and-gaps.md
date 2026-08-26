@@ -49,10 +49,10 @@ normative: true
 
 ## New test fixtures
 
-4 new test files under `backend/tests/`, 47 new tests total, collected and verified directly (`pytest --collect-only`):
+4 new test files under `backend/tests/`, 49 new tests total, collected and verified directly (`pytest --collect-only`):
 
 - `test_geometry_quality_snapshot.py` — 16 tests (`TestComponentPresence`, `TestSolidCount`, `TestConnectivity`, `TestIntersectionRelations`, `TestProngCount`, `TestStoneRole`, `TestVolatileFieldNormalization`, `TestMetadataOnlyEquivalence`).
-- `test_geometry_quality_harness.py` — 15 tests (`TestRealGeneration`, `TestHumanReadableDiff`, `TestIntentionalFailureDetection`, `TestRepeatability`, `TestNoAutoUpdate`, `TestVersionFingerprint`).
+- `test_geometry_quality_harness.py` — 17 tests (`TestRealGeneration`, `TestHumanReadableDiff`, `TestArtifactSeverityEscalation`, `TestIntentionalFailureDetection`, `TestRepeatability`, `TestNoAutoUpdate`, `TestVersionFingerprint`). `TestArtifactSeverityEscalation` was added after a documentation agent, while writing this Sprint's own docs from the real `harness.py` source, correctly identified that artifact-check severity escalation only fired from `NONE`, silently missing a real artifact regression discovered after an `INFO`-level numeric diff — fixed in code, then covered by this test.
 - `test_geometry_quality_artifacts.py` — 6 tests (`TestStepRoundtrip`, `TestStlStructure`, `TestNoBinaryStepDeterminismClaim`).
 - `test_geometry_quality_schemas.py` — 10 tests (8 module-level functions + `TestNoProfessionalClaim`).
 

@@ -18,7 +18,7 @@ normative: false
 
 # Appendix: Geometry Quality Test Matrix
 
-Every test in the 4 new files under `backend/tests/`, by real class/method name — 47 tests total, mirroring [`inspection-test-matrix.md`](inspection-test-matrix.md) (A98)'s pattern.
+Every test in the 4 new files under `backend/tests/`, by real class/method name — 49 tests total, mirroring [`inspection-test-matrix.md`](inspection-test-matrix.md) (A98)'s pattern.
 
 ## `test_geometry_quality_snapshot.py` (16 tests)
 
@@ -33,12 +33,13 @@ Every test in the 4 new files under `backend/tests/`, by real class/method name 
 | `TestVolatileFieldNormalization` | `test_snapshot_has_no_volatile_fields`, `test_two_snapshots_of_identical_geometry_are_equal` | `GOLDEN_VOLATILE_FIELD_NORMALIZATION_TEST`. |
 | `TestMetadataOnlyEquivalence` | `test_metal_choice_does_not_change_geometry_snapshot` (parametrized x4), `test_manufacturing_method_does_not_change_geometry_snapshot` | `GOLDEN_METADATA_EQUIVALENCE_TEST` — metal/manufacturing method change `definitionHash` but never a single geometric fact. |
 
-## `test_geometry_quality_harness.py` (15 tests)
+## `test_geometry_quality_harness.py` (17 tests)
 
 | Class | Test(s) | What it proves |
 |---|---|---|
 | `TestRealGeneration` | `test_every_golden_in_the_manifest_passes`, `test_verify_golden_uses_the_real_pipeline_not_a_mock` | `GOLDEN_REAL_GENERATION_TEST`. |
-| `TestHumanReadableDiff` | `test_passing_diff_reads_as_no_regression`, `test_failing_diff_names_the_metric_and_both_values` | `GOLDEN_HUMAN_READABLE_DIFF_TEST`. |
+| `TestHumanReadableDiff` | `test_a_clean_diff_reads_as_no_regression`, `test_a_real_verification_never_reports_a_false_regression`, `test_failing_diff_names_the_metric_and_both_values` | `GOLDEN_HUMAN_READABLE_DIFF_TEST` — split into a synthetic-zero-diff exact-string check and a live cross-platform-safe check after a real CI run showed the original single test assumed bit-identical cross-platform reproduction (see the Sprint 15 validation report). |
+| `TestArtifactSeverityEscalation` | `test_artifact_regression_escalates_even_when_geometric_diff_is_info` | A real bug fix: an artifact regression must never be masked by a prior `INFO`-level geometric diff. |
 | `TestIntentionalFailureDetection` | `test_altered_component_count_is_flagged_as_a_regression`, `test_volume_altered_beyond_tolerance_is_flagged`, `test_the_real_accepted_baseline_file_is_unchanged_by_this_test` | The mandated intentional-failure test (brief section 36) — mutates an in-memory copy only. |
 | `TestRepeatability` | `test_three_repeated_generations_are_bit_identical_locally` | The mandated repeatability test (brief section 37). |
 | `TestNoAutoUpdate` | `test_verify_golden_never_writes_to_the_registry`, `test_verify_all_goldens_never_writes_to_the_registry`, `test_generate_candidate_baseline_never_writes_to_the_registry`, `test_only_accept_candidate_baseline_calls_save_golden`, `test_a_regression_detected_by_verify_golden_does_not_change_the_file_on_disk` | `GOLDEN_NO_AUTO_UPDATE_TEST` — both a source-inspection proof and a real end-to-end proof. |
@@ -67,7 +68,7 @@ Every test in the 4 new files under `backend/tests/`, by real class/method name 
 | `TestNoProfessionalClaim::test_no_golden_snapshot_contains_a_prohibited_claim` | The mandated no-professional-claim test (brief section 39). |
 | `TestNoProfessionalClaim::test_manifest_contains_no_prohibited_claim` | Same, applied to the suite manifest. |
 
-**Total: 47 tests**, all passing at the time of Sprint 15's completion, on top of the 762 tests that existed after Sprint 14.
+**Total: 49 tests**, all passing at the time of Sprint 15's completion, on top of the 715 tests that existed after Sprint 14.
 
 ## Cross-references
 

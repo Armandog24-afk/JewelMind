@@ -88,7 +88,7 @@ Structurally enforced, not merely documented: `verify_golden()`, `verify_all_gol
 
 ## Tests passed
 
-- Backend: **763/763** (`pytest -q`), including 48 new tests across `test_geometry_quality_snapshot.py` (16), `test_geometry_quality_harness.py` (16, including the escalation-fix regression test below), `test_geometry_quality_artifacts.py` (6), and `test_geometry_quality_schemas.py` (10).
+- Backend: **764/764** (`pytest -q`), including 49 new tests across `test_geometry_quality_snapshot.py` (16), `test_geometry_quality_harness.py` (17, including the escalation-fix regression test below and a cross-platform-safe rewrite of the human-readable-diff test), `test_geometry_quality_artifacts.py` (6), and `test_geometry_quality_schemas.py` (10).
 - Frontend: **137/137** (unaffected — this Sprint made no frontend changes).
 - `ruff check .`: clean.
 - Geometry Inspection (Sprint 14), Professional Validation (Sprint 13), Designer/Conversation/Design-Intent, and Studio/Vision test suites: all unaffected, verified as part of the same full `pytest -q` run.
@@ -101,9 +101,12 @@ Not applicable — Sprint 15 made no frontend changes. `npm run test`/`tsc -b`/`
 
 See the top-level Sprint 15 delivery message for the final GitHub Actions run link and status.
 
-## A real bug found and fixed during this Sprint's own validation
+## Two real issues found and fixed during this Sprint's own validation
 
-A background documentation agent, while writing [`504-regression-comparison-model.md`](504-regression-comparison-model.md) and [`509-artifact-regression-model.md`](509-artifact-regression-model.md) from the real `harness.py` source, correctly identified that `verify_golden()`'s artifact-severity escalation rule (`if diff.artifactChanges and diff.severity == "NONE"`) would let a real STEP/STL artifact regression hide behind an unrelated, harmless `INFO`-level numeric drift — the top-line `QualityResultStatus` could read `PASS` even with a real artifact defect present. This was fixed (the condition now escalates from `NONE` **or** `INFO`) before this Sprint's commit, with a new regression test (`TestArtifactSeverityEscalation::test_artifact_regression_escalates_even_when_geometric_diff_is_info`) proving the fix, and the two docs that had accurately described the bug were updated to describe the fix instead. This is exactly the kind of contradiction-reporting discipline the Bible's own fundamental rule requires — the agent reported what it found rather than silently working around it, and the underlying code was fixed rather than the documentation being rewritten to excuse it.
+1. A background documentation agent, while writing [`504-regression-comparison-model.md`](504-regression-comparison-model.md) and [`509-artifact-regression-model.md`](509-artifact-regression-model.md) from the real `harness.py` source, correctly identified that `verify_golden()`'s artifact-severity escalation rule (`if diff.artifactChanges and diff.severity == "NONE"`) would let a real STEP/STL artifact regression hide behind an unrelated, harmless `INFO`-level numeric drift — the top-line `QualityResultStatus` could read `PASS` even with a real artifact defect present. Fixed (the condition now escalates from `NONE` **or** `INFO`) before this Sprint's commit, with a new regression test (`TestArtifactSeverityEscalation::test_artifact_regression_escalates_even_when_geometric_diff_is_info`) proving the fix.
+2. The first CI push failed: `TestHumanReadableDiff::test_passing_diff_reads_as_no_regression` assumed a live `verify_golden()` call against the real, Windows-generated `SOL-001` baseline would read as exactly `"no regression detected"` on every platform. Real Linux CI showed the same class of ULP-level cross-platform drift Sprint 14 had already measured (`components.prongs.volumeMm3`, relative delta `2.4e-16`) — correctly classified `severity: INFO`/`withinTolerance: True`, but not literally the `NONE`-severity string the test expected. Fixed by splitting the test: `test_a_clean_diff_reads_as_no_regression` proves the exact string against a synthetic zero-diff comparison, and `test_a_real_verification_never_reports_a_false_regression` proves a live cross-platform rerun never reports `REGRESSION`/`VERSION_REVIEW_REQUIRED` without assuming bit-identical reproduction. Both fixes were made to the code/tests, never by loosening a tolerance to hide the finding.
+
+Both are exactly the kind of contradiction-reporting discipline the Bible's own fundamental rule requires — each was reported plainly rather than worked around, and the underlying code or test was corrected rather than the documentation being rewritten to excuse it.
 
 ---
 
