@@ -980,3 +980,102 @@ coding agents must:
   intersection, mesh manifold checks; see
   [`494-current-runtime-inspection-gap-analysis.md`](docs/bible/16-geometry-inspection/494-current-runtime-inspection-gap-analysis.md)
   for the candidates already identified but explicitly deferred.
+
+## GEOMETRY QUALITY / GOLDEN MODEL RULES
+
+`docs/bible/17-geometry-quality/` is the authoritative Geometry Quality
+& Golden Models specification — start at
+[`docs/bible/17-geometry-quality/README.md`](docs/bible/17-geometry-quality/README.md),
+then [`500-quality-governance.md`](docs/bible/17-geometry-quality/500-quality-governance.md)
+for the full 18 QUALITY-GOV rules. The machine-readable half lives in
+[`specs/geometry-quality/v1/`](specs/geometry-quality/v1/README.md) (6
+JSON Schemas, 5 test-vector files, all generated from real code) and the
+real Golden Suite lives at
+[`goldens/solitaire-v1/`](goldens/solitaire-v1/) (9 real fixtures, no
+committed STEP/STL binaries). Future coding agents must:
+
+- **Read `docs/bible/17-geometry-quality/README.md` before changing
+  output geometry** — before modifying anything in
+  `backend/jewelmind/geometry/`, `backend/jewelmind/geometry_quality/`,
+  or a Golden fixture under `goldens/`.
+- **Run Golden regression tests after geometry changes** —
+  `backend/tests/test_geometry_quality_*.py` (plain pytest files, no
+  special marker; they already run in the normal `pytest -q` pass) or
+  `python -m jewelmind.geometry_quality.cli verify-all`.
+- **Never auto-update Golden baselines to make CI pass** — no code path
+  other than the explicit `geometry-quality accept --reason "..."` CLI
+  command may ever write to an accepted `snapshot.json`
+  (QUALITY-GOV-003/004). If a Golden test fails after your change,
+  inspect the diff first; do not regenerate the baseline as a shortcut.
+- **Inspect `GeometryDiff` first** — run
+  `python -m jewelmind.geometry_quality.cli diff <golden_id>` (after
+  `generate-candidate`) and read the human-readable output before
+  deciding whether a failure is a real regression or an intentional,
+  reviewable change; see
+  [`513-regression-failure-triage.md`](docs/bible/17-geometry-quality/513-regression-failure-triage.md).
+- **Keep Golden status separate from Professional Validation** — a
+  `GoldenModel.baselineStatus` of `STABLE` never implies
+  `professional_validation: validated`, and vice versa; see
+  [`514-professional-validation-boundary.md`](docs/bible/17-geometry-quality/514-professional-validation-boundary.md).
+- **Never use STEP byte equality as geometry equivalence** — CadQuery's
+  STEP writer embeds variable OpenCascade metadata; two exports of
+  identical geometry are not byte-identical. Compare via re-import and
+  geometric facts only (QUALITY-GOV-007/008).
+- **Use software comparison tolerances only for regression** —
+  `ABSOLUTE_COMPARISON_TOLERANCE_MM`/`RELATIVE_COMPARISON_TOLERANCE`
+  (`geometry_quality/version.py`) are comparison tools, never
+  manufacturing or jewelry tolerances (QUALITY-GOV-006).
+- **Preserve StoneReference regression protection** — every Golden
+  comparison treats `designConsistency.stoneReferenceIsProductionMetal`
+  as an exact invariant (QUALITY-GOV-013).
+- **Preserve component identity** — a missing or unexpected component in
+  a regenerated snapshot always drives `severity: REGRESSION`
+  (QUALITY-GOV-011).
+- **Record intentional Golden changes** — every accepted baseline change
+  needs an entry in
+  [`docs/bible/appendices/golden-update-register.md`](docs/bible/appendices/golden-update-register.md)
+  (QUALITY-GOV-018).
+- **Update version fingerprints when output-affecting dependencies
+  change** — `collect_fingerprint()` in `geometry_quality/fingerprint.py`
+  must keep reflecting the real installed `cadquery`/`OCP`/Forge
+  registry/generator versions; see
+  [`510-version-fingerprint-policy.md`](docs/bible/17-geometry-quality/510-version-fingerprint-policy.md).
+- **Create an ADR for major Golden/comparison architecture changes** —
+  changing which layer owns baseline acceptance, moving Golden storage
+  off the filesystem, or changing the comparison algorithm's exact-vs-
+  numeric-vs-relationship split; see
+  [`docs/bible/17-geometry-quality/500-quality-governance.md`](docs/bible/17-geometry-quality/500-quality-governance.md).
+- **Create an RFC when redefining the accepted geometry of a major
+  component family** — e.g. when Sprint 16 (Ring Architecture v2)
+  generalizes beyond the solitaire, or before restructuring the Golden
+  Suite's coverage strategy.
+
+## TOKEN-EFFICIENT AGENT EXECUTION
+
+These apply to every future coding agent working on this repository, not
+only Geometry Quality changes:
+
+- **Use targeted repository searches** (Grep/Glob for specific
+  symbols/paths) instead of reading entire directories or files you do
+  not need.
+- **Avoid rereading the entire Bible** — start from `docs/bible/README.md`,
+  the relevant section's own `README.md`, and
+  `docs/bible/appendices/documentation-index.md`; only open a specific
+  numbered doc when a concrete question requires it.
+- **Reference rather than duplicate authoritative docs** — if Atlas,
+  Forge, Foundry, or Inspection already defines a concept, link to it;
+  document only what is genuinely new.
+- **Avoid narrating intermediate plans** — inspect, implement, test, fix,
+  report; do not output a long plan before executing a milestone that
+  has already been fully specified.
+- **Batch repetitive work** — parallelize independent documentation or
+  search tasks rather than running them one at a time.
+- **Generate catalogs from machine-readable sources where practical** —
+  prefer a small script deriving a catalog/table from real JSON/frontmatter
+  over hand-duplicating the same data.
+- **Keep final reports concise** — match the format the task actually
+  asked for; do not pad with restated context the requester already has.
+- **Never trade correctness or test coverage for token savings** — do not
+  skip tests, weaken validation, remove error handling, omit an
+  important architectural finding, hide a failure, or reduce regression
+  coverage merely to finish faster or write less.

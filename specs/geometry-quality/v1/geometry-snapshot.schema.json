@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/geometry-snapshot.schema.json",
+  "title": "Geometry Snapshot v1",
+  "description": "Stable, normalized geometric facts for one golden case, built entirely from real Sprint 14 inspection output. Timestamps, inspection IDs, and other volatile fields are excluded by construction. See docs/bible/17-geometry-quality/README.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["snapshotVersion", "definitionHash", "assembly", "components", "relationships", "designConsistency"],
+  "properties": {
+    "snapshotVersion": { "type": "string" },
+    "definitionHash": { "type": "string" },
+    "assembly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["componentCount", "productionComponentCount", "referenceComponentCount", "productionConnectivityGroups", "productionIsFullyConnected", "boundingBox"],
+      "properties": {
+        "componentCount": { "type": "integer" },
+        "productionComponentCount": { "type": "integer" },
+        "referenceComponentCount": { "type": "integer" },
+        "productionConnectivityGroups": { "type": "integer" },
+        "productionIsFullyConnected": { "type": "boolean" },
+        "boundingBox": { "type": "object" }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["componentId", "role", "present"],
+        "properties": {
+          "componentId": { "type": "string" },
+          "role": { "enum": ["PRODUCTION", "REFERENCE"] },
+          "present": { "type": "boolean" },
+          "solidCount": { "type": ["integer", "null"] },
+          "volumeMm3": { "type": ["number", "null"] },
+          "boundingBox": { "type": ["object", "null"] },
+          "topology": { "type": ["object", "null"] },
+          "fallbackUsed": { "type": "boolean" }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["componentA", "componentB"],
+        "properties": {
+          "componentA": { "type": "string" },
+          "componentB": { "type": "string" },
+          "connected": { "type": ["boolean", "null"] },
+          "intersectionStatus": { "enum": ["INTERSECTS", "TOUCHES", "NO_INTERSECTION", "UNKNOWN", null] },
+          "minDistanceMm": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "designConsistency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedProngCount", "generatedProngCount", "prongCountMatches", "stoneReferenceIsProductionMetal"],
+      "properties": {
+        "requestedProngCount": { "type": "integer" },
+        "generatedProngCount": { "type": "integer" },
+        "prongCountMatches": { "type": "boolean" },
+        "stoneReferenceIsProductionMetal": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ title: Determinism and Reproducibility
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-08-24
+last_updated: 2026-08-26
 source_of_truth: true
 depends_on:
   - JM-BIBLE-120
@@ -45,3 +45,7 @@ Same canonical JDL + same JDL schema version + same geometry generator version +
 ## What JewelMind does not currently guarantee, and has not tested
 
 Cross-OCCT-version geometric equivalence; cross-machine binary STEP/STL file identity; topology (face/edge) ordering stability across runs. These are recorded as open questions (`ATLAS-OQ-009` in [`151-open-atlas-questions.md`](151-open-atlas-questions.md)) and gaps (see [`150-atlas-gap-analysis.md`](150-atlas-gap-analysis.md)), not silently assumed to be fine.
+
+## Sprint 15 update — cross-platform drift is now measured, not just theorized
+
+Sprint 15 ("Geometry Quality & Golden Models v1") measured a real, non-hypothetical instance of the "unassessed" cross-machine risk above: Sprint 14's own CI run showed a Windows-vs-Linux OCCT divergence of ~1.3e-5 relative on a near-tangent sliver intersection volume (see [`docs/bible/16-geometry-inspection/486-inspection-determinism.md`](../16-geometry-inspection/486-inspection-determinism.md)). Sprint 15 does not resolve the open questions above, but it does give this codebase its first empirically-derived, documented software-regression comparison tolerance (`RELATIVE_COMPARISON_TOLERANCE = 1e-3` in `backend/jewelmind/geometry_quality/version.py`) built around that real measurement — see [`docs/bible/17-geometry-quality/505-comparison-tolerance-policy.md`](../17-geometry-quality/505-comparison-tolerance-policy.md). This tolerance is a comparison tool for detecting regressions, never a claim about geometric determinism itself.

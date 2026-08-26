@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "name": "Solitaire Ring",
+    "units": "mm"
+  },
+  "jewelry": {
+    "category": "ring",
+    "style": "solitaire"
+  },
+  "ring": {
+    "sizeSystem": "EU",
+    "size": 16.0,
+    "innerDiameter": 17.8
+  },
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit"
+  },
+  "stone": {
+    "shape": "round",
+    "diameter": 9.0,
+    "depth": 4.0
+  },
+  "setting": {
+    "type": "prong",
+    "prongCount": 4,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5
+  },
+  "material": {
+    "metal": "yellow_gold_18k"
+  },
+  "manufacturing": {
+    "method": "lost_wax_casting"
+  },
+  "preview": {
+    "meshTolerance": 0.1,
+    "angularTolerance": 0.2
+  }
+}

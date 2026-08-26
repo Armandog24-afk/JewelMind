@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/quality-result.schema.json",
+  "title": "Quality Result v1",
+  "description": "The outcome of verifying one golden case against real regenerated geometry. See docs/bible/17-geometry-quality/504-regression-comparison-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["goldenId", "status", "message"],
+  "properties": {
+    "goldenId": { "type": "string" },
+    "status": { "enum": ["PASS", "PASS_WITH_KNOWN_LIMITATIONS", "REGRESSION_DETECTED", "VERSION_REVIEW_REQUIRED", "BASELINE_MISSING", "ERROR"] },
+    "diff": { "type": ["object", "null"], "description": "See geometry-diff.schema.json." },
+    "message": { "type": "string" }
+  }
+}

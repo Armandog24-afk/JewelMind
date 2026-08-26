@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/golden-suite.schema.json",
+  "title": "Golden Suite Manifest v1",
+  "description": "The manifest for one Golden Suite (goldens/<suiteId>/manifest.json). See docs/bible/17-geometry-quality/502-golden-suite-selection.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["suiteId", "version", "purpose", "goldenIds", "fastSuite", "fullSuite"],
+  "properties": {
+    "suiteId": { "type": "string" },
+    "version": { "type": "string" },
+    "purpose": { "type": "string" },
+    "goldenIds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["goldenId", "status"],
+        "properties": {
+          "goldenId": { "type": "string" },
+          "status": { "enum": ["INITIAL", "STABLE", "CANDIDATE", "KNOWN_LIMITATION"] }
+        }
+      }
+    },
+    "fastSuite": { "type": "array", "items": { "type": "string" } },
+    "fullSuite": { "type": "array", "items": { "type": "string" } },
+    "expectedEnvironment": { "type": "object" }
+  }
+}

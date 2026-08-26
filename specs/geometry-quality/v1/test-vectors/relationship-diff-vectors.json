@@ -1,0 +1,83 @@
+{
+  "note": "Real RelationshipChange entries from compare_snapshot() on flipped connectivity/intersection facts.",
+  "vectors": [
+    {
+      "case": "band<->prongs connectivity flipped",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [],
+        "relationshipChanges": [
+          {
+            "componentA": "band",
+            "componentB": "prongs",
+            "field": "connected",
+            "expected": true,
+            "actual": false
+          }
+        ],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    },
+    {
+      "case": "band<->stone_reference intersection status flipped",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [],
+        "relationshipChanges": [
+          {
+            "componentA": "band",
+            "componentB": "stone_reference",
+            "field": "intersectionStatus",
+            "expected": "NO_INTERSECTION",
+            "actual": "INTERSECTS"
+          }
+        ],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    }
+  ]
+}

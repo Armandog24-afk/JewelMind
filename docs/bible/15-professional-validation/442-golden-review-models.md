@@ -4,7 +4,7 @@ title: Golden Review Models
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-08-25
+last_updated: 2026-08-26
 source_of_truth: true
 depends_on:
   - JM-BIBLE-000
@@ -42,8 +42,13 @@ Building on [`441-review-sampling-strategy.md`](441-review-sampling-strategy.md)
 
 A fixture is a reproducible starting point for a review session — it makes zero claim about its own validation status. Nothing in this document, in any generated fixture file, or in any review package generated from one of these fixtures may describe the fixture itself as approved, validated, or manufacturing-ready before an actual `ValidationRecord` exists for it.
 
+## Naming note added in Sprint 15 — do not confuse with `GoldenModel` (Geometry Quality)
+
+Sprint 15 ("Geometry Quality & Golden Models v1") introduced an unrelated, differently-scoped `GoldenModel` type at [`17-geometry-quality/501-golden-model-contract.md`](../17-geometry-quality/501-golden-model-contract.md), with real materialized fixtures under `goldens/solitaire-v1/`. The two concepts share the word "golden" but serve different purposes: a "golden review model" (this document) is a reproducible starting point for a *human professional review session*; a Geometry Quality `GoldenModel` is an *automated software regression baseline* compared on every code change. Neither implies the other's status — a Geometry Quality golden being `STABLE` says nothing about professional review, and vice versa (see [`514-professional-validation-boundary.md`](../17-geometry-quality/514-professional-validation-boundary.md)). The fixture set described below in this document remains unmaterialized as of Sprint 15; Sprint 15 did not build it, and did not reuse `goldens/solitaire-v1/` for professional-review purposes.
+
 ## Cross-references
 
 - [`425-review-case-model.md`](425-review-case-model.md) — the reproducibility contract these fixtures rely on.
 - [`441-review-sampling-strategy.md`](441-review-sampling-strategy.md) — the sampling rationale behind this exact fixture set.
 - [`451-validation-gap-analysis.md`](451-validation-gap-analysis.md) — tracks the "fixtures not yet materialized as files" gap.
+- [`17-geometry-quality/501-golden-model-contract.md`](../17-geometry-quality/501-golden-model-contract.md) — the unrelated Sprint 15 `GoldenModel` type; see the naming note above.

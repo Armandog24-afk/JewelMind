@@ -1,0 +1,87 @@
+{
+  "note": "Real NumericFactDiff entries from compare_snapshot() on a mutated band volume.",
+  "vectors": [
+    {
+      "case": "band volume perturbed ~1e-7 relative (ULP-level noise)",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [
+          {
+            "path": "components.band.volumeMm3",
+            "expected": 250.99168317654699,
+            "actual": 250.99170827571533,
+            "absoluteDelta": 2.5099168340148026e-05,
+            "relativeDelta": 1.0000000008961782e-07,
+            "tolerance": 0.001,
+            "withinTolerance": true
+          }
+        ],
+        "relationshipChanges": [],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "INFO",
+        "requiresBaselineReview": false
+      }
+    },
+    {
+      "case": "band volume perturbed 5% (a real regression)",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [
+          {
+            "path": "components.band.volumeMm3",
+            "expected": 250.99168317654699,
+            "actual": 263.54126733537436,
+            "absoluteDelta": 12.549584158827372,
+            "relativeDelta": 0.05000000000000009,
+            "tolerance": 0.001,
+            "withinTolerance": false
+          }
+        ],
+        "relationshipChanges": [],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "note": "Real GoldenModel objects: a freshly generated candidate (never written to disk) next to the same object with the accept-time transform applied. Demonstrates QUALITY-GOV-003/004: acceptance is a distinct, explicit state transition, never implicit.",
+  "vectors": [
+    {
+      "case": "freshly generated candidate",
+      "baselineStatus": "CANDIDATE",
+      "acceptedAt": null
+    },
+    {
+      "case": "same candidate after the explicit accept transform",
+      "baselineStatus": "STABLE",
+      "acceptedAt": "2026-08-26T09:33:33.358194+00:00"
+    }
+  ]
+}

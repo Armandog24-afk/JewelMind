@@ -1,0 +1,62 @@
+{
+  "suiteId": "solitaire-v1",
+  "version": "1.0.0",
+  "purpose": "Software regression baseline for the current solitaire ring \u2014 never a professional or manufacturing approval. See docs/bible/17-geometry-quality/README.md.",
+  "goldenIds": [
+    {
+      "goldenId": "SOL-001-default-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-002-four-prong-comfort-fit",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-003-six-prong-flat",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-004-four-prong-flat",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-005-ring-size-variation",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-006-band-dimension-variation",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-007-stone-dimension-variation",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-008-prong-basket-dimension-variation",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-009-warning-only-large-stone-four-prong",
+      "status": "STABLE"
+    }
+  ],
+  "fastSuite": [
+    "SOL-001-default-solitaire",
+    "SOL-002-four-prong-comfort-fit",
+    "SOL-003-six-prong-flat"
+  ],
+  "fullSuite": [
+    "SOL-001-default-solitaire",
+    "SOL-002-four-prong-comfort-fit",
+    "SOL-003-six-prong-flat",
+    "SOL-004-four-prong-flat",
+    "SOL-005-ring-size-variation",
+    "SOL-006-band-dimension-variation",
+    "SOL-007-stone-dimension-variation",
+    "SOL-008-prong-basket-dimension-variation",
+    "SOL-009-warning-only-large-stone-four-prong"
+  ],
+  "expectedEnvironment": {
+    "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/version-fingerprint.schema.json",
+  "title": "Version Fingerprint v1",
+  "description": "Real version identifiers relevant to geometry regression, collected from running code (QUALITY-GOV-009). Never a manufacturing/professional claim. See docs/bible/17-geometry-quality/510-version-fingerprint-policy.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["jdlSchemaVersion", "forgeRuleSetVersion", "compilerVersion", "atlasGeneratorVersion", "inspectionVersion", "kernelVersion"],
+  "properties": {
+    "jdlSchemaVersion": { "type": "string" },
+    "forgeRuleSetVersion": { "type": "string" },
+    "compilerVersion": { "type": "string" },
+    "atlasGeneratorVersion": { "type": "string" },
+    "inspectionVersion": { "type": "string" },
+    "kernelVersion": { "type": "string" },
+    "ocpVersion": { "type": ["string", "null"] }
+  }
+}

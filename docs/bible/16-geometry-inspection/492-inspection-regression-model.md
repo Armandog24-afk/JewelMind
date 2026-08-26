@@ -10,6 +10,7 @@ depends_on:
   - JM-BIBLE-000
   - JM-BIBLE-INSPECTION-README
   - JM-BIBLE-460
+  - JM-BIBLE-QUALITY-README
 related_documents:
   - JM-BIBLE-486
 normative: true
@@ -79,3 +80,7 @@ Expanding this regression model — snapshotting connectivity edges, intersectio
 ## Relationship to determinism
 
 This regression model is a different concern from `TestInspectionDeterminism` (`backend/tests/test_geometry_inspection.py`), which asserts two independent inspection runs of the *same* geometry produce equivalent facts (INSPECT-GOV-011) — determinism is about repeatability within one code version; regression is about detecting an unintended *change* across code versions. Both are real and passing today, but they answer different questions and neither substitutes for the other. See [`486-inspection-determinism.md`](486-inspection-determinism.md) for the determinism side of this pair.
+
+## Sprint 15 closed this document's own forward-reference
+
+The "next sprint" this document named above is now real: [`docs/bible/17-geometry-quality/`](../17-geometry-quality/README.md) (Sprint 15, "Geometry Quality & Golden Models v1") built exactly the richer, multi-case regression baseline this document called out as missing — connectivity, intersection status, topology counts, and design-consistency facts are now all part of every accepted `GeometrySnapshot`, compared across 9 real solitaire variations rather than the single minimal vector described above. This document's own baseline and test remain unchanged and still real/passing; Sprint 15 is a separate, additive layer (`backend/jewelmind/geometry_quality/`), not a replacement of `inspect_model()`'s own regression assertion. See [`docs/bible/17-geometry-quality/504-regression-comparison-model.md`](../17-geometry-quality/504-regression-comparison-model.md).

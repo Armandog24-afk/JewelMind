@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/geometry-diff.schema.json",
+  "title": "Geometry Diff v1",
+  "description": "A structured comparison between a golden's expected snapshot and a freshly regenerated actual snapshot. Exact invariants and floating-point comparisons are always kept in distinct lists (QUALITY-GOV-005). See docs/bible/17-geometry-quality/508-geometry-diff-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["goldenId", "expectedFingerprint", "actualFingerprint", "severity", "requiresBaselineReview"],
+  "properties": {
+    "goldenId": { "type": "string" },
+    "expectedFingerprint": { "type": "object", "description": "See version-fingerprint.schema.json." },
+    "actualFingerprint": { "type": "object", "description": "See version-fingerprint.schema.json." },
+    "exactChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "expected", "actual"],
+        "properties": { "path": { "type": "string" }, "expected": {}, "actual": {} }
+      }
+    },
+    "numericChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "expected", "actual", "absoluteDelta", "tolerance", "withinTolerance"],
+        "properties": {
+          "path": { "type": "string" },
+          "expected": { "type": "number" },
+          "actual": { "type": "number" },
+          "absoluteDelta": { "type": "number" },
+          "relativeDelta": { "type": ["number", "null"] },
+          "tolerance": { "type": "number" },
+          "withinTolerance": { "type": "boolean" }
+        }
+      }
+    },
+    "relationshipChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["componentA", "componentB", "field", "expected", "actual"],
+        "properties": {
+          "componentA": { "type": "string" },
+          "componentB": { "type": "string" },
+          "field": { "type": "string" },
+          "expected": {},
+          "actual": {}
+        }
+      }
+    },
+    "topologyChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["componentId", "field", "expected", "actual"],
+        "properties": {
+          "componentId": { "type": "string" },
+          "field": { "type": "string" },
+          "expected": { "type": "integer" },
+          "actual": { "type": "integer" }
+        }
+      }
+    },
+    "artifactChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifactType", "description"],
+        "properties": { "artifactType": { "type": "string" }, "description": { "type": "string" } }
+      }
+    },
+    "severity": { "enum": ["NONE", "INFO", "REGRESSION", "VERSION_REVIEW_REQUIRED"] },
+    "requiresBaselineReview": { "type": "boolean" }
+  }
+}

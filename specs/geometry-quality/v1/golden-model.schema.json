@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.example/specs/geometry-quality/v1/golden-model.schema.json",
+  "title": "Golden Model v1",
+  "description": "A versioned JewelMind input plus expected geometric facts, component relationships, and artifact invariants. NOT a professional approval, manufacturing-readiness claim, or aesthetic judgment (QUALITY-GOV-001). See docs/bible/17-geometry-quality/501-golden-model-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "goldenId", "description", "sourceJDLPath", "definitionHash", "versionFingerprint",
+    "expectedComponents", "geometrySnapshot", "baselineStatus", "createdAt"
+  ],
+  "properties": {
+    "goldenId": { "type": "string" },
+    "description": { "type": "string" },
+    "sourceJDLPath": { "type": "string" },
+    "definitionHash": { "type": "string" },
+    "versionFingerprint": { "type": "object", "description": "See version-fingerprint.schema.json." },
+    "expectedComponents": { "type": "array", "items": { "type": "string" } },
+    "geometrySnapshot": { "type": "object", "description": "See geometry-snapshot.schema.json." },
+    "artifactExpectations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifactType"],
+        "properties": {
+          "artifactType": { "enum": ["STEP", "STL", "JSON", "SPECIFICATION"] },
+          "nonEmpty": { "type": "boolean" },
+          "minSolidCount": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "baselineStatus": { "enum": ["INITIAL", "STABLE", "CANDIDATE", "KNOWN_LIMITATION"] },
+    "knownLimitations": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string" },
+    "acceptedAt": { "type": ["string", "null"] },
+    "notes": { "type": "string" }
+  }
+}

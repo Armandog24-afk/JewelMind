@@ -1,0 +1,81 @@
+{
+  "note": "Both vectors use the SAME topology change; only the actualFingerprint.kernelVersion differs, demonstrating QUALITY-GOV-010: a kernel change makes a topology diff VERSION_REVIEW_REQUIRED instead of an unconditional REGRESSION.",
+  "vectors": [
+    {
+      "case": "topology change, kernel version unchanged",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [],
+        "relationshipChanges": [],
+        "topologyChanges": [
+          {
+            "componentId": "prongs",
+            "field": "faces",
+            "expected": 18,
+            "actual": 20
+          }
+        ],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    },
+    {
+      "case": "topology change, kernel version differs",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "9.9.9-hypothetical",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [],
+        "numericChanges": [],
+        "relationshipChanges": [],
+        "topologyChanges": [
+          {
+            "componentId": "prongs",
+            "field": "faces",
+            "expected": 18,
+            "actual": 20
+          }
+        ],
+        "artifactChanges": [],
+        "severity": "VERSION_REVIEW_REQUIRED",
+        "requiresBaselineReview": true
+      }
+    }
+  ]
+}

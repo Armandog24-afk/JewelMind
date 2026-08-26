@@ -4,7 +4,7 @@ title: "Appendix: Documentation Index"
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-08-24
+last_updated: 2026-08-26
 source_of_truth: true
 depends_on: []
 related_documents: []
@@ -590,6 +590,31 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A97 | Appendix: Inspection Code Mapping | accepted | current | [`appendices/inspection-code-mapping.md`](inspection-code-mapping.md) |
 | JM-BIBLE-A98 | Appendix: Inspection Test Matrix | accepted | current | [`appendices/inspection-test-matrix.md`](inspection-test-matrix.md) |
 | JM-BIBLE-A99 | Appendix: Solitaire Inspection Baseline | accepted | current | [`appendices/solitaire-inspection-baseline.md`](solitaire-inspection-baseline.md) |
+| JM-BIBLE-QUALITY-README | Geometry Quality & Golden Models v1 — Index | accepted | current | [`17-geometry-quality/README.md`](../17-geometry-quality/README.md) |
+| JM-BIBLE-500 | Geometry Quality Governance | accepted | current | [`17-geometry-quality/500-quality-governance.md`](../17-geometry-quality/500-quality-governance.md) |
+| JM-BIBLE-501 | Golden Model Contract | accepted | current | [`17-geometry-quality/501-golden-model-contract.md`](../17-geometry-quality/501-golden-model-contract.md) |
+| JM-BIBLE-502 | Golden Suite Selection | accepted | current | [`17-geometry-quality/502-golden-suite-selection.md`](../17-geometry-quality/502-golden-suite-selection.md) |
+| JM-BIBLE-503 | Quality Signal Model | accepted | current | [`17-geometry-quality/503-quality-signal-model.md`](../17-geometry-quality/503-quality-signal-model.md) |
+| JM-BIBLE-504 | Regression Comparison Model | accepted | current | [`17-geometry-quality/504-regression-comparison-model.md`](../17-geometry-quality/504-regression-comparison-model.md) |
+| JM-BIBLE-505 | Comparison Tolerance Policy | accepted | current | [`17-geometry-quality/505-comparison-tolerance-policy.md`](../17-geometry-quality/505-comparison-tolerance-policy.md) |
+| JM-BIBLE-506 | Golden Regression Harness | accepted | current | [`17-geometry-quality/506-golden-regression-harness.md`](../17-geometry-quality/506-golden-regression-harness.md) |
+| JM-BIBLE-507 | Golden Update Policy | accepted | current | [`17-geometry-quality/507-golden-update-policy.md`](../17-geometry-quality/507-golden-update-policy.md) |
+| JM-BIBLE-508 | Geometry Diff Model | accepted | current | [`17-geometry-quality/508-geometry-diff-model.md`](../17-geometry-quality/508-geometry-diff-model.md) |
+| JM-BIBLE-509 | Artifact Regression Model | accepted | current | [`17-geometry-quality/509-artifact-regression-model.md`](../17-geometry-quality/509-artifact-regression-model.md) |
+| JM-BIBLE-510 | Version Fingerprint Policy | accepted | current | [`17-geometry-quality/510-version-fingerprint-policy.md`](../17-geometry-quality/510-version-fingerprint-policy.md) |
+| JM-BIBLE-511 | Current Solitaire Golden Suite | accepted | current | [`17-geometry-quality/511-current-solitaire-golden-suite.md`](../17-geometry-quality/511-current-solitaire-golden-suite.md) |
+| JM-BIBLE-512 | CI Regression Gating | accepted | current | [`17-geometry-quality/512-ci-regression-gating.md`](../17-geometry-quality/512-ci-regression-gating.md) |
+| JM-BIBLE-513 | Regression Failure Triage | accepted | current | [`17-geometry-quality/513-regression-failure-triage.md`](../17-geometry-quality/513-regression-failure-triage.md) |
+| JM-BIBLE-514 | Professional Validation Boundary | accepted | current | [`17-geometry-quality/514-professional-validation-boundary.md`](../17-geometry-quality/514-professional-validation-boundary.md) |
+| JM-BIBLE-515 | Performance Baseline Model | accepted | current | [`17-geometry-quality/515-performance-baseline-model.md`](../17-geometry-quality/515-performance-baseline-model.md) |
+| JM-BIBLE-516 | Current Code Mapping and Gaps | accepted | current | [`17-geometry-quality/516-current-code-mapping-and-gaps.md`](../17-geometry-quality/516-current-code-mapping-and-gaps.md) |
+| JM-BIBLE-517 | Open Geometry Quality Questions | accepted | current | [`17-geometry-quality/517-open-geometry-quality-questions.md`](../17-geometry-quality/517-open-geometry-quality-questions.md) |
+| JM-BIBLE-SPRINT15-REPORT | Sprint 15 Validation Report | accepted | current | [`17-geometry-quality/SPRINT-15-VALIDATION-REPORT.md`](../17-geometry-quality/SPRINT-15-VALIDATION-REPORT.md) |
+| JM-BIBLE-A100 | Appendix: Golden Model Catalog | accepted | current | [`appendices/golden-model-catalog.md`](golden-model-catalog.md) |
+| JM-BIBLE-A101 | Appendix: Geometry Quality Signal Catalog | accepted | current | [`appendices/geometry-quality-signal-catalog.md`](geometry-quality-signal-catalog.md) |
+| JM-BIBLE-A102 | Appendix: Geometry Regression Metric Catalog | accepted | current | [`appendices/geometry-regression-metric-catalog.md`](geometry-regression-metric-catalog.md) |
+| JM-BIBLE-A103 | Appendix: Golden Update Register | accepted | current | [`appendices/golden-update-register.md`](golden-update-register.md) |
+| JM-BIBLE-A104 | Appendix: Geometry Quality Test Matrix | accepted | current | [`appendices/geometry-quality-test-matrix.md`](geometry-quality-test-matrix.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 
@@ -610,6 +635,15 @@ front-matter convention and are listed here for completeness, per
 | Fact registry (16 fact types, hand-authored, zero professional thresholds) | Yes | [`specs/geometry-inspection/v2/fact-registry.json`](../../../specs/geometry-inspection/v2/fact-registry.json) |
 | Examples (5, real generated inspection reports) | Yes | [`specs/geometry-inspection/v2/examples/`](../../../specs/geometry-inspection/v2/examples/) |
 | Test vectors (8 files) | Yes | [`specs/geometry-inspection/v2/test-vectors/`](../../../specs/geometry-inspection/v2/test-vectors/) |
+
+## Machine-readable Geometry Quality specification — `specs/geometry-quality/v1/`
+
+| File | Normative? | Path |
+|---|---|---|
+| Overview | — | [`specs/geometry-quality/v1/README.md`](../../../specs/geometry-quality/v1/README.md) |
+| Schemas (6 JSON Schemas covering version-fingerprint/geometry-snapshot/golden-model/geometry-diff/quality-result/golden-suite models) | Yes | [`specs/geometry-quality/v1/`](../../../specs/geometry-quality/v1/) |
+| Test vectors (5 files, generated from the real `compare_snapshot()`/`generate_candidate_baseline()`) | Yes | [`specs/geometry-quality/v1/test-vectors/`](../../../specs/geometry-quality/v1/test-vectors/) |
+| Real Golden Suite (9 fixtures, `design.json` + `snapshot.json` each, no committed STEP/STL binaries) | Yes | [`goldens/solitaire-v1/`](../../../goldens/solitaire-v1/) |
 
 ## Machine-readable Studio specification — `specs/studio/v1/`
 

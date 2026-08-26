@@ -1,0 +1,118 @@
+{
+  "note": "Each vector mutates a real accepted SOL-001 snapshot in-memory (never on disk) and runs the real compare_snapshot() to prove an EXACT_INVARIANT change is detected.",
+  "vectors": [
+    {
+      "case": "assembly.componentCount altered",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [
+          {
+            "path": "assembly.componentCount",
+            "expected": 4,
+            "actual": 3
+          }
+        ],
+        "numericChanges": [],
+        "relationshipChanges": [],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    },
+    {
+      "case": "designConsistency.stoneReferenceIsProductionMetal flipped",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [
+          {
+            "path": "designConsistency.stoneReferenceIsProductionMetal",
+            "expected": false,
+            "actual": true
+          }
+        ],
+        "numericChanges": [],
+        "relationshipChanges": [],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    },
+    {
+      "case": "a required component removed from the snapshot",
+      "diff": {
+        "goldenId": "SOL-001-default-solitaire",
+        "expectedFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "actualFingerprint": {
+          "jdlSchemaVersion": "0.1.0",
+          "forgeRuleSetVersion": "1.0.0",
+          "compilerVersion": "0.1.0",
+          "atlasGeneratorVersion": "0.1.0",
+          "inspectionVersion": "1.0.0",
+          "kernelVersion": "2.8.0",
+          "ocpVersion": "7.9.3.1"
+        },
+        "exactChanges": [
+          {
+            "path": "components.missing",
+            "expected": [
+              "stone_reference"
+            ],
+            "actual": []
+          }
+        ],
+        "numericChanges": [],
+        "relationshipChanges": [],
+        "topologyChanges": [],
+        "artifactChanges": [],
+        "severity": "REGRESSION",
+        "requiresBaselineReview": true
+      }
+    }
+  ]
+}

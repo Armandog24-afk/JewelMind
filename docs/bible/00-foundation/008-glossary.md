@@ -4,7 +4,7 @@ title: Glossary
 version: 1.0.0
 status: accepted
 owner: JewelMind
-last_updated: 2026-08-24
+last_updated: 2026-08-26
 source_of_truth: true
 depends_on: []
 related_documents:
@@ -755,3 +755,55 @@ production components like prongs by design, for a plausible grip). See
 components as touching/overlapping versus separated — never an invented
 jewelry-domain tolerance. See
 [`16-geometry-inspection/460-inspection-governance.md`](../16-geometry-inspection/460-inspection-governance.md), INSPECT-GOV-012.
+
+## Geometry Quality terms (Sprint 15)
+
+> Authoritative source for every term in this section:
+> [`17-geometry-quality/`](../17-geometry-quality/README.md) (Sprint 15).
+> Not to be confused with **Golden Review Model** (Sprint 13, a
+> reproducible fixture for a *professional review session* — see
+> [`15-professional-validation/442-golden-review-models.md`](../15-professional-validation/442-golden-review-models.md)),
+> a different, unrelated concept.
+
+**Golden Model** — a versioned JewelMind input plus its expected
+geometric facts, component relationships, and artifact invariants
+(`GoldenModel` in `backend/jewelmind/geometry_quality/models.py`) — a
+**software regression reference only**, never a professional,
+manufacturing, or aesthetic claim. See
+[`17-geometry-quality/501-golden-model-contract.md`](../17-geometry-quality/501-golden-model-contract.md).
+
+**Geometry Snapshot** — the stable, normalized set of geometric facts
+captured for one golden case (`GeometrySnapshot`), built entirely from
+real Sprint 14 `GeometryInspectionReport` output. Excludes every
+volatile field (timestamps, inspection IDs, performance timing) by
+construction. See
+[`17-geometry-quality/501-golden-model-contract.md`](../17-geometry-quality/501-golden-model-contract.md).
+
+**Geometry Diff** — a structured comparison between a golden's expected
+snapshot and a freshly regenerated actual snapshot (`GeometryDiff`),
+keeping exact invariants, numeric regressions, relationship changes,
+topology changes, and artifact changes in separate lists rather than
+one merged pass/fail bit. See
+[`17-geometry-quality/508-geometry-diff-model.md`](../17-geometry-quality/508-geometry-diff-model.md).
+
+**Comparison Tolerance** — `ABSOLUTE_COMPARISON_TOLERANCE_MM`/
+`RELATIVE_COMPARISON_TOLERANCE` (`geometry_quality/version.py`), a
+software-regression comparison tool, empirically derived from real
+measured cross-platform kernel drift — never a manufacturing or jewelry
+tolerance. See
+[`17-geometry-quality/505-comparison-tolerance-policy.md`](../17-geometry-quality/505-comparison-tolerance-policy.md).
+
+**Baseline Acceptance** — the single explicit, human-invoked action
+(`accept_candidate_baseline()`, reachable only via
+`geometry-quality accept --reason "..."`) that may ever write to an
+accepted Golden baseline file. No automated verification path — not
+`verify_golden()`, not `verify_all_goldens()`, not CI — is ever allowed
+to call it. See
+[`17-geometry-quality/507-golden-update-policy.md`](../17-geometry-quality/507-golden-update-policy.md).
+
+**Version Fingerprint** — the real, collected set of version
+identifiers relevant to geometry regression (JDL schema, Forge rule
+set, compiler, Atlas generator, inspection, CAD kernel, OCP) attached to
+every Golden Model, so a kernel/dependency version change is visible
+rather than silently absorbed into a pass/fail result. See
+[`17-geometry-quality/510-version-fingerprint-policy.md`](../17-geometry-quality/510-version-fingerprint-policy.md).
