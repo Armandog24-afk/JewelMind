@@ -116,6 +116,35 @@ def _approx_equal(a, b) -> bool:
     return a == b
 
 
+def _first_mismatch(a, b, path: str = "$") -> str | None:
+    """Return a human-readable path to the first structural disagreement
+    between a and b, or None if they are approx-equal. Used only to make
+    a CI failure diagnosable without re-running locally on the same OS."""
+    if isinstance(a, float) and isinstance(b, float):
+        if not math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-9):
+            return f"{path}: {a!r} != {b!r}"
+        return None
+    if isinstance(a, dict) and isinstance(b, dict):
+        if a.keys() != b.keys():
+            return f"{path}: key sets differ: {a.keys() ^ b.keys()}"
+        for key in a:
+            mismatch = _first_mismatch(a[key], b[key], f"{path}.{key}")
+            if mismatch:
+                return mismatch
+        return None
+    if isinstance(a, list) and isinstance(b, list):
+        if len(a) != len(b):
+            return f"{path}: list length differs: {len(a)} != {len(b)}"
+        for i, (x, y) in enumerate(zip(a, b)):
+            mismatch = _first_mismatch(x, y, f"{path}[{i}]")
+            if mismatch:
+                return mismatch
+        return None
+    if a != b:
+        return f"{path}: {a!r} != {b!r}"
+    return None
+
+
 def test_default_solitaire_example_is_reproducible_live():
     example = _load_json(SPECS_DIR / "examples" / "default-solitaire-inspection.json")
     model = build_solitaire_ring(default_definition())
@@ -131,4 +160,7 @@ def test_default_solitaire_example_is_reproducible_live():
         report["geometricFacts"] = [{**f, "generatedAt": None} for f in report["geometricFacts"]]
         return report
 
-    assert _approx_equal(strip(live), strip(example))
+    stripped_live = strip(live)
+    stripped_example = strip(example)
+    mismatch = _first_mismatch(stripped_live, stripped_example)
+    assert mismatch is None, f"live vs. recorded example diverged at {mismatch}"
