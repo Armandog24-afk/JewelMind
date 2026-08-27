@@ -19,7 +19,7 @@ Geometry Inspection v2 is Atlas's real, runtime fact-gathering subsystem: it rep
 | [`inspection-report.schema.json`](inspection-report.schema.json) | The complete `GeometryInspectionReport` — the response body of `GET /api/models/{modelId}/inspection` |
 | [`inspection-diagnostic.schema.json`](inspection-diagnostic.schema.json) | One of the 11 `INSPECTION_*` diagnostic codes |
 | [`inspection-version.schema.json`](inspection-version.schema.json) | How a change to inspection semantics is classified (PATCH/MINOR/MAJOR) |
-| [`fact-registry.json`](fact-registry.json) | A hand-authored catalog of all 16 `FactType` values — semantic meaning, value type, unit, scope, implementation status, and Forge-consumption status. No professional thresholds appear anywhere in this file. |
+| [`fact-registry.json`](fact-registry.json) | A hand-authored catalog of all 22 `FactType` values (16 from Sprint 14 + the 6 `STONE_*` dimension facts from Sprint 18) — semantic meaning, value type, unit, scope, implementation status, and Forge-consumption status. No professional thresholds appear anywhere in this file. |
 
 ## Examples
 

@@ -1,0 +1,36 @@
+{
+  "description": "Oval, 8x6mm.",
+  "stone": {
+    "shape": "oval",
+    "diameter": 6.5,
+    "length": 8.0,
+    "width": 6.0,
+    "depth": 4.0,
+    "orientation": 0.0
+  },
+  "generatedMetadata": {
+    "shape": "oval",
+    "girdleZMm": 14.200000000000001,
+    "crownHeightMm": 1.4,
+    "pavilionHeightMm": 2.6,
+    "lengthMm": 8.0,
+    "widthMm": 6.0,
+    "depthMm": 4.0,
+    "orientationDeg": 0.0,
+    "isGemologicalReproduction": false,
+    "referenceGeometryVersion": "1.0.0"
+  },
+  "volumeMm3": 67.349966,
+  "boundingBox": {
+    "minMm": [
+      -3.0000001,
+      -4.0000001,
+      11.599999899999997
+    ],
+    "maxMm": [
+      3.0000001,
+      4.0000001,
+      15.6000001
+    ]
+  }
+}

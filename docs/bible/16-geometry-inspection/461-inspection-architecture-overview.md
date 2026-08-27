@@ -74,4 +74,4 @@ What this Sprint does **not** close: Forge's rule engine (`backend/jewelmind/val
 
 ## Related documents
 
-[`462-geometric-fact-model.md`](462-geometric-fact-model.md) for the `GeometricFact` shape and the 16 `FactType` values; [`463-inspection-subsystem-model.md`](463-inspection-subsystem-model.md) for a deeper, function-by-function breakdown of the same modules listed above; [`491-runtime-inspection-policy.md`](491-runtime-inspection-policy.md) for which checks run unconditionally versus are cost-gated.
+[`462-geometric-fact-model.md`](462-geometric-fact-model.md) for the `GeometricFact` shape and the 22 `FactType` values; [`463-inspection-subsystem-model.md`](463-inspection-subsystem-model.md) for a deeper, function-by-function breakdown of the same modules listed above; [`491-runtime-inspection-policy.md`](491-runtime-inspection-policy.md) for which checks run unconditionally versus are cost-gated.

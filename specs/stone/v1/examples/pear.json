@@ -1,0 +1,36 @@
+{
+  "description": "Pear, 9x6mm \u2014 asymmetric.",
+  "stone": {
+    "shape": "pear",
+    "diameter": 6.5,
+    "length": 9.0,
+    "width": 6.0,
+    "depth": 4.0,
+    "orientation": 0.0
+  },
+  "generatedMetadata": {
+    "shape": "pear",
+    "girdleZMm": 14.200000000000001,
+    "crownHeightMm": 1.4,
+    "pavilionHeightMm": 2.6,
+    "lengthMm": 9.0,
+    "widthMm": 6.0,
+    "depthMm": 4.0,
+    "orientationDeg": 0.0,
+    "isGemologicalReproduction": false,
+    "referenceGeometryVersion": "1.0.0"
+  },
+  "volumeMm3": 57.413477,
+  "boundingBox": {
+    "minMm": [
+      -3.0000001,
+      -4.5000001,
+      11.5999999
+    ],
+    "maxMm": [
+      3.0000001,
+      4.5000001,
+      15.6000001
+    ]
+  }
+}

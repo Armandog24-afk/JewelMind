@@ -33,21 +33,48 @@ simplified geometry from being read as more authoritative than it is —
 see [LAW-006](../00-foundation/004-jewelmind-constitution.md#LAW-006) and
 `docs/known-limitations.md`.
 
-## Current concept: round shape only
+## Current concept: 7 shapes (Sprint 18)
 
-`domain/schema.py::StoneSpec.shape` is `Literal["round"]` — no other
-shape is accepted today.
+`domain/schema.py::StoneSpec.shape` accepts `round`, `oval`, `pear`,
+`emerald`, `cushion`, `princess`, and `marquise`. All 7 generate real,
+deterministic CAD reference geometry.
+
+The full Stone System — its governance, per-shape construction, dimension
+and orientation models, capability registry, and setting-compatibility
+boundary — is documented in [`../20-stone/README.md`](../20-stone/README.md)
+and is not restated here. This document remains the jewelry-domain view:
+what a stone *is* as a domain concept, and which of its properties are
+IMPLEMENTED FACTs versus PRELIMINARY SOFTWARE RULEs.
+
+**Generation capability is not setting compatibility.** Only `round` has
+`currentSettingCompatibility: SUPPORTED`; the other 6 are honestly
+`EXPERIMENTAL`, because the current prong layout is a generic circular
+placement rather than shape-derived — see
+[`../20-stone/575-stone-capability-model.md`](../20-stone/575-stone-capability-model.md).
 
 ## Current parameters
 
 | Parameter | Path | Type | Notes |
 |---|---|---|---|
-| Diameter | `stone.diameter` | float, mm | Girdle diameter — see below. |
-| Depth | `stone.depth` | float, mm | Total culet-to-table height. |
+| Shape | `stone.shape` | enum, 7 values | Selects the outline primitive. |
+| Diameter | `stone.diameter` | float \| null, mm | Girdle diameter. Required for, and meaningful only for, `round`. |
+| Length | `stone.length` | float \| null, mm | Major horizontal dimension (local Y). Required when `shape != "round"`. |
+| Width | `stone.width` | float \| null, mm | Minor horizontal dimension (local X). Required when `shape != "round"`. |
+| Depth | `stone.depth` | float, mm | Total culet-to-table height. Every shape. |
+| Orientation | `stone.orientation` | float, degrees | Rotation around the stone's own local vertical axis. Default 0. |
+
+Resolve dimensions only through `domain/stone_dimensions.py`'s
+`resolved_length_mm()` / `resolved_width_mm()` / `resolved_depth_mm()`,
+never by reading `stone.diameter` directly in new code — for `round` those
+resolve to `length == width == diameter`.
 
 ## Crown / girdle / pavilion in the current reference
 
-`geometry/components/stone.py` builds a lofted solid:
+The description below is round's construction, preserved byte-identically
+in `geometry/stone/builder.py::_build_round_stone()`. Every non-round shape
+uses the **same** three reference proportions over its own outline; the
+differences are documented in
+[`../20-stone/567-stone-reference-geometry-contract.md`](../20-stone/567-stone-reference-geometry-contract.md).
 
 1. Culet point (a near-zero radius circle, `_CULET_RADIUS_MM = 0.05`) at
    the bottom.
@@ -105,20 +132,30 @@ assigned to any of them, per
 | Shape | General classification | Likely dimensional parameters | Domain questions requiring professional validation | Status |
 |---|---|---|---|---|
 | Round | Brilliant-style, radially symmetric | Diameter, depth (current) | Whether current crown/pavilion fractions should ever be professionally validated as defaults, or replaced entirely | CURRENT |
-| Oval | Elongated brilliant-style | Length, width, depth | Length:width ratio conventions | PLANNED |
-| Princess | Square/rectangular brilliant-style | Length, width, depth | Corner treatment, pavilion depth convention | PLANNED |
-| Emerald | Step-cut, rectangular | Length, width, depth | Step count, corner (cut-corner) convention | PLANNED |
-| Cushion | Rounded-square/rectangular brilliant or mixed-cut | Length, width, depth | Corner rounding radius convention | PLANNED |
-| Pear | Asymmetric brilliant-style (teardrop) | Length, width, depth | Point/shoulder proportions | PLANNED |
-| Marquise | Elongated pointed-oval brilliant-style | Length, width, depth | Point angle convention | PLANNED |
+| Oval | Elongated brilliant-style | Length, width, depth (current) | Length:width ratio conventions | CURRENT (geometry) — setting `EXPERIMENTAL` |
+| Princess | Square/rectangular brilliant-style | Length, width, depth (current) | Corner treatment, pavilion depth convention | CURRENT (geometry) — setting `EXPERIMENTAL` |
+| Emerald | Step-cut, rectangular | Length, width, depth (current) | Step count, corner (cut-corner) convention | CURRENT (outline only — no step faceting) — setting `EXPERIMENTAL` |
+| Cushion | Rounded-square/rectangular brilliant or mixed-cut | Length, width, depth (current) | Corner rounding radius convention | CURRENT (geometry) — setting `EXPERIMENTAL` |
+| Pear | Asymmetric brilliant-style (teardrop) | Length, width, depth (current) | Point/shoulder proportions | CURRENT (simplified non-tangent outline) — setting `EXPERIMENTAL` |
+| Marquise | Elongated pointed-oval brilliant-style | Length, width, depth (current) | Point angle convention | CURRENT (geometry) — setting `EXPERIMENTAL` |
 | Radiant | Cut-corner rectangular brilliant-style | Length, width, depth | Corner cut angle, facet pattern | PLANNED |
 | Asscher | Cut-corner square step-cut | Length, width, depth | Step count, corner convention | PLANNED |
 | Heart | Bifurcated brilliant-style | Length, width, depth, cleft depth | Cleft/point proportions | PLANNED |
 
 Every non-round shape needs at minimum a length/width pair rather than a
-single diameter — this alone means `StoneSpec` cannot simply add a
-`shape` enum value without a schema change (see
-[`056-domain-extension-strategy.md`](056-domain-extension-strategy.md)).
+single diameter — which is exactly why Sprint 18's shape widening came
+with `stone.length`/`stone.width` as an additive MINOR schema change
+rather than an enum-only edit (see
+[`056-domain-extension-strategy.md`](056-domain-extension-strategy.md)
+and [`../20-stone/576-current-round-migration.md`](../20-stone/576-current-round-migration.md)).
+
+The "Domain questions requiring professional validation" column remains
+entirely open for all 7 shapes. Geometry being CURRENT means the outline
+and reference solid are real and deterministic — it does **not** mean any
+proportion convention in that column has been answered. Radiant, Asscher,
+and Heart remain PLANNED with no geometry, and are deliberately not
+pre-registered in the capability registry (see
+[`../20-stone/575-stone-capability-model.md`](../20-stone/575-stone-capability-model.md)).
 
 ## Why carat weight must not be inferred from diameter alone
 

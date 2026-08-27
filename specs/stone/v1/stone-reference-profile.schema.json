@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v1/stone-reference-profile.schema.json",
+  "title": "StoneReferenceProfile",
+  "description": "The real, fixed construction-time parameters `geometry/stone/builder.py` and `geometry/stone/outline.py` use to build a StoneReference's crown/girdle/pavilion loft — documentation of an existing runtime construction contract, not a request/validation schema. Every value here carries `provenance: \"software_reference_profile\"` (brief section 22): a deliberate, deterministic geometry-engine/software construction choice, verified only to produce robust CAD geometry — never a sourced gemological or industry-standard proportion (STONE-GOV-011). See docs/bible/20-stone/567-stone-reference-geometry-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["provenance", "crownFraction", "pavilionFraction", "tableToGirdleRatio"],
+  "properties": {
+    "provenance": {
+      "const": "software_reference_profile"
+    },
+    "crownFraction": {
+      "type": "number",
+      "const": 0.35,
+      "description": "Fraction of stone.depth allocated to the crown (table-to-girdle) region. Shared by every shape."
+    },
+    "pavilionFraction": {
+      "type": "number",
+      "const": 0.65,
+      "description": "Fraction of stone.depth allocated to the pavilion (girdle-to-culet) region. Shared by every shape."
+    },
+    "tableToGirdleRatio": {
+      "type": "number",
+      "const": 0.56,
+      "description": "Scale factor applied to the girdle outline to produce the table-level outline. Shared by every shape."
+    },
+    "culetRadiusMm": {
+      "type": "number",
+      "const": 0.05,
+      "description": "round only: a fixed, absolute culet circle radius, unchanged since before Sprint 18."
+    },
+    "culetScaleRatio": {
+      "type": "number",
+      "const": 0.05,
+      "description": "Every non-round shape: the girdle outline scaled down by this ratio to produce a small, self-similar culet-level outline — a real, documented geometry-engine numerical-stability accommodation (brief section 16), not a jewelry standard."
+    },
+    "emeraldCornerClipRatio": {
+      "type": "number",
+      "const": 0.18,
+      "description": "emerald only: how far each corner is clipped diagonally, as a fraction of the smaller half-extent."
+    },
+    "cushionCornerRatio": {
+      "type": "number",
+      "const": 0.25,
+      "description": "cushion only: rounded-corner radius, as a fraction of the smaller half-extent."
+    }
+  }
+}

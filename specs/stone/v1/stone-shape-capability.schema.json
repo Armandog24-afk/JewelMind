@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v1/stone-shape-capability.schema.json",
+  "title": "StoneShapeCapability",
+  "description": "Mirrors backend/jewelmind/geometry/stone/capability.py::StoneShapeCapability exactly — one entry per named Stone shape, the single source of truth for CURRENT vs PLANNED and for the real, honest distinction between geometry-generation capability and Setting compatibility (STONE-GOV-009/014; brief section 54). See docs/bible/20-stone/575-stone-capability-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "shape", "status", "generationSupported", "jdlSupported", "inspectionSupported",
+    "visionSupported", "currentSettingCompatibility", "requiredDimensions",
+    "symmetryClass", "referenceGeometryVersion", "description"
+  ],
+  "properties": {
+    "shape": {
+      "enum": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"]
+    },
+    "status": {
+      "enum": ["current", "planned"],
+      "description": "All 7 target shapes are 'current' as of Sprint 18 (the strong target was achieved). Future shapes (asscher, radiant, heart, trillion, baguette, cabochon) would appear here as 'planned' if reserved architecturally — none are, per brief section 62."
+    },
+    "generationSupported": {
+      "type": "boolean",
+      "description": "Whether geometry/stone/builder.py::build_stone() actually constructs real CAD geometry for this shape."
+    },
+    "jdlSupported": {
+      "type": "boolean",
+      "description": "Whether this shape is a real, accepted StoneShape enum member."
+    },
+    "inspectionSupported": {
+      "type": "boolean",
+      "description": "Whether this shape's stone_reference component is covered by real runtime Geometry Inspection facts (generic component facts plus the STONE_REQUESTED_*/STONE_MEASURED_* dimension facts)."
+    },
+    "visionSupported": {
+      "type": "boolean",
+      "description": "Whether Vision renders this shape's real generated geometry — always true for every generatable shape, since Vision parses whatever STL the backend produces generically (no shape-specific frontend code exists or is needed)."
+    },
+    "currentSettingCompatibility": {
+      "enum": ["SUPPORTED", "EXPERIMENTAL", "UNSUPPORTED"],
+      "description": "Deliberately independent from generationSupported (STONE-GOV-009, brief section 27): a shape can generate real geometry while its current prong-setting placement remains a generic, non-shape-optimized provisional layout, honestly marked EXPERIMENTAL rather than claimed correct."
+    },
+    "requiredDimensions": {
+      "type": "array",
+      "items": { "enum": ["diameter", "length", "width", "depth"] },
+      "description": "Which JDL stone.* fields must be set for this shape — mirrors StoneSpec's own model_validator."
+    },
+    "symmetryClass": {
+      "enum": ["RADIAL", "ELONGATED_SMOOTH", "RECTILINEAR_ANGULAR", "ROUNDED_RECTILINEAR", "ASYMMETRIC"],
+      "description": "Shares geometric construction strategy across shapes (brief section 12) — never implies every shape in a class has identical construction."
+    },
+    "referenceGeometryVersion": {
+      "type": "string",
+      "description": "Version of the reference-geometry construction algorithm — bumped on any MAJOR change to how a shape's outline/loft is built."
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

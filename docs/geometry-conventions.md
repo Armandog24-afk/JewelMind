@@ -46,13 +46,20 @@ independent vertical axis: the line `x=0, y=0`, parallel to global Z,
 starting at `z = band_top_z` and rising in `+Z`. This is the "assembly
 anchor point": everything above the band is centered on it.
 
-- **Stone reference** (`build_stone_reference`): girdle plane at
+- **Stone reference** (`build_stone_reference`, a re-export of
+  `geometry/stone/build_stone()`): girdle plane at
   `z = band_top_z + setting.basketHeight`; pavilion extends downward from
-  the girdle, crown extends upward. Girdle radius = `stone.diameter / 2`,
-  centered at `(0, 0)`.
+  the girdle, crown extends upward. The girdle **outline** is the shape's
+  own 2D profile, centered at `(0, 0)`, with its major horizontal
+  dimension (LENGTH) along local Y and its minor (WIDTH) along local X.
+  For `round` that outline is a circle of radius `stone.diameter / 2`.
+  `stone.orientation` rotates the finished solid about its own local
+  vertical axis. See
+  `docs/bible/20-stone/565-stone-coordinate-and-orientation.md`.
 - **Prongs** (`build_prongs`): vertical cylinders whose centers sit on a
   circle of radius `prong_center_radius` (see `constants.py`, slightly
-  inside the stone's girdle radius so each prong overlaps the girdle edge),
+  inside the stone's resolved half-width so each prong overlaps the girdle
+  edge — a generic provisional layout, not shape-optimized),
   evenly spaced by angle, starting just below `band_top_z` (embedded into
   the band/basket, see below) and rising to `band_top_z + setting.prongHeight`.
 - **Basket support** (`build_basket_support`): a hollow cylindrical wall
@@ -92,10 +99,12 @@ then revolved around Y:
 
 ## Stone reference
 
-The stone reference is a simplified round-brilliant-style approximation
-(lofted culet → pavilion → girdle → crown → table), not a gemological
-reproduction. See `docs/known-limitations.md` for what this does and does
-not represent. It is always a solid entirely separate from the metal
+The stone reference is a simplified lofted approximation (culet →
+pavilion → girdle → crown → table) over the shape's own 2D outline, not a
+gemological reproduction — for any of the 7 supported shapes (`round`,
+`oval`, `pear`, `emerald`, `cushion`, `princess`, `marquise`). See
+`docs/known-limitations.md` for what this does and does not represent, and
+`docs/bible/20-stone/README.md` for the full Stone System contract. It is always a solid entirely separate from the metal
 geometry — never unioned, never exported as part of the metal STEP/STL by
 default.
 

@@ -88,23 +88,39 @@ function bandRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+function resolvedStoneLength(d: JewelryDefinition): number {
+  return d.stone.shape === 'round' ? (d.stone.diameter as number) : (d.stone.length as number)
+}
+
+function resolvedStoneWidth(d: JewelryDefinition): number {
+  return d.stone.shape === 'round' ? (d.stone.diameter as number) : (d.stone.width as number)
+}
+
 function stoneRules(d: JewelryDefinition): ValidationResult[] {
+  // Sprint 18: STONE_DIAMETER_RANGE is ROUND_ONLY; STONE_DEPTH_RANGE is
+  // SHARED, generalized to the stone's real minimum horizontal extent —
+  // mirrors backend/jewelmind/validation/engine.py::_stone_rules()
+  // exactly (FORGE-GOV-004). See docs/bible/20-stone/578-current-code-mapping-and-gaps.md.
   const out: ValidationResult[] = []
 
-  if (!(d.stone.diameter >= 2 && d.stone.diameter <= 15)) {
-    out.push({
-      ruleId: RULE_IDS.STONE_DIAMETER_RANGE,
-      severity: 'error',
-      message: 'Stone diameter must be between 2 mm and 15 mm.',
-      parameter: 'stone.diameter',
-    })
+  if (d.stone.shape === 'round') {
+    const diameter = d.stone.diameter as number
+    if (!(diameter >= 2 && diameter <= 15)) {
+      out.push({
+        ruleId: RULE_IDS.STONE_DIAMETER_RANGE,
+        severity: 'error',
+        message: 'Stone diameter must be between 2 mm and 15 mm.',
+        parameter: 'stone.diameter',
+      })
+    }
   }
 
-  if (!(d.stone.depth > 0.5 && d.stone.depth < d.stone.diameter)) {
+  const minExtent = Math.min(resolvedStoneLength(d), resolvedStoneWidth(d))
+  if (!(d.stone.depth > 0.5 && d.stone.depth < minExtent)) {
     out.push({
       ruleId: RULE_IDS.STONE_DEPTH_RANGE,
       severity: 'error',
-      message: 'Stone depth must be greater than 0.5 mm and lower than the stone diameter.',
+      message: "Stone depth must be greater than 0.5 mm and lower than the stone's minimum horizontal extent.",
       parameter: 'stone.depth',
     })
   }
@@ -143,7 +159,8 @@ function prongRules(d: JewelryDefinition): ValidationResult[] {
     })
   }
 
-  if (d.stone.diameter > 8 && d.setting.prongCount === 4) {
+  // ROUND_ONLY (Sprint 18) — see backend's identical guard and rationale.
+  if (d.stone.shape === 'round' && (d.stone.diameter as number) > 8 && d.setting.prongCount === 4) {
     out.push({
       ruleId: RULE_IDS.PRONG_COUNT_VS_STONE_SIZE,
       severity: 'warning',

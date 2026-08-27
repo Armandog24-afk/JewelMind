@@ -1,4 +1,9 @@
-import type { BandProfile, ManufacturingMethod, MetalType } from '@shared/types/jewelry-definition'
+import type {
+  BandProfile,
+  ManufacturingMethod,
+  MetalType,
+  StoneShape,
+} from '@shared/types/jewelry-definition'
 import { useProjectStore } from '../store/useProjectStore'
 import { FormSection } from './FormSection'
 import { NumericField } from './NumericField'
@@ -20,6 +25,20 @@ const METAL_OPTIONS: Array<{ value: MetalType; label: string }> = [
 const MANUFACTURING_OPTIONS: Array<{ value: ManufacturingMethod; label: string }> = [
   { value: 'lost_wax_casting', label: 'Lost-wax casting' },
   { value: 'direct_resin_printing', label: 'Direct resin printing' },
+]
+
+// Mirrors `geometry/stone/capability.py::STONE_SHAPE_CAPABILITIES`'s
+// `generationSupported: true` entries (Sprint 18) — kept in sync by hand,
+// same discipline as every other option list in this file. Update this
+// list in the same change as the backend capability registry.
+const STONE_SHAPE_OPTIONS: Array<{ value: StoneShape; label: string }> = [
+  { value: 'round', label: 'Round' },
+  { value: 'oval', label: 'Oval' },
+  { value: 'pear', label: 'Pear' },
+  { value: 'emerald', label: 'Emerald' },
+  { value: 'cushion', label: 'Cushion' },
+  { value: 'princess', label: 'Princess' },
+  { value: 'marquise', label: 'Marquise' },
 ]
 
 const PRONG_COUNT_OPTIONS = [
@@ -105,16 +124,60 @@ export function ConfigurationPanel() {
       </FormSection>
 
       <FormSection title="Stone">
-        <NumericField
-          id="stone-diameter"
-          label="Diameter"
-          unit="mm"
-          value={definition.stone.diameter}
-          onChange={(diameter) => updateStone({ diameter })}
-          step={0.1}
-          min={0.5}
-          max={20}
+        <SelectField
+          id="stone-shape"
+          label="Shape"
+          value={definition.stone.shape}
+          options={STONE_SHAPE_OPTIONS}
+          onChange={(value) => {
+            const shape = value as StoneShape
+            if (shape === 'round') {
+              updateStone({ shape, diameter: definition.stone.diameter ?? 6.5, length: null, width: null })
+            } else {
+              updateStone({
+                shape,
+                length: definition.stone.length ?? 8.0,
+                width: definition.stone.width ?? 6.0,
+              })
+            }
+          }}
+          wide
         />
+        {definition.stone.shape === 'round' ? (
+          <NumericField
+            id="stone-diameter"
+            label="Diameter"
+            unit="mm"
+            value={definition.stone.diameter ?? 6.5}
+            onChange={(diameter) => updateStone({ diameter })}
+            step={0.1}
+            min={0.5}
+            max={20}
+          />
+        ) : (
+          <>
+            <NumericField
+              id="stone-length"
+              label="Length"
+              unit="mm"
+              value={definition.stone.length ?? 8.0}
+              onChange={(length) => updateStone({ length })}
+              step={0.1}
+              min={0.5}
+              max={20}
+            />
+            <NumericField
+              id="stone-width"
+              label="Width"
+              unit="mm"
+              value={definition.stone.width ?? 6.0}
+              onChange={(width) => updateStone({ width })}
+              step={0.1}
+              min={0.5}
+              max={20}
+            />
+          </>
+        )}
       </FormSection>
 
       <FormSection title="Setting">
@@ -180,6 +243,18 @@ export function ConfigurationPanel() {
             min={0.1}
             max={20}
           />
+          {definition.stone.shape !== 'round' && (
+            <NumericField
+              id="stone-orientation"
+              label="Orientation"
+              unit="deg"
+              value={definition.stone.orientation}
+              onChange={(orientation) => updateStone({ orientation })}
+              step={1}
+              min={0}
+              max={359}
+            />
+          )}
         </FormSection>
 
         <FormSection title="Setting — dimensions">

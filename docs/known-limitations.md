@@ -10,12 +10,27 @@ to every limitation below and to the design as a whole.
 
 - **Stone reference is not a gemological reproduction.** It is a simplified
   lofted approximation (culet → pavilion → girdle → crown → table) sized
-  from `stone.diameter`/`stone.depth` using fixed proportion constants
-  (`_CROWN_FRACTION = 0.35`, `_PAVILION_FRACTION = 0.65`,
+  from the stone's resolved LENGTH/WIDTH/DEPTH using fixed proportion
+  constants (`_CROWN_FRACTION = 0.35`, `_PAVILION_FRACTION = 0.65`,
   `_TABLE_TO_GIRDLE_RATIO = 0.56` in
-  `backend/jewelmind/geometry/components/stone.py`). It does not represent
-  real faceting, optical properties, or actual round-brilliant-cut
-  proportions.
+  `backend/jewelmind/geometry/stone/builder.py`). It does not represent
+  real faceting, optical properties, or actual commercial-cut proportions,
+  for **any** of the 7 shapes. `isGemologicalReproduction` is always
+  `false`. The shape names (`emerald`, `princess`, `marquise`, …) denote
+  the *outline*, never a certified cut — an `emerald` reproduces the
+  clipped-corner silhouette but none of the stepped faceting that defines
+  a real emerald cut. See `docs/bible/20-stone/README.md`.
+- **Only round stones have a setting designed for them.** All 7 shapes
+  generate real geometry, but `currentSettingCompatibility` is
+  `EXPERIMENTAL` for oval, pear, emerald, cushion, princess, and marquise:
+  the current prong layout is a generic circular placement derived from
+  the stone's width, so marquise/pear tips and angular-stone corners are
+  left unsupported. A shape generating correctly is **not** a claim that
+  its setting is valid. See
+  `docs/bible/20-stone/575-stone-capability-model.md`.
+- **Pear's outline is a simplified non-tangent silhouette** — two straight
+  sides meeting a rounded end at a non-zero angle, rather than the smooth
+  continuous curve of a real pear.
 - **Prongs are simplified vertical cylinders**, not tapered/shaped
   prongs as a bench jeweler would cut them, and their contact with the
   stone is geometric overlap, not a modeled seat or bearing cut.

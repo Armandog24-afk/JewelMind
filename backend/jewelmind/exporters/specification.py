@@ -56,7 +56,12 @@ def build_specification(
 
     lines.append("## Stone (reference only, not a gemological reproduction)")
     lines.append(f"- Shape: {definition.stone.shape}")
-    lines.append(f"- Diameter: {_fmt_mm(definition.stone.diameter)}")
+    if definition.stone.shape == "round":
+        lines.append(f"- Diameter: {_fmt_mm(definition.stone.diameter)}")
+    else:
+        lines.append(f"- Length: {_fmt_mm(definition.stone.length)}")
+        lines.append(f"- Width: {_fmt_mm(definition.stone.width)}")
+        lines.append(f"- Orientation: {definition.stone.orientation:g} deg")
     lines.append(f"- Depth: {_fmt_mm(definition.stone.depth)}")
     lines.append("")
 

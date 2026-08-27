@@ -1,26 +1,232 @@
 {
-  "registryVersion": "1.0.0",
-  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) — inspected directly during Sprint 14, 2026-08-26",
+  "registryVersion": "1.1.0",
+  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) \u2014 inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26",
   "facts": [
-    { "factType": "SHAPE_EXISTS", "meaning": "Whether a component produced at least one solid.", "valueType": "boolean", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.Solids()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "SHAPE_VALID", "meaning": "Whether OpenCascade's own shape-validity check (BRepCheck_Analyzer) reports no defects.", "valueType": "boolean", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.isValid()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "SOLID_COUNT", "meaning": "Number of top-level solids in a shape.", "valueType": "integer", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.Solids()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "VOLUME", "meaning": "Solid volume of a component or assembly.", "valueType": "number", "unit": "mm3", "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.Volume", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "BOUNDING_BOX", "meaning": "Axis-aligned bounding box (min/max/size/center per axis).", "valueType": "object", "unit": "mm", "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.BoundingBox()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "COMPONENT_COUNT", "meaning": "Number of named components in the assembly.", "valueType": "integer", "unit": null, "scope": "ASSEMBLY", "implementationStatus": "implemented", "sourceInspection": "len(model.components)", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "INTERSECTION_EXISTS", "meaning": "Whether two components have a real geometric intersection (INTERSECTS/TOUCHES/NO_INTERSECTION/UNKNOWN).", "valueType": "string", "unit": null, "scope": "PAIR", "implementationStatus": "implemented", "sourceInspection": "Shape.intersect()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "INTERSECTION_VOLUME", "meaning": "Volume of the boolean-common solid between two components.", "valueType": "number", "unit": "mm3", "scope": "PAIR", "implementationStatus": "implemented", "sourceInspection": "Shape.intersect()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "MIN_DISTANCE", "meaning": "Minimum distance between two components.", "valueType": "number", "unit": "mm", "scope": "PAIR", "implementationStatus": "implemented", "sourceInspection": "Shape.distance()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "CONNECTED", "meaning": "A group of production components forming one connected group.", "valueType": "boolean", "unit": null, "scope": "ASSEMBLY", "implementationStatus": "implemented", "sourceInspection": "connectivity graph (Shape.distance())", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "DISCONNECTED", "meaning": "A group of production components NOT connected to the rest of the production assembly.", "valueType": "boolean", "unit": null, "scope": "ASSEMBLY", "implementationStatus": "implemented", "sourceInspection": "connectivity graph (Shape.distance())", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "COMPONENT_PRESENT", "meaning": "Whether a specific required component exists in the model.", "valueType": "boolean", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "Shape.Solids()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "PRONG_COUNT", "meaning": "Requested vs. actually generated prong count.", "valueType": "integer", "unit": null, "scope": "ASSEMBLY", "implementationStatus": "implemented", "sourceInspection": "prongs.metadata", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "STONE_METAL_SEPARATE", "meaning": "Whether the StoneReference solid remains distinct from (never fused into) production metal.", "valueType": "boolean", "unit": null, "scope": "ASSEMBLY", "implementationStatus": "implemented", "sourceInspection": "assembly.stoneMetalSeparation (structural, not a boolean-fuse check)", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "BOOLEAN_RESULT_VALID", "meaning": "Whether a fuse/cut/common boolean operation produced a real, non-empty result.", "valueType": "boolean", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "GeneratedComponent construction + inspect_topology()", "forgeConsumptionStatus": "not_consumed" },
-    { "factType": "FALLBACK_USED", "meaning": "Whether a geometry builder fell back from its primary operation (e.g. band fillet, metal fuse) to a simpler alternative.", "valueType": "boolean", "unit": null, "scope": "COMPONENT", "implementationStatus": "implemented", "sourceInspection": "GeneratedComponent.warnings / combined_metal solid count", "forgeConsumptionStatus": "not_consumed" }
+    {
+      "factType": "SHAPE_EXISTS",
+      "meaning": "Whether a component produced at least one solid.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SHAPE_VALID",
+      "meaning": "Whether OpenCascade's own shape-validity check (BRepCheck_Analyzer) reports no defects.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.isValid()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SOLID_COUNT",
+      "meaning": "Number of top-level solids in a shape.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "VOLUME",
+      "meaning": "Solid volume of a component or assembly.",
+      "valueType": "number",
+      "unit": "mm3",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Volume",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "BOUNDING_BOX",
+      "meaning": "Axis-aligned bounding box (min/max/size/center per axis).",
+      "valueType": "object",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.BoundingBox()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "COMPONENT_COUNT",
+      "meaning": "Number of named components in the assembly.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "len(model.components)",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "INTERSECTION_EXISTS",
+      "meaning": "Whether two components have a real geometric intersection (INTERSECTS/TOUCHES/NO_INTERSECTION/UNKNOWN).",
+      "valueType": "string",
+      "unit": null,
+      "scope": "PAIR",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.intersect()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "INTERSECTION_VOLUME",
+      "meaning": "Volume of the boolean-common solid between two components.",
+      "valueType": "number",
+      "unit": "mm3",
+      "scope": "PAIR",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.intersect()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "MIN_DISTANCE",
+      "meaning": "Minimum distance between two components.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "PAIR",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.distance()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "CONNECTED",
+      "meaning": "A group of production components forming one connected group.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "connectivity graph (Shape.distance())",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "DISCONNECTED",
+      "meaning": "A group of production components NOT connected to the rest of the production assembly.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "connectivity graph (Shape.distance())",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "COMPONENT_PRESENT",
+      "meaning": "Whether a specific required component exists in the model.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "PRONG_COUNT",
+      "meaning": "Requested vs. actually generated prong count.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "prongs.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_METAL_SEPARATE",
+      "meaning": "Whether the StoneReference solid remains distinct from (never fused into) production metal.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "assembly.stoneMetalSeparation (structural, not a boolean-fuse check)",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "BOOLEAN_RESULT_VALID",
+      "meaning": "Whether a fuse/cut/common boolean operation produced a real, non-empty result.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent construction + inspect_topology()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "FALLBACK_USED",
+      "meaning": "Whether a geometry builder fell back from its primary operation (e.g. band fillet, metal fuse) to a simpler alternative.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.warnings / combined_metal solid count",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_REQUESTED_LENGTH",
+      "meaning": "The stone reference's requested major horizontal dimension (LENGTH), taken from the component's own build-time metadata. CONSTRUCTION_PARAMETER, not an independent re-measurement.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_MEASURED_LENGTH",
+      "meaning": "The stone reference's measured major horizontal extent, from the independently computed axis-aligned bounding box (sizeY). Isolates LENGTH exactly only at stone.orientation == 0.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.BoundingBox()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_REQUESTED_WIDTH",
+      "meaning": "The stone reference's requested minor horizontal dimension (WIDTH), from build-time metadata. CONSTRUCTION_PARAMETER.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_MEASURED_WIDTH",
+      "meaning": "The stone reference's measured minor horizontal extent, from the bounding box (sizeX). Isolates WIDTH exactly only at stone.orientation == 0.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.BoundingBox()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_REQUESTED_DEPTH",
+      "meaning": "The stone reference's requested vertical dimension (DEPTH), from build-time metadata. CONSTRUCTION_PARAMETER.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_MEASURED_DEPTH",
+      "meaning": "The stone reference's measured vertical extent, from the bounding box (sizeZ).",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.BoundingBox()",
+      "forgeConsumptionStatus": "not_consumed"
+    }
   ],
   "notes": [
-    "No fact type in this registry encodes a professional or manufacturing threshold — every 'meaning' describes a geometric measurement or a structural presence/absence check only.",
-    "forgeConsumptionStatus is 'not_consumed' for every fact as of Sprint 14: Forge's real rule engine (backend/jewelmind/validation/engine.py) does not yet read GeometricFact objects — see docs/bible/16-geometry-inspection/487-forge-fact-contract.md for the kernel-neutral contract this registry establishes for a future integration, and 494-current-runtime-inspection-gap-analysis.md for why the wiring itself was not done this Sprint (a deliberate, documented scope boundary, not an oversight)."
+    "No fact type in this registry encodes a professional or manufacturing threshold \u2014 every 'meaning' describes a geometric measurement or a structural presence/absence check only.",
+    "forgeConsumptionStatus is 'not_consumed' for every fact as of Sprint 14: Forge's real rule engine (backend/jewelmind/validation/engine.py) does not yet read GeometricFact objects \u2014 see docs/bible/16-geometry-inspection/487-forge-fact-contract.md for the kernel-neutral contract this registry establishes for a future integration, and 494-current-runtime-inspection-gap-analysis.md for why the wiring itself was not done this Sprint (a deliberate, documented scope boundary, not an oversight).",
+    "The 6 STONE_REQUESTED_*/STONE_MEASURED_* facts (Sprint 18) deliberately pair a CONSTRUCTION_PARAMETER with an independently MEASURED_GEOMETRY counterpart so an accidental scaling or shape regression is observable as a divergence between them \u2014 compared with a software geometry tolerance, never a professional or manufacturing tolerance. See docs/bible/20-stone/574-stone-inspection-contract.md.",
+    "STONE_MEASURED_LENGTH/WIDTH derive from an axis-aligned bounding box, so they isolate LENGTH from WIDTH exactly only at stone.orientation == 0. This is a real, documented limitation of the current measurement, not an assumed exactness for every orientation."
   ]
 }

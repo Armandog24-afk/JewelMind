@@ -38,9 +38,12 @@ are copied directly from the schema's `Field(default=...)` values.
 | `band.widthTaper.bottomRatio` | float | dimensionless (ratio) | `> 0` and `≤ 1` (schema-level) | `1.0` | direct | multiplier applied to `band.width` at the bottom (`u=0.5`) when `mode="TOWARD_BOTTOM"` | none directly | none (no UI control this Sprint — API/JDL only) | preliminary |
 | `band.thicknessTaper.mode` | string | — | `"NONE"` \| `"TOWARD_BOTTOM"` | `"NONE"` | direct | selects uniform-revolve vs 48-section tapered-loft construction (Sprint 17) | none directly | none (no UI control this Sprint — API/JDL only) | preliminary |
 | `band.thicknessTaper.bottomRatio` | float | dimensionless (ratio) | `> 0` and `≤ 1` (schema-level) | `1.0` | direct | multiplier applied to `(outer_radius - inner_radius)` at the bottom (`u=0.5`) when `mode="TOWARD_BOTTOM"` | none directly | none (no UI control this Sprint — API/JDL only) | preliminary |
-| `stone.shape` | string | — | fixed `"round"` | `"round"` | direct | selects stone-loft construction | none | none (fixed) | preliminary |
-| `stone.diameter` | float | mm | `2`–`15` (business rule) | `6.5` | direct | girdle radius, `prong_center_radius` | `JM-STONE-001`, `JM-PRONG-003` | Numeric input (`stone-diameter`) | preliminary |
-| `stone.depth` | float | mm | `> 0.5` and `< diameter` (business rule) | `4.0` | direct | crown/pavilion heights | `JM-STONE-002` | Numeric input (`stone-depth`) | preliminary |
+| `stone.shape` | string | — | `round` \| `oval` \| `pear` \| `emerald` \| `cushion` \| `princess` \| `marquise` | `"round"` | direct | selects the outline primitive for the shared 3-level loft (Sprint 18) | none directly | Select (`stone-shape`) | preliminary |
+| `stone.diameter` | float \| null | mm | `2`–`15` (business rule, ROUND_ONLY) | `6.5` | direct | round's girdle radius; required only when `shape == "round"` | `JM-STONE-001` (ROUND_ONLY), `JM-PRONG-003` (ROUND_ONLY) | Numeric input (`stone-diameter`), shown for round only | preliminary |
+| `stone.length` | float \| null | mm | no range rule yet (REQUIRES_RULE_EVOLUTION) | `null` | direct | major horizontal dimension (local Y); required when `shape != "round"` (Sprint 18) | none yet | Numeric input (`stone-length`), non-round only | preliminary |
+| `stone.width` | float \| null | mm | no range rule yet (REQUIRES_RULE_EVOLUTION) | `null` | direct | minor horizontal dimension (local X); drives `prong_center_radius`; required when `shape != "round"` (Sprint 18) | none yet | Numeric input (`stone-width`), non-round only | preliminary |
+| `stone.depth` | float | mm | `> 0.5` and `< min(resolved length, resolved width)` (business rule) | `4.0` | direct | crown/pavilion heights | `JM-STONE-002` (SHARED) | Numeric input (`stone-depth`) | preliminary |
+| `stone.orientation` | float | degrees | none (periodic quantity) | `0.0` | direct | rotation of the finished stone solid around its own local vertical axis (Sprint 18) | none | Numeric input (`stone-orientation`), non-round only, Advanced | preliminary |
 | `setting.type` | string | — | fixed `"prong"` | `"prong"` | direct | selects setting construction path | none | none (fixed) | preliminary |
 | `setting.prongCount` | integer | count | `4` or `6` (business rule; schema allows any int) | `6` | direct | number of prong solids, angular spacing | `JM-PRONG-001`, `JM-PRONG-003` | Select (`prong-count`, options 4/6) | preliminary |
 | `setting.prongDiameter` | float | mm | `≥ 0.8` (business rule) | `1.1` | direct | prong cylinder radius, `prong_center_radius` | `JM-PRONG-002` | Numeric input (`prong-diameter`) | preliminary |
@@ -63,7 +66,10 @@ missing schema parameters. Full detail:
 | `inner_radius` | `ring.innerDiameter / 2` |
 | `outer_radius` | `inner_radius + band.thickness` |
 | `band_top_z` | `outer_radius` |
-| `prong_center_radius` | `stone.diameter / 2 − (setting.prongDiameter / 2) × 0.3` |
-| Stone girdle radius | `stone.diameter / 2` |
+| `prong_center_radius` | `resolved_width_mm(stone) / 2 − (setting.prongDiameter / 2) × 0.3` (Sprint 18: was `stone.diameter / 2`) |
+| `resolved_length_mm` | `stone.diameter` if `shape == "round"` else `stone.length` |
+| `resolved_width_mm` | `stone.diameter` if `shape == "round"` else `stone.width` |
+| `resolved_depth_mm` | `stone.depth` (identical for every shape) |
+| Stone girdle radius (round only) | `stone.diameter / 2` — no single girdle radius exists for a non-round outline |
 | Stone girdle Z | `band_top_z + setting.basketHeight` |
 | Stone crown/pavilion heights | `stone.depth × 0.35` / `stone.depth × 0.65` |

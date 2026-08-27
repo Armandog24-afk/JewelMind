@@ -13,7 +13,7 @@
 export const SCHEMA_VERSION = '0.1.0'
 
 export type BandProfile = 'comfort_fit' | 'flat'
-export type StoneShape = 'round'
+export type StoneShape = 'round' | 'oval' | 'pear' | 'emerald' | 'cushion' | 'princess' | 'marquise'
 export type SettingType = 'prong'
 export type MetalType =
   | 'yellow_gold_18k'
@@ -59,8 +59,11 @@ export interface BandSpec {
 
 export interface StoneSpec {
   shape: StoneShape
-  diameter: number
+  diameter: number | null
+  length: number | null
+  width: number | null
   depth: number
+  orientation: number
 }
 
 export interface SettingSpec {
@@ -105,6 +108,15 @@ const METAL_TYPES: readonly MetalType[] = [
   'silver',
 ]
 const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
+const STONE_SHAPES: readonly StoneShape[] = [
+  'round',
+  'oval',
+  'pear',
+  'emerald',
+  'cushion',
+  'princess',
+  'marquise',
+]
 const BAND_TAPER_MODES: readonly BandTaperMode[] = ['NONE', 'TOWARD_BOTTOM']
 const MANUFACTURING_METHODS: readonly ManufacturingMethod[] = [
   'lost_wax_casting',
@@ -124,6 +136,24 @@ function isValidBandTaper(value: unknown): value is BandTaperSpec {
   if (!BAND_TAPER_MODES.includes(value['mode'] as BandTaperMode)) return false
   const ratio = value['bottomRatio']
   return isFiniteNumber(ratio) && ratio > 0 && ratio <= 1
+}
+
+/**
+ * Mirrors the backend's `StoneSpec` model_validator (Sprint 18):
+ * `diameter` is required only for `shape === 'round'`; `length`/`width`
+ * are required for every other shape.
+ */
+function isValidStone(value: unknown): value is StoneSpec {
+  if (!isPlainObject(value)) return false
+  const shape = value['shape']
+  if (!STONE_SHAPES.includes(shape as StoneShape)) return false
+  if (!isFiniteNumber(value['depth'])) return false
+  if (!isFiniteNumber(value['orientation'])) return false
+
+  if (shape === 'round') {
+    return isFiniteNumber(value['diameter'])
+  }
+  return isFiniteNumber(value['length']) && isFiniteNumber(value['width'])
 }
 
 /**
@@ -172,13 +202,7 @@ export function isValidJewelryDefinition(value: unknown): value is JewelryDefini
     return false
   }
 
-  const stone = value['stone']
-  if (
-    !isPlainObject(stone) ||
-    stone['shape'] !== 'round' ||
-    !isFiniteNumber(stone['diameter']) ||
-    !isFiniteNumber(stone['depth'])
-  ) {
+  if (!isValidStone(value['stone'])) {
     return false
   }
 
@@ -234,7 +258,7 @@ export function createDefaultDefinition(): JewelryDefinition {
       widthTaper: { mode: 'NONE', bottomRatio: 1.0 },
       thicknessTaper: { mode: 'NONE', bottomRatio: 1.0 },
     },
-    stone: { shape: 'round', diameter: 6.5, depth: 4.0 },
+    stone: { shape: 'round', diameter: 6.5, length: null, width: null, depth: 4.0, orientation: 0.0 },
     setting: {
       type: 'prong',
       prongCount: 6,

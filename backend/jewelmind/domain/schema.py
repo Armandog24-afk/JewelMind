@@ -13,12 +13,12 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "0.1.0"
 
 BandProfile = Literal["comfort_fit", "flat"]
-StoneShape = Literal["round"]
+StoneShape = Literal["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"]
 SettingType = Literal["prong"]
 MetalType = Literal[
     "yellow_gold_18k",
@@ -103,9 +103,40 @@ class BandSpec(StrictModel):
 
 
 class StoneSpec(StrictModel):
+    """A MINOR, additive Sprint 18 field set (see
+    docs/bible/05-jdl/081-schema-versioning-and-migrations.md's MINOR
+    definition) — `shape` gains 6 new enum members and `length`/`width`/
+    `orientation` are new optional fields, so every existing `round`
+    document that only ever set `diameter`/`depth` keeps validating
+    exactly as before.
+
+    `diameter` is the round-only public dimension, unchanged since Sprint
+    2. `length`/`width` are required only when `shape != "round"` — see
+    docs/bible/20-stone/564-stone-dimension-model.md for the LENGTH
+    (major horizontal dimension) / WIDTH (minor horizontal dimension) /
+    DEPTH semantics and their exact local-axis mapping per shape.
+    `orientation` is a rotation in degrees around the stone's local
+    vertical axis, default 0 — see 565-stone-coordinate-and-orientation.md.
+    """
+
     shape: StoneShape = "round"
-    diameter: float = Field(default=6.5, allow_inf_nan=False)
+    diameter: float | None = Field(default=6.5, allow_inf_nan=False)
+    length: float | None = Field(default=None, allow_inf_nan=False)
+    width: float | None = Field(default=None, allow_inf_nan=False)
     depth: float = Field(default=4.0, allow_inf_nan=False)
+    orientation: float = Field(default=0.0, allow_inf_nan=False)
+
+    @model_validator(mode="after")
+    def _check_shape_dimensions(self) -> StoneSpec:
+        if self.shape == "round":
+            if self.diameter is None:
+                raise ValueError("stone.diameter is required when stone.shape is 'round'")
+        else:
+            if self.length is None or self.width is None:
+                raise ValueError(
+                    f"stone.length and stone.width are both required when stone.shape is '{self.shape}'"
+                )
+        return self
 
 
 class SettingSpec(StrictModel):

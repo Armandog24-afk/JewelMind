@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v1/stone-dimensions.schema.json",
+  "title": "StoneDimensions",
+  "description": "The real, resolved dimension contract every Stone System module (geometry construction, Forge validation) actually consumes — documents backend/jewelmind/domain/stone_dimensions.py's resolved_length_mm()/resolved_width_mm()/resolved_depth_mm() output, not the raw JDL 'stone' object (which differs by shape — see stone-definition.schema.json). For round, resolvedLengthMm == resolvedWidthMm == diameter (STONE-GOV-005: shape and dimensions are separate concepts). See docs/bible/20-stone/564-stone-dimension-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["resolvedLengthMm", "resolvedWidthMm", "resolvedDepthMm"],
+  "properties": {
+    "resolvedLengthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Major horizontal dimension (local Y axis at orientation=0 — the same axis the band revolves around). See docs/bible/20-stone/565-stone-coordinate-and-orientation.md."
+    },
+    "resolvedWidthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Minor horizontal dimension (local X axis at orientation=0)."
+    },
+    "resolvedDepthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Vertical dimension (local Z axis) — identical field (stone.depth) for every shape."
+    }
+  }
+}

@@ -668,6 +668,31 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A111 | Appendix: Shank Capability Catalog | accepted | current | [`appendices/shank-capability-catalog.md`](shank-capability-catalog.md) |
 | JM-BIBLE-A112 | Appendix: Shank Inspection Fact Catalog | accepted | partial | [`appendices/shank-inspection-fact-catalog.md`](shank-inspection-fact-catalog.md) |
 | JM-BIBLE-A113 | Appendix: Shank Test Matrix | accepted | current | [`appendices/shank-test-matrix.md`](shank-test-matrix.md) |
+| JM-BIBLE-STONE-README | Stone System v1 — Index | accepted | current | [`20-stone/README.md`](../20-stone/README.md) |
+| JM-BIBLE-560 | Stone Governance | accepted | current | [`20-stone/560-stone-governance.md`](../20-stone/560-stone-governance.md) |
+| JM-BIBLE-561 | Stone Architecture Overview | accepted | current | [`20-stone/561-stone-architecture-overview.md`](../20-stone/561-stone-architecture-overview.md) |
+| JM-BIBLE-562 | Stone Domain Model | accepted | current | [`20-stone/562-stone-domain-model.md`](../20-stone/562-stone-domain-model.md) |
+| JM-BIBLE-563 | Stone Shape Model | accepted | current | [`20-stone/563-stone-shape-model.md`](../20-stone/563-stone-shape-model.md) |
+| JM-BIBLE-564 | Stone Dimension Model | accepted | current | [`20-stone/564-stone-dimension-model.md`](../20-stone/564-stone-dimension-model.md) |
+| JM-BIBLE-565 | Stone Coordinate and Orientation | accepted | current | [`20-stone/565-stone-coordinate-and-orientation.md`](../20-stone/565-stone-coordinate-and-orientation.md) |
+| JM-BIBLE-566 | Stone Outline Contract | accepted | current | [`20-stone/566-stone-outline-contract.md`](../20-stone/566-stone-outline-contract.md) |
+| JM-BIBLE-567 | Stone Reference Geometry Contract | accepted | current | [`20-stone/567-stone-reference-geometry-contract.md`](../20-stone/567-stone-reference-geometry-contract.md) |
+| JM-BIBLE-568 | Round Stone Contract | accepted | current | [`20-stone/568-round-stone-contract.md`](../20-stone/568-round-stone-contract.md) |
+| JM-BIBLE-569 | Elongated Stone Contract | accepted | current | [`20-stone/569-elongated-stone-contract.md`](../20-stone/569-elongated-stone-contract.md) |
+| JM-BIBLE-570 | Angular Stone Contract | accepted | current | [`20-stone/570-angular-stone-contract.md`](../20-stone/570-angular-stone-contract.md) |
+| JM-BIBLE-571 | Asymmetric Stone Contract | accepted | current | [`20-stone/571-asymmetric-stone-contract.md`](../20-stone/571-asymmetric-stone-contract.md) |
+| JM-BIBLE-572 | Stone Generation Pipeline | accepted | current | [`20-stone/572-stone-generation-pipeline.md`](../20-stone/572-stone-generation-pipeline.md) |
+| JM-BIBLE-573 | Stone Setting Interface | accepted | current | [`20-stone/573-stone-setting-interface.md`](../20-stone/573-stone-setting-interface.md) |
+| JM-BIBLE-574 | Stone Inspection Contract | accepted | current | [`20-stone/574-stone-inspection-contract.md`](../20-stone/574-stone-inspection-contract.md) |
+| JM-BIBLE-575 | Stone Capability Model | accepted | current | [`20-stone/575-stone-capability-model.md`](../20-stone/575-stone-capability-model.md) |
+| JM-BIBLE-576 | Current Round Migration | accepted | current | [`20-stone/576-current-round-migration.md`](../20-stone/576-current-round-migration.md) |
+| JM-BIBLE-577 | Stone Golden Strategy | accepted | current | [`20-stone/577-stone-golden-strategy.md`](../20-stone/577-stone-golden-strategy.md) |
+| JM-BIBLE-578 | Current Code Mapping and Gaps | accepted | current | [`20-stone/578-current-code-mapping-and-gaps.md`](../20-stone/578-current-code-mapping-and-gaps.md) |
+| JM-BIBLE-579 | Open Stone Questions | accepted | current | [`20-stone/579-open-stone-questions.md`](../20-stone/579-open-stone-questions.md) |
+| JM-BIBLE-SPRINT18-REPORT | Sprint 18 Validation Report — Stone System v1 | accepted | current | [`20-stone/SPRINT-18-VALIDATION-REPORT.md`](../20-stone/SPRINT-18-VALIDATION-REPORT.md) |
+| JM-BIBLE-A114 | Appendix: Stone Shape Catalog | accepted | current | [`appendices/stone-shape-catalog.md`](stone-shape-catalog.md) |
+| JM-BIBLE-A115 | Appendix: Stone Capability Catalog | accepted | current | [`appendices/stone-capability-catalog.md`](stone-capability-catalog.md) |
+| JM-BIBLE-A116 | Appendix: Stone Test Matrix | accepted | current | [`appendices/stone-test-matrix.md`](stone-test-matrix.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 

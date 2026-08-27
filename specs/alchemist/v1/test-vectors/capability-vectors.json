@@ -5,7 +5,7 @@
     "supportedJewelryCategories": ["ring"],
     "supportedStyles": ["solitaire"],
     "supportedBandProfiles": ["comfort_fit", "flat"],
-    "supportedStoneShapes": ["round"],
+    "supportedStoneShapes": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"],
     "supportedSettings": ["prong"],
     "supportedProngCounts": [4, 6],
     "supportedArtifacts": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"],

@@ -56,8 +56,11 @@ This is also the exact default definition (see `default_definition()` /
 | `band.profile` | `"comfort_fit"` \| `"flat"` | See `docs/geometry-conventions.md`. |
 | `band.widthTaper` | `{mode, bottomRatio}` | Optional width taper toward the bottom (Sprint 17). Default `mode: "NONE"`. See `docs/bible/19-shank/README.md`. |
 | `band.thicknessTaper` | `{mode, bottomRatio}` | Optional thickness taper toward the bottom (Sprint 17). Default `mode: "NONE"`. |
-| `stone.shape` | `"round"` | Only `round` is supported in this milestone. |
-| `stone.diameter` | number, mm | Girdle diameter of the stone reference. |
+| `stone.shape` | `"round" \| "oval" \| "pear" \| "emerald" \| "cushion" \| "princess" \| "marquise"` | All 7 generate real geometry (Sprint 18). Only `round` has a setting designed for it — see `docs/bible/20-stone/README.md`. |
+| `stone.diameter` | number \| null, mm | Girdle diameter. Required for, and meaningful only for, `round`. |
+| `stone.length` | number \| null, mm | Major horizontal dimension (local Y). Required when `shape != "round"`. |
+| `stone.width` | number \| null, mm | Minor horizontal dimension (local X). Required when `shape != "round"`. |
+| `stone.orientation` | number, degrees | Rotation around the stone's own local vertical axis. Default 0. |
 | `stone.depth` | number, mm | Total culet-to-table height of the stone reference. |
 | `setting.type` | `"prong"` | Only prong settings are supported. |
 | `setting.prongCount` | integer | Business rule requires 4 or 6 (JM-PRONG-001) — the *type* allows any integer so an invalid value surfaces as a validation result, not a raw parse error. |

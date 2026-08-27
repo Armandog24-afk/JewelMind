@@ -1,0 +1,80 @@
+{
+  "vectors": [
+    {
+      "rawText": "round",
+      "normalizedShape": "round"
+    },
+    {
+      "rawText": "rotondo",
+      "normalizedShape": "round"
+    },
+    {
+      "rawText": "rotonda",
+      "normalizedShape": "round"
+    },
+    {
+      "rawText": "tondo",
+      "normalizedShape": "round"
+    },
+    {
+      "rawText": "tonda",
+      "normalizedShape": "round"
+    },
+    {
+      "rawText": "oval",
+      "normalizedShape": "oval"
+    },
+    {
+      "rawText": "ovale",
+      "normalizedShape": "oval"
+    },
+    {
+      "rawText": "pear",
+      "normalizedShape": "pear"
+    },
+    {
+      "rawText": "pera",
+      "normalizedShape": "pear"
+    },
+    {
+      "rawText": "goccia",
+      "normalizedShape": "pear"
+    },
+    {
+      "rawText": "emerald",
+      "normalizedShape": "emerald"
+    },
+    {
+      "rawText": "smeraldo",
+      "normalizedShape": "emerald"
+    },
+    {
+      "rawText": "taglio smeraldo",
+      "normalizedShape": "emerald"
+    },
+    {
+      "rawText": "cushion",
+      "normalizedShape": "cushion"
+    },
+    {
+      "rawText": "cuscino",
+      "normalizedShape": "cushion"
+    },
+    {
+      "rawText": "princess",
+      "normalizedShape": "princess"
+    },
+    {
+      "rawText": "principessa",
+      "normalizedShape": "princess"
+    },
+    {
+      "rawText": "marquise",
+      "normalizedShape": "marquise"
+    },
+    {
+      "rawText": "navette",
+      "normalizedShape": "marquise"
+    }
+  ]
+}

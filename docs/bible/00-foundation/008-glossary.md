@@ -160,12 +160,42 @@ of a real cut stone — see [LAW-006](004-jewelmind-constitution.md),
 `docs/known-limitations.md`, and
 [`04-jewelry-domain/046-stone-domain.md`](../04-jewelry-domain/046-stone-domain.md).
 Deliberately not named "certified gemstone," "manufacturing stone seat,"
-or "gemological model" — see the linked document for why.
+or "gemological model" — see the linked document for why. Since Sprint 18
+a stone reference exists for 7 shapes, not only round — see
+[`20-stone/README.md`](../20-stone/README.md).
+
+**Stone System** — the shared, category-neutral subsystem that owns
+`StoneDefinition` and builds every stone reference
+(`backend/jewelmind/geometry/stone/` +
+`backend/jewelmind/domain/stone_dimensions.py`). It belongs to no
+jewelry category: Ring may position a stone, Setting may interact with
+one, Vision may render one, but none of them owns it. See
+[`20-stone/561-stone-architecture-overview.md`](../20-stone/561-stone-architecture-overview.md).
+
+**LENGTH / WIDTH / DEPTH** — a stone's three canonical dimensions:
+LENGTH is the major horizontal dimension (local Y), WIDTH the minor
+horizontal dimension (local X), DEPTH the vertical dimension (local Z).
+Round publicly uses `diameter` instead and normalizes internally to
+`length == width == diameter`. See
+[`20-stone/564-stone-dimension-model.md`](../20-stone/564-stone-dimension-model.md).
+
+**Stone orientation** — a rotation in degrees around a stone's own local
+vertical axis, applied at its own bounding-box centre. Default 0. Not a
+general 3D transform, and not the stone's placement in the assembly.
+See [`20-stone/565-stone-coordinate-and-orientation.md`](../20-stone/565-stone-coordinate-and-orientation.md).
+
+**Setting compatibility** — whether the *current* setting geometry
+places metal meaningfully for a given stone shape
+(`SUPPORTED` / `EXPERIMENTAL` / `UNSUPPORTED`). Deliberately independent
+from whether the shape generates geometry: only `round` is `SUPPORTED`,
+and all 6 other shapes are `EXPERIMENTAL`. See
+[`20-stone/575-stone-capability-model.md`](../20-stone/575-stone-capability-model.md).
 
 **Girdle** — in real gemology, the widest edge of a cut stone, separating
 crown from pavilion. In this project's simplified stone reference, the
-girdle is the widest ring of the lofted approximation, sized from
-`stone.diameter`.
+girdle is the widest outline of the lofted approximation, sized from the
+stone's resolved LENGTH and WIDTH (which for a round stone are both
+`stone.diameter`).
 
 **Crown** — in real gemology, the upper, table-facing part of a cut
 stone above the girdle. In this project's stone reference, a fixed

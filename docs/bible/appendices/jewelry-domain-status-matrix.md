@@ -24,7 +24,10 @@ Sprint 2 domain model, in one place.
 Ring, Solitaire style, Band (flat + comfort-fit profiles), Band width
 and/or thickness taper (linear, head-anchored, `TOWARD_BOTTOM` only —
 Sprint 17, [`19-shank/`](../19-shank/README.md)), Center stone reference
-(round only), Prong setting (4 or 6 prongs), Basket support (hollow
+(7 shapes — round, oval, pear, emerald, cushion, princess, marquise —
+Sprint 18, [`20-stone/`](../20-stone/README.md); only `round` has
+`SUPPORTED` setting compatibility, the other 6 are `EXPERIMENTAL`),
+Stone orientation, Prong setting (4 or 6 prongs), Basket support (hollow
 cylindrical wall), Material metadata (5 metals, cosmetic), Manufacturing
 context (2 methods, 1 validation rule), Preview configuration,
 Validation engine (16 rules), Generated model identity (hash-based),
@@ -45,9 +48,14 @@ Eternity, Half-eternity, Cluster, Bypass, Split shank, Cathedral (ring
 styles — [`042`](../04-jewelry-domain/042-ring-taxonomy.md)); Bezel,
 Channel, Pavé, Micro-pavé, Flush, Tension, Invisible, Cluster setting,
 Halo arrangement (setting types —
-[`047`](../04-jewelry-domain/047-setting-domain.md)); Oval, Princess,
-Emerald, Cushion, Pear, Marquise, Radiant, Asscher, Heart (stone shapes —
-[`046`](../04-jewelry-domain/046-stone-domain.md)); Claw shape, double
+[`047`](../04-jewelry-domain/047-setting-domain.md)); Radiant, Asscher,
+Heart, Trillion, Baguette, Cabochon, custom outlines, calibrated stones
+(stone shapes — [`046`](../04-jewelry-domain/046-stone-domain.md),
+[`20-stone/579`](../20-stone/579-open-stone-questions.md); note Oval,
+Princess, Emerald, Cushion, Pear and Marquise moved to CURRENT in Sprint
+18); faceted gem models, measured/scanned stones, shape-aware prong
+placement, multi-stone arrangements (stone system —
+[`20-stone/579`](../20-stone/579-open-stone-questions.md)); Claw shape, double
 claw, taper, inclination, tip geometry, seat/bearing cut (prong
 refinements — [`048`](../04-jewelry-domain/048-prong-domain.md));
 Non-linear/`TOWARD_HEAD` band taper, tapered-shank outer-rim fillet,

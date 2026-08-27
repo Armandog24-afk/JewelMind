@@ -9,6 +9,7 @@ client believes.
 from __future__ import annotations
 
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.domain.stone_dimensions import resolved_length_mm, resolved_width_mm
 from jewelmind.validation import rules as R
 from jewelmind.validation.sizing import eu_size_to_inner_diameter, sizing_consistency
 
@@ -105,24 +106,42 @@ def _band_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
 
 
 def _stone_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Sprint 18: STONE_DIAMETER_RANGE is ROUND_ONLY (round is the only
+    shape with a `diameter`); STONE_DEPTH_RANGE is SHARED, generalized to
+    use the stone's real minimum horizontal extent
+    (`min(resolved_length, resolved_width)`) instead of raw `diameter` —
+    a genuine structural generalization (depth must not exceed the
+    stone's own footprint), never a fabricated "equivalent diameter"
+    (brief section 44). There is currently no dimension-range rule for a
+    non-round shape's `length`/`width` individually — a real, honest gap,
+    marked REQUIRES_RULE_EVOLUTION rather than solved by inventing a new
+    rule this Sprint; see
+    docs/bible/20-stone/578-current-code-mapping-and-gaps.md."""
+
     out: list[R.ValidationResult] = []
 
-    if not (2 <= d.stone.diameter <= 15):
-        out.append(
-            R.ValidationResult(
-                ruleId=R.STONE_DIAMETER_RANGE,
-                severity="error",
-                message="Stone diameter must be between 2 mm and 15 mm.",
-                parameter="stone.diameter",
+    if d.stone.shape == "round":
+        assert d.stone.diameter is not None
+        if not (2 <= d.stone.diameter <= 15):
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.STONE_DIAMETER_RANGE,
+                    severity="error",
+                    message="Stone diameter must be between 2 mm and 15 mm.",
+                    parameter="stone.diameter",
+                )
             )
-        )
 
-    if not (0.5 < d.stone.depth < d.stone.diameter):
+    min_extent = min(resolved_length_mm(d.stone), resolved_width_mm(d.stone))
+    if not (0.5 < d.stone.depth < min_extent):
         out.append(
             R.ValidationResult(
                 ruleId=R.STONE_DEPTH_RANGE,
                 severity="error",
-                message="Stone depth must be greater than 0.5 mm and lower than the stone diameter.",
+                message=(
+                    "Stone depth must be greater than 0.5 mm and lower than the "
+                    "stone's minimum horizontal extent."
+                ),
                 parameter="stone.depth",
             )
         )
@@ -165,7 +184,15 @@ def _prong_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
             )
         )
 
-    if d.stone.diameter > 8 and d.setting.prongCount == 4:
+    # ROUND_ONLY (Sprint 18): tuned for a round stone's diameter; applying
+    # it to a non-round shape's length/width would need real, justified
+    # generalization this Sprint does not provide — a REQUIRES_RULE_EVOLUTION
+    # gap, not silently evaluated against a fake equivalent diameter (brief
+    # section 44). See docs/bible/20-stone/578-current-code-mapping-and-gaps.md.
+    stone_is_large_round = (
+        d.stone.shape == "round" and d.stone.diameter is not None and d.stone.diameter > 8
+    )
+    if stone_is_large_round and d.setting.prongCount == 4:
         out.append(
             R.ValidationResult(
                 ruleId=R.PRONG_COUNT_VS_STONE_SIZE,

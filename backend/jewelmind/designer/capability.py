@@ -29,12 +29,6 @@ SUPPORTED_PRONG_COUNTS = (4, 6)
 # backstop for unsupported-feature detection, independent of whether the
 # provider itself flagged the request — see 301-unsupported-request-handling.md.
 KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
-    "oval": "Only round stones are currently supported (stone.shape).",
-    "emerald_cut": "Only round stones are currently supported (stone.shape).",
-    "princess_cut": "Only round stones are currently supported (stone.shape).",
-    "pear": "Only round stones are currently supported (stone.shape).",
-    "marquise": "Only round stones are currently supported (stone.shape).",
-    "cushion": "Only round stones are currently supported (stone.shape).",
     "halo": "Halo settings are not currently supported; only a single prong setting exists.",
     "pave": "Pave bands are not currently supported.",
     "pavé": "Pave bands are not currently supported.",
@@ -106,7 +100,10 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         "band.thickness",
         "band.profile",
         "stone.diameter",
+        "stone.length",
+        "stone.width",
         "stone.depth",
+        "stone.orientation",
         "stone.shape",
         "setting.prongCount",
         "setting.prongDiameter",

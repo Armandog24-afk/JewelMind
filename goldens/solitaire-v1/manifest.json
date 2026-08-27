@@ -50,6 +50,30 @@
     {
       "goldenId": "SOL-012-combined-taper-solitaire",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-013-oval-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-014-pear-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-015-emerald-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-016-cushion-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-017-princess-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SOL-018-marquise-solitaire",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -69,7 +93,13 @@
     "SOL-009-warning-only-large-stone-four-prong",
     "SOL-010-width-taper-solitaire",
     "SOL-011-thickness-taper-solitaire",
-    "SOL-012-combined-taper-solitaire"
+    "SOL-012-combined-taper-solitaire",
+    "SOL-013-oval-solitaire",
+    "SOL-014-pear-solitaire",
+    "SOL-015-emerald-solitaire",
+    "SOL-016-cushion-solitaire",
+    "SOL-017-princess-solitaire",
+    "SOL-018-marquise-solitaire"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

@@ -1,11 +1,11 @@
 {
-  "inspectionId": "inspection-7cf9a584-fce1-492a-b6a9-d328ea37f105",
+  "inspectionId": "inspection-fb35924e-84bb-40f8-9eae-8f2e6385fb27",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "1af3aa14ea3537e0",
+  "definitionHash": "76cd86b9ac469105",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
-  "startedAt": "2026-08-26T07:56:49.598810+00:00",
-  "completedAt": "2026-08-26T07:56:49.982850+00:00",
+  "startedAt": "2026-08-27T12:03:30.959226+00:00",
+  "completedAt": "2026-08-27T12:03:31.253567+00:00",
   "status": "PASS",
   "componentResults": [
     {
@@ -86,12 +86,18 @@
       "shapeValid": true,
       "fallbackUsed": false,
       "metadata": {
+        "shape": "round",
         "girdleRadiusMm": 3.25,
         "girdleZMm": 14.200000000000001,
         "crownHeightMm": 1.4,
         "pavilionHeightMm": 2.6,
         "tableRadiusMm": 1.8200000000000003,
-        "isGemologicalReproduction": false
+        "lengthMm": 6.5,
+        "widthMm": 6.5,
+        "depthMm": 4.0,
+        "orientationDeg": 0.0,
+        "isGemologicalReproduction": false,
+        "referenceGeometryVersion": "1.0.0"
       },
       "diagnostics": []
     },
@@ -501,7 +507,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -518,7 +524,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -535,7 +541,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -552,7 +558,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -569,7 +575,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -10.700000000000001,
@@ -599,7 +605,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -616,7 +622,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -633,7 +639,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -650,7 +656,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -667,7 +673,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.2500001,
@@ -685,6 +691,108 @@
       }
     },
     {
+      "factId": "component.stone_reference.requestedLength",
+      "factType": "STONE_REQUESTED_LENGTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 6.5,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "GeneratedComponent.metadata",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.measuredLength",
+      "factType": "STONE_MEASURED_LENGTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 6.5000002,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.requestedWidth",
+      "factType": "STONE_REQUESTED_WIDTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 6.5,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "GeneratedComponent.metadata",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.measuredWidth",
+      "factType": "STONE_MEASURED_WIDTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 6.5000002,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.requestedDepth",
+      "factType": "STONE_REQUESTED_DEPTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 4.0,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "GeneratedComponent.metadata",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "component.stone_reference.measuredDepth",
+      "factType": "STONE_MEASURED_DEPTH",
+      "inspectionVersion": "1.0.0",
+      "scope": "COMPONENT",
+      "componentIds": [
+        "stone_reference"
+      ],
+      "value": 4.000000199999999,
+      "unit": "mm",
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "Shape.BoundingBox()",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
       "factId": "component.prongs.exists",
       "factType": "COMPONENT_PRESENT",
       "inspectionVersion": "1.0.0",
@@ -697,7 +805,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -714,7 +822,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -731,7 +839,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -748,7 +856,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -765,7 +873,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -795,7 +903,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -812,7 +920,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -829,7 +937,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -846,7 +954,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -863,7 +971,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -896,7 +1004,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "len(model.components)",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -913,7 +1021,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "prongs.metadata",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {
         "requestedCount": 4,
@@ -935,7 +1043,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "assembly.stoneMetalSeparation",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -953,7 +1061,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -971,7 +1079,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -989,7 +1097,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1007,7 +1115,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1025,7 +1133,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1043,7 +1151,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1061,7 +1169,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1079,7 +1187,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1097,7 +1205,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1115,7 +1223,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1133,7 +1241,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1151,7 +1259,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1170,18 +1278,18 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "connectivity graph (Shape.distance())",
-      "generatedAt": "2026-08-26T07:56:49.982850+00:00",
+      "generatedAt": "2026-08-27T12:03:31.253567+00:00",
       "diagnostic": null,
       "metadata": {}
     }
   ],
   "diagnostics": [],
   "performance": {
-    "totalDurationMs": 384.47660001111217,
-    "componentInspectionMs": 74.53830001759343,
-    "distanceInspectionMs": 55.63969997456297,
-    "intersectionInspectionMs": 229.40169999492355,
-    "topologyInspectionMs": 23.841500020353124
+    "totalDurationMs": 293.109899997944,
+    "componentInspectionMs": 71.525900013512,
+    "distanceInspectionMs": 47.71240000263788,
+    "intersectionInspectionMs": 160.15640000114217,
+    "topologyInspectionMs": 13.238899991847575
   },
   "unavailableInspections": []
 }

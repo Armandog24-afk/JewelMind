@@ -65,7 +65,10 @@
       "stone": {
         "shape": "round",
         "diameter": 6.5,
-        "depth": 4.0
+        "length": null,
+        "width": null,
+        "depth": 4.0,
+        "orientation": 0.0
       },
       "setting": {
         "type": "prong",
@@ -188,9 +191,27 @@
         "changed": false
       },
       {
+        "path": "stone.length",
+        "previousValue": null,
+        "proposedValue": null,
+        "changed": false
+      },
+      {
+        "path": "stone.width",
+        "previousValue": null,
+        "proposedValue": null,
+        "changed": false
+      },
+      {
         "path": "stone.depth",
         "previousValue": null,
         "proposedValue": 4.0,
+        "changed": false
+      },
+      {
+        "path": "stone.orientation",
+        "previousValue": null,
+        "proposedValue": 0.0,
         "changed": false
       },
       {

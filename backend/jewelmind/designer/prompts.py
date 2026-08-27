@@ -54,7 +54,9 @@ def build_jdl_fields_block() -> str:
     return (
         "CURRENT JDL FIELDS (dotted paths you may reference in proposedCanonicalValues):\n"
         "project.name, ring.size, ring.innerDiameter, ring.sizeSystem, band.width, "
-        "band.thickness, band.profile, stone.diameter, stone.depth, stone.shape, "
+        "band.thickness, band.profile, stone.diameter, stone.length, stone.width, stone.depth, "
+        "stone.orientation, stone.shape (round/oval/pear/emerald/cushion/princess/marquise — "
+        "diameter is used only for round; length/width are required for every other shape), "
         "setting.prongCount, setting.prongDiameter, setting.prongHeight, setting.basketHeight, "
         "setting.type, material.metal, manufacturing.method, jewelry.category, jewelry.style"
     )

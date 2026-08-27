@@ -70,10 +70,14 @@ changes, especially anything touching `backend/jewelmind/geometry/`,
 - Validation rules: `backend/jewelmind/validation/engine.py` (authoritative)
   + `shared/validation/engine.ts` (frontend mirror).
 - Geometry builders: `backend/jewelmind/geometry/components/*.py` (band
-  — a thin re-export of `geometry/shank/build_shank()`, stone, prongs,
-  basket) + `geometry/shank/` (the real Shank subsystem: profile, taper,
-  builder, capability) + `geometry/connection.py` (Shank → RingHead
-  interface) + `geometry/assemblies/solitaire.py` (combines them).
+  and stone are thin re-exports of `geometry/shank/build_shank()` and
+  `geometry/stone/build_stone()`; prongs, basket are real) +
+  `geometry/shank/` (the Shank subsystem: profile, taper, builder,
+  capability) + `geometry/stone/` (the Stone System: outline, builder,
+  capability, errors) + `domain/stone_dimensions.py` (the shared
+  LENGTH/WIDTH/DEPTH resolution both Atlas and Forge depend on) +
+  `geometry/connection.py` (Shank → RingHead interface) +
+  `geometry/assemblies/solitaire.py` (combines them).
 - Coordinate convention: `backend/jewelmind/geometry/constants.py`,
   documented in `docs/geometry-conventions.md`.
 - Exporters: `backend/jewelmind/exporters/` (STEP, STL, JSON,
@@ -1242,6 +1246,105 @@ examples, and test vectors). Future coding agents must:
   depends on Shank changes beyond what `540-shank-governance.md`
   already reserves.
 
+## STONE SYSTEM RULES
+
+`docs/bible/20-stone/` is the authoritative Stone System specification —
+start at [`docs/bible/20-stone/README.md`](docs/bible/20-stone/README.md),
+then [`560-stone-governance.md`](docs/bible/20-stone/560-stone-governance.md)
+for the full 16 STONE-GOV rules. The machine-readable half lives in
+[`specs/stone/v1/`](specs/stone/v1/README.md) (5 JSON Schemas, a real
+`shape-registry.json` generated from `geometry/stone/capability.py`, 7
+examples, and 5 test-vector files). Future coding agents must:
+
+- **Read `docs/bible/20-stone/README.md` before changing stone
+  geometry** — before modifying anything in
+  `backend/jewelmind/geometry/stone/`,
+  `backend/jewelmind/domain/stone_dimensions.py`, or
+  `domain/schema.py::StoneSpec`.
+- **Treat Stone System as shared, category-neutral infrastructure** —
+  it belongs to no jewelry category. Ring may position a stone, Setting
+  may interact with one, Vision may render one, Forge may evaluate rules
+  involving stone facts; none of them owns `StoneDefinition`
+  (STONE-GOV-001).
+- **Never put a Ring dependency inside Stone System** — nothing under
+  `geometry/stone/` or in `domain/stone_dimensions.py` may import
+  `jewelmind.ring`. Ring depends on Stone, never the reverse; enforced by
+  `backend/tests/test_stone_system_no_ring_dependency.py`, which uses AST
+  parsing rather than `import` so it cannot pass by accident on an
+  already-cached module (STONE-GOV-001).
+- **Never let a StoneReference become production metal** — it must never
+  be unioned into the metal body and must stay excluded from STEP/STL by
+  default, for every shape, not only round (STONE-GOV-003/004, restating
+  LAW-006).
+- **Never claim gemological accuracy** — a `StoneReference` is
+  deterministic CAD reference geometry. It never guarantees an exact
+  facet pattern, optical behaviour, commercial cutting proportions,
+  gemological certification, or vendor dimensions
+  (STONE-GOV-011). `isGemologicalReproduction` is always `false`.
+- **Never label a software construction constant as an industry
+  standard** — the crown/pavilion/table ratios (`0.35`/`0.65`/`0.56`),
+  the emerald corner clip (`0.18`), and the cushion corner radius
+  (`0.25`) are `provenance: software_reference_profile`: deliberate,
+  deterministic construction choices verified only to produce robust CAD
+  geometry (STONE-GOV-011).
+- **Keep shape separate from dimensions** — `stone.shape` selects a
+  construction strategy; `diameter`/`length`/`width`/`depth` are
+  independent quantities. Resolve them only through
+  `domain/stone_dimensions.py`'s `resolved_length_mm()`/
+  `resolved_width_mm()`/`resolved_depth_mm()`, never by reading
+  `stone.diameter` directly in new code (STONE-GOV-005/006).
+- **Keep orientation explicit and deterministic** —
+  `stone.orientation` is a real JDL field, applied by
+  `_apply_orientation()` around the stone's own local vertical axis at
+  its own bounding-box center. Never infer orientation, and never
+  substitute an arbitrary 3D transform (STONE-GOV-008).
+- **Never fake an equivalent diameter for a non-round stone** — an
+  `oval 8 × 6` is never collapsed to `diameter = 7` for rule
+  compatibility. `JM-STONE-001` and `JM-PRONG-003` are explicitly scoped
+  ROUND_ONLY; `JM-STONE-002` was genuinely generalized to the stone's
+  real minimum horizontal extent. Any future equivalent-size metric
+  requires its own explicit domain semantics (brief-level rule; see
+  [`578-current-code-mapping-and-gaps.md`](docs/bible/20-stone/578-current-code-mapping-and-gaps.md)).
+- **Scope round-specific Forge rules correctly** — before applying an
+  existing jewelry threshold to a non-round shape, check whether its
+  semantics actually generalize. If they do not, mark it
+  `REQUIRES_RULE_EVOLUTION` and leave it ROUND_ONLY rather than
+  evaluating it against a substituted dimension (STONE-GOV-010).
+- **Keep stone-generation capability separate from Setting
+  compatibility** — `generationSupported` and
+  `currentSettingCompatibility` are independent axes. A shape that
+  generates real geometry is never, by that fact, a shape whose prong
+  setting is valid; only `round` is `SUPPORTED`, and all 6 other shapes
+  are honestly `EXPERIMENTAL` (STONE-GOV-009).
+- **Add registry capability metadata for every new shape** —
+  `geometry/stone/capability.py::STONE_SHAPE_CAPABILITIES` is the single
+  source of truth for CURRENT vs PLANNED, mirrored (never
+  hand-duplicated) at `specs/stone/v1/shape-registry.json`
+  (STONE-GOV-014).
+- **Add Geometry Inspection and Golden coverage for every new shape** —
+  a new shape needs real inspection facts and its own new Golden case;
+  never retrofit an existing case (STONE-GOV-015).
+- **Raise `StoneGenerationError` on a real construction failure —
+  never silently fall back to another shape** — a failed/invalid loft
+  must be an observable error, not a quiet substitution
+  (STONE-GOV-007/013).
+- **Preserve current round compatibility** — every `round` request must
+  keep using the exact pre-Sprint-18 construction in
+  `_build_round_stone()`; never route it through the non-round loft path
+  "for consistency" (STONE-GOV-016).
+- **Update the Ring Architecture v2 and JDL mirrors when `StoneSpec`
+  changes** — `shared/types/jewelry-definition.ts`,
+  `shared/validation/engine.ts`, `specs/jdl/v1/jdl.schema.json`, and
+  `specs/ring/v2/` examples must change in the same commit.
+- **Require an ADR** for a new construction primitive replacing the
+  3-level loft, a change to the LENGTH/WIDTH/DEPTH axis mapping or the
+  orientation convention, moving `stone_dimensions` out of `domain/`, or
+  introducing a `FACETED_GEM_MODEL`/`MEASURED_STONE` layer.
+- **Require an RFC** for a new stone shape (asscher, radiant, heart,
+  trillion, baguette, cabochon, custom outlines, calibrated stones) —
+  see [`docs/bible/04-jewelry-domain/056-domain-extension-strategy.md`](docs/bible/04-jewelry-domain/056-domain-extension-strategy.md)
+  — or for multi-stone arrangements (halo, pavé, three-stone).
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules from Sprint 15
 (above) — they apply to every future sprint, not only Geometry Quality,
-Ring Architecture, or Shank changes.
+Ring Architecture, Shank, or Stone changes.

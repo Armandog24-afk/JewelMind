@@ -105,7 +105,56 @@ def _component_facts(now: str, result: ComponentInspectionResult) -> list[Geomet
                 metadata=result.boundingBox.model_dump(),
             )
         )
+        if result.componentId == "stone_reference":
+            facts.extend(_stone_dimension_facts(now, result))
     return facts
+
+
+def _stone_dimension_facts(now: str, result: ComponentInspectionResult) -> list[GeometricFact]:
+    """Requested-vs-measured dimension facts for the stone reference
+    (brief section 31; docs/bible/20-stone/574-stone-inspection-contract.md).
+
+    STONE_REQUESTED_* comes from the component's own build-time metadata —
+    CONSTRUCTION_PARAMETER, the same value used to build the geometry,
+    never independently re-measured (mirrors Shank's `widthSamplesMm`
+    convention, Sprint 17). STONE_MEASURED_* comes from the real,
+    independently computed bounding box (`BoundingBoxFact.sizeY`/`sizeX`/
+    `sizeZ`) — genuine MEASURED_GEOMETRY, catching an accidental scaling
+    or shape regression. `sizeY`/`sizeX` correspond to length/width only
+    at `orientation=0`; a rotated stone's axis-aligned bounding box no
+    longer isolates length from width exactly — a known, documented
+    simplification, not silently assumed exact for every orientation.
+    """
+
+    meta = result.metadata
+    bbox = result.boundingBox
+    assert bbox is not None
+    requested_length = meta.get("lengthMm")
+    requested_width = meta.get("widthMm")
+    requested_depth = meta.get("depthMm")
+
+    def _fact(fact_id_suffix: str, fact_type: str, value: float | None, source: str) -> GeometricFact:
+        return GeometricFact(
+            factId=f"component.{result.componentId}.{fact_id_suffix}",
+            factType=fact_type,
+            inspectionVersion=INSPECTION_VERSION,
+            scope="COMPONENT",
+            componentIds=[result.componentId],
+            value=value,
+            unit="mm",
+            status="PASS" if value is not None else "UNKNOWN",
+            sourceOperation=source,
+            generatedAt=now,
+        )
+
+    return [
+        _fact("requestedLength", "STONE_REQUESTED_LENGTH", requested_length, "GeneratedComponent.metadata"),
+        _fact("measuredLength", "STONE_MEASURED_LENGTH", bbox.sizeY, "Shape.BoundingBox()"),
+        _fact("requestedWidth", "STONE_REQUESTED_WIDTH", requested_width, "GeneratedComponent.metadata"),
+        _fact("measuredWidth", "STONE_MEASURED_WIDTH", bbox.sizeX, "Shape.BoundingBox()"),
+        _fact("requestedDepth", "STONE_REQUESTED_DEPTH", requested_depth, "GeneratedComponent.metadata"),
+        _fact("measuredDepth", "STONE_MEASURED_DEPTH", bbox.sizeZ, "Shape.BoundingBox()"),
+    ]
 
 
 def inspect_model(model: GeneratedModel) -> GeometryInspectionReport:

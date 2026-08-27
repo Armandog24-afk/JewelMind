@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v1/stone-orientation.schema.json",
+  "title": "StoneOrientation",
+  "description": "The real JDL stone.orientation field contract (Sprint 18) — a rotation in degrees around the stone's own local vertical (Z) axis, applied by geometry/stone/builder.py::_apply_orientation() at the stone's own bounding-box center after construction. Default 0.0. Meaningful for every non-radial shape (oval/pear/emerald/cushion/princess/marquise); a no-op in practice for round, applied uniformly rather than special-cased away. Describes orientation within the stone's own placement frame only — never a general 3D transform, and never the stone's world position (that is StoneArrangement/category-integration's job, out of scope for this schema). See docs/bible/20-stone/565-stone-coordinate-and-orientation.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["orientationDeg"],
+  "properties": {
+    "orientationDeg": {
+      "type": "number",
+      "default": 0.0,
+      "description": "Degrees, rotation around the local vertical axis. Not range-constrained at the schema layer (a periodic quantity — any real value rotates correctly); 0 is the default placement documented per-shape in 565-stone-coordinate-and-orientation.md."
+    }
+  }
+}

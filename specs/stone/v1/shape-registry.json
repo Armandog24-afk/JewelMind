@@ -1,0 +1,122 @@
+{
+  "shapes": [
+    {
+      "shape": "round",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "SUPPORTED",
+      "requiredDimensions": [
+        "diameter",
+        "depth"
+      ],
+      "symmetryClass": "RADIAL",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Byte-identical pre-Sprint-18 lofted round-brilliant-style reference."
+    },
+    {
+      "shape": "oval",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "ELONGATED_SMOOTH",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Elliptical outline, real CAD loft. Current prong placement is generic/circular, not shape-optimized."
+    },
+    {
+      "shape": "marquise",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "ELONGATED_SMOOTH",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Two-arc pointed lens outline. Current prong placement does not cluster prongs at the tips."
+    },
+    {
+      "shape": "pear",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "ASYMMETRIC",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "One pointed tip, one rounded end. Current prong placement is generic/circular, not tip-aware."
+    },
+    {
+      "shape": "emerald",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "RECTILINEAR_ANGULAR",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Clipped-corner rectangular outline. Current prong placement is generic/circular, not corner-aware."
+    },
+    {
+      "shape": "princess",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "RECTILINEAR_ANGULAR",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Plain rectangular outline. Current prong placement is generic/circular, not corner-aware."
+    },
+    {
+      "shape": "cushion",
+      "status": "current",
+      "generationSupported": true,
+      "jdlSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "currentSettingCompatibility": "EXPERIMENTAL",
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "ROUNDED_RECTILINEAR",
+      "referenceGeometryVersion": "1.0.0",
+      "description": "Rounded-rectangle outline. Current prong placement is generic/circular, not corner-aware."
+    }
+  ]
+}

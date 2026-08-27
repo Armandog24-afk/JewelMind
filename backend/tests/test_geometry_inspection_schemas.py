@@ -63,10 +63,25 @@ def test_report_examples_validate_against_inspection_report_schema():
 def test_fact_registry_exists_and_has_no_professional_thresholds():
     registry = _load_json(SPECS_DIR / "fact-registry.json")
     assert "facts" in registry
-    assert len(registry["facts"]) == 16
     text = json.dumps(registry)
     for forbidden in ("manufacturable", "acceptable tolerance", "industry standard"):
         assert forbidden not in text.lower()
+
+
+def test_fact_registry_covers_exactly_the_live_fact_type_values():
+    """Derived from the real `FactType` literal rather than a hardcoded
+    count, so the registry cannot silently drift out of sync with the code
+    when a new fact type is added (as 6 `STONE_*` facts were in Sprint 18)."""
+
+    from typing import get_args
+
+    from jewelmind.geometry.inspection.models import FactType
+
+    registry = _load_json(SPECS_DIR / "fact-registry.json")
+    recorded = {entry["factType"] for entry in registry["facts"]}
+    live = set(get_args(FactType))
+    assert recorded == live
+    assert len(registry["facts"]) == len(live)  # no duplicate entries
 
 
 def test_all_test_vector_files_exist_and_are_non_empty():

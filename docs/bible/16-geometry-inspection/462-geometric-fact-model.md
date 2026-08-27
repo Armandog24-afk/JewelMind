@@ -43,7 +43,7 @@ The normative shape is `backend/jewelmind/geometry/inspection/models.py::Geometr
 
 `InspectionDiagnostic` itself (`code`, `severity`, `message`, `componentIds`) is documented in full in [`483-inspection-error-model.md`](483-inspection-error-model.md).
 
-## The 16 `FactType` values
+## The 22 `FactType` values
 
 Source: `models.py::FactType` and `specs/geometry-inspection/v2/fact-registry.json` (the hand-curated, authoritative catalog — every entry there was written by inspecting the real `inspector.py`/`assembly.py` fact-construction code, not guessed from the type name).
 
@@ -65,8 +65,16 @@ Source: `models.py::FactType` and `specs/geometry-inspection/v2/fact-registry.js
 | `STONE_METAL_SEPARATE` | Whether the StoneReference solid remains distinct from (never fused into) production metal. |
 | `BOOLEAN_RESULT_VALID` | Whether a fuse/cut/common boolean operation produced a real, non-empty result. |
 | `FALLBACK_USED` | Whether a geometry builder fell back from its primary operation (e.g. band fillet, metal fuse) to a simpler alternative. |
+| `STONE_REQUESTED_LENGTH` | The stone reference's requested major horizontal dimension, from build-time metadata (CONSTRUCTION_PARAMETER). Sprint 18. |
+| `STONE_MEASURED_LENGTH` | The stone reference's measured major horizontal extent, from the independently computed bounding box (`sizeY`). Sprint 18. |
+| `STONE_REQUESTED_WIDTH` | The stone reference's requested minor horizontal dimension, from build-time metadata (CONSTRUCTION_PARAMETER). Sprint 18. |
+| `STONE_MEASURED_WIDTH` | The stone reference's measured minor horizontal extent, from the bounding box (`sizeX`). Sprint 18. |
+| `STONE_REQUESTED_DEPTH` | The stone reference's requested vertical dimension, from build-time metadata (CONSTRUCTION_PARAMETER). Sprint 18. |
+| `STONE_MEASURED_DEPTH` | The stone reference's measured vertical extent, from the bounding box (`sizeZ`). Sprint 18. |
 
 Not every `FactType` currently has a dedicated flattened entry in `inspector.py::inspect_model()` — `inspector.py` currently emits `COMPONENT_PRESENT`, `SOLID_COUNT`, `VOLUME`, `SHAPE_VALID`, `BOUNDING_BOX` (per component), `COMPONENT_COUNT`, `PRONG_COUNT`, `STONE_METAL_SEPARATE`, `INTERSECTION_VOLUME`, `MIN_DISTANCE` (per pair), and `CONNECTED`/`DISCONNECTED` (per production connectivity group). `SHAPE_EXISTS`, `INTERSECTION_EXISTS`, `BOOLEAN_RESULT_VALID`, and `FALLBACK_USED` are real, defined `FactType` values whose underlying information is present on `ComponentInspectionResult`/`AssemblyInspectionResult`/`BooleanOperationResult` (e.g. `exists`, `IntersectionResult.status`, `BooleanOperationResult.succeeded`/`fallbackUsed`) but are not independently flattened into `geometricFacts` as their own fact entries today — a real, minor gap, not a hidden one; see [`494-current-runtime-inspection-gap-analysis.md`](494-current-runtime-inspection-gap-analysis.md).
+
+The 6 `STONE_*` dimension facts added in Sprint 18 (`inspector.py::_stone_dimension_facts()`) are all genuinely emitted, for the `stone_reference` component only. Their contract — the deliberate CONSTRUCTION_PARAMETER / MEASURED_GEOMETRY pairing, and the honest limitation that an axis-aligned bounding box isolates length from width exactly only at `stone.orientation == 0` — is documented in [`docs/bible/20-stone/574-stone-inspection-contract.md`](../20-stone/574-stone-inspection-contract.md).
 
 ## No professional threshold anywhere in this catalog
 

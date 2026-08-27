@@ -1,0 +1,80 @@
+{
+  "vectors": [
+    {
+      "input": {
+        "shape": "round",
+        "diameter": 6.5,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 6.5,
+      "resolvedWidthMm": 6.5,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "oval",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 8.0,
+      "resolvedWidthMm": 6.0,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "pear",
+        "length": 9.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 9.0,
+      "resolvedWidthMm": 6.0,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "emerald",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 8.0,
+      "resolvedWidthMm": 6.0,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "cushion",
+        "length": 7.0,
+        "width": 7.0,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 7.0,
+      "resolvedWidthMm": 7.0,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "princess",
+        "length": 6.5,
+        "width": 6.5,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 6.5,
+      "resolvedWidthMm": 6.5,
+      "resolvedDepthMm": 4.0
+    },
+    {
+      "input": {
+        "shape": "marquise",
+        "length": 10.0,
+        "width": 5.0,
+        "depth": 4.0
+      },
+      "resolvedLengthMm": 10.0,
+      "resolvedWidthMm": 5.0,
+      "resolvedDepthMm": 4.0
+    }
+  ]
+}

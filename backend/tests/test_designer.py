@@ -160,15 +160,43 @@ class TestUnsupportedFeature:
         assert proposal.unsupportedFeatures[0].blocking is True
 
     def test_unsupported_stone_shape_value_is_caught_deterministically(self):
+        """Sprint 18 made oval/pear/emerald/cushion/princess/marquise real,
+        supported shapes, so this test now uses `asscher` — a shape that is
+        genuinely still unsupported. The behaviour under test is unchanged:
+        an enum value outside the real `StoneShape` capability set must be
+        rejected deterministically by `capability.py`, never smuggled into
+        the candidate JDL, regardless of what a provider returns."""
+
         raw = RawDesignerResponse(
             proposedCanonicalValues=[
-                RawProposedValue(field="stone.shape", value="oval", sourceText="pietra ovale")
+                RawProposedValue(field="stone.shape", value="asscher", sourceText="pietra asscher")
             ]
         )
         service = DesignerService(provider=FakeDesignerProvider(response=raw))
-        result = service.interpret(_request("Voglio una pietra ovale."))
-        assert any(f.feature == "oval" for f in result.proposal.unsupportedFeatures)
+        result = service.interpret(_request("Voglio una pietra asscher."))
+        assert any(f.feature == "asscher" for f in result.proposal.unsupportedFeatures)
         assert result.proposal.candidateJDL.stone.shape == "round"
+
+    def test_stone_shapes_supported_since_sprint18_are_no_longer_rejected(self):
+        """The complement of the test above, and the real regression guard
+        for Sprint 18's capability widening: a shape the Stone System now
+        genuinely generates must NOT be reported as an unsupported feature,
+        and must actually reach the candidate JDL."""
+
+        for shape in ("oval", "pear", "emerald", "cushion", "princess", "marquise"):
+            raw = RawDesignerResponse(
+                proposedCanonicalValues=[
+                    RawProposedValue(field="stone.shape", value=shape, sourceText=shape),
+                    # A non-round shape requires length+width, so supply them:
+                    # Designer must never invent dimensions from a shape name.
+                    RawProposedValue(field="stone.length", value="8", sourceText="8 mm"),
+                    RawProposedValue(field="stone.width", value="6", sourceText="6 mm"),
+                ]
+            )
+            service = DesignerService(provider=FakeDesignerProvider(response=raw))
+            result = service.interpret(_request(f"Voglio una pietra {shape} 8x6."))
+            assert not any(f.feature == shape for f in result.proposal.unsupportedFeatures), shape
+            assert result.proposal.candidateJDL.stone.shape == shape, shape
 
     def test_unknown_field_from_provider_is_rejected_not_smuggled_into_jdl(self):
         raw = RawDesignerResponse(

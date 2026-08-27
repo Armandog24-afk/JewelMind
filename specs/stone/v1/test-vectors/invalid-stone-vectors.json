@@ -1,0 +1,36 @@
+{
+  "vectors": [
+    {
+      "description": "round without diameter is rejected",
+      "input": {
+        "shape": "round",
+        "diameter": null
+      },
+      "expectedError": "stone.diameter is required when stone.shape is 'round'"
+    },
+    {
+      "description": "oval without length/width is rejected",
+      "input": {
+        "shape": "oval"
+      },
+      "expectedError": "stone.length and stone.width are both required when stone.shape is 'oval'"
+    },
+    {
+      "description": "oval with only length is rejected",
+      "input": {
+        "shape": "oval",
+        "length": 8.0
+      },
+      "expectedError": "stone.length and stone.width are both required when stone.shape is 'oval'"
+    },
+    {
+      "description": "unknown shape is rejected",
+      "input": {
+        "shape": "asscher",
+        "length": 8.0,
+        "width": 6.0
+      },
+      "expectedError": "Input should be 'round', 'oval', 'pear', 'emerald', 'cushion', 'princess' or 'marquise'"
+    }
+  ]
+}

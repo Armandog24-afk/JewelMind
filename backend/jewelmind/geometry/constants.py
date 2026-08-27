@@ -21,6 +21,7 @@ See docs/geometry-conventions.md for the full write-up. Summary:
 from __future__ import annotations
 
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.domain.stone_dimensions import resolved_width_mm
 
 GENERATOR_VERSION = "0.1.0"
 
@@ -48,11 +49,23 @@ def band_top_z(definition: JewelryDefinition) -> float:
 def prong_center_radius(definition: JewelryDefinition) -> float:
     """Radial distance (in the local XY plane) of each prong's central axis.
 
-    Slightly inside the stone's girdle radius so the prong body overlaps the
+    Slightly inside the stone's girdle so the prong body overlaps the
     girdle edge, approximating a grip. Shared by the prong and basket
     builders so their footprints stay consistent with each other.
+
+    Uses `resolved_width_mm()` (the stone's minor horizontal dimension —
+    `diameter` for round, `width` for every other shape, Sprint 18) rather
+    than `stone.diameter` directly, so this stays a real, generic
+    construction parameter instead of assuming every stone is round. This
+    is NOT a "fake equivalent diameter" (see
+    docs/bible/20-stone/578-current-code-mapping-and-gaps.md): it drives a
+    generic, provisional circular prong layout — real placement geometry,
+    not a Forge rule threshold evaluation — and every non-round shape's
+    `currentSettingCompatibility` is explicitly `EXPERIMENTAL`
+    (`geometry/stone/capability.py`) precisely because this placement is
+    not shape-optimized.
     """
 
-    girdle_r = definition.stone.diameter / 2
+    girdle_r = resolved_width_mm(definition.stone) / 2
     prong_r = definition.setting.prongDiameter / 2
     return girdle_r - prong_r * 0.3

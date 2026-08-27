@@ -29,7 +29,10 @@
     "stone": {
       "shape": "round",
       "diameter": 6.5,
-      "depth": 4.0
+      "depth": 4.0,
+      "length": null,
+      "width": null,
+      "orientation": 0.0
     }
   },
   "setting": {

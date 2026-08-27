@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v1/stone-definition.schema.json",
+  "title": "StoneDefinition",
+  "description": "Two real, distinct shapes: the JDL-facing 'stone' input (backend/jewelmind/domain/schema.py::StoneSpec, whose required dimensions differ by shape for backward compatibility — see docs/bible/20-stone/576-current-round-migration.md) and the generatedMetadata a real build_stone() call actually returns on the resulting GeneratedComponent. This is documentation of an existing runtime contract, never a second canonical JDL schema — the authoritative validator remains StoneSpec/JewelryDefinition (brief section 5). See docs/bible/20-stone/562-stone-domain-model.md.",
+  "$defs": {
+    "boundingBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minMm", "maxMm"],
+      "properties": {
+        "minMm": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+        "maxMm": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stone"],
+  "properties": {
+    "stone": {
+      "type": "object",
+      "description": "The JDL-facing input. Mirrors StoneSpec exactly. `diameter` is meaningful only for shape=\"round\"; `length`/`width` are required for every other shape — enforced by StoneSpec's own model_validator, deliberately not as a JSON-Schema if/then conditional here (see docs/bible/05-jdl/075-validation-pipeline.md's structural/semantic layering).",
+      "additionalProperties": false,
+      "required": ["shape", "depth", "orientation"],
+      "properties": {
+        "shape": { "enum": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"], "default": "round" },
+        "diameter": { "type": ["number", "null"], "default": 6.5 },
+        "length": { "type": ["number", "null"], "default": null },
+        "width": { "type": ["number", "null"], "default": null },
+        "depth": { "type": "number", "exclusiveMinimum": 0, "default": 4.0 },
+        "orientation": { "type": "number", "default": 0.0 }
+      }
+    },
+    "generatedMetadata": {
+      "description": "The metadata dict on the GeneratedComponent named 'stone_reference'. Round carries three extra round-only construction fields (girdleRadiusMm/tableRadiusMm) the non-round loft has no single equivalent for.",
+      "type": "object",
+      "required": [
+        "shape", "girdleZMm", "crownHeightMm", "pavilionHeightMm",
+        "lengthMm", "widthMm", "depthMm", "orientationDeg",
+        "isGemologicalReproduction", "referenceGeometryVersion"
+      ],
+      "properties": {
+        "shape": { "enum": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"] },
+        "girdleRadiusMm": { "type": "number", "description": "round only — a single girdle radius exists only for a radially symmetric outline." },
+        "tableRadiusMm": { "type": "number", "description": "round only — see girdleRadiusMm." },
+        "girdleZMm": { "type": "number", "description": "Z height of the girdle plane, the assembly's stone-placement anchor." },
+        "crownHeightMm": { "type": "number" },
+        "pavilionHeightMm": { "type": "number" },
+        "lengthMm": {
+          "type": "number",
+          "description": "CONSTRUCTION_PARAMETER — the resolved major horizontal dimension used to build the geometry, never an independent re-measurement. Geometry Inspection's STONE_MEASURED_LENGTH fact is the independently measured counterpart (see docs/bible/20-stone/574-stone-inspection-contract.md)."
+        },
+        "widthMm": { "type": "number", "description": "CONSTRUCTION_PARAMETER — see lengthMm." },
+        "depthMm": { "type": "number", "description": "CONSTRUCTION_PARAMETER — see lengthMm." },
+        "orientationDeg": { "type": "number" },
+        "isGemologicalReproduction": {
+          "const": false,
+          "description": "Always false, for every shape (STONE-GOV-011). A StoneReference is deterministic CAD reference geometry, never a claim of gemological, optical, or commercial-cut accuracy."
+        },
+        "referenceGeometryVersion": { "type": "string" }
+      }
+    },
+    "description": { "type": "string" },
+    "volumeMm3": { "type": "number", "exclusiveMinimum": 0 },
+    "boundingBox": { "$ref": "#/$defs/boundingBox" }
+  }
+}

@@ -106,20 +106,36 @@
     "stone": {
       "type": "object",
       "additionalProperties": false,
+      "description": "MINOR, additive Sprint 18 field set (see docs/bible/20-stone/README.md and docs/bible/05-jdl/081-schema-versioning-and-migrations.md): shape gained 6 new enum members, length/width/orientation are new optional fields. `diameter` required (only meaningfully) for shape=\"round\"; `length`/`width` required (only meaningfully) for every other shape — enforced at the semantic/Pydantic layer (StoneSpec's own model_validator), deliberately not as a JSON-Schema if/then conditional here, per 075-validation-pipeline.md's structural/semantic layering.",
       "properties": {
         "shape": {
-          "const": "round",
+          "enum": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"],
           "default": "round"
         },
         "diameter": {
-          "type": "number",
+          "type": ["number", "null"],
           "default": 6.5,
-          "description": "Millimeters. Range (2mm to 15mm) is semantic rule JM-STONE-001, not enforced here."
+          "description": "Millimeters. Meaningful only when shape=\"round\". Range (2mm to 15mm) is semantic rule JM-STONE-001, not enforced here."
+        },
+        "length": {
+          "type": ["number", "null"],
+          "default": null,
+          "description": "Millimeters. Major horizontal dimension (local Y axis). Required (semantic layer) when shape != \"round\"."
+        },
+        "width": {
+          "type": ["number", "null"],
+          "default": null,
+          "description": "Millimeters. Minor horizontal dimension (local X axis). Required (semantic layer) when shape != \"round\"."
         },
         "depth": {
           "type": "number",
           "default": 4.0,
           "description": "Millimeters. Range is semantic rule JM-STONE-002, not enforced here."
+        },
+        "orientation": {
+          "type": "number",
+          "default": 0.0,
+          "description": "Degrees, rotation around the stone's local vertical axis. See docs/bible/20-stone/565-stone-coordinate-and-orientation.md."
         }
       }
     },

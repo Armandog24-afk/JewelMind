@@ -93,4 +93,4 @@ See [`484-inspection-performance-model.md`](../16-geometry-inspection/484-inspec
 
 - `specs/geometry-inspection/v2/examples/default-solitaire-inspection.json`, `four-prong-inspection.json` — the full, real, unabridged reports this table summarizes.
 - `specs/geometry-inspection/v2/test-vectors/regression-vectors.json` — the vectors `TestInspectionRegression` asserts against.
-- [`geometry-fact-catalog.md`](geometry-fact-catalog.md) (A92) — the 16 `FactType` definitions these values instantiate.
+- [`geometry-fact-catalog.md`](geometry-fact-catalog.md) (A92) — the 22 `FactType` definitions these values instantiate.

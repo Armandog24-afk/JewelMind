@@ -38,7 +38,7 @@ geometry dependency in the future.
 is the most granular current restatement of this table — a full
 JDL-path-to-CadQuery-operation trace for every geometry-driving field,
 including two cross-component dependencies (`setting.basketHeight` also
-placing the stone; `stone.diameter` also sizing the prongs/basket radii)
+placing the stone; the stone's resolved WIDTH also sizing the prongs/basket radii)
 made explicit there for the first time.
 
 ## Dependency table
@@ -51,8 +51,12 @@ made explicit there for the first time.
 | `band.profile` | Which cross-section construction path runs (flat vs. comfort-fit) at every sampled section, band volume | `geometry/shank/profile.py` |
 | `band.widthTaper.mode`/`.bottomRatio` (Sprint 17) | Whether/how much `band.width` is reduced moving away from the head toward the bottom (`u=0.5`); selects the uniform-revolve vs 48-section tapered-loft construction path; band volume | `geometry/shank/taper.py`, `builder.py` |
 | `band.thicknessTaper.mode`/`.bottomRatio` (Sprint 17) | Whether/how much `band.thickness` is reduced moving away from the head toward the bottom (`u=0.5`); selects the uniform-revolve vs 48-section tapered-loft construction path; band volume | `geometry/shank/taper.py`, `builder.py` |
-| `stone.diameter` | Stone reference girdle radius, `prong_center_radius` (and therefore prong + basket positioning), `JM-STONE-001`/`JM-PRONG-003` validation | `geometry/constants.py::prong_center_radius`, `geometry/components/stone.py` |
-| `stone.depth` | Stone reference crown/pavilion heights (vertical geometry only — no downstream effect on prongs/basket), `JM-STONE-002` validation | `geometry/components/stone.py` |
+| `stone.shape` (Sprint 18) | Which outline primitive builds the stone reference, and therefore its whole horizontal silhouette and volume; also gates which Forge rules apply (`JM-STONE-001`/`JM-PRONG-003` are ROUND_ONLY) | `geometry/stone/builder.py`, `geometry/stone/outline.py`, `validation/engine.py` |
+| `stone.diameter` | ROUND_ONLY. Round's girdle radius; via `resolved_width_mm()` also `prong_center_radius` (and therefore prong + basket positioning); `JM-STONE-001`/`JM-PRONG-003` validation | `geometry/constants.py::prong_center_radius`, `geometry/stone/builder.py`, `domain/stone_dimensions.py` |
+| `stone.length` (Sprint 18) | Non-round major horizontal extent (local Y) of the stone reference outline; participates in `JM-STONE-002` via `min(length, width)` | `geometry/stone/outline.py`, `domain/stone_dimensions.py` |
+| `stone.width` (Sprint 18) | Non-round minor horizontal extent (local X); via `resolved_width_mm()` drives `prong_center_radius` and therefore prong + basket positioning; participates in `JM-STONE-002` | `geometry/stone/outline.py`, `geometry/constants.py::prong_center_radius`, `domain/stone_dimensions.py` |
+| `stone.depth` | Stone reference crown/pavilion heights (vertical geometry only — no downstream effect on prongs/basket), `JM-STONE-002` validation | `geometry/stone/builder.py` |
+| `stone.orientation` (Sprint 18) | Rotation of the finished stone solid around its own local vertical axis; changes the stone's bounding box but nothing downstream (prong/basket placement is orientation-independent) | `geometry/stone/builder.py::_apply_orientation` |
 | `setting.prongCount` | Number of prong solids generated, angular distribution, `JM-PRONG-001`/`JM-PRONG-003` validation | `geometry/components/prongs.py::_prong_positions` |
 | `setting.prongDiameter` | Prong cylinder radius, `prong_center_radius` (and therefore basket wall radii), prong metal volume, `JM-PRONG-002` validation | `geometry/constants.py::prong_center_radius`, `geometry/components/prongs.py`, `geometry/components/basket.py` |
 | `setting.prongHeight` | Prong cylinder height, `JM-PRONG-004` invariant (must exceed `basketHeight`) | `geometry/components/prongs.py` |
@@ -67,7 +71,7 @@ made explicit there for the first time.
 |---|---|
 | `ring.innerDiameter`, `ring.size` | `inner_radius`, `outer_radius`, `band_top_z` |
 | `band.width`, `band.thickness`, `band.profile`, `band.widthTaper`, `band.thicknessTaper` | Band cross-section geometry (uniform or tapered) |
-| `stone.diameter`, `stone.depth` | Girdle radius, crown/pavilion heights, table radius |
+| `stone.shape`, `stone.diameter`, `stone.length`, `stone.width`, `stone.depth`, `stone.orientation` | Resolved LENGTH/WIDTH/DEPTH, girdle outline (per shape), crown/pavilion heights, table-level outline; girdle/table radius for round only |
 | `setting.prongCount`, `prongDiameter`, `prongHeight`, `basketHeight` | `prong_center_radius`, prong positions, basket inner/outer radii, stone girdle Z |
 | `material.metal`, `manufacturing.method` | (metadata only — nothing further derived) |
 | `preview.meshTolerance`, `angularTolerance` | Mesh vertex/triangle counts |
@@ -86,12 +90,17 @@ flowchart TD
     widthTaper["band.widthTaper"] --> bandGeom
     thicknessTaper["band.thicknessTaper"] --> bandGeom
 
-    stoneDiameter["stone.diameter"] --> girdleRadius["girdle radius"]
+    stoneShape["stone.shape"] --> stoneOutline["girdle outline (per shape)"]
+    stoneDiameter["stone.diameter (round)"] --> resolvedDims["resolved LENGTH / WIDTH"]
+    stoneLength["stone.length (non-round)"] --> resolvedDims
+    stoneWidth["stone.width (non-round)"] --> resolvedDims
+    resolvedDims --> stoneOutline
     stoneDepth["stone.depth"] --> stoneHeights["crown / pavilion heights"]
-    girdleRadius --> stoneGeom["Stone reference geometry"]
+    stoneOutline --> stoneGeom["Stone reference geometry"]
     stoneHeights --> stoneGeom
+    stoneOrientation["stone.orientation"] --> stoneGeom
 
-    stoneDiameter --> centerRadius["prong_center_radius"]
+    resolvedDims --> centerRadius["prong_center_radius"]
     prongDiameter["setting.prongDiameter"] --> centerRadius
     centerRadius --> prongGeom["Prong positions / geometry"]
     prongCount["setting.prongCount"] --> prongGeom
@@ -122,8 +131,9 @@ parameter "belongs" to. This is why
 stale on *any* field change, rather than tracking per-component
 staleness — a targeted per-component recomputation is not currently
 implemented and would require confirming no cross-component dependency
-was missed (e.g. `stone.diameter` affecting prong/basket geometry, not
-just the stone itself).
+was missed (e.g. the stone's resolved WIDTH — `stone.diameter` for round,
+`stone.width` otherwise — affecting prong/basket geometry, not just the
+stone itself).
 
 ## Recomputation requirements
 

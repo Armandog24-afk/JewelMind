@@ -1,0 +1,14 @@
+{
+  "vectors": [
+    {
+      "description": "A pre-Sprint-18 round document (shape/diameter/depth only, no length/width/orientation) still validates and produces the byte-identical pre-Sprint-18 volume.",
+      "input": {
+        "shape": "round",
+        "diameter": 6.5,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 58.221419,
+      "expectedVariation": "round"
+    }
+  ]
+}

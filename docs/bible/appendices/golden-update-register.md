@@ -36,6 +36,12 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `SOL-010-width-taper-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real width-taper geometry, comfort-fit profile, `bottomRatio=0.6` | Sprint 17 milestone | 2026-08-26 |
 | `SOL-011-thickness-taper-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real thickness-taper geometry, comfort-fit profile, `bottomRatio=0.5` | Sprint 17 milestone | 2026-08-26 |
 | `SOL-012-combined-taper-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real combined width+thickness taper, flat profile, `bottomRatio=0.7`/`0.6` | Sprint 17 milestone | 2026-08-26 |
+| `SOL-013-oval-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real oval StoneReference, 8.0 × 6.0 mm | Sprint 18 milestone | 2026-08-26 |
+| `SOL-014-pear-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real pear StoneReference (asymmetric), 9.0 × 6.0 mm | Sprint 18 milestone | 2026-08-26 |
+| `SOL-015-emerald-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real emerald StoneReference (clipped corners), 8.0 × 6.0 mm | Sprint 18 milestone | 2026-08-26 |
+| `SOL-016-cushion-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real cushion StoneReference (rounded corners), 7.0 × 7.0 mm | Sprint 18 milestone | 2026-08-26 |
+| `SOL-017-princess-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real princess StoneReference (rectangular), 6.5 × 6.5 mm | Sprint 18 milestone | 2026-08-26 |
+| `SOL-018-marquise-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — real marquise StoneReference (pointed lens), 10.0 × 5.0 mm | Sprint 18 milestone | 2026-08-26 |
 
 ## How a future entry gets added
 
