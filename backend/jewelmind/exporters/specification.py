@@ -67,10 +67,40 @@ def build_specification(
 
     lines.append("## Setting")
     lines.append(f"- Type: {definition.setting.type}")
-    lines.append(f"- Prong count: {definition.setting.prongCount}")
-    lines.append(f"- Prong diameter: {_fmt_mm(definition.setting.prongDiameter)}")
-    lines.append(f"- Prong height: {_fmt_mm(definition.setting.prongHeight)}")
+    if definition.setting.type == "prong":
+        lines.append(f"- Prong count: {definition.setting.prongCount}")
+        lines.append(f"- Prong diameter: {_fmt_mm(definition.setting.prongDiameter)}")
+        lines.append(f"- Prong height: {_fmt_mm(definition.setting.prongHeight)}")
+    else:
+        lines.append(f"- Bezel wall thickness: {_fmt_mm(definition.setting.bezelWallThickness)}")
+        lines.append(f"- Bezel wall height: {_fmt_mm(definition.setting.bezelWallHeight)}")
     lines.append(f"- Basket height: {_fmt_mm(definition.setting.basketHeight)}")
+
+    setting_result = getattr(model, "setting_result", None)
+    if setting_result is not None:
+        lines.append(f"- Generated setting components: {', '.join(setting_result.generatedComponents)}")
+        if setting_result.settingType == "prong":
+            lines.append(
+                f"- Prong count requested/generated: "
+                f"{setting_result.requestedProngCount}/{setting_result.generatedProngCount}"
+            )
+            lines.append(f"- Prong placement strategy: {setting_result.placementStrategy}")
+        lines.append(
+            f"- Setting/stone compatibility: {setting_result.compatibilityStatus} "
+            f"(software capability status — NOT a professional approval)"
+        )
+        lines.append(
+            "- Professional validation of this setting: NOT_REVIEWED. No qualified "
+            "human review of this setting geometry has taken place."
+        )
+        if setting_result.compatibilityStatus == "EXPERIMENTAL":
+            lines.append(
+                "- NOTE: this stone/setting combination is EXPERIMENTAL. The setting "
+                "geometry generates, but its placement is a provisional software "
+                "layout that has not been optimized for this stone shape."
+            )
+        for event in setting_result.fallbackEvents:
+            lines.append(f"- Geometry fallback ({event.stage}): {event.reason}")
     lines.append("")
 
     lines.append("## Material & manufacturing")
@@ -116,11 +146,14 @@ def build_specification(
         else:
             connectivity_summary = f"{connectivity.disconnectedGroupCount} disconnected group(s)"
         lines.append(f"- Production connectivity: {connectivity_summary}")
-        lines.append(
-            f"- Requested vs. generated prong count: "
-            f"{inspection_report.assemblyResult.prongCount.requestedCount} vs. "
-            f"{inspection_report.assemblyResult.prongCount.generatedCount}"
-        )
+        # PRONG_ONLY (Sprint 19): a bezel has no prongs, and reporting
+        # "0 vs. 0" would read as a defect rather than as not-applicable.
+        prong_count = inspection_report.assemblyResult.prongCount
+        if prong_count.status != "NOT_APPLICABLE":
+            lines.append(
+                f"- Requested vs. generated prong count: "
+                f"{prong_count.requestedCount} vs. {prong_count.generatedCount}"
+            )
         lines.append(
             "- This is a geometric fact summary, not a manufacturability or "
             "professional-quality assessment — see docs/bible/16-geometry-inspection/."

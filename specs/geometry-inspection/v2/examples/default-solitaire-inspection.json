@@ -1,11 +1,11 @@
 {
-  "inspectionId": "inspection-e00040a6-8baf-40ad-9d77-2073daa91ef3",
+  "inspectionId": "inspection-1dca5610-a82c-4f24-bc16-778dbc9dfc3d",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "e1d6dc2f2390875d",
+  "definitionHash": "8def81bd12b97d38",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
-  "startedAt": "2026-08-27T12:03:30.357878+00:00",
-  "completedAt": "2026-08-27T12:03:30.695534+00:00",
+  "startedAt": "2026-08-27T14:54:44.267236+00:00",
+  "completedAt": "2026-08-27T14:54:44.748275+00:00",
   "status": "PASS",
   "componentResults": [
     {
@@ -132,10 +132,13 @@
       "shapeValid": true,
       "fallbackUsed": false,
       "metadata": {
+        "settingType": "prong",
         "requestedCount": 6,
         "generatedCount": 6,
         "prongRadiusMm": 0.55,
-        "centerRadiusMm": 3.085,
+        "placementStrategy": "RADIAL",
+        "stoneShape": "round",
+        "compatibilityStatus": "SUPPORTED_SOFTWARE",
         "positions": [
           {
             "x": 3.085,
@@ -161,7 +164,8 @@
             "x": 1.5425000000000004,
             "y": -2.671688370674993
           }
-        ]
+        ],
+        "centerRadiusMm": 3.085
       },
       "diagnostics": []
     },
@@ -515,7 +519,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -532,7 +536,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -549,7 +553,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -566,7 +570,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -583,7 +587,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -10.700000000000001,
@@ -613,7 +617,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -630,7 +634,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -647,7 +651,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -664,7 +668,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -681,7 +685,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.2500001,
@@ -711,7 +715,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -728,7 +732,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -745,7 +749,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -762,7 +766,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -779,7 +783,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -796,7 +800,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -813,7 +817,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -830,7 +834,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -847,7 +851,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -864,7 +868,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -881,7 +885,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -911,7 +915,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -928,7 +932,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -945,7 +949,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -962,7 +966,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -979,7 +983,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -1012,7 +1016,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "len(model.components)",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1029,7 +1033,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "prongs.metadata",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {
         "requestedCount": 6,
@@ -1051,7 +1055,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "assembly.stoneMetalSeparation",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1069,7 +1073,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1087,7 +1091,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1105,7 +1109,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1123,7 +1127,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1141,7 +1145,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1159,7 +1163,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1177,7 +1181,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1195,7 +1199,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1213,7 +1217,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1231,7 +1235,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1249,7 +1253,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1267,7 +1271,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1286,18 +1290,120 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "connectivity graph (Shape.distance())",
-      "generatedAt": "2026-08-27T12:03:30.695534+00:00",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.type",
+      "factType": "SETTING_TYPE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": "prong",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.compatibilityStatus",
+      "factType": "SETTING_COMPATIBILITY_STATUS",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": "SUPPORTED_SOFTWARE",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.componentCount",
+      "factType": "SETTING_COMPONENT_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 1,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.requestedProngCount",
+      "factType": "SETTING_REQUESTED_PRONG_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 6,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.generatedProngCount",
+      "factType": "SETTING_GENERATED_PRONG_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": 6,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.placementStrategy",
+      "factType": "SETTING_PLACEMENT_STRATEGY",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs"
+      ],
+      "value": "RADIAL",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-08-27T14:54:44.748275+00:00",
       "diagnostic": null,
       "metadata": {}
     }
   ],
   "diagnostics": [],
   "performance": {
-    "totalDurationMs": 340.4053999984171,
-    "componentInspectionMs": 72.07829999970272,
-    "distanceInspectionMs": 62.01739999232814,
-    "intersectionInspectionMs": 189.30740002542734,
-    "topologyInspectionMs": 15.796699997736141
+    "totalDurationMs": 484.14709998178296,
+    "componentInspectionMs": 103.6076000018511,
+    "distanceInspectionMs": 84.32470000116155,
+    "intersectionInspectionMs": 272.5674999819603,
+    "topologyInspectionMs": 21.221499977400526
   },
   "unavailableInspections": []
 }

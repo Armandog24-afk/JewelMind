@@ -1,0 +1,222 @@
+"""Capability Coverage Guard consistency tests (brief section 45).
+
+`specs/capabilities/jewelmind-capabilities.json` is one authoritative
+cross-product record of what JewelMind can and cannot do. Its whole value
+is that it cannot quietly lie, so these tests check it against the real
+code wherever the real code can answer.
+
+The central invariant: **CURRENT requires real implementation.** A
+capability marked CURRENT whose implementation does not exist is a
+documentation defect, not a harmless optimism.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import get_args
+
+import jsonschema
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CAPS_DIR = REPO_ROOT / "specs" / "capabilities"
+REGISTRY = CAPS_DIR / "jewelmind-capabilities.json"
+SCHEMA = CAPS_DIR / "jewelmind-capabilities.schema.json"
+
+VALID_STATUSES = {"CURRENT", "PARTIAL", "PLANNED", "BLOCKED", "OUT_OF_SCOPE"}
+
+
+def _load(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _entries() -> list[dict]:
+    return _load(REGISTRY)["capabilities"]
+
+
+def _by_key() -> dict[tuple[str, str], dict]:
+    return {(e["domain"], e["capability"]): e for e in _entries()}
+
+
+def test_registry_and_schema_exist_and_validate():
+    schema = _load(SCHEMA)
+    jsonschema.Draft202012Validator.check_schema(schema)
+    jsonschema.validate(_load(REGISTRY), schema)
+
+
+def test_every_status_is_a_recognized_value():
+    for entry in _entries():
+        assert entry["status"] in VALID_STATUSES, entry
+
+
+def test_every_entry_has_a_substantive_note():
+    """A status with no justification is unauditable."""
+
+    for entry in _entries():
+        assert len(entry["note"].strip()) >= 15, entry
+
+
+def test_no_duplicate_capability_keys():
+    keys = [(e["domain"], e["capability"]) for e in _entries()]
+    assert len(keys) == len(set(keys))
+
+
+def test_declared_status_values_match_the_real_set():
+    assert set(_load(REGISTRY)["statusValues"]) == VALID_STATUSES
+
+
+# --- CURRENT must be backed by real code -------------------------------------
+
+
+def test_current_setting_families_match_the_live_setting_registry():
+    from jewelmind.setting.capability import SETTING_CAPABILITIES
+
+    recorded = {
+        e["capability"].removesuffix("_setting")
+        for e in _entries()
+        if e["domain"] == "setting" and e["status"] == "CURRENT" and e["capability"].endswith("_setting")
+    }
+    assert recorded == set(SETTING_CAPABILITIES)
+
+
+def test_planned_setting_families_are_not_registered_generators():
+    from jewelmind.setting.dispatch import setting_generators
+
+    generators = setting_generators()
+    for entry in _entries():
+        if entry["domain"] == "setting" and entry["status"] == "PLANNED":
+            family = entry["capability"].removesuffix("_setting")
+            assert family not in generators, entry
+
+
+def test_current_stone_shapes_match_the_live_stone_registry():
+    from jewelmind.geometry.stone.capability import STONE_SHAPE_CAPABILITIES
+
+    recorded = {
+        e["capability"] for e in _entries() if e["domain"] == "stone_shape" and e["status"] == "CURRENT"
+    }
+    assert recorded == set(STONE_SHAPE_CAPABILITIES)
+
+
+def test_planned_stone_shapes_are_not_accepted_by_jdl():
+    from jewelmind.domain.schema import StoneShape
+
+    accepted = set(get_args(StoneShape))
+    for entry in _entries():
+        if entry["domain"] == "stone_shape" and entry["status"] == "PLANNED":
+            assert entry["capability"] not in accepted, entry
+
+
+def test_current_jewelry_categories_match_the_live_category_registry():
+    from jewelmind.jewelry_category.registry import CATEGORY_CAPABILITIES
+
+    recorded = {
+        e["capability"]
+        for e in _entries()
+        if e["domain"] == "jewelry_category" and e["status"] == "CURRENT"
+    }
+    live_generatable = {
+        name for name, cap in CATEGORY_CAPABILITIES.items() if cap.generationSupported
+    }
+    assert recorded == live_generatable
+
+
+def test_seats_bearings_and_cutters_are_planned_everywhere():
+    """Brief section 24: no seat/bearing/cutter geometry exists, so the
+    guard and the Setting registry must agree on that."""
+
+    from jewelmind.setting.capability import SETTING_CAPABILITIES
+
+    keys = _by_key()
+    for capability in ("stone_seat", "bearing", "cutter"):
+        assert keys[("setting", capability)]["status"] == "PLANNED"
+    for capability in SETTING_CAPABILITIES.values():
+        assert capability.seatSupport == "PLANNED"
+        assert capability.bearingSupport == "PLANNED"
+        assert capability.cutterSupport == "PLANNED"
+
+
+def test_no_professionally_validated_setting_geometry_is_claimed():
+    """The single most important honesty invariant in this file."""
+
+    from jewelmind.setting.capability import SETTING_CAPABILITIES
+
+    entry = _by_key()[("professional_validation", "validated_setting_geometry")]
+    assert entry["status"] == "PLANNED"
+    for capability in SETTING_CAPABILITIES.values():
+        assert capability.professionalValidationStatus == "NOT_REVIEWED"
+
+
+def test_active_professional_validation_registry_is_still_empty():
+    """A CURRENT professional-validation *framework* must not be confused
+    with actual validated records."""
+
+    registry = _load(
+        REPO_ROOT / "specs" / "professional-validation" / "v1" / "current-validation-registry.json"
+    )
+    records = registry.get("records", registry.get("validationRecords", []))
+    assert records == []
+
+
+def test_escape_hatches_are_recorded():
+    """Brief section 46: the cross-product escape hatches must remain
+    visible so a future capability is not architecturally blocked."""
+
+    keys = _by_key()
+    required = [
+        ("setting", "custom_setting"),
+        ("setting", "imported_setting_component"),
+        ("stone_source_mode", "custom_outline"),
+        ("stone_source_mode", "measured_stone"),
+        ("component", "user_component"),
+        ("component", "imported_cad_component"),
+        ("finding", "generic_finding"),
+        ("jewelry_category", "custom_category"),
+        ("decoration", "custom_pattern"),
+        ("material", "external_material_profile"),
+        ("manufacturing", "external_manufacturing_profile"),
+    ]
+    for key in required:
+        assert key in keys, f"missing escape hatch: {key}"
+        assert keys[key]["status"] in {"PLANNED", "PARTIAL"}, keys[key]
+
+
+def test_blocked_entries_explain_what_blocks_them():
+    blocked = [e for e in _entries() if e["status"] == "BLOCKED"]
+    assert blocked, "at least one genuinely blocked capability is expected to be recorded"
+    for entry in blocked:
+        assert any(word in entry["note"].lower() for word in ("credential", "blocked", "unavailable", "no "))
+
+
+def test_coverage_spans_the_expected_domains():
+    domains = {e["domain"] for e in _entries()}
+    expected = {
+        "setting",
+        "stone_shape",
+        "stone_source_mode",
+        "stone",
+        "stone_arrangement",
+        "ring_family",
+        "jewelry_category",
+        "shank",
+        "finding",
+        "component",
+        "decoration",
+        "material",
+        "manufacturing",
+        "reporting",
+        "interoperability",
+        "history",
+        "library",
+        "studio",
+        "vision",
+        "designer",
+        "conversation",
+        "commercial",
+        "sdk",
+        "collaboration",
+        "retail",
+        "professional_validation",
+    }
+    missing = expected - domains
+    assert not missing, f"capability coverage is missing domains: {sorted(missing)}"

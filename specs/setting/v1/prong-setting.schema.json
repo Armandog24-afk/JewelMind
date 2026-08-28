@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/prong-setting.schema.json",
+  "title": "ProngSettingDefinition",
+  "description": "Mirrors backend/jewelmind/setting/models.py::ProngSettingDefinition. The prong-family half of the discriminated Setting model. `prongCount`/`prongDiameterMm`/`prongHeightMm` map 1:1 from the public JDL fields via geometry/setting_adapter.py; `placementStrategy` and `style` are Setting-internal and resolved from the stone. See docs/bible/21-setting/prong-setting-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["prongCount", "prongDiameterMm", "prongHeightMm", "placementStrategy"],
+  "properties": {
+    "prongCount": { "type": "integer", "description": "Real requested count. 4 and 6 are the counts the generator builds and JM-PRONG-001 permits; an out-of-set value surfaces as a structured validation result, not a parse error." },
+    "prongDiameterMm": { "type": "number", "exclusiveMinimum": 0 },
+    "prongHeightMm": { "type": "number", "exclusiveMinimum": 0 },
+    "placementStrategy": { "enum": ["RADIAL", "OUTLINE_CARDINAL"] },
+    "style": {
+      "enum": ["ROUND_PRONG"],
+      "default": "ROUND_PRONG",
+      "description": "Only the cylindrical reference prong is implemented. CLAW, V_PRONG, SHARED_PRONG and CUSTOM_PRONG are reserved names with no geometry — deliberately NOT enum members (SETTING-GOV-005). V_PRONG in particular is what real pear/marquise tip protection would need."
+    }
+  }
+}

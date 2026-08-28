@@ -18,6 +18,7 @@ ProductionRole = Literal["included_by_default", "excluded_by_default", "never_in
 GEOMETRY_ROLE: dict[str, GeometryRole] = {
     "band": "production_metal",
     "prongs": "production_metal",
+    "bezel": "production_metal",
     "basket_support": "production_metal",
     "stone_reference": "stone_reference",
 }
@@ -25,6 +26,7 @@ GEOMETRY_ROLE: dict[str, GeometryRole] = {
 PRODUCTION_ROLE: dict[str, ProductionRole] = {
     "band": "included_by_default",
     "prongs": "included_by_default",
+    "bezel": "included_by_default",
     "basket_support": "included_by_default",
     "stone_reference": "excluded_by_default",
 }

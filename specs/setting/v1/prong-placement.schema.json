@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/prong-placement.schema.json",
+  "title": "ProngPlacement",
+  "description": "One resolved prong-placement result: which strategy ran and the real positions it produced. Documents backend/jewelmind/setting/placement.py. Positions are NOT claimed to be professionally correct setting positions (SETTING-GOV-007/010) — for every non-round shape the compatibility status is EXPERIMENTAL. See docs/bible/21-setting/prong-placement-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stoneShape", "prongCount", "strategy", "positions"],
+  "properties": {
+    "stoneShape": { "type": "string" },
+    "lengthMm": { "type": "number", "exclusiveMinimum": 0 },
+    "widthMm": { "type": "number", "exclusiveMinimum": 0 },
+    "prongCount": { "type": "integer", "minimum": 0 },
+    "prongRadiusMm": { "type": "number", "exclusiveMinimum": 0 },
+    "strategy": {
+      "enum": ["RADIAL", "OUTLINE_CARDINAL"],
+      "description": "RADIAL is the pre-Sprint-19 behaviour, geometrically faithful only for a radially symmetric stone. OUTLINE_CARDINAL samples the stone's real girdle outline. Resolved from the stone's symmetry, never requested via JDL."
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["x", "y"],
+        "properties": { "x": { "type": "number" }, "y": { "type": "number" } }
+      },
+      "description": "Prong axis centres in the local XY plane, already pulled inside the girdle by the documented inset."
+    }
+  }
+}

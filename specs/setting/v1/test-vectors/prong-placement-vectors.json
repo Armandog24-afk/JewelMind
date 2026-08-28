@@ -1,0 +1,424 @@
+{
+  "vectors": [
+    {
+      "stoneShape": "round",
+      "lengthMm": 6.5,
+      "widthMm": 6.5,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "RADIAL",
+      "positions": [
+        {
+          "x": 3.085,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.085
+        },
+        {
+          "x": -3.085,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -3.085
+        }
+      ]
+    },
+    {
+      "stoneShape": "round",
+      "lengthMm": 6.5,
+      "widthMm": 6.5,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "RADIAL",
+      "positions": [
+        {
+          "x": 3.085,
+          "y": 0.0
+        },
+        {
+          "x": 1.5425,
+          "y": 2.671688371
+        },
+        {
+          "x": -1.5425,
+          "y": 2.671688371
+        },
+        {
+          "x": -3.085,
+          "y": 0.0
+        },
+        {
+          "x": -1.5425,
+          "y": -2.671688371
+        },
+        {
+          "x": 1.5425,
+          "y": -2.671688371
+        }
+      ]
+    },
+    {
+      "stoneShape": "oval",
+      "lengthMm": 8.0,
+      "widthMm": 6.0,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.8349998,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.835
+        },
+        {
+          "x": -2.834999974,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -3.834999755
+        }
+      ]
+    },
+    {
+      "stoneShape": "oval",
+      "lengthMm": 8.0,
+      "widthMm": 6.0,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.8349998,
+          "y": 0.0
+        },
+        {
+          "x": 1.804955434,
+          "y": 3.126274517
+        },
+        {
+          "x": -1.804953117,
+          "y": 3.126270504
+        },
+        {
+          "x": -2.834999974,
+          "y": 0.0
+        },
+        {
+          "x": -1.804954518,
+          "y": -3.12627293
+        },
+        {
+          "x": 1.804951512,
+          "y": -3.126267724
+        }
+      ]
+    },
+    {
+      "stoneShape": "marquise",
+      "lengthMm": 10.0,
+      "widthMm": 5.0,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.335,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 4.835
+        },
+        {
+          "x": -2.335,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -4.835
+        }
+      ]
+    },
+    {
+      "stoneShape": "marquise",
+      "lengthMm": 10.0,
+      "widthMm": 5.0,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.335,
+          "y": 0.0
+        },
+        {
+          "x": 2.082563509,
+          "y": 3.607105808
+        },
+        {
+          "x": -2.082563509,
+          "y": 3.607105808
+        },
+        {
+          "x": -2.335,
+          "y": 0.0
+        },
+        {
+          "x": -2.082563509,
+          "y": -3.607105808
+        },
+        {
+          "x": 2.082563509,
+          "y": -3.607105808
+        }
+      ]
+    },
+    {
+      "stoneShape": "pear",
+      "lengthMm": 9.0,
+      "widthMm": 6.0,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.83495037,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 4.335
+        },
+        {
+          "x": -2.83495037,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -4.335
+        }
+      ]
+    },
+    {
+      "stoneShape": "pear",
+      "lengthMm": 9.0,
+      "widthMm": 6.0,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.83495037,
+          "y": 0.0
+        },
+        {
+          "x": 1.866057159,
+          "y": 3.232105808
+        },
+        {
+          "x": -1.866057159,
+          "y": 3.232105808
+        },
+        {
+          "x": -2.83495037,
+          "y": 0.0
+        },
+        {
+          "x": -2.066999297,
+          "y": -3.580147801
+        },
+        {
+          "x": 2.066999297,
+          "y": -3.580147801
+        }
+      ]
+    },
+    {
+      "stoneShape": "emerald",
+      "lengthMm": 8.0,
+      "widthMm": 6.0,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.835,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.835
+        },
+        {
+          "x": -2.835,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -3.835
+        }
+      ]
+    },
+    {
+      "stoneShape": "emerald",
+      "lengthMm": 8.0,
+      "widthMm": 6.0,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 2.835,
+          "y": 0.0
+        },
+        {
+          "x": 2.264550808,
+          "y": 3.922317055
+        },
+        {
+          "x": -2.262157581,
+          "y": 3.918171865
+        },
+        {
+          "x": -2.835,
+          "y": 0.0
+        },
+        {
+          "x": -2.264550808,
+          "y": -3.922317055
+        },
+        {
+          "x": 2.262157581,
+          "y": -3.918171865
+        }
+      ]
+    },
+    {
+      "stoneShape": "princess",
+      "lengthMm": 6.5,
+      "widthMm": 6.5,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 3.085,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.085
+        },
+        {
+          "x": -3.085,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -3.085
+        }
+      ]
+    },
+    {
+      "stoneShape": "princess",
+      "lengthMm": 6.5,
+      "widthMm": 6.5,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 3.085,
+          "y": 0.0
+        },
+        {
+          "x": 2.137291281,
+          "y": 3.70189709
+        },
+        {
+          "x": -2.137291281,
+          "y": 3.70189709
+        },
+        {
+          "x": -3.085,
+          "y": 0.0
+        },
+        {
+          "x": -2.137291281,
+          "y": -3.70189709
+        },
+        {
+          "x": 2.137291281,
+          "y": -3.70189709
+        }
+      ]
+    },
+    {
+      "stoneShape": "cushion",
+      "lengthMm": 7.0,
+      "widthMm": 7.0,
+      "prongCount": 4,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 3.335,
+          "y": 0.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.335
+        },
+        {
+          "x": -3.335,
+          "y": 0.0
+        },
+        {
+          "x": -0.0,
+          "y": -3.335
+        }
+      ]
+    },
+    {
+      "stoneShape": "cushion",
+      "lengthMm": 7.0,
+      "widthMm": 7.0,
+      "prongCount": 6,
+      "prongRadiusMm": 0.55,
+      "strategy": "OUTLINE_CARDINAL",
+      "positions": [
+        {
+          "x": 3.335,
+          "y": 0.0
+        },
+        {
+          "x": 2.147830378,
+          "y": 3.720151342
+        },
+        {
+          "x": -2.147904294,
+          "y": 3.720279367
+        },
+        {
+          "x": -3.335,
+          "y": 0.0
+        },
+        {
+          "x": -2.147830378,
+          "y": -3.720151342
+        },
+        {
+          "x": 2.147904294,
+          "y": -3.720279367
+        }
+      ]
+    }
+  ]
+}

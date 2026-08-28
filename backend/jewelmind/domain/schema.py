@@ -19,7 +19,7 @@ SCHEMA_VERSION = "0.1.0"
 
 BandProfile = Literal["comfort_fit", "flat"]
 StoneShape = Literal["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"]
-SettingType = Literal["prong"]
+SettingType = Literal["prong", "bezel"]
 MetalType = Literal[
     "yellow_gold_18k",
     "white_gold_18k",
@@ -140,6 +140,29 @@ class StoneSpec(StrictModel):
 
 
 class SettingSpec(StrictModel):
+    """A MINOR, additive Sprint 19 change (see
+    docs/bible/05-jdl/081-schema-versioning-and-migrations.md's MINOR
+    definition) — `type` gains the `bezel` enum member and two optional
+    bezel fields are added, so every existing prong document keeps
+    validating and generating exactly as before.
+
+    The prong fields keep their defaults and are therefore never *required*
+    for a bezel setting; they are simply unread. Likewise the bezel fields
+    are unread for a prong setting. Sprint 19 deliberately did NOT split
+    this into a discriminated union at the JDL layer: that would be a
+    breaking change to a published schema for no capability gain. The
+    discriminated model exists one layer in, as
+    `setting/models.py::ProngSettingDefinition` / `BezelSettingDefinition`,
+    with `ring/setting_adapter.py` as the compatibility adapter (brief
+    section 30).
+
+    `bezelWallThickness`/`bezelWallHeight` defaults are **PRELIMINARY
+    SOFTWARE VALUES**, in the same class as `band.width = 2.4` — deliberate,
+    configurable software choices chosen to produce robust geometry. They
+    are NOT professional recommendations and must never be described as
+    such (SETTING-GOV-010).
+    """
+
     type: SettingType = "prong"
     # Not a Literal[4, 6]: an out-of-set value must surface as a structured
     # JM-PRONG-001 validation result, not a raw pydantic parse error.
@@ -147,6 +170,8 @@ class SettingSpec(StrictModel):
     prongDiameter: float = Field(default=1.1, allow_inf_nan=False)
     prongHeight: float = Field(default=4.8, allow_inf_nan=False)
     basketHeight: float = Field(default=3.5, allow_inf_nan=False)
+    bezelWallThickness: float = Field(default=0.6, allow_inf_nan=False)
+    bezelWallHeight: float = Field(default=2.5, allow_inf_nan=False)
 
 
 class MaterialSpec(StrictModel):

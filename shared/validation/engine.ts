@@ -128,8 +128,47 @@ function stoneRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+// BEZEL_ONLY (Sprint 19). Constructibility invariants only — no minimum
+// bezel wall dimension is asserted, because no sourced professional value
+// exists and inventing one is forbidden (SETTING-GOV-010).
+function bezelRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+
+  if (d.setting.type !== 'bezel') {
+    return out
+  }
+
+  if (d.setting.bezelWallThickness <= 0) {
+    out.push({
+      ruleId: RULE_IDS.BEZEL_WALL_THICKNESS_POSITIVE,
+      severity: 'error',
+      message: 'Bezel wall thickness must be positive.',
+      parameter: 'setting.bezelWallThickness',
+    })
+  }
+
+  if (d.setting.bezelWallHeight <= 0) {
+    out.push({
+      ruleId: RULE_IDS.BEZEL_WALL_HEIGHT_POSITIVE,
+      severity: 'error',
+      message: 'Bezel wall height must be positive.',
+      parameter: 'setting.bezelWallHeight',
+    })
+  }
+
+  return out
+}
+
+// PRONG_ONLY (Sprint 19) — mirrors backend/jewelmind/validation/engine.py
+// ::_prong_rules exactly (FORGE-GOV-004). Every rule here reads a prong
+// field, so none is meaningful for a bezel setting; evaluating them would
+// block a valid bezel on setting.prongCount.
 function prongRules(d: JewelryDefinition): ValidationResult[] {
   const out: ValidationResult[] = []
+
+  if (d.setting.type !== 'prong') {
+    return out
+  }
 
   if (d.setting.prongCount !== 4 && d.setting.prongCount !== 6) {
     out.push({
@@ -257,6 +296,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...bandRules(definition),
     ...stoneRules(definition),
     ...prongRules(definition),
+    ...bezelRules(definition),
     ...settingRules(definition),
     ...manufacturingRules(definition),
     ...geometryRules(definition),

@@ -1,0 +1,155 @@
+{
+  "settings": [
+    {
+      "settingType": "prong",
+      "status": "CURRENT",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round"
+      ],
+      "stoneShapesExperimental": [
+        "oval",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "pear"
+      ],
+      "stoneShapesUnsupported": [],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE_STONE"
+      ],
+      "seatSupport": "PLANNED",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.0.0",
+      "description": "Cylindrical reference prongs. RADIAL placement for round (byte-identical to pre-Sprint-19); OUTLINE_CARDINAL placement for non-round shapes. No seat, bearing, or cutter geometry exists."
+    },
+    {
+      "settingType": "bezel",
+      "status": "CURRENT",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round",
+        "oval"
+      ],
+      "stoneShapesExperimental": [
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "pear"
+      ],
+      "stoneShapesUnsupported": [],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE_STONE"
+      ],
+      "seatSupport": "PLANNED",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.0.0",
+      "description": "Parametric wall built by offsetting the stone's own girdle outline, so the pipeline is outline-agnostic rather than per-shape. Wall thickness/height are preliminary software values, not professional recommendations. No seat, bearing, or cutter geometry exists."
+    }
+  ],
+  "reservedFamilies": [
+    "channel",
+    "flush",
+    "bar",
+    "tension",
+    "bead",
+    "pave",
+    "custom"
+  ],
+  "compatibilityMatrix": [
+    {
+      "settingType": "bezel",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "oval",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    }
+  ]
+}

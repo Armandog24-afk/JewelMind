@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/setting-capability.schema.json",
+  "title": "SettingCapability",
+  "description": "Mirrors backend/jewelmind/setting/capability.py::SettingCapability exactly. One entry per implemented Setting family. `generatable` and `professionalValidationStatus` are rigorously independent: a generatable setting is never, by that fact, professionally validated (SETTING-GOV-007). See docs/bible/21-setting/setting-capability-model.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["settingType", "status", "generatable", "inspectable", "categoryNeutral", "stoneShapesSupported", "stoneShapesExperimental", "stoneShapesUnsupported", "stoneSourceModesSupported", "seatSupport", "bearingSupport", "cutterSupport", "professionalValidationStatus", "settingGeometryVersion", "description"],
+  "properties": {
+    "settingType": { "enum": ["prong", "bezel"] },
+    "status": { "$ref": "#/$defs/capabilityStatus" },
+    "generatable": { "type": "boolean" },
+    "inspectable": { "type": "boolean" },
+    "categoryNeutral": { "type": "boolean", "description": "Whether the family's generator is free of any jewelry-category dependency." },
+    "stoneShapesSupported": { "type": "array", "items": { "type": "string" }, "description": "SUPPORTED_SOFTWARE: geometry was designed for this shape. Still not professionally validated." },
+    "stoneShapesExperimental": { "type": "array", "items": { "type": "string" }, "description": "Generates real geometry via a provisional strategy." },
+    "stoneShapesUnsupported": { "type": "array", "items": { "type": "string" } },
+    "stoneSourceModesSupported": { "type": "array", "items": { "type": "string" } },
+    "seatSupport": { "$ref": "#/$defs/capabilityStatus", "description": "PLANNED for every family: no seat geometry exists. Stone/metal overlap is NOT a seat." },
+    "bearingSupport": { "$ref": "#/$defs/capabilityStatus" },
+    "cutterSupport": { "$ref": "#/$defs/capabilityStatus" },
+    "professionalValidationStatus": { "enum": ["NOT_REVIEWED", "IN_REVIEW", "VALIDATED"] },
+    "settingGeometryVersion": { "type": "string" },
+    "description": { "type": "string" }
+  },
+  "$defs": {
+    "capabilityStatus": { "enum": ["CURRENT", "PARTIAL", "PLANNED", "BLOCKED", "OUT_OF_SCOPE"] }
+  }
+}

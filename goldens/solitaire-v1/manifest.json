@@ -74,6 +74,26 @@
     {
       "goldenId": "SOL-018-marquise-solitaire",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "SET-001-round-4-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SET-002-round-6-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SET-003-oval-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SET-004-round-bezel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SET-005-oval-bezel",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -99,7 +119,12 @@
     "SOL-015-emerald-solitaire",
     "SOL-016-cushion-solitaire",
     "SOL-017-princess-solitaire",
-    "SOL-018-marquise-solitaire"
+    "SOL-018-marquise-solitaire",
+    "SET-001-round-4-prong",
+    "SET-002-round-6-prong",
+    "SET-003-oval-prong",
+    "SET-004-round-bezel",
+    "SET-005-oval-bezel"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

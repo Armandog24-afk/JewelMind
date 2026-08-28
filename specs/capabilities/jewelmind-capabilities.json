@@ -1,0 +1,618 @@
+{
+  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Generated from a single authored source during Sprint 19 and validated by backend/tests/test_capability_coverage.py.",
+  "statusValues": [
+    "CURRENT",
+    "PARTIAL",
+    "PLANNED",
+    "BLOCKED",
+    "OUT_OF_SCOPE"
+  ],
+  "capabilities": [
+    {
+      "domain": "setting",
+      "capability": "prong_setting",
+      "status": "CURRENT",
+      "note": "geometry/setting + prong.py; 4/6 prongs; RADIAL + OUTLINE_CARDINAL placement."
+    },
+    {
+      "domain": "setting",
+      "capability": "bezel_setting",
+      "status": "CURRENT",
+      "note": "geometry/setting + bezel.py; outline-offset wall; round/oval proven."
+    },
+    {
+      "domain": "setting",
+      "capability": "channel_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "flush_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "bar_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "tension_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "bead_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "pave_setting",
+      "status": "PLANNED",
+      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "custom_setting",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved; must reuse component roles, attachment interface, inspection, capability metadata."
+    },
+    {
+      "domain": "setting",
+      "capability": "imported_setting_component",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved; not implemented."
+    },
+    {
+      "domain": "setting",
+      "capability": "stone_seat",
+      "status": "PLANNED",
+      "note": "No seat geometry exists. Stone/metal overlap is NOT a seat."
+    },
+    {
+      "domain": "setting",
+      "capability": "bearing",
+      "status": "PLANNED",
+      "note": "No bearing geometry exists."
+    },
+    {
+      "domain": "setting",
+      "capability": "cutter",
+      "status": "PLANNED",
+      "note": "No cutter geometry exists."
+    },
+    {
+      "domain": "setting",
+      "capability": "prong_style_round",
+      "status": "CURRENT",
+      "note": "Cylindrical reference prong."
+    },
+    {
+      "domain": "setting",
+      "capability": "prong_style_claw",
+      "status": "PLANNED",
+      "note": "Sprint 23 territory."
+    },
+    {
+      "domain": "setting",
+      "capability": "prong_style_v_prong",
+      "status": "PLANNED",
+      "note": "Needed for real pear/marquise tip protection; not implemented."
+    },
+    {
+      "domain": "setting",
+      "capability": "shape_aware_prong_placement",
+      "status": "PARTIAL",
+      "note": "OUTLINE_CARDINAL is provisional software placement, EXPERIMENTAL for every non-round shape."
+    },
+    {
+      "domain": "setting",
+      "capability": "setting_attachment_interface",
+      "status": "CURRENT",
+      "note": "setting/models.py::SettingAttachmentInterface, consumed by the RingHead."
+    },
+    {
+      "domain": "setting",
+      "capability": "setting_runtime_inspection",
+      "status": "CURRENT",
+      "note": "8 SETTING_*/BEZEL_* inspection facts."
+    },
+    {
+      "domain": "setting",
+      "capability": "setting_golden_regression",
+      "status": "CURRENT",
+      "note": "SET-001..SET-005 plus the 18 pre-existing solitaire goldens."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "round",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "oval",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "pear",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "emerald",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "cushion",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "princess",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "marquise",
+      "status": "CURRENT",
+      "note": "Real parametric reference geometry (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "asscher",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "radiant",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "heart",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "trillion",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "baguette",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "cabochon",
+      "status": "PLANNED",
+      "note": "Requires an RFC; no geometry."
+    },
+    {
+      "domain": "stone_source_mode",
+      "capability": "parametric_reference_stone",
+      "status": "CURRENT",
+      "note": "The only implemented source mode."
+    },
+    {
+      "domain": "stone_source_mode",
+      "capability": "measured_stone",
+      "status": "PLANNED",
+      "note": "Supplier dimensions / scan / imported CAD. ADR required."
+    },
+    {
+      "domain": "stone_source_mode",
+      "capability": "custom_outline",
+      "status": "PLANNED",
+      "note": "Bezel pipeline is already outline-agnostic, so this is architecturally reachable."
+    },
+    {
+      "domain": "stone",
+      "capability": "faceted_gem_model",
+      "status": "PLANNED",
+      "note": "Reference geometry only today. ADR required."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "single_center",
+      "status": "CURRENT",
+      "note": "The only implemented arrangement."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "three_stone",
+      "status": "PLANNED",
+      "note": "Multi-stone arrangement. RFC required; StoneArrangementDefinition supports only SINGLE_CENTER today."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "halo",
+      "status": "PLANNED",
+      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "pave",
+      "status": "PLANNED",
+      "note": "Multi-stone arrangement. RFC required; pave boundaries would consume the stone outline contract."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "eternity",
+      "status": "PLANNED",
+      "note": "Multi-stone arrangement around the full shank. RFC required; no arrangement geometry exists."
+    },
+    {
+      "domain": "stone_arrangement",
+      "capability": "cluster",
+      "status": "PLANNED",
+      "note": "Multi-stone arrangement. RFC required; no arrangement geometry exists."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "solitaire",
+      "status": "CURRENT",
+      "note": "The only implemented family."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "three_stone",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "toi_et_moi",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "halo",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "eternity",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "half_eternity",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "signet",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "plain_band",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "cluster",
+      "status": "PLANNED",
+      "note": "Reserved name; no generator."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "ring",
+      "status": "CURRENT",
+      "note": "generationSupported."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "earring",
+      "status": "PLANNED",
+      "note": "Recognized, never advertised as working."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "pendant",
+      "status": "PLANNED",
+      "note": "Recognized, never advertised as working."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "bracelet",
+      "status": "PLANNED",
+      "note": "Recognized, never advertised as working."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "necklace",
+      "status": "PLANNED",
+      "note": "Recognized, never advertised as working."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "charm",
+      "status": "PLANNED",
+      "note": "Recognized, never advertised as working."
+    },
+    {
+      "domain": "jewelry_category",
+      "capability": "custom_category",
+      "status": "PLANNED",
+      "note": "Escape hatch; dispatch boundary proven generic by test."
+    },
+    {
+      "domain": "shank",
+      "capability": "uniform_shank",
+      "status": "CURRENT",
+      "note": "Byte-identical pre-Sprint-17 revolve."
+    },
+    {
+      "domain": "shank",
+      "capability": "width_thickness_taper",
+      "status": "CURRENT",
+      "note": "TOWARD_BOTTOM, linear."
+    },
+    {
+      "domain": "shank",
+      "capability": "split_shank",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "cathedral",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "knife_edge",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "euro_shank",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "twisted",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "multi_rail",
+      "status": "PLANNED",
+      "note": "Reserved; no geometry."
+    },
+    {
+      "domain": "shank",
+      "capability": "tapered_shank_outer_fillet",
+      "status": "PLANNED",
+      "note": "Known v1 limitation."
+    },
+    {
+      "domain": "finding",
+      "capability": "generic_finding",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "component",
+      "capability": "user_component",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "component",
+      "capability": "imported_cad_component",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "decoration",
+      "capability": "engraving",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "decoration",
+      "capability": "custom_pattern",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "decoration",
+      "capability": "freeform_modeling",
+      "status": "OUT_OF_SCOPE",
+      "note": "Not a parametric-CAD goal for this product."
+    },
+    {
+      "domain": "material",
+      "capability": "metal_metadata",
+      "status": "CURRENT",
+      "note": "5 metals; metadata/validation-context only, never geometry."
+    },
+    {
+      "domain": "material",
+      "capability": "external_material_profile",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "material",
+      "capability": "density_and_weight",
+      "status": "PLANNED",
+      "note": "No sourced densities; must not be invented."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "lost_wax_casting_context",
+      "status": "CURRENT",
+      "note": "Validation context only."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "direct_resin_printing_context",
+      "status": "CURRENT",
+      "note": "Validation context + 1 rule."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "external_manufacturing_profile",
+      "status": "PLANNED",
+      "note": "Escape hatch reserved."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "casting_sprues",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "batch_layout",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "manufacturing",
+      "capability": "mesh_printability_analysis",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "reporting",
+      "capability": "technical_specification",
+      "status": "CURRENT",
+      "note": "Markdown export incl. setting + capability status."
+    },
+    {
+      "domain": "reporting",
+      "capability": "bom_costing",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "interoperability",
+      "capability": "step_export",
+      "status": "CURRENT",
+      "note": "Real STEP; no native-CAD-history claim."
+    },
+    {
+      "domain": "interoperability",
+      "capability": "stl_export",
+      "status": "CURRENT",
+      "note": "Real STL; derived one-way artifact."
+    },
+    {
+      "domain": "interoperability",
+      "capability": "external_cad_workflow_validation",
+      "status": "PLANNED",
+      "note": "No recorded import test run; must report zero."
+    },
+    {
+      "domain": "history",
+      "capability": "project_versioning",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "library",
+      "capability": "component_library",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "studio",
+      "capability": "parameter_editor",
+      "status": "CURRENT",
+      "note": "Capability-driven shape + setting selectors."
+    },
+    {
+      "domain": "vision",
+      "capability": "technical_and_presentation_view",
+      "status": "CURRENT",
+      "note": "Renders real backend geometry only."
+    },
+    {
+      "domain": "designer",
+      "capability": "natural_language_interpretation",
+      "status": "CURRENT",
+      "note": "Proposal-only; capability-gated."
+    },
+    {
+      "domain": "designer",
+      "capability": "live_provider_credential",
+      "status": "BLOCKED",
+      "note": "No credential in this environment; deterministic pipeline fully covered by FakeDesignerProvider."
+    },
+    {
+      "domain": "conversation",
+      "capability": "multi_turn_modification",
+      "status": "CURRENT",
+      "note": "Structured actions; hash-versioned proposals."
+    },
+    {
+      "domain": "commercial",
+      "capability": "auth_payments_marketplace",
+      "status": "OUT_OF_SCOPE",
+      "note": "Explicitly excluded by README/CLAUDE.md."
+    },
+    {
+      "domain": "sdk",
+      "capability": "public_sdk",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "collaboration",
+      "capability": "multi_user",
+      "status": "OUT_OF_SCOPE",
+      "note": "Explicitly excluded."
+    },
+    {
+      "domain": "retail",
+      "capability": "configurator",
+      "status": "PLANNED",
+      "note": "Not implemented."
+    },
+    {
+      "domain": "professional_validation",
+      "capability": "evidence_backed_review_records",
+      "status": "CURRENT",
+      "note": "Framework exists; active registry deliberately holds ZERO records."
+    },
+    {
+      "domain": "professional_validation",
+      "capability": "validated_setting_geometry",
+      "status": "PLANNED",
+      "note": "Every setting is NOT_REVIEWED. No human evidence exists."
+    }
+  ]
+}

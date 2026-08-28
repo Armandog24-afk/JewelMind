@@ -1,6 +1,6 @@
 {
-  "registryVersion": "1.1.0",
-  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) \u2014 inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26",
+  "registryVersion": "1.2.0",
+  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) \u2014 inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26; extended with the 8 SETTING_*/BEZEL_* facts during Sprint 19 (inspector.py::_setting_facts), 2026-08-27",
   "facts": [
     {
       "factType": "SHAPE_EXISTS",
@@ -221,12 +221,93 @@
       "implementationStatus": "implemented",
       "sourceInspection": "Shape.BoundingBox()",
       "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_TYPE",
+      "meaning": "The Setting family that was generated (prong/bezel).",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_COMPATIBILITY_STATUS",
+      "meaning": "The recorded Stone x Setting compatibility for this combination (SUPPORTED_SOFTWARE/EXPERIMENTAL/UNSUPPORTED). A recorded capability fact, never a professional judgement.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_COMPONENT_COUNT",
+      "meaning": "Number of components the Setting generated.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_REQUESTED_PRONG_COUNT",
+      "meaning": "Prong count requested. Prong family only.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_GENERATED_PRONG_COUNT",
+      "meaning": "Prong count actually generated. Prong family only.",
+      "valueType": "integer",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_PLACEMENT_STRATEGY",
+      "meaning": "Which placement strategy produced the prong positions (RADIAL/OUTLINE_CARDINAL). Prong family only.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "BEZEL_OUTLINE_SOURCE",
+      "meaning": "Which geometry the bezel path was derived from. Bezel family only.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "BEZEL_WALL_CONTINUOUS",
+      "meaning": "Whether the bezel wall is exactly one closed solid. A topological fact only, never a claim about professional stone coverage. Bezel family only.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
     }
   ],
   "notes": [
     "No fact type in this registry encodes a professional or manufacturing threshold \u2014 every 'meaning' describes a geometric measurement or a structural presence/absence check only.",
     "forgeConsumptionStatus is 'not_consumed' for every fact as of Sprint 14: Forge's real rule engine (backend/jewelmind/validation/engine.py) does not yet read GeometricFact objects \u2014 see docs/bible/16-geometry-inspection/487-forge-fact-contract.md for the kernel-neutral contract this registry establishes for a future integration, and 494-current-runtime-inspection-gap-analysis.md for why the wiring itself was not done this Sprint (a deliberate, documented scope boundary, not an oversight).",
     "The 6 STONE_REQUESTED_*/STONE_MEASURED_* facts (Sprint 18) deliberately pair a CONSTRUCTION_PARAMETER with an independently MEASURED_GEOMETRY counterpart so an accidental scaling or shape regression is observable as a divergence between them \u2014 compared with a software geometry tolerance, never a professional or manufacturing tolerance. See docs/bible/20-stone/574-stone-inspection-contract.md.",
-    "STONE_MEASURED_LENGTH/WIDTH derive from an axis-aligned bounding box, so they isolate LENGTH from WIDTH exactly only at stone.orientation == 0. This is a real, documented limitation of the current measurement, not an assumed exactness for every orientation."
+    "STONE_MEASURED_LENGTH/WIDTH derive from an axis-aligned bounding box, so they isolate LENGTH from WIDTH exactly only at stone.orientation == 0. This is a real, documented limitation of the current measurement, not an assumed exactness for every orientation.",
+    "The 8 SETTING_*/BEZEL_* facts (Sprint 19) report what the Setting System built and which recorded compatibility status applies. SETTING_COMPATIBILITY_STATUS and BEZEL_WALL_CONTINUOUS are deliberately NOT quality judgements: the first echoes the capability registry, the second is pure topology. Professional interpretation belongs to Forge/Professional Validation (SETTING-GOV-016). Prong-only facts are emitted only for the prong family and bezel-only facts only for bezel, so a fact's presence is itself honest about what was generated."
   ]
 }

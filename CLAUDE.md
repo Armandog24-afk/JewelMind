@@ -69,15 +69,19 @@ changes, especially anything touching `backend/jewelmind/geometry/`,
   kept in sync by hand).
 - Validation rules: `backend/jewelmind/validation/engine.py` (authoritative)
   + `shared/validation/engine.ts` (frontend mirror).
-- Geometry builders: `backend/jewelmind/geometry/components/*.py` (band
-  and stone are thin re-exports of `geometry/shank/build_shank()` and
-  `geometry/stone/build_stone()`; prongs, basket are real) +
+- Geometry builders: `backend/jewelmind/geometry/components/*.py` (band,
+  stone and prongs are thin re-exports of `geometry/shank/build_shank()`,
+  `geometry/stone/build_stone()` and the Setting System; basket is real) +
   `geometry/shank/` (the Shank subsystem: profile, taper, builder,
   capability) + `geometry/stone/` (the Stone System: outline, builder,
-  capability, errors) + `domain/stone_dimensions.py` (the shared
-  LENGTH/WIDTH/DEPTH resolution both Atlas and Forge depend on) +
-  `geometry/connection.py` (Shank → RingHead interface) +
-  `geometry/assemblies/solitaire.py` (combines them).
+  capability, errors) + `jewelmind/setting/` (the Setting System —
+  category-neutral: models, capability, stone_interface, placement,
+  prong, bezel, dispatch; never imports Ring) +
+  `domain/stone_dimensions.py` (the shared LENGTH/WIDTH/DEPTH resolution
+  both Atlas and Forge depend on) + `geometry/connection.py` (Shank →
+  RingHead interface) + `geometry/setting_adapter.py` (JewelryDefinition
+  → Setting contracts; the Ring-side translation point) +
+  `geometry/assemblies/solitaire.py` (the RingHead — combines them).
 - Coordinate convention: `backend/jewelmind/geometry/constants.py`,
   documented in `docs/geometry-conventions.md`.
 - Exporters: `backend/jewelmind/exporters/` (STEP, STL, JSON,
@@ -1345,6 +1349,90 @@ examples, and 5 test-vector files). Future coding agents must:
   see [`docs/bible/04-jewelry-domain/056-domain-extension-strategy.md`](docs/bible/04-jewelry-domain/056-domain-extension-strategy.md)
   — or for multi-stone arrangements (halo, pavé, three-stone).
 
+## SETTING SYSTEM RULES
+
+`docs/bible/21-setting/` is the authoritative Setting System
+specification — start at
+[`docs/bible/21-setting/README.md`](docs/bible/21-setting/README.md),
+then [`setting-governance.md`](docs/bible/21-setting/setting-governance.md)
+for the full 18 SETTING-GOV rules. The machine-readable half lives in
+[`specs/setting/v1/`](specs/setting/v1/README.md). Future coding agents
+must:
+
+- **Read `docs/bible/21-setting/README.md` before changing setting
+  geometry** — before modifying anything in
+  `backend/jewelmind/setting/`, `backend/jewelmind/geometry/setting_adapter.py`,
+  or `domain/schema.py::SettingSpec`.
+- **Treat Setting System as category-neutral** — a Setting defines how
+  metal interacts with stones. A RingHead defines how a setting is
+  incorporated into a ring. Those are different jobs.
+- **Never import Ring into Setting core** — nothing under
+  `jewelmind/setting/` may import `jewelmind.ring`,
+  `jewelmind.jewelry_category`, `jewelmind.geometry.shank`,
+  `jewelmind.geometry.connection`, `geometry/setting_adapter.py`, or
+  `JewelryDefinition` (the last would smuggle the whole ring domain
+  across in one import). Enforced by AST inspection in
+  `backend/tests/test_setting_system_no_ring_dependency.py`. Ring may
+  import Setting; the adapter is the sanctioned translation point and
+  lives deliberately outside the Setting package (SETTING-GOV-001).
+- **Use Stone System geometry contracts rather than round-only
+  assumptions** — consume `StoneSettingReference` and
+  `girdle_outline_wire()`; never read `stone.diameter` (it is `None` for
+  every non-round shape) and never rebuild a stone silhouette
+  (SETTING-GOV-003/008).
+- **Keep Setting generation capability separate from professional
+  validation** — `generatable` and `professionalValidationStatus` are
+  independent axes. Every family is currently `generatable: true` AND
+  `NOT_REVIEWED`; a generatable setting is never, by that fact,
+  professionally validated (SETTING-GOV-007).
+- **Never invent setter or manufacturing thresholds** — bezel wall
+  thickness/height defaults are PRELIMINARY SOFTWARE VALUES, and **no
+  minimum wall dimension is enforced** because no sourced professional
+  minimum exists. The only constants in the package are construction
+  parameters (SETTING-GOV-010).
+- **Preserve StoneReference non-production status** — never return the
+  stone as a `productionComponent`, never fuse it into metal, and keep
+  it excluded from STEP/STL by default (SETTING-GOV-004, LAW-006).
+- **Keep Setting attachment explicit** — a Setting receives
+  `attachmentPlaneZMm`/`embedMm`/`supportHeightMm` from the category
+  integration and must never compute them from a band, shank, or
+  ring-size field (SETTING-GOV-014).
+- **Scope Setting-specific Forge rules correctly** — all four
+  `JM-PRONG-*` rules are PRONG_ONLY and `JM-SETTING-003/004` are
+  BEZEL_ONLY. A prong rule must never block a valid bezel. Mirror any
+  change identically in `shared/validation/engine.ts` (SETTING-GOV, FORGE-GOV-004).
+- **Add capability metadata for every Setting family** —
+  `setting/capability.py::SETTING_CAPABILITIES` is the single source of
+  truth, mirrored (never hand-duplicated) at
+  `specs/setting/v1/setting-registry.json`. Reserved families must have
+  no generator and must not be `SettingFamily` enum members
+  (SETTING-GOV-005).
+- **Add Geometry Inspection and Golden coverage for every real Setting
+  family** — a new family needs real inspection facts and its own new
+  Golden case; never retrofit an existing one (SETTING-GOV-015).
+- **Never silently substitute another Setting when generation fails** —
+  no `BEZEL → PRONG` path and no `OUTLINE_CARDINAL → RADIAL` downgrade.
+  Any documented geometric accommodation must be recorded as an
+  observable `SettingFallbackEvent` (SETTING-GOV-013).
+- **Preserve custom-Setting and imported-Setting escape hatches** — the
+  generator registry must stay a registry, not an `if/elif` chain, so a
+  future custom setting remains reachable (SETTING-GOV-018).
+- **Keep seats/bearings/cutters status explicit** — all three are
+  `PLANNED` for every family because **none exists**. Stone/metal
+  overlap is NOT a seat and must never be renamed as one
+  (SETTING-GOV-011).
+- **Run old and new Golden suites after Setting changes** — all 23
+  cases. Round 4/6-prong must stay byte-identical
+  (`341.44334316909976 mm³`); a non-round change must go through
+  `generate-candidate → diff → accept --reason`, never an automatic
+  regeneration (SETTING-GOV-017).
+- **Keep the Capability Coverage Guard honest** —
+  `specs/capabilities/jewelmind-capabilities.json` must be updated with
+  any capability change, and `CURRENT` requires real implementation AND
+  tests. `backend/tests/test_capability_coverage.py` checks it against
+  the live registries.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules from Sprint 15
-(above) — they apply to every future sprint, not only Geometry Quality,
-Ring Architecture, Shank, or Stone changes.
+(above) and the **CAPABILITY COVERAGE GUARD** — they apply to every
+future sprint, not only Geometry Quality, Ring Architecture, Shank,
+Stone, or Setting changes.

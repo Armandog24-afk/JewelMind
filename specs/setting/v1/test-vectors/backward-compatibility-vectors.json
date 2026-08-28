@@ -1,0 +1,13 @@
+{
+  "description": "A pre-Sprint-19 prong document still produces the byte-identical fused metal volume.",
+  "vectors": [
+    {
+      "settingType": "prong",
+      "prongCount": 6,
+      "stoneShape": "round",
+      "expectedCombinedMetalVolumeMm3": 341.44334316909976,
+      "expectedProngVolumeMm3": 29.650351464580467,
+      "expectedPlacementStrategy": "RADIAL"
+    }
+  ]
+}

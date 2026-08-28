@@ -159,7 +159,18 @@ def generate_model(definition: JewelryDefinition) -> GenerateResponse:
             "componentVolumesMm3": gm.component_volumes(),
             "combinedMetalVolumeMm3": gm.combined_metal_volume_mm3,
             "boundingBoxMm": gm.bounding_box.as_dict(),
-            "prongs": record.generated_model.components["prongs"].metadata,
+            # Sprint 19: setting-family-aware. Indexing "prongs" directly
+            # raised KeyError for a bezel model, which has no prongs. The
+            # key is preserved for backward compatibility and is None when
+            # the setting family produced no prong component.
+            "prongs": (
+                gm.components["prongs"].metadata if "prongs" in gm.components else None
+            ),
+            "setting": (
+                gm.setting_result.model_dump(mode="json")
+                if getattr(gm, "setting_result", None) is not None
+                else None
+            ),
             "inspection": _inspection_summary(record),
         },
         previewComponents=preview_components,

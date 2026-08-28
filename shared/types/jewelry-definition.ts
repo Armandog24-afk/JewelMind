@@ -14,7 +14,7 @@ export const SCHEMA_VERSION = '0.1.0'
 
 export type BandProfile = 'comfort_fit' | 'flat'
 export type StoneShape = 'round' | 'oval' | 'pear' | 'emerald' | 'cushion' | 'princess' | 'marquise'
-export type SettingType = 'prong'
+export type SettingType = 'prong' | 'bezel'
 export type MetalType =
   | 'yellow_gold_18k'
   | 'white_gold_18k'
@@ -72,6 +72,14 @@ export interface SettingSpec {
   prongDiameter: number
   prongHeight: number
   basketHeight: number
+  /**
+   * Bezel-family parameters (Sprint 19). Present on every definition so the
+   * flat JDL shape stays backward compatible; unread when `type === 'prong'`.
+   * The defaults are PRELIMINARY SOFTWARE VALUES, not professional
+   * recommendations - see docs/bible/21-setting/bezel-setting-contract.md.
+   */
+  bezelWallThickness: number
+  bezelWallHeight: number
 }
 
 export interface MaterialSpec {
@@ -108,6 +116,7 @@ const METAL_TYPES: readonly MetalType[] = [
   'silver',
 ]
 const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
+const SETTING_TYPES: readonly SettingType[] = ['prong', 'bezel']
 const STONE_SHAPES: readonly StoneShape[] = [
   'round',
   'oval',
@@ -209,11 +218,13 @@ export function isValidJewelryDefinition(value: unknown): value is JewelryDefini
   const setting = value['setting']
   if (
     !isPlainObject(setting) ||
-    setting['type'] !== 'prong' ||
+    !SETTING_TYPES.includes(setting['type'] as SettingType) ||
     !isFiniteNumber(setting['prongCount']) ||
     !isFiniteNumber(setting['prongDiameter']) ||
     !isFiniteNumber(setting['prongHeight']) ||
-    !isFiniteNumber(setting['basketHeight'])
+    !isFiniteNumber(setting['basketHeight']) ||
+    !isFiniteNumber(setting['bezelWallThickness']) ||
+    !isFiniteNumber(setting['bezelWallHeight'])
   ) {
     return false
   }
@@ -265,6 +276,8 @@ export function createDefaultDefinition(): JewelryDefinition {
       prongDiameter: 1.1,
       prongHeight: 4.8,
       basketHeight: 3.5,
+      bezelWallThickness: 0.6,
+      bezelWallHeight: 2.5,
     },
     material: { metal: 'yellow_gold_18k' },
     manufacturing: { method: 'lost_wax_casting' },

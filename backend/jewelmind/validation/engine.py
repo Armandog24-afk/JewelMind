@@ -150,7 +150,26 @@ def _stone_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
 
 
 def _prong_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """PRONG_ONLY (Sprint 19). Every rule in this function reads a prong
+    field, so none of them is meaningful for a bezel setting — a bezel has
+    no prongs to count, size, or clear. Evaluating them anyway would block
+    a perfectly valid bezel on `setting.prongCount`, which is exactly the
+    mis-scoping brief section 32 calls out.
+
+    Classification per rule:
+      JM-PRONG-001 (count)             PRONG_ONLY
+      JM-PRONG-002 (diameter min)      PRONG_ONLY
+      JM-PRONG-003 (count vs size)     PRONG_ONLY + ROUND_ONLY (Sprint 18)
+      JM-PRONG-004 (height vs basket)  PRONG_ONLY
+
+    See docs/bible/21-setting/code-mapping-and-gaps.md for the full
+    Setting-scoped rule table.
+    """
+
     out: list[R.ValidationResult] = []
+
+    if d.setting.type != "prong":
+        return out
 
     if d.setting.prongCount not in (4, 6):
         out.append(
@@ -210,6 +229,46 @@ def _prong_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
                 severity="error",
                 message="Prong height must be greater than basket height.",
                 parameter="setting.prongHeight",
+            )
+        )
+
+    return out
+
+
+def _bezel_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """BEZEL_ONLY (Sprint 19). Deliberately ENGINEERING_INVARIANT rules
+    only: both check that a dimension is positive, which is a
+    constructibility fact, not a jewelry-domain threshold.
+
+    No minimum bezel wall thickness or height is asserted. Such a minimum
+    would be a professional manufacturing threshold, and no sourced value
+    exists — inventing one is forbidden by SETTING-GOV-010. This is a real,
+    documented gap, not an oversight: see
+    docs/bible/21-setting/code-mapping-and-gaps.md.
+    """
+
+    out: list[R.ValidationResult] = []
+
+    if d.setting.type != "bezel":
+        return out
+
+    if d.setting.bezelWallThickness <= 0:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.BEZEL_WALL_THICKNESS_POSITIVE,
+                severity="error",
+                message="Bezel wall thickness must be positive.",
+                parameter="setting.bezelWallThickness",
+            )
+        )
+
+    if d.setting.bezelWallHeight <= 0:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.BEZEL_WALL_HEIGHT_POSITIVE,
+                severity="error",
+                message="Bezel wall height must be positive.",
+                parameter="setting.bezelWallHeight",
             )
         )
 
@@ -304,6 +363,7 @@ _RULE_GROUPS = (
     _band_rules,
     _stone_rules,
     _prong_rules,
+    _bezel_rules,
     _setting_rules,
     _manufacturing_rules,
     _geometry_rules,

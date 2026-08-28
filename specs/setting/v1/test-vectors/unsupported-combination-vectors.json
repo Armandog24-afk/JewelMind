@@ -1,0 +1,17 @@
+{
+  "description": "Combinations that must fail explicitly rather than silently substituting another setting family (SETTING-GOV-012/013). No current Stone shape is UNSUPPORTED for either family, so these vectors document the ERROR CONTRACT rather than a currently-reachable rejection.",
+  "vectors": [
+    {
+      "settingType": "channel",
+      "stoneShape": "round",
+      "expectedError": "SETTING_TYPE_UNSUPPORTED",
+      "note": "No generator registered; 'channel' is a reserved family name, not a SettingFamily enum member."
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "asscher",
+      "expectedError": "SETTING_STONE_COMBINATION_UNSUPPORTED",
+      "note": "Unreachable via JDL today (StoneShape is a closed enum) \u2014 documents the guard."
+    }
+  ]
+}

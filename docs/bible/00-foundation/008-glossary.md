@@ -210,9 +210,25 @@ princess, ...). Only `round` is implemented today — see
 [`04-jewelry-domain/046-stone-domain.md`](../04-jewelry-domain/046-stone-domain.md).
 
 **Setting** — the general concept of how a stone is physically held
-(prong, bezel, channel, pavé, ...); this project currently supports only
-prong settings. See
-[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md).
+(prong, bezel, channel, pavé, ...); this project currently supports
+**prong and bezel** settings. Since Sprint 19 the Setting System is
+shared, category-neutral infrastructure — see
+[`21-setting/README.md`](../21-setting/README.md) — and
+[`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md)
+for the jewelry-domain view.
+
+**Setting System** — the category-neutral subsystem that owns setting
+geometry (`backend/jewelmind/setting/`). It defines how metal interacts
+with stones and knows nothing about rings; a **RingHead** defines how a
+setting is incorporated into a ring. See
+[`21-setting/setting-architecture.md`](../21-setting/setting-architecture.md).
+
+**Prong placement strategy** — how prong positions are derived from a
+stone. `RADIAL` (evenly spaced angles on a circle) for a radially
+symmetric stone; `OUTLINE_CARDINAL` (sampled from the stone's own girdle
+outline) for every other shape. Resolved from the stone's geometry, never
+requested via JDL. See
+[`21-setting/prong-placement-model.md`](../21-setting/prong-placement-model.md).
 
 **Pavé** — a setting/decorative technique where many small stones are set
 closely together — **not a ring style**, despite sometimes being used
@@ -228,8 +244,14 @@ arrangement support the current schema does not have) — see
 [`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md).
 
 **Bezel** — a setting type where the stone is fully or partially
-encircled by a continuous metal rim, with no discrete prongs. **Not
-implemented.** See
+encircled by a continuous metal rim, with no discrete prongs.
+**Implemented since Sprint 19** as a real parametric wall built by
+offsetting the stone's own girdle outline. It has **no seat or bearing
+cut** — a real bezel is set by cutting a seat inside the wall, and that
+geometry does not exist — and no setting geometry is professionally
+validated. See
+[`21-setting/bezel-setting-contract.md`](../21-setting/bezel-setting-contract.md)
+and
 [`04-jewelry-domain/047-setting-domain.md`](../04-jewelry-domain/047-setting-domain.md).
 
 **Channel setting** — a setting type where stones are held between two

@@ -75,7 +75,9 @@
         "prongCount": 6,
         "prongDiameter": 1.1,
         "prongHeight": 4.8,
-        "basketHeight": 3.5
+        "basketHeight": 3.5,
+        "bezelWallThickness": 0.6,
+        "bezelWallHeight": 2.5
       },
       "material": {
         "metal": "rose_gold_18k"
@@ -242,6 +244,18 @@
         "path": "setting.basketHeight",
         "previousValue": null,
         "proposedValue": 3.5,
+        "changed": false
+      },
+      {
+        "path": "setting.bezelWallThickness",
+        "previousValue": null,
+        "proposedValue": 0.6,
+        "changed": false
+      },
+      {
+        "path": "setting.bezelWallHeight",
+        "previousValue": null,
+        "proposedValue": 2.5,
         "changed": false
       },
       {

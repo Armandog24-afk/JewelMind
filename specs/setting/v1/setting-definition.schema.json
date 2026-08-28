@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/setting-definition.schema.json",
+  "title": "SettingDefinition",
+  "description": "The full Setting System input/output contract. Documents backend/jewelmind/setting/models.py \u2014 a Setting subsystem domain contract, NOT a second canonical JDL schema (JDL remains governed by specs/jdl/v1). Every field is kernel-neutral: no CadQuery or OCP object ever appears, so Forge, Studio, Designer and any future jewelry category can depend on this without importing a CAD kernel. See docs/bible/21-setting/setting-domain-model.md. Sub-schemas are INLINED under $defs (this codebase's specs convention avoids cross-file $ref); the standalone files remain the readable per-family reference. Sub-schemas are INLINED under $defs (this codebase's specs convention avoids cross-file $ref); the standalone per-family files remain the readable reference.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "settingId",
+    "settingType",
+    "stone",
+    "attachment"
+  ],
+  "properties": {
+    "settingId": {
+      "type": "string"
+    },
+    "settingType": {
+      "enum": [
+        "prong",
+        "bezel"
+      ],
+      "description": "Only implemented families are enum members. CHANNEL/FLUSH/BAR/TENSION/BEAD/PAVE/CUSTOM are reserved names carried in setting-registry.json's reservedFamilies, with no generator (SETTING-GOV-005)."
+    },
+    "stone": {
+      "$ref": "#/$defs/stoneSettingReference"
+    },
+    "attachment": {
+      "$ref": "#/$defs/settingAttachmentInterface"
+    },
+    "prong": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/prongSetting"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezel": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/bezelSetting"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "stoneSettingReference": {
+      "type": "object",
+      "description": "The kernel-neutral facts a Setting may consume about one stone. A Setting reads these; it may never redefine stone geometry (SETTING-GOV-003).",
+      "additionalProperties": false,
+      "required": [
+        "stoneId",
+        "shape",
+        "lengthMm",
+        "widthMm",
+        "depthMm",
+        "orientationDeg",
+        "girdlePlaneZMm",
+        "centerXMm",
+        "centerYMm",
+        "boundingBoxMinMm",
+        "boundingBoxMaxMm",
+        "isBilaterallySymmetric"
+      ],
+      "properties": {
+        "stoneId": {
+          "type": "string"
+        },
+        "shape": {
+          "type": "string"
+        },
+        "lengthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "widthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "depthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "orientationDeg": {
+          "type": "number"
+        },
+        "girdlePlaneZMm": {
+          "type": "number",
+          "description": "The reference plane a setting grips at."
+        },
+        "centerXMm": {
+          "type": "number"
+        },
+        "centerYMm": {
+          "type": "number"
+        },
+        "boundingBoxMinMm": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "boundingBoxMaxMm": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "isBilaterallySymmetric": {
+          "type": "boolean",
+          "description": "False for pear. Lets a placement strategy refuse to assume symmetry it does not have (SETTING-GOV-008)."
+        },
+        "tipDirectionY": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Signed local-Y direction a pointed asymmetric stone's tip faces; null when the shape has no distinguished tip."
+        }
+      }
+    },
+    "settingAttachmentInterface": {
+      "description": "Mirrors backend/jewelmind/setting/models.py::SettingAttachmentInterface exactly. The generic, category-neutral handoff between a Setting and whatever structure incorporates it. A RingHead consumes this today; a future PendantBody or EarringBody consumes the same contract. Every value is supplied BY the category integration \u2014 the Setting never computes them from category fields (SETTING-GOV-001/014). See docs/bible/21-setting/setting-attachment-interface.md.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attachmentPlaneZMm",
+        "embedMm",
+        "supportHeightMm"
+      ],
+      "properties": {
+        "attachmentPlaneZMm": {
+          "type": "number",
+          "description": "Z of the plane the setting attaches down onto. For a ring this is the top of the band, but the Setting does not know that."
+        },
+        "embedMm": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "How far setting geometry sinks past the attachment plane so a boolean union yields real 3D overlap rather than a tangent touch. A kernel/boolean-robustness value, never a jewelry threshold."
+        },
+        "supportHeightMm": {
+          "type": "number",
+          "description": "Vertical distance from the attachment plane up to the stone's girdle plane."
+        }
+      }
+    },
+    "prongSetting": {
+      "description": "Mirrors backend/jewelmind/setting/models.py::ProngSettingDefinition. The prong-family half of the discriminated Setting model. `prongCount`/`prongDiameterMm`/`prongHeightMm` map 1:1 from the public JDL fields via geometry/setting_adapter.py; `placementStrategy` and `style` are Setting-internal and resolved from the stone. See docs/bible/21-setting/prong-setting-contract.md.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prongCount",
+        "prongDiameterMm",
+        "prongHeightMm",
+        "placementStrategy"
+      ],
+      "properties": {
+        "prongCount": {
+          "type": "integer",
+          "description": "Real requested count. 4 and 6 are the counts the generator builds and JM-PRONG-001 permits; an out-of-set value surfaces as a structured validation result, not a parse error."
+        },
+        "prongDiameterMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "prongHeightMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "placementStrategy": {
+          "enum": [
+            "RADIAL",
+            "OUTLINE_CARDINAL"
+          ]
+        },
+        "style": {
+          "enum": [
+            "ROUND_PRONG"
+          ],
+          "default": "ROUND_PRONG",
+          "description": "Only the cylindrical reference prong is implemented. CLAW, V_PRONG, SHARED_PRONG and CUSTOM_PRONG are reserved names with no geometry \u2014 deliberately NOT enum members (SETTING-GOV-005). V_PRONG in particular is what real pear/marquise tip protection would need."
+        }
+      }
+    },
+    "bezelSetting": {
+      "description": "Mirrors backend/jewelmind/setting/models.py::BezelSettingDefinition. The bezel wall is derived by offsetting the stone's OWN girdle outline, so the pipeline is outline-agnostic and a future custom outline flows through unchanged (brief section 19). See docs/bible/21-setting/bezel-setting-contract.md.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wallThicknessMm",
+        "wallHeightMm"
+      ],
+      "properties": {
+        "wallThicknessMm": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Constant geometric offset applied outward from the stone girdle outline. When defaulted (0.6) this is a PRELIMINARY SOFTWARE VALUE in the same class as band.width \u2014 a deliberate, configurable software choice, NEVER a professional recommendation (SETTING-GOV-010). No minimum is enforced because no sourced professional minimum exists."
+        },
+        "wallHeightMm": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Total vertical extent of the wall. When defaulted (2.5) this is likewise a PRELIMINARY SOFTWARE VALUE."
+        },
+        "verticalReference": {
+          "enum": [
+            "GIRDLE"
+          ],
+          "default": "GIRDLE",
+          "description": "The wall is centred on the stone's girdle plane: bottom at girdlePlaneZ - wallHeight/2, top at girdlePlaneZ + wallHeight/2. An explicit, symmetric rule chosen precisely to avoid fabricating an asymmetric crown/pavilion coverage split."
+        },
+        "outlineOffsetMode": {
+          "enum": [
+            "CONSTANT_OFFSET"
+          ],
+          "default": "CONSTANT_OFFSET",
+          "description": "A true constant-distance offset (cq.Wire.offset2D), not a scaled outline \u2014 so wall thickness is uniform around the whole perimeter."
+        }
+      }
+    }
+  }
+}

@@ -1,25 +1,62 @@
 {
   "description": "The real current capability set, populated by reading backend/jewelmind/domain/schema.py Literal types and backend/jewelmind/api/routes.py's actual endpoints directly during Sprint 6. No roadmap/planned value is marked supported.",
   "currentCapabilities": {
-    "supportedJDLVersions": ["0.1.0"],
-    "supportedJewelryCategories": ["ring"],
-    "supportedStyles": ["solitaire"],
-    "supportedBandProfiles": ["comfort_fit", "flat"],
-    "supportedStoneShapes": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"],
-    "supportedSettings": ["prong"],
-    "supportedProngCounts": [4, 6],
-    "supportedArtifacts": ["PREVIEW_MESH", "STEP", "STL", "JSON", "TECHNICAL_SPECIFICATION"],
-    "supportedManufacturingContexts": ["lost_wax_casting", "direct_resin_printing"],
-    "supportedPreviewFormats": ["STL"]
+    "supportedJDLVersions": [
+      "0.1.0"
+    ],
+    "supportedJewelryCategories": [
+      "ring"
+    ],
+    "supportedStyles": [
+      "solitaire"
+    ],
+    "supportedBandProfiles": [
+      "comfort_fit",
+      "flat"
+    ],
+    "supportedStoneShapes": [
+      "round",
+      "oval",
+      "pear",
+      "emerald",
+      "cushion",
+      "princess",
+      "marquise"
+    ],
+    "supportedSettings": [
+      "prong",
+      "bezel"
+    ],
+    "supportedProngCounts": [
+      4,
+      6
+    ],
+    "supportedArtifacts": [
+      "PREVIEW_MESH",
+      "STEP",
+      "STL",
+      "JSON",
+      "TECHNICAL_SPECIFICATION"
+    ],
+    "supportedManufacturingContexts": [
+      "lost_wax_casting",
+      "direct_resin_printing"
+    ],
+    "supportedPreviewFormats": [
+      "STL"
+    ]
   },
   "notSupported": [
     "Any jewelry category other than ring",
     "Any ring style other than solitaire",
     "Any band profile other than comfort_fit/flat",
-    "Any stone shape other than round",
-    "Any setting type other than prong",
+    "Any stone shape other than round/oval/pear/emerald/cushion/princess/marquise",
+    "Any setting type other than prong/bezel",
     "Any prong count other than 4 or 6",
-    "GLB/glTF preview format (evaluated and explicitly not implemented — see docs/known-limitations.md)",
+    "Professionally validated setting geometry for any stone shape (all settings are NOT_REVIEWED)",
+    "Shape-optimized prong placement (non-round placement is provisional/EXPERIMENTAL)",
+    "Stone seat, bearing, or cutter geometry (PLANNED for every setting family)",
+    "GLB/glTF preview format (evaluated and explicitly not implemented \u2014 see docs/known-limitations.md)",
     "Any manufacturing method other than lost_wax_casting/direct_resin_printing",
     "YAML or textual-DSL JDL input (Sprint 3, PLANNED)"
   ]

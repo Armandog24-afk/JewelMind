@@ -82,8 +82,16 @@ STONE_SHAPE_SYNONYMS: dict[str, str] = {
 
 SETTING_TYPE_SYNONYMS: dict[str, str] = {
     "prong": "prong",
+    "prong setting": "prong",
     "griffe": "prong",
+    "griffes": "prong",
     "a griffe": "prong",
+    "incastonatura a griffe": "prong",
+    "bezel": "bezel",
+    "bezel setting": "bezel",
+    "castone": "bezel",
+    "castone pieno": "bezel",
+    "incastonatura a castone": "bezel",
 }
 
 MANUFACTURING_SYNONYMS: dict[str, str] = {
@@ -157,6 +165,8 @@ _NUMERIC_FIELDS: frozenset[str] = frozenset(
         "setting.prongDiameter",
         "setting.prongHeight",
         "setting.basketHeight",
+        "setting.bezelWallThickness",
+        "setting.bezelWallHeight",
     }
 )
 

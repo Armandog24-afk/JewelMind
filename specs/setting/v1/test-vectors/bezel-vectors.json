@@ -1,0 +1,173 @@
+{
+  "vectors": [
+    {
+      "stoneShape": "round",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "solidCount": 1,
+      "volumeMm3": 33.457962,
+      "boundingBox": {
+        "minMm": [
+          -3.85,
+          -3.85,
+          12.950000000000001
+        ],
+        "maxMm": [
+          3.85,
+          3.85,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 6.5,
+      "widthMm": 6.5
+    },
+    {
+      "stoneShape": "oval",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "solidCount": 1,
+      "volumeMm3": 35.980626,
+      "boundingBox": {
+        "minMm": [
+          -3.6000001000000004,
+          -4.6000001,
+          12.949999900000002
+        ],
+        "maxMm": [
+          3.6000000999999995,
+          4.600000326209712,
+          15.450000100000002
+        ]
+      },
+      "stepSafetyRepairApplied": true,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 8.0,
+      "widthMm": 6.0
+    },
+    {
+      "stoneShape": "emerald",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "EXPERIMENTAL",
+      "solidCount": 1,
+      "volumeMm3": 42.929485,
+      "boundingBox": {
+        "minMm": [
+          -3.6,
+          -4.6,
+          12.950000000000001
+        ],
+        "maxMm": [
+          3.6,
+          4.6,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 8.0,
+      "widthMm": 6.0
+    },
+    {
+      "stoneShape": "cushion",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "EXPERIMENTAL",
+      "solidCount": 1,
+      "volumeMm3": 42.574114,
+      "boundingBox": {
+        "minMm": [
+          -4.1,
+          -4.1,
+          12.950000000000001
+        ],
+        "maxMm": [
+          4.1,
+          4.1,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 7.0,
+      "widthMm": 7.0
+    },
+    {
+      "stoneShape": "princess",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "EXPERIMENTAL",
+      "solidCount": 1,
+      "volumeMm3": 41.827433,
+      "boundingBox": {
+        "minMm": [
+          -3.85,
+          -3.85,
+          12.950000000000001
+        ],
+        "maxMm": [
+          3.85,
+          3.85,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 6.5,
+      "widthMm": 6.5
+    },
+    {
+      "stoneShape": "marquise",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "EXPERIMENTAL",
+      "solidCount": 1,
+      "volumeMm3": 37.601004,
+      "boundingBox": {
+        "minMm": [
+          -3.100000000000002,
+          -5.600000000000001,
+          12.950000000000001
+        ],
+        "maxMm": [
+          3.099999999999999,
+          5.6,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 10.0,
+      "widthMm": 5.0
+    },
+    {
+      "stoneShape": "pear",
+      "wallThicknessMm": 0.6,
+      "wallHeightMm": 2.5,
+      "compatibility": "EXPERIMENTAL",
+      "solidCount": 1,
+      "volumeMm3": 37.089212,
+      "boundingBox": {
+        "minMm": [
+          -3.6,
+          -5.1,
+          12.950000000000001
+        ],
+        "maxMm": [
+          3.6,
+          5.1,
+          15.450000000000001
+        ]
+      },
+      "stepSafetyRepairApplied": false,
+      "outlineSource": "stone_girdle_outline",
+      "lengthMm": 9.0,
+      "widthMm": 6.0
+    }
+  ],
+  "description": "Real generated bezel facts per stone shape, produced by running backend/jewelmind/setting/bezel.py. lengthMm/widthMm record the exact stone dimensions each row was generated from, so the vectors are independently reproducible."
+}

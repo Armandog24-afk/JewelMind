@@ -1,0 +1,128 @@
+{
+  "description": "Round stone, 4 prongs, RADIAL placement (pre-Sprint-19 behaviour).",
+  "settingJDL": {
+    "type": "prong",
+    "prongCount": 4,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5,
+    "bezelWallThickness": 0.6,
+    "bezelWallHeight": 2.5
+  },
+  "stoneJDL": {
+    "shape": "round",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0
+  },
+  "settingDefinition": {
+    "settingId": "primary",
+    "settingType": "prong",
+    "stone": {
+      "stoneId": "stone_reference",
+      "shape": "round",
+      "lengthMm": 6.5,
+      "widthMm": 6.5,
+      "depthMm": 4.0,
+      "orientationDeg": 0.0,
+      "girdlePlaneZMm": 14.200000000000001,
+      "centerXMm": 0.0,
+      "centerYMm": 0.0,
+      "boundingBoxMinMm": [
+        -3.2500001,
+        -3.2500001,
+        11.599999900000002
+      ],
+      "boundingBoxMaxMm": [
+        3.2500001,
+        3.2500001,
+        15.6000001
+      ],
+      "isBilaterallySymmetric": true,
+      "tipDirectionY": null
+    },
+    "attachment": {
+      "attachmentPlaneZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "supportHeightMm": 3.5
+    },
+    "prong": {
+      "prongCount": 4,
+      "prongDiameterMm": 1.1,
+      "prongHeightMm": 4.8,
+      "placementStrategy": "RADIAL",
+      "style": "ROUND_PRONG"
+    },
+    "bezel": null
+  },
+  "settingGeometryResult": {
+    "settingId": "primary",
+    "settingType": "prong",
+    "generatedComponents": [
+      "prongs"
+    ],
+    "productionComponents": [
+      "prongs"
+    ],
+    "referenceComponents": [],
+    "attachmentInterfaces": [
+      {
+        "attachmentPlaneZMm": 10.700000000000001,
+        "embedMm": 0.4,
+        "supportHeightMm": 3.5
+      }
+    ],
+    "geometryFacts": [
+      {
+        "componentId": "prongs",
+        "solidCount": 4,
+        "volumeMm3": 19.766900976386978,
+        "boundingBoxMinMm": [
+          -3.635,
+          -3.635,
+          10.3
+        ],
+        "boundingBoxMaxMm": [
+          3.635,
+          3.635,
+          15.5
+        ]
+      }
+    ],
+    "fallbackEvents": [],
+    "diagnostics": [],
+    "compatibilityStatus": "SUPPORTED_SOFTWARE",
+    "requestedProngCount": 4,
+    "generatedProngCount": 4,
+    "placementStrategy": "RADIAL"
+  },
+  "generatedComponent": {
+    "componentId": "prongs",
+    "solidCount": 4,
+    "volumeMm3": 19.766901,
+    "boundingBox": {
+      "minMm": [
+        -3.635,
+        -3.635,
+        10.3
+      ],
+      "maxMm": [
+        3.635,
+        3.635,
+        15.5
+      ]
+    },
+    "metadata": {
+      "settingType": "prong",
+      "requestedCount": 4,
+      "generatedCount": 4,
+      "prongRadiusMm": 0.55,
+      "placementStrategy": "RADIAL",
+      "stoneShape": "round",
+      "compatibilityStatus": "SUPPORTED_SOFTWARE",
+      "centerRadiusMm": 3.085
+    }
+  }
+}

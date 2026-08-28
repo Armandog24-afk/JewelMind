@@ -1,0 +1,88 @@
+{
+  "vectors": [
+    {
+      "settingType": "bezel",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "oval",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bezel",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "prong",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    }
+  ]
+}

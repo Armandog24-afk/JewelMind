@@ -35,9 +35,13 @@ KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
     "trilogy": "Only a single-stone solitaire is currently supported.",
     "three_stone": "Only a single-stone solitaire is currently supported.",
     "multi_stone": "Only a single-stone solitaire is currently supported.",
-    "bezel": "Only a prong setting is currently supported (setting.type).",
-    "tension": "Only a prong setting is currently supported (setting.type).",
-    "channel": "Only a prong setting is currently supported (setting.type).",
+    # Sprint 19: `bezel` was removed from this map — it is now a real,
+    # generatable setting family. The remaining entries are genuinely
+    # unimplemented reserved families.
+    "tension": "Only prong and bezel settings are currently supported (setting.type).",
+    "channel": "Only prong and bezel settings are currently supported (setting.type).",
+    "flush": "Only prong and bezel settings are currently supported (setting.type).",
+    "bar": "Only prong and bezel settings are currently supported (setting.type).",
 }
 
 
@@ -109,6 +113,8 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         "setting.prongDiameter",
         "setting.prongHeight",
         "setting.basketHeight",
+        "setting.bezelWallThickness",
+        "setting.bezelWallHeight",
         "setting.type",
         "material.metal",
         "manufacturing.method",

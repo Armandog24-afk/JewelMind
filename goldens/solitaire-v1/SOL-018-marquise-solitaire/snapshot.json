@@ -2,7 +2,7 @@
   "goldenId": "SOL-018-marquise-solitaire",
   "description": "Real marquise-shaped solitaire (Sprint 18): two-arc pointed lens StoneReference outline. length=10.0mm, width=5.0mm.",
   "sourceJDLPath": "goldens/solitaire-v1/SOL-018-marquise-solitaire/design.json",
-  "definitionHash": "8088beb1f1858117",
+  "definitionHash": "e75bb6bf5a0375b4",
   "versionFingerprint": {
     "jdlSchemaVersion": "0.1.0",
     "forgeRuleSetVersion": "1.0.0",
@@ -20,7 +20,7 @@
   ],
   "geometrySnapshot": {
     "snapshotVersion": "1.0.0",
-    "definitionHash": "8088beb1f1858117",
+    "definitionHash": "e75bb6bf5a0375b4",
     "assembly": {
       "componentCount": 4,
       "productionComponentCount": 3,
@@ -108,17 +108,17 @@
         "solidCount": 6,
         "volumeMm3": 29.650351464580467,
         "boundingBox": {
-          "xmin": -2.885,
-          "ymin": -2.5721693178366642,
+          "xmin": -2.8850000000000007,
+          "ymin": -4.157105808375567,
           "zmin": 10.3,
-          "xmax": 2.885,
-          "ymax": 2.5721693178366642,
+          "xmax": 2.884999999999999,
+          "ymax": 4.157105808375568,
           "zmax": 15.5,
           "sizeX": 5.77,
-          "sizeY": 5.1443386356733285,
+          "sizeY": 8.314211616751134,
           "sizeZ": 5.199999999999999,
-          "centerX": 0.0,
-          "centerY": 0.0,
+          "centerX": -8.881784197001252e-16,
+          "centerY": 4.440892098500626e-16,
           "centerZ": 12.9
         },
         "topology": {
@@ -237,7 +237,7 @@
   "knownLimitations": [
     "Prong setting compatibility for this shape is EXPERIMENTAL — the current prong layout is a generic, provisional circular placement, not shape-optimized. See docs/bible/20-stone/README.md and geometry/stone/capability.py."
   ],
-  "createdAt": "2026-08-26T00:00:00+00:00",
-  "acceptedAt": "2026-08-26T00:00:00+00:00",
-  "notes": "INITIAL_BASELINE — see docs/bible/appendices/golden-update-register.md."
+  "createdAt": "2026-08-27T14:17:23.503058+00:00",
+  "acceptedAt": "2026-08-27T14:18:22.666039+00:00",
+  "notes": "INITIAL_BASELINE — see docs/bible/appendices/golden-update-register.md.\nReason: Sprint 19 Setting System v1: prong placement for non-round stones changed from the generic width-derived radial circle to shape-aware OUTLINE_CARDINAL placement. Prong count, diameter, height and volume are unchanged (volume delta ~3.6e-15); only the prong POSITIONS moved outward to follow the stone's own girdle outline. Measured improvement on this oval: off-axis prongs sat 0.784mm away from the outline under radial placement and sit 0.049mm from it now, while the on-axis prong is unchanged at the intended 0.165mm girdle inset. Intentional, reviewed geometry change - see docs/bible/21-setting/prong-placement-model.md."
 }

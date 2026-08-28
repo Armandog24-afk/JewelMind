@@ -2,7 +2,7 @@
   "goldenId": "SOL-017-princess-solitaire",
   "description": "Real princess-shaped solitaire (Sprint 18): plain rectangular StoneReference outline. length=6.5mm, width=6.5mm.",
   "sourceJDLPath": "goldens/solitaire-v1/SOL-017-princess-solitaire/design.json",
-  "definitionHash": "d1ddac9062020eee",
+  "definitionHash": "aa1fe54cd2943c7f",
   "versionFingerprint": {
     "jdlSchemaVersion": "0.1.0",
     "forgeRuleSetVersion": "1.0.0",
@@ -20,7 +20,7 @@
   ],
   "geometrySnapshot": {
     "snapshotVersion": "1.0.0",
-    "definitionHash": "d1ddac9062020eee",
+    "definitionHash": "aa1fe54cd2943c7f",
     "assembly": {
       "componentCount": 4,
       "productionComponentCount": 3,
@@ -29,13 +29,13 @@
       "productionIsFullyConnected": true,
       "boundingBox": {
         "xmin": -10.7000001,
-        "ymin": -3.635,
+        "ymin": -4.251897089525281,
         "zmin": -10.7000001,
         "xmax": 10.7000001,
-        "ymax": 3.635,
+        "ymax": 4.251897089525281,
         "zmax": 15.6000001,
         "sizeX": 21.4000002,
-        "sizeY": 7.27,
+        "sizeY": 8.503794179050562,
         "sizeZ": 26.3000002,
         "centerX": 0.0,
         "centerY": 0.0,
@@ -108,16 +108,16 @@
         "solidCount": 6,
         "volumeMm3": 29.650351464580467,
         "boundingBox": {
-          "xmin": -3.635,
-          "ymin": -3.2216883706749933,
+          "xmin": -3.6350000000000007,
+          "ymin": -4.251897089525281,
           "zmin": 10.3,
           "xmax": 3.635,
-          "ymax": 3.2216883706749933,
+          "ymax": 4.251897089525281,
           "zmax": 15.5,
-          "sizeX": 7.27,
-          "sizeY": 6.4433767413499865,
+          "sizeX": 7.2700000000000005,
+          "sizeY": 8.503794179050562,
           "sizeZ": 5.199999999999999,
-          "centerX": 0.0,
+          "centerX": -4.440892098500626e-16,
           "centerY": 0.0,
           "centerZ": 12.9
         },
@@ -237,7 +237,7 @@
   "knownLimitations": [
     "Prong setting compatibility for this shape is EXPERIMENTAL — the current prong layout is a generic, provisional circular placement, not shape-optimized. See docs/bible/20-stone/README.md and geometry/stone/capability.py."
   ],
-  "createdAt": "2026-08-26T00:00:00+00:00",
-  "acceptedAt": "2026-08-26T00:00:00+00:00",
-  "notes": "INITIAL_BASELINE — see docs/bible/appendices/golden-update-register.md."
+  "createdAt": "2026-08-27T14:17:16.881888+00:00",
+  "acceptedAt": "2026-08-27T14:18:18.014146+00:00",
+  "notes": "INITIAL_BASELINE — see docs/bible/appendices/golden-update-register.md.\nReason: Sprint 19 Setting System v1: prong placement for non-round stones changed from the generic width-derived radial circle to shape-aware OUTLINE_CARDINAL placement. Prong count, diameter, height and volume are unchanged (volume delta ~3.6e-15); only the prong POSITIONS moved outward to follow the stone's own girdle outline. Measured improvement on this oval: off-axis prongs sat 0.784mm away from the outline under radial placement and sit 0.049mm from it now, while the on-axis prong is unchanged at the intended 0.165mm girdle inset. Intentional, reviewed geometry change - see docs/bible/21-setting/prong-placement-model.md."
 }

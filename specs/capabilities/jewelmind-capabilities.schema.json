@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/capabilities/jewelmind-capabilities.schema.json",
+  "title": "JewelMindCapabilityCoverage",
+  "description": "The Capability Coverage Guard (brief section 45). One authoritative cross-product record of what JewelMind can and cannot do, so a capability can never be quietly assumed. CURRENT requires real implementation AND tests; PARTIAL, PLANNED, BLOCKED and OUT_OF_SCOPE must be recorded honestly. Validated by backend/tests/test_capability_coverage.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["description", "statusValues", "capabilities"],
+  "properties": {
+    "description": { "type": "string" },
+    "statusValues": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/status" },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "capability", "status", "note"],
+        "properties": {
+          "domain": { "type": "string", "minLength": 1 },
+          "capability": { "type": "string", "minLength": 1 },
+          "status": { "$ref": "#/$defs/status" },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Why this status is accurate. For CURRENT, what implements it. For anything else, what is genuinely missing or blocked."
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "status": { "enum": ["CURRENT", "PARTIAL", "PLANNED", "BLOCKED", "OUT_OF_SCOPE"] }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/bezel-setting.schema.json",
+  "title": "BezelSettingDefinition",
+  "description": "Mirrors backend/jewelmind/setting/models.py::BezelSettingDefinition. The bezel wall is derived by offsetting the stone's OWN girdle outline, so the pipeline is outline-agnostic and a future custom outline flows through unchanged (brief section 19). See docs/bible/21-setting/bezel-setting-contract.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["wallThicknessMm", "wallHeightMm"],
+  "properties": {
+    "wallThicknessMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Constant geometric offset applied outward from the stone girdle outline. When defaulted (0.6) this is a PRELIMINARY SOFTWARE VALUE in the same class as band.width — a deliberate, configurable software choice, NEVER a professional recommendation (SETTING-GOV-010). No minimum is enforced because no sourced professional minimum exists."
+    },
+    "wallHeightMm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Total vertical extent of the wall. When defaulted (2.5) this is likewise a PRELIMINARY SOFTWARE VALUE."
+    },
+    "verticalReference": {
+      "enum": ["GIRDLE"],
+      "default": "GIRDLE",
+      "description": "The wall is centred on the stone's girdle plane: bottom at girdlePlaneZ - wallHeight/2, top at girdlePlaneZ + wallHeight/2. An explicit, symmetric rule chosen precisely to avoid fabricating an asymmetric crown/pavilion coverage split."
+    },
+    "outlineOffsetMode": {
+      "enum": ["CONSTANT_OFFSET"],
+      "default": "CONSTANT_OFFSET",
+      "description": "A true constant-distance offset (cq.Wire.offset2D), not a scaled outline — so wall thickness is uniform around the whole perimeter."
+    }
+  }
+}

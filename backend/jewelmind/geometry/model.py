@@ -67,6 +67,12 @@ class GeneratedModel:
     combined_metal_volume_mm3: float
     bounding_box: BoundingBox
     warnings: list[str]
+    #: The structured Setting System outcome (Sprint 19). Typed as `Any` to
+    #: keep this dataclass free of a `jewelmind.setting` import — the
+    #: concrete type is `jewelmind.setting.models.SettingGeometryResult`.
+    #: Optional so any caller constructing a `GeneratedModel` directly
+    #: (fixtures, test doubles) keeps working.
+    setting_result: Any = None
 
     def component_volumes(self) -> dict[str, float]:
         return {name: c.volume_mm3 for name, c in self.components.items()}

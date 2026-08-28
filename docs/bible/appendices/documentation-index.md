@@ -693,6 +693,21 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-A114 | Appendix: Stone Shape Catalog | accepted | current | [`appendices/stone-shape-catalog.md`](stone-shape-catalog.md) |
 | JM-BIBLE-A115 | Appendix: Stone Capability Catalog | accepted | current | [`appendices/stone-capability-catalog.md`](stone-capability-catalog.md) |
 | JM-BIBLE-A116 | Appendix: Stone Test Matrix | accepted | current | [`appendices/stone-test-matrix.md`](stone-test-matrix.md) |
+| JM-BIBLE-SETTING-README | Setting System v1 — Index | accepted | current | [`21-setting/README.md`](../21-setting/README.md) |
+| JM-BIBLE-580 | Setting Governance | accepted | current | [`21-setting/setting-governance.md`](../21-setting/setting-governance.md) |
+| JM-BIBLE-581 | Setting Architecture | accepted | current | [`21-setting/setting-architecture.md`](../21-setting/setting-architecture.md) |
+| JM-BIBLE-582 | Setting Domain Model | accepted | current | [`21-setting/setting-domain-model.md`](../21-setting/setting-domain-model.md) |
+| JM-BIBLE-583 | Stone to Setting Interface | accepted | current | [`21-setting/stone-setting-interface.md`](../21-setting/stone-setting-interface.md) |
+| JM-BIBLE-584 | Setting Attachment Interface | accepted | current | [`21-setting/setting-attachment-interface.md`](../21-setting/setting-attachment-interface.md) |
+| JM-BIBLE-585 | Prong Setting Contract | accepted | current | [`21-setting/prong-setting-contract.md`](../21-setting/prong-setting-contract.md) |
+| JM-BIBLE-586 | Prong Placement Model | accepted | current | [`21-setting/prong-placement-model.md`](../21-setting/prong-placement-model.md) |
+| JM-BIBLE-587 | Bezel Setting Contract | accepted | current | [`21-setting/bezel-setting-contract.md`](../21-setting/bezel-setting-contract.md) |
+| JM-BIBLE-588 | Setting Inspection Contract | accepted | current | [`21-setting/setting-inspection-contract.md`](../21-setting/setting-inspection-contract.md) |
+| JM-BIBLE-589 | Setting Capability Model | accepted | current | [`21-setting/setting-capability-model.md`](../21-setting/setting-capability-model.md) |
+| JM-BIBLE-590 | Current Prong Migration | accepted | current | [`21-setting/current-prong-migration.md`](../21-setting/current-prong-migration.md) |
+| JM-BIBLE-591 | Setting Golden Strategy | accepted | current | [`21-setting/setting-golden-strategy.md`](../21-setting/setting-golden-strategy.md) |
+| JM-BIBLE-592 | Setting Code Mapping and Gaps | accepted | current | [`21-setting/code-mapping-and-gaps.md`](../21-setting/code-mapping-and-gaps.md) |
+| JM-BIBLE-SPRINT19-REPORT | Sprint 19 Validation Report — Setting System v1 | accepted | current | [`21-setting/SPRINT-19-VALIDATION-REPORT.md`](../21-setting/SPRINT-19-VALIDATION-REPORT.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 

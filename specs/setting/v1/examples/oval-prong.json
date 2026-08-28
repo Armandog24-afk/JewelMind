@@ -1,0 +1,128 @@
+{
+  "description": "Oval stone, 6 prongs, shape-aware OUTLINE_CARDINAL placement. Setting compatibility EXPERIMENTAL.",
+  "settingJDL": {
+    "type": "prong",
+    "prongCount": 6,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5,
+    "bezelWallThickness": 0.6,
+    "bezelWallHeight": 2.5
+  },
+  "stoneJDL": {
+    "shape": "oval",
+    "diameter": 6.5,
+    "length": 8.0,
+    "width": 6.0,
+    "depth": 4.0,
+    "orientation": 0.0
+  },
+  "settingDefinition": {
+    "settingId": "primary",
+    "settingType": "prong",
+    "stone": {
+      "stoneId": "stone_reference",
+      "shape": "oval",
+      "lengthMm": 8.0,
+      "widthMm": 6.0,
+      "depthMm": 4.0,
+      "orientationDeg": 0.0,
+      "girdlePlaneZMm": 14.200000000000001,
+      "centerXMm": 0.0,
+      "centerYMm": 0.0,
+      "boundingBoxMinMm": [
+        -3.0000001,
+        -4.0000001,
+        11.599999899999997
+      ],
+      "boundingBoxMaxMm": [
+        3.0000001,
+        4.0000001,
+        15.6000001
+      ],
+      "isBilaterallySymmetric": true,
+      "tipDirectionY": null
+    },
+    "attachment": {
+      "attachmentPlaneZMm": 10.700000000000001,
+      "embedMm": 0.4,
+      "supportHeightMm": 3.5
+    },
+    "prong": {
+      "prongCount": 6,
+      "prongDiameterMm": 1.1,
+      "prongHeightMm": 4.8,
+      "placementStrategy": "OUTLINE_CARDINAL",
+      "style": "ROUND_PRONG"
+    },
+    "bezel": null
+  },
+  "settingGeometryResult": {
+    "settingId": "primary",
+    "settingType": "prong",
+    "generatedComponents": [
+      "prongs"
+    ],
+    "productionComponents": [
+      "prongs"
+    ],
+    "referenceComponents": [],
+    "attachmentInterfaces": [
+      {
+        "attachmentPlaneZMm": 10.700000000000001,
+        "embedMm": 0.4,
+        "supportHeightMm": 3.5
+      }
+    ],
+    "geometryFacts": [
+      {
+        "componentId": "prongs",
+        "solidCount": 6,
+        "volumeMm3": 29.65035146458047,
+        "boundingBoxMinMm": [
+          -3.384999974155712,
+          -3.6762729298850374,
+          10.3
+        ],
+        "boundingBoxMaxMm": [
+          3.3849998004128157,
+          3.6762745172045586,
+          15.5
+        ]
+      }
+    ],
+    "fallbackEvents": [],
+    "diagnostics": [],
+    "compatibilityStatus": "EXPERIMENTAL",
+    "requestedProngCount": 6,
+    "generatedProngCount": 6,
+    "placementStrategy": "OUTLINE_CARDINAL"
+  },
+  "generatedComponent": {
+    "componentId": "prongs",
+    "solidCount": 6,
+    "volumeMm3": 29.650351,
+    "boundingBox": {
+      "minMm": [
+        -3.384999974155712,
+        -3.6762729298850374,
+        10.3
+      ],
+      "maxMm": [
+        3.3849998004128157,
+        3.6762745172045586,
+        15.5
+      ]
+    },
+    "metadata": {
+      "settingType": "prong",
+      "requestedCount": 6,
+      "generatedCount": 6,
+      "prongRadiusMm": 0.55,
+      "placementStrategy": "OUTLINE_CARDINAL",
+      "stoneShape": "oval",
+      "compatibilityStatus": "EXPERIMENTAL",
+      "centerRadiusMm": null
+    }
+  }
+}

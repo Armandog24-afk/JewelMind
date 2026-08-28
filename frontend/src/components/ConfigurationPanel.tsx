@@ -2,6 +2,7 @@ import type {
   BandProfile,
   ManufacturingMethod,
   MetalType,
+  SettingType,
   StoneShape,
 } from '@shared/types/jewelry-definition'
 import { useProjectStore } from '../store/useProjectStore'
@@ -39,6 +40,15 @@ const STONE_SHAPE_OPTIONS: Array<{ value: StoneShape; label: string }> = [
   { value: 'cushion', label: 'Cushion' },
   { value: 'princess', label: 'Princess' },
   { value: 'marquise', label: 'Marquise' },
+]
+
+// Mirrors `setting/capability.py::SETTING_CAPABILITIES`'s generatable
+// families (Sprint 19) — kept in sync by hand, same discipline as every
+// other option list here. Reserved families (channel, flush, bar, tension,
+// bead, pave, custom) have no generator and must NOT appear.
+const SETTING_TYPE_OPTIONS: Array<{ value: SettingType; label: string }> = [
+  { value: 'prong', label: 'Prong' },
+  { value: 'bezel', label: 'Bezel' },
 ]
 
 const PRONG_COUNT_OPTIONS = [
@@ -182,12 +192,45 @@ export function ConfigurationPanel() {
 
       <FormSection title="Setting">
         <SelectField
-          id="prong-count"
-          label="Prong count"
-          value={String(definition.setting.prongCount)}
-          options={PRONG_COUNT_OPTIONS}
-          onChange={(value) => updateSetting({ prongCount: Number(value) })}
+          id="setting-type"
+          label="Type"
+          value={definition.setting.type}
+          options={SETTING_TYPE_OPTIONS}
+          onChange={(value) => updateSetting({ type: value as SettingType })}
+          wide
         />
+        {definition.setting.type === 'prong' ? (
+          <SelectField
+            id="prong-count"
+            label="Prong count"
+            value={String(definition.setting.prongCount)}
+            options={PRONG_COUNT_OPTIONS}
+            onChange={(value) => updateSetting({ prongCount: Number(value) })}
+          />
+        ) : (
+          <>
+            <NumericField
+              id="bezel-wall-thickness"
+              label="Wall thickness"
+              unit="mm"
+              value={definition.setting.bezelWallThickness}
+              onChange={(bezelWallThickness) => updateSetting({ bezelWallThickness })}
+              step={0.1}
+              min={0.1}
+              max={5}
+            />
+            <NumericField
+              id="bezel-wall-height"
+              label="Wall height"
+              unit="mm"
+              value={definition.setting.bezelWallHeight}
+              onChange={(bezelWallHeight) => updateSetting({ bezelWallHeight })}
+              step={0.1}
+              min={0.1}
+              max={10}
+            />
+          </>
+        )}
       </FormSection>
 
       <FormSection title="Material">

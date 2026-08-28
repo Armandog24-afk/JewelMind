@@ -157,6 +157,113 @@ def _stone_dimension_facts(now: str, result: ComponentInspectionResult) -> list[
     ]
 
 
+def _setting_facts(now: str, model: GeneratedModel) -> list[GeometricFact]:
+    """Setting-level runtime facts (brief section 25;
+    docs/bible/21-setting/setting-inspection-contract.md).
+
+    Reads the structured `SettingGeometryResult` the Setting System already
+    produced — it does not re-derive anything, and it makes no quality
+    judgement (SETTING-GOV-016). Prong-specific facts are emitted only for
+    the prong family and bezel-specific facts only for bezel, so a fact's
+    presence is itself honest about what was built.
+
+    Returns an empty list when a model carries no setting result (e.g. a
+    hand-constructed test fixture), rather than inventing defaults.
+    """
+
+    result = model.setting_result
+    if result is None:
+        return []
+
+    facts: list[GeometricFact] = []
+    components = list(result.generatedComponents)
+
+    def _fact(suffix: str, fact_type: str, value, source: str, unit: str | None = None) -> GeometricFact:
+        return GeometricFact(
+            factId=f"setting.{suffix}",
+            factType=fact_type,
+            inspectionVersion=INSPECTION_VERSION,
+            scope="ASSEMBLY",
+            componentIds=components,
+            value=value,
+            unit=unit,
+            status="PASS" if value is not None else "UNKNOWN",
+            sourceOperation="SettingGeometryResult",
+            generatedAt=now,
+        )
+
+    facts.append(_fact("type", "SETTING_TYPE", result.settingType, "SettingGeometryResult"))
+    facts.append(
+        _fact(
+            "compatibilityStatus",
+            "SETTING_COMPATIBILITY_STATUS",
+            result.compatibilityStatus,
+            "SettingGeometryResult",
+        )
+    )
+    facts.append(
+        _fact(
+            "componentCount",
+            "SETTING_COMPONENT_COUNT",
+            len(result.generatedComponents),
+            "SettingGeometryResult",
+        )
+    )
+
+    if result.settingType == "prong":
+        facts.append(
+            _fact(
+                "requestedProngCount",
+                "SETTING_REQUESTED_PRONG_COUNT",
+                result.requestedProngCount,
+                "SettingGeometryResult",
+            )
+        )
+        facts.append(
+            _fact(
+                "generatedProngCount",
+                "SETTING_GENERATED_PRONG_COUNT",
+                result.generatedProngCount,
+                "SettingGeometryResult",
+            )
+        )
+        facts.append(
+            _fact(
+                "placementStrategy",
+                "SETTING_PLACEMENT_STRATEGY",
+                result.placementStrategy,
+                "SettingGeometryResult",
+            )
+        )
+
+    if result.settingType == "bezel":
+        bezel = model.components.get("bezel")
+        outline_source = bezel.metadata.get("outlineSource") if bezel else None
+        facts.append(
+            _fact(
+                "bezelOutlineSource",
+                "BEZEL_OUTLINE_SOURCE",
+                outline_source,
+                "GeneratedComponent.metadata",
+            )
+        )
+        # Continuity here means the wall is exactly one closed solid — a
+        # real topological fact, never a claim about professional coverage.
+        continuous = None
+        if bezel is not None:
+            continuous = len(bezel.shape.Solids()) == 1
+        facts.append(
+            _fact(
+                "bezelWallContinuous",
+                "BEZEL_WALL_CONTINUOUS",
+                continuous,
+                "Shape.Solids()",
+            )
+        )
+
+    return facts
+
+
 def inspect_model(model: GeneratedModel) -> GeometryInspectionReport:
     started_at = _now()
     t_start = time.perf_counter()
@@ -267,6 +374,8 @@ def inspect_model(model: GeneratedModel) -> GeometryInspectionReport:
                 generatedAt=now,
             )
         )
+
+    geometric_facts.extend(_setting_facts(now, model))
 
     total_ms = (time.perf_counter() - t_start) * 1000
     completed_at = _now()

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v1/setting-attachment.schema.json",
+  "title": "SettingAttachmentInterface",
+  "description": "Mirrors backend/jewelmind/setting/models.py::SettingAttachmentInterface exactly. The generic, category-neutral handoff between a Setting and whatever structure incorporates it. A RingHead consumes this today; a future PendantBody or EarringBody consumes the same contract. Every value is supplied BY the category integration — the Setting never computes them from category fields (SETTING-GOV-001/014). See docs/bible/21-setting/setting-attachment-interface.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["attachmentPlaneZMm", "embedMm", "supportHeightMm"],
+  "properties": {
+    "attachmentPlaneZMm": { "type": "number", "description": "Z of the plane the setting attaches down onto. For a ring this is the top of the band, but the Setting does not know that." },
+    "embedMm": { "type": "number", "exclusiveMinimum": 0, "description": "How far setting geometry sinks past the attachment plane so a boolean union yields real 3D overlap rather than a tangent touch. A kernel/boolean-robustness value, never a jewelry threshold." },
+    "supportHeightMm": { "type": "number", "description": "Vertical distance from the attachment plane up to the stone's girdle plane." }
+  }
+}

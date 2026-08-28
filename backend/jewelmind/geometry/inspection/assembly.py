@@ -24,14 +24,43 @@ from jewelmind.geometry.inspection.topology import inspect_topology
 from jewelmind.geometry.model import GeneratedModel
 from jewelmind.geometry.roles import is_production_component, production_component_names
 
-REQUIRED_COMPONENT_NAMES = ("band", "stone_reference", "prongs", "basket_support")
+# Components every assembly must have regardless of which Setting family
+# was requested (Sprint 19). `prongs` deliberately moved OUT of this tuple:
+# a bezel assembly has no prongs and must not be reported as missing a
+# required component. The setting component is required too, but which one
+# it is depends on the setting family — see `required_component_names()`.
+REQUIRED_COMPONENT_NAMES = ("band", "stone_reference", "basket_support")
 
-# Pairs judged relevant enough to always inspect for the current
-# solitaire's 4 named components — every pair, since 4 components is
-# small enough that "all pairs" and "the relevant pairs" are the same
-# set (see 471-component-intersection-model.md and
-# 484-inspection-performance-model.md for the cost of scaling this up).
-_ALL_PAIRS = tuple(combinations(REQUIRED_COMPONENT_NAMES, 2))
+# Setting components that satisfy the "a setting must exist" requirement.
+# Exactly one of these is expected per assembly.
+SETTING_COMPONENT_NAMES = ("prongs", "bezel")
+
+
+def required_component_names(model: GeneratedModel) -> tuple[str, ...]:
+    """The components this specific assembly is required to have.
+
+    Setting-family-aware: the base components plus whichever setting
+    component the model actually produced. If no setting component is
+    present at all, `prongs` is reported as the expected one so a genuinely
+    setting-less assembly still fails loudly rather than silently passing.
+    """
+
+    present = [n for n in SETTING_COMPONENT_NAMES if n in model.components]
+    return (*REQUIRED_COMPONENT_NAMES, *(present or ["prongs"]))
+
+
+def _inspection_pairs(names: list[str]) -> tuple[tuple[str, str], ...]:
+    """Every pair among the assembly's real components.
+
+    Previously a module-level constant over a hardcoded 4-name tuple; now
+    derived from the model so a bezel assembly's `bezel` component is
+    genuinely included in pairwise intersection/distance inspection rather
+    than silently skipped. Still "all pairs" because the component count
+    stays small (see 471-component-intersection-model.md and
+    484-inspection-performance-model.md for the cost of scaling this up).
+    """
+
+    return tuple(combinations(names, 2))
 
 
 def _stone_metal_separation(
@@ -78,6 +107,13 @@ def _stone_metal_separation(
 def _prong_count(model: GeneratedModel) -> ProngCountResult:
     prongs = model.components.get("prongs")
     if prongs is None:
+        # Sprint 19: a non-prong setting (e.g. bezel) legitimately has no
+        # prongs. That is NOT_APPLICABLE, not a failure — reporting FAIL
+        # here previously made every valid bezel assembly inspect as FAIL.
+        if any(name in model.components for name in SETTING_COMPONENT_NAMES):
+            return ProngCountResult(
+                requestedCount=0, generatedCount=0, matches=True, status="NOT_APPLICABLE"
+            )
         return ProngCountResult(requestedCount=0, generatedCount=0, matches=False, status="FAIL")
     requested = prongs.metadata.get("requestedCount")
     generated = prongs.metadata.get("generatedCount")
@@ -95,7 +131,9 @@ def _boolean_operations(
     model: GeneratedModel, component_results: dict[str, ComponentInspectionResult]
 ) -> list:
     results = []
-    for name in ("band", "basket_support", "prongs"):
+    # Sprint 19: setting-family-aware. `bezel` is included so a bezel
+    # assembly's boolean/fallback state is inspected rather than skipped.
+    for name in ("band", "basket_support", *SETTING_COMPONENT_NAMES):
         comp = component_results.get(name)
         if comp is None:
             continue
@@ -141,7 +179,7 @@ def inspect_assembly(
     all_names = list(model.components.keys())
     missing = [
         n
-        for n in REQUIRED_COMPONENT_NAMES
+        for n in required_component_names(model)
         if n not in model.components or not component_results[n].exists
     ]
 
@@ -154,7 +192,7 @@ def inspect_assembly(
 
     t0 = time.perf_counter()
     intersections = []
-    for name_a, name_b in _ALL_PAIRS:
+    for name_a, name_b in _inspection_pairs(all_names):
         if name_a not in shapes or name_b not in shapes:
             continue
         d = distance_by_pair.get(frozenset((name_a, name_b)))

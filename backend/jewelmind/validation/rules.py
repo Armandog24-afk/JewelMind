@@ -37,6 +37,12 @@ PRONG_HEIGHT_VS_BASKET = "JM-PRONG-004"
 
 SETTING_BASKET_HEIGHT_POSITIVE = "JM-SETTING-001"
 SETTING_BASKET_HEIGHT_MAX = "JM-SETTING-002"
+# Sprint 19, BEZEL_ONLY, both ENGINEERING_INVARIANT (constructibility, not
+# a jewelry threshold). No minimum bezel wall dimension is asserted — no
+# sourced professional value exists and inventing one is forbidden
+# (SETTING-GOV-010).
+BEZEL_WALL_THICKNESS_POSITIVE = "JM-SETTING-003"
+BEZEL_WALL_HEIGHT_POSITIVE = "JM-SETTING-004"
 
 MANUFACTURING_MIN_FEATURE = "JM-MANUFACTURING-001"
 
