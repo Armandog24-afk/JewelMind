@@ -54,30 +54,35 @@ NON_ROUND_SHAPES = ["oval", "pear", "emerald", "cushion", "princess", "marquise"
 
 #: The pre-Sprint-19 recorded values for the default 6-prong round solitaire.
 #:
-#: `PRE_SPRINT19_PRONG_VOLUME` is asserted EXACTLY: a prong compound is built by
-#: primitive construction only, and reproduces bit-for-bit on every platform CI
-#: runs on. That exactness is the real backward-compatibility signal.
+#: BOTH are compared with a tolerance, because both are OCCT-computed volumes
+#: and both carry real platform-dependent floating-point drift. Measured between
+#: this repo's Windows build and CI's Linux build:
 #:
-#: `PRE_SPRINT19_COMBINED_METAL_VOLUME` is the volume of the BOOLEAN FUSE of
-#: band + basket + prongs, and OCCT's boolean result carries genuine
-#: platform-dependent floating-point drift: this value is 341.44334316909976 on
-#: Windows and 341.44334316907685 on CI's Linux build — a relative difference of
-#: ~6.7e-14, i.e. last-two-digits-of-a-double. Asserting exact equality on it
-#: claimed a cross-platform guarantee the CAD kernel does not offer, and failed
-#: on CI while passing locally. It is compared with `math.isclose` instead; see
-#: `BOOLEAN_VOLUME_REL_TOL` for why that tolerance still catches a real
-#: regression.
+#:   combined metal (boolean fuse)  341.44334316909976 vs 341.44334316907685
+#:                                  (~6.7e-14 relative)
+#:   prongs (compound)               29.650351464580467 vs  29.65035146458046
+#:                                  (~2.4e-16 relative)
+#:
+#: An earlier version of this test asserted both EXACTLY, on the assumption that
+#: only the boolean fuse could drift and a primitive-built prong compound could
+#: not. That assumption was wrong. It briefly looked correct only because the
+#: combined-volume assertion came first and short-circuited the test before the
+#: prong assertion ever ran on Linux. Volume is an OCCT integration over a
+#: shape's faces in every case — the boolean simply drifts more, not uniquely.
+#:
+#: The guard is unchanged in substance: the same recorded pre-Sprint-19 constants
+#: are still asserted against, at a tolerance that cannot hide a real regression.
 PRE_SPRINT19_COMBINED_METAL_VOLUME = 341.44334316909976
 PRE_SPRINT19_PRONG_VOLUME = 29.650351464580467
 
-#: Tolerance for comparing an OCCT boolean-fuse volume across platforms.
+#: Tolerance for comparing an OCCT-computed volume across platforms.
 #:
 #: This is a SOFTWARE COMPARISON TOLERANCE, never a manufacturing or jewelry
 #: tolerance. It is ~4 orders of magnitude above the largest drift actually
 #: observed (~6.7e-14) and ~6 orders of magnitude below any geometry change this
 #: test could plausibly need to catch — a moved, resized, added or dropped
-#: component shifts this volume by a fraction of a mm³, not by a rounding step.
-BOOLEAN_VOLUME_REL_TOL = 1e-9
+#: component shifts these volumes by a fraction of a mm³, not by a rounding step.
+KERNEL_VOLUME_REL_TOL = 1e-9
 
 
 def _definition(shape="round", setting_type="prong", prong_count=6, length=8.0, width=6.0):
@@ -104,15 +109,20 @@ class TestRoundProngBackwardCompatibility:
 
     def test_default_six_prong_round_reproduces_pre_sprint19_volumes(self):
         model = build_solitaire_ring(default_definition())
-        # Exact: primitive-built prong geometry is bit-identical everywhere.
-        assert model.components["prongs"].volume_mm3 == PRE_SPRINT19_PRONG_VOLUME
-        # Tolerance: boolean-fuse volume drifts across platforms. See the
-        # constants' docstring above.
-        assert math.isclose(
-            model.combined_metal_volume_mm3,
-            PRE_SPRINT19_COMBINED_METAL_VOLUME,
-            rel_tol=BOOLEAN_VOLUME_REL_TOL,
-        ), f"{model.combined_metal_volume_mm3!r} != {PRE_SPRINT19_COMBINED_METAL_VOLUME!r}"
+        # Both compared with a tolerance — see the constants' docstring above for
+        # the real per-platform drift measured on each.
+        for label, actual, expected in (
+            (
+                "combined metal",
+                model.combined_metal_volume_mm3,
+                PRE_SPRINT19_COMBINED_METAL_VOLUME,
+            ),
+            ("prongs", model.components["prongs"].volume_mm3, PRE_SPRINT19_PRONG_VOLUME),
+        ):
+            assert math.isclose(actual, expected, rel_tol=KERNEL_VOLUME_REL_TOL), (
+                f"{label}: {actual!r} != {expected!r} "
+                f"(relative {abs(actual - expected) / expected:.3e})"
+            )
 
     @pytest.mark.parametrize("count", [4, 6])
     def test_round_prong_counts_generate_exactly_that_many_solids(self, count):

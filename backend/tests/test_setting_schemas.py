@@ -201,19 +201,25 @@ def test_backward_compatibility_vector_reproduces_live():
     vectors = _load(SPECS / "test-vectors" / "backward-compatibility-vectors.json")
     for vector in vectors["vectors"]:
         model = build_solitaire_ring(default_definition())
-        # Exact: primitive-built prong geometry is bit-identical everywhere.
-        assert model.components["prongs"].volume_mm3 == vector["expectedProngVolumeMm3"]
-        # Tolerance: an OCCT boolean-fuse volume carries real platform-dependent
-        # drift (~6.7e-14 relative between this repo's Windows and CI's Linux
-        # build). See `test_setting.py::BOOLEAN_VOLUME_REL_TOL`.
-        assert math.isclose(
-            model.combined_metal_volume_mm3,
-            vector["expectedCombinedMetalVolumeMm3"],
-            rel_tol=1e-9,
-        ), (
-            f"{model.combined_metal_volume_mm3!r} != "
-            f"{vector['expectedCombinedMetalVolumeMm3']!r}"
-        )
+        # Both are OCCT-computed volumes and both carry real platform-dependent
+        # drift between this repo's Windows build and CI's Linux build. See
+        # `test_setting.py::KERNEL_VOLUME_REL_TOL` for the measured values.
+        for label, actual, expected in (
+            (
+                "combined metal",
+                model.combined_metal_volume_mm3,
+                vector["expectedCombinedMetalVolumeMm3"],
+            ),
+            (
+                "prongs",
+                model.components["prongs"].volume_mm3,
+                vector["expectedProngVolumeMm3"],
+            ),
+        ):
+            assert math.isclose(actual, expected, rel_tol=1e-9), (
+                f"{label}: {actual!r} != {expected!r} "
+                f"(relative {abs(actual - expected) / expected:.3e})"
+            )
         assert model.setting_result.placementStrategy == vector["expectedPlacementStrategy"]
 
 

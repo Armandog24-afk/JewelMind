@@ -167,21 +167,32 @@ the OCCT **boolean fuse** of band + basket + prongs. That value is
 a relative difference of ~6.7e-14, i.e. the last two digits of a double.
 
 The assertion, not the geometry, was wrong: it claimed a cross-platform
-bit-identity guarantee the CAD kernel does not offer. Fixed by splitting the two
-quantities according to what each can actually promise:
+bit-identity guarantee the CAD kernel does not offer.
 
-- `components["prongs"].volume_mm3` stays an **exact** assertion — a prong
-  compound is primitive-built and does reproduce bit-for-bit on both platforms.
-  This is the real backward-compatibility signal, and it passed on Linux
-  unchanged.
-- `combined_metal_volume_mm3` is compared with `math.isclose(rel_tol=1e-9)` — a
-  documented **software comparison tolerance**, never a manufacturing one. It
-  sits ~4 orders of magnitude above the observed drift and ~6 below any geometry
-  change this test exists to catch (a moved, resized, added or dropped component
-  shifts this volume by a fraction of a mm³, not by a rounding step).
+The **first fix was itself based on a wrong inference** and is worth recording.
+Seeing only the combined-volume failure, I concluded that the boolean fuse drifts
+while a primitive-built prong compound does not, and kept the prong assertion
+exact. The next CI run failed on the prong volume instead
+(`29.650351464580467` vs `29.65035146458046`, ~2.4e-16 relative). The prong
+assertion had never passed on Linux — it had never *run*, because the
+combined-volume assertion preceded it and short-circuited the test. Volume is an
+OCCT integration over a shape's faces in every case; the boolean simply drifts
+more, not uniquely.
+
+Both are now compared with `math.isclose(rel_tol=1e-9)` — a documented **software
+comparison tolerance**, never a manufacturing one. It sits ~4 orders of magnitude
+above the largest observed drift and ~6 below any geometry change these tests
+exist to catch (a moved, resized, added or dropped component shifts these volumes
+by a fraction of a mm³, not by a rounding step). Each assertion now reports the
+label, both values, and the relative difference on failure, so a future
+cross-platform diff does not need a second CI round-trip to diagnose.
 
 No baseline, threshold, or geometry was changed to make CI pass; the same
-constant is still asserted against.
+recorded pre-Sprint-19 constants are still asserted against.
+
+**Reusable lesson:** a passing assertion that sits *after* a failing one in the
+same test has not passed — it has not run. When a multi-assertion test fails,
+do not draw conclusions about the assertions below the failure.
 
 ## `definitionHash` drift: third occurrence, documented
 
