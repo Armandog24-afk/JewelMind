@@ -1,0 +1,237 @@
+{
+  "registryVersion": "2.0.0",
+  "generatedFrom": "backend/jewelmind/stone/capability.py::compatibility_matrix_v2()",
+  "note": "A generatable shape is never, by that fact, a settable one. Only the combinations marked SUPPORTED_SOFTWARE have been exercised end to end; EXPERIMENTAL means the geometry builds but placement is not shape-optimized. None is professionally validated.",
+  "matrix": [
+    {
+      "stoneShape": "round",
+      "settingFamily": "prong",
+      "status": "SUPPORTED_SOFTWARE"
+    },
+    {
+      "stoneShape": "round",
+      "settingFamily": "bezel",
+      "status": "SUPPORTED_SOFTWARE"
+    },
+    {
+      "stoneShape": "oval",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "oval",
+      "settingFamily": "bezel",
+      "status": "SUPPORTED_SOFTWARE"
+    },
+    {
+      "stoneShape": "pear",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "pear",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "emerald",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "emerald",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "cushion",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "cushion",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "princess",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "princess",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "marquise",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "marquise",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "heart",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "heart",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "radiant",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "radiant",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "asscher",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "asscher",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "trillion",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "trillion",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "baguette",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "baguette",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "tapered_baguette",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "tapered_baguette",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "triangle",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "triangle",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "trapezoid",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "trapezoid",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "lozenge",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "lozenge",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "hexagon",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "hexagon",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "kite",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "kite",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "shield",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "shield",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "half_moon",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "half_moon",
+      "settingFamily": "bezel",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "pearl",
+      "settingFamily": "prong",
+      "status": "UNSUPPORTED"
+    },
+    {
+      "stoneShape": "pearl",
+      "settingFamily": "bezel",
+      "status": "UNSUPPORTED"
+    },
+    {
+      "stoneShape": "custom",
+      "settingFamily": "prong",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "stoneShape": "custom",
+      "settingFamily": "bezel",
+      "status": "SUPPORTED_SOFTWARE"
+    },
+    {
+      "stoneShape": "imported",
+      "settingFamily": "prong",
+      "status": "UNSUPPORTED"
+    },
+    {
+      "stoneShape": "imported",
+      "settingFamily": "bezel",
+      "status": "UNSUPPORTED"
+    }
+  ]
+}

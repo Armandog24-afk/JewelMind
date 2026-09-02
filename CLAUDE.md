@@ -77,6 +77,12 @@ changes, especially anything touching `backend/jewelmind/geometry/`,
   capability, errors) + `jewelmind/setting/` (the Setting System —
   category-neutral: models, capability, stone_interface, placement,
   prong, bezel, dispatch; never imports Ring) +
+  `jewelmind/stone/` (the Stone System v2 core — category-neutral:
+  models, capability, outline_validation, anchors, normalize,
+  importing, dispatch, errors; never imports a jewelry category, and
+  its `__init__.py` deliberately imports nothing) +
+  `geometry/stone/profile.py` (the 3D reference profiles: faceted,
+  cabochon, spherical) +
   `domain/stone_dimensions.py` (the shared LENGTH/WIDTH/DEPTH resolution
   both Atlas and Forge depend on) + `geometry/connection.py` (Shank →
   RingHead interface) + `geometry/setting_adapter.py` (JewelryDefinition
@@ -1436,3 +1442,128 @@ Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules from Sprint 15
 (above) and the **CAPABILITY COVERAGE GUARD** — they apply to every
 future sprint, not only Geometry Quality, Ring Architecture, Shank,
 Stone, or Setting changes.
+
+## STONE SYSTEM V2 RULES
+
+`docs/bible/22-stone-v2/` is the authoritative Stone System v2 specification —
+start at
+[`docs/bible/22-stone-v2/README.md`](docs/bible/22-stone-v2/README.md), then
+[`stone-v2-governance.md`](docs/bible/22-stone-v2/stone-v2-governance.md) for
+the full 18 STONEV2-GOV rules. The machine-readable half lives in
+[`specs/stone/v2/`](specs/stone/v2/README.md) (12 JSON Schemas, three
+registries generated from the live code, 19 examples, 8 test-vector files).
+Sprint 18's [`specs/stone/v1/`](specs/stone/v1/README.md) and
+[`docs/bible/20-stone/`](docs/bible/20-stone/README.md) remain accurate for the
+seven original shapes and for the shared coordinate contract; the 16 STONE-GOV
+rules still apply in full. Future coding agents must:
+
+- **Never assume the built-in shape enum covers every real stone.** Stone v2's
+  whole objective is that it does not. Before adding a shape, ask whether
+  `CUSTOM_OUTLINE` already covers the case (STONEV2-GOV-002).
+- **Preserve the three escape hatches** — `CUSTOM_OUTLINE`, `MEASURED`,
+  `IMPORTED_CAD`. A change that makes a named-enum cut the only route to stone
+  geometry is a regression against this sprint, however many cuts the enum has.
+- **Keep Stone shape/cut separate from Gem identity.** `stone.shape =
+  "emerald"` is the clipped-corner OUTLINE; the gem species emerald is Sprint 21
+  territory. The rhombus is `lozenge`, never `diamond`. `StoneSpec` carries no
+  material or species field, and no shape synonym may resolve a species name to
+  a cut (STONEV2-GOV-008).
+- **Keep outline and profile as two independent axes.** Never add an
+  `OVAL_CABOCHON`-style compound enum member; an oval cabochon is
+  `shape=oval` + `profile=CABOCHON_REFERENCE` (STONEV2-GOV-005).
+- **Never invent a missing Stone measurement.** A `MEASURED` stone with an
+  absent measurement raises `MEASURED_STONE_INSUFFICIENT_DATA`. A
+  dimension-only reference is labelled `MEASURED_DIMENSION_REFERENCE` and must
+  never be described as the physical stone's real surface (STONEV2-GOV-006).
+- **Never invent commercial cut proportions.** Every ratio in
+  `geometry/stone/outline.py` and `geometry/stone/profile.py` is a SOFTWARE
+  REFERENCE CONSTRUCTION parameter. `radiant` is not the radiant brilliant
+  facet pattern, `asscher` is not the Asscher step cut, and
+  `CABOCHON_REFERENCE` is not a gemological cabochon (STONEV2-GOV-003/004).
+- **Never fabricate an equivalent diameter** for a non-round stone — carried
+  from Sprint 18, unchanged.
+- **Never guess an imported asset's unit.** `declaredUnit` is required; the
+  honest failure is `STONE_IMPORT_UNITS_UNKNOWN`, never a default
+  (FOUNDRY-GOV-012).
+- **Never silently convert imported geometry into a native approximation.** The
+  asset IS the stone: it is placed, never rebuilt (STONEV2-GOV-010).
+- **Distinguish B-Rep from mesh capabilities.** An STL import reports
+  `representation: MESH`, `solidCount: 0` and a null volume — the honest
+  result. `supportsBrepOperations` is computed from the real parsed geometry,
+  never from the file extension. **A mesh must also be transformed node by
+  node**: neither `cadquery.Shape.scale()` nor `BRepBuilderAPI_Transform` moves
+  a triangulation, which shipped as a real bug this sprint (STONEV2-GOV-014).
+- **Keep Stone source provenance explicit, true and stable.**
+  `normalizationOperations` records every operation ACTUALLY applied — an entry
+  claiming an operation the geometry did not receive is worse than a missing
+  one. Provenance carries no wall-clock timestamp, because it participates in
+  `definitionHash` and in Golden snapshots. `sourceAssetHash` is a content
+  hash, never a filesystem path (STONEV2-GOV-015).
+- **Treat imported stone files as untrusted input** — content-addressed
+  storage with a validated hexadecimal hash, size and complexity bounds checked
+  after parsing as well as before, sanitized error messages with no stack trace
+  or server path, and never any execution of file content (STONEV2-GOV-016).
+- **Never repair a malformed custom outline** — validate and reject. Only unit
+  conversion, winding and origin are normalized, and each is recorded.
+  Normalization changes coordinates, never shape.
+- **Keep requested dimensions equal to measured dimensions.** Every native
+  outline's real bounding box must equal the request; four shapes violated this
+  during Sprint 20 and each was fixed at the source, never by reporting the
+  nominal value (STONEV2-GOV-012).
+- **Keep every outline centred on the local origin** — the frame
+  `_apply_orientation()` rotates about and `StoneSettingReference` reports. A
+  size-only check is not enough; `half_moon` had a correct size and a wrong
+  centre (STONEV2-GOV-013).
+- **Preserve Stone v1 exactly.** A plain round faceted parametric stone must
+  keep using `_build_round_stone()`. That is a GEOMETRY guarantee, not a
+  performance note: the shared pipeline's proportional culet makes its body
+  ~1.8% larger. Target and result: zero Stone v1 Golden baseline updates
+  (STONEV2-GOV-017).
+- **Keep the Stone System category-neutral** — nothing under
+  `jewelmind/stone/`, `geometry/stone/` or `domain/stone_dimensions.py` may
+  import a jewelry category, and the core must not import `JewelryDefinition`.
+  `geometry/stone/builder.py` is the sanctioned placement adapter;
+  `build_stone_geometry(stone, girdle_z_mm)` must remain a category-neutral
+  entry point. Enforced by AST inspection in
+  `backend/tests/test_stone_v2_no_category_dependency.py` (STONEV2-GOV-001).
+- **Keep `jewelmind/stone/__init__.py` importing nothing.** It is load-bearing:
+  `domain/schema.py` imports `jewelmind.stone.models` while
+  `jewelmind.stone.normalize` imports `domain/schema.py`, and the graph is only
+  acyclic because the package init pulls in no submodule.
+- **Keep anchors as geometric facts, never prong positions.** An anchor a shape
+  does not have is ABSENT, never approximated: a custom outline has no
+  deterministic TIP, a pearl has no anchors at all (STONEV2-GOV-009).
+- **Keep Setting behaviour driven by geometric properties, not shape names.**
+  `jewelmind/setting/` must contain no comparison of `.shape` against a string
+  literal; strategy selection reads `isRadiallySymmetric`, and bezel paths come
+  from the outline. Enforced by an AST scan in
+  `test_stone_v2.py::test_setting_system_has_no_custom_shape_special_case`.
+- **Scope Forge rules honestly rather than loosening them.** A rule is
+  evaluated only where its premise holds — `STONE_DEPTH_RANGE` is skipped for
+  spherical and imported stones. Do not close a recorded gap (`pearl` has no
+  diameter range; a non-round shape's `length`/`width` have none individually)
+  by inventing a threshold (STONEV2-GOV-011).
+- **Generate every registry, example and test vector by running the real
+  implementation** — `specs/stone/v2/` and
+  `specs/capabilities/jewelmind-capabilities.json` are mirrors of live code,
+  never hand-maintained copies. Sprint 20 removed three hand-copies that had
+  already drifted and caused Designer and Setting to misreport real
+  capabilities.
+- **Require registry, inspection, test and Golden coverage for every new
+  capability**, in the same change — including a requested-equals-measured
+  dimension assertion and a NEW Golden case, never a retrofit of an existing
+  one (STONEV2-GOV-018).
+- **Never mark a shape, profile or source CURRENT without a real generator AND
+  real tests.** Nothing in Stone v2 is professionally validated; every entry is
+  `NOT_REVIEWED` and the active validation registry holds zero records
+  (STONEV2-GOV-007).
+- **Create an ADR** before changing the LENGTH/WIDTH/DEPTH axis mapping or the
+  orientation convention, replacing the outline-plus-profile model, moving
+  `domain/stone_dimensions.py` out of `domain/`, or introducing a
+  `FACETED_GEM_MODEL`/`SCANNED_MESH` layer.
+- **Create an RFC** before adding a stone shape beyond the 21 implemented (see
+  `RESERVED_STONE_SHAPES`), a multi-stone arrangement, a new import format, a
+  real scan-processing pipeline, or curve-segment/SVG outline input.
+
+Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
+COVERAGE GUARD** — they apply to every future sprint.

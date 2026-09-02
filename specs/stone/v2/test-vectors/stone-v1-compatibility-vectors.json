@@ -1,0 +1,94 @@
+{
+  "vectors": [
+    {
+      "shape": "round",
+      "sprint18StoneSpec": {
+        "shape": "round",
+        "diameter": 6.5,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 58.22141924499569,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "oval",
+      "sprint18StoneSpec": {
+        "shape": "oval",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 67.34996594608987,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "pear",
+      "sprint18StoneSpec": {
+        "shape": "pear",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 52.05393726491256,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "emerald",
+      "sprint18StoneSpec": {
+        "shape": "emerald",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 84.710745424,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "cushion",
+      "sprint18StoneSpec": {
+        "shape": "cushion",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 84.89001462177934,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "princess",
+      "sprint18StoneSpec": {
+        "shape": "princess",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 85.75264000000003,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    },
+    {
+      "shape": "marquise",
+      "sprint18StoneSpec": {
+        "shape": "marquise",
+        "length": 8.0,
+        "width": 6.0,
+        "depth": 4.0
+      },
+      "expectedVolumeMm3": 63.160827730166524,
+      "expectedSourceMode": "PARAMETRIC_REFERENCE",
+      "expectedProfile": "FACETED_REFERENCE",
+      "note": "A Sprint 18 document that sets no Stone v2 field must keep validating AND keep generating identical geometry."
+    }
+  ]
+}

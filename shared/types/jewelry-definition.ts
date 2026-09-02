@@ -13,7 +13,64 @@
 export const SCHEMA_VERSION = '0.1.0'
 
 export type BandProfile = 'comfort_fit' | 'flat'
-export type StoneShape = 'round' | 'oval' | 'pear' | 'emerald' | 'cushion' | 'princess' | 'marquise'
+/**
+ * Canonical stone CUT identities. Mirrors `StoneShape` in
+ * backend/jewelmind/domain/schema.py.
+ *
+ * A cut, never a gem species: `emerald` is the clipped-corner rectangular
+ * outline, and the rhombus is named `lozenge` rather than `diamond`, precisely
+ * so a shape ID can never collide with gem identity (STONEV2-GOV-008).
+ *
+ * `custom` and `imported` are pseudo-shapes for stones with no named cut. They
+ * are real members so capability lookups are uniform, and are never offered to
+ * a user as cuts to choose from.
+ */
+export type StoneShape =
+  // Stone v1 (Sprint 18)
+  | 'round'
+  | 'oval'
+  | 'pear'
+  | 'emerald'
+  | 'cushion'
+  | 'princess'
+  | 'marquise'
+  // Stone v2 (Sprint 20) extended cuts
+  | 'heart'
+  | 'radiant'
+  | 'asscher'
+  | 'trillion'
+  | 'baguette'
+  | 'tapered_baguette'
+  | 'triangle'
+  | 'trapezoid'
+  | 'lozenge'
+  | 'hexagon'
+  | 'kite'
+  | 'shield'
+  | 'half_moon'
+  | 'pearl'
+  // Pseudo-shapes for non-native sources
+  | 'custom'
+  | 'imported'
+
+/** Where a stone's geometry comes from. Mirrors `StoneSourceMode`. */
+export type StoneSourceMode =
+  | 'PARAMETRIC_REFERENCE'
+  | 'CUSTOM_OUTLINE'
+  | 'MEASURED'
+  | 'IMPORTED_CAD'
+
+/**
+ * The 3D reference profile applied to an outline. Independent of `StoneShape`,
+ * which is what avoids `OVAL_CABOCHON`-style compound members.
+ */
+export type StoneReferenceProfile =
+  | 'FACETED_REFERENCE'
+  | 'CABOCHON_REFERENCE'
+  | 'SPHERICAL_REFERENCE'
+
+/** Units a caller may declare for a custom outline or an imported asset. */
+export type DeclaredUnit = 'mm' | 'cm' | 'm' | 'in'
 export type SettingType = 'prong' | 'bezel'
 export type MetalType =
   | 'yellow_gold_18k'
@@ -57,6 +114,39 @@ export interface BandSpec {
   thicknessTaper: BandTaperSpec
 }
 
+export interface OutlinePoint {
+  x: number
+  y: number
+}
+
+/**
+ * A caller-supplied closed stone outline. The outline is closed implicitly —
+ * the first point must not be repeated at the end.
+ */
+export interface CustomOutline {
+  points: OutlinePoint[]
+  unit: DeclaredUnit
+  label: string | null
+}
+
+/** Provenance for a physically measured stone. Never filled in by JewelMind. */
+export interface StoneMeasurement {
+  measurementSource: string | null
+  measurementDate: string | null
+  operatorNote: string | null
+}
+
+/**
+ * Reference to externally supplied stone geometry. `assetHash` is a content
+ * hash, never a filesystem path, and `declaredUnit` is required rather than
+ * inferred — no format JewelMind reads carries a reliable unit.
+ */
+export interface ImportedStoneAsset {
+  assetHash: string
+  assetName: string | null
+  declaredUnit: DeclaredUnit
+}
+
 export interface StoneSpec {
   shape: StoneShape
   diameter: number | null
@@ -64,6 +154,13 @@ export interface StoneSpec {
   width: number | null
   depth: number
   orientation: number
+  /** Narrow-end width of a tapered shape. Required for tapered_baguette/trapezoid. */
+  narrowWidth: number | null
+  source: StoneSourceMode
+  profile: StoneReferenceProfile
+  customOutline: CustomOutline | null
+  measurement: StoneMeasurement | null
+  importedAsset: ImportedStoneAsset | null
 }
 
 export interface SettingSpec {
@@ -269,7 +366,20 @@ export function createDefaultDefinition(): JewelryDefinition {
       widthTaper: { mode: 'NONE', bottomRatio: 1.0 },
       thicknessTaper: { mode: 'NONE', bottomRatio: 1.0 },
     },
-    stone: { shape: 'round', diameter: 6.5, length: null, width: null, depth: 4.0, orientation: 0.0 },
+    stone: {
+      shape: 'round',
+      diameter: 6.5,
+      length: null,
+      width: null,
+      depth: 4.0,
+      orientation: 0.0,
+      narrowWidth: null,
+      source: 'PARAMETRIC_REFERENCE',
+      profile: 'FACETED_REFERENCE',
+      customOutline: null,
+      measurement: null,
+      importedAsset: null,
+    },
     setting: {
       type: 'prong',
       prongCount: 6,

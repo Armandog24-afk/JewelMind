@@ -1,0 +1,126 @@
+{
+  "description": "Real generated output for baguette, produced by running the pipeline.",
+  "stoneSpec": {
+    "shape": "baguette",
+    "diameter": 6.5,
+    "length": 6.0,
+    "width": 3.0,
+    "depth": 2.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null
+  },
+  "normalizedStoneDefinition": {
+    "stoneId": "stone_reference",
+    "sourceMode": "PARAMETRIC_REFERENCE",
+    "shape": "baguette",
+    "family": "RECTILINEAR",
+    "profile": "FACETED_REFERENCE",
+    "dimensions": {
+      "lengthMm": 6.0,
+      "widthMm": 3.0,
+      "depthMm": 2.0,
+      "narrowWidthMm": null,
+      "provenance": "REQUESTED_PARAMETER"
+    },
+    "orientationDeg": 0.0,
+    "symmetry": "BILATERAL_BOTH_AXES",
+    "representation": "PARAMETRIC",
+    "provenance": {
+      "sourceMode": "PARAMETRIC_REFERENCE",
+      "sourceAssetHash": null,
+      "sourceAssetName": null,
+      "originalUnit": null,
+      "normalizationOperations": [],
+      "generatorVersion": "2.0.0",
+      "importerVersion": null,
+      "measurementSource": null,
+      "measurementDate": null,
+      "operatorNote": null
+    },
+    "outline": {
+      "points": [
+        {
+          "x": -1.5,
+          "y": -3.0
+        },
+        {
+          "x": 1.5,
+          "y": -3.0
+        },
+        {
+          "x": 1.5,
+          "y": 3.0
+        },
+        {
+          "x": -1.5,
+          "y": 3.0
+        }
+      ],
+      "isPolygonal": true,
+      "derivation": "NATIVE_PRIMITIVE"
+    },
+    "measuredReferenceClass": null
+  },
+  "anchors": [
+    {
+      "anchor": "CENTER",
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "anchor": "TOP",
+      "x": 1.5,
+      "y": 3.0
+    },
+    {
+      "anchor": "BOTTOM",
+      "x": -1.5,
+      "y": -3.0
+    },
+    {
+      "anchor": "LEFT",
+      "x": -1.5,
+      "y": -3.0
+    },
+    {
+      "anchor": "RIGHT",
+      "x": 1.5,
+      "y": -3.0
+    },
+    {
+      "anchor": "CORNER_NW",
+      "x": -1.5,
+      "y": 3.0
+    },
+    {
+      "anchor": "CORNER_NE",
+      "x": 1.5,
+      "y": 3.0
+    },
+    {
+      "anchor": "CORNER_SW",
+      "x": -1.5,
+      "y": -3.0
+    },
+    {
+      "anchor": "CORNER_SE",
+      "x": 1.5,
+      "y": -3.0
+    }
+  ],
+  "generatedGeometry": {
+    "volumeMm3": 16.07862,
+    "solidCount": 1,
+    "boundingBoxMm": {
+      "sizeX": 3.0000002,
+      "sizeY": 6.0000002,
+      "sizeZ": 2.000000199999999
+    },
+    "isGemologicalReproduction": false
+  }
+}

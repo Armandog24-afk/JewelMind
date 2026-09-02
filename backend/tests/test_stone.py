@@ -137,8 +137,47 @@ class TestStoneDimensionValidation:
             StoneSpec.model_validate({"shape": shape, "length": 8.0})
 
     def test_unknown_shape_is_rejected(self):
+        # `briolette` is genuinely unimplemented and is listed in
+        # `RESERVED_STONE_SHAPES` with a real reason. It replaced `asscher`
+        # here in Sprint 20: asscher became a real, generating shape, so the
+        # original assertion had quietly stopped testing what it claimed to.
         with pytest.raises(ValidationError):
-            StoneSpec.model_validate({"shape": "asscher", "length": 8.0, "width": 6.0})
+            StoneSpec.model_validate({"shape": "briolette", "length": 8.0, "width": 6.0})
+
+    def test_every_reserved_shape_is_rejected_by_jdl(self):
+        """The reserved list must stay honest in both directions: a name
+        documented as unimplemented must not be quietly accepted."""
+
+        from jewelmind.stone.capability import RESERVED_STONE_SHAPES
+
+        assert RESERVED_STONE_SHAPES, "the reserved list must not be empty"
+        for shape in RESERVED_STONE_SHAPES:
+            with pytest.raises(ValidationError):
+                StoneSpec.model_validate(
+                    {"shape": shape, "length": 8.0, "width": 6.0, "depth": 4.0}
+                )
+
+    def test_every_sprint20_shape_is_accepted_by_jdl(self):
+        """The complement of the rejection test above.
+
+        Sprint 18 learned that retargeting an obsolete assertion is only half
+        the fix: without this, nothing would fail if a newly supported shape
+        were accidentally dropped from the JDL enum.
+        """
+
+        from jewelmind.stone.capability import native_shapes
+
+        round_like = {"round", "pearl"}
+        tapered = {"tapered_baguette", "trapezoid"}
+        for shape in native_shapes():
+            payload: dict[str, object] = {"shape": shape, "depth": 4.0}
+            if shape in round_like:
+                payload["diameter"] = 6.5
+            else:
+                payload.update({"length": 8.0, "width": 6.0})
+            if shape in tapered:
+                payload["narrowWidth"] = 4.0
+            assert StoneSpec.model_validate(payload).shape == shape
 
     def test_resolved_dimensions_match_public_fields_for_round(self):
         stone = StoneSpec.model_validate({"shape": "round", "diameter": 7.0, "depth": 4.0})

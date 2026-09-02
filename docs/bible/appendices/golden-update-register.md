@@ -53,6 +53,22 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `SET-003-oval-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — oval 8 × 6, OUTLINE_CARDINAL placement | Sprint 19 milestone | 2026-08-27 |
 | `SET-004-round-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — round, real parametric bezel wall | Sprint 19 milestone | 2026-08-27 |
 | `SET-005-oval-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — oval 8 × 6, bezel with STEP-safety resampling | Sprint 19 milestone | 2026-08-27 |
+| `STV2-001-heart-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — heart 8 x 8, 6 prongs. Records a PRE-EXISTING, size-driven head-attachment finding | Sprint 20 milestone | 2026-09-02 |
+| `STV2-002-radiant-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — radiant 8 x 6, clipped-corner rectangle | Sprint 20 milestone | 2026-09-02 |
+| `STV2-003-asscher-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — asscher 6.5 x 6.5 with a bezel wall | Sprint 20 milestone | 2026-09-02 |
+| `STV2-004-trillion-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — trillion 7 x 7, bowed-side triangle | Sprint 20 milestone | 2026-09-02 |
+| `STV2-005-baguette-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — baguette 6 x 3, plain rectangle | Sprint 20 milestone | 2026-09-02 |
+| `STV2-006-tapered-baguette-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — tapered baguette 6 x 3.2, narrowWidth 2.0 | Sprint 20 milestone | 2026-09-02 |
+| `STV2-007-triangle-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — triangle 7 x 7, straight sides | Sprint 20 milestone | 2026-09-02 |
+| `STV2-008-trapezoid-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — trapezoid 4 x 6, narrowWidth 3.6 | Sprint 20 milestone | 2026-09-02 |
+| `STV2-009-lozenge-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — lozenge 8 x 4, rhombus | Sprint 20 milestone | 2026-09-02 |
+| `STV2-010-hexagon-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — elongated hexagon 8 x 6 with a bezel wall | Sprint 20 milestone | 2026-09-02 |
+| `STV2-011-kite-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — kite 9 x 5, longitudinally asymmetric | Sprint 20 milestone | 2026-09-02 |
+| `STV2-012-shield-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — shield 8 x 6, seven-vertex polygon | Sprint 20 milestone | 2026-09-02 |
+| `STV2-013-half-moon-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — half moon 6 x 6, chord plus elliptical arc | Sprint 20 milestone | 2026-09-02 |
+| `STV2-014-oval-cabochon-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — oval 8 x 6 with a CABOCHON_REFERENCE profile | Sprint 20 milestone | 2026-09-02 |
+| `STV2-015-custom-outline-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — CUSTOM_OUTLINE source through the generic bezel interface | Sprint 20 milestone | 2026-09-02 |
+| `STV2-016-measured-oval-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — MEASURED source, MEASURED_DIMENSION_REFERENCE geometry | Sprint 20 milestone | 2026-09-02 |
 
 ### Sprint 19: the six non-round prong-placement acceptances
 
@@ -78,6 +94,42 @@ confirmed the change was an improvement → `accept --reason` → full `verify-a
 
 **All 12 round-stone cases (`SOL-001`–`SOL-012`) required zero updates**, which is the evidence that
 the refactor changed architecture rather than geometry.
+
+### Sprint 20: sixteen new Stone v2 cases, zero baseline updates
+
+All 16 are `INITIAL_BASELINE` creations, not updates. **No existing baseline was
+modified**, including all 23 pre-existing cases and the exact-equality guards
+(`combined_metal_volume_mm3 == 341.44334316909976`, prong volume
+`== 29.650351464580467`, round stone volume `== 58.22141924499569`).
+
+Created through the sanctioned path: `design.json` written from a real validated
+definition, registered in `manifest.json`, then
+`generate_candidate_baseline()` -> `accept_candidate_baseline()` with an explicit
+reason, transient `candidate.json` removed, and a full `verify-all` re-run.
+Nothing was hand-authored.
+
+The recorded `--reason` for all 16:
+
+> Sprint 20 Stone System v2: INITIAL_BASELINE for a newly supported stone
+> shape, profile or source. Created by running the real pipeline; no existing
+> baseline was modified.
+
+**`STV2-001-heart-prong` records a pre-existing finding rather than avoiding
+it.** Its snapshot captures `productionIsFullyConnected: false` — the band sits
+0.0681mm from `basket_support` and 0.1112mm from `prongs`, so the head floats
+above the band. This is a function of the stone FOOTPRINT, not of the heart
+shape: a `round` stone of diameter 8.0mm — a capability since Sprint 2 —
+reproduces the identical distances, and a `princess 8 x 7.5` is already at
+0.0378mm. The threshold sits near a 7.5mm footprint. Sprint 20 did not introduce
+this; its wider shape coverage surfaced it. The baseline documents the real
+geometry instead of sidestepping it by choosing a smaller heart.
+
+**No Golden ring case exists for `pearl` or for imported stones**, because
+neither can currently be set: a sphere has no girdle plane and imported geometry
+has no derived outline, so both setting families refuse them and no ring can be
+assembled. Their geometry is covered by unit tests and by real import vectors
+instead. See
+[`../22-stone-v2/stone-v2-golden-strategy.md`](../22-stone-v2/stone-v2-golden-strategy.md).
 
 ## How a future entry gets added
 

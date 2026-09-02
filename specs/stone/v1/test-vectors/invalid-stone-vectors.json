@@ -6,14 +6,14 @@
         "shape": "round",
         "diameter": null
       },
-      "expectedError": "stone.diameter is required when stone.shape is 'round'"
+      "expectedError": "Value error, stone.diameter is required when stone.shape is 'round'"
     },
     {
       "description": "oval without length/width is rejected",
       "input": {
         "shape": "oval"
       },
-      "expectedError": "stone.length and stone.width are both required when stone.shape is 'oval'"
+      "expectedError": "Value error, stone.length and stone.width are both required when stone.shape is 'oval'"
     },
     {
       "description": "oval with only length is rejected",
@@ -21,16 +21,16 @@
         "shape": "oval",
         "length": 8.0
       },
-      "expectedError": "stone.length and stone.width are both required when stone.shape is 'oval'"
+      "expectedError": "Value error, stone.length and stone.width are both required when stone.shape is 'oval'"
     },
     {
-      "description": "unknown shape is rejected",
+      "description": "unknown shape is rejected (briolette is a RESERVED, unimplemented shape)",
       "input": {
-        "shape": "asscher",
+        "shape": "briolette",
         "length": 8.0,
         "width": 6.0
       },
-      "expectedError": "Input should be 'round', 'oval', 'pear', 'emerald', 'cushion', 'princess' or 'marquise'"
+      "expectedError": "Input should be 'round', 'oval', 'pear', 'emerald', 'cushion', 'princess', 'marquise', 'heart', 'radiant', 'asscher', 'trillion', 'baguette', 'tapered_baguette', 'triangle', 'trapezoid', 'lozenge', 'hexagon', 'kite', 'shield', 'half_moon', 'pearl', 'custom' or 'imported'"
     }
   ]
 }

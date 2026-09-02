@@ -3,6 +3,7 @@ import type {
   ManufacturingMethod,
   MetalType,
   SettingType,
+  StoneReferenceProfile,
   StoneShape,
 } from '@shared/types/jewelry-definition'
 import { useProjectStore } from '../store/useProjectStore'
@@ -28,10 +29,14 @@ const MANUFACTURING_OPTIONS: Array<{ value: ManufacturingMethod; label: string }
   { value: 'direct_resin_printing', label: 'Direct resin printing' },
 ]
 
-// Mirrors `geometry/stone/capability.py::STONE_SHAPE_CAPABILITIES`'s
-// `generationSupported: true` entries (Sprint 18) — kept in sync by hand,
-// same discipline as every other option list in this file. Update this
-// list in the same change as the backend capability registry.
+// Mirrors `jewelmind/stone/capability.py::native_shapes()` — every shape with a
+// real generator (Sprint 20). Kept in sync by hand, same discipline as every
+// other option list in this file. Update this list in the same change as the
+// backend capability registry.
+//
+// The `custom` and `imported` pseudo-shapes are deliberately ABSENT: they are
+// not cuts a user picks, they are consequences of choosing a different stone
+// source, and offering them here would invite a stone with no outline behind it.
 const STONE_SHAPE_OPTIONS: Array<{ value: StoneShape; label: string }> = [
   { value: 'round', label: 'Round' },
   { value: 'oval', label: 'Oval' },
@@ -40,7 +45,53 @@ const STONE_SHAPE_OPTIONS: Array<{ value: StoneShape; label: string }> = [
   { value: 'cushion', label: 'Cushion' },
   { value: 'princess', label: 'Princess' },
   { value: 'marquise', label: 'Marquise' },
+  { value: 'heart', label: 'Heart' },
+  { value: 'radiant', label: 'Radiant' },
+  { value: 'asscher', label: 'Asscher' },
+  { value: 'trillion', label: 'Trillion' },
+  { value: 'baguette', label: 'Baguette' },
+  { value: 'tapered_baguette', label: 'Tapered baguette' },
+  { value: 'triangle', label: 'Triangle' },
+  { value: 'trapezoid', label: 'Trapezoid' },
+  { value: 'lozenge', label: 'Lozenge' },
+  { value: 'hexagon', label: 'Hexagon' },
+  { value: 'kite', label: 'Kite' },
+  { value: 'shield', label: 'Shield' },
+  { value: 'half_moon', label: 'Half moon' },
+  { value: 'pearl', label: 'Pearl (sphere)' },
 ]
+
+// Shapes whose single horizontal size is a diameter rather than a length/width
+// pair. Mirrors `_ROUND_LIKE_SHAPES` in the backend schema.
+const ROUND_LIKE_SHAPES: StoneShape[] = ['round', 'pearl']
+
+// Shapes that require an explicit narrow-end width. Mirrors `_TAPERED_SHAPES`.
+// The taper is a real dimension the user supplies, never a default ratio.
+const TAPERED_SHAPES: StoneShape[] = ['tapered_baguette', 'trapezoid']
+
+// Which 3D reference profile each shape supports. Mirrors the
+// `supportedProfiles` field of the backend shape registry. Profile is a second,
+// independent axis: this is why there is no `OVAL_CABOCHON` shape.
+const SHAPE_PROFILE_OPTIONS: Partial<
+  Record<StoneShape, Array<{ value: StoneReferenceProfile; label: string }>>
+> = {
+  round: [
+    { value: 'FACETED_REFERENCE', label: 'Faceted' },
+    { value: 'CABOCHON_REFERENCE', label: 'Cabochon' },
+  ],
+  oval: [
+    { value: 'FACETED_REFERENCE', label: 'Faceted' },
+    { value: 'CABOCHON_REFERENCE', label: 'Cabochon' },
+  ],
+  heart: [
+    { value: 'FACETED_REFERENCE', label: 'Faceted' },
+    { value: 'CABOCHON_REFERENCE', label: 'Cabochon' },
+  ],
+  half_moon: [
+    { value: 'FACETED_REFERENCE', label: 'Faceted' },
+    { value: 'CABOCHON_REFERENCE', label: 'Cabochon' },
+  ],
+}
 
 // Mirrors `setting/capability.py::SETTING_CAPABILITIES`'s generatable
 // families (Sprint 19) — kept in sync by hand, same discipline as every
@@ -141,19 +192,55 @@ export function ConfigurationPanel() {
           options={STONE_SHAPE_OPTIONS}
           onChange={(value) => {
             const shape = value as StoneShape
-            if (shape === 'round') {
-              updateStone({ shape, diameter: definition.stone.diameter ?? 6.5, length: null, width: null })
-            } else {
+            // Carry compatible dimensions across a shape change and clear the
+            // ones the new shape cannot use, so switching never leaves a
+            // half-populated stone the backend would reject. A profile the new
+            // shape does not support falls back to its first supported one.
+            const profiles = SHAPE_PROFILE_OPTIONS[shape]
+            const profile: StoneReferenceProfile =
+              shape === 'pearl'
+                ? 'SPHERICAL_REFERENCE'
+                : profiles?.some((option) => option.value === definition.stone.profile)
+                  ? definition.stone.profile
+                  : 'FACETED_REFERENCE'
+
+            if (ROUND_LIKE_SHAPES.includes(shape)) {
               updateStone({
                 shape,
+                profile,
+                diameter: definition.stone.diameter ?? 6.5,
+                length: null,
+                width: null,
+                narrowWidth: null,
+              })
+            } else {
+              const width = definition.stone.width ?? 6.0
+              updateStone({
+                shape,
+                profile,
                 length: definition.stone.length ?? 8.0,
-                width: definition.stone.width ?? 6.0,
+                width,
+                // A tapered shape needs a real narrow width; seed it from the
+                // wide width so the field starts valid, and let the user set it.
+                narrowWidth: TAPERED_SHAPES.includes(shape)
+                  ? (definition.stone.narrowWidth ?? Number((width * 0.6).toFixed(2)))
+                  : null,
               })
             }
           }}
           wide
         />
-        {definition.stone.shape === 'round' ? (
+        {SHAPE_PROFILE_OPTIONS[definition.stone.shape] && (
+          <SelectField
+            id="stone-profile"
+            label="Profile"
+            value={definition.stone.profile}
+            options={SHAPE_PROFILE_OPTIONS[definition.stone.shape] ?? []}
+            onChange={(value) => updateStone({ profile: value as StoneReferenceProfile })}
+            wide
+          />
+        )}
+        {ROUND_LIKE_SHAPES.includes(definition.stone.shape) ? (
           <NumericField
             id="stone-diameter"
             label="Diameter"
@@ -178,7 +265,7 @@ export function ConfigurationPanel() {
             />
             <NumericField
               id="stone-width"
-              label="Width"
+              label={TAPERED_SHAPES.includes(definition.stone.shape) ? 'Wide-end width' : 'Width'}
               unit="mm"
               value={definition.stone.width ?? 6.0}
               onChange={(width) => updateStone({ width })}
@@ -186,6 +273,18 @@ export function ConfigurationPanel() {
               min={0.5}
               max={20}
             />
+            {TAPERED_SHAPES.includes(definition.stone.shape) && (
+              <NumericField
+                id="stone-narrow-width"
+                label="Narrow-end width"
+                unit="mm"
+                value={definition.stone.narrowWidth ?? 3.6}
+                onChange={(narrowWidth) => updateStone({ narrowWidth })}
+                step={0.1}
+                min={0.5}
+                max={20}
+              />
+            )}
           </>
         )}
       </FormSection>

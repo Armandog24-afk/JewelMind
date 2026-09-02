@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/extended-shape-capability.schema.json",
+  "title": "StoneShapeCapabilityV2",
+  "description": "One canonical shape's real, current capabilities. THREE INDEPENDENT AXES: generationSupported, setting compatibility, and professional validation. A shape that generates real geometry is not, by that fact, settable, and neither implies professional validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "shape",
+    "family",
+    "status",
+    "generationSupported",
+    "inspectionSupported",
+    "visionSupported",
+    "jdlSupported",
+    "requiredDimensions",
+    "symmetryClass",
+    "supportedProfiles",
+    "availableSourceModes",
+    "referenceGeometryVersion",
+    "prongCompatibility",
+    "bezelCompatibility",
+    "professionalValidationStatus",
+    "introducedInStoneV1",
+    "description"
+  ],
+  "properties": {
+    "shape": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "RADIAL",
+        "ELLIPTICAL",
+        "POINTED_ELONGATED",
+        "ASYMMETRIC_POINTED",
+        "RECTILINEAR",
+        "CLIPPED_RECTILINEAR",
+        "ROUNDED_RECTILINEAR",
+        "SQUARE_ANGULAR",
+        "TRIANGULAR",
+        "TAPERED_QUADRILATERAL",
+        "POLYGONAL",
+        "SPECIAL_OUTLINE",
+        "SPHERICAL",
+        "CUSTOM",
+        "IMPORTED"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CURRENT",
+        "PARTIAL",
+        "PLANNED",
+        "BLOCKED",
+        "OUT_OF_SCOPE"
+      ]
+    },
+    "generationSupported": {
+      "type": "boolean"
+    },
+    "inspectionSupported": {
+      "type": "boolean"
+    },
+    "visionSupported": {
+      "type": "boolean"
+    },
+    "jdlSupported": {
+      "type": "boolean"
+    },
+    "requiredDimensions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "optionalDimensions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "symmetryClass": {
+      "type": "string",
+      "enum": [
+        "RADIAL",
+        "BILATERAL_BOTH_AXES",
+        "BILATERAL_ONE_AXIS",
+        "ASYMMETRIC",
+        "UNKNOWN"
+      ]
+    },
+    "supportedProfiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "FACETED_REFERENCE",
+          "CABOCHON_REFERENCE",
+          "SPHERICAL_REFERENCE"
+        ]
+      }
+    },
+    "availableSourceModes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "PARAMETRIC_REFERENCE",
+          "CUSTOM_OUTLINE",
+          "MEASURED",
+          "IMPORTED_CAD"
+        ]
+      }
+    },
+    "anchors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CENTER",
+          "TOP",
+          "BOTTOM",
+          "LEFT",
+          "RIGHT",
+          "TIP",
+          "CLEFT",
+          "LEFT_LOBE",
+          "RIGHT_LOBE",
+          "WIDE_END",
+          "NARROW_END",
+          "CORNER_NW",
+          "CORNER_NE",
+          "CORNER_SW",
+          "CORNER_SE"
+        ]
+      }
+    },
+    "referenceGeometryVersion": {
+      "type": "string"
+    },
+    "prongCompatibility": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED_SOFTWARE",
+        "EXPERIMENTAL",
+        "UNSUPPORTED"
+      ]
+    },
+    "bezelCompatibility": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED_SOFTWARE",
+        "EXPERIMENTAL",
+        "UNSUPPORTED"
+      ]
+    },
+    "professionalValidationStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_REVIEWED",
+        "IN_REVIEW",
+        "VALIDATED"
+      ]
+    },
+    "introducedInStoneV1": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    }
+  }
+}

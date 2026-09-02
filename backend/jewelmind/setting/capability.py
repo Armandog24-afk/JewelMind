@@ -41,6 +41,36 @@ RESERVED_SETTING_FAMILIES: tuple[str, ...] = (
     "custom",
 )
 
+def _stone_shapes_by_compatibility(family: str) -> tuple[list[str], list[str], list[str]]:
+    """Split every known stone shape into supported / experimental / unsupported.
+
+    DERIVED from the Stone System's own registry rather than hand-listed here.
+    Sprint 19 hard-coded the seven Stone v1 shapes in this module, and Sprint 20
+    immediately proved why that is a drift hazard: fourteen new shapes plus the
+    `custom` pseudo-shape appeared, and a bezel over a custom outline was
+    refused as "not supported" even though the geometry pipeline built it
+    correctly. Deriving the split means a new shape cannot be forgotten here.
+
+    Stone remains the authority on what a shape IS; Setting remains the
+    authority on what it can DO with one. This function only reads the former.
+    """
+
+    from jewelmind.stone.capability import STONE_SHAPE_CAPABILITIES_V2
+
+    supported: list[str] = []
+    experimental: list[str] = []
+    unsupported: list[str] = []
+    for shape, entry in STONE_SHAPE_CAPABILITIES_V2.items():
+        status = entry.prongCompatibility if family == "prong" else entry.bezelCompatibility
+        if status == "SUPPORTED_SOFTWARE":
+            supported.append(shape)
+        elif status == "EXPERIMENTAL":
+            experimental.append(shape)
+        else:
+            unsupported.append(shape)
+    return supported, experimental, unsupported
+
+
 ALL_STONE_SHAPES: tuple[str, ...] = (
     "round",
     "oval",
@@ -83,10 +113,12 @@ SETTING_CAPABILITIES: dict[str, SettingCapability] = {
             categoryNeutral=True,
             # Only round's placement was designed for its shape. Every
             # non-round shape generates, but via a provisional strategy.
-            stoneShapesSupported=["round"],
-            stoneShapesExperimental=["oval", "emerald", "cushion", "princess", "marquise", "pear"],
-            stoneShapesUnsupported=[],
-            stoneSourceModesSupported=["PARAMETRIC_REFERENCE_STONE"],
+            stoneShapesSupported=_stone_shapes_by_compatibility("prong")[0],
+            stoneShapesExperimental=_stone_shapes_by_compatibility("prong")[1],
+            stoneShapesUnsupported=_stone_shapes_by_compatibility("prong")[2],
+            stoneSourceModesSupported=[
+                "PARAMETRIC_REFERENCE", "CUSTOM_OUTLINE", "MEASURED",
+            ],
             seatSupport="PLANNED",
             bearingSupport="PLANNED",
             cutterSupport="PLANNED",
@@ -94,7 +126,8 @@ SETTING_CAPABILITIES: dict[str, SettingCapability] = {
             settingGeometryVersion=SETTING_GEOMETRY_VERSION,
             description=(
                 "Cylindrical reference prongs. RADIAL placement for round (byte-identical to "
-                "pre-Sprint-19); OUTLINE_CARDINAL placement for non-round shapes. No seat, "
+                "pre-Sprint-19); OUTLINE_CARDINAL placement for every other outline, including "
+                "custom ones. Placement is not tip-, corner- or anchor-aware. No seat, "
                 "bearing, or cutter geometry exists."
             ),
         ),
@@ -105,10 +138,12 @@ SETTING_CAPABILITIES: dict[str, SettingCapability] = {
             inspectable=True,
             categoryNeutral=True,
             # round and oval are the two proven cases required by the brief.
-            stoneShapesSupported=["round", "oval"],
-            stoneShapesExperimental=["emerald", "cushion", "princess", "marquise", "pear"],
-            stoneShapesUnsupported=[],
-            stoneSourceModesSupported=["PARAMETRIC_REFERENCE_STONE"],
+            stoneShapesSupported=_stone_shapes_by_compatibility("bezel")[0],
+            stoneShapesExperimental=_stone_shapes_by_compatibility("bezel")[1],
+            stoneShapesUnsupported=_stone_shapes_by_compatibility("bezel")[2],
+            stoneSourceModesSupported=[
+                "PARAMETRIC_REFERENCE", "CUSTOM_OUTLINE", "MEASURED",
+            ],
             seatSupport="PLANNED",
             bearingSupport="PLANNED",
             cutterSupport="PLANNED",
@@ -116,9 +151,10 @@ SETTING_CAPABILITIES: dict[str, SettingCapability] = {
             settingGeometryVersion=SETTING_GEOMETRY_VERSION,
             description=(
                 "Parametric wall built by offsetting the stone's own girdle outline, so the "
-                "pipeline is outline-agnostic rather than per-shape. Wall thickness/height are "
-                "preliminary software values, not professional recommendations. No seat, "
-                "bearing, or cutter geometry exists."
+                "pipeline is outline-agnostic rather than per-shape — which is why a custom "
+                "outline needs no bezel code of its own. Wall thickness/height are preliminary "
+                "software values, not professional recommendations. No seat, bearing, or cutter "
+                "geometry exists."
             ),
         ),
     ]

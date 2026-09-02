@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/stone-profile-v2.schema.json",
+  "title": "StoneReferenceProfile",
+  "description": "The 3D reference profile applied to an outline. Independent of the shape, which is what avoids OVAL_CABOCHON-style compound members. Never a claim about a commercial cutting style.",
+  "type": "string",
+  "enum": [
+    "FACETED_REFERENCE",
+    "CABOCHON_REFERENCE",
+    "SPHERICAL_REFERENCE"
+  ]
+}

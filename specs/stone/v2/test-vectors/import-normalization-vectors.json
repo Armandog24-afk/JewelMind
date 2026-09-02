@@ -1,0 +1,78 @@
+{
+  "note": "Produced by exporting a real 6x8x4mm box, storing it, and importing it back. The STL rows record solidCount 0 and volume null, which is the honest result for a mesh, not a failure.",
+  "sourceGeometry": {
+    "description": "cq.Solid.makeBox(6, 8, 4) translated to (10, 20, 30)"
+  },
+  "vectors": [
+    {
+      "description": ".step declared as mm",
+      "extension": ".step",
+      "declaredUnit": "mm",
+      "expectedRepresentation": "BREP_SOLID",
+      "expectedSupportsBrepOperations": true,
+      "expectedSolidCount": 1,
+      "expectedFaceCount": 6,
+      "expectedTriangleCount": null,
+      "expectedLengthMm": 8.0,
+      "expectedWidthMm": 6.0,
+      "expectedDepthMm": 4.0,
+      "expectedVolumeMm3": 192.0,
+      "expectedNormalizationOperations": [
+        "ORIGIN_RECENTERED:bbox_center(13.000000,24.000000,32.000000)"
+      ]
+    },
+    {
+      "description": ".step declared as cm",
+      "extension": ".step",
+      "declaredUnit": "cm",
+      "expectedRepresentation": "BREP_SOLID",
+      "expectedSupportsBrepOperations": true,
+      "expectedSolidCount": 1,
+      "expectedFaceCount": 6,
+      "expectedTriangleCount": null,
+      "expectedLengthMm": 80.0,
+      "expectedWidthMm": 60.0,
+      "expectedDepthMm": 40.0,
+      "expectedVolumeMm3": 192000.0,
+      "expectedNormalizationOperations": [
+        "UNIT_CONVERSION:cm->mm",
+        "ORIGIN_RECENTERED:bbox_center(130.000000,240.000000,320.000000)"
+      ]
+    },
+    {
+      "description": ".stl declared as mm",
+      "extension": ".stl",
+      "declaredUnit": "mm",
+      "expectedRepresentation": "MESH",
+      "expectedSupportsBrepOperations": false,
+      "expectedSolidCount": 0,
+      "expectedFaceCount": 1,
+      "expectedTriangleCount": 12,
+      "expectedLengthMm": 8.0000002,
+      "expectedWidthMm": 6.0000002,
+      "expectedDepthMm": 4.0000002,
+      "expectedVolumeMm3": null,
+      "expectedNormalizationOperations": [
+        "ORIGIN_RECENTERED:bbox_center(13.000000,24.000000,32.000000)"
+      ]
+    },
+    {
+      "description": ".stl declared as cm",
+      "extension": ".stl",
+      "declaredUnit": "cm",
+      "expectedRepresentation": "MESH",
+      "expectedSupportsBrepOperations": false,
+      "expectedSolidCount": 0,
+      "expectedFaceCount": 1,
+      "expectedTriangleCount": 12,
+      "expectedLengthMm": 80.0000002,
+      "expectedWidthMm": 60.0000002,
+      "expectedDepthMm": 40.0000002,
+      "expectedVolumeMm3": null,
+      "expectedNormalizationOperations": [
+        "UNIT_CONVERSION:cm->mm",
+        "ORIGIN_RECENTERED:bbox_center(130.000000,240.000000,320.000000)"
+      ]
+    }
+  ]
+}

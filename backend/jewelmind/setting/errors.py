@@ -63,3 +63,16 @@ class SettingCapabilityMismatchError(SettingError):
     generatable (SETTING-GOV-005/006)."""
 
     code = "SETTING_CAPABILITY_MISMATCH"
+
+
+class StoneOutlineUnavailableError(SettingError):
+    """No usable girdle outline could be obtained for a stone.
+
+    Raised rather than substituting an approximation. A stone with no planar
+    outline (the spherical pearl reference) or one whose outline the Stone
+    System could not derive genuinely cannot be set by the current
+    outline-driven families, and saying so is the honest answer
+    (SETTING-GOV-013: never silently substitute).
+    """
+
+    code = "STONE_OUTLINE_UNAVAILABLE"

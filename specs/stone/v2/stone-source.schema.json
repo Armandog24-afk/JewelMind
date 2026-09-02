@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/stone-source.schema.json",
+  "title": "StoneSourceMode",
+  "description": "Where a stone's geometry comes from. SCANNED_MESH is deliberately absent: a scan arrives as a mesh or a converted CAD file and is handled by IMPORTED_CAD's normalization.",
+  "type": "string",
+  "enum": [
+    "PARAMETRIC_REFERENCE",
+    "CUSTOM_OUTLINE",
+    "MEASURED",
+    "IMPORTED_CAD"
+  ]
+}

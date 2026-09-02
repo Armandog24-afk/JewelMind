@@ -171,12 +171,55 @@ def generate_model(definition: JewelryDefinition) -> GenerateResponse:
                 if getattr(gm, "setting_result", None) is not None
                 else None
             ),
+            # Sprint 20: source mode, profile, provenance and anchors, so a
+            # client can tell a parametric cut from a custom, measured or
+            # imported stone without guessing from `shape`.
+            "stone": _stone_summary(gm),
             "inspection": _inspection_summary(record),
         },
         previewComponents=preview_components,
         warnings=gm.warnings,
         generatedAt=record.generated_at,
     )
+
+
+def _stone_summary(gm) -> dict | None:
+    """Kernel-neutral Stone v2 facts for an API response (brief section 84).
+
+    Deliberately a SUMMARY rather than the raw component metadata: the metadata
+    carries the full outline point list, which is exactly what the Setting System
+    needs and exactly what an API consumer does not — a 196-point cushion outline
+    would dominate every generate response. The point COUNT is reported instead,
+    and the points themselves stay server-side.
+    """
+
+    component = gm.components.get("stone_reference")
+    if component is None:
+        return None
+
+    meta = component.metadata
+    return {
+        "sourceMode": meta.get("sourceMode"),
+        "shape": meta.get("shape"),
+        "profile": meta.get("profile"),
+        "family": meta.get("family"),
+        "symmetry": meta.get("symmetry"),
+        "representation": meta.get("representation"),
+        "lengthMm": meta.get("lengthMm"),
+        "widthMm": meta.get("widthMm"),
+        "depthMm": meta.get("depthMm"),
+        "narrowWidthMm": meta.get("narrowWidthMm"),
+        "dimensionProvenance": meta.get("dimensionProvenance"),
+        "measuredReferenceClass": meta.get("measuredReferenceClass"),
+        "orientationDeg": meta.get("orientationDeg"),
+        "outlineAvailable": meta.get("outlineAvailable"),
+        "outlineIsPolygonal": meta.get("outlineIsPolygonal"),
+        "outlinePointCount": meta.get("outlinePointCount"),
+        "anchors": meta.get("anchors"),
+        "provenance": meta.get("provenance"),
+        "isGemologicalReproduction": meta.get("isGemologicalReproduction", False),
+        "referenceGeometryVersion": meta.get("referenceGeometryVersion"),
+    }
 
 
 @router.get("/api/models/{model_id}/metadata", response_model=ModelMetadataResponse)

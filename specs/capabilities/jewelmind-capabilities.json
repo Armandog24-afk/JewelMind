@@ -129,84 +129,6 @@
       "note": "SET-001..SET-005 plus the 18 pre-existing solitaire goldens."
     },
     {
-      "domain": "stone_shape",
-      "capability": "round",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "oval",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "pear",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "emerald",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "cushion",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "princess",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "marquise",
-      "status": "CURRENT",
-      "note": "Real parametric reference geometry (Sprint 18)."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "asscher",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "radiant",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "heart",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "trillion",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "baguette",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
-      "domain": "stone_shape",
-      "capability": "cabochon",
-      "status": "PLANNED",
-      "note": "Requires an RFC; no geometry."
-    },
-    {
       "domain": "stone_source_mode",
       "capability": "parametric_reference_stone",
       "status": "CURRENT",
@@ -613,6 +535,300 @@
       "capability": "validated_setting_geometry",
       "status": "PLANNED",
       "note": "Every setting is NOT_REVIEWED. No human evidence exists."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "round",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "oval",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "pear",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "emerald",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "cushion",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "princess",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "marquise",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 18)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "heart",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "radiant",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "asscher",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "trillion",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "baguette",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "tapered_baguette",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "triangle",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "trapezoid",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "lozenge",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "hexagon",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "kite",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "shield",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "half_moon",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "pearl",
+      "status": "CURRENT",
+      "note": "Real deterministic reference geometry with a registered outline builder, generation tests and a Golden case (Sprint 20)."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "briolette",
+      "status": "PLANNED",
+      "note": "Reserved, not a JDL enum member and with no generator. Fully three-dimensional drop with no single girdle plane; the current outline-plus-profile pipeline cannot express it."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "rose_cut",
+      "status": "PLANNED",
+      "note": "Reserved, not a JDL enum member and with no generator. Defined by its facet arrangement (flat back, domed faceted crown) rather than by its outline; needs a real facet model."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "old_mine",
+      "status": "PLANNED",
+      "note": "Reserved, not a JDL enum member and with no generator. A historical proportion set, not a distinct outline. Would require sourced proportions JewelMind does not have."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "star",
+      "status": "PLANNED",
+      "note": "Reserved, not a JDL enum member and with no generator. Concave polygonal outline is expressible, but no sourced proportions exist; a caller wanting one today should use CUSTOM_OUTLINE."
+    },
+    {
+      "domain": "stone_shape",
+      "capability": "cross",
+      "status": "PLANNED",
+      "note": "Reserved, not a JDL enum member and with no generator. As above \u2014 reachable through CUSTOM_OUTLINE without a new enum."
+    },
+    {
+      "domain": "stone_source",
+      "capability": "PARAMETRIC_REFERENCE",
+      "status": "CURRENT",
+      "note": "A named canonical shape plus explicit dimensions."
+    },
+    {
+      "domain": "stone_source",
+      "capability": "CUSTOM_OUTLINE",
+      "status": "CURRENT",
+      "note": "A validated caller-supplied closed outline, extruded through the same reference-profile pipeline every native shape uses."
+    },
+    {
+      "domain": "stone_source",
+      "capability": "MEASURED",
+      "status": "CURRENT",
+      "note": "A real physical stone's measurements. With dimensions only, JewelMind builds an approximation labelled MEASURED_DIMENSION_REFERENCE; with a measured outline it builds MEASURED_OUTLINE_REFERENCE."
+    },
+    {
+      "domain": "stone_source",
+      "capability": "IMPORTED_CAD",
+      "status": "PARTIAL",
+      "note": "Externally supplied CAD or mesh geometry, normalized into the canonical stone frame with explicit declared units and recorded provenance."
+    },
+    {
+      "domain": "stone_source",
+      "capability": "SCANNED_MESH",
+      "status": "PLANNED",
+      "note": "Scan-specific processing (point clouds, decimation, hole filling) does not exist. A scan that has already been converted to STL or STEP is importable today through IMPORTED_CAD."
+    },
+    {
+      "domain": "stone_profile",
+      "capability": "FACETED_REFERENCE",
+      "status": "CURRENT",
+      "note": "Three-level culet/girdle/table reference body, unchanged since Sprint 18."
+    },
+    {
+      "domain": "stone_profile",
+      "capability": "CABOCHON_REFERENCE",
+      "status": "CURRENT",
+      "note": "Real domed body over any supported outline, built from 16 ellipsoidal sections chosen from a measured convergence run."
+    },
+    {
+      "domain": "stone_profile",
+      "capability": "SPHERICAL_REFERENCE",
+      "status": "CURRENT",
+      "note": "Real spherical reference solid used by the pearl shape. Near-round, drop and button pearl bodies are PLANNED."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "step",
+      "status": "CURRENT",
+      "note": "Verified by running the installed kernel; yields BREP_SOLID. Mesh imports expose no B-Rep operations."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "stp",
+      "status": "CURRENT",
+      "note": "Verified by running the installed kernel; yields BREP_SOLID. Mesh imports expose no B-Rep operations."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "brep",
+      "status": "CURRENT",
+      "note": "Verified by running the installed kernel; yields BREP_SOLID. Mesh imports expose no B-Rep operations."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "stl",
+      "status": "CURRENT",
+      "note": "Verified by running the installed kernel; yields MESH. Mesh imports expose no B-Rep operations."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "obj",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. OCP.RWObj is not available in this build."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "gltf",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. No XCAF document pipeline is wired up to read it."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "glb",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. No XCAF document pipeline is wired up to read it."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "iges",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. No IGES reader is available in this build."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "igs",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. No IGES reader is available in this build."
+    },
+    {
+      "domain": "stone_import_format",
+      "capability": "3dm",
+      "status": "BLOCKED",
+      "note": "Not claimed, and rejected at store time. Rhino format; JewelMind never requires Rhino (LAW)."
+    },
+    {
+      "domain": "stone_outline",
+      "capability": "NORMALIZED_OUTLINE_API",
+      "status": "CURRENT",
+      "note": "Every parametric, custom and measured stone exposes ordered millimetre-space outline points that Setting consumes directly."
+    },
+    {
+      "domain": "stone_outline",
+      "capability": "IMPORTED_OUTLINE_PROJECTION",
+      "status": "PLANNED",
+      "note": "Deriving a girdle outline by projecting imported geometry is not implemented; imported stones report no outline rather than a fabricated one, which is why their setting compatibility is UNSUPPORTED."
+    },
+    {
+      "domain": "stone_outline",
+      "capability": "CUSTOM_OUTLINE_CURVE_SEGMENTS",
+      "status": "PLANNED",
+      "note": "Only ordered points are accepted; curve segments and SVG import do not exist."
+    },
+    {
+      "domain": "stone_anchor",
+      "capability": "OUTLINE_DERIVED_ANCHORS",
+      "status": "CURRENT",
+      "note": "Cardinal, tip, cleft, lobe, wide/narrow-end and corner anchors are derived from the real outline. They are geometric facts, never prong positions."
+    },
+    {
+      "domain": "stone_anchor",
+      "capability": "ANCHOR_DRIVEN_PRONG_PLACEMENT",
+      "status": "PLANNED",
+      "note": "Setting still places prongs from the outline support function, not from named anchors. Tip-aware and corner-aware placement do not exist."
     }
   ]
 }

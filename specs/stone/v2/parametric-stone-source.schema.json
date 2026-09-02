@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/parametric-stone-source.schema.json",
+  "title": "ParametricStoneSource",
+  "description": "A stone built from a named canonical cut plus explicit dimensions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "shape"
+  ],
+  "properties": {
+    "mode": {
+      "const": "PARAMETRIC_REFERENCE"
+    },
+    "shape": {
+      "type": "string",
+      "enum": [
+        "round",
+        "oval",
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon",
+        "pearl",
+        "custom",
+        "imported"
+      ]
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE",
+        "SPHERICAL_REFERENCE"
+      ]
+    }
+  }
+}

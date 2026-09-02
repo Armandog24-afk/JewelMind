@@ -143,8 +143,17 @@ def test_invalid_stone_vectors_are_actually_rejected():
 
     vectors = _load(SPECS_DIR / "test-vectors" / "invalid-stone-vectors.json")
     for vector in vectors["vectors"]:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValidationError) as caught:
             StoneSpec.model_validate(vector["input"])
+
+        # Also assert the RECORDED message still matches the real one. Without
+        # this the `expectedError` field is documentation nothing verifies, and
+        # it had in fact drifted: it still listed only the seven Sprint 18
+        # shapes after Sprint 20 added fourteen more.
+        assert caught.value.errors()[0]["msg"] == vector["expectedError"], (
+            f"recorded expectedError for {vector['description']!r} no longer "
+            "matches the real validator output"
+        )
 
 
 def test_backward_compatibility_vector_reproduces_the_pre_sprint18_volume():

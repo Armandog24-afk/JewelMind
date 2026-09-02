@@ -160,22 +160,150 @@ class TestUnsupportedFeature:
         assert proposal.unsupportedFeatures[0].blocking is True
 
     def test_unsupported_stone_shape_value_is_caught_deterministically(self):
-        """Sprint 18 made oval/pear/emerald/cushion/princess/marquise real,
-        supported shapes, so this test now uses `asscher` — a shape that is
-        genuinely still unsupported. The behaviour under test is unchanged:
-        an enum value outside the real `StoneShape` capability set must be
-        rejected deterministically by `capability.py`, never smuggled into
-        the candidate JDL, regardless of what a provider returns."""
+        """The behaviour under test never changes; the SUBJECT keeps having to.
+
+        An enum value outside the real `StoneShape` capability set must be
+        rejected deterministically by `capability.py`, never smuggled into the
+        candidate JDL, regardless of what a provider returns.
+
+        This test has now been retargeted twice. Sprint 18 moved it from `oval`
+        to `asscher`; Sprint 20 made `asscher` a real generating shape, so it
+        moves again — to `briolette`, which is listed in
+        `RESERVED_STONE_SHAPES` with a real geometric reason for its absence.
+
+        The recurring retarget is a feature of a healthy capability guard, not a
+        flaw: it fires precisely because the capability set genuinely grew. The
+        complement test below is what makes the pair sound — without it, nothing
+        would fail if a newly supported shape were dropped from the enum.
+        """
 
         raw = RawDesignerResponse(
             proposedCanonicalValues=[
-                RawProposedValue(field="stone.shape", value="asscher", sourceText="pietra asscher")
+                RawProposedValue(
+                    field="stone.shape", value="briolette", sourceText="pietra briolette"
+                )
             ]
         )
         service = DesignerService(provider=FakeDesignerProvider(response=raw))
-        result = service.interpret(_request("Voglio una pietra asscher."))
-        assert any(f.feature == "asscher" for f in result.proposal.unsupportedFeatures)
+        result = service.interpret(_request("Voglio una pietra briolette."))
+        assert any(f.feature == "briolette" for f in result.proposal.unsupportedFeatures)
         assert result.proposal.candidateJDL.stone.shape == "round"
+
+    def test_no_sprint20_shape_is_reported_unsupported(self):
+        """The Sprint 20 complement to the retargeted test above.
+
+        Without this, nothing would fail if a newly supported shape were dropped
+        from the capability set — which is exactly how Designer came to
+        misreport `tapered_baguette` and `half_moon` as unsupported during this
+        sprint: the synonym table listed only their spaced spellings, and nothing
+        mapped the underscored canonical IDs.
+        """
+
+        from jewelmind.stone.capability import native_shapes
+
+        sprint20 = [
+            shape for shape in native_shapes()
+            if shape not in (
+                "round", "oval", "pear", "emerald", "cushion", "princess", "marquise",
+            )
+        ]
+        assert len(sprint20) == 14, sprint20
+
+        for shape in sprint20:
+            raw = RawDesignerResponse(
+                proposedCanonicalValues=[
+                    RawProposedValue(field="stone.shape", value=shape, sourceText=shape)
+                ]
+            )
+            service = DesignerService(provider=FakeDesignerProvider(response=raw))
+            result = service.interpret(_request(f"Voglio una pietra {shape}."))
+            assert not any(
+                f.feature == shape for f in result.proposal.unsupportedFeatures
+            ), f"{shape} generates real geometry but Designer reports it unsupported"
+
+    def test_a_shape_without_dimensions_asks_rather_than_inventing_them(self):
+        """Brief section 39, verified rather than asserted in prose.
+
+        "Voglio una pietra a cuore" names a cut and no size. JewelMind must NOT
+        decide that a heart is 8 x 8mm; it must ask. The proposal therefore
+        carries no candidate and a structured question per missing dimension.
+        """
+
+        raw = RawDesignerResponse(
+            proposedCanonicalValues=[
+                RawProposedValue(field="stone.shape", value="heart", sourceText="cuore")
+            ]
+        )
+        service = DesignerService(provider=FakeDesignerProvider(response=raw))
+        proposal = service.interpret(_request("Voglio una pietra a cuore.")).proposal
+
+        assert proposal.candidateJDL is None, (
+            "a shape with no dimensions must not produce a candidate built on "
+            "invented proportions"
+        )
+        asked = {question.field for question in proposal.clarificationQuestions}
+        assert asked == {"stone.length", "stone.width"}, asked
+        for question in proposal.clarificationQuestions:
+            assert question.ambiguityLevel == "HIGH_IMPACT_AMBIGUITY"
+            assert "millimetre" in question.question
+
+    def test_a_tapered_shape_also_asks_for_its_narrow_width(self):
+        """The taper is a real dimension, never a default ratio."""
+
+        raw = RawDesignerResponse(
+            proposedCanonicalValues=[
+                RawProposedValue(field="stone.shape", value="tapered baguette")
+            ]
+        )
+        service = DesignerService(provider=FakeDesignerProvider(response=raw))
+        proposal = service.interpret(_request("Voglio una baguette rastremata.")).proposal
+        asked = {question.field for question in proposal.clarificationQuestions}
+        assert asked == {"stone.length", "stone.width", "stone.narrowWidth"}, asked
+
+    def test_a_shape_with_dimensions_reaches_the_candidate(self):
+        """The other half: once the sizes are supplied, the shape really lands."""
+
+        raw = RawDesignerResponse(
+            proposedCanonicalValues=[
+                RawProposedValue(field="stone.shape", value="heart"),
+                RawProposedValue(field="stone.length", value="8.0"),
+                RawProposedValue(field="stone.width", value="8.0"),
+            ]
+        )
+        service = DesignerService(provider=FakeDesignerProvider(response=raw))
+        proposal = service.interpret(_request("Voglio un cuore 8x8.")).proposal
+        assert proposal.candidateJDL is not None
+        assert proposal.candidateJDL.stone.shape == "heart"
+        assert proposal.candidateJDL.stone.length == 8.0
+        assert not proposal.clarificationQuestions
+
+    def test_italian_and_english_aliases_resolve_to_the_same_cut(self):
+        """Brief section 38's alias table, exercised through the real service."""
+
+        for alias, expected in (
+            ("cuore", "heart"),
+            ("radiante", "radiant"),
+            ("trilliant", "trillion"),
+            ("losanga", "lozenge"),
+            ("esagonale", "hexagon"),
+            ("aquilone", "kite"),
+            ("scudo", "shield"),
+            ("mezzaluna", "half_moon"),
+            ("perla", "pearl"),
+            ("half moon", "half_moon"),
+        ):
+            raw = RawDesignerResponse(
+                proposedCanonicalValues=[
+                    RawProposedValue(field="stone.shape", value=alias),
+                    RawProposedValue(field="stone.length", value="8.0"),
+                    RawProposedValue(field="stone.width", value="6.0"),
+                    RawProposedValue(field="stone.diameter", value="8.0"),
+                ]
+            )
+            service = DesignerService(provider=FakeDesignerProvider(response=raw))
+            proposal = service.interpret(_request(f"Voglio una pietra {alias}.")).proposal
+            assert proposal.candidateJDL is not None, f"{alias} produced no candidate"
+            assert proposal.candidateJDL.stone.shape == expected, alias
 
     def test_stone_shapes_supported_since_sprint18_are_no_longer_rejected(self):
         """The complement of the test above, and the real regression guard

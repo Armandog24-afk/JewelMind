@@ -708,6 +708,28 @@ front-matter convention and are listed here for completeness, per
 | JM-BIBLE-591 | Setting Golden Strategy | accepted | current | [`21-setting/setting-golden-strategy.md`](../21-setting/setting-golden-strategy.md) |
 | JM-BIBLE-592 | Setting Code Mapping and Gaps | accepted | current | [`21-setting/code-mapping-and-gaps.md`](../21-setting/code-mapping-and-gaps.md) |
 | JM-BIBLE-SPRINT19-REPORT | Sprint 19 Validation Report — Setting System v1 | accepted | current | [`21-setting/SPRINT-19-VALIDATION-REPORT.md`](../21-setting/SPRINT-19-VALIDATION-REPORT.md) |
+| JM-BIBLE-STONEV2-README | Stone System v2 — Index | accepted | current | [`22-stone-v2/README.md`](../22-stone-v2/README.md) |
+| JM-BIBLE-600 | Stone System v2 Governance | accepted | current | [`22-stone-v2/stone-v2-governance.md`](../22-stone-v2/stone-v2-governance.md) |
+| JM-BIBLE-601 | Stone Source Architecture | accepted | current | [`22-stone-v2/stone-source-architecture.md`](../22-stone-v2/stone-source-architecture.md) |
+| JM-BIBLE-602 | Extended Shape Taxonomy | accepted | current | [`22-stone-v2/extended-shape-taxonomy.md`](../22-stone-v2/extended-shape-taxonomy.md) |
+| JM-BIBLE-603 | Shape Family Architecture | accepted | current | [`22-stone-v2/shape-family-architecture.md`](../22-stone-v2/shape-family-architecture.md) |
+| JM-BIBLE-604 | Extended Native Shapes | accepted | current | [`22-stone-v2/extended-native-shapes.md`](../22-stone-v2/extended-native-shapes.md) |
+| JM-BIBLE-605 | Stone Profile Model v2 | accepted | current | [`22-stone-v2/stone-profile-v2.md`](../22-stone-v2/stone-profile-v2.md) |
+| JM-BIBLE-606 | Cabochon and Pearl References | accepted | current | [`22-stone-v2/cabochon-and-pearl.md`](../22-stone-v2/cabochon-and-pearl.md) |
+| JM-BIBLE-607 | Custom Outline Contract | accepted | current | [`22-stone-v2/custom-outline-contract.md`](../22-stone-v2/custom-outline-contract.md) |
+| JM-BIBLE-608 | Custom Outline Validation | accepted | current | [`22-stone-v2/custom-outline-validation.md`](../22-stone-v2/custom-outline-validation.md) |
+| JM-BIBLE-609 | Measured Stone Contract | accepted | current | [`22-stone-v2/measured-stone-contract.md`](../22-stone-v2/measured-stone-contract.md) |
+| JM-BIBLE-610 | Imported Stone Contract | accepted | current | [`22-stone-v2/imported-stone-contract.md`](../22-stone-v2/imported-stone-contract.md) |
+| JM-BIBLE-611 | Import Normalization | accepted | current | [`22-stone-v2/import-normalization.md`](../22-stone-v2/import-normalization.md) |
+| JM-BIBLE-612 | Stone Source Provenance | accepted | current | [`22-stone-v2/stone-source-provenance.md`](../22-stone-v2/stone-source-provenance.md) |
+| JM-BIBLE-613 | Stone / Setting Compatibility v2 | accepted | current | [`22-stone-v2/stone-setting-compatibility-v2.md`](../22-stone-v2/stone-setting-compatibility-v2.md) |
+| JM-BIBLE-614 | Stone Inspection v2 | accepted | current | [`22-stone-v2/stone-inspection-v2.md`](../22-stone-v2/stone-inspection-v2.md) |
+| JM-BIBLE-615 | Stone v2 Golden Strategy | accepted | current | [`22-stone-v2/stone-v2-golden-strategy.md`](../22-stone-v2/stone-v2-golden-strategy.md) |
+| JM-BIBLE-616 | Stone v2 Capability Model | accepted | current | [`22-stone-v2/stone-v2-capability-model.md`](../22-stone-v2/stone-v2-capability-model.md) |
+| JM-BIBLE-617 | Stone v1 Migration | accepted | current | [`22-stone-v2/current-stone-v1-migration.md`](../22-stone-v2/current-stone-v1-migration.md) |
+| JM-BIBLE-618 | Stone v2 Code Mapping and Gaps | accepted | current | [`22-stone-v2/code-mapping-and-gaps.md`](../22-stone-v2/code-mapping-and-gaps.md) |
+| JM-BIBLE-619 | Open Stone v2 Questions | accepted | current | [`22-stone-v2/open-stone-v2-questions.md`](../22-stone-v2/open-stone-v2-questions.md) |
+| JM-BIBLE-SPRINT20-REPORT | Sprint 20 Validation Report | accepted | current | [`22-stone-v2/SPRINT-20-VALIDATION-REPORT.md`](../22-stone-v2/SPRINT-20-VALIDATION-REPORT.md) |
 
 ## Machine-readable Professional Validation specification — `specs/professional-validation/v1/`
 

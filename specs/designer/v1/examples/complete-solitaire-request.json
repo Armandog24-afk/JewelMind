@@ -68,7 +68,13 @@
         "length": null,
         "width": null,
         "depth": 4.0,
-        "orientation": 0.0
+        "orientation": 0.0,
+        "narrowWidth": null,
+        "source": "PARAMETRIC_REFERENCE",
+        "profile": "FACETED_REFERENCE",
+        "customOutline": null,
+        "measurement": null,
+        "importedAsset": null
       },
       "setting": {
         "type": "prong",

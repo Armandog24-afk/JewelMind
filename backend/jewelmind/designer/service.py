@@ -43,6 +43,52 @@ from jewelmind.designer.schemas import (
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.validation.engine import has_errors, validate_definition
 
+#: The dimensions each stone shape needs, and the question to ask when one is
+#: missing. Derived from the Stone System registry so a new shape's requirements
+#: cannot drift from what the schema actually enforces.
+_STONE_DIMENSION_QUESTIONS: dict[str, str] = {
+    "diameter": "What diameter should the stone be, in millimetres?",
+    "length": "What length should the stone be, in millimetres?",
+    "width": "What width should the stone be, in millimetres?",
+    "narrowWidth": (
+        "This shape is tapered. What should its narrow-end width be, in "
+        "millimetres?"
+    ),
+}
+
+
+def _missing_stone_dimensions(patch: dict[str, Any]) -> list[tuple[str, str]]:
+    """Which stone dimensions a proposed shape needs but the patch omits.
+
+    Returns `(field path, question)` pairs. Never fills a dimension in — the
+    whole point is that JewelMind asks instead of inventing a proportion
+    (brief section 39).
+    """
+
+    from jewelmind.stone.capability import get_shape_capability
+
+    shape = patch.get("stone.shape")
+    if not isinstance(shape, str):
+        return []
+
+    entry = get_shape_capability(shape)
+    if entry is None:
+        return []
+
+    questions: list[tuple[str, str]] = []
+    for dimension in entry.requiredDimensions:
+        # `depth` always has a usable schema default, and `outline` is not a
+        # numeric dimension a user can answer in one value.
+        if dimension in ("depth", "outline"):
+            continue
+        path = f"stone.{dimension}"
+        if path in patch:
+            continue
+        question = _STONE_DIMENSION_QUESTIONS.get(dimension)
+        if question is not None:
+            questions.append((path, question))
+    return questions
+
 
 def _apply_patch(base: JewelryDefinition, patch: dict[str, Any]) -> JewelryDefinition | None:
     data = base.model_dump(mode="python")
@@ -310,11 +356,32 @@ class DesignerService:
         candidate = _apply_patch(base, patch) if patch or request.interactionMode == "CREATE" else base
 
         if candidate is None:
+            # A shape that needs dimensions the request never supplied is the
+            # commonest way to land here, and it deserves a QUESTION rather than
+            # a dead end. Brief section 39 is explicit: JewelMind must not infer
+            # that a heart is 8 x 8mm, so the honest response to a missing
+            # dimension is to ask for it (STONEV2-GOV-006's discipline applied
+            # to natural language).
+            missing = _missing_stone_dimensions(patch)
+            for field_path, question in missing:
+                clarification_questions.append(
+                    ClarificationQuestion(
+                        field=field_path,
+                        question=question,
+                        options=[],
+                        ambiguityLevel="HIGH_IMPACT_AMBIGUITY",
+                    )
+                )
             diagnostics.append(
                 DesignerDiagnostic(
                     code=DESIGNER_PROPOSAL_INVALID,
                     severity="error",
-                    message="The proposed values could not form a valid design definition.",
+                    message=(
+                        "The proposed values could not form a valid design "
+                        "definition; the stone's required dimensions are missing."
+                        if missing
+                        else "The proposed values could not form a valid design definition."
+                    ),
                 )
             )
             validation: list = []

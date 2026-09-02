@@ -1,0 +1,61 @@
+{
+  "description": "Real generated output for pearl-reference, produced by running the pipeline.",
+  "stoneSpec": {
+    "shape": "pearl",
+    "diameter": 8.0,
+    "length": null,
+    "width": null,
+    "depth": 8.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null
+  },
+  "normalizedStoneDefinition": {
+    "stoneId": "stone_reference",
+    "sourceMode": "PARAMETRIC_REFERENCE",
+    "shape": "pearl",
+    "family": "SPHERICAL",
+    "profile": "SPHERICAL_REFERENCE",
+    "dimensions": {
+      "lengthMm": 8.0,
+      "widthMm": 8.0,
+      "depthMm": 8.0,
+      "narrowWidthMm": null,
+      "provenance": "REQUESTED_PARAMETER"
+    },
+    "orientationDeg": 0.0,
+    "symmetry": "RADIAL",
+    "representation": "PARAMETRIC",
+    "provenance": {
+      "sourceMode": "PARAMETRIC_REFERENCE",
+      "sourceAssetHash": null,
+      "sourceAssetName": null,
+      "originalUnit": null,
+      "normalizationOperations": [
+        "PROFILE_DEFAULTED:FACETED_REFERENCE->SPHERICAL_REFERENCE"
+      ],
+      "generatorVersion": "2.0.0",
+      "importerVersion": null,
+      "measurementSource": null,
+      "measurementDate": null,
+      "operatorNote": null
+    },
+    "outline": null,
+    "measuredReferenceClass": null
+  },
+  "anchors": [],
+  "generatedGeometry": {
+    "volumeMm3": 268.082573106329,
+    "solidCount": 1,
+    "boundingBoxMm": {
+      "sizeX": 8.0,
+      "sizeY": 8.0,
+      "sizeZ": 8.000000000000002
+    },
+    "isGemologicalReproduction": false
+  }
+}

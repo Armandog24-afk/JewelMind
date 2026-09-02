@@ -1,0 +1,244 @@
+{
+  "goldenId": "STV2-001-heart-prong",
+  "description": "Heart cut, 6 prongs. Point at -Y, cleft at +Y.",
+  "sourceJDLPath": "goldens/solitaire-v1/STV2-001-heart-prong/design.json",
+  "definitionHash": "7e8173a8b86b74a0",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "prongs",
+    "stone_reference"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "7e8173a8b86b74a0",
+    "assembly": {
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 1,
+      "productionConnectivityGroups": 2,
+      "productionIsFullyConnected": false,
+      "boundingBox": {
+        "xmin": -10.700000000000001,
+        "ymin": -4.385,
+        "zmin": -10.700000000000001,
+        "xmax": 10.700000000000001,
+        "ymax": 4.441783221677662,
+        "zmax": 15.6000001,
+        "sizeX": 21.400000000000002,
+        "sizeY": 8.826783221677662,
+        "sizeZ": 26.300000100000002,
+        "centerX": 0.0,
+        "centerY": 0.028391610838831127,
+        "centerZ": 2.45000005
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 103.37190715151463,
+        "boundingBox": {
+          "xmin": -4.385,
+          "ymin": -4.385,
+          "zmin": 10.3,
+          "xmax": 4.385,
+          "ymax": 4.385,
+          "zmax": 14.200000000000001,
+          "sizeX": 8.77,
+          "sizeY": 8.77,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -4.384799039344953,
+          "ymin": -3.407105808375567,
+          "zmin": 10.3,
+          "xmax": 4.384799039344953,
+          "ymax": 4.441783221677662,
+          "zmax": 15.5,
+          "sizeX": 8.769598078689906,
+          "sizeY": 7.848889030053229,
+          "sizeZ": 5.199999999999999,
+          "centerX": 0.0,
+          "centerY": 0.5173387066510475,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 67.38260839529006,
+        "boundingBox": {
+          "xmin": -4.0000001,
+          "ymin": -4.0000001,
+          "zmin": 11.599999900000002,
+          "xmax": 4.0000001,
+          "ymax": 4.0000001,
+          "zmax": 15.6000001,
+          "sizeX": 8.0000002,
+          "sizeY": 8.0000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 10,
+          "edges": 20,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.06806908962149817
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.11110099522160155
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9000000000000004
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "Prong placement is not cleft- or tip-aware; a prong may sit at the cleft.",
+    "PRE-EXISTING, NOT SHAPE-SPECIFIC: this case records productionIsFullyConnected = false. The band sits 0.0681mm from basket_support and 0.1112mm from prongs, so the head floats above the band rather than touching it. This is a function of the stone FOOTPRINT, not of the heart shape: a round stone of diameter 8.0mm - a capability since Sprint 2 - reproduces the identical distances, and a princess 8x7.5 is already at 0.0378mm. The threshold sits near a 7.5mm footprint. Sprint 20 did not introduce this; its wider shape coverage surfaced it. Recorded here rather than avoided by choosing a smaller stone, so the baseline documents real geometry. See docs/bible/22-stone-v2/code-mapping-and-gaps.md."
+  ],
+  "createdAt": "2026-09-01T13:50:30.350315+00:00",
+  "acceptedAt": "2026-09-01T13:50:30.351822+00:00",
+  "notes": "Sprint 20 Stone System v2: INITIAL_BASELINE for a newly supported stone shape, profile or source. Created by running the real pipeline; no existing baseline was modified."
+}

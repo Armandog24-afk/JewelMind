@@ -13,6 +13,7 @@ from typing import Any
 
 from jewelmind.designer.schemas import FieldDiff
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.stone.capability import native_shapes as _native_shapes
 
 # Only mappings for values that actually exist in the current schema are
 # implemented here — see 298-defaulting-policy.md: Designer may normalize a
@@ -58,26 +59,154 @@ BAND_PROFILE_SYNONYMS: dict[str, str] = {
     "fascia piatta": "flat",
 }
 
+#: Natural-language names for stone CUTS, in Italian and English
+#: (brief section 38). Every value must be a real member of the JDL `StoneShape`
+#: enum; `test_designer_corpus.py` asserts that, so a synonym can never point at
+#: a shape the system cannot build.
+#:
+#: `custom` and `imported` are deliberately ABSENT. A user asking for "a custom
+#: stone" is describing a SOURCE, not naming a cut, and Designer must route that
+#: to a clarification rather than silently producing a stone with no outline
+#: behind it (brief section 60).
+#: Every shape with a real generator, read from the Stone System registry.
+_NATIVE_SHAPES: tuple[str, ...] = tuple(_native_shapes())
+
 STONE_SHAPE_SYNONYMS: dict[str, str] = {
+    # --- Stone v1 (Sprint 18) ---
     "round": "round",
     "rotondo": "round",
     "rotonda": "round",
     "tondo": "round",
     "tonda": "round",
+    "brillante": "round",
+    "round brilliant": "round",
     "oval": "oval",
     "ovale": "oval",
     "pear": "pear",
     "pera": "pear",
     "goccia": "pear",
+    "teardrop": "pear",
     "emerald": "emerald",
     "smeraldo": "emerald",
     "taglio smeraldo": "emerald",
+    "emerald cut": "emerald",
     "cushion": "cushion",
     "cuscino": "cushion",
     "princess": "princess",
     "principessa": "princess",
     "marquise": "marquise",
     "navette": "marquise",
+    # --- Stone v2 (Sprint 20) extended cuts ---
+    "heart": "heart",
+    "cuore": "heart",
+    "a cuore": "heart",
+    "heart cut": "heart",
+    "radiant": "radiant",
+    "radiante": "radiant",
+    "radiant cut": "radiant",
+    "asscher": "asscher",
+    "asscher cut": "asscher",
+    # TRILLIANT is an alias, not a second canonical shape: no distinct geometry
+    # semantics were defined for it (brief section 11).
+    "trillion": "trillion",
+    "trilliant": "trillion",
+    "trilliante": "trillion",
+    "baguette": "baguette",
+    "baguette cut": "baguette",
+    "tapered baguette": "tapered_baguette",
+    "baguette rastremata": "tapered_baguette",
+    "baguette conica": "tapered_baguette",
+    "triangle": "triangle",
+    "triangolo": "triangle",
+    "triangolare": "triangle",
+    "triangular": "triangle",
+    "trapezoid": "trapezoid",
+    "trapezio": "trapezoid",
+    "trapezium": "trapezoid",
+    # LOZENGE, never "diamond": in JewelMind "diamond" is a gem species, and a
+    # shape synonym must never resolve a species name to a cut
+    # (STONEV2-GOV-008, brief section 37).
+    "lozenge": "lozenge",
+    "losanga": "lozenge",
+    "rombo": "lozenge",
+    "rhombus": "lozenge",
+    "hexagon": "hexagon",
+    "esagono": "hexagon",
+    "esagonale": "hexagon",
+    "hexagonal": "hexagon",
+    "kite": "kite",
+    "aquilone": "kite",
+    "shield": "shield",
+    "scudo": "shield",
+    "shield cut": "shield",
+    "half moon": "half_moon",
+    "halfmoon": "half_moon",
+    "mezzaluna": "half_moon",
+    "demi lune": "half_moon",
+    "pearl": "pearl",
+    "perla": "pearl",
+    "sfera": "pearl",
+    "sphere": "pearl",
+}
+
+# Every canonical shape ID must resolve to itself. Two real shapes —
+# `tapered_baguette` and `half_moon` — were reported as UNSUPPORTED by Designer
+# because the table above lists only their spaced human spellings ("tapered
+# baguette", "half moon") and nothing mapped the underscored canonical ID. That
+# is exactly the misreport Sprint 18 had to correct for its six new shapes, so
+# the identity mapping is derived from the registry rather than typed out.
+for _shape in _NATIVE_SHAPES:
+    STONE_SHAPE_SYNONYMS.setdefault(_shape, _shape)
+    STONE_SHAPE_SYNONYMS.setdefault(_shape.replace("_", " "), _shape)
+
+
+#: Natural-language names for the 3D REFERENCE PROFILE, which is a separate axis
+#: from the cut (brief section 36). "cabochon oval" therefore resolves to
+#: `shape=oval` plus `profile=CABOCHON_REFERENCE`, never to a compound
+#: `OVAL_CABOCHON` shape.
+STONE_PROFILE_SYNONYMS: dict[str, str] = {
+    "faceted": "FACETED_REFERENCE",
+    "sfaccettata": "FACETED_REFERENCE",
+    "sfaccettato": "FACETED_REFERENCE",
+    "brilliant": "FACETED_REFERENCE",
+    "cabochon": "CABOCHON_REFERENCE",
+    "cabochon cut": "CABOCHON_REFERENCE",
+    "cabochon reference": "CABOCHON_REFERENCE",
+    "liscia": "CABOCHON_REFERENCE",
+    "bombata": "CABOCHON_REFERENCE",
+    "sphere": "SPHERICAL_REFERENCE",
+    "spherical": "SPHERICAL_REFERENCE",
+    "sferica": "SPHERICAL_REFERENCE",
+}
+
+#: Natural-language names for the stone SOURCE MODE (brief section 60).
+#:
+#: Recognizing these is what lets Designer respond honestly to "use this exact
+#: stone": the phrase names a source, and if no asset or measurement was
+#: supplied the correct response is a structured clarification, never a
+#: fabricated import (STONEV2-GOV-006).
+STONE_SOURCE_SYNONYMS: dict[str, str] = {
+    "parametric": "PARAMETRIC_REFERENCE",
+    "parametrica": "PARAMETRIC_REFERENCE",
+    "custom": "CUSTOM_OUTLINE",
+    "custom stone": "CUSTOM_OUTLINE",
+    "custom outline": "CUSTOM_OUTLINE",
+    "pietra personalizzata": "CUSTOM_OUTLINE",
+    "profilo personalizzato": "CUSTOM_OUTLINE",
+    "sagoma personalizzata": "CUSTOM_OUTLINE",
+    "measured": "MEASURED",
+    "measured stone": "MEASURED",
+    "pietra misurata": "MEASURED",
+    "pietra reale": "MEASURED",
+    "misurata": "MEASURED",
+    "imported": "IMPORTED_CAD",
+    "stone from cad": "IMPORTED_CAD",
+    "imported stone": "IMPORTED_CAD",
+    "pietra importata": "IMPORTED_CAD",
+    "pietra da cad": "IMPORTED_CAD",
+    "stone scan": "IMPORTED_CAD",
+    "scansione": "IMPORTED_CAD",
+    "scan della pietra": "IMPORTED_CAD",
 }
 
 SETTING_TYPE_SYNONYMS: dict[str, str] = {

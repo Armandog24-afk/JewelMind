@@ -1,0 +1,186 @@
+{
+  "vectors": [
+    {
+      "description": "collinear points enclose no area",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": 1.0,
+            "y": 1.0
+          },
+          {
+            "x": 2.0,
+            "y": 2.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_INVALID",
+      "expectedErrorMessage": "Outline encloses no area (computed 0.000e+00 mm^2). The points are collinear or the outline collapses on itself."
+    },
+    {
+      "description": "zero area",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": 2.0,
+            "y": 0.0
+          },
+          {
+            "x": 1.0,
+            "y": 0.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_INVALID",
+      "expectedErrorMessage": "Outline encloses no area (computed 0.000e+00 mm^2). The points are collinear or the outline collapses on itself."
+    },
+    {
+      "description": "duplicated closing point",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": 2.0,
+            "y": 0.0
+          },
+          {
+            "x": 2.0,
+            "y": 2.0
+          },
+          {
+            "x": 0.0,
+            "y": 0.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_INVALID",
+      "expectedErrorMessage": "Outline repeats its first point at the end. The outline is closed implicitly; supply each vertex exactly once."
+    },
+    {
+      "description": "degenerate segment",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": 2.0,
+            "y": 0.0
+          },
+          {
+            "x": 2.0,
+            "y": 1e-12
+          },
+          {
+            "x": 2.0,
+            "y": 2.0
+          },
+          {
+            "x": 0.0,
+            "y": 2.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_INVALID",
+      "expectedErrorMessage": "Outline segment 1 is degenerate: points (2.0, 0.0) and (2.0, 1e-12) coincide."
+    },
+    {
+      "description": "non-finite coordinate",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "x": "NaN",
+            "y": 0.0
+          },
+          {
+            "x": 1.0,
+            "y": 1.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_INVALID",
+      "expectedErrorMessage": "Outline contains a non-finite coordinate (NaN or infinity)."
+    },
+    {
+      "description": "self-intersecting with real area",
+      "input": {
+        "points": [
+          {
+            "x": 0.0,
+            "y": 4.0
+          },
+          {
+            "x": 2.4,
+            "y": -3.0
+          },
+          {
+            "x": -3.0,
+            "y": 1.5
+          },
+          {
+            "x": 3.0,
+            "y": 1.5
+          },
+          {
+            "x": -2.4,
+            "y": -3.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_SELF_INTERSECTION",
+      "expectedErrorMessage": "Outline self-intersects: segment 0 crosses segment 2. A stone outline must be a simple closed curve."
+    },
+    {
+      "description": "boundary touches itself",
+      "input": {
+        "points": [
+          {
+            "x": -3.0,
+            "y": 3.0
+          },
+          {
+            "x": 3.0,
+            "y": 3.0
+          },
+          {
+            "x": -3.0,
+            "y": -1.0
+          },
+          {
+            "x": 3.0,
+            "y": -3.0
+          },
+          {
+            "x": -3.0,
+            "y": -3.0
+          }
+        ],
+        "unit": "mm"
+      },
+      "expectedErrorCode": "CUSTOM_OUTLINE_SELF_INTERSECTION",
+      "expectedErrorMessage": "Outline is not simple: vertex 2 lies on segment 4. The boundary touches itself, which makes an offset (and therefore a bezel) ambiguous."
+    }
+  ]
+}

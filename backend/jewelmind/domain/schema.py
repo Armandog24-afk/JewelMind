@@ -15,10 +15,45 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+# The Stone System owns the canonical stone vocabulary; importing it here keeps
+# one source of truth instead of a hand-maintained duplicate. Safe against
+# circular imports because `jewelmind.stone.__init__` deliberately imports
+# nothing and `jewelmind.stone.models` depends on no other JewelMind module.
+from jewelmind.stone.models import (
+    DeclaredUnit,
+    StoneReferenceProfile,
+    StoneSourceMode,
+)
+
 SCHEMA_VERSION = "0.1.0"
 
 BandProfile = Literal["comfort_fit", "flat"]
-StoneShape = Literal["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"]
+#: Canonical stone CUT identities (never gem species — STONEV2-GOV-008).
+#:
+#: The first seven are Sprint 18's set and are unchanged. The rest are Sprint
+#: 20's extended cuts. `custom` and `imported` are pseudo-shapes used when a
+#: stone genuinely has no named cut; they are real members so that every
+#: consumer can look a stone's capabilities up uniformly, and they are never
+#: offered to a user as cuts to choose from.
+StoneShape = Literal[
+    # Stone v1 (Sprint 18)
+    "round", "oval", "pear", "emerald", "cushion", "princess", "marquise",
+    # Stone v2 (Sprint 20) extended cuts
+    "heart", "radiant", "asscher", "trillion", "baguette", "tapered_baguette",
+    "triangle", "trapezoid", "lozenge", "hexagon", "kite", "shield",
+    "half_moon", "pearl",
+    # Pseudo-shapes for non-native sources
+    "custom", "imported",
+]
+
+#: Shapes whose single horizontal dimension is a diameter rather than a
+#: length/width pair. `pearl` joins `round` here because a sphere has one
+#: horizontal size, not two.
+_ROUND_LIKE_SHAPES: frozenset[str] = frozenset({"round", "pearl"})
+
+#: Shapes that require an explicit `narrowWidth`.
+_TAPERED_SHAPES: frozenset[str] = frozenset({"tapered_baguette", "trapezoid"})
+
 SettingType = Literal["prong", "bezel"]
 MetalType = Literal[
     "yellow_gold_18k",
@@ -102,21 +137,83 @@ class BandSpec(StrictModel):
     thicknessTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
 
 
-class StoneSpec(StrictModel):
-    """A MINOR, additive Sprint 18 field set (see
-    docs/bible/05-jdl/081-schema-versioning-and-migrations.md's MINOR
-    definition) — `shape` gains 6 new enum members and `length`/`width`/
-    `orientation` are new optional fields, so every existing `round`
-    document that only ever set `diameter`/`depth` keeps validating
-    exactly as before.
+class JdlOutlinePoint(StrictModel):
+    """One 2D point of a custom stone outline, in the stone's local frame."""
 
-    `diameter` is the round-only public dimension, unchanged since Sprint
-    2. `length`/`width` are required only when `shape != "round"` — see
-    docs/bible/20-stone/564-stone-dimension-model.md for the LENGTH
-    (major horizontal dimension) / WIDTH (minor horizontal dimension) /
-    DEPTH semantics and their exact local-axis mapping per shape.
-    `orientation` is a rotation in degrees around the stone's local
-    vertical axis, default 0 — see 565-stone-coordinate-and-orientation.md.
+    x: float = Field(allow_inf_nan=False)
+    y: float = Field(allow_inf_nan=False)
+
+
+class JdlCustomOutline(StrictModel):
+    """A caller-supplied closed stone outline (brief section 23).
+
+    Ordered points only. No JDL representation may ever carry an expression,
+    script or function body (JDL's no-executable-code rule), and a point list
+    is the representation that cannot.
+
+    The outline is closed implicitly; the first point must not be repeated at
+    the end. Semantic validation (self-intersection, zero area, degenerate
+    segments) lives in `jewelmind/stone/outline_validation.py`, not here —
+    structural and semantic validation stay separate layers.
+    """
+
+    points: list[JdlOutlinePoint] = Field(min_length=3, max_length=10_000)
+    unit: DeclaredUnit = "mm"
+    label: str | None = Field(default=None, max_length=200)
+
+
+class JdlStoneMeasurement(StrictModel):
+    """Provenance for a physically measured stone (brief section 28).
+
+    Every field is optional and caller-supplied. JewelMind never fills one in:
+    an absent measurement source is an honest absence, not a value to invent
+    (STONEV2-GOV-006).
+    """
+
+    measurementSource: str | None = Field(default=None, max_length=500)
+    measurementDate: str | None = Field(default=None, max_length=64)
+    operatorNote: str | None = Field(default=None, max_length=500)
+
+
+class JdlImportedStoneAsset(StrictModel):
+    """Reference to externally supplied stone geometry (brief sections 30/31).
+
+    `assetHash` is a content hash, never a filesystem path: a path in a design
+    document would leak an internal server location into every export and
+    review package (FOUNDRY-GOV-011).
+
+    `declaredUnit` is required rather than inferred, because no format
+    JewelMind reads carries a reliable, universally-populated unit, and
+    guessing one silently rescales a real physical object.
+    """
+
+    assetHash: str = Field(min_length=8, max_length=128)
+    assetName: str | None = Field(default=None, max_length=255)
+    declaredUnit: DeclaredUnit
+
+
+class StoneSpec(StrictModel):
+    """A MINOR, additive Sprint 20 field set, on top of Sprint 18's.
+
+    Sprint 18 added 6 shape enum members plus `length`/`width`/`orientation`.
+    Sprint 20 adds 14 further shape members and the `source`/`profile`/
+    `narrowWidth`/`customOutline`/`measurement`/`importedAsset` fields. Every
+    new field is optional with a default that reproduces pre-Sprint-20
+    behaviour exactly, so an existing document — whether it set only
+    `diameter`/`depth` or a Sprint 18 `length`/`width` pair — keeps validating
+    AND keeps generating identical geometry (brief sections 53/70).
+
+    `diameter` is the round-only public dimension, unchanged since Sprint 2.
+    `length`/`width` are required for a named non-round cut. See
+    docs/bible/20-stone/564-stone-dimension-model.md for the LENGTH (major
+    horizontal dimension) / WIDTH (minor horizontal dimension) / DEPTH
+    semantics, and docs/bible/22-stone-v2/stone-source-architecture.md for how
+    `source` selects which of those dimension rules applies.
+
+    IMPORTANT — `shape` is a CUT, never a GEM SPECIES (STONEV2-GOV-008). The
+    member `emerald` is the clipped-corner rectangular outline; the gem species
+    emerald is an entirely separate concept arriving in Sprint 21. That is also
+    why the rhombus member is named `lozenge` and not `diamond`.
     """
 
     shape: StoneShape = "round"
@@ -126,16 +223,65 @@ class StoneSpec(StrictModel):
     depth: float = Field(default=4.0, allow_inf_nan=False)
     orientation: float = Field(default=0.0, allow_inf_nan=False)
 
+    #: The narrow-end width of a tapered shape. A real required dimension for
+    #: `tapered_baguette`/`trapezoid` rather than an invented default ratio
+    #: (brief section 13).
+    narrowWidth: float | None = Field(default=None, allow_inf_nan=False)
+
+    #: Where this stone's geometry comes from (brief section 3).
+    source: StoneSourceMode = "PARAMETRIC_REFERENCE"
+
+    #: The 3D reference profile applied to the outline (brief section 36).
+    #: Independent of `shape`, which is what avoids `OVAL_CABOCHON`-style
+    #: compound enum members.
+    profile: StoneReferenceProfile = "FACETED_REFERENCE"
+
+    customOutline: JdlCustomOutline | None = None
+    measurement: JdlStoneMeasurement | None = None
+    importedAsset: JdlImportedStoneAsset | None = None
+
     @model_validator(mode="after")
     def _check_shape_dimensions(self) -> StoneSpec:
-        if self.shape == "round":
+        # Source-specific structural requirements. Semantic checks (outline
+        # geometry, importable asset) belong to the Stone System and Forge.
+        if self.source == "CUSTOM_OUTLINE":
+            if self.customOutline is None:
+                raise ValueError(
+                    "stone.customOutline is required when stone.source is 'CUSTOM_OUTLINE'"
+                )
+            return self
+
+        if self.source == "IMPORTED_CAD":
+            if self.importedAsset is None:
+                raise ValueError(
+                    "stone.importedAsset is required when stone.source is 'IMPORTED_CAD'"
+                )
+            return self
+
+        # PARAMETRIC_REFERENCE and MEASURED both describe a named cut with
+        # explicit dimensions, so they share the same dimension rules.
+        if self.shape in _ROUND_LIKE_SHAPES:
             if self.diameter is None:
-                raise ValueError("stone.diameter is required when stone.shape is 'round'")
+                raise ValueError(
+                    f"stone.diameter is required when stone.shape is '{self.shape}'"
+                )
         else:
             if self.length is None or self.width is None:
                 raise ValueError(
                     f"stone.length and stone.width are both required when stone.shape is '{self.shape}'"
                 )
+
+        if self.shape in _TAPERED_SHAPES:
+            if self.narrowWidth is None:
+                raise ValueError(
+                    f"stone.narrowWidth is required when stone.shape is '{self.shape}'"
+                )
+            if self.width is not None and self.narrowWidth > self.width:
+                raise ValueError(
+                    f"stone.narrowWidth ({self.narrowWidth}) cannot exceed stone.width "
+                    f"({self.width}) — width is the WIDE end of a tapered shape"
+                )
+
         return self
 
 

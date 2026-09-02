@@ -13,6 +13,142 @@ def _fmt_mm(value: float) -> str:
     return f"{value:.3f} mm"
 
 
+#: Stone source modes whose named "cut" is not a real cut. For these the
+#: specification must not print a cut name as though a gemologist would
+#: recognize it (brief section 62).
+_UNNAMED_CUT_SOURCES = frozenset({"CUSTOM_OUTLINE", "IMPORTED_CAD"})
+
+
+def _stone_lines(definition, model) -> list[str]:
+    """The Stone section of the technical specification (brief section 62).
+
+    Reads the GENERATED component's metadata rather than only the request, so
+    the specification describes the stone that was actually built. That matters
+    most for the sources where the two genuinely differ: a custom outline's
+    dimensions are derived from its points, and an imported stone's come from
+    the asset.
+
+    For a stone with no named cut, the shape is reported as CUSTOM or IMPORTED
+    rather than invented — brief section 62's explicit requirement.
+    """
+
+    stone = definition.stone
+    component = model.components.get("stone_reference") if model is not None else None
+    meta = component.metadata if component is not None else {}
+
+    source = str(meta.get("sourceMode", stone.source))
+    profile = str(meta.get("profile", stone.profile))
+    shape = str(meta.get("shape", stone.shape))
+
+    lines: list[str] = []
+    lines.append(f"- Stone ID: {meta.get('stoneId', 'stone_reference')}")
+    lines.append(f"- Source mode: {source}")
+    if source in _UNNAMED_CUT_SOURCES:
+        lines.append(
+            f"- Shape: {shape.upper()} (no named cut — this stone is defined by "
+            "its own outline or imported geometry)"
+        )
+    else:
+        lines.append(f"- Shape (cut): {shape}")
+    lines.append(f"- Reference profile: {profile}")
+
+    length = meta.get("lengthMm")
+    width = meta.get("widthMm")
+    depth = meta.get("depthMm")
+    provenance = meta.get("dimensionProvenance")
+
+    if source == "PARAMETRIC_REFERENCE":
+        lines.append("- Requested dimensions:")
+        if shape in ("round", "pearl"):
+            lines.append(f"  - Diameter: {_fmt_mm(stone.diameter)}")
+        else:
+            lines.append(f"  - Length: {_fmt_mm(stone.length)}")
+            lines.append(f"  - Width: {_fmt_mm(stone.width)}")
+            if stone.narrowWidth is not None:
+                lines.append(f"  - Narrow-end width: {_fmt_mm(stone.narrowWidth)}")
+        lines.append(f"  - Depth: {_fmt_mm(stone.depth)}")
+
+    if length is not None:
+        label = "Generated/measured dimensions"
+        if provenance == "INPUT_MEASUREMENT":
+            label = "Input measurements"
+        elif provenance == "IMPORTED_GEOMETRY_MEASUREMENT":
+            label = "Dimensions measured from the imported geometry"
+        elif provenance == "DERIVED_FROM_OUTLINE":
+            label = "Dimensions derived from the supplied outline"
+        lines.append(f"- {label}:")
+        lines.append(f"  - Length: {_fmt_mm(length)}")
+        lines.append(f"  - Width: {_fmt_mm(width)}")
+        lines.append(f"  - Depth: {_fmt_mm(depth)}")
+        if meta.get("narrowWidthMm") is not None:
+            lines.append(f"  - Narrow-end width: {_fmt_mm(meta['narrowWidthMm'])}")
+        if provenance:
+            lines.append(f"  - Dimension provenance: {provenance}")
+
+    lines.append(f"- Orientation: {meta.get('orientationDeg', stone.orientation):g} deg")
+
+    representation = meta.get("representation")
+    if representation:
+        lines.append(f"- Geometry representation: {representation}")
+        if representation == "MESH":
+            lines.append(
+                "  - NOTE: a mesh is a tessellated approximation. It carries no "
+                "B-Rep topology, so it supports fewer CAD operations than a "
+                "solid and has no reliable volume."
+            )
+
+    reference_class = meta.get("measuredReferenceClass")
+    if reference_class == "MEASURED_DIMENSION_REFERENCE":
+        lines.append(
+            "- Measured reference class: MEASURED_DIMENSION_REFERENCE — reference "
+            "geometry APPROXIMATED from the supplied measurements. It is NOT a "
+            "model of the physical stone's real surface."
+        )
+    elif reference_class == "MEASURED_OUTLINE_REFERENCE":
+        lines.append(
+            "- Measured reference class: MEASURED_OUTLINE_REFERENCE — built from "
+            "the supplied measured outline. Still reference geometry, not a scan "
+            "of the physical stone."
+        )
+
+    provenance_record = meta.get("provenance") or {}
+    if any(provenance_record.get(key) for key in
+           ("sourceAssetHash", "sourceAssetName", "originalUnit",
+            "measurementSource", "measurementDate", "operatorNote",
+            "normalizationOperations")):
+        lines.append("- Source provenance:")
+        for key, label in (
+            ("sourceAssetName", "Asset name"),
+            ("sourceAssetHash", "Asset content hash"),
+            ("originalUnit", "Declared original unit"),
+            ("measurementSource", "Measurement source"),
+            ("measurementDate", "Measurement date"),
+            ("operatorNote", "Operator note"),
+            ("importerVersion", "Importer version"),
+            ("generatorVersion", "Generator version"),
+        ):
+            value = provenance_record.get(key)
+            if value:
+                lines.append(f"  - {label}: {value}")
+        operations = provenance_record.get("normalizationOperations") or []
+        lines.append(
+            f"  - Normalization applied: {', '.join(operations) if operations else 'none'}"
+        )
+
+    from jewelmind.stone.capability import setting_compatibility
+
+    family = definition.setting.type
+    lines.append(
+        f"- Setting compatibility ({family}): {setting_compatibility(shape, family)}"
+    )
+    lines.append(
+        "- Professional validation status: NOT_REVIEWED — no stone shape, "
+        "profile or source in JewelMind has been reviewed by a qualified "
+        "jewelry professional."
+    )
+    return lines
+
+
 def build_specification(
     definition: JewelryDefinition,
     model: GeneratedModel,
@@ -55,14 +191,7 @@ def build_specification(
     lines.append("")
 
     lines.append("## Stone (reference only, not a gemological reproduction)")
-    lines.append(f"- Shape: {definition.stone.shape}")
-    if definition.stone.shape == "round":
-        lines.append(f"- Diameter: {_fmt_mm(definition.stone.diameter)}")
-    else:
-        lines.append(f"- Length: {_fmt_mm(definition.stone.length)}")
-        lines.append(f"- Width: {_fmt_mm(definition.stone.width)}")
-        lines.append(f"- Orientation: {definition.stone.orientation:g} deg")
-    lines.append(f"- Depth: {_fmt_mm(definition.stone.depth)}")
+    lines.extend(_stone_lines(definition, model))
     lines.append("")
 
     lines.append("## Setting")

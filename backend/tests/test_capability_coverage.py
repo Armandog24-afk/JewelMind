@@ -90,12 +90,38 @@ def test_planned_setting_families_are_not_registered_generators():
 
 
 def test_current_stone_shapes_match_the_live_stone_registry():
-    from jewelmind.geometry.stone.capability import STONE_SHAPE_CAPABILITIES
+    """Sprint 20 made the Stone v2 registry authoritative for shape capability.
+
+    The Sprint 18 registry still exists and still describes the seven original
+    shapes; `test_stone_v1_and_v2_registries_agree` below pins the two together
+    so they cannot drift apart.
+    """
+
+    from jewelmind.stone.capability import native_shapes
 
     recorded = {
         e["capability"] for e in _entries() if e["domain"] == "stone_shape" and e["status"] == "CURRENT"
     }
-    assert recorded == set(STONE_SHAPE_CAPABILITIES)
+    assert recorded == set(native_shapes())
+
+
+def test_stone_v1_and_v2_registries_agree():
+    """Two registries describing the same shapes are a drift hazard.
+
+    The Sprint 18 registry is a frozen record of Stone v1 and keeps its own
+    field shape; what must never diverge is the FACTS they both state — which
+    shapes exist, and whether each generates.
+    """
+
+    from jewelmind.geometry.stone.capability import STONE_SHAPE_CAPABILITIES
+    from jewelmind.stone.capability import STONE_SHAPE_CAPABILITIES_V2
+
+    for shape, v1 in STONE_SHAPE_CAPABILITIES.items():
+        v2 = STONE_SHAPE_CAPABILITIES_V2.get(shape)
+        assert v2 is not None, f"{shape} exists in the Stone v1 registry but not in v2"
+        assert v2.introducedInStoneV1, f"{shape} is a Stone v1 shape but v2 does not say so"
+        assert v1.generationSupported == v2.generationSupported
+        assert v1.requiredDimensions == v2.requiredDimensions
 
 
 def test_planned_stone_shapes_are_not_accepted_by_jdl():
@@ -185,7 +211,16 @@ def test_blocked_entries_explain_what_blocks_them():
     blocked = [e for e in _entries() if e["status"] == "BLOCKED"]
     assert blocked, "at least one genuinely blocked capability is expected to be recorded"
     for entry in blocked:
-        assert any(word in entry["note"].lower() for word in ("credential", "blocked", "unavailable", "no "))
+        # "not available" and "not supported" are legitimate phrasings of a
+        # real blocker; the vocabulary was widened rather than contorting the
+        # notes to contain a keyword.
+        assert any(
+            word in entry["note"].lower()
+            for word in (
+                "credential", "blocked", "unavailable", "no ",
+                "not available", "not supported", "not present",
+            )
+        ), entry
 
 
 def test_coverage_spans_the_expected_domains():

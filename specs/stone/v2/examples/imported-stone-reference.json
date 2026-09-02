@@ -1,0 +1,22 @@
+{
+  "description": "The IMPORTED_CAD contract. Dimensions are deliberately absent from the request: an imported stone's size is a property of the asset, and the document must not claim to know it.",
+  "stoneSpec": {
+    "shape": "imported",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "IMPORTED_CAD",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": {
+      "assetHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "assetName": "example-stone.step",
+      "declaredUnit": "mm"
+    }
+  },
+  "note": "resolved_length_mm/width/depth deliberately RAISE for this source. Real dimensions are reported by Geometry Inspection from the imported geometry \u2014 see test-vectors/import-normalization-vectors.json."
+}

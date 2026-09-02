@@ -1,0 +1,117 @@
+{
+  "description": "Real generated output for triangle, produced by running the pipeline.",
+  "stoneSpec": {
+    "shape": "triangle",
+    "diameter": 6.5,
+    "length": 7.0,
+    "width": 7.0,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null
+  },
+  "normalizedStoneDefinition": {
+    "stoneId": "stone_reference",
+    "sourceMode": "PARAMETRIC_REFERENCE",
+    "shape": "triangle",
+    "family": "TRIANGULAR",
+    "profile": "FACETED_REFERENCE",
+    "dimensions": {
+      "lengthMm": 7.0,
+      "widthMm": 7.0,
+      "depthMm": 4.0,
+      "narrowWidthMm": null,
+      "provenance": "REQUESTED_PARAMETER"
+    },
+    "orientationDeg": 0.0,
+    "symmetry": "BILATERAL_ONE_AXIS",
+    "representation": "PARAMETRIC",
+    "provenance": {
+      "sourceMode": "PARAMETRIC_REFERENCE",
+      "sourceAssetHash": null,
+      "sourceAssetName": null,
+      "originalUnit": null,
+      "normalizationOperations": [],
+      "generatorVersion": "2.0.0",
+      "importerVersion": null,
+      "measurementSource": null,
+      "measurementDate": null,
+      "operatorNote": null
+    },
+    "outline": {
+      "points": [
+        {
+          "x": 0.0,
+          "y": 3.5
+        },
+        {
+          "x": 3.5,
+          "y": -3.5
+        },
+        {
+          "x": -3.5,
+          "y": -3.5
+        }
+      ],
+      "isPolygonal": true,
+      "derivation": "NATIVE_PRIMITIVE"
+    },
+    "measuredReferenceClass": null
+  },
+  "anchors": [
+    {
+      "anchor": "CENTER",
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "anchor": "TOP",
+      "x": 0.0,
+      "y": 3.5
+    },
+    {
+      "anchor": "BOTTOM",
+      "x": 3.5,
+      "y": -3.5
+    },
+    {
+      "anchor": "LEFT",
+      "x": -3.5,
+      "y": -3.5
+    },
+    {
+      "anchor": "RIGHT",
+      "x": 3.5,
+      "y": -3.5
+    },
+    {
+      "anchor": "TIP",
+      "x": 0.0,
+      "y": 3.5
+    },
+    {
+      "anchor": "CORNER_SW",
+      "x": -3.5,
+      "y": -3.5
+    },
+    {
+      "anchor": "CORNER_SE",
+      "x": 3.5,
+      "y": -3.5
+    }
+  ],
+  "generatedGeometry": {
+    "volumeMm3": 43.769576666666666,
+    "solidCount": 1,
+    "boundingBoxMm": {
+      "sizeX": 7.0000002,
+      "sizeY": 7.0000002,
+      "sizeZ": 4.000000199999999
+    },
+    "isGemologicalReproduction": false
+  }
+}

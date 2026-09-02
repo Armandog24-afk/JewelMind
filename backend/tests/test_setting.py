@@ -342,8 +342,12 @@ class TestSettingRegistry:
             assert compatibility_status("bezel", shape) == "EXPERIMENTAL"
 
     def test_unknown_family_or_shape_reports_unsupported(self):
+        # `briolette` is a genuinely unimplemented, RESERVED shape. It replaced
+        # `asscher` here in Sprint 20: asscher became a real, generating shape
+        # with EXPERIMENTAL setting compatibility, so this assertion had quietly
+        # stopped testing what it claimed to.
         assert compatibility_status("channel", "round") == "UNSUPPORTED"
-        assert compatibility_status("prong", "asscher") == "UNSUPPORTED"
+        assert compatibility_status("prong", "briolette") == "UNSUPPORTED"
         assert get_setting_capability("channel") is None
 
 
@@ -381,10 +385,29 @@ class TestUnsupportedSettingCombination:
         d = _definition(setting_type="bezel")
         setting_def = _setting_def(d)
         broken = setting_def.model_copy(
-            update={"stone": setting_def.stone.model_copy(update={"shape": "asscher"})}
+            update={"stone": setting_def.stone.model_copy(update={"shape": "briolette"})}
         )
         with pytest.raises(SettingStoneCombinationUnsupportedError):
             generate_setting(broken)
+
+    def test_a_pearl_cannot_be_set_by_an_outline_driven_family(self):
+        """A real UNSUPPORTED combination, not a synthetic one.
+
+        A sphere has no girdle outline for a prong ring or a bezel wall to be
+        derived from, so both families refuse it. The refusal is explicit rather
+        than an approximation with a circle.
+        """
+
+        for family in ("prong", "bezel"):
+            d = default_definition()
+            # Built directly rather than through `_definition`, which assumes a
+            # length/width pair; a sphere has a single diameter.
+            d.stone = StoneSpec.model_validate(
+                {"shape": "pearl", "diameter": 8.0, "depth": 8.0}
+            )
+            d.setting.type = family
+            with pytest.raises(SettingStoneCombinationUnsupportedError):
+                generate_setting(_setting_def(d))
 
     def test_error_messages_never_leak_a_kernel_stack_trace(self):
         d = _definition(setting_type="bezel")

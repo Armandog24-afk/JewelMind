@@ -41,6 +41,21 @@ _CULET_RADIUS_MM = 0.05  # round only, unchanged pre-Sprint-18 constant
 _CULET_SCALE_RATIO = 0.05  # non-round shapes: a proportional, self-similar culet
 
 
+def _round_anchors(points: list[tuple[float, float]]):
+    """Cardinal anchors for the round fast path.
+
+    Imported lazily so the byte-identical round path keeps its minimal import
+    graph, and so `geometry/stone/builder.py` does not import the Stone System
+    core at module level (`domain/schema.py` already imports
+    `jewelmind.stone.models`, and eager imports here would tighten that loop).
+    """
+
+    from jewelmind.stone.anchors import derive_anchors
+    from jewelmind.stone.models import OutlinePoint
+
+    return derive_anchors("round", [OutlinePoint(x=x, y=y) for x, y in points])
+
+
 def _build_round_stone(definition: JewelryDefinition) -> GeneratedComponent:
     """The exact pre-Sprint-18 construction — see git history for
     `geometry/components/stone.py` before this Sprint. Never changed by
@@ -78,9 +93,43 @@ def _build_round_stone(definition: JewelryDefinition) -> GeneratedComponent:
         "widthMm": girdle_r * 2,
         "depthMm": definition.stone.depth,
         "orientationDeg": definition.stone.orientation,
+        # ADDITIVE METADATA ONLY — the geometry above is untouched.
+        #
+        # Round is the DEFAULT stone, and while this fast path exists to keep its
+        # geometry byte-identical, that is no reason for it to be the least
+        # inspectable stone in the system: before Sprint 20 filled these in, the
+        # default solitaire reported NOT_APPLICABLE for its own shape family,
+        # symmetry, outline and anchors while every other stone reported them.
+        #
+        # `symmetry` in particular is load-bearing: it is what lets the Setting
+        # System choose RADIAL placement from a geometric property rather than
+        # from the shape's name.
+        "sourceMode": "PARAMETRIC_REFERENCE",
+        "profile": "FACETED_REFERENCE",
+        "family": "RADIAL",
+        "symmetry": "RADIAL",
+        "representation": "PARAMETRIC",
+        "dimensionProvenance": "REQUESTED_PARAMETER",
+        "narrowWidthMm": None,
+        "measuredReferenceClass": None,
+        "provenance": {
+            "sourceMode": "PARAMETRIC_REFERENCE",
+            "normalizationOperations": [],
+            "generatorVersion": "1.0.0",
+        },
         "isGemologicalReproduction": False,
         "referenceGeometryVersion": "1.0.0",
     }
+
+    outline_points, outline_is_polygonal = O.sample_outline(O.round_outline(girdle_r, 1.0))
+    metadata["outlineAvailable"] = True
+    metadata["outlineIsPolygonal"] = outline_is_polygonal
+    metadata["outlinePointCount"] = len(outline_points)
+    metadata["outlinePointsMm"] = [[x, y] for x, y in outline_points]
+    metadata["anchors"] = [
+        {"anchor": a.anchor, "x": a.x, "y": a.y}
+        for a in _round_anchors(outline_points)
+    ]
 
     return GeneratedComponent(
         name="stone_reference",
@@ -185,14 +234,129 @@ def _build_non_round_stone(definition: JewelryDefinition) -> GeneratedComponent:
     )
 
 
-def build_stone(definition: JewelryDefinition) -> GeneratedComponent:
+def build_stone_geometry(
+    stone: StoneSpec,
+    girdle_z_mm: float,
+    imported: object | None = None,
+) -> GeneratedComponent:
+    """The Stone v2 path: normalize the stone, then build outline x profile.
+
+    Everything that is not the byte-identical `round` fast path flows through
+    here — extended native cuts, cabochons, pearls, custom outlines, measured
+    stones and imported assets alike. That is the point: one pipeline, so a new
+    source or profile does not add a branch to every downstream consumer
+    (brief section 54).
+    """
+
+    from jewelmind.geometry.stone.profile import (
+        build_profile,
+        build_spherical_reference,
+    )
+    from jewelmind.stone.dispatch import resolve_stone
+    from jewelmind.stone.normalize import outline_builder_for, stone_anchors
+
+    normalized = resolve_stone(stone, imported=imported)
+    girdle_z = girdle_z_mm
+    dimensions = normalized.dimensions
+
+    if normalized.sourceMode == "IMPORTED_CAD":
+        if imported is None:  # pragma: no cover - guarded by resolve_stone
+            raise StoneGenerationError(
+                "An imported stone requires real imported geometry."
+            )
+        # The imported asset IS the stone. It is placed, never rebuilt: silently
+        # replacing it with a native approximation would discard the exact
+        # geometry the user supplied (STONEV2-GOV-010).
+        shape = imported.shape.translate((0, 0, girdle_z))
+    elif normalized.profile == "SPHERICAL_REFERENCE":
+        shape = build_spherical_reference(dimensions.depthMm, girdle_z)
+    else:
+        shape = build_profile(
+            normalized.profile,
+            outline_builder_for(normalized),
+            dimensions.depthMm,
+            girdle_z,
+        )
+
+    shape = _apply_orientation(shape, normalized.orientationDeg)
+
+    solids = shape.Solids()
+    anchors = stone_anchors(normalized)
+    metadata = {
+        "shape": normalized.shape,
+        "sourceMode": normalized.sourceMode,
+        "profile": normalized.profile,
+        "family": normalized.family,
+        "symmetry": normalized.symmetry,
+        "representation": normalized.representation,
+        "girdleZMm": girdle_z,
+        "lengthMm": dimensions.lengthMm,
+        "widthMm": dimensions.widthMm,
+        "depthMm": dimensions.depthMm,
+        "narrowWidthMm": dimensions.narrowWidthMm,
+        "dimensionProvenance": dimensions.provenance,
+        "orientationDeg": normalized.orientationDeg,
+        "measuredReferenceClass": normalized.measuredReferenceClass,
+        "anchors": [{"anchor": a.anchor, "x": a.x, "y": a.y} for a in anchors],
+        "outlineAvailable": normalized.outline is not None,
+        "outlineIsPolygonal": normalized.outline.isPolygonal if normalized.outline else None,
+        "outlinePointCount": len(normalized.outline.points) if normalized.outline else 0,
+        # The real outline points, carried so the Setting System can build a
+        # bezel path for ANY stone without looking the shape up by name. This
+        # is what makes a custom or imported stone settable at all. Golden
+        # snapshots record specific geometric facts rather than raw metadata,
+        # so carrying them here does not enlarge any baseline.
+        "outlinePointsMm": (
+            [[p.x, p.y] for p in normalized.outline.points] if normalized.outline else None
+        ),
+        "provenance": normalized.provenance.model_dump(),
+        "isGemologicalReproduction": False,
+        "referenceGeometryVersion": "2.0.0",
+    }
+    if normalized.profile != "SPHERICAL_REFERENCE" and normalized.sourceMode != "IMPORTED_CAD":
+        crown_h = dimensions.depthMm * _CROWN_FRACTION
+        metadata["crownHeightMm"] = crown_h
+        metadata["pavilionHeightMm"] = dimensions.depthMm * _PAVILION_FRACTION
+
+    # A mesh import legitimately has no solids and no volume. Reporting 0.0
+    # rather than crashing is the honest answer, and `representation` already
+    # tells a consumer why (brief section 32).
+    volume = shape.Volume() if solids else 0.0
+
+    return GeneratedComponent(
+        name="stone_reference",
+        shape=shape,
+        volume_mm3=volume,
+        bounding_box=BoundingBox.from_shape(shape),
+        warnings=[],
+        metadata=metadata,
+    )
+
+
+def build_stone(
+    definition: JewelryDefinition,
+    imported: object | None = None,
+) -> GeneratedComponent:
     """Build the stone reference solid, named "stone_reference" (the
     stable, unchanged component identity).
 
-    Dispatches to the exact pre-Sprint-18 construction for `round`, and a
-    new shared loft-based construction for every other shape.
+    DISPATCH ORDER MATTERS AND IS DELIBERATE. A plain parametric `round`
+    faceted stone — which is what every pre-Sprint-20 document is — takes the
+    exact pre-Sprint-18 construction, untouched, which is what guarantees zero
+    Golden baseline updates (brief section 70). Sprint 18 made the same choice
+    for the same reason, and it is why Stone v1's twelve Golden cases survived
+    that sprint unchanged.
+
+    Everything else goes through the Stone v2 pipeline.
     """
 
-    if definition.stone.shape == "round":
+    stone = definition.stone
+    if (
+        stone.shape == "round"
+        and stone.source == "PARAMETRIC_REFERENCE"
+        and stone.profile == "FACETED_REFERENCE"
+    ):
         return _build_round_stone(definition)
-    return _build_non_round_stone(definition)
+
+    girdle_z = band_top_z(definition) + definition.setting.basketHeight
+    return build_stone_geometry(stone, girdle_z, imported=imported)

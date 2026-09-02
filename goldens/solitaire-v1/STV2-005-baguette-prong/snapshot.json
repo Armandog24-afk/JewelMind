@@ -1,0 +1,243 @@
+{
+  "goldenId": "STV2-005-baguette-prong",
+  "description": "Baguette: a plain rectangle, distinct from emerald.",
+  "sourceJDLPath": "goldens/solitaire-v1/STV2-005-baguette-prong/design.json",
+  "definitionHash": "a705bb816c89d564",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "prongs",
+    "stone_reference"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "a705bb816c89d564",
+    "assembly": {
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 1,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.306624861213897,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.306624861213897,
+        "zmax": 15.5,
+        "sizeX": 21.4000002,
+        "sizeY": 6.613249722427794,
+        "sizeZ": 26.2000001,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.3999999499999998
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 35.984744732013574,
+        "boundingBox": {
+          "xmin": -1.885,
+          "ymin": -1.885,
+          "zmin": 10.3,
+          "xmax": 1.885,
+          "ymax": 1.885,
+          "zmax": 14.200000000000001,
+          "sizeX": 3.77,
+          "sizeY": 3.77,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -2.141538105676659,
+          "ymin": -3.306624861213897,
+          "zmin": 10.3,
+          "xmax": 2.1415381056766583,
+          "ymax": 3.306624861213897,
+          "zmax": 15.5,
+          "sizeX": 4.283076211353317,
+          "sizeY": 6.613249722427794,
+          "sizeZ": 5.199999999999999,
+          "centerX": -4.440892098500626e-16,
+          "centerY": 0.0,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 16.07862,
+        "boundingBox": {
+          "xmin": -1.5000001,
+          "ymin": -3.0000001,
+          "zmin": 12.899999900000001,
+          "xmax": 1.5000001,
+          "ymax": 3.0000001,
+          "zmax": 14.9000001,
+          "sizeX": 3.0000002,
+          "sizeY": 6.0000002,
+          "sizeZ": 2.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.9
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 10,
+          "edges": 20,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.1999999999999993
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "Prong placement is not corner- or side-aware."
+  ],
+  "createdAt": "2026-09-01T13:50:38.324675+00:00",
+  "acceptedAt": "2026-09-01T13:50:38.332406+00:00",
+  "notes": "Sprint 20 Stone System v2: INITIAL_BASELINE for a newly supported stone shape, profile or source. Created by running the real pipeline; no existing baseline was modified."
+}

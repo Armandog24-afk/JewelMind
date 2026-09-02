@@ -1,0 +1,379 @@
+{
+  "note": "Declared compatibility is checked against what actually happens: an UNSUPPORTED row must carry a refusal code, and a SUPPORTED or EXPERIMENTAL row must have produced real components.",
+  "vectors": [
+    {
+      "stoneShape": "round",
+      "settingFamily": "prong",
+      "declaredCompatibility": "SUPPORTED_SOFTWARE",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "round",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "SUPPORTED_SOFTWARE",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "oval",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "oval",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "SUPPORTED_SOFTWARE",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "pear",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "pear",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "emerald",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "emerald",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "cushion",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "cushion",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "princess",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "princess",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "marquise",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "marquise",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "heart",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "heart",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "radiant",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "radiant",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "asscher",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "asscher",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "trillion",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "trillion",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "baguette",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "baguette",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "tapered_baguette",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "tapered_baguette",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "triangle",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "triangle",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "trapezoid",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "trapezoid",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "lozenge",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "lozenge",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "hexagon",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "hexagon",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "kite",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "kite",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "shield",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "shield",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "half_moon",
+      "settingFamily": "prong",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "prongs"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "half_moon",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "EXPERIMENTAL",
+      "generatedComponents": [
+        "bezel"
+      ],
+      "refusalCode": null
+    },
+    {
+      "stoneShape": "pearl",
+      "settingFamily": "prong",
+      "declaredCompatibility": "UNSUPPORTED",
+      "generatedComponents": null,
+      "refusalCode": "SETTING_STONE_COMBINATION_UNSUPPORTED"
+    },
+    {
+      "stoneShape": "pearl",
+      "settingFamily": "bezel",
+      "declaredCompatibility": "UNSUPPORTED",
+      "generatedComponents": null,
+      "refusalCode": "SETTING_STONE_COMBINATION_UNSUPPORTED"
+    }
+  ]
+}

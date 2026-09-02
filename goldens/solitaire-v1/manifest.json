@@ -94,6 +94,70 @@
     {
       "goldenId": "SET-005-oval-bezel",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-001-heart-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-002-radiant-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-003-asscher-bezel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-004-trillion-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-005-baguette-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-006-tapered-baguette-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-007-triangle-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-008-trapezoid-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-009-lozenge-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-010-hexagon-bezel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-011-kite-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-012-shield-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-013-half-moon-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-014-oval-cabochon-bezel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-015-custom-outline-bezel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "STV2-016-measured-oval-prong",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -124,7 +188,23 @@
     "SET-002-round-6-prong",
     "SET-003-oval-prong",
     "SET-004-round-bezel",
-    "SET-005-oval-bezel"
+    "SET-005-oval-bezel",
+    "STV2-001-heart-prong",
+    "STV2-002-radiant-prong",
+    "STV2-003-asscher-bezel",
+    "STV2-004-trillion-prong",
+    "STV2-005-baguette-prong",
+    "STV2-006-tapered-baguette-prong",
+    "STV2-007-triangle-prong",
+    "STV2-008-trapezoid-prong",
+    "STV2-009-lozenge-prong",
+    "STV2-010-hexagon-bezel",
+    "STV2-011-kite-prong",
+    "STV2-012-shield-prong",
+    "STV2-013-half-moon-prong",
+    "STV2-014-oval-cabochon-bezel",
+    "STV2-015-custom-outline-bezel",
+    "STV2-016-measured-oval-prong"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

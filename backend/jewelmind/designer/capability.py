@@ -17,6 +17,10 @@ from typing import Any, get_args
 
 from jewelmind.domain import schema as S
 from jewelmind.jewelry_category.registry import get_capability
+from jewelmind.stone.capability import (
+    RESERVED_STONE_SHAPES as _RESERVED_STONE_SHAPES,
+)
+from jewelmind.stone.models import StoneReferenceProfile
 
 # The Forge rule (validation/engine.py::_prong_rules) hardcodes this as
 # `(4, 6)`; kept as a literal tuple here too since the rule module doesn't
@@ -42,7 +46,36 @@ KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
     "channel": "Only prong and bezel settings are currently supported (setting.type).",
     "flush": "Only prong and bezel settings are currently supported (setting.type).",
     "bar": "Only prong and bezel settings are currently supported (setting.type).",
+    # Sprint 20: heart, radiant, asscher, trillion, baguette, tapered baguette,
+    # triangle, trapezoid, lozenge, hexagon, kite, shield, half moon, pearl and
+    # cabochon were REMOVED from this map — every one is now a real, generating
+    # shape or profile. Reporting them as unsupported would have made Designer
+    # actively misreport a real capability, which is the same mistake Sprint 18
+    # had to correct for the six shapes it added.
+    #
+    # The entries below are the stone shapes JewelMind genuinely does not build.
+    # Sourced from `jewelmind/stone/capability.py::RESERVED_STONE_SHAPES` rather
+    # than hand-written here, so the two can never disagree.
 }
+
+for _shape, _reason in _RESERVED_STONE_SHAPES.items():
+    KNOWN_UNSUPPORTED_CONCEPTS[_shape] = (
+        f"The {_shape.replace('_', ' ')} cut is not currently supported "
+        f"(stone.shape). {_reason} A stone with no built-in cut can still be "
+        "modelled today by supplying a custom outline."
+    )
+
+
+def _stone_source_capabilities() -> dict[str, str]:
+    """The real, current stone source modes and their status.
+
+    Read from the Stone System registry so Designer can never advertise a source
+    the backend cannot resolve.
+    """
+
+    from jewelmind.stone.capability import STONE_SOURCE_CAPABILITIES
+
+    return {mode: entry.status for mode, entry in STONE_SOURCE_CAPABILITIES.items()}
 
 
 def _category_unsupported_message(category: str) -> str:
@@ -73,6 +106,11 @@ def current_capabilities() -> dict[str, Any]:
         "manufacturingMethod": list(get_args(S.ManufacturingMethod)),
         "ringSizeSystem": list(get_args(S.RingSizeSystem)),
         "prongCount": list(SUPPORTED_PRONG_COUNTS),
+        # Sprint 20: the two independent Stone v2 axes. Exposed so Designer's
+        # capability report describes what a stone can actually be, rather than
+        # implying every stone is a named parametric cut.
+        "stoneSourceMode": list(_stone_source_capabilities()),
+        "stoneReferenceProfile": list(get_args(StoneReferenceProfile)),
     }
 
 

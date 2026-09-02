@@ -1,5 +1,5 @@
 {
-  "registryVersion": "1.2.0",
+  "registryVersion": "1.3.0",
   "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) \u2014 inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26; extended with the 8 SETTING_*/BEZEL_* facts during Sprint 19 (inspector.py::_setting_facts), 2026-08-27",
   "facts": [
     {
@@ -300,6 +300,176 @@
       "scope": "ASSEMBLY",
       "implementationStatus": "implemented",
       "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_SOURCE_MODE",
+      "meaning": "Which StoneSourceMode produced this stone: PARAMETRIC_REFERENCE, CUSTOM_OUTLINE, MEASURED or IMPORTED_CAD. An identity fact, never a judgement about which source is preferable.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_SHAPE_IDENTITY",
+      "meaning": "The canonical shape (cut) identity the stone was built as. This is a CUT, never a gem species: 'emerald' here means the clipped-corner outline.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_PROFILE_IDENTITY",
+      "meaning": "The 3D reference profile applied to the outline: FACETED_REFERENCE, CABOCHON_REFERENCE or SPHERICAL_REFERENCE. Independent of shape.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_SHAPE_FAMILY",
+      "meaning": "The geometry-reuse family the shape belongs to (RECTILINEAR, POLYGONAL, SPECIAL_OUTLINE, ...). A construction grouping, not a jewelry taxonomy.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_SYMMETRY_CLASS",
+      "meaning": "How the outline behaves under reflection: RADIAL, BILATERAL_BOTH_AXES, BILATERAL_ONE_AXIS, ASYMMETRIC or UNKNOWN. Consumed by Setting to choose a placement strategy from geometry rather than from a shape name.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_REPRESENTATION",
+      "meaning": "How the geometry is represented: PARAMETRIC, BREP_SOLID or MESH. A mesh genuinely supports fewer operations than a B-Rep solid, and this records which one a caller has.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_DIMENSION_PROVENANCE",
+      "meaning": "Where the stone's dimensions came from: REQUESTED_PARAMETER, INPUT_MEASUREMENT, GENERATED_REFERENCE_MEASUREMENT, IMPORTED_GEOMETRY_MEASUREMENT or DERIVED_FROM_OUTLINE.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_MEASURED_REFERENCE_CLASS",
+      "meaning": "For a measured stone, whether its reference geometry is a MEASURED_DIMENSION_REFERENCE (an approximation built from length/width/depth) or a MEASURED_OUTLINE_REFERENCE (built from a supplied measured outline). NOT_APPLICABLE for every other source.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_OUTLINE_AVAILABLE",
+      "meaning": "Whether a normalized girdle outline exists for this stone. False for the spherical reference, which genuinely has no planar girdle; never a fabricated outline.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_OUTLINE_POINT_COUNT",
+      "meaning": "How many ordered points the normalized outline contains. A polygonal outline reports its exact vertex count; a curved one reports its sampling resolution.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_ANCHOR_COUNT",
+      "meaning": "How many deterministic named anchors were derived from the outline. Anchors are geometric facts about where a feature is, never prong positions.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_ORIENTATION_DEG",
+      "meaning": "The rotation applied about the stone's own local vertical axis, in degrees.",
+      "valueType": "number",
+      "unit": "deg",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_GENERATOR_VERSION",
+      "meaning": "Version of the reference-geometry construction that built this stone. Changes when the construction changes, so a Golden diff can be traced to a deliberate version bump.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_IMPORTER_VERSION",
+      "meaning": "Version of the import-normalization pipeline, for an imported stone. NOT_APPLICABLE for every other source.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_SOURCE_ASSET_HASH",
+      "meaning": "Content hash of the external asset an imported stone came from. A content hash, never a filesystem path.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_NORMALIZATION_OPERATION_COUNT",
+      "meaning": "How many normalization operations were applied (unit conversion, winding reversal, recentring, profile defaulting). Zero means none were needed, never that normalization was skipped.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "STONE_IS_PRODUCTION_METAL",
+      "meaning": "Whether the stone reference is classified as production metal. Structurally always false (LAW-006); recorded as a fact so a regression would be observable rather than silent.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "geometry.roles.GEOMETRY_ROLE",
       "forgeConsumptionStatus": "not_consumed"
     }
   ],

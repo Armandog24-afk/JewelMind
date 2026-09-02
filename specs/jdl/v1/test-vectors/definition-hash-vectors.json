@@ -4,48 +4,48 @@
   "vectors": [
     {
       "source": "examples/default-solitaire.json",
-      "definitionHash": "8def81bd12b97d38"
+      "definitionHash": "7680c5eeb2bc67df"
     },
     {
       "source": "examples/minimal-solitaire.json",
-      "definitionHash": "8def81bd12b97d38",
+      "definitionHash": "7680c5eeb2bc67df",
       "note": "Equal to default-solitaire.json: an omitted field and its explicit default value canonicalize identically."
     },
     {
       "source": "examples/six-prong-solitaire.json",
-      "definitionHash": "8def81bd12b97d38",
+      "definitionHash": "7680c5eeb2bc67df",
       "note": "Equal to default-solitaire.json: explicit prongCount=6 matches the default."
     },
     {
       "source": "examples/comfort-fit-solitaire.json",
-      "definitionHash": "8def81bd12b97d38",
+      "definitionHash": "7680c5eeb2bc67df",
       "note": "Equal to default-solitaire.json: explicit band.profile=comfort_fit matches the default."
     },
     {
       "source": "examples/four-prong-solitaire.json",
-      "definitionHash": "32c53d931bce713c"
+      "definitionHash": "9659700b22fae9d2"
     },
     {
       "source": "examples/flat-band-solitaire.json",
-      "definitionHash": "e14e38d7d9d7fd71"
+      "definitionHash": "39747adb6e2c247f"
     },
     {
       "source": "examples/direct-resin-printing-solitaire.json",
-      "definitionHash": "b16cb081b5a415dc"
+      "definitionHash": "2b5185ac953dc048"
     },
     {
       "source": "examples/invalid/invalid-prong-count.json",
-      "definitionHash": "a56351282573139f",
+      "definitionHash": "f58a9a3a3eeb4f6d",
       "note": "Hash exists even though this document fails semantic validation (JM-PRONG-001): hashing identifies a definition, it does not certify it."
     },
     {
       "source": "examples/invalid/invalid-negative-dimension.json",
-      "definitionHash": "36a3ff0a96d8d20f",
+      "definitionHash": "6f35b2ab1d8a5c84",
       "note": "Hash exists even though this document fails semantic validation (JM-BAND-001, JM-GEOMETRY-001)."
     },
     {
       "source": "examples/invalid/invalid-basket-height.json",
-      "definitionHash": "aa154914e34ed51a",
+      "definitionHash": "0efe96a30a7fb4bb",
       "note": "Hash exists even though this document fails semantic validation (JM-SETTING-001)."
     }
   ],

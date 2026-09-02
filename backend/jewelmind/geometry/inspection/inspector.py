@@ -29,6 +29,7 @@ from jewelmind.geometry.inspection.models import (
 )
 from jewelmind.geometry.inspection.version import INSPECTION_VERSION
 from jewelmind.geometry.model import GeneratedModel
+from jewelmind.geometry.roles import GEOMETRY_ROLE
 
 
 def _now() -> str:
@@ -107,6 +108,7 @@ def _component_facts(now: str, result: ComponentInspectionResult) -> list[Geomet
         )
         if result.componentId == "stone_reference":
             facts.extend(_stone_dimension_facts(now, result))
+            facts.extend(_stone_identity_facts(now, result))
     return facts
 
 
@@ -155,6 +157,118 @@ def _stone_dimension_facts(now: str, result: ComponentInspectionResult) -> list[
         _fact("requestedDepth", "STONE_REQUESTED_DEPTH", requested_depth, "GeneratedComponent.metadata"),
         _fact("measuredDepth", "STONE_MEASURED_DEPTH", bbox.sizeZ, "Shape.BoundingBox()"),
     ]
+
+
+def _stone_identity_facts(
+    now: str, result: ComponentInspectionResult
+) -> list[GeometricFact]:
+    """Stone v2 identity, source and provenance facts (brief section 45).
+
+    Every value is read from the component metadata the Stone System already
+    recorded; nothing here re-derives geometry, and nothing here judges it. A
+    fact that genuinely does not apply is emitted with `status="NOT_APPLICABLE"`
+    rather than omitted, so a reader can tell "this stone has no measured
+    reference class" from "inspection forgot to look" (ATLAS-GOV-006's spirit,
+    applied to facts).
+
+    Pre-Sprint-20 components (and the byte-identical round fast path) carry only
+    a subset of these keys. A missing key produces NOT_APPLICABLE, never a
+    fabricated default.
+    """
+
+    meta = result.metadata
+    facts: list[GeometricFact] = []
+
+    def _fact(
+        suffix: str, fact_type: str, value, source: str = "GeneratedComponent.metadata",
+        unit: str | None = None,
+    ) -> GeometricFact:
+        return GeometricFact(
+            factId=f"component.{result.componentId}.{suffix}",
+            factType=fact_type,
+            inspectionVersion=INSPECTION_VERSION,
+            scope="COMPONENT",
+            componentIds=[result.componentId],
+            value=value,
+            unit=unit,
+            status="PASS" if value is not None else "NOT_APPLICABLE",
+            sourceOperation=source,
+            generatedAt=now,
+        )
+
+    # The round fast path predates `sourceMode`; reporting the mode it actually
+    # is, rather than NOT_APPLICABLE, keeps the fact meaningful for every stone.
+    facts.append(
+        _fact("sourceMode", "STONE_SOURCE_MODE", meta.get("sourceMode", "PARAMETRIC_REFERENCE"))
+    )
+    facts.append(_fact("shapeIdentity", "STONE_SHAPE_IDENTITY", meta.get("shape")))
+    facts.append(
+        _fact(
+            "profileIdentity",
+            "STONE_PROFILE_IDENTITY",
+            meta.get("profile", "FACETED_REFERENCE"),
+        )
+    )
+    facts.append(_fact("shapeFamily", "STONE_SHAPE_FAMILY", meta.get("family")))
+    facts.append(_fact("symmetryClass", "STONE_SYMMETRY_CLASS", meta.get("symmetry")))
+    facts.append(
+        _fact("representation", "STONE_REPRESENTATION", meta.get("representation", "PARAMETRIC"))
+    )
+    facts.append(
+        _fact("dimensionProvenance", "STONE_DIMENSION_PROVENANCE", meta.get("dimensionProvenance"))
+    )
+    facts.append(
+        _fact(
+            "measuredReferenceClass",
+            "STONE_MEASURED_REFERENCE_CLASS",
+            meta.get("measuredReferenceClass"),
+        )
+    )
+    facts.append(_fact("orientationDeg", "STONE_ORIENTATION_DEG", meta.get("orientationDeg"), unit="deg"))
+
+    outline_available = meta.get("outlineAvailable")
+    facts.append(_fact("outlineAvailable", "STONE_OUTLINE_AVAILABLE", outline_available))
+    facts.append(
+        _fact("outlinePointCount", "STONE_OUTLINE_POINT_COUNT", meta.get("outlinePointCount"))
+    )
+    anchors = meta.get("anchors")
+    facts.append(
+        _fact("anchorCount", "STONE_ANCHOR_COUNT", len(anchors) if anchors is not None else None)
+    )
+
+    provenance = meta.get("provenance") or {}
+    facts.append(
+        _fact(
+            "generatorVersion",
+            "STONE_GENERATOR_VERSION",
+            provenance.get("generatorVersion") or meta.get("referenceGeometryVersion"),
+        )
+    )
+    facts.append(_fact("importerVersion", "STONE_IMPORTER_VERSION", provenance.get("importerVersion")))
+    facts.append(
+        _fact("sourceAssetHash", "STONE_SOURCE_ASSET_HASH", provenance.get("sourceAssetHash"))
+    )
+    operations = provenance.get("normalizationOperations")
+    facts.append(
+        _fact(
+            "normalizationOperationCount",
+            "STONE_NORMALIZATION_OPERATION_COUNT",
+            len(operations) if operations is not None else None,
+        )
+    )
+
+    # A structural fact, not a measurement: the stone reference is never metal.
+    # Read from the role registry rather than from geometry, because that is
+    # where the invariant actually lives (LAW-006, INSPECT-GOV-008).
+    facts.append(
+        _fact(
+            "isProductionMetal",
+            "STONE_IS_PRODUCTION_METAL",
+            GEOMETRY_ROLE.get(result.componentId) == "production_metal",
+            source="geometry.roles.GEOMETRY_ROLE",
+        )
+    )
+    return facts
 
 
 def _setting_facts(now: str, model: GeneratedModel) -> list[GeometricFact]:

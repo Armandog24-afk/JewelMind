@@ -1,0 +1,138 @@
+{
+  "vectors": [
+    {
+      "description": "dimensions only",
+      "stoneSpec": {
+        "shape": "oval",
+        "diameter": 6.5,
+        "length": 8.2,
+        "width": 6.1,
+        "depth": 4.05,
+        "orientation": 0.0,
+        "narrowWidth": null,
+        "source": "MEASURED",
+        "profile": "FACETED_REFERENCE",
+        "customOutline": null,
+        "measurement": null,
+        "importedAsset": null
+      },
+      "expectedReferenceClass": "MEASURED_DIMENSION_REFERENCE",
+      "expectedDimensionProvenance": "INPUT_MEASUREMENT",
+      "expectedLengthMm": 8.2,
+      "expectedWidthMm": 6.1,
+      "expectedDepthMm": 4.05,
+      "expectedProvenance": {
+        "sourceMode": "MEASURED",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": null,
+        "measurementDate": null,
+        "operatorNote": null
+      }
+    },
+    {
+      "description": "dimensions plus measured outline",
+      "stoneSpec": {
+        "shape": "oval",
+        "diameter": 6.5,
+        "length": 7.0,
+        "width": 6.0,
+        "depth": 4.0,
+        "orientation": 0.0,
+        "narrowWidth": null,
+        "source": "MEASURED",
+        "profile": "FACETED_REFERENCE",
+        "customOutline": {
+          "points": [
+            {
+              "x": 0.0,
+              "y": 4.0
+            },
+            {
+              "x": 3.0,
+              "y": 1.5
+            },
+            {
+              "x": 2.4,
+              "y": -3.0
+            },
+            {
+              "x": -2.4,
+              "y": -3.0
+            },
+            {
+              "x": -3.0,
+              "y": 1.5
+            }
+          ],
+          "unit": "mm",
+          "label": null
+        },
+        "measurement": null,
+        "importedAsset": null
+      },
+      "expectedReferenceClass": "MEASURED_OUTLINE_REFERENCE",
+      "expectedDimensionProvenance": "INPUT_MEASUREMENT",
+      "expectedLengthMm": 7.0,
+      "expectedWidthMm": 6.0,
+      "expectedDepthMm": 4.0,
+      "expectedProvenance": {
+        "sourceMode": "MEASURED",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [
+          "WINDING_REVERSED:CW->CCW",
+          "ORIGIN_RECENTERED:bbox_center(0.000000000,0.500000000)"
+        ],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": null,
+        "measurementDate": null,
+        "operatorNote": null
+      }
+    },
+    {
+      "description": "with full provenance",
+      "stoneSpec": {
+        "shape": "cushion",
+        "diameter": 6.5,
+        "length": 7.0,
+        "width": 7.0,
+        "depth": 4.0,
+        "orientation": 0.0,
+        "narrowWidth": null,
+        "source": "MEASURED",
+        "profile": "FACETED_REFERENCE",
+        "customOutline": null,
+        "measurement": {
+          "measurementSource": "Mitutoyo digital caliper",
+          "measurementDate": "2026-08-14",
+          "operatorNote": "widest girdle point"
+        },
+        "importedAsset": null
+      },
+      "expectedReferenceClass": "MEASURED_DIMENSION_REFERENCE",
+      "expectedDimensionProvenance": "INPUT_MEASUREMENT",
+      "expectedLengthMm": 7.0,
+      "expectedWidthMm": 7.0,
+      "expectedDepthMm": 4.0,
+      "expectedProvenance": {
+        "sourceMode": "MEASURED",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": "Mitutoyo digital caliper",
+        "measurementDate": "2026-08-14",
+        "operatorNote": "widest girdle point"
+      }
+    }
+  ]
+}

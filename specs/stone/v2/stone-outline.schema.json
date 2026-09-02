@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/stone-outline.schema.json",
+  "title": "StoneOutline",
+  "description": "A normalized, millimetre-space outline any consumer may read. This is the single contract that makes the Setting System shape-agnostic: a bezel consumes these points without knowing whether they came from a native cut, a custom outline, or a projected imported solid.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "points",
+    "isPolygonal",
+    "derivation"
+  ],
+  "properties": {
+    "points": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "isPolygonal": {
+      "type": "boolean",
+      "description": "True for an exact closed polygon; false when the outline is a SAMPLED approximation of a curve, so a consumer can tell the difference."
+    },
+    "derivation": {
+      "type": "string",
+      "enum": [
+        "NATIVE_PRIMITIVE",
+        "CUSTOM_INPUT",
+        "SAMPLED_FROM_CURVE",
+        "PROJECTED_FROM_GEOMETRY"
+      ]
+    }
+  }
+}

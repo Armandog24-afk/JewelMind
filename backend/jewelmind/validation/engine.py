@@ -9,7 +9,11 @@ client believes.
 from __future__ import annotations
 
 from jewelmind.domain.schema import JewelryDefinition
-from jewelmind.domain.stone_dimensions import resolved_length_mm, resolved_width_mm
+from jewelmind.domain.stone_dimensions import (
+    resolved_depth_mm,
+    resolved_length_mm,
+    resolved_width_mm,
+)
 from jewelmind.validation import rules as R
 from jewelmind.validation.sizing import eu_size_to_inner_diameter, sizing_consistency
 
@@ -105,18 +109,52 @@ def _band_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _stone_depth_rule_applies(stone) -> bool:
+    """Whether STONE_DEPTH_RANGE's premise holds for this stone.
+
+    Returns False where the rule was never calibrated, rather than evaluating it
+    against a dimension it does not describe (STONE-GOV-010's discipline).
+    """
+
+    if stone.source == "IMPORTED_CAD":
+        return False
+    if stone.profile == "SPHERICAL_REFERENCE" or stone.shape == "pearl":
+        return False
+    return True
+
+
 def _stone_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
-    """Sprint 18: STONE_DIAMETER_RANGE is ROUND_ONLY (round is the only
-    shape with a `diameter`); STONE_DEPTH_RANGE is SHARED, generalized to
-    use the stone's real minimum horizontal extent
-    (`min(resolved_length, resolved_width)`) instead of raw `diameter` —
-    a genuine structural generalization (depth must not exceed the
-    stone's own footprint), never a fabricated "equivalent diameter"
-    (brief section 44). There is currently no dimension-range rule for a
-    non-round shape's `length`/`width` individually — a real, honest gap,
-    marked REQUIRES_RULE_EVOLUTION rather than solved by inventing a new
-    rule this Sprint; see
-    docs/bible/20-stone/578-current-code-mapping-and-gaps.md."""
+    """Stone-domain rules, scoped to the stone sources they were calibrated for.
+
+    Sprint 18: `STONE_DIAMETER_RANGE` is ROUND_ONLY (round was the only shape
+    with a `diameter`); `STONE_DEPTH_RANGE` was generalized to the stone's real
+    minimum horizontal extent, a genuine structural generalization (depth must
+    not exceed the stone's own footprint) rather than a fabricated "equivalent
+    diameter".
+
+    Sprint 20 scoping, both found by actually running validation against the new
+    sources rather than by reading the code:
+
+    - A SPHERICAL reference (pearl) is exempt from `STONE_DEPTH_RANGE`. A
+      sphere's depth IS its horizontal extent, so `depth < min_extent` can never
+      hold and the rule fired on every valid pearl. The rule's premise — that a
+      stone is wider than it is deep — simply does not describe a sphere. Marked
+      REQUIRES_RULE_EVOLUTION rather than "fixed" by loosening the threshold,
+      which would have weakened it for every other shape.
+
+    - An IMPORTED stone is exempt from both dimension rules. Its true dimensions
+      are a property of the asset, not of the document, so
+      `resolved_length_mm()` correctly refuses to answer — and calling it here
+      raised `StoneDimensionsUnavailableError` straight out of validation. Its
+      real dimensions are reported by Geometry Inspection from the imported
+      geometry; interpreting them is future rule work, not something to fake
+      from the document.
+
+    `stone.diameter` still has no range rule for `pearl`, and a non-round
+    shape's `length`/`width` still have none individually. Both are real,
+    recorded gaps — see docs/bible/22-stone-v2/code-mapping-and-gaps.md — not
+    solved by inventing a threshold this Sprint (STONEV2-GOV-011).
+    """
 
     out: list[R.ValidationResult] = []
 
@@ -132,19 +170,20 @@ def _stone_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
                 )
             )
 
-    min_extent = min(resolved_length_mm(d.stone), resolved_width_mm(d.stone))
-    if not (0.5 < d.stone.depth < min_extent):
-        out.append(
-            R.ValidationResult(
-                ruleId=R.STONE_DEPTH_RANGE,
-                severity="error",
-                message=(
-                    "Stone depth must be greater than 0.5 mm and lower than the "
-                    "stone's minimum horizontal extent."
-                ),
-                parameter="stone.depth",
+    if _stone_depth_rule_applies(d.stone):
+        min_extent = min(resolved_length_mm(d.stone), resolved_width_mm(d.stone))
+        if not (0.5 < resolved_depth_mm(d.stone) < min_extent):
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.STONE_DEPTH_RANGE,
+                    severity="error",
+                    message=(
+                        "Stone depth must be greater than 0.5 mm and lower than the "
+                        "stone's minimum horizontal extent."
+                    ),
+                    parameter="stone.depth",
+                )
             )
-        )
 
     return out
 

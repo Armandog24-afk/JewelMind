@@ -1,0 +1,116 @@
+{
+  "description": "Real generated output for trapezoid, produced by running the pipeline.",
+  "stoneSpec": {
+    "shape": "trapezoid",
+    "diameter": 6.5,
+    "length": 4.0,
+    "width": 6.0,
+    "depth": 2.0,
+    "orientation": 0.0,
+    "narrowWidth": 3.6,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null
+  },
+  "normalizedStoneDefinition": {
+    "stoneId": "stone_reference",
+    "sourceMode": "PARAMETRIC_REFERENCE",
+    "shape": "trapezoid",
+    "family": "TAPERED_QUADRILATERAL",
+    "profile": "FACETED_REFERENCE",
+    "dimensions": {
+      "lengthMm": 4.0,
+      "widthMm": 6.0,
+      "depthMm": 2.0,
+      "narrowWidthMm": 3.6,
+      "provenance": "REQUESTED_PARAMETER"
+    },
+    "orientationDeg": 0.0,
+    "symmetry": "BILATERAL_ONE_AXIS",
+    "representation": "PARAMETRIC",
+    "provenance": {
+      "sourceMode": "PARAMETRIC_REFERENCE",
+      "sourceAssetHash": null,
+      "sourceAssetName": null,
+      "originalUnit": null,
+      "normalizationOperations": [],
+      "generatorVersion": "2.0.0",
+      "importerVersion": null,
+      "measurementSource": null,
+      "measurementDate": null,
+      "operatorNote": null
+    },
+    "outline": {
+      "points": [
+        {
+          "x": -1.8,
+          "y": 2.0
+        },
+        {
+          "x": 1.8,
+          "y": 2.0
+        },
+        {
+          "x": 3.0,
+          "y": -2.0
+        },
+        {
+          "x": -3.0,
+          "y": -2.0
+        }
+      ],
+      "isPolygonal": true,
+      "derivation": "NATIVE_PRIMITIVE"
+    },
+    "measuredReferenceClass": null
+  },
+  "anchors": [
+    {
+      "anchor": "CENTER",
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "anchor": "TOP",
+      "x": -1.8,
+      "y": 2.0
+    },
+    {
+      "anchor": "BOTTOM",
+      "x": 3.0,
+      "y": -2.0
+    },
+    {
+      "anchor": "LEFT",
+      "x": -3.0,
+      "y": -2.0
+    },
+    {
+      "anchor": "RIGHT",
+      "x": 3.0,
+      "y": -2.0
+    },
+    {
+      "anchor": "WIDE_END",
+      "x": 0.0,
+      "y": -2.0
+    },
+    {
+      "anchor": "NARROW_END",
+      "x": 0.0,
+      "y": 2.0
+    }
+  ],
+  "generatedGeometry": {
+    "volumeMm3": 17.150527999999998,
+    "solidCount": 1,
+    "boundingBoxMm": {
+      "sizeX": 6.0000002,
+      "sizeY": 4.0000002,
+      "sizeZ": 2.000000199999999
+    },
+    "isGemologicalReproduction": false
+  }
+}

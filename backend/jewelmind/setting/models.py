@@ -74,9 +74,39 @@ class StoneSettingReference(SettingModel):
     #: midplanes. False for `pear`. Lets a placement strategy refuse to
     #: assume symmetry it does not have (SETTING-GOV-008).
     isBilaterallySymmetric: bool
+
+    #: True when the stone's outline is the same in every direction from its
+    #: centre — a circle, or a sphere's equator.
+    #:
+    #: This is the property RADIAL prong placement actually depends on. Sprint
+    #: 19 approximated it as `shape == "round"`, which was true then because
+    #: round was the only radially symmetric shape. Stating the geometric fact
+    #: instead means a future radially symmetric stone — including a custom
+    #: outline that happens to be circular — is handled correctly without
+    #: another name added to a branch.
+    isRadiallySymmetric: bool = False
     #: Signed local-Y direction the stone's tip points, for pointed
     #: asymmetric shapes. `None` when the shape has no distinguished tip.
     tipDirectionY: float | None = None
+
+    #: The stone's real girdle outline as ordered (x, y) millimetre points in
+    #: the stone's own unrotated local frame.
+    #:
+    #: THIS IS WHAT MAKES SETTING SHAPE-AGNOSTIC (Sprint 20, brief sections
+    #: 27/41/72). Before it existed, `girdle_outline_wire()` looked the outline
+    #: up in a table keyed by shape NAME, so a custom or imported stone — which
+    #: has no named cut — could not be set at all. Carrying the points means a
+    #: bezel consumes the same contract whatever the stone's source, with no
+    #: `if shape == "custom"` branch anywhere in the Setting System.
+    #:
+    #: `None` only when the stone genuinely has no planar outline (the
+    #: spherical pearl reference), which a Setting must treat as "cannot set",
+    #: never as "assume a circle".
+    outlinePoints: list[tuple[float, float]] | None = None
+
+    #: Narrow-end width of a tapered stone, needed to rebuild its exact outline.
+    #: `None` for every non-tapered shape.
+    narrowWidthMm: float | None = None
 
 
 class SettingAttachmentInterface(SettingModel):

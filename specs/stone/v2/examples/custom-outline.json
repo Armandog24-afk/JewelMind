@@ -1,0 +1,138 @@
+{
+  "description": "Real generated output for custom-outline, produced by running the pipeline.",
+  "stoneSpec": {
+    "shape": "custom",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "CUSTOM_OUTLINE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": {
+      "points": [
+        {
+          "x": 0.0,
+          "y": 4.0
+        },
+        {
+          "x": 3.0,
+          "y": 1.5
+        },
+        {
+          "x": 2.4,
+          "y": -3.0
+        },
+        {
+          "x": -2.4,
+          "y": -3.0
+        },
+        {
+          "x": -3.0,
+          "y": 1.5
+        }
+      ],
+      "unit": "mm",
+      "label": "convex reference outline"
+    },
+    "measurement": null,
+    "importedAsset": null
+  },
+  "normalizedStoneDefinition": {
+    "stoneId": "stone_reference",
+    "sourceMode": "CUSTOM_OUTLINE",
+    "shape": "custom",
+    "family": "CUSTOM",
+    "profile": "FACETED_REFERENCE",
+    "dimensions": {
+      "lengthMm": 7.0,
+      "widthMm": 6.0,
+      "depthMm": 4.0,
+      "narrowWidthMm": null,
+      "provenance": "DERIVED_FROM_OUTLINE"
+    },
+    "orientationDeg": 0.0,
+    "symmetry": "UNKNOWN",
+    "representation": "PARAMETRIC",
+    "provenance": {
+      "sourceMode": "CUSTOM_OUTLINE",
+      "sourceAssetHash": null,
+      "sourceAssetName": "convex reference outline",
+      "originalUnit": "mm",
+      "normalizationOperations": [
+        "WINDING_REVERSED:CW->CCW",
+        "ORIGIN_RECENTERED:bbox_center(0.000000000,0.500000000)"
+      ],
+      "generatorVersion": "2.0.0",
+      "importerVersion": null,
+      "measurementSource": null,
+      "measurementDate": null,
+      "operatorNote": null
+    },
+    "outline": {
+      "points": [
+        {
+          "x": -3.0,
+          "y": 1.0
+        },
+        {
+          "x": -2.4,
+          "y": -3.5
+        },
+        {
+          "x": 2.4,
+          "y": -3.5
+        },
+        {
+          "x": 3.0,
+          "y": 1.0
+        },
+        {
+          "x": 0.0,
+          "y": 3.5
+        }
+      ],
+      "isPolygonal": true,
+      "derivation": "CUSTOM_INPUT"
+    },
+    "measuredReferenceClass": null
+  },
+  "anchors": [
+    {
+      "anchor": "CENTER",
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "anchor": "TOP",
+      "x": 0.0,
+      "y": 3.5
+    },
+    {
+      "anchor": "BOTTOM",
+      "x": -2.4,
+      "y": -3.5
+    },
+    {
+      "anchor": "LEFT",
+      "x": -3.0,
+      "y": 1.0
+    },
+    {
+      "anchor": "RIGHT",
+      "x": 3.0,
+      "y": 1.0
+    }
+  ],
+  "generatedGeometry": {
+    "volumeMm3": 56.81112400000001,
+    "solidCount": 1,
+    "boundingBoxMm": {
+      "sizeX": 6.0000002,
+      "sizeY": 7.0000002,
+      "sizeZ": 4.000000199999999
+    },
+    "isGemologicalReproduction": false
+  }
+}

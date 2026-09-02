@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/normalized-stone-definition.schema.json",
+  "title": "NormalizedStoneDefinition",
+  "description": "The single internal stone model every downstream system consumes. Legacy Stone v1 input, an extended native cut, a custom outline, a measured stone and an imported asset all normalize into this shape. Consumers must read `sourceMode` to learn where geometry came from, never pattern-match `shape`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "stoneId",
+    "sourceMode",
+    "shape",
+    "family",
+    "profile",
+    "dimensions",
+    "orientationDeg",
+    "symmetry",
+    "representation",
+    "provenance"
+  ],
+  "properties": {
+    "stoneId": {
+      "type": "string"
+    },
+    "sourceMode": {
+      "$ref": "stone-source.schema.json"
+    },
+    "shape": {
+      "type": "string",
+      "description": "A string rather than a closed enum: a custom or imported stone genuinely has no canonical named cut and carries 'custom' or 'imported' here."
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "RADIAL",
+        "ELLIPTICAL",
+        "POINTED_ELONGATED",
+        "ASYMMETRIC_POINTED",
+        "RECTILINEAR",
+        "CLIPPED_RECTILINEAR",
+        "ROUNDED_RECTILINEAR",
+        "SQUARE_ANGULAR",
+        "TRIANGULAR",
+        "TAPERED_QUADRILATERAL",
+        "POLYGONAL",
+        "SPECIAL_OUTLINE",
+        "SPHERICAL",
+        "CUSTOM",
+        "IMPORTED"
+      ]
+    },
+    "profile": {
+      "$ref": "stone-profile-v2.schema.json"
+    },
+    "dimensions": {
+      "$ref": "#/$defs/dimensions"
+    },
+    "orientationDeg": {
+      "type": "number"
+    },
+    "symmetry": {
+      "type": "string",
+      "enum": [
+        "RADIAL",
+        "BILATERAL_BOTH_AXES",
+        "BILATERAL_ONE_AXIS",
+        "ASYMMETRIC",
+        "UNKNOWN"
+      ]
+    },
+    "representation": {
+      "type": "string",
+      "enum": [
+        "BREP_SOLID",
+        "MESH",
+        "PARAMETRIC"
+      ]
+    },
+    "provenance": {
+      "$ref": "stone-source-provenance.schema.json"
+    },
+    "outline": {
+      "oneOf": [
+        {
+          "$ref": "stone-outline.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Null only when the stone genuinely has no planar outline (the spherical reference) \u2014 never a fabricated silhouette."
+    },
+    "measuredReferenceClass": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "MEASURED_DIMENSION_REFERENCE",
+        "MEASURED_OUTLINE_REFERENCE",
+        null
+      ]
+    }
+  },
+  "$defs": {
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lengthMm",
+        "widthMm",
+        "depthMm",
+        "provenance"
+      ],
+      "properties": {
+        "lengthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "widthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "depthMm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "narrowWidthMm": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "REQUESTED_PARAMETER",
+            "INPUT_MEASUREMENT",
+            "GENERATED_REFERENCE_MEASUREMENT",
+            "IMPORTED_GEOMETRY_MEASUREMENT",
+            "DERIVED_FROM_OUTLINE"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -44,13 +44,18 @@ _OUTLINE_SAMPLES = 720
 def resolve_strategy(reference: StoneSettingReference) -> ProngPlacementStrategy:
     """Pick the placement strategy from the stone's real geometry.
 
-    `round` is the only radially symmetric shape, so it is the only one for
-    which RADIAL is geometrically faithful. Every other shape gets the
-    outline-aware strategy — including `pear`, whose asymmetry the outline
-    itself carries.
+    RADIAL is geometrically faithful exactly when the outline is the same in
+    every direction from its centre; every other stone gets the outline-aware
+    strategy, including `pear`, whose asymmetry the outline itself carries.
+
+    Selected on the GEOMETRIC PROPERTY, not on the shape's name. Sprint 19 wrote
+    this as `shape == "round"`, which was equivalent at the time because round
+    was the only radially symmetric shape — but it made the Setting System a
+    list of known names again, which is exactly what Stone v2 set out to end.
+    Round still resolves to RADIAL, so generated geometry is unchanged.
     """
 
-    return "RADIAL" if reference.shape == "round" else "OUTLINE_CARDINAL"
+    return "RADIAL" if reference.isRadiallySymmetric else "OUTLINE_CARDINAL"
 
 
 def radial_positions(

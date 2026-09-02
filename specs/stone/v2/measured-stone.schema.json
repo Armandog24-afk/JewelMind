@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/measured-stone.schema.json",
+  "title": "MeasuredStoneSource",
+  "description": "A real physical stone the user has measured. A missing measurement is never invented; `shape` is optional because a measured stone may genuinely have no known cut.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "lengthMm",
+    "widthMm",
+    "depthMm"
+  ],
+  "properties": {
+    "mode": {
+      "const": "MEASURED"
+    },
+    "lengthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "widthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "depthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "shape": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "round",
+        "oval",
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon",
+        "pearl",
+        "custom",
+        "imported",
+        null
+      ]
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE",
+        "SPHERICAL_REFERENCE"
+      ]
+    },
+    "measuredOutline": {
+      "oneOf": [
+        {
+          "$ref": "custom-outline.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "measurementSource": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "measurementDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 64
+    },
+    "operatorNote": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "referenceClass": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "MEASURED_DIMENSION_REFERENCE",
+        "MEASURED_OUTLINE_REFERENCE",
+        null
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/custom-outline.schema.json",
+  "title": "CustomOutline",
+  "description": "A caller-supplied closed 2D outline. Ordered points only \u2014 no representation may carry an expression, script or function body. The ring is closed implicitly; the first point must not be repeated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "points"
+  ],
+  "properties": {
+    "points": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "mm",
+        "cm",
+        "m",
+        "in"
+      ],
+      "default": "mm"
+    },
+    "label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 200
+    }
+  }
+}

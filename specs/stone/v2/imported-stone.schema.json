@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/imported-stone.schema.json",
+  "title": "ImportedStoneSource",
+  "description": "Externally supplied stone geometry. `assetHash` is a content hash, never a filesystem path. `declaredUnit` is REQUIRED rather than inferred: no format JewelMind reads carries a reliable unit, and guessing one silently rescales a real physical object.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "assetHash",
+    "declaredUnit"
+  ],
+  "properties": {
+    "mode": {
+      "const": "IMPORTED_CAD"
+    },
+    "assetHash": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "assetName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "declaredUnit": {
+      "type": "string",
+      "enum": [
+        "mm",
+        "cm",
+        "m",
+        "in"
+      ]
+    },
+    "orientationDeg": {
+      "type": "number"
+    },
+    "representation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "BREP_SOLID",
+        "MESH",
+        "PARAMETRIC",
+        null
+      ],
+      "description": "Determined by PARSING the asset, never from its extension. A MESH carries no B-Rep topology and supports fewer operations."
+    }
+  }
+}

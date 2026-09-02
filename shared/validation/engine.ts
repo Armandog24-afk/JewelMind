@@ -89,18 +89,43 @@ function bandRules(d: JewelryDefinition): ValidationResult[] {
 }
 
 function resolvedStoneLength(d: JewelryDefinition): number {
-  return d.stone.shape === 'round' ? (d.stone.diameter as number) : (d.stone.length as number)
+  return roundLike(d) ? (d.stone.diameter as number) : (d.stone.length as number)
 }
 
 function resolvedStoneWidth(d: JewelryDefinition): number {
-  return d.stone.shape === 'round' ? (d.stone.diameter as number) : (d.stone.width as number)
+  return roundLike(d) ? (d.stone.diameter as number) : (d.stone.width as number)
+}
+
+/** Shapes whose single horizontal size is a diameter. Mirrors `_ROUND_LIKE`. */
+function roundLike(d: JewelryDefinition): boolean {
+  return d.stone.shape === 'round' || d.stone.shape === 'pearl'
+}
+
+/**
+ * Whether STONE_DEPTH_RANGE's premise holds for this stone. Mirrors
+ * `_stone_depth_rule_applies()` in the backend engine exactly (FORGE-GOV-004).
+ *
+ * A sphere's depth IS its horizontal extent, so the rule can never pass for a
+ * pearl; an imported stone's true dimensions live in the asset, not in the
+ * document. Both are skipped rather than evaluated against a dimension the
+ * rule does not describe.
+ */
+function stoneDepthRuleApplies(d: JewelryDefinition): boolean {
+  if (d.stone.source === 'IMPORTED_CAD') {
+    return false
+  }
+  if (d.stone.profile === 'SPHERICAL_REFERENCE' || d.stone.shape === 'pearl') {
+    return false
+  }
+  return true
 }
 
 function stoneRules(d: JewelryDefinition): ValidationResult[] {
-  // Sprint 18: STONE_DIAMETER_RANGE is ROUND_ONLY; STONE_DEPTH_RANGE is
-  // SHARED, generalized to the stone's real minimum horizontal extent —
-  // mirrors backend/jewelmind/validation/engine.py::_stone_rules()
-  // exactly (FORGE-GOV-004). See docs/bible/20-stone/578-current-code-mapping-and-gaps.md.
+  // STONE_DIAMETER_RANGE is ROUND_ONLY; STONE_DEPTH_RANGE is generalized to the
+  // stone's real minimum horizontal extent, and is scoped away from spherical
+  // and imported stones (Sprint 20). Mirrors
+  // backend/jewelmind/validation/engine.py::_stone_rules() exactly
+  // (FORGE-GOV-004). See docs/bible/22-stone-v2/code-mapping-and-gaps.md.
   const out: ValidationResult[] = []
 
   if (d.stone.shape === 'round') {
@@ -115,14 +140,17 @@ function stoneRules(d: JewelryDefinition): ValidationResult[] {
     }
   }
 
-  const minExtent = Math.min(resolvedStoneLength(d), resolvedStoneWidth(d))
-  if (!(d.stone.depth > 0.5 && d.stone.depth < minExtent)) {
-    out.push({
-      ruleId: RULE_IDS.STONE_DEPTH_RANGE,
-      severity: 'error',
-      message: "Stone depth must be greater than 0.5 mm and lower than the stone's minimum horizontal extent.",
-      parameter: 'stone.depth',
-    })
+  if (stoneDepthRuleApplies(d)) {
+    const minExtent = Math.min(resolvedStoneLength(d), resolvedStoneWidth(d))
+    const depth = d.stone.shape === 'pearl' ? (d.stone.diameter as number) : d.stone.depth
+    if (!(depth > 0.5 && depth < minExtent)) {
+      out.push({
+        ruleId: RULE_IDS.STONE_DEPTH_RANGE,
+        severity: 'error',
+        message: "Stone depth must be greater than 0.5 mm and lower than the stone's minimum horizontal extent.",
+        parameter: 'stone.depth',
+      })
+    }
   }
 
   return out

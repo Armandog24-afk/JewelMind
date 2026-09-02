@@ -1,0 +1,125 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedFrom": "backend/jewelmind/stone/capability.py::STONE_SOURCE_CAPABILITIES",
+  "sources": [
+    {
+      "sourceMode": "PARAMETRIC_REFERENCE",
+      "status": "CURRENT",
+      "generatesRealGeometry": true,
+      "representation": "PARAMETRIC",
+      "outlineAvailable": true,
+      "anchorsAvailable": true,
+      "settingCompatible": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A named canonical shape plus explicit dimensions.",
+      "knownLimitations": [
+        "Reference silhouettes only \u2014 no shape models a real facet arrangement."
+      ]
+    },
+    {
+      "sourceMode": "CUSTOM_OUTLINE",
+      "status": "CURRENT",
+      "generatesRealGeometry": true,
+      "representation": "PARAMETRIC",
+      "outlineAvailable": true,
+      "anchorsAvailable": true,
+      "settingCompatible": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A validated caller-supplied closed outline, extruded through the same reference-profile pipeline every native shape uses.",
+      "knownLimitations": [
+        "Concave outlines generate valid geometry but are not bezel-verified for every concavity; the Golden case covers a convex outline.",
+        "Only ordered points are accepted; curve segments and SVG import are PLANNED.",
+        "Anchors are limited to the five cardinal points \u2014 a custom outline has no deterministic TIP or CLEFT."
+      ]
+    },
+    {
+      "sourceMode": "MEASURED",
+      "status": "CURRENT",
+      "generatesRealGeometry": true,
+      "representation": "PARAMETRIC",
+      "outlineAvailable": true,
+      "anchorsAvailable": true,
+      "settingCompatible": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A real physical stone's measurements. With dimensions only, JewelMind builds an approximation labelled MEASURED_DIMENSION_REFERENCE; with a measured outline it builds MEASURED_OUTLINE_REFERENCE.",
+      "knownLimitations": [
+        "A dimension-only reference is an approximation of the physical stone, never a model of its real surface.",
+        "No measurement is ever inferred when absent."
+      ]
+    },
+    {
+      "sourceMode": "IMPORTED_CAD",
+      "status": "PARTIAL",
+      "generatesRealGeometry": true,
+      "representation": "BREP_SOLID",
+      "outlineAvailable": true,
+      "anchorsAvailable": true,
+      "settingCompatible": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "Externally supplied CAD or mesh geometry, normalized into the canonical stone frame with explicit declared units and recorded provenance.",
+      "knownLimitations": [
+        "PARTIAL: STEP/BREP B-Rep import is CURRENT; STL mesh import is CURRENT for inspection and Vision but exposes no B-Rep operations.",
+        "Setting compatibility is decided per asset from real geometry, never granted automatically.",
+        "Scan-specific processing (point clouds, decimation, hole filling) is PLANNED."
+      ]
+    }
+  ],
+  "importFormats": {
+    "supported": [
+      {
+        "extension": ".step",
+        "representation": "BREP_SOLID",
+        "verifiedBy": "running the installed CadQuery/OCP build"
+      },
+      {
+        "extension": ".stp",
+        "representation": "BREP_SOLID",
+        "verifiedBy": "running the installed CadQuery/OCP build"
+      },
+      {
+        "extension": ".brep",
+        "representation": "BREP_SOLID",
+        "verifiedBy": "running the installed CadQuery/OCP build"
+      },
+      {
+        "extension": ".stl",
+        "representation": "MESH",
+        "verifiedBy": "running the installed CadQuery/OCP build"
+      }
+    ],
+    "unsupported": [
+      {
+        "extension": ".obj",
+        "reason": "OCP.RWObj is not available in this build."
+      },
+      {
+        "extension": ".gltf",
+        "reason": "No XCAF document pipeline is wired up to read it."
+      },
+      {
+        "extension": ".glb",
+        "reason": "No XCAF document pipeline is wired up to read it."
+      },
+      {
+        "extension": ".iges",
+        "reason": "No IGES reader is available in this build."
+      },
+      {
+        "extension": ".igs",
+        "reason": "No IGES reader is available in this build."
+      },
+      {
+        "extension": ".3dm",
+        "reason": "Rhino format; JewelMind never requires Rhino (LAW)."
+      }
+    ]
+  },
+  "resourceLimits": {
+    "maxAssetBytes": 33554432,
+    "maxMeshTriangles": 2000000,
+    "maxBrepFaces": 100000,
+    "maxOutlinePoints": 10000,
+    "note": "Safeguards for untrusted input, not geometric judgements. A real gemstone asset is orders of magnitude below every limit."
+  },
+  "importerVersion": "1.0.0"
+}

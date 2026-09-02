@@ -1,0 +1,71 @@
+{
+  "note": "No entry carries a wall-clock timestamp. Provenance participates in definitionHash and in Golden snapshots, so a clock reading would make identical geometry hash differently between runs.",
+  "vectors": [
+    {
+      "description": "parametric",
+      "expectedProvenance": {
+        "sourceMode": "PARAMETRIC_REFERENCE",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": null,
+        "measurementDate": null,
+        "operatorNote": null
+      }
+    },
+    {
+      "description": "custom outline in centimetres",
+      "expectedProvenance": {
+        "sourceMode": "CUSTOM_OUTLINE",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": "cm",
+        "normalizationOperations": [
+          "UNIT_CONVERSION:cm->mm",
+          "WINDING_REVERSED:CW->CCW",
+          "ORIGIN_RECENTERED:bbox_center(0.000000000,0.500000000)"
+        ],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": null,
+        "measurementDate": null,
+        "operatorNote": null
+      }
+    },
+    {
+      "description": "measured with provenance",
+      "expectedProvenance": {
+        "sourceMode": "MEASURED",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": "digital caliper",
+        "measurementDate": "2026-08-14",
+        "operatorNote": null
+      }
+    },
+    {
+      "description": "pearl profile defaulted",
+      "expectedProvenance": {
+        "sourceMode": "PARAMETRIC_REFERENCE",
+        "sourceAssetHash": null,
+        "sourceAssetName": null,
+        "originalUnit": null,
+        "normalizationOperations": [
+          "PROFILE_DEFAULTED:FACETED_REFERENCE->SPHERICAL_REFERENCE"
+        ],
+        "generatorVersion": "2.0.0",
+        "importerVersion": null,
+        "measurementSource": null,
+        "measurementDate": null,
+        "operatorNote": null
+      }
+    }
+  ]
+}

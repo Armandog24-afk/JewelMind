@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/stone/v2/custom-outline-stone.schema.json",
+  "title": "CustomOutlineStoneSource",
+  "description": "A stone defined by a caller-supplied outline \u2014 the escape hatch that frees the Stone System from a finite built-in shape list.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "outline",
+    "depthMm"
+  ],
+  "properties": {
+    "mode": {
+      "const": "CUSTOM_OUTLINE"
+    },
+    "outline": {
+      "$ref": "custom-outline.schema.json"
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE",
+        "SPHERICAL_REFERENCE"
+      ]
+    },
+    "depthMm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    }
+  }
+}

@@ -38,6 +38,27 @@ FactType = Literal[
     "STONE_MEASURED_WIDTH",
     "STONE_REQUESTED_DEPTH",
     "STONE_MEASURED_DEPTH",
+    # --- Sprint 20 (Stone System v2), brief section 45 ---------------------
+    # Every fact below reports WHAT A STONE IS, never whether it is any good:
+    # a source mode, a profile, a representation, a count. Interpreting any of
+    # them as acceptable or unacceptable remains Forge's job (INSPECT-GOV-001).
+    "STONE_SOURCE_MODE",
+    "STONE_SHAPE_IDENTITY",
+    "STONE_PROFILE_IDENTITY",
+    "STONE_SHAPE_FAMILY",
+    "STONE_SYMMETRY_CLASS",
+    "STONE_REPRESENTATION",
+    "STONE_DIMENSION_PROVENANCE",
+    "STONE_MEASURED_REFERENCE_CLASS",
+    "STONE_OUTLINE_AVAILABLE",
+    "STONE_OUTLINE_POINT_COUNT",
+    "STONE_ANCHOR_COUNT",
+    "STONE_ORIENTATION_DEG",
+    "STONE_GENERATOR_VERSION",
+    "STONE_IMPORTER_VERSION",
+    "STONE_SOURCE_ASSET_HASH",
+    "STONE_NORMALIZATION_OPERATION_COUNT",
+    "STONE_IS_PRODUCTION_METAL",
     "SETTING_TYPE",
     "SETTING_COMPATIBILITY_STATUS",
     "SETTING_REQUESTED_PRONG_COUNT",

@@ -1,0 +1,1004 @@
+{
+  "registryVersion": "2.0.0",
+  "generatedFrom": "backend/jewelmind/stone/capability.py::STONE_SHAPE_CAPABILITIES_V2",
+  "note": "Generated from the live registry, never hand-maintained. generationSupported, setting compatibility and professional validation are three INDEPENDENT axes.",
+  "shapes": [
+    {
+      "shape": "round",
+      "aliases": [
+        "brilliant",
+        "round brilliant",
+        "rotondo",
+        "tondo"
+      ],
+      "family": "RADIAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "diameter",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "RADIAL",
+      "supportedProfiles": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "SUPPORTED_SOFTWARE",
+      "bezelCompatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Pre-Sprint-18 lofted round reference, byte-identical since Sprint 18."
+    },
+    {
+      "shape": "oval",
+      "aliases": [
+        "ovale"
+      ],
+      "family": "ELLIPTICAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Elliptical outline. Bezel requires STEP-safety resampling (Sprint 19)."
+    },
+    {
+      "shape": "pear",
+      "aliases": [
+        "pera",
+        "goccia",
+        "teardrop",
+        "drop"
+      ],
+      "family": "ASYMMETRIC_POINTED",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "One pointed tip at +Y, one rounded end. Placement is not tip-aware."
+    },
+    {
+      "shape": "emerald",
+      "aliases": [
+        "smeraldo",
+        "taglio smeraldo",
+        "emerald cut"
+      ],
+      "family": "CLIPPED_RECTILINEAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Clipped-corner rectangle. NOTE: this is a SHAPE named emerald, never the gem species emerald \u2014 see STONEV2-GOV-008."
+    },
+    {
+      "shape": "cushion",
+      "aliases": [
+        "cuscino"
+      ],
+      "family": "ROUNDED_RECTILINEAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Rounded-rectangle outline."
+    },
+    {
+      "shape": "princess",
+      "aliases": [
+        "principessa",
+        "quadrato",
+        "square"
+      ],
+      "family": "SQUARE_ANGULAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Plain rectangle; square only when length equals width."
+    },
+    {
+      "shape": "marquise",
+      "aliases": [
+        "navette",
+        "marchesa"
+      ],
+      "family": "POINTED_ELONGATED",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "1.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": true,
+      "description": "Two-arc pointed lens. Prongs are not clustered at the tips."
+    },
+    {
+      "shape": "heart",
+      "aliases": [
+        "cuore",
+        "heart cut"
+      ],
+      "family": "SPECIAL_OUTLINE",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP",
+        "CLEFT",
+        "LEFT_LOBE",
+        "RIGHT_LOBE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Point at -Y, cleft at +Y. Construction half-extents are normalized so the real bounding box equals the request; no commercial heart proportion is claimed."
+    },
+    {
+      "shape": "radiant",
+      "aliases": [
+        "radiante",
+        "radiant cut"
+      ],
+      "family": "CLIPPED_RECTILINEAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Clipped-corner rectangle, shallower clip than emerald. Silhouette only."
+    },
+    {
+      "shape": "asscher",
+      "aliases": [
+        "asscher cut"
+      ],
+      "family": "CLIPPED_RECTILINEAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Clipped-corner rectangle, deeper clip than emerald or radiant."
+    },
+    {
+      "shape": "trillion",
+      "aliases": [
+        "trilliant",
+        "trillian",
+        "trilliante",
+        "triangolo brillante"
+      ],
+      "family": "TRIANGULAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Triangle with outward-bowed sides. TRILLIANT is an ALIAS, not a second canonical shape: no distinct geometry semantics were defined for it (brief section 11)."
+    },
+    {
+      "shape": "baguette",
+      "aliases": [
+        "baguette cut",
+        "rettangolo"
+      ],
+      "family": "RECTILINEAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "CORNER_NW",
+        "CORNER_NE",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Plain rectangle. Distinct from EMERALD (which has clipped corners) and from PRINCESS (same geometry, different canonical identity and proportions)."
+    },
+    {
+      "shape": "tapered_baguette",
+      "aliases": [
+        "tapered baguette",
+        "baguette rastremata",
+        "baguette conica"
+      ],
+      "family": "TAPERED_QUADRILATERAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "narrowWidth",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "WIDE_END",
+        "NARROW_END"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Explicitly tapered rectangle: WIDE end at -Y, NARROW end at +Y. The taper is a required dimension, never an invented default ratio."
+    },
+    {
+      "shape": "triangle",
+      "aliases": [
+        "triangolo",
+        "triangolare",
+        "triangular"
+      ],
+      "family": "TRIANGULAR",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP",
+        "CORNER_SW",
+        "CORNER_SE"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Isosceles triangle with STRAIGHT sides \u2014 deliberately not TRILLION."
+    },
+    {
+      "shape": "trapezoid",
+      "aliases": [
+        "trapezio",
+        "trapeze",
+        "trapezium"
+      ],
+      "family": "TAPERED_QUADRILATERAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "narrowWidth",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "WIDE_END",
+        "NARROW_END"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Same primitive as TAPERED_BAGUETTE, separate canonical identity: a trapezoid is typically a short accent stone rather than an elongated one."
+    },
+    {
+      "shape": "lozenge",
+      "aliases": [
+        "losanga",
+        "rombo",
+        "rhombus"
+      ],
+      "family": "POLYGONAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Rhombus. Named LOZENGE and never 'diamond', because in JewelMind 'diamond' is a gem species and a shape ID must never collide with gem identity."
+    },
+    {
+      "shape": "hexagon",
+      "aliases": [
+        "esagono",
+        "esagonale",
+        "hexagonal"
+      ],
+      "family": "POLYGONAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_BOTH_AXES",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "ELONGATED hexagon: regular only when the caller supplies a matching length/width ratio. Regularity is not forced."
+    },
+    {
+      "shape": "kite",
+      "aliases": [
+        "aquilone",
+        "cervo volante"
+      ],
+      "family": "POLYGONAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Kite with its widest span above center \u2014 longitudinally asymmetric."
+    },
+    {
+      "shape": "shield",
+      "aliases": [
+        "scudo",
+        "shield cut"
+      ],
+      "family": "POLYGONAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT",
+        "TIP"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Flat-topped shield tapering to a point at -Y. Fully polygonal: an arc-based lower boundary overshot the requested width during prototyping. No subtypes."
+    },
+    {
+      "shape": "half_moon",
+      "aliases": [
+        "half moon",
+        "mezzaluna",
+        "demi lune",
+        "halfmoon"
+      ],
+      "family": "SPECIAL_OUTLINE",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "BILATERAL_ONE_AXIS",
+      "supportedProfiles": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "EXPERIMENTAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Straight chord at -X closed by an ELLIPTICAL arc. Half of an ellipse rather than half of a circle, so the bounding box is exact at any aspect ratio."
+    },
+    {
+      "shape": "pearl",
+      "aliases": [
+        "perla",
+        "sphere",
+        "sfera",
+        "bead"
+      ],
+      "family": "SPHERICAL",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "diameter"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "RADIAL",
+      "supportedProfiles": [
+        "SPHERICAL_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "PARAMETRIC_REFERENCE",
+        "MEASURED"
+      ],
+      "anchors": [],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "UNSUPPORTED",
+      "bezelCompatibility": "UNSUPPORTED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Spherical reference solid. This is GEOMETRY only: whether the stone is an actual pearl is gem identity, which arrives in Sprint 21. Near-round, drop and button pearls remain PLANNED. Settings are UNSUPPORTED because a sphere has no girdle plane for the current prong/bezel contracts to grip."
+    },
+    {
+      "shape": "custom",
+      "aliases": [
+        "custom outline",
+        "pietra personalizzata"
+      ],
+      "family": "CUSTOM",
+      "status": "CURRENT",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [
+        "outline",
+        "depth"
+      ],
+      "optionalDimensions": [],
+      "symmetryClass": "UNKNOWN",
+      "supportedProfiles": [
+        "FACETED_REFERENCE",
+        "CABOCHON_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "CUSTOM_OUTLINE"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "EXPERIMENTAL",
+      "bezelCompatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "A stone defined by a caller-supplied outline. The escape hatch that frees the Stone System from a finite built-in shape list. Bezel is SUPPORTED_SOFTWARE because the bezel consumes the normalized outline contract directly, with no per-shape branch."
+    },
+    {
+      "shape": "imported",
+      "aliases": [],
+      "family": "IMPORTED",
+      "status": "PARTIAL",
+      "generationSupported": true,
+      "inspectionSupported": true,
+      "visionSupported": true,
+      "jdlSupported": true,
+      "requiredDimensions": [],
+      "optionalDimensions": [
+        "length",
+        "width",
+        "depth"
+      ],
+      "symmetryClass": "UNKNOWN",
+      "supportedProfiles": [
+        "FACETED_REFERENCE"
+      ],
+      "availableSourceModes": [
+        "IMPORTED_CAD"
+      ],
+      "anchors": [
+        "CENTER",
+        "TOP",
+        "BOTTOM",
+        "LEFT",
+        "RIGHT"
+      ],
+      "referenceGeometryVersion": "2.0.0",
+      "prongCompatibility": "UNSUPPORTED",
+      "bezelCompatibility": "UNSUPPORTED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "introducedInStoneV1": false,
+      "description": "Externally supplied geometry. PARTIAL: B-Rep import, unit normalization, inspection and Vision all work, but setting compatibility is decided per asset from real geometry rather than granted by this registry entry."
+    }
+  ],
+  "reservedShapes": [
+    {
+      "shape": "briolette",
+      "reason": "Fully three-dimensional drop with no single girdle plane; the current outline-plus-profile pipeline cannot express it.",
+      "status": "PLANNED"
+    },
+    {
+      "shape": "rose_cut",
+      "reason": "Defined by its facet arrangement (flat back, domed faceted crown) rather than by its outline; needs a real facet model.",
+      "status": "PLANNED"
+    },
+    {
+      "shape": "old_mine",
+      "reason": "A historical proportion set, not a distinct outline. Would require sourced proportions JewelMind does not have.",
+      "status": "PLANNED"
+    },
+    {
+      "shape": "star",
+      "reason": "Concave polygonal outline is expressible, but no sourced proportions exist; a caller wanting one today should use CUSTOM_OUTLINE.",
+      "status": "PLANNED"
+    },
+    {
+      "shape": "cross",
+      "reason": "As above \u2014 reachable through CUSTOM_OUTLINE without a new enum.",
+      "status": "PLANNED"
+    }
+  ]
+}
