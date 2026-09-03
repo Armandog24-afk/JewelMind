@@ -16,11 +16,11 @@ from __future__ import annotations
 from typing import Any, get_args
 
 from jewelmind.domain import schema as S
+from jewelmind.gem.models import GemOrigin, GemTreatmentType
 from jewelmind.jewelry_category.registry import get_capability
 from jewelmind.stone.capability import (
     RESERVED_STONE_SHAPES as _RESERVED_STONE_SHAPES,
 )
-from jewelmind.gem.models import GemOrigin, GemTreatmentType
 from jewelmind.stone.models import StoneReferenceProfile
 
 # The Forge rule (validation/engine.py::_prong_rules) hardcodes this as

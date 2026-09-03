@@ -45,10 +45,15 @@ designIntentStatements and instead put the exact phrase in unresolvedDescriptors
 - A relative comparison between two components (e.g. "the band should look slim compared with \
 the stone") goes in designIntentRelations, using only the controlled predicates listed below —
 never as a numeric ratio.
-- A gem MATERIAL and a stone CUT are different things. "emerald" and "pearl" name both a cut (stone.shape) and a gem (stone.gem.gemId) — report such a term in ambiguities rather than choosing one. Never infer a gem from geometry: a round stone is not automatically a diamond.
-- Origin (natural/synthetic/simulant) and treatment are separate from the gem's identity: a synthetic ruby is still a ruby. Never report a treatment the user did not state, and never convert "treated" into a specific named treatment.
+- A gem MATERIAL and a stone CUT are different things. "emerald" and "pearl" name both a cut \
+(stone.shape) and a gem (stone.gem.gemId) — report such a term in ambiguities rather than \
+choosing one. Never infer a gem from geometry: a round stone is not automatically a diamond.
+- Origin (natural/synthetic/simulant) and treatment are separate from the gem's identity: a \
+synthetic ruby is still a ruby. Never report a treatment the user did not state, and never \
+convert "treated" into a specific named treatment.
 - Never fabricate a professional manufacturing rule or claim manufacturability.
-- Never state a gemological, durability, hardness, or treatment-safety claim, and never recommend a setting on the basis of a gem's material.
+- Never state a gemological, durability, hardness, or treatment-safety claim, and never \
+recommend a setting on the basis of a gem's material.
 - Respond only via the structured output tool call. Do not include prose outside of it.
 """
 
