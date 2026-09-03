@@ -1,5 +1,8 @@
 import type {
   BandProfile,
+  GemIdentity,
+  GemOrigin,
+  GemTreatmentType,
   ManufacturingMethod,
   MetalType,
   SettingType,
@@ -10,6 +13,7 @@ import { useProjectStore } from '../store/useProjectStore'
 import { FormSection } from './FormSection'
 import { NumericField } from './NumericField'
 import { SelectField } from './SelectField'
+import { TextField } from './TextField'
 
 const BAND_PROFILE_OPTIONS: Array<{ value: BandProfile; label: string }> = [
   { value: 'comfort_fit', label: 'Comfort fit' },
@@ -100,6 +104,128 @@ const SHAPE_PROFILE_OPTIONS: Partial<
 const SETTING_TYPE_OPTIONS: Array<{ value: SettingType; label: string }> = [
   { value: 'prong', label: 'Prong' },
   { value: 'bezel', label: 'Bezel' },
+]
+
+// Gem identity options (Sprint 21).
+//
+// A SHORT, CURATED list, not the whole registry. The backend knows 40 entries
+// and is authoritative (brief section 11); offering all of them in a dropdown
+// would bury the common cases, and the brief asks not to clutter the interface
+// with every advanced field by default (brief section 33).
+//
+// `GET /api/gems` returns the full registry for a client that needs it. What is
+// here is what a user picks most often, plus the two escape hatches.
+const GEM_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: 'unknown', label: 'Not specified' },
+  { value: 'diamond', label: 'Diamond' },
+  { value: 'corundum.ruby', label: 'Ruby' },
+  { value: 'corundum.sapphire', label: 'Sapphire' },
+  { value: 'beryl.emerald', label: 'Emerald' },
+  { value: 'beryl.aquamarine', label: 'Aquamarine' },
+  { value: 'quartz.amethyst', label: 'Amethyst' },
+  { value: 'quartz.citrine', label: 'Citrine' },
+  { value: 'spinel', label: 'Spinel' },
+  { value: 'garnet', label: 'Garnet' },
+  { value: 'tourmaline', label: 'Tourmaline' },
+  { value: 'topaz', label: 'Topaz' },
+  { value: 'peridot', label: 'Peridot' },
+  { value: 'opal', label: 'Opal' },
+  { value: 'moonstone', label: 'Moonstone' },
+  { value: 'turquoise', label: 'Turquoise' },
+  { value: 'jade.jadeite', label: 'Jade (jadeite)' },
+  { value: 'pearl', label: 'Pearl' },
+  { value: 'amber', label: 'Amber' },
+  { value: 'coral', label: 'Coral' },
+  { value: 'simulant.cubic_zirconia', label: 'Cubic zirconia (simulant)' },
+  { value: 'simulant.moissanite', label: 'Moissanite (simulant)' },
+  { value: 'custom', label: 'Custom material…' },
+]
+
+// Which origins each offered gem accepts. Mirrors `applicableOrigins` in the
+// backend registry, so the UI cannot offer a combination the backend refuses —
+// a cubic zirconia is never offered as NATURAL.
+const GEM_ORIGIN_OPTIONS: Record<string, Array<{ value: GemOrigin; label: string }>> = {
+  unknown: [{ value: 'UNKNOWN', label: 'Not specified' }],
+  custom: [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'SYNTHETIC', label: 'Synthetic / lab-grown' },
+    { value: 'SIMULANT', label: 'Simulant' },
+    { value: 'COMPOSITE', label: 'Composite' },
+  ],
+  'simulant.cubic_zirconia': [{ value: 'SIMULANT', label: 'Simulant' }],
+  'simulant.moissanite': [
+    { value: 'SIMULANT', label: 'Simulant' },
+    { value: 'SYNTHETIC', label: 'Synthetic / lab-grown' },
+  ],
+  pearl: [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'SYNTHETIC', label: 'Cultured' },
+    { value: 'SIMULANT', label: 'Imitation' },
+  ],
+  amber: [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'COMPOSITE', label: 'Pressed / reconstituted' },
+    { value: 'SIMULANT', label: 'Imitation' },
+  ],
+  coral: [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'SIMULANT', label: 'Imitation' },
+  ],
+  turquoise: [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'SYNTHETIC', label: 'Synthetic' },
+    { value: 'COMPOSITE', label: 'Stabilized / reconstituted' },
+  ],
+  'jade.jadeite': [
+    { value: 'UNKNOWN', label: 'Not specified' },
+    { value: 'NATURAL', label: 'Natural' },
+    { value: 'COMPOSITE', label: 'Treated composite' },
+  ],
+}
+
+// Gems where only NATURAL is applicable, so the origin control offers exactly
+// that plus "not specified".
+const NATURAL_ONLY_GEMS = new Set([
+  'garnet', 'tourmaline', 'topaz', 'peridot', 'moonstone',
+])
+
+const DEFAULT_ORIGIN_OPTIONS: Array<{ value: GemOrigin; label: string }> = [
+  { value: 'UNKNOWN', label: 'Not specified' },
+  { value: 'NATURAL', label: 'Natural' },
+  { value: 'SYNTHETIC', label: 'Synthetic / lab-grown' },
+]
+
+const NATURAL_ONLY_ORIGIN_OPTIONS: Array<{ value: GemOrigin; label: string }> = [
+  { value: 'UNKNOWN', label: 'Not specified' },
+  { value: 'NATURAL', label: 'Natural' },
+]
+
+function originOptionsFor(gemId: string): Array<{ value: GemOrigin; label: string }> {
+  if (gemId in GEM_ORIGIN_OPTIONS) {
+    return GEM_ORIGIN_OPTIONS[gemId] as Array<{ value: GemOrigin; label: string }>
+  }
+  return NATURAL_ONLY_GEMS.has(gemId)
+    ? NATURAL_ONLY_ORIGIN_OPTIONS
+    : DEFAULT_ORIGIN_OPTIONS
+}
+
+// The treatments offered in the basic UI. A short list, and explicitly not
+// presented as exhaustive — the schema accepts more, and the UI says so.
+const GEM_TREATMENT_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: 'NONE_RECORDED', label: 'Not recorded' },
+  { value: 'DECLARED_UNTREATED', label: 'Declared untreated' },
+  { value: 'HEAT', label: 'Heat' },
+  { value: 'IRRADIATION', label: 'Irradiation' },
+  { value: 'FRACTURE_FILLING', label: 'Fracture filling' },
+  { value: 'DYEING', label: 'Dyeing' },
+  { value: 'IMPREGNATION', label: 'Impregnation' },
+  { value: 'COATING', label: 'Coating' },
+  { value: 'UNKNOWN', label: 'Unknown' },
 ]
 
 const PRONG_COUNT_OPTIONS = [
@@ -289,6 +415,66 @@ export function ConfigurationPanel() {
         )}
       </FormSection>
 
+      <FormSection title="Gem">
+        <SelectField
+          id="gem-id"
+          label="Gem"
+          value={definition.stone.gem?.gemId ?? 'unknown'}
+          options={GEM_OPTIONS}
+          onChange={(value) => {
+            // Changing the gem never touches geometry — the backend's
+            // geometry_hash excludes gem identity, so the built shape is reused.
+            const allowed = originOptionsFor(value).map((o) => o.value)
+            const current = definition.stone.gem?.origin ?? 'UNKNOWN'
+            updateStone({
+              gem: {
+                gemId: value,
+                // Carry the origin across only when the new gem accepts it;
+                // otherwise fall back to the first applicable one rather than
+                // sending a combination the backend would refuse.
+                origin: allowed.includes(current) ? current : (allowed[0] ?? 'UNKNOWN'),
+                treatments: definition.stone.gem?.treatments ?? [],
+                visualProfileId: null,
+                customName: value === 'custom' ? (definition.stone.gem?.customName ?? '') : null,
+                note: definition.stone.gem?.note ?? null,
+              } satisfies GemIdentity,
+            })
+          }}
+          wide
+        />
+        {definition.stone.gem?.gemId === 'custom' && (
+          <TextField
+            id="gem-custom-name"
+            label="Material name"
+            value={definition.stone.gem?.customName ?? ''}
+            onChange={(customName) =>
+              updateStone({
+                gem: { ...(definition.stone.gem as GemIdentity), customName },
+              })
+            }
+            placeholder="e.g. meteorite inlay"
+            wide
+          />
+        )}
+        {definition.stone.gem && definition.stone.gem.gemId !== 'unknown' && (
+          <SelectField
+            id="gem-origin"
+            label="Origin"
+            value={definition.stone.gem.origin}
+            options={originOptionsFor(definition.stone.gem.gemId)}
+            onChange={(value) =>
+              updateStone({
+                gem: {
+                  ...(definition.stone.gem as GemIdentity),
+                  origin: value as GemOrigin,
+                },
+              })
+            }
+            wide
+          />
+        )}
+      </FormSection>
+
       <FormSection title="Setting">
         <SelectField
           id="setting-type"
@@ -384,6 +570,69 @@ export function ConfigurationPanel() {
             step={0.1}
             min={0.1}
             max={20}
+          />
+          <SelectField
+            id="gem-treatment"
+            label="Gem treatment"
+            value={
+              (definition.stone.gem?.treatments ?? []).length === 0
+                ? 'NONE_RECORDED'
+                : (definition.stone.gem?.treatments ?? [])[0]?.status === 'NOT_PRESENT'
+                  ? 'DECLARED_UNTREATED'
+                  : ((definition.stone.gem?.treatments ?? [])[0]?.treatment ?? 'NONE_RECORDED')
+            }
+            options={GEM_TREATMENT_OPTIONS}
+            onChange={(value) => {
+              // "Not recorded" and "declared untreated" are DIFFERENT states,
+              // and the control keeps them apart: an empty list means nothing
+              // was recorded, while an explicit NOT_PRESENT record asserts the
+              // stone is untreated. Conflating them would put a claim in the
+              // technical specification the user never made.
+              const base = (definition.stone.gem ?? {
+                gemId: 'unknown',
+                origin: 'UNKNOWN',
+                treatments: [],
+                visualProfileId: null,
+                customName: null,
+                note: null,
+              }) as GemIdentity
+              if (value === 'NONE_RECORDED') {
+                updateStone({ gem: { ...base, treatments: [] } })
+                return
+              }
+              if (value === 'DECLARED_UNTREATED') {
+                updateStone({
+                  gem: {
+                    ...base,
+                    treatments: [
+                      {
+                        treatment: 'HEAT',
+                        status: 'NOT_PRESENT',
+                        disclosure: 'USER_DECLARED',
+                        confidence: 'UNKNOWN',
+                        note: null,
+                      },
+                    ],
+                  },
+                })
+                return
+              }
+              updateStone({
+                gem: {
+                  ...base,
+                  treatments: [
+                    {
+                      treatment: value as GemTreatmentType,
+                      status: 'PRESENT',
+                      disclosure: 'USER_DECLARED',
+                      confidence: 'UNKNOWN',
+                      note: null,
+                    },
+                  ],
+                },
+              })
+            }}
+            wide
           />
           {definition.stone.shape !== 'round' && (
             <NumericField

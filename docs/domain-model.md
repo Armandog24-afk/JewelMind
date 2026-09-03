@@ -67,6 +67,11 @@ This is also the exact default definition (see `default_definition()` /
 | `setting.prongDiameter` | number, mm | Prong cylinder diameter. |
 | `setting.prongHeight` | number, mm | Prong height above the top of the band. |
 | `setting.basketHeight` | number, mm | Basket support height above the top of the band. |
+| `stone.gem` | `GemIdentity` \| null | What the stone is MADE OF, separate from every geometry field (Sprint 21). `null` on a legacy document, which normalizes to the `unknown` gem — never to diamond. Never inferred from the shape. See `docs/bible/23-gem-identity/README.md`. |
+| `stone.gem.gemId` | string | A canonical registry ID (`gem/registry.py`), e.g. `corundum.ruby`. `custom` requires `customName`; `unknown` records that the gem was not identified. Validated for shape before any lookup. |
+| `stone.gem.origin` | enum | `NATURAL`, `SYNTHETIC`, `SIMULANT`, `COMPOSITE`, `UNKNOWN`. Independent of treatment and of identity. |
+| `stone.gem.treatments` | list | DECLARED treatments, each with a status and a disclosure source. An empty list means nothing was recorded, not that the stone is untreated. |
+| `stone.gem.visualProfileId` | string \| null | Overrides the entry's default appearance. Presentation only — it never changes identity, and it is excluded from the geometry hash along with the rest of `stone.gem`. |
 | `material.metal` | enum | `yellow_gold_18k`, `white_gold_18k`, `rose_gold_18k`, `platinum`, `silver`. Cosmetic only in this milestone — see known limitations. |
 | `manufacturing.method` | enum | `lost_wax_casting`, `direct_resin_printing`. Affects one validation rule (JM-MANUFACTURING-001). |
 | `preview.meshTolerance` | number, mm | Linear tessellation tolerance for preview meshes and STL export. |

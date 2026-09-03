@@ -1,0 +1,56 @@
+{
+  "identity": {
+    "gemId": "pearl",
+    "origin": "SYNTHETIC",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "pearl",
+    "canonicalName": "Pearl",
+    "displayNames": {
+      "en": "Pearl",
+      "it": "Perla"
+    },
+    "materialClass": "ORGANIC",
+    "family": null,
+    "species": null,
+    "variety": null,
+    "applicableOrigins": [
+      "NATURAL",
+      "SYNTHETIC",
+      "SIMULANT"
+    ],
+    "aliases": [
+      "pearl",
+      "perla"
+    ],
+    "defaultVisualProfileId": "pearlescent.white",
+    "status": "CURRENT",
+    "provenance": "INTERNAL_TAXONOMY",
+    "supersededBy": null,
+    "description": "Organic gem material formed within a mollusc. No mineral species or variety applies. `SYNTHETIC` here covers cultured pearls and `SIMULANT` covers imitation pearls — genuinely different things that a single boolean could not distinguish."
+  },
+  "visualProfile": {
+    "profileId": "pearlescent.white",
+    "renderCategory": "PEARLESCENT",
+    "baseColor": "#f4ece1",
+    "metalness": 0.15,
+    "roughness": 0.18,
+    "opacity": 1.0,
+    "transmission": 0.0,
+    "ior": 1.53,
+    "thickness": 0.0,
+    "clearcoat": 0.7,
+    "envMapIntensity": 1.1,
+    "dispersion": 0.0,
+    "hasVariableColour": true,
+    "isFallback": false,
+    "description": "Soft pearlescent surface appearance. A pearl's orient is NOT simulated; hasVariableColour records the approximation."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": false,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

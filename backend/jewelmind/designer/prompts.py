@@ -12,7 +12,7 @@ import json
 
 from jewelmind.design_intent.schemas import DesignIntent
 from jewelmind.design_intent.vocabulary import CATEGORIES
-from jewelmind.designer.capability import current_capabilities
+from jewelmind.designer.capability import KNOWN_JDL_FIELD_PATHS, current_capabilities
 from jewelmind.designer.schemas import InteractionMode
 from jewelmind.domain.schema import JewelryDefinition
 
@@ -45,20 +45,33 @@ designIntentStatements and instead put the exact phrase in unresolvedDescriptors
 - A relative comparison between two components (e.g. "the band should look slim compared with \
 the stone") goes in designIntentRelations, using only the controlled predicates listed below —
 never as a numeric ratio.
+- A gem MATERIAL and a stone CUT are different things. "emerald" and "pearl" name both a cut (stone.shape) and a gem (stone.gem.gemId) — report such a term in ambiguities rather than choosing one. Never infer a gem from geometry: a round stone is not automatically a diamond.
+- Origin (natural/synthetic/simulant) and treatment are separate from the gem's identity: a synthetic ruby is still a ruby. Never report a treatment the user did not state, and never convert "treated" into a specific named treatment.
 - Never fabricate a professional manufacturing rule or claim manufacturability.
+- Never state a gemological, durability, hardness, or treatment-safety claim, and never recommend a setting on the basis of a gem's material.
 - Respond only via the structured output tool call. Do not include prose outside of it.
 """
 
 
 def build_jdl_fields_block() -> str:
+    """The dotted paths a provider may reference.
+
+    DERIVED from `capability.KNOWN_JDL_FIELD_PATHS`, not restated. This block
+    used to be a hand-written list and had already drifted: it still named the
+    seven Stone v1 cuts after Sprint 20 added fourteen more, and omitted the
+    bezel fields Sprint 19 added — so the prompt was describing a smaller
+    JewelMind than the one enforcing the proposals. The enum values themselves
+    are in CURRENT CAPABILITIES, which is likewise generated from live code, so
+    they are deliberately not repeated here.
+    """
+
+    paths = ", ".join(sorted(KNOWN_JDL_FIELD_PATHS))
     return (
         "CURRENT JDL FIELDS (dotted paths you may reference in proposedCanonicalValues):\n"
-        "project.name, ring.size, ring.innerDiameter, ring.sizeSystem, band.width, "
-        "band.thickness, band.profile, stone.diameter, stone.length, stone.width, stone.depth, "
-        "stone.orientation, stone.shape (round/oval/pear/emerald/cushion/princess/marquise — "
-        "diameter is used only for round; length/width are required for every other shape), "
-        "setting.prongCount, setting.prongDiameter, setting.prongHeight, setting.basketHeight, "
-        "setting.type, material.metal, manufacturing.method, jewelry.category, jewelry.style"
+        + paths
+        + "\nNotes: stone.diameter applies only to a round stone; stone.length and "
+        "stone.width are required for every other shape. stone.gem.gemId is the gem "
+        "MATERIAL and is independent of stone.shape, which is the CUT."
     )
 
 

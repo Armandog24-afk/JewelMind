@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/gem-definition.schema.json",
+  "title": "GemDefinition",
+  "additionalProperties": false,
+  "description": "A registry entry: one KIND of gem (brief sections 4/5/11).\n\nType-level only. It says what a ruby is; it says nothing about any\nparticular ruby's origin or treatment.\n\nTAXONOMY IS OPTIONAL AT EVERY LEVEL (brief section 5). `family`, `species`\nand `variety` are each nullable, because the hierarchy genuinely does not\napply uniformly:\n\n    diamond    species only, no meaningful family/variety split\n    ruby       family=corundum, species=corundum, variety=ruby\n    amethyst   family=quartz, species=quartz, variety=amethyst\n    pearl      ORGANIC — none of the three apply\n    custom     user-authored, no taxonomy at all\n\nWhere a hierarchy is not reliable for an entry, the honest representation is\na null level, never an invented one (GEM-GOV-004).",
+  "properties": {
+    "gemId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+      "title": "Gemid",
+      "type": "string"
+    },
+    "canonicalName": {
+      "maxLength": 80,
+      "minLength": 2,
+      "title": "Canonicalname",
+      "type": "string"
+    },
+    "displayNames": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Displaynames",
+      "type": "object"
+    },
+    "materialClass": {
+      "enum": [
+        "MINERAL",
+        "ORGANIC",
+        "NON_MINERAL",
+        "COMPOSITE",
+        "UNKNOWN"
+      ],
+      "title": "Materialclass",
+      "type": "string"
+    },
+    "family": {
+      "anyOf": [
+        {
+          "maxLength": 60,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Family"
+    },
+    "species": {
+      "anyOf": [
+        {
+          "maxLength": 60,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Species"
+    },
+    "variety": {
+      "anyOf": [
+        {
+          "maxLength": 60,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variety"
+    },
+    "applicableOrigins": {
+      "items": {
+        "enum": [
+          "NATURAL",
+          "SYNTHETIC",
+          "SIMULANT",
+          "COMPOSITE",
+          "UNKNOWN"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Applicableorigins",
+      "type": "array"
+    },
+    "aliases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Aliases",
+      "type": "array"
+    },
+    "defaultVisualProfileId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+      "title": "Defaultvisualprofileid",
+      "type": "string"
+    },
+    "status": {
+      "default": "CURRENT",
+      "enum": [
+        "CURRENT",
+        "DEPRECATED",
+        "CUSTOM",
+        "UNKNOWN"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "provenance": {
+      "default": "INTERNAL_TAXONOMY",
+      "enum": [
+        "INTERNAL_TAXONOMY",
+        "SOURCED",
+        "USER_AUTHORED",
+        "PRELIMINARY",
+        "PROFESSIONALLY_VALIDATED",
+        "UNKNOWN"
+      ],
+      "title": "Provenance",
+      "type": "string"
+    },
+    "supersededBy": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersededby"
+    },
+    "description": {
+      "maxLength": 500,
+      "minLength": 10,
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "gemId",
+    "canonicalName",
+    "materialClass",
+    "applicableOrigins",
+    "defaultVisualProfileId",
+    "description"
+  ],
+  "type": "object"
+}

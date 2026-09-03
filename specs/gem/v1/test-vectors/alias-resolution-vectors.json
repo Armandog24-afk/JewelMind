@@ -1,0 +1,120 @@
+{
+  "generatedFrom": "jewelmind.gem.resolution.resolve_alias / jewelmind.designer.gem_language.normalize_gem_term",
+  "note": "resolve_alias is the domain-level lookup. normalize_gem_term is Designer's language layer, which additionally REFUSES the terms naming both a cut and a gem, reporting them as ambiguous instead of choosing one.",
+  "ambiguousCutOrSpeciesTerms": [
+    "emerald",
+    "pearl",
+    "perla",
+    "smeraldo"
+  ],
+  "vectors": [
+    {
+      "term": "ruby",
+      "resolveAlias": "corundum.ruby",
+      "designerGemId": "corundum.ruby",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "rubino",
+      "resolveAlias": "corundum.ruby",
+      "designerGemId": "corundum.ruby",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "Rubino",
+      "resolveAlias": "corundum.ruby",
+      "designerGemId": "corundum.ruby",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "  RUBY  ",
+      "resolveAlias": "corundum.ruby",
+      "designerGemId": "corundum.ruby",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "zaffiro",
+      "resolveAlias": "corundum.sapphire",
+      "designerGemId": "corundum.sapphire",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "diamante",
+      "resolveAlias": "diamond",
+      "designerGemId": "diamond",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "diamond",
+      "resolveAlias": "diamond",
+      "designerGemId": "diamond",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "smeraldo",
+      "resolveAlias": "beryl.emerald",
+      "designerGemId": null,
+      "designerAmbiguous": true
+    },
+    {
+      "term": "emerald",
+      "resolveAlias": "beryl.emerald",
+      "designerGemId": null,
+      "designerAmbiguous": true
+    },
+    {
+      "term": "perla",
+      "resolveAlias": "pearl",
+      "designerGemId": null,
+      "designerAmbiguous": true
+    },
+    {
+      "term": "pearl",
+      "resolveAlias": "pearl",
+      "designerGemId": null,
+      "designerAmbiguous": true
+    },
+    {
+      "term": "cubic zirconia",
+      "resolveAlias": "simulant.cubic_zirconia",
+      "designerGemId": "simulant.cubic_zirconia",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "moissanite",
+      "resolveAlias": "simulant.moissanite",
+      "designerGemId": "simulant.moissanite",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "giada",
+      "resolveAlias": "jade.jadeite",
+      "designerGemId": "jade.jadeite",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "ambra",
+      "resolveAlias": "amber",
+      "designerGemId": "amber",
+      "designerAmbiguous": false
+    },
+    {
+      "term": "tanzanite",
+      "resolveAlias": null,
+      "designerGemId": null,
+      "designerAmbiguous": false
+    },
+    {
+      "term": "unicorn tears",
+      "resolveAlias": null,
+      "designerGemId": null,
+      "designerAmbiguous": false
+    },
+    {
+      "term": "",
+      "resolveAlias": null,
+      "designerGemId": null,
+      "designerAmbiguous": false
+    }
+  ]
+}

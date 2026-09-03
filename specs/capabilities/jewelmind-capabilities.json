@@ -1,5 +1,5 @@
 {
-  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Generated from a single authored source during Sprint 19 and validated by backend/tests/test_capability_coverage.py.",
+  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Authored during Sprint 19 and extended each sprint since (gem/gem_visual: Sprint 21) and validated by backend/tests/test_capability_coverage.py.",
   "statusValues": [
     "CURRENT",
     "PARTIAL",
@@ -690,7 +690,7 @@
       "domain": "stone_shape",
       "capability": "cross",
       "status": "PLANNED",
-      "note": "Reserved, not a JDL enum member and with no generator. As above \u2014 reachable through CUSTOM_OUTLINE without a new enum."
+      "note": "Reserved, not a JDL enum member and with no generator. As above — reachable through CUSTOM_OUTLINE without a new enum."
     },
     {
       "domain": "stone_source",
@@ -829,6 +829,96 @@
       "capability": "ANCHOR_DRIVEN_PRONG_PLACEMENT",
       "status": "PLANNED",
       "note": "Setting still places prongs from the outline support function, not from named anchors. Tip-aware and corner-aware placement do not exist."
+    },
+    {
+      "domain": "gem",
+      "capability": "gem_registry",
+      "status": "CURRENT",
+      "note": "gem/registry.py; 40 entries across minerals, organics, simulants and composites, plus 'custom' and 'unknown'. An internal taxonomy, not a gemological database; every entry is NOT_REVIEWED."
+    },
+    {
+      "domain": "gem",
+      "capability": "gem_identity_on_a_stone",
+      "status": "CURRENT",
+      "note": "domain/schema.py::StoneSpec.gem; type/instance split — the registry says what a ruby is, the identity says what THIS ruby is."
+    },
+    {
+      "domain": "gem",
+      "capability": "origin_declaration",
+      "status": "CURRENT",
+      "note": "NATURAL/SYNTHETIC/SIMULANT/COMPOSITE/UNKNOWN, checked against each entry's applicableOrigins by JM-GEM-002. Independent of treatment."
+    },
+    {
+      "domain": "gem",
+      "capability": "treatment_declaration",
+      "status": "CURRENT",
+      "note": "14 treatment types with PRESENT/NOT_PRESENT/SUSPECTED/UNKNOWN status and a disclosure source. Declaration only: no safety, durability or setting rule is derived from it."
+    },
+    {
+      "domain": "gem",
+      "capability": "custom_material",
+      "status": "CURRENT",
+      "note": "gemId 'custom' with a required customName — the escape hatch for a material with no registry entry."
+    },
+    {
+      "domain": "gem",
+      "capability": "unknown_gem",
+      "status": "CURRENT",
+      "note": "gemId 'unknown' and the resolution fallback. A legacy design with no gem normalizes here, never to diamond."
+    },
+    {
+      "domain": "gem",
+      "capability": "gem_language_recognition",
+      "status": "CURRENT",
+      "note": "designer/gem_language.py; English and Italian names, origins and treatments, derived from the live registry. Cut/species terms (emerald, pearl) are reported ambiguous rather than resolved."
+    },
+    {
+      "domain": "gem",
+      "capability": "gemological_certification",
+      "status": "OUT_OF_SCOPE",
+      "note": "JewelMind makes no certification claim and stores no lab report as evidence. A treatment or origin field records what someone DECLARED."
+    },
+    {
+      "domain": "gem",
+      "capability": "gem_property_rules",
+      "status": "PLANNED",
+      "note": "No hardness, durability, heat-sensitivity or setting-suitability rule exists. Each requires professional evidence this project does not have, so none is implemented rather than guessed."
+    },
+    {
+      "domain": "gem",
+      "capability": "external_gem_database",
+      "status": "PLANNED",
+      "note": "The escape hatch for sourced gem data. No external source is integrated; provenance SOURCED exists in the vocabulary and is used by no entry yet."
+    },
+    {
+      "domain": "gem",
+      "capability": "per_stone_gem_in_a_multi_stone_design",
+      "status": "PLANNED",
+      "note": "gem/models.py::StoneInstance carries a role and its own gem, but no generator builds more than one stone, so the arrangement half is PLANNED."
+    },
+    {
+      "domain": "gem_visual",
+      "capability": "gem_visual_profiles",
+      "status": "CURRENT",
+      "note": "gem/visual.py; 20 profiles mirrored in frontend/src/vision/gemMaterials.ts. Every value is a RENDERING parameter, never an optical measurement."
+    },
+    {
+      "domain": "gem_visual",
+      "capability": "gem_driven_stone_appearance",
+      "status": "CURRENT",
+      "note": "vision/materials.ts::resolveComponentMaterial takes the gem's profile; an unrecognized profile renders the neutral fallback, not a diamond look."
+    },
+    {
+      "domain": "gem_visual",
+      "capability": "visual_profile_override_per_stone",
+      "status": "CURRENT",
+      "note": "stone.gem.visualProfileId; lets a pale sapphire look pale while still being a sapphire. Presentation only — it never changes identity."
+    },
+    {
+      "domain": "gem_visual",
+      "capability": "physically_measured_gem_optics",
+      "status": "PLANNED",
+      "note": "No measured refractive index, dispersion or absorption spectrum. The renderer's ior/dispersion values are chosen for plausibility on screen."
     }
   ]
 }

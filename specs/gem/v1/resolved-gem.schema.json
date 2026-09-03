@@ -1,0 +1,469 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/resolved-gem.schema.json",
+  "title": "ResolvedGem",
+  "$defs": {
+    "GemDefinition": {
+      "additionalProperties": false,
+      "description": "A registry entry: one KIND of gem (brief sections 4/5/11).\n\nType-level only. It says what a ruby is; it says nothing about any\nparticular ruby's origin or treatment.\n\nTAXONOMY IS OPTIONAL AT EVERY LEVEL (brief section 5). `family`, `species`\nand `variety` are each nullable, because the hierarchy genuinely does not\napply uniformly:\n\n    diamond    species only, no meaningful family/variety split\n    ruby       family=corundum, species=corundum, variety=ruby\n    amethyst   family=quartz, species=quartz, variety=amethyst\n    pearl      ORGANIC — none of the three apply\n    custom     user-authored, no taxonomy at all\n\nWhere a hierarchy is not reliable for an entry, the honest representation is\na null level, never an invented one (GEM-GOV-004).",
+      "properties": {
+        "gemId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Gemid",
+          "type": "string"
+        },
+        "canonicalName": {
+          "maxLength": 80,
+          "minLength": 2,
+          "title": "Canonicalname",
+          "type": "string"
+        },
+        "displayNames": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Displaynames",
+          "type": "object"
+        },
+        "materialClass": {
+          "enum": [
+            "MINERAL",
+            "ORGANIC",
+            "NON_MINERAL",
+            "COMPOSITE",
+            "UNKNOWN"
+          ],
+          "title": "Materialclass",
+          "type": "string"
+        },
+        "family": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Family"
+        },
+        "species": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Species"
+        },
+        "variety": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Variety"
+        },
+        "applicableOrigins": {
+          "items": {
+            "enum": [
+              "NATURAL",
+              "SYNTHETIC",
+              "SIMULANT",
+              "COMPOSITE",
+              "UNKNOWN"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Applicableorigins",
+          "type": "array"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "defaultVisualProfileId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Defaultvisualprofileid",
+          "type": "string"
+        },
+        "status": {
+          "default": "CURRENT",
+          "enum": [
+            "CURRENT",
+            "DEPRECATED",
+            "CUSTOM",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "provenance": {
+          "default": "INTERNAL_TAXONOMY",
+          "enum": [
+            "INTERNAL_TAXONOMY",
+            "SOURCED",
+            "USER_AUTHORED",
+            "PRELIMINARY",
+            "PROFESSIONALLY_VALIDATED",
+            "UNKNOWN"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "supersededBy": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersededby"
+        },
+        "description": {
+          "maxLength": 500,
+          "minLength": 10,
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gemId",
+        "canonicalName",
+        "materialClass",
+        "applicableOrigins",
+        "defaultVisualProfileId",
+        "description"
+      ],
+      "title": "GemDefinition",
+      "type": "object"
+    },
+    "GemIdentity": {
+      "additionalProperties": false,
+      "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+      "properties": {
+        "gemId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Gemid",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "NATURAL",
+            "SYNTHETIC",
+            "SIMULANT",
+            "COMPOSITE",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "treatments": {
+          "items": {
+            "$ref": "#/$defs/GemTreatment"
+          },
+          "title": "Treatments",
+          "type": "array"
+        },
+        "visualProfileId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visualprofileid"
+        },
+        "customName": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customname"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "gemId"
+      ],
+      "title": "GemIdentity",
+      "type": "object"
+    },
+    "GemTreatment": {
+      "additionalProperties": false,
+      "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "HEAT",
+            "IRRADIATION",
+            "FRACTURE_FILLING",
+            "GLASS_FILLING",
+            "COATING",
+            "DIFFUSION",
+            "DYEING",
+            "IMPREGNATION",
+            "RESIN_IMPREGNATION",
+            "BLEACHING",
+            "LASER_DRILLING",
+            "HPHT",
+            "OTHER",
+            "UNKNOWN"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "status": {
+          "default": "PRESENT",
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT",
+            "SUSPECTED",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "USER_DECLARED",
+          "enum": [
+            "USER_DECLARED",
+            "VENDOR_DECLARED",
+            "LAB_REPORT_CLAIMED",
+            "UNDISCLOSED",
+            "UNKNOWN"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "UNKNOWN",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "treatment"
+      ],
+      "title": "GemTreatment",
+      "type": "object"
+    },
+    "GemVisualProfile": {
+      "additionalProperties": false,
+      "description": "How a gem is rendered (brief section 13).\n\nEVERY VALUE HERE IS A RENDERING PARAMETER, NOT A MEASUREMENT. `ior` is the\nnumber a renderer is given to make a stone look plausible on screen; it is\nnot this gem's refractive index as a laboratory would report it, and it must\nnever be presented as such. The same applies to `dispersion`, which drives a\nsparkle effect rather than describing real spectral separation.",
+      "properties": {
+        "profileId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Profileid",
+          "type": "string"
+        },
+        "renderCategory": {
+          "enum": [
+            "TRANSPARENT_BRILLIANT",
+            "TRANSPARENT_COLOURED",
+            "TRANSLUCENT",
+            "OPAQUE",
+            "IRIDESCENT",
+            "PEARLESCENT",
+            "FALLBACK"
+          ],
+          "title": "Rendercategory",
+          "type": "string"
+        },
+        "baseColor": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Basecolor",
+          "type": "string"
+        },
+        "metalness": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Metalness",
+          "type": "number"
+        },
+        "roughness": {
+          "default": 0.05,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Roughness",
+          "type": "number"
+        },
+        "opacity": {
+          "default": 1.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Opacity",
+          "type": "number"
+        },
+        "transmission": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Transmission",
+          "type": "number"
+        },
+        "ior": {
+          "default": 1.5,
+          "maximum": 3.0,
+          "minimum": 1.0,
+          "title": "Ior",
+          "type": "number"
+        },
+        "thickness": {
+          "default": 0.0,
+          "maximum": 10.0,
+          "minimum": 0.0,
+          "title": "Thickness",
+          "type": "number"
+        },
+        "clearcoat": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Clearcoat",
+          "type": "number"
+        },
+        "envMapIntensity": {
+          "default": 1.0,
+          "maximum": 5.0,
+          "minimum": 0.0,
+          "title": "Envmapintensity",
+          "type": "number"
+        },
+        "dispersion": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Dispersion",
+          "type": "number"
+        },
+        "hasVariableColour": {
+          "default": false,
+          "title": "Hasvariablecolour",
+          "type": "boolean"
+        },
+        "isFallback": {
+          "default": false,
+          "title": "Isfallback",
+          "type": "boolean"
+        },
+        "description": {
+          "maxLength": 400,
+          "minLength": 10,
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profileId",
+        "renderCategory",
+        "baseColor",
+        "description"
+      ],
+      "title": "GemVisualProfile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A `GemIdentity` joined to its registry entry and visual profile.\n\nWhat every downstream consumer reads. Produced by\n`jewelmind/gem/resolution.py`, which is the only place the join happens —\nso Forge, Vision, Foundry and the technical specification cannot each\nresolve a gem slightly differently.",
+  "properties": {
+    "identity": {
+      "$ref": "#/$defs/GemIdentity"
+    },
+    "definition": {
+      "$ref": "#/$defs/GemDefinition"
+    },
+    "visualProfile": {
+      "$ref": "#/$defs/GemVisualProfile"
+    },
+    "wasUnresolved": {
+      "default": false,
+      "title": "Wasunresolved",
+      "type": "boolean"
+    },
+    "usedFallbackVisualProfile": {
+      "default": false,
+      "title": "Usedfallbackvisualprofile",
+      "type": "boolean"
+    },
+    "registryVersion": {
+      "title": "Registryversion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "identity",
+    "definition",
+    "visualProfile",
+    "registryVersion"
+  ],
+  "type": "object"
+}

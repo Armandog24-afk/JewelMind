@@ -109,6 +109,159 @@ def _band_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _gem_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Gem identity validation (Sprint 21, brief section 26).
+
+    SCOPE: GEM_IDENTITY_ONLY. Every rule here checks a REFERENCE or a
+    COHERENCE — does the entry exist, is the declared state self-consistent,
+    does the profile resolve. None of them makes a gemological or manufacturing
+    claim, and none may be added that does: hardness, durability, heat
+    sensitivity, setting suitability and treatment safety all require
+    professional evidence this project does not have (GEM-GOV-006).
+
+    A stone with no gem at all produces NO results. That is not an oversight —
+    a legacy document is valid, and normalizes to `unknown` rather than being
+    reported as broken (brief sections 17/18).
+    """
+
+    from jewelmind.gem.models import CUSTOM_GEM_ID
+    from jewelmind.gem.registry import GEM_REGISTRY
+    from jewelmind.gem.visual import profile_exists
+
+    gem = d.stone.gem
+    if gem is None:
+        return []
+
+    out: list[R.ValidationResult] = []
+    entry = GEM_REGISTRY.get(gem.gemId)
+
+    if entry is None:
+        # A WARNING, not an error. A design referencing a removed entry must
+        # still load and still generate (brief sections 10/29); refusing it
+        # would make a registry change break saved projects.
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_REFERENCE_EXISTS,
+                severity="warning",
+                message=(
+                    f"Gem '{gem.gemId}' is not in the gem registry. The design "
+                    "remains usable and the stone is treated as an unspecified "
+                    "gem; no substitute has been chosen for you."
+                ),
+                parameter="stone.gem.gemId",
+            )
+        )
+        return out
+
+    if entry.status == "DEPRECATED":
+        superseded = (
+            f" It is superseded by '{entry.supersededBy}'."
+            if entry.supersededBy
+            else ""
+        )
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_ENTRY_DEPRECATED,
+                severity="warning",
+                message=(
+                    f"Gem '{gem.gemId}' is deprecated but still resolvable."
+                    f"{superseded}"
+                ),
+                parameter="stone.gem.gemId",
+            )
+        )
+
+    if gem.origin != "UNKNOWN" and gem.origin not in entry.applicableOrigins:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_ORIGIN_APPLICABLE,
+                severity="error",
+                message=(
+                    f"Origin '{gem.origin}' is not applicable to "
+                    f"{entry.canonicalName}. Applicable: "
+                    f"{', '.join(entry.applicableOrigins)}."
+                ),
+                parameter="stone.gem.origin",
+            )
+        )
+
+    # Structurally enforced by `JdlGemIdentity` too. Kept as a Forge rule so the
+    # requirement is visible in a validation report rather than only as a schema
+    # rejection, and so a programmatically-built identity is covered as well.
+    if gem.gemId == CUSTOM_GEM_ID and not (gem.customName or "").strip():
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_CUSTOM_COHERENT,
+                severity="error",
+                message="A custom gem requires a name describing the material.",
+                parameter="stone.gem.customName",
+            )
+        )
+    elif gem.gemId != CUSTOM_GEM_ID and gem.customName is not None:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_CUSTOM_COHERENT,
+                severity="error",
+                message=(
+                    f"A custom name is only meaningful for a custom gem; "
+                    f"'{gem.gemId}' already has a canonical name."
+                ),
+                parameter="stone.gem.customName",
+            )
+        )
+
+    profile_id = gem.visualProfileId or entry.defaultVisualProfileId
+    if not profile_exists(profile_id):
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_VISUAL_PROFILE_RESOLVES,
+                severity="warning",
+                message=(
+                    f"Visual profile '{profile_id}' does not exist; a generic "
+                    "fallback appearance will be used. This affects how the "
+                    "stone is drawn, never what it is."
+                ),
+                parameter="stone.gem.visualProfileId",
+            )
+        )
+
+    seen: set[str] = set()
+    for treatment in gem.treatments:
+        if treatment.treatment in seen:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.GEM_TREATMENT_COHERENT,
+                    severity="warning",
+                    message=(
+                        f"Treatment '{treatment.treatment}' is recorded more "
+                        "than once. Duplicate records cannot be reconciled "
+                        "automatically, so both are preserved."
+                    ),
+                    parameter="stone.gem.treatments",
+                )
+            )
+        seen.add(treatment.treatment)
+
+    # Asserting both "treated" and "explicitly not treated" is a contradiction
+    # a reader cannot resolve, so it is reported rather than silently kept.
+    present = {t.treatment for t in gem.treatments if t.status == "PRESENT"}
+    absent = {t.treatment for t in gem.treatments if t.status == "NOT_PRESENT"}
+    for conflict in sorted(present & absent):
+        out.append(
+            R.ValidationResult(
+                ruleId=R.GEM_TREATMENT_COHERENT,
+                severity="error",
+                message=(
+                    f"Treatment '{conflict}' is recorded as both present and "
+                    "not present."
+                ),
+                parameter="stone.gem.treatments",
+            )
+        )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -401,6 +554,7 @@ _RULE_GROUPS = (
     _ring_rules,
     _band_rules,
     _stone_rules,
+    _gem_rules,
     _prong_rules,
     _bezel_rules,
     _setting_rules,

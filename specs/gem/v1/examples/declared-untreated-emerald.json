@@ -1,0 +1,16 @@
+{
+  "gemId": "beryl.emerald",
+  "origin": "NATURAL",
+  "treatments": [
+    {
+      "treatment": "FRACTURE_FILLING",
+      "status": "NOT_PRESENT",
+      "disclosure": "USER_DECLARED",
+      "confidence": "UNKNOWN",
+      "note": null
+    }
+  ],
+  "visualProfileId": null,
+  "customName": null,
+  "note": null
+}

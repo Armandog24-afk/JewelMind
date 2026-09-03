@@ -22,7 +22,7 @@ from jewelmind.geometry.constants import GENERATOR_VERSION
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent, GeneratedModel
 from jewelmind.geometry.setting_adapter import setting_definition_from_jdl
 from jewelmind.setting.dispatch import generate_setting
-from jewelmind.utils.hashing import definition_hash
+from jewelmind.utils.hashing import definition_hash, geometry_hash
 
 
 def _fuse_metal(metal_components: list[GeneratedComponent]):
@@ -105,6 +105,7 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
 
     return GeneratedModel(
         definition_hash=definition_hash(definition),
+        geometry_hash=geometry_hash(definition),
         generator_version=GENERATOR_VERSION,
         generation_duration_s=duration,
         components=components,

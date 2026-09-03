@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/gem-visual-profile.schema.json",
+  "title": "GemVisualProfile",
+  "additionalProperties": false,
+  "description": "How a gem is rendered (brief section 13).\n\nEVERY VALUE HERE IS A RENDERING PARAMETER, NOT A MEASUREMENT. `ior` is the\nnumber a renderer is given to make a stone look plausible on screen; it is\nnot this gem's refractive index as a laboratory would report it, and it must\nnever be presented as such. The same applies to `dispersion`, which drives a\nsparkle effect rather than describing real spectral separation.",
+  "properties": {
+    "profileId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+      "title": "Profileid",
+      "type": "string"
+    },
+    "renderCategory": {
+      "enum": [
+        "TRANSPARENT_BRILLIANT",
+        "TRANSPARENT_COLOURED",
+        "TRANSLUCENT",
+        "OPAQUE",
+        "IRIDESCENT",
+        "PEARLESCENT",
+        "FALLBACK"
+      ],
+      "title": "Rendercategory",
+      "type": "string"
+    },
+    "baseColor": {
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Basecolor",
+      "type": "string"
+    },
+    "metalness": {
+      "default": 0.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Metalness",
+      "type": "number"
+    },
+    "roughness": {
+      "default": 0.05,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Roughness",
+      "type": "number"
+    },
+    "opacity": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Opacity",
+      "type": "number"
+    },
+    "transmission": {
+      "default": 0.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Transmission",
+      "type": "number"
+    },
+    "ior": {
+      "default": 1.5,
+      "maximum": 3.0,
+      "minimum": 1.0,
+      "title": "Ior",
+      "type": "number"
+    },
+    "thickness": {
+      "default": 0.0,
+      "maximum": 10.0,
+      "minimum": 0.0,
+      "title": "Thickness",
+      "type": "number"
+    },
+    "clearcoat": {
+      "default": 0.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Clearcoat",
+      "type": "number"
+    },
+    "envMapIntensity": {
+      "default": 1.0,
+      "maximum": 5.0,
+      "minimum": 0.0,
+      "title": "Envmapintensity",
+      "type": "number"
+    },
+    "dispersion": {
+      "default": 0.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Dispersion",
+      "type": "number"
+    },
+    "hasVariableColour": {
+      "default": false,
+      "title": "Hasvariablecolour",
+      "type": "boolean"
+    },
+    "isFallback": {
+      "default": false,
+      "title": "Isfallback",
+      "type": "boolean"
+    },
+    "description": {
+      "maxLength": 400,
+      "minLength": 10,
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "profileId",
+    "renderCategory",
+    "baseColor",
+    "description"
+  ],
+  "type": "object"
+}

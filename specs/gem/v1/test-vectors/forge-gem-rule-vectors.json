@@ -1,0 +1,92 @@
+{
+  "generatedFrom": "jewelmind.validation.engine.validate_definition (JM-GEM-* only)",
+  "note": "Every structural check on gem identity, produced by running the real engine. A case rejected at the JDL layer never reaches Forge, which the vector records explicitly rather than reporting an empty pass.",
+  "vectors": [
+    {
+      "case": "no gem recorded",
+      "gem": null,
+      "rejectedBySchema": false,
+      "results": []
+    },
+    {
+      "case": "valid natural ruby",
+      "gem": {
+        "gemId": "corundum.ruby",
+        "origin": "NATURAL"
+      },
+      "rejectedBySchema": false,
+      "results": []
+    },
+    {
+      "case": "unregistered gem id",
+      "gem": {
+        "gemId": "tanzanite",
+        "origin": "NATURAL"
+      },
+      "rejectedBySchema": false,
+      "results": [
+        {
+          "ruleId": "JM-GEM-001",
+          "severity": "warning",
+          "message": "Gem 'tanzanite' is not in the gem registry. The design remains usable and the stone is treated as an unspecified gem; no substitute has been chosen for you.",
+          "parameter": "stone.gem.gemId",
+          "suggestedValue": null
+        }
+      ]
+    },
+    {
+      "case": "origin not applicable to entry",
+      "gem": {
+        "gemId": "simulant.cubic_zirconia",
+        "origin": "NATURAL"
+      },
+      "rejectedBySchema": false,
+      "results": [
+        {
+          "ruleId": "JM-GEM-002",
+          "severity": "error",
+          "message": "Origin 'NATURAL' is not applicable to Cubic zirconia. Applicable: SIMULANT.",
+          "parameter": "stone.gem.origin",
+          "suggestedValue": null
+        }
+      ]
+    },
+    {
+      "case": "custom without a name",
+      "gem": {
+        "gemId": "custom",
+        "origin": "UNKNOWN"
+      },
+      "rejectedBySchema": true,
+      "error": "ValidationError"
+    },
+    {
+      "case": "custom with a name",
+      "gem": {
+        "gemId": "custom",
+        "origin": "UNKNOWN",
+        "customName": "meteorite"
+      },
+      "rejectedBySchema": false,
+      "results": []
+    },
+    {
+      "case": "unknown visual profile override",
+      "gem": {
+        "gemId": "diamond",
+        "origin": "NATURAL",
+        "visualProfileId": "not.a.profile"
+      },
+      "rejectedBySchema": false,
+      "results": [
+        {
+          "ruleId": "JM-GEM-004",
+          "severity": "warning",
+          "message": "Visual profile 'not.a.profile' does not exist; a generic fallback appearance will be used. This affects how the stone is drawn, never what it is.",
+          "parameter": "stone.gem.visualProfileId",
+          "suggestedValue": null
+        }
+      ]
+    }
+  ]
+}

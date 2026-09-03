@@ -88,8 +88,19 @@ def test_generation_failure_maps_to_model_generation_failed(client, monkeypatch)
     import jewelmind.ring.families as ring_families
 
     monkeypatch.setitem(ring_families.RING_FAMILY_GENERATORS, "solitaire", _boom)
-    definition = default_definition().model_dump(mode="json")
-    resp = client.post("/api/models/generate", json=definition)
+
+    # Sprint 21: the definition must have geometry NOTHING ELSE IN THE SUITE
+    # HAS ALREADY BUILT. `ModelService` now reuses cached geometry when a
+    # request's `geometry_hash` matches an existing record, so posting the
+    # default definition here would be satisfied from the cache and never reach
+    # the patched generator at all — the test would pass for the wrong reason,
+    # or fail depending on which tests ran before it.
+    #
+    # An unusual band width is enough: it changes the geometry hash while
+    # keeping the definition valid, so the generator really is called.
+    definition = default_definition()
+    definition.band.width = 2.87
+    resp = client.post("/api/models/generate", json=definition.model_dump(mode="json"))
     assert resp.status_code == 500
     body = resp.json()
     assert body["error"]["code"] == "MODEL_GENERATION_FAILED"

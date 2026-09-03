@@ -20,6 +20,7 @@ from jewelmind.jewelry_category.registry import get_capability
 from jewelmind.stone.capability import (
     RESERVED_STONE_SHAPES as _RESERVED_STONE_SHAPES,
 )
+from jewelmind.gem.models import GemOrigin, GemTreatmentType
 from jewelmind.stone.models import StoneReferenceProfile
 
 # The Forge rule (validation/engine.py::_prong_rules) hardcodes this as
@@ -78,6 +79,19 @@ def _stone_source_capabilities() -> dict[str, str]:
     return {mode: entry.status for mode, entry in STONE_SOURCE_CAPABILITIES.items()}
 
 
+def _current_gem_ids() -> list[str]:
+    """Gem IDs a design may reference, from the real registry.
+
+    DEPRECATED entries are excluded — Designer must not propose one — while
+    remaining resolvable for a saved design that already references it
+    (brief section 29).
+    """
+
+    from jewelmind.gem.registry import current_gem_ids
+
+    return current_gem_ids()
+
+
 def _category_unsupported_message(category: str) -> str:
     """Sourced from the real jewelry category capability registry
     (Sprint 16), never a second hand-maintained roadmap string — see
@@ -111,6 +125,13 @@ def current_capabilities() -> dict[str, Any]:
         # implying every stone is a named parametric cut.
         "stoneSourceMode": list(_stone_source_capabilities()),
         "stoneReferenceProfile": list(get_args(StoneReferenceProfile)),
+        # Sprint 21: gem identity is a THIRD axis, independent of both of the
+        # above. Read from the live registry rather than restated, so a gem
+        # added to `jewelmind/gem/registry.py` is offered here in the same
+        # change — the drift Sprint 20 had to fix three times.
+        "gemId": _current_gem_ids(),
+        "gemOrigin": list(get_args(GemOrigin)),
+        "gemTreatment": list(get_args(GemTreatmentType)),
     }
 
 
@@ -128,6 +149,8 @@ _ENUM_FIELD_CAPABILITY_KEY: dict[str, str] = {
     "material.metal": "metal",
     "manufacturing.method": "manufacturingMethod",
     "ring.sizeSystem": "ringSizeSystem",
+    "stone.gem.gemId": "gemId",
+    "stone.gem.origin": "gemOrigin",
 }
 
 # Fields Designer is allowed to propose at all. Anything outside this set
@@ -159,6 +182,14 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         "jewelry.category",
         "jewelry.style",
         "ring.sizeSystem",
+        # Sprint 21. Deliberately NOT the whole gem identity: `visualProfileId`
+        # is a Vision presentation choice rather than design intent, and
+        # `treatments` is a list a dotted-path patch cannot express. Both are
+        # set through the Studio UI and the API, not proposed by Designer.
+        "stone.gem.gemId",
+        "stone.gem.origin",
+        "stone.gem.customName",
+        "stone.gem.note",
     }
 )
 

@@ -43,6 +43,12 @@ results are shown but never block anything.
 | `JM-PRONG-004` | `setting.prongHeight` | Must be greater than `setting.basketHeight`. | error |
 | `JM-SETTING-001` | `setting.basketHeight` | Must be positive. | error |
 | `JM-SETTING-002` | `setting.basketHeight` | Above 8 mm. | warning |
+| `JM-GEM-001` | `stone.gem.gemId` | The referenced gem registry entry does not exist. A **warning**, not an error: a design referencing a removed entry must still load and still generate. | warning |
+| `JM-GEM-002` | `stone.gem.origin` | The declared origin is not in the registry entry's `applicableOrigins` (e.g. a cubic zirconia declared `NATURAL`). Refused rather than corrected — resolving it would mean deciding whether the user meant the material or the origin. | error |
+| `JM-GEM-003` | `stone.gem.customName` | `custom` requires a material name, and only `custom` may have one. Also enforced structurally by `JdlGemIdentity`, so the second branch fires only for an identity built in Python. | error |
+| `JM-GEM-004` | `stone.gem.visualProfileId` | The visual profile override does not resolve; a neutral fallback appearance is used. Affects how the stone is drawn, never what it is. | warning |
+| `JM-GEM-005` | `stone.gem.treatments` | A duplicate treatment record is a warning; the same treatment recorded as both `PRESENT` and `NOT_PRESENT` is an error. | warning / error |
+| `JM-GEM-006` | `stone.gem.gemId` | The entry is deprecated but still resolvable. | warning |
 | `JM-MANUFACTURING-001` | `band.thickness`, `band.width` | For `manufacturing.method = direct_resin_printing`, either dimension below 0.8 mm. (`setting.prongDiameter` is excluded here — `JM-PRONG-002` already errors below 0.8 mm regardless of manufacturing method.) | warning |
 | `JM-GEOMETRY-001` | `band.thickness`, `band.width` | Defense-in-depth: rejects any combination that would produce a non-positive outer band dimension (e.g. zero/negative thickness or width), independent of the rules above. | error |
 

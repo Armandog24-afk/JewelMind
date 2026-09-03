@@ -1,0 +1,98 @@
+{
+  "generatedFrom": "jewelmind.designer.gem_language",
+  "note": "Origin and treatment are axes independent of the gem's identity. treated/trattato resolves to the UNKNOWN treatment type on purpose: the user asserted a treatment exists without naming it, and naming one for them would invent a gemological claim.",
+  "originVectors": [
+    {
+      "term": "natural",
+      "origin": "NATURAL"
+    },
+    {
+      "term": "naturale",
+      "origin": "NATURAL"
+    },
+    {
+      "term": "synthetic",
+      "origin": "SYNTHETIC"
+    },
+    {
+      "term": "sintetico",
+      "origin": "SYNTHETIC"
+    },
+    {
+      "term": "lab grown",
+      "origin": "SYNTHETIC"
+    },
+    {
+      "term": "coltivato",
+      "origin": "SYNTHETIC"
+    },
+    {
+      "term": "simulant",
+      "origin": "SIMULANT"
+    },
+    {
+      "term": "imitazione",
+      "origin": "SIMULANT"
+    },
+    {
+      "term": "composite",
+      "origin": "COMPOSITE"
+    },
+    {
+      "term": "vintage",
+      "origin": null
+    }
+  ],
+  "treatmentVectors": [
+    {
+      "term": "treated",
+      "treatment": "UNKNOWN",
+      "assertsAbsence": false
+    },
+    {
+      "term": "trattato",
+      "treatment": "UNKNOWN",
+      "assertsAbsence": false
+    },
+    {
+      "term": "heated",
+      "treatment": "HEAT",
+      "assertsAbsence": false
+    },
+    {
+      "term": "riscaldato",
+      "treatment": "HEAT",
+      "assertsAbsence": false
+    },
+    {
+      "term": "oiled",
+      "treatment": "FRACTURE_FILLING",
+      "assertsAbsence": false
+    },
+    {
+      "term": "irradiated",
+      "treatment": "IRRADIATION",
+      "assertsAbsence": false
+    },
+    {
+      "term": "stabilizzato",
+      "treatment": "IMPREGNATION",
+      "assertsAbsence": false
+    },
+    {
+      "term": "untreated",
+      "treatment": null,
+      "assertsAbsence": true
+    },
+    {
+      "term": "non trattato",
+      "treatment": null,
+      "assertsAbsence": true
+    },
+    {
+      "term": "blessed by a jeweller",
+      "treatment": null,
+      "assertsAbsence": false
+    }
+  ]
+}

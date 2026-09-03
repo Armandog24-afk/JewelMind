@@ -252,6 +252,65 @@ def test_coverage_spans_the_expected_domains():
         "collaboration",
         "retail",
         "professional_validation",
+        # Sprint 21.
+        "gem",
+        "gem_visual",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"
+
+
+def test_current_gem_capabilities_match_the_live_gem_registry():
+    """A gem capability marked CURRENT must be backed by real registry content.
+
+    Sprint 20 found three hand-copied capability lists that had already drifted
+    and made Designer and Setting misreport what the backend could do; this ties
+    the gem entries to the live code instead.
+    """
+
+    from jewelmind.gem.registry import GEM_REGISTRY, current_gem_ids
+    from jewelmind.gem.visual import GEM_VISUAL_PROFILES
+
+    keys = _by_key()
+
+    registry_entry = keys[("gem", "gem_registry")]
+    assert registry_entry["status"] == "CURRENT"
+    assert str(len(current_gem_ids())) in registry_entry["note"]
+
+    profiles_entry = keys[("gem_visual", "gem_visual_profiles")]
+    assert profiles_entry["status"] == "CURRENT"
+    assert str(len(GEM_VISUAL_PROFILES)) in profiles_entry["note"]
+
+    # The two escape hatches must exist as real entries, not merely as prose.
+    assert "custom" in GEM_REGISTRY
+    assert "unknown" in GEM_REGISTRY
+    assert keys[("gem", "custom_material")]["status"] == "CURRENT"
+    assert keys[("gem", "unknown_gem")]["status"] == "CURRENT"
+
+
+def test_no_gem_property_rule_is_claimed_as_current():
+    """No hardness, durability or setting-suitability rule exists.
+
+    Each would need professional evidence this project does not have, so the
+    capability stays PLANNED and no Forge rule may quietly appear.
+    """
+
+    import jewelmind.validation.rules as live_rules
+
+    keys = _by_key()
+    assert keys[("gem", "gem_property_rules")]["status"] == "PLANNED"
+    assert keys[("gem", "gemological_certification")]["status"] == "OUT_OF_SCOPE"
+
+    gem_rule_ids = {
+        value
+        for name, value in vars(live_rules).items()
+        if isinstance(value, str) and value.startswith("JM-GEM")
+    }
+    # Six referential/coherence rules and nothing more: a seventh would need to
+    # be justified, and a property rule could not be.
+    assert len(gem_rule_ids) == 6, sorted(gem_rule_ids)
+
+
+def test_gem_arrangement_is_not_advertised_as_current():
+    keys = _by_key()
+    assert keys[("gem", "per_stone_gem_in_a_multi_stone_design")]["status"] == "PLANNED"

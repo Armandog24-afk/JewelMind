@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/jdl-gem-identity.schema.json",
+  "title": "JdlGemIdentity",
+  "$defs": {
+    "JdlGemTreatment": {
+      "additionalProperties": false,
+      "description": "One treatment claim about this stone (brief section 7).\n\nJewelMind records the claim and who made it. It never decides whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which need professional evidence this project does not\nhave.",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "HEAT",
+            "IRRADIATION",
+            "FRACTURE_FILLING",
+            "GLASS_FILLING",
+            "COATING",
+            "DIFFUSION",
+            "DYEING",
+            "IMPREGNATION",
+            "RESIN_IMPREGNATION",
+            "BLEACHING",
+            "LASER_DRILLING",
+            "HPHT",
+            "OTHER",
+            "UNKNOWN"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "status": {
+          "default": "PRESENT",
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT",
+            "SUSPECTED",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "USER_DECLARED",
+          "enum": [
+            "USER_DECLARED",
+            "VENDOR_DECLARED",
+            "LAB_REPORT_CLAIMED",
+            "UNDISCLOSED",
+            "UNKNOWN"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "UNKNOWN",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "treatment"
+      ],
+      "title": "JdlGemTreatment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "What gem THIS stone is (brief sections 3/4/17).\n\nDeliberately separate from every geometry field. A round stone is not\nautomatically a diamond, and the same `StoneSpec` is reusable with any gem —\nwhich is why this is its own object rather than a `stone.material` string.\n\n`gemId` references the canonical registry\n(`backend/jewelmind/gem/registry.py`). IDs are language-independent and\nconstrained so one can never become a filesystem path or a shell argument.\n\nAbsent entirely on a legacy document, which normalizes to `unknown` — never\nto diamond (brief section 18).",
+  "properties": {
+    "gemId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+      "title": "Gemid",
+      "type": "string"
+    },
+    "origin": {
+      "default": "UNKNOWN",
+      "enum": [
+        "NATURAL",
+        "SYNTHETIC",
+        "SIMULANT",
+        "COMPOSITE",
+        "UNKNOWN"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "treatments": {
+      "items": {
+        "$ref": "#/$defs/JdlGemTreatment"
+      },
+      "maxItems": 20,
+      "title": "Treatments",
+      "type": "array"
+    },
+    "visualProfileId": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Visualprofileid"
+    },
+    "customName": {
+      "anyOf": [
+        {
+          "maxLength": 120,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Customname"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    }
+  },
+  "required": [
+    "gemId"
+  ],
+  "type": "object"
+}

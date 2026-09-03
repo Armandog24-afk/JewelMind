@@ -149,6 +149,117 @@ def _stone_lines(definition, model) -> list[str]:
     return lines
 
 
+def _gem_lines(definition) -> list[str]:
+    """The Gem section of the technical specification (brief section 25).
+
+    Reports identity, classification, origin, treatment state, appearance and
+    provenance — and nothing more. There is deliberately no hardness, no
+    durability note, no setting recommendation and no treatment safety
+    statement, because each would need professional evidence this project does
+    not have (GEM-GOV-006).
+
+    Every value is resolved through `gem.resolution.resolve_gem()`, the single
+    join point, so this section can never describe a gem differently from the
+    API, Vision or the review package.
+    """
+
+    from jewelmind.gem.models import GemIdentity, GemTreatment
+    from jewelmind.gem.resolution import (
+        effective_display_name,
+        resolve_gem,
+        treatment_summary,
+    )
+
+    gem_field = definition.stone.gem
+    identity = None
+    if gem_field is not None:
+        identity = GemIdentity(
+            gemId=gem_field.gemId,
+            origin=gem_field.origin,
+            treatments=[
+                GemTreatment(
+                    treatment=treatment.treatment,
+                    status=treatment.status,
+                    disclosure=treatment.disclosure,
+                    confidence=treatment.confidence,
+                    note=treatment.note,
+                )
+                for treatment in gem_field.treatments
+            ],
+            visualProfileId=gem_field.visualProfileId,
+            customName=gem_field.customName,
+            note=gem_field.note,
+        )
+
+    resolved = resolve_gem(identity)
+    entry = resolved.definition
+
+    lines: list[str] = []
+    lines.append(f"- Gem ID: {entry.gemId}")
+    lines.append(f"- Gem name: {effective_display_name(resolved)}")
+    lines.append(f"- Canonical name: {entry.canonicalName}")
+    lines.append(f"- Material class: {entry.materialClass}")
+
+    taxonomy = [
+        f"{level}: {value}"
+        for level, value in (
+            ("family", entry.family),
+            ("species", entry.species),
+            ("variety", entry.variety),
+        )
+        if value is not None
+    ]
+    # An absent level is reported as absent rather than filled in. Not every gem
+    # has all three, and inventing one would be inventing taxonomy.
+    lines.append(
+        f"- Taxonomy: {', '.join(taxonomy) if taxonomy else 'not applicable to this material'}"
+    )
+
+    lines.append(f"- Origin / nature: {resolved.identity.origin}")
+    lines.append(f"- Treatment state: {treatment_summary(resolved.identity)}")
+    for treatment in resolved.identity.treatments:
+        detail = (
+            f"  - {treatment.treatment}: {treatment.status}, "
+            f"disclosure {treatment.disclosure}, confidence {treatment.confidence}"
+        )
+        if treatment.note:
+            detail += f" — {treatment.note}"
+        lines.append(detail)
+
+    lines.append(
+        f"- Visual profile: {resolved.visualProfile.profileId} "
+        f"({resolved.visualProfile.renderCategory})"
+    )
+    if resolved.usedFallbackVisualProfile:
+        lines.append(
+            "  - NOTE: a generic FALLBACK appearance is in use, not this gem's "
+            "own. Rendering parameters are display values, never optical "
+            "measurements."
+        )
+
+    lines.append(f"- Registry entry status: {entry.status}")
+    if entry.status == "DEPRECATED" and entry.supersededBy:
+        lines.append(f"  - Superseded by: {entry.supersededBy}")
+    lines.append(f"- Data provenance: {entry.provenance}")
+
+    if resolved.wasUnresolved:
+        lines.append(
+            "  - NOTE: the design references a gem this registry does not "
+            "contain. It is reported as unspecified; no substitute was chosen."
+        )
+
+    lines.append(f"- Gem system version: {resolved.registryVersion}")
+    lines.append(
+        "- Professional validation status: NOT_REVIEWED — no gem entry, "
+        "classification or appearance in JewelMind has been reviewed by a "
+        "qualified gemologist. This section records what was declared, not what "
+        "was verified."
+    )
+    if resolved.identity.note:
+        lines.append(f"- Note: {resolved.identity.note}")
+    return lines
+
+
 def build_specification(
     definition: JewelryDefinition,
     model: GeneratedModel,
@@ -192,6 +303,10 @@ def build_specification(
 
     lines.append("## Stone (reference only, not a gemological reproduction)")
     lines.extend(_stone_lines(definition, model))
+    lines.append("")
+
+    lines.append("## Gem identity (declared, not verified)")
+    lines.extend(_gem_lines(definition))
     lines.append("")
 
     lines.append("## Setting")

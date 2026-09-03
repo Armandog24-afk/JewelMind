@@ -1,0 +1,56 @@
+{
+  "identity": {
+    "gemId": "corundum.sapphire",
+    "origin": "NATURAL",
+    "treatments": [],
+    "visualProfileId": "blue.pale",
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "corundum.sapphire",
+    "canonicalName": "Sapphire",
+    "displayNames": {
+      "en": "Sapphire",
+      "it": "Zaffiro"
+    },
+    "materialClass": "MINERAL",
+    "family": "corundum",
+    "species": "corundum",
+    "variety": "sapphire",
+    "applicableOrigins": [
+      "NATURAL",
+      "SYNTHETIC"
+    ],
+    "aliases": [
+      "sapphire",
+      "zaffiro",
+      "saphir"
+    ],
+    "defaultVisualProfileId": "blue.deep",
+    "status": "CURRENT",
+    "provenance": "INTERNAL_TAXONOMY",
+    "supersededBy": null,
+    "description": "Non-red variety of corundum. Blue is the default appearance; other sapphire colours are expressed with a visualProfileId override, since colour is appearance rather than identity."
+  },
+  "visualProfile": {
+    "profileId": "blue.pale",
+    "renderCategory": "TRANSPARENT_COLOURED",
+    "baseColor": "#a8dbe8",
+    "metalness": 0.0,
+    "roughness": 0.05,
+    "opacity": 1.0,
+    "transmission": 0.85,
+    "ior": 1.58,
+    "thickness": 1.0,
+    "clearcoat": 0.6,
+    "envMapIntensity": 1.1,
+    "dispersion": 0.08,
+    "hasVariableColour": false,
+    "isFallback": false,
+    "description": "Pale blue transparent appearance for aquamarine-class stones."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": false,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

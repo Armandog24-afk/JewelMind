@@ -1,0 +1,56 @@
+{
+  "identity": {
+    "gemId": "simulant.cubic_zirconia",
+    "origin": "SIMULANT",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "simulant.cubic_zirconia",
+    "canonicalName": "Cubic zirconia",
+    "displayNames": {
+      "en": "Cubic zirconia",
+      "it": "Zirconia cubica"
+    },
+    "materialClass": "MINERAL",
+    "family": null,
+    "species": "cubic_zirconia",
+    "variety": null,
+    "applicableOrigins": [
+      "SIMULANT"
+    ],
+    "aliases": [
+      "cubic zirconia",
+      "zirconia cubica",
+      "cz",
+      "zirconia"
+    ],
+    "defaultVisualProfileId": "colourless.brilliant",
+    "status": "CURRENT",
+    "provenance": "INTERNAL_TAXONOMY",
+    "supersededBy": null,
+    "description": "Synthetic cubic zirconium dioxide, most often used as a diamond simulant. It is NOT diamond and must never resolve to diamond, however diamond-like the intended appearance. Sharing a visual profile with diamond is a rendering choice, not an identity claim."
+  },
+  "visualProfile": {
+    "profileId": "colourless.brilliant",
+    "renderCategory": "TRANSPARENT_BRILLIANT",
+    "baseColor": "#f2f8ff",
+    "metalness": 0.0,
+    "roughness": 0.02,
+    "opacity": 1.0,
+    "transmission": 0.95,
+    "ior": 2.4,
+    "thickness": 1.2,
+    "clearcoat": 1.0,
+    "envMapIntensity": 1.5,
+    "dispersion": 0.85,
+    "hasVariableColour": false,
+    "isFallback": false,
+    "description": "High-sparkle colourless transparent look. A stylized bright-stone appearance, not a model of diamond optics."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": false,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

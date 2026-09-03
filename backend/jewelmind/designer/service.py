@@ -17,7 +17,7 @@ from pydantic import ValidationError
 
 from jewelmind.api.errors import AppError
 from jewelmind.design_intent.resolver import RawRelationInput, RawStatementInput, build_design_intent
-from jewelmind.designer import capability, normalizer
+from jewelmind.designer import capability, gem_language, normalizer
 from jewelmind.designer.errors import (
     DESIGNER_AMBIGUOUS_REQUEST,
     DESIGNER_CAPABILITY_MISMATCH,
@@ -93,8 +93,21 @@ def _missing_stone_dimensions(patch: dict[str, Any]) -> list[tuple[str, str]]:
 def _apply_patch(base: JewelryDefinition, patch: dict[str, Any]) -> JewelryDefinition | None:
     data = base.model_dump(mode="python")
     for path, value in patch.items():
-        section, field_name = path.split(".", 1)
-        data.setdefault(section, {})[field_name] = value
+        # Walks the whole dotted path rather than splitting once (Sprint 21):
+        # `stone.gem.gemId` is three segments deep, and a single split would
+        # have written a literal `"gem.gemId"` key that the schema rejects as an
+        # unknown field, turning a valid gem proposal into a silent failure.
+        segments = path.split(".")
+        cursor: dict[str, Any] = data
+        for segment in segments[:-1]:
+            existing = cursor.get(segment)
+            if not isinstance(existing, dict):
+                # `stone.gem` is None on a design that has never named a gem;
+                # a nested set has to materialize it.
+                existing = {}
+                cursor[segment] = existing
+            cursor = existing
+        cursor[segments[-1]] = value
     try:
         return JewelryDefinition.model_validate(data)
     except ValidationError:
@@ -165,6 +178,75 @@ class DesignerService:
                 )
                 continue
 
+            # Sprint 21: gem identity gets its own handling before the generic
+            # enum path, for two reasons the generic path gets wrong.
+            #
+            # AMBIGUITY: a term like "smeraldo" names both a cut and a gem, so
+            # the useful question is "cut or material?", not "pick one of 38
+            # gem IDs".
+            #
+            # UNRECOGNIZED: an unknown gem is NOT an unsupported feature. Every
+            # gem is expressible — `custom` names the material explicitly and
+            # `unknown` records that it was not identified — so this asks
+            # instead of declaring a capability gap that does not exist.
+            if path == "stone.gem.gemId":
+                gem_id, is_ambiguous = gem_language.normalize_gem_term(str(pv.value))
+                if is_ambiguous:
+                    clarification_questions.append(
+                        ClarificationQuestion(
+                            field=path,
+                            question=(
+                                f"'{pv.value}' can mean the stone's cut or its gem "
+                                "material. Which did you mean?"
+                            ),
+                            options=["stone.shape (the cut)", "stone.gem.gemId (the material)"],
+                            ambiguityLevel="HIGH_IMPACT_AMBIGUITY",
+                        )
+                    )
+                    diagnostics.append(
+                        DesignerDiagnostic(
+                            code=DESIGNER_AMBIGUOUS_REQUEST,
+                            severity="info",
+                            message=gem_language.ambiguity_reason(str(pv.value)),
+                            field=path,
+                        )
+                    )
+                    continue
+                if gem_id is None:
+                    clarification_questions.append(
+                        ClarificationQuestion(
+                            field=path,
+                            question=(
+                                f"JewelMind does not have a registry entry for "
+                                f"'{pv.value}'. Record it as a custom material, or "
+                                "leave the gem unspecified?"
+                            ),
+                            options=["custom", "unknown"],
+                            ambiguityLevel="HIGH_IMPACT_AMBIGUITY",
+                        )
+                    )
+                    diagnostics.append(
+                        DesignerDiagnostic(
+                            code=DESIGNER_AMBIGUOUS_REQUEST,
+                            severity="info",
+                            message=gem_language.unresolved_gem_reason(str(pv.value)),
+                            field=path,
+                        )
+                    )
+                    continue
+                already_canonical = str(pv.value).strip().lower() == gem_id
+                proposed_fields.append(
+                    ProposedField(
+                        path=path,
+                        value=gem_id,
+                        provenance="AI_INTERPRETATION",
+                        confidence="EXACT" if already_canonical else "NORMALIZED",
+                        sourceText=pv.sourceText or None,
+                    )
+                )
+                patch[path] = gem_id
+                continue
+
             enum_key = capability.enum_capability_key(path)
             if enum_key is not None:
                 normalized, is_ambiguous = normalizer.normalize_enum_token(path, str(pv.value))
@@ -225,6 +307,25 @@ class DesignerService:
                     )
                 )
                 patch[path] = value
+                continue
+
+            # Free-text gem fields (Sprint 21). `customName` is the user's own
+            # words for a material JewelMind has no entry for — the one place a
+            # design carries a material name that is not a registry ID. It is
+            # passed through unchanged, exactly like `project.name`: JDL's
+            # length limit and Forge's `JM-GEM-003` are the authoritative
+            # checks, not a second one here.
+            if path in ("stone.gem.customName", "stone.gem.note"):
+                proposed_fields.append(
+                    ProposedField(
+                        path=path,
+                        value=str(pv.value),
+                        provenance="AI_INTERPRETATION",
+                        confidence="EXACT",
+                        sourceText=pv.sourceText or None,
+                    )
+                )
+                patch[path] = str(pv.value)
                 continue
 
             if path == "project.name":

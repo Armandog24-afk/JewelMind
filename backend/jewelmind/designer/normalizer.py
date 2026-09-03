@@ -9,8 +9,10 @@ docs/bible/12-designer/297-supported-language-scope.md and
 
 from __future__ import annotations
 
+import json
 from typing import Any
 
+from jewelmind.designer import gem_language
 from jewelmind.designer.schemas import FieldDiff
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.stone.capability import native_shapes as _native_shapes
@@ -270,6 +272,15 @@ def normalize_enum_token(field: str, raw_value: str) -> tuple[str | None, bool]:
     if field == "material.metal" and token in AMBIGUOUS_METAL_TERMS:
         return None, True
 
+    # Sprint 21. Gem terms live in `gem_language.py` and are derived from the
+    # live registry, so this function stays a router rather than gaining a
+    # 40-entry copy of the registry that could drift from it.
+    if field == "stone.gem.gemId":
+        return gem_language.normalize_gem_term(token)
+    if field == "stone.gem.origin":
+        origin = gem_language.normalize_origin_term(token)
+        return origin, False
+
     if field == "setting.prongCount":
         mapped = PRONG_COUNT_WORDS.get(token)
         return (str(mapped) if mapped is not None else None), False
@@ -323,6 +334,17 @@ def _flatten_into(out: dict[str, Any], prefix: str, value: Any) -> None:
     if isinstance(value, dict):
         for key, sub_value in value.items():
             _flatten_into(out, f"{prefix}.{key}", sub_value)
+    elif isinstance(value, list):
+        # A LIST-valued leaf, rendered as canonical JSON (Sprint 21).
+        #
+        # `FieldDiff` holds a scalar, so a raw list raised a validation error
+        # the moment `stone.gem.treatments` became the first list-valued leaf in
+        # a definition — an interpretation that was otherwise entirely valid
+        # failed outright. Sorted-key JSON keeps the value faithful AND keeps
+        # `changed` detection exact, since two equal lists always render to the
+        # same string. Reporting a length or a placeholder instead would have
+        # made the diff lie about what the user is being asked to approve.
+        out[prefix] = json.dumps(value, sort_keys=True, separators=(",", ":"))
     else:
         out[prefix] = value
 

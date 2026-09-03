@@ -15,7 +15,7 @@ import shutil
 import tempfile
 import threading
 from collections import OrderedDict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -30,6 +30,7 @@ from jewelmind.geometry.inspection.models import GeometryInspectionReport
 from jewelmind.geometry.model import GeneratedModel
 from jewelmind.jewelry_category.dispatch import generate_jewelry
 from jewelmind.preview.mesh import write_component_previews
+from jewelmind.utils.hashing import definition_hash, geometry_hash
 from jewelmind.utils.logging import get_logger
 from jewelmind.validation.engine import has_errors, validate_definition
 from jewelmind.validation.rules import ValidationResult
@@ -51,11 +52,58 @@ class ModelRecord:
     inspection_report: GeometryInspectionReport
 
 
+def _rebind_geometry(
+    source: GeneratedModel, definition: JewelryDefinition
+) -> GeneratedModel:
+    """Return `source`'s geometry under the new definition's identity.
+
+    The CadQuery shapes are shared by reference, not copied: they are immutable
+    as far as this pipeline is concerned — every builder constructs new shapes
+    rather than mutating existing ones, and Geometry Inspection is read-only by
+    contract (INSPECT-GOV-013). Copying them would defeat the point of reuse.
+
+    Only the identity fields change. `generation_duration_s` is deliberately set
+    to 0.0 rather than carried over, because this generation genuinely did no
+    geometric work and reporting the original's duration would misstate that.
+    """
+
+    return replace(
+        source,
+        definition_hash=definition_hash(definition),
+        geometry_hash=geometry_hash(definition),
+        generation_duration_s=0.0,
+    )
+
+
 class ModelService:
     def __init__(self) -> None:
         self._records: OrderedDict[str, ModelRecord] = OrderedDict()
         self._lock = threading.Lock()
         atexit.register(self._cleanup_all)
+
+    # -- geometry reuse ---------------------------------------------------
+
+    def _find_reusable_geometry(
+        self, definition: JewelryDefinition
+    ) -> ModelRecord | None:
+        """A cached record whose geometry this definition can reuse.
+
+        Matched on `geometry_hash`, so it only ever matches a definition that
+        differs in fields verified not to drive geometry. Returns `None` when
+        nothing matches, which is the normal case for a real geometric edit.
+
+        Scans the cache rather than keeping a second index: `MAX_CACHED_MODELS`
+        is 20, so a linear scan costs nothing next to a CAD rebuild, and a
+        second index would be a second thing to keep consistent.
+        """
+
+        wanted = geometry_hash(definition)
+        with self._lock:
+            for record in reversed(self._records.values()):
+                model = record.generated_model
+                if model.geometry_hash and model.geometry_hash == wanted:
+                    return record
+        return None
 
     # -- validation -----------------------------------------------------
 
@@ -74,10 +122,31 @@ class ModelService:
                 details=[r.model_dump() for r in results],
             )
 
-        # Dispatched by jewelry.category (currently always "ring") rather
-        # than calling a geometry builder directly — see
-        # docs/bible/18-ring-architecture/532-ring-generation-contract.md.
-        generated_model = generate_jewelry(definition)
+        # GEOMETRY REUSE ACROSS A PURELY SEMANTIC EDIT (Sprint 21, brief
+        # section 19). Changing Diamond -> Sapphire changes the document, so it
+        # changes `definition_hash` and therefore the model id — correctly, two
+        # designs differing by gem are two designs. But the B-Rep is identical,
+        # and rebuilding it would be wasted work.
+        #
+        # `geometry_hash` excludes exactly the fields verified not to drive
+        # geometry, so a cached model with the same geometry hash can lend its
+        # already-built shapes to this one.
+        reused_from = self._find_reusable_geometry(definition)
+        if reused_from is not None:
+            generated_model = _rebind_geometry(reused_from.generated_model, definition)
+            logger.info(
+                "reused geometry for a semantic-only change",
+                extra={
+                    "geometry_hash": generated_model.geometry_hash,
+                    "reused_from_model_id": reused_from.model_id,
+                },
+            )
+        else:
+            # Dispatched by jewelry.category (currently always "ring") rather
+            # than calling a geometry builder directly — see
+            # docs/bible/18-ring-architecture/532-ring-generation-contract.md.
+            generated_model = generate_jewelry(definition)
+
         model_id = generated_model.definition_hash
 
         temp_dir = Path(tempfile.mkdtemp(prefix=f"jewelmind_{model_id}_"))

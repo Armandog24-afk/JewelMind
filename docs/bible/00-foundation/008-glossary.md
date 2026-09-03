@@ -926,3 +926,46 @@ routes a category string and a payload to a registered generator — it
 has never heard of a ring field, proven by a test-only dummy category
 that dispatches through the exact same function. See
 [`18-ring-architecture/532-ring-generation-contract.md`](../18-ring-architecture/532-ring-generation-contract.md).
+
+## Gem terms (Sprint 21)
+
+**Gem Identity** — what a stone is MADE OF, as opposed to what shape it is.
+Carried on `stone.gem` and resolved through
+[`backend/jewelmind/gem/`](../../../backend/jewelmind/gem/). Never inferred from
+geometry: a round stone is not a diamond. See
+[`23-gem-identity/README.md`](../23-gem-identity/README.md).
+
+**GemDefinition** — a registry entry: one KIND of gem (type level). It says
+what a ruby *is* — family, names, applicable origins, default appearance. It
+cannot say whether a particular ruby was heated.
+
+**GemIdentity** — what THIS stone is (instance level): its declared origin, its
+declared treatments, an optional appearance override, an optional note.
+
+**Origin** — the nature of the material itself: `NATURAL`, `SYNTHETIC`,
+`SIMULANT`, `COMPOSITE` or `UNKNOWN`. Independent of treatment, and independent
+of identity — a synthetic ruby is still a ruby.
+
+**Treatment** — a DECLARED alteration of a stone, with a status
+(`PRESENT`/`NOT_PRESENT`/`SUSPECTED`/`UNKNOWN`) and a disclosure source. An
+empty treatment list means nothing was recorded — it is NOT a claim that the
+stone is untreated.
+
+**Gem Visual Profile** — rendering parameters for one appearance
+(`gem/visual.py`, mirrored in `frontend/src/vision/gemMaterials.ts`). Every
+value is a rendering parameter, never an optical measurement.
+
+**Fallback Visual Profile** — the deliberately neutral appearance used for an
+unidentified gem or an unresolvable profile. Never diamond-like, because that
+would render an unidentified gem as the most valuable reading of itself.
+
+**Geometry Hash** — `geometry_hash(definition)`: the definition minus the parts
+empirically verified not to affect geometry (gem, material, manufacturing,
+project, preview). Distinct from `definitionHash`, which still covers the whole
+document. Two definitions sharing a geometry hash build the same shape, which
+is what lets a semantic-only edit reuse already-built geometry. See
+[`23-gem-identity/README.md`](../23-gem-identity/README.md).
+
+**StoneInstance** — a stone's `instanceId`, `StoneRole` (`CENTER`, `SIDE`,
+`ACCENT`, `HALO`, `PAVE`, `UNKNOWN`) and its own gem. A model only: no
+generator builds more than one stone, so multi-stone arrangement is PLANNED.

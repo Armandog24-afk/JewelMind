@@ -1565,5 +1565,113 @@ rules still apply in full. Future coding agents must:
   `RESERVED_STONE_SHAPES`), a multi-stone arrangement, a new import format, a
   real scan-processing pipeline, or curve-segment/SVG outline input.
 
+## GEM IDENTITY & MATERIAL RULES
+
+`docs/bible/23-gem-identity/` is the authoritative Gem Identity & Material
+System specification — start at
+[`docs/bible/23-gem-identity/README.md`](docs/bible/23-gem-identity/README.md),
+then
+[`gem-governance.md`](docs/bible/23-gem-identity/gem-governance.md) for the
+full 16 GEM-GOV rules. The machine-readable half lives in
+[`specs/gem/v1/`](specs/gem/v1/README.md). Future coding agents must:
+
+- **Read `docs/bible/23-gem-identity/README.md` before touching gem
+  identity, gem appearance, or the geometry hash** — before modifying
+  anything in `backend/jewelmind/gem/`, `domain/schema.py::StoneSpec.gem`,
+  `utils/hashing.py::geometry_hash`, `designer/gem_language.py`, or
+  `frontend/src/vision/gemMaterials.ts`.
+- **Never infer a gem from geometry.** A round stone is not a diamond, a red
+  stone is not a ruby, an 8×6 oval is not a sapphire. Nothing under
+  `jewelmind/gem/` may read a shape, dimension, outline or girdle plane
+  (GEM-GOV-002).
+- **Keep the Gem System category-neutral** — nothing under
+  `backend/jewelmind/gem/` may import `jewelmind.ring`,
+  `jewelmind.jewelry_category`, any geometry module, the CAD kernel, or
+  `JewelryDefinition` (which would smuggle the whole ring domain across in one
+  import). Enforced by AST inspection in
+  `backend/tests/test_gem_no_category_dependency.py` (GEM-GOV-001).
+- **Keep `jewelmind/gem/__init__.py` importing nothing.** It is load-bearing:
+  `domain/schema.py` imports `jewelmind.gem.models`, so an eager package init
+  would make the import graph cyclic — the same trap
+  `jewelmind/stone/__init__.py` documents.
+- **Preserve the type/instance split.** `GemDefinition` says what a ruby IS;
+  `GemIdentity` says what THIS ruby is. A registry entry can never know
+  whether a particular stone was heated, so per-stone facts never move into
+  the registry.
+- **Never invent gemological data.** No hardness, Mohs value, toughness, heat
+  sensitivity, treatment-safety rule, durability class, cleaning instruction,
+  or gem-derived setting recommendation — in the registry, in a Forge rule, or
+  in any user-facing message. Each needs professional evidence this project
+  does not have (GEM-GOV-003).
+- **Never present the registry as a certification source.** `origin` and
+  `treatments` record what someone DECLARED, with the source in `disclosure`.
+  Nothing verifies a claim and no lab report is stored as evidence
+  (GEM-GOV-004).
+- **Keep every entry `NOT_REVIEWED`** — `provenance:
+  PROFESSIONALLY_VALIDATED` requires a real record naming a real reviewer in
+  the professional-validation registry, which holds zero (GEM-GOV-005).
+- **Treat every visual-profile value as a rendering parameter, never a
+  measurement.** `ior` is not a refractive index and `dispersion` is not
+  spectral separation (GEM-GOV-006).
+- **Keep the fallback appearance neutral.** An unidentified gem must never
+  render as a brilliant colourless stone — that would show it as the most
+  valuable reading of itself. The fallback is flagged `isFallback` so an
+  interface can present it AS a fallback (GEM-GOV-007).
+- **Never guess or substitute a gem.** `resolve_gem()` never raises; an
+  unresolvable reference degrades to `unknown`, sets `wasUnresolved`, and
+  preserves the original reference. A missing gem resolves to `unknown`, never
+  to diamond. An unrecognized term resolves to nothing, never to the
+  nearest-looking entry (GEM-GOV-008).
+- **Treat a gem ID as untrusted input** — validated for shape before any
+  lookup, so it can never become a filesystem path, a shell argument, or an
+  arbitrary dictionary key. Same for `StoneInstance.instanceId`. Every float
+  field sets `allow_inf_nan=False` (GEM-GOV-009).
+- **Keep the three treatment states distinct** — nothing recorded
+  (`treatments: []`), declared untreated (an explicit `NOT_PRESENT` record),
+  and treated-but-unspecified (`treatment: UNKNOWN`, `status: PRESENT`). An
+  empty list is NOT a claim of being untreated, and "treated" must never be
+  resolved to a specific named treatment on the user's behalf (GEM-GOV-010).
+- **Keep cut names and species names separate, in both directions.**
+  Sprint 20's `STONEV2-GOV-008` forbids resolving a species name to a cut;
+  the mirror obligation forbids resolving a cut name to a species. A term
+  naming both (`emerald`, `pearl`, and their Italian forms) is reported
+  AMBIGUOUS and produces a clarification (GEM-GOV-011).
+- **Treat an unrecognized gem as a question, not a capability gap** — every
+  gem is expressible through `custom` (with a required `customName`) or
+  `unknown`, so it produces a clarification, never an `UnsupportedFeature`
+  (GEM-GOV-012).
+- **Verify every `geometry_hash()` exclusion empirically.** A field may only
+  be excluded after geometry has actually been generated with it varied and
+  the output compared. A wrong exclusion serves stale geometry for a real
+  design change, which is worse than a slow rebuild. `definitionHash` keeps
+  its whole-document meaning and must never be repurposed to encode geometry
+  scope (GEM-GOV-013).
+- **Generate every `specs/gem/v1/` artifact by running the real
+  implementation** — registry, profile set, alias index, examples and test
+  vectors are mirrors of live code, re-derived by
+  `test_gem_identity.py::TestSpecArtifactsMatchLiveCode` on every run
+  (GEM-GOV-014).
+- **Never let the frontend own gem data** — `gemMaterials.ts` may render a
+  profile the backend defines and must never define a gem, origin, treatment
+  or profile the backend lacks; an unmirrored profile degrades visibly to the
+  fallback (GEM-GOV-015).
+- **Keep multi-stone arrangement PLANNED.** `StoneInstance` exists as a model;
+  no generator builds more than one stone and `JewelryDefinition` has no
+  `stones` field. A model is not a feature (GEM-GOV-016).
+- **Update the Forge rule registry with every rule change** — the six
+  `JM-GEM-*` rules are all `GEM_IDENTITY_ONLY` referential/coherence checks.
+  `backend/tests/test_forge_registry.py::test_registry_lists_every_live_jm_rule`
+  now compares `specs/forge/v1/current-rule-registry.json` against the live
+  `validation/rules.py`, so an omission fails the suite (it was added after
+  finding that Sprint 19's `JM-SETTING-003/004` had silently drifted out).
+- **Create an ADR** before letting gem identity affect geometry, changing what
+  `geometry_hash()` excludes, moving the registry into a runtime-writable
+  store, letting `conversation/` or `designer/` write a gem field without
+  routing through `DesignerService`, or introducing a gem-property layer
+  (hardness, durability, setting suitability).
+- **Create an RFC** before adding a gem entry, a new `materialClass`/
+  `GemOrigin`/`GemTreatmentType` member, a multi-stone arrangement, or an
+  external gem/gemological data source.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

@@ -1,0 +1,46 @@
+{
+  "generatedFrom": "jewelmind.gem.resolution.is_valid_gem_id",
+  "note": "IDs are validated for SHAPE before any lookup, so a user-authored value can never become a filesystem path, a shell argument, or an arbitrary dictionary key.",
+  "vectors": [
+    {
+      "gemId": "corundum.ruby",
+      "valid": true
+    },
+    {
+      "gemId": "Ruby",
+      "valid": false
+    },
+    {
+      "gemId": "corundum..ruby",
+      "valid": false
+    },
+    {
+      "gemId": "../../etc/passwd",
+      "valid": false
+    },
+    {
+      "gemId": "corundum/ruby",
+      "valid": false
+    },
+    {
+      "gemId": "rm -rf /",
+      "valid": false
+    },
+    {
+      "gemId": "9lives",
+      "valid": false
+    },
+    {
+      "gemId": "-leading",
+      "valid": false
+    },
+    {
+      "gemId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "valid": false
+    },
+    {
+      "gemId": "",
+      "valid": false
+    }
+  ]
+}

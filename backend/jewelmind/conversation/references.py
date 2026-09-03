@@ -64,6 +64,39 @@ _MATERIAL_WORDS: tuple[str, ...] = (
 )
 
 
+def mentions_gem_word(text: str) -> bool:
+    """Whether `text` names a gem material, an origin, or a treatment.
+
+    A gem name uniquely identifies the STONE, for the same reason a metal name
+    uniquely identifies MATERIAL_APPEARANCE (see `_MATERIAL_WORDS` above): no
+    other target in the vocabulary has a gem-material sense. So "make it a
+    ruby" is a safe resolution even though "it" alone would not be.
+
+    The terms come from `designer.gem_language`, which derives them from the
+    live gem registry — never a second word list here. Its ambiguous cut/species
+    terms ("emerald", "pearl") are already excluded from that index, so this
+    cannot resolve a target off a word that might have meant the cut.
+    """
+
+    from jewelmind.designer.gem_language import (
+        GEM_ORIGIN_SYNONYMS,
+        GEM_TREATMENT_SYNONYMS,
+        GEM_UNTREATED_TERMS,
+        gem_alias_index,
+    )
+
+    lowered = f" {text.lower()} "
+    terms = (
+        set(gem_alias_index())
+        | set(GEM_ORIGIN_SYNONYMS)
+        | set(GEM_TREATMENT_SYNONYMS)
+        | set(GEM_UNTREATED_TERMS)
+    )
+    # Whole-word matching: a bare substring test would fire on "corallo" inside
+    # an unrelated word, and — worse — on the short registry IDs.
+    return any(f" {term} " in lowered for term in terms)
+
+
 def find_explicit_target(text: str) -> str | None:
     """Scans `text` for a known component word (band/stone/prongs/...).
 
@@ -117,6 +150,13 @@ def resolve_implicit_target(text: str, last_referenced_target: str | None) -> tu
 
     if mentions_material_word(text):
         return "MATERIAL_APPEARANCE", False
+
+    # Sprint 21: a gem, origin or treatment word resolves to the STONE. Checked
+    # after the metal words so a design whose text names both keeps the
+    # pre-existing behaviour rather than silently changing which target an old
+    # phrase resolves to.
+    if mentions_gem_word(text):
+        return "STONE", False
 
     lowered = text.lower()
     has_bare_pronoun = any(f" {p} " in f" {lowered} " for p in _BARE_PRONOUNS)

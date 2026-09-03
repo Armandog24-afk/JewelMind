@@ -1,0 +1,64 @@
+{
+  "identity": {
+    "gemId": "beryl.emerald",
+    "origin": "NATURAL",
+    "treatments": [
+      {
+        "treatment": "FRACTURE_FILLING",
+        "status": "NOT_PRESENT",
+        "disclosure": "USER_DECLARED",
+        "confidence": "UNKNOWN",
+        "note": null
+      }
+    ],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "beryl.emerald",
+    "canonicalName": "Emerald",
+    "displayNames": {
+      "en": "Emerald",
+      "it": "Smeraldo"
+    },
+    "materialClass": "MINERAL",
+    "family": "beryl",
+    "species": "beryl",
+    "variety": "emerald",
+    "applicableOrigins": [
+      "NATURAL",
+      "SYNTHETIC"
+    ],
+    "aliases": [
+      "emerald",
+      "smeraldo",
+      "emeraude"
+    ],
+    "defaultVisualProfileId": "green.deep",
+    "status": "CURRENT",
+    "provenance": "INTERNAL_TAXONOMY",
+    "supersededBy": null,
+    "description": "Green variety of beryl. NOTE the distinction this whole sprint exists for: this is the GEM SPECIES emerald, entirely separate from stone.shape = 'emerald', which is a clipped-corner outline."
+  },
+  "visualProfile": {
+    "profileId": "green.deep",
+    "renderCategory": "TRANSPARENT_COLOURED",
+    "baseColor": "#0f7a4a",
+    "metalness": 0.0,
+    "roughness": 0.08,
+    "opacity": 1.0,
+    "transmission": 0.62,
+    "ior": 1.58,
+    "thickness": 1.5,
+    "clearcoat": 0.5,
+    "envMapIntensity": 1.0,
+    "dispersion": 0.08,
+    "hasVariableColour": false,
+    "isFallback": false,
+    "description": "Deep green transparent appearance for emerald-class stones, with a slightly higher roughness than corundum-class profiles."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": false,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

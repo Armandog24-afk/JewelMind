@@ -1,0 +1,56 @@
+{
+  "identity": {
+    "gemId": "corundum.ruby",
+    "origin": "NATURAL",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "corundum.ruby",
+    "canonicalName": "Ruby",
+    "displayNames": {
+      "en": "Ruby",
+      "it": "Rubino"
+    },
+    "materialClass": "MINERAL",
+    "family": "corundum",
+    "species": "corundum",
+    "variety": "ruby",
+    "applicableOrigins": [
+      "NATURAL",
+      "SYNTHETIC"
+    ],
+    "aliases": [
+      "ruby",
+      "rubino",
+      "rubis"
+    ],
+    "defaultVisualProfileId": "red.deep",
+    "status": "CURRENT",
+    "provenance": "INTERNAL_TAXONOMY",
+    "supersededBy": null,
+    "description": "Red variety of corundum. Natural and synthetic share this identity."
+  },
+  "visualProfile": {
+    "profileId": "red.deep",
+    "renderCategory": "TRANSPARENT_COLOURED",
+    "baseColor": "#9b1128",
+    "metalness": 0.0,
+    "roughness": 0.04,
+    "opacity": 1.0,
+    "transmission": 0.72,
+    "ior": 1.77,
+    "thickness": 1.4,
+    "clearcoat": 0.8,
+    "envMapIntensity": 1.2,
+    "dispersion": 0.12,
+    "hasVariableColour": false,
+    "isFallback": false,
+    "description": "Deep saturated red transparent appearance for ruby-class stones."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": false,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

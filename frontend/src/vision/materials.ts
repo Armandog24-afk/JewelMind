@@ -1,4 +1,5 @@
 import type { MetalType } from '@shared/types/jewelry-definition'
+import { resolveGemMaterial } from './gemMaterials'
 
 /**
  * Centralized Vision material presets. Nothing outside this module may
@@ -60,7 +61,13 @@ export interface StoneMaterialParams {
 /** StoneReference is not a certified gemstone model (LAW-006) — these
  * parameters are a stylized "clear gemstone-like" look, never a claim of
  * physically accurate diamond optics. See
- * docs/bible/10-vision/233-stone-material-model.md. */
+ * docs/bible/10-vision/233-stone-material-model.md.
+ *
+ * SUPERSEDED FOR RENDERING by the gem visual profiles in `gemMaterials.ts`
+ * (Sprint 21): a stone's appearance now follows its gem identity. These two
+ * constants remain the pre-Sprint-21 look, still exported because they are a
+ * documented part of the Vision contract and referenced by existing tests —
+ * `resolveComponentMaterial` no longer reaches for them. */
 export const STONE_TECHNICAL_MATERIAL: StoneMaterialParams = {
   color: '#bfe3ff',
   metalness: 0.1,
@@ -114,9 +121,15 @@ export function resolveComponentMaterial(
   isStone: boolean,
   metal: string,
   mode: 'technical' | 'presentation',
+  gemProfileId?: string | null,
 ): ResolvedComponentMaterial {
   if (isStone) {
-    return resolveStoneMaterial(mode)
+    // Sprint 21: a stone's appearance comes from its GEM, not from one
+    // hardcoded look. `gemProfileId` is omitted by any caller that has no gem
+    // (a legacy design), and `resolveGemMaterial` then returns the neutral
+    // fallback — deliberately not the old diamond-like preset, which would make
+    // an unidentified stone look like the most valuable reading of itself.
+    return resolveGemMaterial(gemProfileId, mode)
   }
   const metalParams = resolveMetalMaterial(metal, mode)
   return {

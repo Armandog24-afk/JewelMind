@@ -120,6 +120,90 @@ function stoneDepthRuleApplies(d: JewelryDefinition): boolean {
   return true
 }
 
+/**
+ * Gem identity validation. Mirrors
+ * `backend/jewelmind/validation/engine.py::_gem_rules()` (FORGE-GOV-004).
+ *
+ * SCOPE: GEM_IDENTITY_ONLY — referential and coherence invariants only. No
+ * gemological or manufacturing claim is made here, and none may be added:
+ * hardness, durability, heat sensitivity, setting suitability and treatment
+ * safety all require professional evidence this project does not have.
+ *
+ * THIS MIRROR IS DELIBERATELY A SUBSET, and says so rather than pretending
+ * otherwise. The frontend has no copy of the gem registry — the backend is
+ * authoritative (brief section 11) — so four of the six rules are
+ * BACKEND-ONLY:
+ *
+ *   JM-GEM-001  entry exists          needs the registry
+ *   JM-GEM-002  origin applicable     needs the registry
+ *   JM-GEM-004  profile resolves      needs the profile set
+ *   JM-GEM-006  entry deprecated      needs the registry
+ *
+ * What remains needs nothing but the identity itself, and is mirrored exactly.
+ * FORGE-GOV-004 permits a mirror to enforce a subset; it must never enforce
+ * something the backend does not.
+ */
+function gemRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const gem = d.stone.gem
+
+  // A legacy document with no gem is valid and produces no results.
+  if (gem === null || gem === undefined) {
+    return out
+  }
+
+  if (gem.gemId === 'custom') {
+    if (!gem.customName || !gem.customName.trim()) {
+      out.push({
+        ruleId: RULE_IDS.GEM_CUSTOM_COHERENT,
+        severity: 'error',
+        message: 'A custom gem requires a name describing the material.',
+        parameter: 'stone.gem.customName',
+      })
+    }
+  } else if (gem.customName !== null && gem.customName !== undefined) {
+    out.push({
+      ruleId: RULE_IDS.GEM_CUSTOM_COHERENT,
+      severity: 'error',
+      message: `A custom name is only meaningful for a custom gem; '${gem.gemId}' already has a canonical name.`,
+      parameter: 'stone.gem.customName',
+    })
+  }
+
+  const treatments = gem.treatments ?? []
+  const seen = new Set<string>()
+  for (const treatment of treatments) {
+    if (seen.has(treatment.treatment)) {
+      out.push({
+        ruleId: RULE_IDS.GEM_TREATMENT_COHERENT,
+        severity: 'warning',
+        message: `Treatment '${treatment.treatment}' is recorded more than once. Duplicate records cannot be reconciled automatically, so both are preserved.`,
+        parameter: 'stone.gem.treatments',
+      })
+    }
+    seen.add(treatment.treatment)
+  }
+
+  const present = new Set(
+    treatments.filter((x) => x.status === 'PRESENT').map((x) => x.treatment),
+  )
+  const absent = Array.from(
+    new Set(treatments.filter((x) => x.status === 'NOT_PRESENT').map((x) => x.treatment)),
+  ).sort()
+  for (const conflict of absent) {
+    if (present.has(conflict)) {
+      out.push({
+        ruleId: RULE_IDS.GEM_TREATMENT_COHERENT,
+        severity: 'error',
+        message: `Treatment '${conflict}' is recorded as both present and not present.`,
+        parameter: 'stone.gem.treatments',
+      })
+    }
+  }
+
+  return out
+}
+
 function stoneRules(d: JewelryDefinition): ValidationResult[] {
   // STONE_DIAMETER_RANGE is ROUND_ONLY; STONE_DEPTH_RANGE is generalized to the
   // stone's real minimum horizontal extent, and is scoped away from spherical
@@ -156,6 +240,13 @@ function stoneRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+// BEZEL_ONLY (Sprint 19). Constructibility invariants only — no minimum
+// bezel wall dimension is asserted, because no sourced professional value
+// exists and inventing one is forbidden (SETTING-GOV-010).
+// PRONG_ONLY (Sprint 19) — mirrors backend/jewelmind/validation/engine.py
+// ::_prong_rules exactly (FORGE-GOV-004). Every rule here reads a prong
+// field, so none is meaningful for a bezel setting; evaluating them would
+// block a valid bezel on setting.prongCount.
 // BEZEL_ONLY (Sprint 19). Constructibility invariants only — no minimum
 // bezel wall dimension is asserted, because no sourced professional value
 // exists and inventing one is forbidden (SETTING-GOV-010).
@@ -323,7 +414,9 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...ringRules(definition),
     ...bandRules(definition),
     ...stoneRules(definition),
+    ...gemRules(definition),
     ...prongRules(definition),
+    ...bezelRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),
     ...manufacturingRules(definition),

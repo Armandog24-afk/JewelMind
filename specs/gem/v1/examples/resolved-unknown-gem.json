@@ -1,0 +1,51 @@
+{
+  "identity": {
+    "gemId": "unknown",
+    "origin": "UNKNOWN",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "definition": {
+    "gemId": "unknown",
+    "canonicalName": "Unknown gem",
+    "displayNames": {
+      "en": "Unknown gem",
+      "it": "Gemma non specificata"
+    },
+    "materialClass": "UNKNOWN",
+    "family": null,
+    "species": null,
+    "variety": null,
+    "applicableOrigins": [
+      "UNKNOWN"
+    ],
+    "aliases": [],
+    "defaultVisualProfileId": "fallback.generic",
+    "status": "UNKNOWN",
+    "provenance": "UNKNOWN",
+    "supersededBy": null,
+    "description": "No gem identity has been specified. This is the state a legacy design normalizes to, and it is deliberately NOT diamond: the MVP having used a diamond-like stone is not evidence about any particular design's intent."
+  },
+  "visualProfile": {
+    "profileId": "fallback.generic",
+    "renderCategory": "FALLBACK",
+    "baseColor": "#c9ccd1",
+    "metalness": 0.0,
+    "roughness": 0.25,
+    "opacity": 0.85,
+    "transmission": 0.35,
+    "ior": 1.5,
+    "thickness": 0.6,
+    "clearcoat": 0.2,
+    "envMapIntensity": 0.8,
+    "dispersion": 0.0,
+    "hasVariableColour": false,
+    "isFallback": true,
+    "description": "Neutral generic gem appearance used when a gem has no profile of its own. Deliberately not diamond-like, so an unidentified stone is never rendered as the most valuable reading of itself."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": true,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

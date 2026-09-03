@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/stone-instance.schema.json",
+  "title": "StoneInstance",
+  "$defs": {
+    "GemIdentity": {
+      "additionalProperties": false,
+      "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+      "properties": {
+        "gemId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Gemid",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "NATURAL",
+            "SYNTHETIC",
+            "SIMULANT",
+            "COMPOSITE",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "treatments": {
+          "items": {
+            "$ref": "#/$defs/GemTreatment"
+          },
+          "title": "Treatments",
+          "type": "array"
+        },
+        "visualProfileId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visualprofileid"
+        },
+        "customName": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customname"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "gemId"
+      ],
+      "title": "GemIdentity",
+      "type": "object"
+    },
+    "GemTreatment": {
+      "additionalProperties": false,
+      "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "HEAT",
+            "IRRADIATION",
+            "FRACTURE_FILLING",
+            "GLASS_FILLING",
+            "COATING",
+            "DIFFUSION",
+            "DYEING",
+            "IMPREGNATION",
+            "RESIN_IMPREGNATION",
+            "BLEACHING",
+            "LASER_DRILLING",
+            "HPHT",
+            "OTHER",
+            "UNKNOWN"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "status": {
+          "default": "PRESENT",
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT",
+            "SUSPECTED",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "USER_DECLARED",
+          "enum": [
+            "USER_DECLARED",
+            "VENDOR_DECLARED",
+            "LAB_REPORT_CLAIMED",
+            "UNDISCLOSED",
+            "UNKNOWN"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "UNKNOWN",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "treatment"
+      ],
+      "title": "GemTreatment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One stone occurrence in a design (brief section 16).\n\nThe contract that makes gem identity addressable PER STONE, so a future\ndesign can carry a diamond centre with sapphire sides without the whole\nproject depending on one global gem.\n\nDeliberately does NOT include arrangement geometry — position, spacing,\ncount. That belongs to a future arrangement milestone, and duplicating it\nhere would create a second source of truth for stone placement. This model\ncarries only what identifies an occurrence.",
+  "properties": {
+    "instanceId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+      "title": "Instanceid",
+      "type": "string"
+    },
+    "role": {
+      "default": "CENTER",
+      "enum": [
+        "CENTER",
+        "SIDE",
+        "ACCENT",
+        "HALO",
+        "PAVE",
+        "UNKNOWN"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "gem": {
+      "$ref": "#/$defs/GemIdentity"
+    }
+  },
+  "required": [
+    "instanceId",
+    "gem"
+  ],
+  "type": "object"
+}

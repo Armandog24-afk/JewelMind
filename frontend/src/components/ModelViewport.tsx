@@ -7,6 +7,7 @@ import { triggerBrowserDownload } from '../api/client'
 import { useProjectStore } from '../store/useProjectStore'
 import { isComponentVisible, useVisionStore } from '../store/useVisionStore'
 import { useComponentGeometries } from '../hooks/useComponentGeometries'
+import { profileIdForGem } from '../vision/gemMaterials'
 import { BACKGROUND_COLOR, resolveComponentMaterial } from '../vision/materials'
 import { computeCameraPreset, computeFitPose, computeGroundY } from '../vision/camera'
 import type { BoundingBoxMm } from '../vision/camera'
@@ -324,7 +325,15 @@ export function ModelViewport() {
               if (!isComponentVisible({ componentVisibility }, name)) return null
               const entry = lastSuccessfulPreview?.previewComponents[name]
               const isStone = (entry?.geometryRole ?? (name === 'stone_reference' ? 'stone_reference' : 'production_metal')) === 'stone_reference'
-              const material = resolveComponentMaterial(isStone, definition.material.metal, viewMode)
+              // Sprint 21: the stone's appearance follows its gem identity.
+              // `profileIdForGem` prefers the identity's own override, so a
+              // pale sapphire can look pale while still being a sapphire.
+              const material = resolveComponentMaterial(
+                isStone,
+                definition.material.metal,
+                viewMode,
+                isStone ? profileIdForGem(definition.stone.gem) : null,
+              )
               const isSelected = selectedComponent === name
               return (
                 <ComponentMesh

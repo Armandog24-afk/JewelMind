@@ -1,0 +1,42 @@
+{
+  "generatedFrom": "jewelmind.gem.visual.get_visual_profile",
+  "note": "Resolution never raises. An unknown profile ID yields the neutral fallback, flagged isFallback — deliberately not a brilliant colourless look, which would render an unidentified gem as the most valuable reading of itself.",
+  "vectors": [
+    {
+      "requested": "colourless.brilliant",
+      "profileId": "colourless.brilliant",
+      "isFallback": false,
+      "renderCategory": "TRANSPARENT_BRILLIANT"
+    },
+    {
+      "requested": "red.deep",
+      "profileId": "red.deep",
+      "isFallback": false,
+      "renderCategory": "TRANSPARENT_COLOURED"
+    },
+    {
+      "requested": "pearlescent.white",
+      "profileId": "pearlescent.white",
+      "isFallback": false,
+      "renderCategory": "PEARLESCENT"
+    },
+    {
+      "requested": "fallback.generic",
+      "profileId": "fallback.generic",
+      "isFallback": true,
+      "renderCategory": "FALLBACK"
+    },
+    {
+      "requested": "not.a.profile",
+      "profileId": "fallback.generic",
+      "isFallback": true,
+      "renderCategory": "FALLBACK"
+    },
+    {
+      "requested": "",
+      "profileId": "fallback.generic",
+      "isFallback": true,
+      "renderCategory": "FALLBACK"
+    }
+  ]
+}

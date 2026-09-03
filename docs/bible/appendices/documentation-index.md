@@ -936,6 +936,9 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | Geometry conventions | authoritative (detail level) | [`../../geometry-conventions.md`](../../geometry-conventions.md) |
 | Known limitations | authoritative (detail level) | [`../../known-limitations.md`](../../known-limitations.md) |
 | Validation rules | authoritative (detail level) | [`../../validation-rules.md`](../../validation-rules.md) |
+| JM-BIBLE-GEM-README | Gem Identity & Material System v1 — Index | accepted | current | [`23-gem-identity/README.md`](../23-gem-identity/README.md) |
+| JM-BIBLE-GEM-GOVERNANCE | Gem System Governance | accepted | current | [`23-gem-identity/gem-governance.md`](../23-gem-identity/gem-governance.md) |
+| JM-BIBLE-GEM-SPRINT-21-REPORT | Sprint 21 Validation Report — Gem Identity & Material System v1 | accepted | current | [`23-gem-identity/SPRINT-21-VALIDATION-REPORT.md`](../23-gem-identity/SPRINT-21-VALIDATION-REPORT.md) |
 
 ## Root-level project documents
 

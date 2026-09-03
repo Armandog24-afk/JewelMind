@@ -1,0 +1,55 @@
+{
+  "identity": {
+    "gemId": "custom",
+    "origin": "UNKNOWN",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": "meteorite inlay",
+    "note": "Client-supplied material with no registry entry."
+  },
+  "definition": {
+    "gemId": "custom",
+    "canonicalName": "Custom material",
+    "displayNames": {
+      "en": "Custom material",
+      "it": "Materiale personalizzato"
+    },
+    "materialClass": "UNKNOWN",
+    "family": null,
+    "species": null,
+    "variety": null,
+    "applicableOrigins": [
+      "NATURAL",
+      "SYNTHETIC",
+      "SIMULANT",
+      "COMPOSITE",
+      "UNKNOWN"
+    ],
+    "aliases": [],
+    "defaultVisualProfileId": "fallback.generic",
+    "status": "CUSTOM",
+    "provenance": "USER_AUTHORED",
+    "supersededBy": null,
+    "description": "A user-described material with no registry entry. Requires a customName on the identity, so a custom gem always carries the user's own description rather than an empty label."
+  },
+  "visualProfile": {
+    "profileId": "fallback.generic",
+    "renderCategory": "FALLBACK",
+    "baseColor": "#c9ccd1",
+    "metalness": 0.0,
+    "roughness": 0.25,
+    "opacity": 0.85,
+    "transmission": 0.35,
+    "ior": 1.5,
+    "thickness": 0.6,
+    "clearcoat": 0.2,
+    "envMapIntensity": 0.8,
+    "dispersion": 0.0,
+    "hasVariableColour": false,
+    "isFallback": true,
+    "description": "Neutral generic gem appearance used when a gem has no profile of its own. Deliberately not diamond-like, so an unidentified stone is never rendered as the most valuable reading of itself."
+  },
+  "wasUnresolved": false,
+  "usedFallbackVisualProfile": true,
+  "registryVersion": "registry-1.0.0+visual-1.0.0"
+}

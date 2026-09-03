@@ -63,6 +63,38 @@ def test_invalid_rule_examples_fail_schema(path: Path):
     assert errors != [], f"{path.name} unexpectedly passed schema validation"
 
 
+def test_registry_lists_every_live_jm_rule():
+    """Every `JM-*` rule ID declared in code appears in the registry.
+
+    Added in Sprint 21 after finding a real, silent drift: Sprint 19 introduced
+    `JM-SETTING-003`/`JM-SETTING-004` and never added them here, so FORGE-GOV's
+    "update the registry in the same change" rule was being enforced by nothing
+    but attention. Comparing against `validation/rules.py` — the code that
+    actually defines the IDs — makes the whole class of omission impossible
+    rather than unlikely.
+    """
+
+    import jewelmind.validation.rules as live_rules
+
+    declared = {
+        value
+        for name, value in vars(live_rules).items()
+        if not name.startswith("_") and isinstance(value, str) and value.startswith("JM-")
+    }
+    registry = _load_json(SPECS_DIR / "current-rule-registry.json")
+    listed = {rule["ruleId"] for rule in registry["rules"]}
+
+    missing = sorted(declared - listed)
+    assert not missing, f"rule IDs defined in code but absent from the registry: {missing}"
+
+    # The reverse direction too: a registry entry for a rule that no longer
+    # exists would misreport what JewelMind enforces. Non-`JM-` platform rule
+    # IDs (FORGE-SCHEMA/SAFETY/GEOM/EXPORT) are not defined in `rules.py`, so
+    # only the `JM-` namespace is compared.
+    stale = sorted({r for r in listed if r.startswith("JM-")} - declared)
+    assert not stale, f"registry lists rule IDs no longer defined in code: {stale}"
+
+
 def test_registry_ids_have_no_duplicates():
     registry = _load_json(SPECS_DIR / "current-rule-registry.json")
     ids = [r["ruleId"] for r in registry["rules"]]

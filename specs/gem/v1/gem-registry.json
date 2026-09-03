@@ -1,0 +1,993 @@
+{
+  "registryVersion": "1.0.0",
+  "systemVersion": "registry-1.0.0+visual-1.0.0",
+  "generatedFrom": "backend/jewelmind/gem/registry.py::GEM_REGISTRY",
+  "note": "Generated from the live registry, never hand-maintained. An extensible foundation for identifying and rendering gems, NOT a gemological database and not a certification source. Every entry is NOT_REVIEWED: no record in the professional-validation registry backs any of it.",
+  "gemCount": 40,
+  "gems": [
+    {
+      "gemId": "unknown",
+      "canonicalName": "Unknown gem",
+      "displayNames": {
+        "en": "Unknown gem",
+        "it": "Gemma non specificata"
+      },
+      "materialClass": "UNKNOWN",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "UNKNOWN"
+      ],
+      "aliases": [],
+      "defaultVisualProfileId": "fallback.generic",
+      "status": "UNKNOWN",
+      "provenance": "UNKNOWN",
+      "supersededBy": null,
+      "description": "No gem identity has been specified. This is the state a legacy design normalizes to, and it is deliberately NOT diamond: the MVP having used a diamond-like stone is not evidence about any particular design's intent."
+    },
+    {
+      "gemId": "custom",
+      "canonicalName": "Custom material",
+      "displayNames": {
+        "en": "Custom material",
+        "it": "Materiale personalizzato"
+      },
+      "materialClass": "UNKNOWN",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC",
+        "SIMULANT",
+        "COMPOSITE",
+        "UNKNOWN"
+      ],
+      "aliases": [],
+      "defaultVisualProfileId": "fallback.generic",
+      "status": "CUSTOM",
+      "provenance": "USER_AUTHORED",
+      "supersededBy": null,
+      "description": "A user-described material with no registry entry. Requires a customName on the identity, so a custom gem always carries the user's own description rather than an empty label."
+    },
+    {
+      "gemId": "diamond",
+      "canonicalName": "Diamond",
+      "displayNames": {
+        "en": "Diamond",
+        "it": "Diamante"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "diamond",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "diamante",
+        "brilliant",
+        "brillante"
+      ],
+      "defaultVisualProfileId": "colourless.brilliant",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Carbon mineral. Natural and laboratory-grown diamond share this identity and are distinguished by GemIdentity.origin, not by separate registry entries — a lab-grown diamond IS diamond."
+    },
+    {
+      "gemId": "corundum",
+      "canonicalName": "Corundum",
+      "displayNames": {
+        "en": "Corundum",
+        "it": "Corindone"
+      },
+      "materialClass": "MINERAL",
+      "family": "corundum",
+      "species": "corundum",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "corindone"
+      ],
+      "defaultVisualProfileId": "colourless.moderate",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "The corundum species itself, for a stone identified no further than its species. Ruby and sapphire are varieties of it."
+    },
+    {
+      "gemId": "corundum.ruby",
+      "canonicalName": "Ruby",
+      "displayNames": {
+        "en": "Ruby",
+        "it": "Rubino"
+      },
+      "materialClass": "MINERAL",
+      "family": "corundum",
+      "species": "corundum",
+      "variety": "ruby",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "ruby",
+        "rubino",
+        "rubis"
+      ],
+      "defaultVisualProfileId": "red.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Red variety of corundum. Natural and synthetic share this identity."
+    },
+    {
+      "gemId": "corundum.sapphire",
+      "canonicalName": "Sapphire",
+      "displayNames": {
+        "en": "Sapphire",
+        "it": "Zaffiro"
+      },
+      "materialClass": "MINERAL",
+      "family": "corundum",
+      "species": "corundum",
+      "variety": "sapphire",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "sapphire",
+        "zaffiro",
+        "saphir"
+      ],
+      "defaultVisualProfileId": "blue.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Non-red variety of corundum. Blue is the default appearance; other sapphire colours are expressed with a visualProfileId override, since colour is appearance rather than identity."
+    },
+    {
+      "gemId": "beryl",
+      "canonicalName": "Beryl",
+      "displayNames": {
+        "en": "Beryl",
+        "it": "Berillo"
+      },
+      "materialClass": "MINERAL",
+      "family": "beryl",
+      "species": "beryl",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "berillo"
+      ],
+      "defaultVisualProfileId": "colourless.moderate",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "The beryl species itself, for a stone identified no further."
+    },
+    {
+      "gemId": "beryl.emerald",
+      "canonicalName": "Emerald",
+      "displayNames": {
+        "en": "Emerald",
+        "it": "Smeraldo"
+      },
+      "materialClass": "MINERAL",
+      "family": "beryl",
+      "species": "beryl",
+      "variety": "emerald",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "emerald",
+        "smeraldo",
+        "emeraude"
+      ],
+      "defaultVisualProfileId": "green.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Green variety of beryl. NOTE the distinction this whole sprint exists for: this is the GEM SPECIES emerald, entirely separate from stone.shape = 'emerald', which is a clipped-corner outline."
+    },
+    {
+      "gemId": "beryl.aquamarine",
+      "canonicalName": "Aquamarine",
+      "displayNames": {
+        "en": "Aquamarine",
+        "it": "Acquamarina"
+      },
+      "materialClass": "MINERAL",
+      "family": "beryl",
+      "species": "beryl",
+      "variety": "aquamarine",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "aquamarine",
+        "acquamarina",
+        "aquamarina"
+      ],
+      "defaultVisualProfileId": "blue.pale",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Blue to blue-green variety of beryl."
+    },
+    {
+      "gemId": "beryl.morganite",
+      "canonicalName": "Morganite",
+      "displayNames": {
+        "en": "Morganite",
+        "it": "Morganite"
+      },
+      "materialClass": "MINERAL",
+      "family": "beryl",
+      "species": "beryl",
+      "variety": "morganite",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "morganite"
+      ],
+      "defaultVisualProfileId": "pink.medium",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Pink to peach variety of beryl."
+    },
+    {
+      "gemId": "quartz",
+      "canonicalName": "Quartz",
+      "displayNames": {
+        "en": "Quartz",
+        "it": "Quarzo"
+      },
+      "materialClass": "MINERAL",
+      "family": "quartz",
+      "species": "quartz",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "quarzo",
+        "rock crystal",
+        "cristallo di rocca"
+      ],
+      "defaultVisualProfileId": "colourless.moderate",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "The quartz species itself, for a stone identified no further."
+    },
+    {
+      "gemId": "quartz.amethyst",
+      "canonicalName": "Amethyst",
+      "displayNames": {
+        "en": "Amethyst",
+        "it": "Ametista"
+      },
+      "materialClass": "MINERAL",
+      "family": "quartz",
+      "species": "quartz",
+      "variety": "amethyst",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "amethyst",
+        "ametista"
+      ],
+      "defaultVisualProfileId": "violet.medium",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Violet variety of quartz."
+    },
+    {
+      "gemId": "quartz.citrine",
+      "canonicalName": "Citrine",
+      "displayNames": {
+        "en": "Citrine",
+        "it": "Citrino"
+      },
+      "materialClass": "MINERAL",
+      "family": "quartz",
+      "species": "quartz",
+      "variety": "citrine",
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "citrine",
+        "citrino"
+      ],
+      "defaultVisualProfileId": "yellow.warm",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Yellow to orange variety of quartz."
+    },
+    {
+      "gemId": "quartz.rose",
+      "canonicalName": "Rose quartz",
+      "displayNames": {
+        "en": "Rose quartz",
+        "it": "Quarzo rosa"
+      },
+      "materialClass": "MINERAL",
+      "family": "quartz",
+      "species": "quartz",
+      "variety": "rose_quartz",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "rose quartz",
+        "quarzo rosa"
+      ],
+      "defaultVisualProfileId": "pink.medium",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Pink variety of quartz."
+    },
+    {
+      "gemId": "spinel",
+      "canonicalName": "Spinel",
+      "displayNames": {
+        "en": "Spinel",
+        "it": "Spinello"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "spinel",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "spinello"
+      ],
+      "defaultVisualProfileId": "red.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Spinel. Recorded at species level: its colour varieties are not given separate entries, because a reliable variety taxonomy for them is not something this registry can assert."
+    },
+    {
+      "gemId": "topaz",
+      "canonicalName": "Topaz",
+      "displayNames": {
+        "en": "Topaz",
+        "it": "Topazio"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "topaz",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "topazio"
+      ],
+      "defaultVisualProfileId": "brown.warm",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Topaz, recorded at species level."
+    },
+    {
+      "gemId": "zircon",
+      "canonicalName": "Zircon",
+      "displayNames": {
+        "en": "Zircon",
+        "it": "Zircone"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "zircon",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "zircone"
+      ],
+      "defaultVisualProfileId": "brown.warm",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Zircon, a natural mineral. NOT to be confused with cubic zirconia, which is a separate synthetic simulant entry — the two are different materials with confusingly similar names."
+    },
+    {
+      "gemId": "peridot",
+      "canonicalName": "Peridot",
+      "displayNames": {
+        "en": "Peridot",
+        "it": "Peridoto"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "forsterite_olivine",
+      "variety": "peridot",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "peridoto",
+        "olivine",
+        "olivina"
+      ],
+      "defaultVisualProfileId": "green.light",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Gem-quality variety of the olivine mineral series."
+    },
+    {
+      "gemId": "opal",
+      "canonicalName": "Opal",
+      "displayNames": {
+        "en": "Opal",
+        "it": "Opale"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "opal",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "opale"
+      ],
+      "defaultVisualProfileId": "iridescent.opal",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Opal. Its play-of-colour is not simulated; the visual profile records that its appearance is a known approximation."
+    },
+    {
+      "gemId": "moonstone",
+      "canonicalName": "Moonstone",
+      "displayNames": {
+        "en": "Moonstone",
+        "it": "Pietra di luna"
+      },
+      "materialClass": "MINERAL",
+      "family": "feldspar",
+      "species": "orthoclase",
+      "variety": "moonstone",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "moonstone",
+        "pietra di luna",
+        "adularia"
+      ],
+      "defaultVisualProfileId": "translucent.moonstone",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Adularescent variety within the feldspar group. Adularescence is not simulated."
+    },
+    {
+      "gemId": "turquoise",
+      "canonicalName": "Turquoise",
+      "displayNames": {
+        "en": "Turquoise",
+        "it": "Turchese"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "turquoise",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC",
+        "COMPOSITE"
+      ],
+      "aliases": [
+        "turchese"
+      ],
+      "defaultVisualProfileId": "opaque.turquoise",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Opaque phosphate mineral. Frequently stabilized or reconstituted, which is why COMPOSITE is an applicable origin here."
+    },
+    {
+      "gemId": "garnet",
+      "canonicalName": "Garnet",
+      "displayNames": {
+        "en": "Garnet",
+        "it": "Granato"
+      },
+      "materialClass": "MINERAL",
+      "family": "garnet",
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "granato"
+      ],
+      "defaultVisualProfileId": "red.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "The garnet group. Recorded with a family but NO species, which is the honest representation: garnet is a mineral group of several species rather than a single one."
+    },
+    {
+      "gemId": "garnet.almandine",
+      "canonicalName": "Almandine garnet",
+      "displayNames": {
+        "en": "Almandine garnet",
+        "it": "Granato almandino"
+      },
+      "materialClass": "MINERAL",
+      "family": "garnet",
+      "species": "almandine",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "almandine",
+        "almandino"
+      ],
+      "defaultVisualProfileId": "red.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Iron-aluminium species within the garnet group."
+    },
+    {
+      "gemId": "garnet.spessartine",
+      "canonicalName": "Spessartine garnet",
+      "displayNames": {
+        "en": "Spessartine garnet",
+        "it": "Granato spessartite"
+      },
+      "materialClass": "MINERAL",
+      "family": "garnet",
+      "species": "spessartine",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "spessartine",
+        "spessartite"
+      ],
+      "defaultVisualProfileId": "orange.warm",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Manganese-aluminium species within the garnet group."
+    },
+    {
+      "gemId": "garnet.tsavorite",
+      "canonicalName": "Tsavorite garnet",
+      "displayNames": {
+        "en": "Tsavorite garnet",
+        "it": "Granato tsavorite"
+      },
+      "materialClass": "MINERAL",
+      "family": "garnet",
+      "species": "grossular",
+      "variety": "tsavorite",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "tsavorite",
+        "tsavorite garnet"
+      ],
+      "defaultVisualProfileId": "green.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Green variety of grossular garnet."
+    },
+    {
+      "gemId": "tourmaline",
+      "canonicalName": "Tourmaline",
+      "displayNames": {
+        "en": "Tourmaline",
+        "it": "Tormalina"
+      },
+      "materialClass": "MINERAL",
+      "family": "tourmaline",
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "tormalina"
+      ],
+      "defaultVisualProfileId": "pink.medium",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "The tourmaline group. Family only, for the same reason as garnet: it is a group rather than a single species."
+    },
+    {
+      "gemId": "tourmaline.rubellite",
+      "canonicalName": "Rubellite tourmaline",
+      "displayNames": {
+        "en": "Rubellite tourmaline",
+        "it": "Tormalina rubellite"
+      },
+      "materialClass": "MINERAL",
+      "family": "tourmaline",
+      "species": "elbaite",
+      "variety": "rubellite",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "rubellite"
+      ],
+      "defaultVisualProfileId": "pink.medium",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Pink to red variety of elbaite tourmaline."
+    },
+    {
+      "gemId": "tourmaline.verdelite",
+      "canonicalName": "Green tourmaline",
+      "displayNames": {
+        "en": "Green tourmaline",
+        "it": "Tormalina verde"
+      },
+      "materialClass": "MINERAL",
+      "family": "tourmaline",
+      "species": "elbaite",
+      "variety": "verdelite",
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "verdelite",
+        "green tourmaline"
+      ],
+      "defaultVisualProfileId": "green.deep",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Green variety of elbaite tourmaline."
+    },
+    {
+      "gemId": "jade.jadeite",
+      "canonicalName": "Jadeite jade",
+      "displayNames": {
+        "en": "Jadeite jade",
+        "it": "Giada giadeite"
+      },
+      "materialClass": "MINERAL",
+      "family": "jade",
+      "species": "jadeite",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "COMPOSITE"
+      ],
+      "aliases": [
+        "jadeite",
+        "giadeite",
+        "jade",
+        "giada"
+      ],
+      "defaultVisualProfileId": "translucent.green",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Jadeite, one of the two distinct minerals sold as jade. Given its own entry rather than a generic 'jade' precisely because jadeite and nephrite are different minerals."
+    },
+    {
+      "gemId": "jade.nephrite",
+      "canonicalName": "Nephrite jade",
+      "displayNames": {
+        "en": "Nephrite jade",
+        "it": "Giada nefrite"
+      },
+      "materialClass": "MINERAL",
+      "family": "jade",
+      "species": "nephrite",
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "COMPOSITE"
+      ],
+      "aliases": [
+        "nephrite",
+        "nefrite"
+      ],
+      "defaultVisualProfileId": "translucent.green",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Nephrite, the other mineral sold as jade."
+    },
+    {
+      "gemId": "pearl",
+      "canonicalName": "Pearl",
+      "displayNames": {
+        "en": "Pearl",
+        "it": "Perla"
+      },
+      "materialClass": "ORGANIC",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SYNTHETIC",
+        "SIMULANT"
+      ],
+      "aliases": [
+        "pearl",
+        "perla"
+      ],
+      "defaultVisualProfileId": "pearlescent.white",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Organic gem material formed within a mollusc. No mineral species or variety applies. `SYNTHETIC` here covers cultured pearls and `SIMULANT` covers imitation pearls — genuinely different things that a single boolean could not distinguish."
+    },
+    {
+      "gemId": "amber",
+      "canonicalName": "Amber",
+      "displayNames": {
+        "en": "Amber",
+        "it": "Ambra"
+      },
+      "materialClass": "ORGANIC",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "COMPOSITE",
+        "SIMULANT"
+      ],
+      "aliases": [
+        "amber",
+        "ambra"
+      ],
+      "defaultVisualProfileId": "translucent.warm",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Fossilized tree resin. `COMPOSITE` covers pressed or reconstituted amber, which is real amber that has been reformed."
+    },
+    {
+      "gemId": "coral",
+      "canonicalName": "Coral",
+      "displayNames": {
+        "en": "Coral",
+        "it": "Corallo"
+      },
+      "materialClass": "ORGANIC",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL",
+        "SIMULANT"
+      ],
+      "aliases": [
+        "coral",
+        "corallo"
+      ],
+      "defaultVisualProfileId": "opaque.coral",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Organic material formed by marine coral polyps."
+    },
+    {
+      "gemId": "shell.mother_of_pearl",
+      "canonicalName": "Mother of pearl",
+      "displayNames": {
+        "en": "Mother of pearl",
+        "it": "Madreperla"
+      },
+      "materialClass": "ORGANIC",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "mother of pearl",
+        "madreperla",
+        "nacre",
+        "nacre shell"
+      ],
+      "defaultVisualProfileId": "pearlescent.white",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Nacreous shell lining used as a gem material."
+    },
+    {
+      "gemId": "jet",
+      "canonicalName": "Jet",
+      "displayNames": {
+        "en": "Jet",
+        "it": "Giaietto"
+      },
+      "materialClass": "ORGANIC",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "NATURAL"
+      ],
+      "aliases": [
+        "jet",
+        "giaietto"
+      ],
+      "defaultVisualProfileId": "opaque.coral",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Fossilized wood used as an opaque black gem material. Its visual profile is a placeholder shared with coral and is a recorded limitation, not a claim that jet looks like coral."
+    },
+    {
+      "gemId": "simulant.cubic_zirconia",
+      "canonicalName": "Cubic zirconia",
+      "displayNames": {
+        "en": "Cubic zirconia",
+        "it": "Zirconia cubica"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "cubic_zirconia",
+      "variety": null,
+      "applicableOrigins": [
+        "SIMULANT"
+      ],
+      "aliases": [
+        "cubic zirconia",
+        "zirconia cubica",
+        "cz",
+        "zirconia"
+      ],
+      "defaultVisualProfileId": "colourless.brilliant",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Synthetic cubic zirconium dioxide, most often used as a diamond simulant. It is NOT diamond and must never resolve to diamond, however diamond-like the intended appearance. Sharing a visual profile with diamond is a rendering choice, not an identity claim."
+    },
+    {
+      "gemId": "simulant.moissanite",
+      "canonicalName": "Moissanite",
+      "displayNames": {
+        "en": "Moissanite",
+        "it": "Moissanite"
+      },
+      "materialClass": "MINERAL",
+      "family": null,
+      "species": "silicon_carbide",
+      "variety": null,
+      "applicableOrigins": [
+        "SIMULANT",
+        "SYNTHETIC"
+      ],
+      "aliases": [
+        "moissanite"
+      ],
+      "defaultVisualProfileId": "colourless.brilliant",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Silicon carbide, essentially always laboratory-grown and commonly used as a diamond simulant. A distinct material with its own identity."
+    },
+    {
+      "gemId": "simulant.glass",
+      "canonicalName": "Glass",
+      "displayNames": {
+        "en": "Glass",
+        "it": "Vetro"
+      },
+      "materialClass": "NON_MINERAL",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "SIMULANT"
+      ],
+      "aliases": [
+        "glass",
+        "vetro",
+        "paste",
+        "strass"
+      ],
+      "defaultVisualProfileId": "colourless.moderate",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "Glass used as a gem simulant. `NON_MINERAL` because glass is amorphous and has no mineral species — a case where the mineralogical fields correctly stay empty."
+    },
+    {
+      "gemId": "composite.doublet",
+      "canonicalName": "Composite doublet",
+      "displayNames": {
+        "en": "Composite doublet",
+        "it": "Doppietta composita"
+      },
+      "materialClass": "COMPOSITE",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "COMPOSITE"
+      ],
+      "aliases": [
+        "doublet",
+        "doppietta"
+      ],
+      "defaultVisualProfileId": "fallback.generic",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "A stone assembled from two bonded layers of different materials. Uses the generic profile because its appearance depends entirely on which materials were combined, which the registry cannot know."
+    },
+    {
+      "gemId": "composite.triplet",
+      "canonicalName": "Composite triplet",
+      "displayNames": {
+        "en": "Composite triplet",
+        "it": "Tripletta composita"
+      },
+      "materialClass": "COMPOSITE",
+      "family": null,
+      "species": null,
+      "variety": null,
+      "applicableOrigins": [
+        "COMPOSITE"
+      ],
+      "aliases": [
+        "triplet",
+        "tripletta"
+      ],
+      "defaultVisualProfileId": "fallback.generic",
+      "status": "CURRENT",
+      "provenance": "INTERNAL_TAXONOMY",
+      "supersededBy": null,
+      "description": "A stone assembled from three bonded layers."
+    }
+  ]
+}

@@ -114,6 +114,159 @@ export interface BandSpec {
   thicknessTaper: BandTaperSpec
 }
 
+/**
+ * Gem identity vocabularies. Mirrors `backend/jewelmind/gem/models.py`.
+ *
+ * The backend registry is authoritative: the frontend must never define its own
+ * gem entries, only reference IDs the backend already knows (brief section 11).
+ */
+
+/** What a gem material fundamentally is. `ORGANIC` exists because not every gem
+ * is a mineral — a pearl has no species or variety. */
+export type GemMaterialClass =
+  | 'MINERAL'
+  | 'ORGANIC'
+  | 'NON_MINERAL'
+  | 'COMPOSITE'
+  | 'UNKNOWN'
+
+/**
+ * How the gem came to exist. Independent of treatment, and deliberately not a
+ * boolean: a stone may be natural AND treated, or synthetic AND untreated.
+ *
+ * `SIMULANT` is its own value because a simulant must never identify as the
+ * material it imitates — cubic zirconia is not diamond.
+ */
+export type GemOrigin =
+  | 'NATURAL'
+  | 'SYNTHETIC'
+  | 'SIMULANT'
+  | 'COMPOSITE'
+  | 'UNKNOWN'
+
+/** Treatment types. NOT an exhaustive list; `OTHER` carries a note. */
+export type GemTreatmentType =
+  | 'HEAT'
+  | 'IRRADIATION'
+  | 'FRACTURE_FILLING'
+  | 'GLASS_FILLING'
+  | 'COATING'
+  | 'DIFFUSION'
+  | 'DYEING'
+  | 'IMPREGNATION'
+  | 'RESIN_IMPREGNATION'
+  | 'BLEACHING'
+  | 'LASER_DRILLING'
+  | 'HPHT'
+  | 'OTHER'
+  | 'UNKNOWN'
+
+/** `NOT_PRESENT` is a real state: an explicit "not heated" is different
+ * information from "we do not know". */
+export type GemTreatmentStatus = 'PRESENT' | 'NOT_PRESENT' | 'SUSPECTED' | 'UNKNOWN'
+
+/** Who made the treatment claim. JewelMind never invents a disclosure
+ * requirement; this only records the source. */
+export type GemTreatmentDisclosure =
+  | 'USER_DECLARED'
+  | 'VENDOR_DECLARED'
+  | 'LAB_REPORT_CLAIMED'
+  | 'UNDISCLOSED'
+  | 'UNKNOWN'
+
+export type GemConfidence = 'HIGH' | 'MEDIUM' | 'LOW' | 'UNKNOWN'
+
+/** Registry entry lifecycle. A DEPRECATED entry stays resolvable. */
+export type GemEntryStatus = 'CURRENT' | 'DEPRECATED' | 'CUSTOM' | 'UNKNOWN'
+
+export type GemDataProvenance =
+  | 'INTERNAL_TAXONOMY'
+  | 'SOURCED'
+  | 'USER_AUTHORED'
+  | 'PRELIMINARY'
+  | 'PROFESSIONALLY_VALIDATED'
+  | 'UNKNOWN'
+
+/** A rendering CATEGORY, never an optical claim. */
+export type GemRenderCategory =
+  | 'TRANSPARENT_BRILLIANT'
+  | 'TRANSPARENT_COLOURED'
+  | 'TRANSLUCENT'
+  | 'OPAQUE'
+  | 'IRIDESCENT'
+  | 'PEARLESCENT'
+  | 'FALLBACK'
+
+export interface GemTreatment {
+  treatment: GemTreatmentType
+  status: GemTreatmentStatus
+  disclosure: GemTreatmentDisclosure
+  confidence: GemConfidence
+  note: string | null
+}
+
+/**
+ * What gem THIS stone is. Separate from every geometry field: a round stone is
+ * not automatically a diamond, and the same geometry is reusable with any gem.
+ *
+ * `null` on a legacy document, which normalizes to `unknown` — never to
+ * diamond.
+ */
+export interface GemIdentity {
+  gemId: string
+  origin: GemOrigin
+  /** An EMPTY list means no treatment is RECORDED, not that the stone is
+   * untreated. To assert that, record one with status `NOT_PRESENT`. */
+  treatments: GemTreatment[]
+  visualProfileId: string | null
+  /** Required for, and only valid for, `gemId === 'custom'`. */
+  customName: string | null
+  note: string | null
+}
+
+/**
+ * How a gem is rendered. EVERY VALUE IS A RENDERING PARAMETER, NOT A
+ * MEASUREMENT — `ior` is what a renderer is handed, not a laboratory refractive
+ * index, and `dispersion` drives a sparkle effect rather than describing real
+ * spectral separation.
+ */
+export interface GemVisualProfile {
+  profileId: string
+  renderCategory: GemRenderCategory
+  baseColor: string
+  metalness: number
+  roughness: number
+  opacity: number
+  transmission: number
+  ior: number
+  thickness: number
+  clearcoat: number
+  envMapIntensity: number
+  dispersion: number
+  hasVariableColour: boolean
+  isFallback: boolean
+  description: string
+}
+
+/** A registry entry: one KIND of gem. Type-level only — it says what a ruby is,
+ * never whether a particular ruby was heated. */
+export interface GemDefinition {
+  gemId: string
+  canonicalName: string
+  displayNames: Record<string, string>
+  materialClass: GemMaterialClass
+  family: string | null
+  species: string | null
+  variety: string | null
+  applicableOrigins: GemOrigin[]
+  aliases: string[]
+  defaultVisualProfileId: string
+  status: GemEntryStatus
+  provenance: GemDataProvenance
+  supersededBy: string | null
+  description: string
+}
+
 export interface OutlinePoint {
   x: number
   y: number
@@ -161,6 +314,14 @@ export interface StoneSpec {
   customOutline: CustomOutline | null
   measurement: StoneMeasurement | null
   importedAsset: ImportedStoneAsset | null
+  /**
+   * The gem this stone is made of (Sprint 21). `null` on any document written
+   * before Sprint 21, which normalizes to `unknown` — never to diamond.
+   *
+   * Deliberately NOT a geometry field: the backend's `geometry_hash` excludes
+   * it, so changing Diamond -> Sapphire reuses the built geometry.
+   */
+  gem: GemIdentity | null
 }
 
 export interface SettingSpec {
@@ -379,6 +540,7 @@ export function createDefaultDefinition(): JewelryDefinition {
       customOutline: null,
       measurement: null,
       importedAsset: null,
+      gem: null,
     },
     setting: {
       type: 'prong',

@@ -2,17 +2,17 @@
   "turns": [
     {
       "session": {
-        "sessionId": "session-6265a5b6-b415-4976-aa07-c620d20b6606",
+        "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "7680c5eeb2bc67df",
+        "currentJDLHash": "c967672f8629fa2e",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
-            "turnId": "turn-cb4223e0-c8e5-40f2-8df6-e79fa5d0437b",
+            "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
             "sequence": 1,
             "role": "user",
             "sourceText": "Fammi un solitario in oro rosa con sei griffe.",
-            "timestamp": "2026-09-01T13:29:52.701400+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -21,11 +21,11 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+            "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -33,12 +33,12 @@
         ],
         "pendingClarification": null,
         "activeProposal": {
-          "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
-          "turnId": "turn-cb4223e0-c8e5-40f2-8df6-e79fa5d0437b",
-          "baseDefinitionHash": "7680c5eeb2bc67df",
+          "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
+          "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
+          "baseDefinitionHash": "c967672f8629fa2e",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
-            "proposalId": "proposal-c859dcb4-dce3-4e47-970e-a2db283de728",
+            "proposalId": "proposal-ea410877-3a77-4e1e-b767-b979e00f84e0",
             "sourceText": "Fammi un solitario in oro rosa con sei griffe.",
             "interactionMode": "MODIFY",
             "unresolvedIntent": [],
@@ -103,7 +103,8 @@
                 "profile": "FACETED_REFERENCE",
                 "customOutline": null,
                 "measurement": null,
-                "importedAsset": null
+                "importedAsset": null,
+                "gem": null
               },
               "setting": {
                 "type": "prong",
@@ -288,6 +289,12 @@
                 "changed": false
               },
               {
+                "path": "stone.gem",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "setting.type",
                 "previousValue": "prong",
                 "proposedValue": "prong",
@@ -378,15 +385,15 @@
           "unsupportedDiscussed": []
         },
         "status": "PROPOSAL_READY",
-        "createdAt": "2026-09-01T13:29:52.701400+00:00",
-        "updatedAt": "2026-09-01T13:29:52.701400+00:00"
+        "createdAt": "2026-09-02T15:55:21.333890+00:00",
+        "updatedAt": "2026-09-02T15:55:21.333890+00:00"
       },
       "turn": {
-        "turnId": "turn-cb4223e0-c8e5-40f2-8df6-e79fa5d0437b",
+        "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
         "sequence": 1,
         "role": "user",
         "sourceText": "Fammi un solitario in oro rosa con sei griffe.",
-        "timestamp": "2026-09-01T13:29:52.701400+00:00",
+        "timestamp": "2026-09-02T15:55:21.333890+00:00",
         "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
         "references": [],
         "technicalChanges": [
@@ -395,11 +402,11 @@
         "intentChanges": [],
         "clarification": null,
         "unsupportedFeatures": [],
-        "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+        "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "7680c5eeb2bc67df",
-        "relatedJDLHashAfter": "7680c5eeb2bc67df",
+        "relatedJDLHashBefore": "c967672f8629fa2e",
+        "relatedJDLHashAfter": "c967672f8629fa2e",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -407,17 +414,17 @@
     },
     {
       "session": {
-        "sessionId": "session-6265a5b6-b415-4976-aa07-c620d20b6606",
+        "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "7680c5eeb2bc67df",
+        "currentJDLHash": "c967672f8629fa2e",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
-            "turnId": "turn-cb4223e0-c8e5-40f2-8df6-e79fa5d0437b",
+            "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
             "sequence": 1,
             "role": "user",
             "sourceText": "Fammi un solitario in oro rosa con sei griffe.",
-            "timestamp": "2026-09-01T13:29:52.701400+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -426,21 +433,21 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+            "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
           },
           {
-            "turnId": "turn-dbb35027-69d8-4d4b-a7ec-4acd5276dff4",
+            "turnId": "turn-fb4dd440-08cf-43f9-a881-91e47c5246e1",
             "sequence": 2,
             "role": "user",
             "sourceText": "ok",
-            "timestamp": "2026-09-01T13:29:52.705408+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "ACCEPT_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -449,11 +456,11 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+            "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -475,15 +482,15 @@
           "unsupportedDiscussed": []
         },
         "status": "ACTIVE",
-        "createdAt": "2026-09-01T13:29:52.701400+00:00",
-        "updatedAt": "2026-09-01T13:29:52.705408+00:00"
+        "createdAt": "2026-09-02T15:55:21.333890+00:00",
+        "updatedAt": "2026-09-02T15:55:21.333890+00:00"
       },
       "turn": {
-        "turnId": "turn-dbb35027-69d8-4d4b-a7ec-4acd5276dff4",
+        "turnId": "turn-fb4dd440-08cf-43f9-a881-91e47c5246e1",
         "sequence": 2,
         "role": "user",
         "sourceText": "ok",
-        "timestamp": "2026-09-01T13:29:52.705408+00:00",
+        "timestamp": "2026-09-02T15:55:21.333890+00:00",
         "interpretedAction": "ACCEPT_PROPOSAL",
         "references": [],
         "technicalChanges": [
@@ -492,11 +499,11 @@
         "intentChanges": [],
         "clarification": null,
         "unsupportedFeatures": [],
-        "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+        "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal accepted.",
         "accepted": true,
-        "relatedJDLHashBefore": "7680c5eeb2bc67df",
-        "relatedJDLHashAfter": "7680c5eeb2bc67df",
+        "relatedJDLHashBefore": "c967672f8629fa2e",
+        "relatedJDLHashAfter": "c967672f8629fa2e",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -504,17 +511,17 @@
     },
     {
       "session": {
-        "sessionId": "session-6265a5b6-b415-4976-aa07-c620d20b6606",
+        "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "7680c5eeb2bc67df",
+        "currentJDLHash": "c967672f8629fa2e",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
-            "turnId": "turn-cb4223e0-c8e5-40f2-8df6-e79fa5d0437b",
+            "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
             "sequence": 1,
             "role": "user",
             "sourceText": "Fammi un solitario in oro rosa con sei griffe.",
-            "timestamp": "2026-09-01T13:29:52.701400+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -523,21 +530,21 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+            "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
           },
           {
-            "turnId": "turn-dbb35027-69d8-4d4b-a7ec-4acd5276dff4",
+            "turnId": "turn-fb4dd440-08cf-43f9-a881-91e47c5246e1",
             "sequence": 2,
             "role": "user",
             "sourceText": "ok",
-            "timestamp": "2026-09-01T13:29:52.705408+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "ACCEPT_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -546,21 +553,21 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-7c3caa55-192c-497a-ab87-93c1a36bec21",
+            "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
           },
           {
-            "turnId": "turn-0826869d-627c-4c80-941b-de358dc5dfb5",
+            "turnId": "turn-0603c70d-ccae-4b5f-9140-8e1bcbaccca0",
             "sequence": 3,
             "role": "user",
             "sourceText": "Fallo in platino.",
-            "timestamp": "2026-09-01T13:29:52.705408+00:00",
+            "timestamp": "2026-09-02T15:55:21.333890+00:00",
             "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
             "references": [],
             "technicalChanges": [
@@ -569,11 +576,11 @@
             "intentChanges": [],
             "clarification": null,
             "unsupportedFeatures": [],
-            "proposalId": "conv-proposal-ccba5d4e-3397-4bea-be90-658574eee01c",
+            "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "7680c5eeb2bc67df",
-            "relatedJDLHashAfter": "7680c5eeb2bc67df",
+            "relatedJDLHashBefore": "c967672f8629fa2e",
+            "relatedJDLHashAfter": "c967672f8629fa2e",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -581,12 +588,12 @@
         ],
         "pendingClarification": null,
         "activeProposal": {
-          "proposalId": "conv-proposal-ccba5d4e-3397-4bea-be90-658574eee01c",
-          "turnId": "turn-0826869d-627c-4c80-941b-de358dc5dfb5",
-          "baseDefinitionHash": "7680c5eeb2bc67df",
+          "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
+          "turnId": "turn-0603c70d-ccae-4b5f-9140-8e1bcbaccca0",
+          "baseDefinitionHash": "c967672f8629fa2e",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
-            "proposalId": "proposal-6b5ec432-c826-48be-a826-b5c6dcf39489",
+            "proposalId": "proposal-d5aaeeda-8a4c-4c26-846d-2c898a02802a",
             "sourceText": "Fallo in platino.",
             "interactionMode": "MODIFY",
             "unresolvedIntent": [],
@@ -643,7 +650,8 @@
                 "profile": "FACETED_REFERENCE",
                 "customOutline": null,
                 "measurement": null,
-                "importedAsset": null
+                "importedAsset": null,
+                "gem": null
               },
               "setting": {
                 "type": "prong",
@@ -828,6 +836,12 @@
                 "changed": false
               },
               {
+                "path": "stone.gem",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "setting.type",
                 "previousValue": "prong",
                 "proposedValue": "prong",
@@ -922,15 +936,15 @@
           "unsupportedDiscussed": []
         },
         "status": "PROPOSAL_READY",
-        "createdAt": "2026-09-01T13:29:52.701400+00:00",
-        "updatedAt": "2026-09-01T13:29:52.705408+00:00"
+        "createdAt": "2026-09-02T15:55:21.333890+00:00",
+        "updatedAt": "2026-09-02T15:55:21.333890+00:00"
       },
       "turn": {
-        "turnId": "turn-0826869d-627c-4c80-941b-de358dc5dfb5",
+        "turnId": "turn-0603c70d-ccae-4b5f-9140-8e1bcbaccca0",
         "sequence": 3,
         "role": "user",
         "sourceText": "Fallo in platino.",
-        "timestamp": "2026-09-01T13:29:52.705408+00:00",
+        "timestamp": "2026-09-02T15:55:21.333890+00:00",
         "interpretedAction": "MODIFY_DESIGN_PROPOSAL",
         "references": [],
         "technicalChanges": [
@@ -939,11 +953,11 @@
         "intentChanges": [],
         "clarification": null,
         "unsupportedFeatures": [],
-        "proposalId": "conv-proposal-ccba5d4e-3397-4bea-be90-658574eee01c",
+        "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "7680c5eeb2bc67df",
-        "relatedJDLHashAfter": "7680c5eeb2bc67df",
+        "relatedJDLHashBefore": "c967672f8629fa2e",
+        "relatedJDLHashAfter": "c967672f8629fa2e",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []

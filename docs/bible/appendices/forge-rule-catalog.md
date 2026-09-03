@@ -35,6 +35,14 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-PRONG-004` | Prong height vs. basket height | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-SETTING-001` | Basket height positivity | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
 | `JM-SETTING-002` | Basket height maximum | PROTOTYPE_HEURISTIC | FORGE-4 | warning | 1.0.0 | ACCEPTED |
+| `JM-SETTING-003` | Bezel wall thickness positivity | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
+| `JM-SETTING-004` | Bezel wall height positivity | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
+| `JM-GEM-001` | Gem reference exists | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-GEM-002` | Origin applicable to entry | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-GEM-003` | Custom gem coherence | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-GEM-004` | Visual profile resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-GEM-005` | Treatment set coherence | SEMANTIC_COMPATIBILITY | FORGE-1 | warning/error | 1.0.0 | ACCEPTED |
+| `JM-GEM-006` | Entry deprecated but resolvable | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-MANUFACTURING-001` | Minimum feature size (resin) | MANUFACTURING_CONTEXT | FORGE-5 | warning | 1.0.0 | ACCEPTED |
 | `JM-GEOMETRY-001` | Positive outer band dimension | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
 | `FORGE-SCHEMA-001` | Schema version literal | SCHEMA_INTEGRITY | FORGE-0 | fatal | 1.0.0 | ACCEPTED |

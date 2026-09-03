@@ -22,6 +22,11 @@ from jewelmind.api.schemas import (
     ExportJsonRequest,
     ExportStepRequest,
     ExportStlRequest,
+    GemRegistryResponse,
+    GemResolveRequest,
+    GemResolveResponse,
+    GemValidateRequest,
+    GemValidateResponse,
     GenerateResponse,
     HealthResponse,
     ModelMetadataResponse,
@@ -390,4 +395,149 @@ def review_package_route(payload: ReviewPackageRequest) -> FileResponse:
         filename=filename,
         headers={"X-Content-SHA256": checksum, "X-Package-Id": manifest.packageId},
         background=BackgroundTask(_delete_file, zip_path),
+    )
+
+
+# -- gem registry ---------------------------------------------------------------
+#
+# Read-only, and deliberately so. The registry is code (see
+# `jewelmind/gem/registry.py`); adding a gem is a change to the repository with
+# tests and a version bump, not a runtime write. A mutable registry behind an
+# API would make `registryVersion` meaningless and make a saved design's gem
+# reference resolvable or not depending on when it was opened.
+
+
+@router.get("/api/gems", response_model=GemRegistryResponse)
+def gem_registry_route() -> GemRegistryResponse:
+    """Every gem entry and visual profile the backend knows."""
+
+    from jewelmind.gem.registry import (
+        GEM_REGISTRY,
+        current_gem_ids,
+    )
+    from jewelmind.gem.resolution import GEM_SYSTEM_VERSION
+    from jewelmind.gem.visual import GEM_VISUAL_PROFILES
+
+    offered = set(current_gem_ids())
+    return GemRegistryResponse(
+        registryVersion=GEM_SYSTEM_VERSION,
+        gems=[
+            entry.model_dump(mode="json")
+            for gem_id, entry in GEM_REGISTRY.items()
+            if gem_id in offered
+        ],
+        visualProfiles=[
+            profile.model_dump(mode="json")
+            for profile in GEM_VISUAL_PROFILES.values()
+        ],
+        note=(
+            "An extensible foundation for identifying and rendering gems, not a "
+            "gemological database and not a certification source. Every entry is "
+            "NOT_REVIEWED, and every visual parameter is a rendering value rather "
+            "than an optical measurement."
+        ),
+    )
+
+
+@router.get("/api/gems/{gem_id}")
+def gem_detail_route(gem_id: str) -> dict:
+    """One gem entry, including a DEPRECATED one.
+
+    Deprecated entries stay reachable here on purpose: a saved design may
+    reference one, and a client must be able to describe it (brief section 29).
+    """
+
+    from jewelmind.api.errors import GemIdInvalidError as ApiGemIdInvalidError
+    from jewelmind.api.errors import GemNotFoundError as ApiGemNotFoundError
+    from jewelmind.gem.errors import GemIdInvalidError, GemNotFoundError
+    from jewelmind.gem.resolution import GEM_SYSTEM_VERSION, get_gem_or_raise
+    from jewelmind.gem.visual import get_visual_profile
+
+    # The domain error is translated to the API error at the boundary, the same
+    # way every other route does it — the domain layer never learns about HTTP
+    # status codes.
+    try:
+        entry = get_gem_or_raise(gem_id)
+    except GemIdInvalidError as exc:
+        raise ApiGemIdInvalidError(str(exc)) from exc
+    except GemNotFoundError as exc:
+        raise ApiGemNotFoundError(str(exc)) from exc
+
+    return {
+        "registryVersion": GEM_SYSTEM_VERSION,
+        "gem": entry.model_dump(mode="json"),
+        "visualProfile": get_visual_profile(
+            entry.defaultVisualProfileId
+        ).model_dump(mode="json"),
+    }
+
+
+@router.post("/api/gems/resolve", response_model=GemResolveResponse)
+def gem_resolve_route(payload: GemResolveRequest) -> GemResolveResponse:
+    """Resolve a name or alias to a canonical gem ID.
+
+    Returns `gemId: null` when nothing matches. It never guesses, and it never
+    infers a gem from a stone's shape.
+    """
+
+    from jewelmind.gem.registry import GEM_REGISTRY
+    from jewelmind.gem.resolution import resolve_alias
+
+    gem_id = resolve_alias(payload.term)
+    entry = GEM_REGISTRY.get(gem_id) if gem_id else None
+    return GemResolveResponse(
+        term=payload.term,
+        gemId=gem_id,
+        gem=entry.model_dump(mode="json") if entry else None,
+    )
+
+
+@router.post("/api/gems/validate", response_model=GemValidateResponse)
+def gem_validate_route(payload: GemValidateRequest) -> GemValidateResponse:
+    """Validate a gem identity on its own, without generating a model.
+
+    Runs the real Forge gem rules against a definition carrying this identity,
+    so the answer is exactly what generation would say — not a second,
+    divergent check.
+    """
+
+    from jewelmind.domain.defaults import default_definition
+    from jewelmind.domain.schema import StoneSpec
+    from jewelmind.gem.models import GemIdentity, GemTreatment
+    from jewelmind.gem.resolution import resolve_gem
+    from jewelmind.validation.engine import validate_definition
+
+    definition = default_definition()
+    definition.stone = StoneSpec.model_validate(
+        {**definition.stone.model_dump(), "gem": payload.gem.model_dump()}
+    )
+    results = [
+        result
+        for result in validate_definition(definition)
+        if result.ruleId.startswith("JM-GEM")
+    ]
+
+    identity = GemIdentity(
+        gemId=payload.gem.gemId,
+        origin=payload.gem.origin,
+        treatments=[
+            GemTreatment(
+                treatment=t.treatment,
+                status=t.status,
+                disclosure=t.disclosure,
+                confidence=t.confidence,
+                note=t.note,
+            )
+            for t in payload.gem.treatments
+        ],
+        visualProfileId=payload.gem.visualProfileId,
+        customName=payload.gem.customName,
+        note=payload.gem.note,
+    )
+    resolved = resolve_gem(identity)
+
+    return GemValidateResponse(
+        valid=not any(r.severity == "error" for r in results),
+        results=results,
+        resolved=resolved.model_dump(mode="json"),
     )

@@ -50,7 +50,12 @@
             "jewelryCategories": { "type": "array", "items": { "type": "string" } },
             "styles": { "type": "array", "items": { "type": "string" } },
             "materials": { "type": "array", "items": { "type": "string" } },
-            "manufacturingMethods": { "type": "array", "items": { "type": "string" } }
+            "manufacturingMethods": { "type": "array", "items": { "type": "string" } },
+            "settingFamilies": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Setting families a rule applies to, e.g. ['bezel']. Added in Sprint 21 so the bezel-only scope of JM-SETTING-003/004 (real since Sprint 19) can be stated here instead of living only in engine.py. Additive: an entry that omits it is unchanged in meaning."
+            }
           }
         },
         "professionalValidationStatus": {

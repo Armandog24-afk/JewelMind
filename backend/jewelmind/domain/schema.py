@@ -15,10 +15,20 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-# The Stone System owns the canonical stone vocabulary; importing it here keeps
-# one source of truth instead of a hand-maintained duplicate. Safe against
-# circular imports because `jewelmind.stone.__init__` deliberately imports
-# nothing and `jewelmind.stone.models` depends on no other JewelMind module.
+# The Stone and Gem systems own their canonical vocabularies; importing them
+# here keeps one source of truth instead of hand-maintained duplicates. Safe
+# against circular imports because both packages' `__init__.py` deliberately
+# import nothing, and both `models` modules depend on no other JewelMind
+# module — see each package's `__init__.py` for why that is load-bearing.
+from jewelmind.gem.models import (
+    GEM_ID_PATTERN,
+    MAX_GEM_ID_LENGTH,
+    GemConfidence,
+    GemOrigin,
+    GemTreatmentDisclosure,
+    GemTreatmentStatus,
+    GemTreatmentType,
+)
 from jewelmind.stone.models import (
     DeclaredUnit,
     StoneReferenceProfile,
@@ -137,6 +147,80 @@ class BandSpec(StrictModel):
     thicknessTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
 
 
+class JdlGemTreatment(StrictModel):
+    """One treatment claim about this stone (brief section 7).
+
+    JewelMind records the claim and who made it. It never decides whether a
+    treatment must be disclosed, whether it is stable, or whether it affects
+    durability — all of which need professional evidence this project does not
+    have.
+    """
+
+    treatment: GemTreatmentType
+    status: GemTreatmentStatus = "PRESENT"
+    disclosure: GemTreatmentDisclosure = "USER_DECLARED"
+    confidence: GemConfidence = "UNKNOWN"
+    note: str | None = Field(default=None, max_length=500)
+
+    @model_validator(mode="after")
+    def _other_requires_a_note(self) -> JdlGemTreatment:
+        if self.treatment == "OTHER" and not (self.note or "").strip():
+            raise ValueError(
+                "stone.gem.treatments[].note is required when treatment is 'OTHER'"
+            )
+        return self
+
+
+class JdlGemIdentity(StrictModel):
+    """What gem THIS stone is (brief sections 3/4/17).
+
+    Deliberately separate from every geometry field. A round stone is not
+    automatically a diamond, and the same `StoneSpec` is reusable with any gem —
+    which is why this is its own object rather than a `stone.material` string.
+
+    `gemId` references the canonical registry
+    (`backend/jewelmind/gem/registry.py`). IDs are language-independent and
+    constrained so one can never become a filesystem path or a shell argument.
+
+    Absent entirely on a legacy document, which normalizes to `unknown` — never
+    to diamond (brief section 18).
+    """
+
+    gemId: str = Field(pattern=GEM_ID_PATTERN, max_length=MAX_GEM_ID_LENGTH)
+
+    #: The ACTUAL origin of this stone, independent of treatment. Not a boolean:
+    #: a stone may be natural AND treated, or synthetic AND untreated.
+    origin: GemOrigin = "UNKNOWN"
+
+    #: An EMPTY list means no treatment is RECORDED — not that the stone is
+    #: untreated. To assert that, record a treatment with `status: NOT_PRESENT`.
+    treatments: list[JdlGemTreatment] = Field(default_factory=list, max_length=20)
+
+    #: Overrides the registry entry's default appearance, so a pale sapphire can
+    #: look pale while still being a sapphire.
+    visualProfileId: str | None = Field(
+        default=None, pattern=GEM_ID_PATTERN, max_length=MAX_GEM_ID_LENGTH
+    )
+
+    #: Required for, and only valid for, `gemId == "custom"`.
+    customName: str | None = Field(default=None, max_length=120)
+
+    note: str | None = Field(default=None, max_length=500)
+
+    @model_validator(mode="after")
+    def _custom_name_matches_custom_gem(self) -> JdlGemIdentity:
+        if self.gemId == "custom":
+            if not (self.customName or "").strip():
+                raise ValueError(
+                    "stone.gem.customName is required when gemId is 'custom'"
+                )
+        elif self.customName is not None:
+            raise ValueError(
+                "stone.gem.customName is only valid when gemId is 'custom'"
+            )
+        return self
+
+
 class JdlOutlinePoint(StrictModel):
     """One 2D point of a custom stone outline, in the stone's local frame."""
 
@@ -239,6 +323,15 @@ class StoneSpec(StrictModel):
     customOutline: JdlCustomOutline | None = None
     measurement: JdlStoneMeasurement | None = None
     importedAsset: JdlImportedStoneAsset | None = None
+
+    #: The gem this stone is made of (Sprint 21). Absent on every document
+    #: written before Sprint 21, which normalizes to `unknown` — never to
+    #: diamond, because the MVP having used a diamond-like stone is not
+    #: evidence about any particular design's intent (brief section 18).
+    #:
+    #: Deliberately NOT a geometry field: `geometry_hash()` excludes it, so
+    #: changing Diamond -> Sapphire does not invalidate the stone's geometry.
+    gem: JdlGemIdentity | None = None
 
     @model_validator(mode="after")
     def _check_shape_dimensions(self) -> StoneSpec:

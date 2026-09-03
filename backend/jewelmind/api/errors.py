@@ -71,3 +71,26 @@ class CadEngineUnavailableError(AppError):
 
     status_code = 503
     code = "CAD_ENGINE_UNAVAILABLE"
+
+
+class GemIdInvalidError(AppError):
+    """A gem identifier is malformed.
+
+    A client error, not a server one: gem IDs are constrained precisely so a
+    malformed value is rejected at the boundary rather than reaching a lookup.
+    """
+
+    status_code = 400
+    code = "GEM_ID_INVALID"
+
+
+class GemNotFoundError(AppError):
+    """No registry entry with the requested gem ID.
+
+    Distinct from a design REFERENCING an unknown gem, which is not an error at
+    all: that design still loads, resolving to `unknown`. This is only for an
+    explicit lookup of an ID that does not exist.
+    """
+
+    status_code = 404
+    code = "GEM_NOT_FOUND"

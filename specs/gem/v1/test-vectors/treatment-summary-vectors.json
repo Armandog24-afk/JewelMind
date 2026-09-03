@@ -1,0 +1,78 @@
+{
+  "generatedFrom": "jewelmind.gem.resolution.treatment_summary",
+  "note": "Three DIFFERENT states an interface must not conflate: nothing recorded, declared untreated, and one or more declared treatments.",
+  "vectors": [
+    {
+      "case": "nothing recorded",
+      "identity": {
+        "gemId": "corundum.ruby",
+        "origin": "UNKNOWN",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "summary": "not recorded"
+    },
+    {
+      "case": "declared untreated",
+      "identity": {
+        "gemId": "corundum.ruby",
+        "origin": "UNKNOWN",
+        "treatments": [
+          {
+            "treatment": "HEAT",
+            "status": "NOT_PRESENT",
+            "disclosure": "USER_DECLARED",
+            "confidence": "UNKNOWN",
+            "note": null
+          }
+        ],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "summary": "declared untreated"
+    },
+    {
+      "case": "heat present",
+      "identity": {
+        "gemId": "corundum.ruby",
+        "origin": "UNKNOWN",
+        "treatments": [
+          {
+            "treatment": "HEAT",
+            "status": "PRESENT",
+            "disclosure": "USER_DECLARED",
+            "confidence": "UNKNOWN",
+            "note": null
+          }
+        ],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "summary": "heat"
+    },
+    {
+      "case": "unspecified treatment declared",
+      "identity": {
+        "gemId": "beryl.emerald",
+        "origin": "UNKNOWN",
+        "treatments": [
+          {
+            "treatment": "UNKNOWN",
+            "status": "PRESENT",
+            "disclosure": "USER_DECLARED",
+            "confidence": "UNKNOWN",
+            "note": null
+          }
+        ],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "summary": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/gem/v1/gem-treatment.schema.json",
+  "title": "GemTreatment",
+  "additionalProperties": false,
+  "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+  "properties": {
+    "treatment": {
+      "enum": [
+        "HEAT",
+        "IRRADIATION",
+        "FRACTURE_FILLING",
+        "GLASS_FILLING",
+        "COATING",
+        "DIFFUSION",
+        "DYEING",
+        "IMPREGNATION",
+        "RESIN_IMPREGNATION",
+        "BLEACHING",
+        "LASER_DRILLING",
+        "HPHT",
+        "OTHER",
+        "UNKNOWN"
+      ],
+      "title": "Treatment",
+      "type": "string"
+    },
+    "status": {
+      "default": "PRESENT",
+      "enum": [
+        "PRESENT",
+        "NOT_PRESENT",
+        "SUSPECTED",
+        "UNKNOWN"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "disclosure": {
+      "default": "USER_DECLARED",
+      "enum": [
+        "USER_DECLARED",
+        "VENDOR_DECLARED",
+        "LAB_REPORT_CLAIMED",
+        "UNDISCLOSED",
+        "UNKNOWN"
+      ],
+      "title": "Disclosure",
+      "type": "string"
+    },
+    "confidence": {
+      "default": "UNKNOWN",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    }
+  },
+  "required": [
+    "treatment"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,16 @@
+{
+  "gemId": "corundum.sapphire",
+  "origin": "NATURAL",
+  "treatments": [
+    {
+      "treatment": "HEAT",
+      "status": "PRESENT",
+      "disclosure": "LAB_REPORT_CLAIMED",
+      "confidence": "HIGH",
+      "note": null
+    }
+  ],
+  "visualProfileId": null,
+  "customName": null,
+  "note": null
+}

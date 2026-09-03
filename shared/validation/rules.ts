@@ -28,6 +28,14 @@ export const RULE_IDS = {
   // not a jewelry threshold). No minimum bezel wall dimension is asserted.
   BEZEL_WALL_THICKNESS_POSITIVE: 'JM-SETTING-003',
   BEZEL_WALL_HEIGHT_POSITIVE: 'JM-SETTING-004',
+  // Sprint 21 — GEM_IDENTITY_ONLY. Referential and coherence invariants
+  // only; no gemological or manufacturing claim.
+  GEM_REFERENCE_EXISTS: 'JM-GEM-001',
+  GEM_ORIGIN_APPLICABLE: 'JM-GEM-002',
+  GEM_CUSTOM_COHERENT: 'JM-GEM-003',
+  GEM_VISUAL_PROFILE_RESOLVES: 'JM-GEM-004',
+  GEM_TREATMENT_COHERENT: 'JM-GEM-005',
+  GEM_ENTRY_DEPRECATED: 'JM-GEM-006',
   MANUFACTURING_MIN_FEATURE: 'JM-MANUFACTURING-001',
   GEOMETRY_OUTER_BAND_POSITIVE: 'JM-GEOMETRY-001',
 } as const

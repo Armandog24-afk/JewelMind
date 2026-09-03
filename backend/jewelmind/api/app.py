@@ -43,10 +43,26 @@ def _json_safe(value: Any) -> Any:
     if isinstance(value, float) and not math.isfinite(value):
         return str(value)
     if isinstance(value, dict):
-        return {k: _json_safe(v) for k, v in value.items()}
+        return {str(k): _json_safe(v) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
         return [_json_safe(v) for v in value]
-    return value
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    # ANY other object, stringified.
+    #
+    # The non-finite-float case above is one instance of a general problem:
+    # `errors()` echoes back whatever a validator put in `ctx`, and a
+    # `model_validator` that raises `ValueError` puts the exception OBJECT
+    # there. Serializing that crashed the handler, so a request rejected by a
+    # cross-field rule came back as an opaque 500 instead of a 422 naming the
+    # field — found in Sprint 21 against `stone.gem` (a custom gem with no
+    # name), but the same fault applied to every `ValueError`-raising validator
+    # in the schema, including the Stone v2 outline rules from Sprint 20.
+    #
+    # `str()` on a pydantic `ValueError` yields the validator's own message,
+    # which is written by this codebase and carries no server path or stack
+    # trace (FOUNDRY-GOV-011).
+    return str(value)
 
 
 def _cors_origins() -> list[str]:

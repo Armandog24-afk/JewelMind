@@ -47,3 +47,18 @@ BEZEL_WALL_HEIGHT_POSITIVE = "JM-SETTING-004"
 MANUFACTURING_MIN_FEATURE = "JM-MANUFACTURING-001"
 
 GEOMETRY_OUTER_BAND_POSITIVE = "JM-GEOMETRY-001"
+
+# Sprint 21 — GEM_IDENTITY_ONLY. Every one is a REFERENTIAL or COHERENCE
+# invariant: does the referenced entry exist, is the declared state
+# self-consistent, does the profile resolve.
+#
+# NONE is a gemological or manufacturing claim. There is deliberately no rule
+# about hardness, durability, heat sensitivity, setting suitability or treatment
+# safety, because every one of those needs evidence this project does not have
+# (GEM-GOV-006, brief section 26).
+GEM_REFERENCE_EXISTS = "JM-GEM-001"
+GEM_ORIGIN_APPLICABLE = "JM-GEM-002"
+GEM_CUSTOM_COHERENT = "JM-GEM-003"
+GEM_VISUAL_PROFILE_RESOLVES = "JM-GEM-004"
+GEM_TREATMENT_COHERENT = "JM-GEM-005"
+GEM_ENTRY_DEPRECATED = "JM-GEM-006"

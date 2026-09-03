@@ -169,6 +169,34 @@ completely unaffected when this happens. See
 full contract, governance rules, and machine-readable schemas in
 [`specs/designer/v1/`](../specs/designer/v1/README.md).
 
+### `GET /api/gems`
+
+Every current gem registry entry and every visual profile, plus a `note`
+stating what the registry is not. Read-only: the registry is code, so adding a
+gem is a repository change with tests and a version bump, never a runtime
+write — a mutable registry would make `registryVersion` meaningless.
+
+### `GET /api/gems/{gemId}`
+
+One entry with its default visual profile. A deprecated entry stays reachable
+here on purpose, because a saved design may reference one. `400
+GEM_ID_INVALID` for a malformed ID (validated for shape before any lookup),
+`404 GEM_NOT_FOUND` for a well-formed ID with no entry.
+
+### `POST /api/gems/resolve`
+
+Body: `{ "term": "rubino" }`. Resolves a name or alias to a canonical gem ID in
+either supported language. Returns `gemId: null` when nothing matches — it
+never guesses, and never infers a gem from a stone's shape.
+
+### `POST /api/gems/validate`
+
+Body: `{ "gem": <GemIdentity> }`. Runs the real Forge gem rules against a
+definition carrying this identity, so the answer is exactly what generation
+would say, and returns the `ResolvedGem` alongside. See
+[`specs/gem/v1/`](../specs/gem/v1/README.md) and
+[`docs/bible/23-gem-identity/README.md`](bible/23-gem-identity/README.md).
+
 ## CORS, limits, and cleanup
 
 - CORS origins are configured via the `JEWELMIND_CORS_ORIGINS` environment
