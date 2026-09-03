@@ -1769,5 +1769,81 @@ must:
   accent stones, allowing multiple named stone specifications in one document,
   or adding any professional arrangement rule.
 
+## SETTING SYSTEM V2 RULES
+
+`docs/bible/25-setting-v2/` is the authoritative Setting System v2
+specification — start at
+[`docs/bible/25-setting-v2/README.md`](docs/bible/25-setting-v2/README.md),
+then
+[`setting-v2-governance.md`](docs/bible/25-setting-v2/setting-v2-governance.md)
+for the 12 SETTINGV2-GOV rules, and
+[`head-execution-boundary.md`](docs/bible/25-setting-v2/head-execution-boundary.md)
+for exactly what does and does not execute. The machine-readable half lives in
+[`specs/setting/v2/`](specs/setting/v2/README.md). Sprint 19's
+[`docs/bible/21-setting/`](docs/bible/21-setting/README.md) and its 18
+SETTING-GOV rules still apply in full. Future coding agents must:
+
+- **Read `docs/bible/25-setting-v2/README.md` before changing head or prong
+  geometry** — before modifying anything in `backend/jewelmind/setting/`,
+  `geometry/components/basket.py`, `geometry/setting_adapter.py`, or
+  `domain/schema.py::SettingSpec`.
+- **Keep head construction category-neutral** — `setting/head.py` must never
+  read a band, a ring size or any category field; the Ring adapter resolves
+  those and passes numbers (SETTINGV2-GOV-001).
+- **Never rename the head component.** Every architecture produces
+  `basket_support`. The name is a structural role wired into
+  `geometry/roles.py`, the inspection required-component set, every preview
+  manifest, every export list and all 39 Golden baselines; the architecture is
+  reported in `SettingGeometryResult.headArchitecture` and the component
+  metadata (SETTINGV2-GOV-002).
+- **Preserve `ROUND_PRONG` and `BASKET` exactly** — both reproduce their
+  pre-Sprint-23 constructions character-for-character, and the Ring adapter
+  passes the ORIGINAL basket bore expression rather than re-deriving it
+  (re-deriving re-associates the same arithmetic and moves the solid ~1e-11 mm).
+  A default design's metal volume must not move and no Golden may be updated
+  (SETTINGV2-GOV-003).
+- **Keep every registry entry backed by a real builder, in both directions** —
+  `PRONG_STYLE_CAPABILITIES`/`HEAD_ARCHITECTURE_CAPABILITIES` must match
+  `prong_solid_builders()`/`head_builders()` exactly (SETTINGV2-GOV-004).
+- **Never make an unimplemented architecture an enum member.** `TRELLIS`,
+  `cathedral`, `compass_point` and `double_gallery` live in
+  `RESERVED_HEAD_ARCHITECTURES` with real reasons, are refused by the model, and
+  must never be silently substituted with a basket (SETTINGV2-GOV-005).
+- **Keep every head one connected solid** — a builder producing more raises.
+  `PEG_HEAD` originally produced two (a floating basket above an unattached
+  peg, because a peg narrower than the bore never touches it)
+  (SETTINGV2-GOV-006).
+- **Keep the vertical extent architecture-independent** — choosing a martini
+  must never move the stone; an architecture takes room from its own base
+  (SETTINGV2-GOV-007).
+- **Seat relief is a CUT, never a fuse.** No code in `seat.py` may call
+  `.fuse()` on a stone shape, and the stone must never become production metal
+  (LAW-006, ATLAS-GOV-011). The operation is recorded as
+  `CUT_STONE_FROM_METAL` in the component metadata (SETTINGV2-GOV-008).
+- **Never call relief a seat.** `REFERENCE_SEAT` has no bearing shoulder and no
+  claim that a stone would sit correctly in it. `seatSupport` stays `PARTIAL`;
+  `bearingSupport`/`cutterSupport` stay `PLANNED` until real sourced
+  professional geometry exists (SETTINGV2-GOV-009).
+- **Never invent a professional threshold** — no rule, model or message may
+  judge prong thickness for a stone size, head wall castability, seat depth or
+  whether a setting would hold. Every taper ratio, notch angle, section count
+  and clearance is a CONSTRUCTION PARAMETER and says so (SETTINGV2-GOV-010).
+- **Carry stone references, never resolve them** — nothing under
+  `jewelmind/setting/` may import `jewelmind.arrangement`;
+  `stoneInstanceAssignments` holds opaque IDs (SETTINGV2-GOV-011).
+- **Never mix explicit and derived prong layouts** — `EXPLICIT` with no
+  positions raises rather than falling back, and a group naming a non-existent
+  index raises rather than applying a requested style to nothing
+  (SETTINGV2-GOV-012).
+- **Create an ADR** before renaming the head component, emitting more than one
+  head per setting, replacing the registry dispatch, letting the stone shape
+  reach a fuse, making relief the default, moving head construction out of the
+  Setting System, or changing `ROUND_PRONG`/`BASKET` construction.
+- **Create an RFC** before adding a head architecture or prong style beyond
+  those implemented (including any reserved name), support rails, a real cut
+  seat with a bearing shoulder, cutter geometry, anchor-driven or
+  instance-aware placement, or any professional threshold on prong/head/seat
+  dimensions.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

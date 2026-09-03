@@ -1,0 +1,47 @@
+{
+  "generatedFrom": "live registries and live builder registries",
+  "note": "The registries and the builders must agree exactly. A registry entry with no builder would advertise a capability that does not exist; a builder with no entry would ship one nobody declared.",
+  "prongStylesWithBuilders": [
+    "CLAW_PRONG",
+    "ROUND_PRONG",
+    "TAPERED_PRONG",
+    "V_PRONG"
+  ],
+  "prongStylesInRegistry": [
+    "CLAW_PRONG",
+    "ROUND_PRONG",
+    "TAPERED_PRONG",
+    "V_PRONG"
+  ],
+  "headArchitecturesWithBuilders": [
+    "BASKET",
+    "MARTINI",
+    "PEG_HEAD",
+    "TULIP"
+  ],
+  "headArchitecturesInRegistry": [
+    "BASKET",
+    "MARTINI",
+    "PEG_HEAD",
+    "TULIP"
+  ],
+  "reservedHeadArchitectures": [
+    "cathedral",
+    "compass_point",
+    "double_gallery",
+    "trellis"
+  ],
+  "reservedSettingFamilies": [
+    "bar",
+    "bead",
+    "channel",
+    "custom",
+    "flush",
+    "pave",
+    "tension"
+  ],
+  "settingFamilies": [
+    "bezel",
+    "prong"
+  ]
+}

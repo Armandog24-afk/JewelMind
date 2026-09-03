@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v2/seat-setting-definition.schema.json",
+  "title": "SeatSettingDefinition",
+  "additionalProperties": false,
+  "description": "Whether and how metal is relieved where the stone sits (Sprint 23).",
+  "properties": {
+    "mode": {
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REFERENCE_SEAT"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "clearanceMm": {
+      "default": 0.02,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Clearancemm",
+      "type": "number"
+    }
+  },
+  "type": "object"
+}

@@ -31,6 +31,11 @@ from jewelmind.gem.models import (
     GemTreatmentStatus,
     GemTreatmentType,
 )
+from jewelmind.setting.models import (
+    HeadArchitecture,
+    ProngStyle,
+    SeatMode,
+)
 from jewelmind.stone.models import (
     DeclaredUnit,
     StoneReferenceProfile,
@@ -411,6 +416,51 @@ class SettingSpec(StrictModel):
     prongDiameter: float = Field(default=1.1, allow_inf_nan=False)
     prongHeight: float = Field(default=4.8, allow_inf_nan=False)
     basketHeight: float = Field(default=3.5, allow_inf_nan=False)
+
+    # ---- Sprint 23: advanced heads and prongs -------------------------------
+    #
+    # Three additive optional fields, each defaulting to the pre-Sprint-23
+    # behaviour, so every existing document generates byte-identical geometry.
+    # A MINOR change by the same definition Sprint 19 used when `bezel` joined
+    # the `type` enum, so `schemaVersion` stays "0.1.0".
+
+    #: The prong body style. `ROUND_PRONG` is the cylinder every design had
+    #: before this sprint and remains the default.
+    prongStyle: ProngStyle = "ROUND_PRONG"
+
+    #: The structure between the top of the band and the stone. `BASKET` is the
+    #: hollow cylindrical wall every design had before this sprint.
+    #:
+    #: The generated component is still named `basket_support` for every
+    #: architecture — the name is a structural role, and it is wired into the
+    #: role map, the inspection required-component set, every preview manifest
+    #: and all 39 Golden baselines.
+    headArchitecture: HeadArchitecture = "BASKET"
+
+    #: Whether metal is relieved where the stone sits. `NONE` is the default and
+    #: the pre-Sprint-23 geometry; `REFERENCE_SEAT` cuts the stone's volume out
+    #: of the head and prongs.
+    #:
+    #: A CUT, never a fuse: the stone is a cutting tool and is never unioned
+    #: into the metal body, so LAW-006 holds. It is REFERENCE relief, not a
+    #: setter's seat, and must never be described as one.
+    seatMode: SeatMode = "NONE"
+
+    #: Tip radius as a fraction of the prong radius, for the tapered styles.
+    #: Ignored by `ROUND_PRONG`. A CONSTRUCTION PARAMETER, not a professional
+    #: proportion.
+    prongTipRatio: float = Field(default=0.6, gt=0.05, le=1.0, allow_inf_nan=False)
+
+    #: Base radius as a fraction of the head radius, for `MARTINI`/`TULIP`.
+    #: Ignored by `BASKET`, which is a straight wall.
+    headBaseRatio: float = Field(default=0.55, gt=0.05, le=1.0, allow_inf_nan=False)
+
+    #: Peg dimensions, required for and only meaningful to `PEG_HEAD`.
+    #: Deliberately not defaulted to numbers: an invented peg size would be a
+    #: construction choice the caller never made, so the generator refuses
+    #: rather than guessing (surfaced as JM-SETTING-005).
+    pegDiameter: float | None = Field(default=None, allow_inf_nan=False)
+    pegHeight: float | None = Field(default=None, allow_inf_nan=False)
     bezelWallThickness: float = Field(default=0.6, allow_inf_nan=False)
     bezelWallHeight: float = Field(default=2.5, allow_inf_nan=False)
 

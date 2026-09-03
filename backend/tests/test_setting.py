@@ -316,12 +316,19 @@ class TestSettingRegistry:
             assert capability.inspectable is True
             assert capability.categoryNeutral is True
 
-    def test_seats_bearings_and_cutters_are_honestly_planned(self):
-        """Brief section 24: no production seat geometry exists, so claiming
-        anything other than PLANNED would be false."""
+    def test_seats_bearings_and_cutters_are_reported_honestly(self):
+        """Sprint 19 asserted all three were PLANNED, which was true then.
+
+        Sprint 23 added real opt-in `REFERENCE_SEAT` relief, so `seatSupport`
+        is now PARTIAL — PARTIAL rather than CURRENT because relief is not a cut
+        seat with a bearing shoulder. Bearing and cutter geometry still do not
+        exist and must keep saying PLANNED: a bearing is sized by a setter and a
+        cutter is manufacturing tooling, and no sourced professional geometry
+        exists for either.
+        """
 
         for capability in SETTING_CAPABILITIES.values():
-            assert capability.seatSupport == "PLANNED"
+            assert capability.seatSupport == "PARTIAL"
             assert capability.bearingSupport == "PLANNED"
             assert capability.cutterSupport == "PLANNED"
 
@@ -650,11 +657,19 @@ class TestSettingGeometryResult:
     @pytest.mark.parametrize("setting_type,component", [("prong", "prongs"), ("bezel", "bezel")])
     def test_result_reports_real_components_and_roles(self, setting_type, component):
         _components, result = generate_setting(_setting_def(_definition(setting_type=setting_type)))
-        assert result.generatedComponents == [component]
-        assert result.productionComponents == [component]
+        # Sprint 23: the head is now a Setting component too, so a setting
+        # built through the Ring adapter reports its family component AND the
+        # head. Both are production metal; neither is a reference component.
+        assert result.generatedComponents == [component, "basket_support"]
+        assert result.productionComponents == [component, "basket_support"]
         assert result.referenceComponents == []
         assert result.geometryFacts[0].componentId == component
         assert result.geometryFacts[0].solidCount >= 1
+        head_fact = next(
+            f for f in result.geometryFacts if f.componentId == "basket_support"
+        )
+        assert head_fact.solidCount == 1
+        assert result.headArchitecture == "BASKET"
 
     def test_model_carries_the_setting_result(self):
         model = build_solitaire_ring(default_definition())

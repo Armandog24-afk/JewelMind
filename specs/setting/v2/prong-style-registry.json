@@ -1,0 +1,57 @@
+{
+  "settingGeometryVersion": "1.1.0",
+  "generatedFrom": "backend/jewelmind/setting/capability.py::PRONG_STYLE_CAPABILITIES",
+  "note": "Generated from the live registry. ROUND_PRONG is the pre-Sprint-23 cylinder, preserved character-for-character and still the default — which is why every existing design's prong volumes are unchanged. Every notch angle, depth and tip ratio is a SOFTWARE CONSTRUCTION parameter; none is a professional prong proportion.",
+  "constructionParameters": {
+    "vNotchAngleDeg": 90.0,
+    "vNotchDepthFraction": 0.35
+  },
+  "styles": [
+    {
+      "style": "ROUND_PRONG",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "The pre-Sprint-23 straight cylinder, unchanged and still the default. `tipRatio` is accepted and ignored, because honouring it would silently change every existing design's geometry."
+    },
+    {
+      "style": "TAPERED_PRONG",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A cone frustum: full radius at the base, `tipRatio` of it at the tip. A software reference taper, not a measured claw profile."
+    },
+    {
+      "style": "CLAW_PRONG",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A cylindrical shaft fused to a tapered head, so the taper is concentrated near the tip. Distinct from TAPERED_PRONG, which tapers over its whole length."
+    },
+    {
+      "style": "V_PRONG",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A cylinder with a V notch cut into its tip, the notch opening outward along the prong's own radial direction. The notch angle and depth are construction parameters; no claim is made that a stone tip would seat correctly in one."
+    }
+  ],
+  "reserved": [
+    {
+      "capability": "anchor_driven_placement",
+      "reason": "Placing prongs at a stone's own anchors (tip, cleft, corners). The anchors exist in Stone v2; consuming them needs a placement strategy that does not yet exist, so OUTLINE_CARDINAL remains the non-round default."
+    },
+    {
+      "capability": "custom_prong_profile",
+      "reason": "An arbitrary swept prong cross-section. EXPLICIT positions are the escape hatch for layout; an arbitrary profile is not expressible."
+    },
+    {
+      "capability": "shared_prong_geometry",
+      "reason": "A prong serving two stones is REPRESENTABLE today — explicit positions carry `servesStoneInstanceIds`, and the assignment is reported in the result. It is not GENERATABLE against two stones, because one stone component is built per model (see the Stone Arrangement execution boundary)."
+    }
+  ]
+}

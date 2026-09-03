@@ -1,7 +1,7 @@
 {
   "inspectionId": "inspection-6af422d9-16cc-4d7f-a4be-47c04ef49205",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "ce6a799efdd4fe13",
+  "definitionHash": "6edd0c3c2696639f",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
   "startedAt": "2026-09-02T15:55:18.571583+00:00",
@@ -402,6 +402,18 @@
             "y": -2.671688370674993
           }
         ],
+        "prongStyle": "ROUND_PRONG",
+        "positionSource": "DERIVED",
+        "stylesUsed": [
+          "ROUND_PRONG",
+          "ROUND_PRONG",
+          "ROUND_PRONG",
+          "ROUND_PRONG",
+          "ROUND_PRONG",
+          "ROUND_PRONG"
+        ],
+        "tipRatio": 0.6,
+        "sharedProngCount": 0,
         "centerRadiusMm": 3.085
       },
       "diagnostics": []
@@ -440,7 +452,9 @@
         "outerRadiusMm": 3.635,
         "innerRadiusMm": 2.535,
         "baseZMm": 10.3,
-        "heightMm": 3.9
+        "heightMm": 3.9,
+        "headArchitecture": "BASKET",
+        "solidCount": 1
       },
       "diagnostics": []
     }
@@ -1826,7 +1840,8 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
       "value": "prong",
       "unit": null,
@@ -1843,7 +1858,8 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
       "value": "SUPPORTED_SOFTWARE",
       "unit": null,
@@ -1860,9 +1876,10 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
-      "value": 1,
+      "value": 2,
       "unit": null,
       "status": "PASS",
       "tolerance": null,
@@ -1877,7 +1894,8 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
       "value": 6,
       "unit": null,
@@ -1894,7 +1912,8 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
       "value": 6,
       "unit": null,
@@ -1911,7 +1930,8 @@
       "inspectionVersion": "1.0.0",
       "scope": "ASSEMBLY",
       "componentIds": [
-        "prongs"
+        "prongs",
+        "basket_support"
       ],
       "value": "RADIAL",
       "unit": null,

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v2/prong-group.schema.json",
+  "title": "ProngGroupSpec",
+  "additionalProperties": false,
+  "description": "A named subset of prongs that share a style or a stone assignment.\n\nGrouping is how \"these two prongs are the shared pair between the centre\nand the left side stone\" is stated. It carries no geometry of its own — a\ngroup is a label over positions, so removing one changes nothing built.",
+  "properties": {
+    "groupId": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Groupid",
+      "type": "string"
+    },
+    "style": {
+      "anyOf": [
+        {
+          "enum": [
+            "ROUND_PRONG",
+            "CLAW_PRONG",
+            "V_PRONG",
+            "TAPERED_PRONG"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Style"
+    },
+    "positionIndices": {
+      "items": {
+        "type": "integer"
+      },
+      "maxItems": 100,
+      "title": "Positionindices",
+      "type": "array"
+    }
+  },
+  "required": [
+    "groupId"
+  ],
+  "type": "object"
+}

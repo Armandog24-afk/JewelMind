@@ -1263,9 +1263,78 @@
           "default": 2.5,
           "title": "Bezelwallheight",
           "type": "number"
+        },
+        "prongStyle": {
+          "default": "ROUND_PRONG",
+          "enum": [
+            "ROUND_PRONG",
+            "CLAW_PRONG",
+            "V_PRONG",
+            "TAPERED_PRONG"
+          ],
+          "title": "Prongstyle",
+          "type": "string"
+        },
+        "headArchitecture": {
+          "default": "BASKET",
+          "enum": [
+            "BASKET",
+            "PEG_HEAD",
+            "MARTINI",
+            "TULIP"
+          ],
+          "title": "Headarchitecture",
+          "type": "string"
+        },
+        "seatMode": {
+          "default": "NONE",
+          "enum": [
+            "NONE",
+            "REFERENCE_SEAT"
+          ],
+          "title": "Seatmode",
+          "type": "string"
+        },
+        "prongTipRatio": {
+          "default": 0.6,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "title": "Prongtipratio",
+          "type": "number"
+        },
+        "headBaseRatio": {
+          "default": 0.55,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "title": "Headbaseratio",
+          "type": "number"
+        },
+        "pegDiameter": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pegdiameter"
+        },
+        "pegHeight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pegheight"
         }
       },
-      "description": " Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts."
+      "description": " Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts. Sprint 23 note: prongStyle, headArchitecture, seatMode, prongTipRatio, headBaseRatio, pegDiameter and pegHeight are additive optional fields, each defaulting to the pre-Sprint-23 behaviour (ROUND_PRONG / BASKET / NONE), so every existing document generates byte-identical geometry and schemaVersion stays 0.1.0."
     },
     "material": {
       "type": "object",

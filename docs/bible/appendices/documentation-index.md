@@ -943,6 +943,10 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-ARRANGE-GOVERNANCE | Stone Arrangement Governance | accepted | current | [`24-arrangement/arrangement-governance.md`](../24-arrangement/arrangement-governance.md) |
 | JM-BIBLE-ARRANGE-BOUNDARY | Stone Arrangement Execution Boundary | accepted | partial | [`24-arrangement/execution-boundary.md`](../24-arrangement/execution-boundary.md) |
 | JM-BIBLE-ARRANGE-SPRINT-22-REPORT | Sprint 22 Validation Report — Stone Arrangement Engine v1 | accepted | current | [`24-arrangement/SPRINT-22-VALIDATION-REPORT.md`](../24-arrangement/SPRINT-22-VALIDATION-REPORT.md) |
+| JM-BIBLE-SETTINGV2-README | Setting System v2 — Index | accepted | current | [`25-setting-v2/README.md`](../25-setting-v2/README.md) |
+| JM-BIBLE-SETTINGV2-GOVERNANCE | Setting System v2 Governance | accepted | current | [`25-setting-v2/setting-v2-governance.md`](../25-setting-v2/setting-v2-governance.md) |
+| JM-BIBLE-SETTINGV2-BOUNDARY | Setting v2 Execution Boundary | accepted | partial | [`25-setting-v2/head-execution-boundary.md`](../25-setting-v2/head-execution-boundary.md) |
+| JM-BIBLE-SETTINGV2-SPRINT-23-REPORT | Sprint 23 Validation Report — Setting System v2 | accepted | current | [`25-setting-v2/SPRINT-23-VALIDATION-REPORT.md`](../25-setting-v2/SPRINT-23-VALIDATION-REPORT.md) |
 
 ## Root-level project documents
 

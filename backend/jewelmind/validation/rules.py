@@ -44,6 +44,19 @@ SETTING_BASKET_HEIGHT_MAX = "JM-SETTING-002"
 BEZEL_WALL_THICKNESS_POSITIVE = "JM-SETTING-003"
 BEZEL_WALL_HEIGHT_POSITIVE = "JM-SETTING-004"
 
+# Sprint 23 — SETTING_V2. Structural and referential checks on the advanced
+# head/prong fields: does the requested architecture have the parameters it
+# needs, is a field meaningful for the family that was chosen, can the
+# requested operation actually run against this stone.
+#
+# NONE is a professional or manufacturing threshold. There is deliberately no
+# rule about minimum prong thickness for a given stone size, minimum head wall
+# for a given metal, or whether a seat is deep enough to hold a stone — each
+# needs sourced professional evidence this project does not have.
+SETTING_HEAD_PARAMETERS_COMPLETE = "JM-SETTING-005"
+SETTING_FIELD_APPLICABLE = "JM-SETTING-006"
+SETTING_SEAT_FEASIBLE = "JM-SETTING-007"
+
 MANUFACTURING_MIN_FEATURE = "JM-MANUFACTURING-001"
 
 GEOMETRY_OUTER_BAND_POSITIVE = "JM-GEOMETRY-001"

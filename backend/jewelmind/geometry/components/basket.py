@@ -1,53 +1,35 @@
-"""Basket support geometry: a simplified structural ring connecting the
-prongs down to the band.
+"""Basket support: a thin re-export of the Setting System's head builder.
 
-Implemented as a hollow cylindrical wall (outer radius minus inner radius)
-rather than a tapered or decorative structure — a robust first
-implementation, per the product spec, rather than a highly decorative one.
-The wall's radial thickness is sized to fully embed the prong footprint so
-prongs, basket, and band all genuinely overlap in 3D rather than merely
-touching at a surface.
+Sprint 23 moved head construction into `jewelmind/setting/head.py` so a head is
+a CATEGORY-NEUTRAL Setting concern rather than a ring-specific one — a future
+pendant or earring reaching the same structure gets it for free. This module
+survives as the Ring-side entry point, the same pattern `band.py`, `stone.py`
+and `prongs.py` already follow.
+
+THE GEOMETRY IS UNCHANGED for a `BASKET` architecture, which is every
+pre-Sprint-23 document: `head.py::_basket()` reproduces the previous
+construction character-for-character, and the component is still named
+`basket_support`. The radial dimensions are resolved by
+`geometry/setting_adapter.py::head_definition_from_jdl()`, which restates the
+same `centre ± prongR` arithmetic this module used to do inline.
 """
 
 from __future__ import annotations
 
-import cadquery as cq
-
 from jewelmind.domain.schema import JewelryDefinition
-from jewelmind.geometry.connection import shank_connection_interface
-from jewelmind.geometry.model import BoundingBox, GeneratedComponent
-
-_MIN_INNER_RADIUS_MM = 0.2
+from jewelmind.geometry.model import GeneratedComponent
+from jewelmind.setting.head import build_head
 
 
 def build_basket_support(definition: JewelryDefinition) -> GeneratedComponent:
-    interface = shank_connection_interface(definition)
-    prong_r = definition.setting.prongDiameter / 2
-    center_r = interface.headCenterRadiusMm
+    """Build the head component (named `basket_support`) for this ring."""
 
-    outer_r = center_r + prong_r
-    inner_r = max(center_r - prong_r, _MIN_INNER_RADIUS_MM)
+    from jewelmind.geometry.setting_adapter import (
+        head_definition_from_jdl,
+        setting_attachment_interface,
+    )
 
-    base_z = interface.topZMm - interface.embedMm
-    height = definition.setting.basketHeight + interface.embedMm
-
-    outer = cq.Workplane("XY").workplane(offset=base_z).circle(outer_r).extrude(height)
-    inner = cq.Workplane("XY").workplane(offset=base_z).circle(inner_r).extrude(height)
-    solid = outer.cut(inner)
-
-    shape = solid.val()
-    metadata = {
-        "outerRadiusMm": outer_r,
-        "innerRadiusMm": inner_r,
-        "baseZMm": base_z,
-        "heightMm": height,
-    }
-
-    return GeneratedComponent(
-        name="basket_support",
-        shape=shape,
-        volume_mm3=shape.Volume(),
-        bounding_box=BoundingBox.from_shape(shape),
-        warnings=[],
-        metadata=metadata,
+    return build_head(
+        head_definition_from_jdl(definition),
+        setting_attachment_interface(definition),
     )

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v2/prong-setting-definition-v2.schema.json",
+  "title": "ProngSettingDefinition",
+  "$defs": {
+    "ProngGroupSpec": {
+      "additionalProperties": false,
+      "description": "A named subset of prongs that share a style or a stone assignment.\n\nGrouping is how \"these two prongs are the shared pair between the centre\nand the left side stone\" is stated. It carries no geometry of its own — a\ngroup is a label over positions, so removing one changes nothing built.",
+      "properties": {
+        "groupId": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Groupid",
+          "type": "string"
+        },
+        "style": {
+          "anyOf": [
+            {
+              "enum": [
+                "ROUND_PRONG",
+                "CLAW_PRONG",
+                "V_PRONG",
+                "TAPERED_PRONG"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style"
+        },
+        "positionIndices": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 100,
+          "title": "Positionindices",
+          "type": "array"
+        }
+      },
+      "required": [
+        "groupId"
+      ],
+      "title": "ProngGroupSpec",
+      "type": "object"
+    },
+    "ProngPositionSpec": {
+      "additionalProperties": false,
+      "description": "One explicitly placed prong, in the stone's own local millimetre frame.\n\nExists so a configuration no strategy derives is still expressible. The\n`servesStoneInstanceIds` field is what makes a SHARED prong a real concept\nrather than a coincidence of position: a prong between two stones declares\nboth, and that declaration survives into the geometry metadata where\ninspection and Vision can read it.",
+      "properties": {
+        "xMm": {
+          "maximum": 100.0,
+          "minimum": -100.0,
+          "title": "Xmm",
+          "type": "number"
+        },
+        "yMm": {
+          "maximum": 100.0,
+          "minimum": -100.0,
+          "title": "Ymm",
+          "type": "number"
+        },
+        "servesStoneInstanceIds": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Servesstoneinstanceids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "xMm",
+        "yMm"
+      ],
+      "title": "ProngPositionSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Prong-family parameters (brief section 9). Mirrors the real public\nJDL fields; `placementStrategy` and `style` are Setting-internal and\nare resolved from the stone rather than requested via JDL.",
+  "properties": {
+    "prongCount": {
+      "title": "Prongcount",
+      "type": "integer"
+    },
+    "prongDiameterMm": {
+      "title": "Prongdiametermm",
+      "type": "number"
+    },
+    "prongHeightMm": {
+      "title": "Prongheightmm",
+      "type": "number"
+    },
+    "placementStrategy": {
+      "enum": [
+        "RADIAL",
+        "OUTLINE_CARDINAL"
+      ],
+      "title": "Placementstrategy",
+      "type": "string"
+    },
+    "style": {
+      "default": "ROUND_PRONG",
+      "enum": [
+        "ROUND_PRONG",
+        "CLAW_PRONG",
+        "V_PRONG",
+        "TAPERED_PRONG"
+      ],
+      "title": "Style",
+      "type": "string"
+    },
+    "positionSource": {
+      "default": "DERIVED",
+      "enum": [
+        "DERIVED",
+        "EXPLICIT"
+      ],
+      "title": "Positionsource",
+      "type": "string"
+    },
+    "positions": {
+      "items": {
+        "$ref": "#/$defs/ProngPositionSpec"
+      },
+      "maxItems": 100,
+      "title": "Positions",
+      "type": "array"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/$defs/ProngGroupSpec"
+      },
+      "maxItems": 20,
+      "title": "Groups",
+      "type": "array"
+    },
+    "tipRatio": {
+      "default": 0.6,
+      "exclusiveMinimum": 0.05,
+      "maximum": 1.0,
+      "title": "Tipratio",
+      "type": "number"
+    }
+  },
+  "required": [
+    "prongCount",
+    "prongDiameterMm",
+    "prongHeightMm",
+    "placementStrategy"
+  ],
+  "type": "object"
+}

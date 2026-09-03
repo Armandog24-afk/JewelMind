@@ -1013,3 +1013,39 @@ resolves and what the geometry pipeline builds. Today every instance resolves
 and one stone solid is emitted; the rest are reported `NOT_GENERATED` with a
 reason. See
 [`24-arrangement/execution-boundary.md`](../24-arrangement/execution-boundary.md).
+
+## Setting v2 terms (Sprint 23)
+
+**Head** — the structure between the attachment plane and the stone: what the
+prongs rise from. A category-neutral Setting concern since Sprint 23, built by
+`setting/head.py`. See
+[`25-setting-v2/README.md`](../25-setting-v2/README.md).
+
+**Head Architecture** — which head shape is built: `BASKET` (a straight hollow
+wall, and the default), `PEG_HEAD` (a wall on a peg, joined by a flare),
+`MARTINI` (a conical wall), `TULIP` (a concave flare). Every one produces a
+component named `basket_support`, because the name is a structural role.
+
+**Prong Style** — the prong body's shape: `ROUND_PRONG` (a cylinder, and the
+default), `TAPERED_PRONG` (a cone frustum), `CLAW_PRONG` (a shaft with a
+tapered head, so the taper concentrates at the tip), `V_PRONG` (a notch cut
+along the prong's own radial direction).
+
+**Prong Position Source** — whether positions are `DERIVED` from the stone's
+geometry (the default) or stated `EXPLICIT`ly. Never mixed: a half-overridden
+layout has no determinate meaning.
+
+**Prong Group** — a named subset of prongs carrying a style override, so a
+mixed layout needs no second setting. A label over positions; it builds no
+geometry of its own.
+
+**Reference Seat** — metal relieved where the stone sits, produced by using the
+stone solid as a CUTTING TOOL against production metal. Never a fuse, so the
+stone is never part of the production body. It is relief, NOT a setter's seat
+with a bearing shoulder, and no claim is made that a stone would sit correctly
+in it.
+
+**Stone Instance Assignment** — the map from a generated setting component to
+the stone instance IDs it serves. What makes a shared prong a real concept
+rather than a coincidence of position. The Setting System carries these
+references and never resolves them.

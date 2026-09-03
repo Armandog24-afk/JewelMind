@@ -1,0 +1,23 @@
+{
+  "settingGeometryVersion": "1.1.0",
+  "generatedFrom": "backend/jewelmind/setting/capability.py::SEAT_CAPABILITIES",
+  "note": "REFERENCE_SEAT uses the stone solid as a CUTTING TOOL against production metal. Never a fuse: the stone contributes no material and is discarded when the cut returns, so LAW-006 holds unchanged. It is relief, NOT a cut seat with a bearing shoulder, and no claim is made that a stone would sit correctly in it. Off by default, so every pre-Sprint-23 design keeps its geometry.",
+  "modes": [
+    {
+      "mode": "NONE",
+      "status": "CURRENT",
+      "generatable": true,
+      "operation": "NONE",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "No relief, and the default. Stone and metal overlap exactly as they did before Sprint 23."
+    },
+    {
+      "mode": "REFERENCE_SEAT",
+      "status": "CURRENT",
+      "generatable": true,
+      "operation": "CUT_STONE_FROM_METAL",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "The stone solid is used as a CUTTING TOOL against production metal, so metal no longer occupies the stone's volume. Never a fuse, so LAW-006 holds. REFERENCE relief only: it is not a cut seat with a bearing shoulder and no claim is made that a stone would sit correctly in it."
+    }
+  ]
+}

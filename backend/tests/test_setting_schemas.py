@@ -123,7 +123,11 @@ def test_registry_setting_types_match_the_jdl_enum():
 def test_no_registry_entry_claims_professional_validation():
     for entry in _load(SPECS / "setting-registry.json")["settings"]:
         assert entry["professionalValidationStatus"] == "NOT_REVIEWED"
-        assert entry["seatSupport"] == "PLANNED"
+        # Sprint 23: seat support is PARTIAL, because opt-in REFERENCE_SEAT
+        # relief is real — and PARTIAL rather than CURRENT, because relief is
+        # not a cut seat with a bearing shoulder. Bearing and cutter geometry
+        # still do not exist and must keep saying PLANNED.
+        assert entry["seatSupport"] == "PARTIAL"
         assert entry["bearingSupport"] == "PLANNED"
         assert entry["cutterSupport"] == "PLANNED"
 

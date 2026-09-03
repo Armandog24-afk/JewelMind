@@ -83,6 +83,13 @@
         "prongDiameter": 1.1,
         "prongHeight": 4.8,
         "basketHeight": 3.5,
+        "prongStyle": "ROUND_PRONG",
+        "headArchitecture": "BASKET",
+        "seatMode": "NONE",
+        "prongTipRatio": 0.6,
+        "headBaseRatio": 0.55,
+        "pegDiameter": null,
+        "pegHeight": null,
         "bezelWallThickness": 0.6,
         "bezelWallHeight": 2.5
       },

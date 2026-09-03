@@ -431,6 +431,142 @@ def _arrangement_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _setting_v2_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Advanced head and prong validation (Sprint 23).
+
+    SCOPE: SETTING_V2, and STRUCTURAL ONLY. Each finding answers one of three
+    questions: does the requested architecture have the parameters it needs, is
+    a requested field meaningful for the family chosen, and can the requested
+    operation actually run against this stone.
+
+    None of them is a professional judgment. There is no rule here about
+    whether a prong is thick enough for a 6.5 mm stone, whether a martini wall
+    is castable, or whether a seat would hold — every one of those needs
+    sourced professional evidence this project does not have, so none exists
+    (SETTING-GOV-010).
+
+    A design left on the defaults produces NO results: `ROUND_PRONG`,
+    `BASKET` and `seatMode="NONE"` are exactly what every pre-Sprint-23
+    document has, and reporting anything for them would make the whole existing
+    corpus noisy.
+    """
+
+    setting = d.setting
+    out: list[R.ValidationResult] = []
+
+    # A PEG_HEAD without peg dimensions cannot be built, and the generator
+    # refuses rather than inventing them — so the refusal is surfaced here as a
+    # rule result instead of only as a generation-time exception.
+    if setting.headArchitecture == "PEG_HEAD":
+        missing = [
+            name
+            for name, value in (
+                ("pegDiameter", setting.pegDiameter),
+                ("pegHeight", setting.pegHeight),
+            )
+            if value is None
+        ]
+        if missing:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.SETTING_HEAD_PARAMETERS_COMPLETE,
+                    severity="error",
+                    message=(
+                        "A PEG_HEAD requires "
+                        + " and ".join(f"setting.{name}" for name in missing)
+                        + ". No default is applied, because an invented peg size "
+                        "would be a construction choice you did not make."
+                    ),
+                    parameter=f"setting.{missing[0]}",
+                )
+            )
+        else:
+            for name, value in (
+                ("pegDiameter", setting.pegDiameter),
+                ("pegHeight", setting.pegHeight),
+            ):
+                if value is not None and value <= 0:
+                    out.append(
+                        R.ValidationResult(
+                            ruleId=R.SETTING_HEAD_PARAMETERS_COMPLETE,
+                            severity="error",
+                            message=f"setting.{name} must be greater than 0 mm.",
+                            parameter=f"setting.{name}",
+                        )
+                    )
+            if (
+                setting.pegHeight is not None
+                and setting.pegHeight >= setting.basketHeight
+            ):
+                out.append(
+                    R.ValidationResult(
+                        ruleId=R.SETTING_HEAD_PARAMETERS_COMPLETE,
+                        severity="error",
+                        message=(
+                            f"setting.pegHeight ({setting.pegHeight} mm) must be "
+                            f"less than setting.basketHeight "
+                            f"({setting.basketHeight} mm); otherwise no head wall "
+                            "remains above the peg."
+                        ),
+                        parameter="setting.pegHeight",
+                    )
+                )
+
+    # An unread field is reported rather than silently ignored. INFORMATION,
+    # not a warning: the document is perfectly valid, the value simply has no
+    # effect, and a user who set it deserves to know which.
+    if setting.type != "prong" and setting.prongStyle != "ROUND_PRONG":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_FIELD_APPLICABLE,
+                severity="information",
+                message=(
+                    f"setting.prongStyle '{setting.prongStyle}' is not read by a "
+                    f"'{setting.type}' setting and has no effect on the generated "
+                    "geometry."
+                ),
+                parameter="setting.prongStyle",
+            )
+        )
+    if setting.headArchitecture != "PEG_HEAD" and (
+        setting.pegDiameter is not None or setting.pegHeight is not None
+    ):
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_FIELD_APPLICABLE,
+                severity="information",
+                message=(
+                    f"setting.pegDiameter/pegHeight are read only by a PEG_HEAD; "
+                    f"this design uses '{setting.headArchitecture}', so they have "
+                    "no effect."
+                ),
+                parameter="setting.pegDiameter",
+            )
+        )
+
+    # Seat relief is a boolean CUT against the real generated stone solid. An
+    # imported asset may be a mesh, which has no solid to cut with — a real
+    # feasibility question, and a WARNING rather than an error because whether
+    # a given asset parses to a B-Rep is only knowable after import.
+    if setting.seatMode != "NONE" and d.stone.source == "IMPORTED_CAD":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_SEAT_FEASIBLE,
+                severity="warning",
+                message=(
+                    f"Seat relief '{setting.seatMode}' cuts the stone volume out "
+                    "of the metal, which requires the stone to parse as a solid. "
+                    "An imported asset may be a mesh, in which case no relief can "
+                    "be cut and generation will report the failure rather than "
+                    "silently skipping it."
+                ),
+                parameter="setting.seatMode",
+            )
+        )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -728,6 +864,7 @@ _RULE_GROUPS = (
     _prong_rules,
     _bezel_rules,
     _setting_rules,
+    _setting_v2_rules,
     _manufacturing_rules,
     _geometry_rules,
 )

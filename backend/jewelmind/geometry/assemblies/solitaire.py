@@ -23,6 +23,7 @@ from jewelmind.geometry.constants import GENERATOR_VERSION
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent, GeneratedModel
 from jewelmind.geometry.setting_adapter import setting_definition_from_jdl
 from jewelmind.setting.dispatch import generate_setting
+from jewelmind.setting.head import HEAD_COMPONENT
 from jewelmind.utils.hashing import definition_hash, geometry_hash
 
 
@@ -69,10 +70,21 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
 
     band = build_ring_band(definition)
     stone = build_stone_reference(definition)
-    basket = build_basket_support(definition)
 
     setting_definition = setting_definition_from_jdl(definition, stone)
-    setting_components, setting_result = generate_setting(setting_definition)
+    # The stone SHAPE is passed as an argument, never stored on the setting
+    # contract, and only so seat relief can cut against the real generated
+    # stone. `SettingDefinition` stays kernel-neutral (Sprint 23).
+    setting_components, setting_result = generate_setting(
+        setting_definition, stone_shape=stone.shape
+    )
+
+    # The head comes from the Setting System when the setting built one, and
+    # from the Ring-side re-export otherwise. Both call the same builder; this
+    # avoids constructing it twice for the same design.
+    basket = setting_components.pop(HEAD_COMPONENT, None) or build_basket_support(
+        definition
+    )
 
     # Fuse order preserved from pre-Sprint-19: band, basket, then setting.
     setting_metal = [

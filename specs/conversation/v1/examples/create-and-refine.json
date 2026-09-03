@@ -4,7 +4,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "ce6a799efdd4fe13",
+        "currentJDLHash": "6edd0c3c2696639f",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -24,8 +24,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -34,8 +34,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
-          "turnId": "turn-08ec54b9-4845-4e82-a7c5-99c0648e1328",
-          "baseDefinitionHash": "ce6a799efdd4fe13",
+          "turnId": "turn-0e2d5971-6936-45d6-9dae-1346bde7a764",
+          "baseDefinitionHash": "6edd0c3c2696639f",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-ea410877-3a77-4e1e-b767-b979e00f84e0",
@@ -112,6 +112,13 @@
                 "prongDiameter": 1.1,
                 "prongHeight": 4.8,
                 "basketHeight": 3.5,
+                "prongStyle": "ROUND_PRONG",
+                "headArchitecture": "BASKET",
+                "seatMode": "NONE",
+                "prongTipRatio": 0.6,
+                "headBaseRatio": 0.55,
+                "pegDiameter": null,
+                "pegHeight": null,
                 "bezelWallThickness": 0.6,
                 "bezelWallHeight": 2.5
               },
@@ -326,6 +333,48 @@
                 "changed": false
               },
               {
+                "path": "setting.prongStyle",
+                "previousValue": "ROUND_PRONG",
+                "proposedValue": "ROUND_PRONG",
+                "changed": false
+              },
+              {
+                "path": "setting.headArchitecture",
+                "previousValue": "BASKET",
+                "proposedValue": "BASKET",
+                "changed": false
+              },
+              {
+                "path": "setting.seatMode",
+                "previousValue": "NONE",
+                "proposedValue": "NONE",
+                "changed": false
+              },
+              {
+                "path": "setting.prongTipRatio",
+                "previousValue": 0.6,
+                "proposedValue": 0.6,
+                "changed": false
+              },
+              {
+                "path": "setting.headBaseRatio",
+                "previousValue": 0.55,
+                "proposedValue": 0.55,
+                "changed": false
+              },
+              {
+                "path": "setting.pegDiameter",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
+                "path": "setting.pegHeight",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "setting.bezelWallThickness",
                 "previousValue": 0.6,
                 "proposedValue": 0.6,
@@ -406,8 +455,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "ce6a799efdd4fe13",
-        "relatedJDLHashAfter": "ce6a799efdd4fe13",
+        "relatedJDLHashBefore": "6edd0c3c2696639f",
+        "relatedJDLHashAfter": "6edd0c3c2696639f",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -417,7 +466,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "ce6a799efdd4fe13",
+        "currentJDLHash": "6edd0c3c2696639f",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -437,8 +486,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -460,8 +509,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -503,8 +552,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal accepted.",
         "accepted": true,
-        "relatedJDLHashBefore": "ce6a799efdd4fe13",
-        "relatedJDLHashAfter": "ce6a799efdd4fe13",
+        "relatedJDLHashBefore": "6edd0c3c2696639f",
+        "relatedJDLHashAfter": "6edd0c3c2696639f",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -514,7 +563,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "ce6a799efdd4fe13",
+        "currentJDLHash": "6edd0c3c2696639f",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -534,8 +583,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -557,8 +606,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -580,8 +629,8 @@
             "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "ce6a799efdd4fe13",
-            "relatedJDLHashAfter": "ce6a799efdd4fe13",
+            "relatedJDLHashBefore": "6edd0c3c2696639f",
+            "relatedJDLHashAfter": "6edd0c3c2696639f",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -590,8 +639,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
-          "turnId": "turn-c563afac-59dc-41a0-8adc-d7dc63ae0ee7",
-          "baseDefinitionHash": "ce6a799efdd4fe13",
+          "turnId": "turn-5a42d88a-d93d-473c-82e0-9e1f9ab64db9",
+          "baseDefinitionHash": "6edd0c3c2696639f",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-d5aaeeda-8a4c-4c26-846d-2c898a02802a",
@@ -660,6 +709,13 @@
                 "prongDiameter": 1.1,
                 "prongHeight": 4.8,
                 "basketHeight": 3.5,
+                "prongStyle": "ROUND_PRONG",
+                "headArchitecture": "BASKET",
+                "seatMode": "NONE",
+                "prongTipRatio": 0.6,
+                "headBaseRatio": 0.55,
+                "pegDiameter": null,
+                "pegHeight": null,
                 "bezelWallThickness": 0.6,
                 "bezelWallHeight": 2.5
               },
@@ -874,6 +930,48 @@
                 "changed": false
               },
               {
+                "path": "setting.prongStyle",
+                "previousValue": "ROUND_PRONG",
+                "proposedValue": "ROUND_PRONG",
+                "changed": false
+              },
+              {
+                "path": "setting.headArchitecture",
+                "previousValue": "BASKET",
+                "proposedValue": "BASKET",
+                "changed": false
+              },
+              {
+                "path": "setting.seatMode",
+                "previousValue": "NONE",
+                "proposedValue": "NONE",
+                "changed": false
+              },
+              {
+                "path": "setting.prongTipRatio",
+                "previousValue": 0.6,
+                "proposedValue": 0.6,
+                "changed": false
+              },
+              {
+                "path": "setting.headBaseRatio",
+                "previousValue": 0.55,
+                "proposedValue": 0.55,
+                "changed": false
+              },
+              {
+                "path": "setting.pegDiameter",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
+                "path": "setting.pegHeight",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "setting.bezelWallThickness",
                 "previousValue": 0.6,
                 "proposedValue": 0.6,
@@ -958,8 +1056,8 @@
         "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "ce6a799efdd4fe13",
-        "relatedJDLHashAfter": "ce6a799efdd4fe13",
+        "relatedJDLHashBefore": "6edd0c3c2696639f",
+        "relatedJDLHashAfter": "6edd0c3c2696639f",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []

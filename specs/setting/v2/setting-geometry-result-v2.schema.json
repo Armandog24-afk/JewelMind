@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v2/setting-geometry-result-v2.schema.json",
+  "title": "SettingGeometryResult",
+  "$defs": {
+    "SettingAttachmentInterface": {
+      "additionalProperties": false,
+      "description": "The generic, category-neutral handoff between a Setting and whatever\nstructure incorporates it (brief section 21).\n\nA RingHead consumes this today; a future PendantBody or EarringBody\nconsumes the same contract. The Setting never learns which one it is\n(SETTING-GOV-014).",
+      "properties": {
+        "attachmentPlaneZMm": {
+          "title": "Attachmentplanezmm",
+          "type": "number"
+        },
+        "embedMm": {
+          "title": "Embedmm",
+          "type": "number"
+        },
+        "supportHeightMm": {
+          "title": "Supportheightmm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "attachmentPlaneZMm",
+        "embedMm",
+        "supportHeightMm"
+      ],
+      "title": "SettingAttachmentInterface",
+      "type": "object"
+    },
+    "SettingComponentFact": {
+      "additionalProperties": false,
+      "description": "One kernel-neutral geometric fact about a generated setting\ncomponent. Facts only — no quality judgement (SETTING-GOV-016).",
+      "properties": {
+        "componentId": {
+          "title": "Componentid",
+          "type": "string"
+        },
+        "solidCount": {
+          "title": "Solidcount",
+          "type": "integer"
+        },
+        "volumeMm3": {
+          "title": "Volumemm3",
+          "type": "number"
+        },
+        "boundingBoxMinMm": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Boundingboxminmm",
+          "type": "array"
+        },
+        "boundingBoxMaxMm": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Boundingboxmaxmm",
+          "type": "array"
+        }
+      },
+      "required": [
+        "componentId",
+        "solidCount",
+        "volumeMm3",
+        "boundingBoxMinMm",
+        "boundingBoxMaxMm"
+      ],
+      "title": "SettingComponentFact",
+      "type": "object"
+    },
+    "SettingFallbackEvent": {
+      "additionalProperties": false,
+      "description": "An observable record that a documented geometric fallback was taken\n(SETTING-GOV-013 — a fallback must never be silent).",
+      "properties": {
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage",
+        "reason"
+      ],
+      "title": "SettingFallbackEvent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The structured outcome of generating one setting (brief section 7).\n\nComponent *shapes* are returned separately by the generator; this model\ncarries only kernel-neutral structure so it can cross layer boundaries.",
+  "properties": {
+    "settingId": {
+      "title": "Settingid",
+      "type": "string"
+    },
+    "settingType": {
+      "enum": [
+        "prong",
+        "bezel"
+      ],
+      "title": "Settingtype",
+      "type": "string"
+    },
+    "generatedComponents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Generatedcomponents",
+      "type": "array"
+    },
+    "productionComponents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Productioncomponents",
+      "type": "array"
+    },
+    "referenceComponents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Referencecomponents",
+      "type": "array"
+    },
+    "attachmentInterfaces": {
+      "items": {
+        "$ref": "#/$defs/SettingAttachmentInterface"
+      },
+      "title": "Attachmentinterfaces",
+      "type": "array"
+    },
+    "geometryFacts": {
+      "items": {
+        "$ref": "#/$defs/SettingComponentFact"
+      },
+      "title": "Geometryfacts",
+      "type": "array"
+    },
+    "fallbackEvents": {
+      "items": {
+        "$ref": "#/$defs/SettingFallbackEvent"
+      },
+      "title": "Fallbackevents",
+      "type": "array"
+    },
+    "diagnostics": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Diagnostics",
+      "type": "array"
+    },
+    "compatibilityStatus": {
+      "enum": [
+        "SUPPORTED_SOFTWARE",
+        "EXPERIMENTAL",
+        "UNSUPPORTED"
+      ],
+      "title": "Compatibilitystatus",
+      "type": "string"
+    },
+    "requestedProngCount": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requestedprongcount"
+    },
+    "generatedProngCount": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generatedprongcount"
+    },
+    "placementStrategy": {
+      "anyOf": [
+        {
+          "enum": [
+            "RADIAL",
+            "OUTLINE_CARDINAL"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Placementstrategy"
+    },
+    "prongStyle": {
+      "anyOf": [
+        {
+          "enum": [
+            "ROUND_PRONG",
+            "CLAW_PRONG",
+            "V_PRONG",
+            "TAPERED_PRONG"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prongstyle"
+    },
+    "headArchitecture": {
+      "anyOf": [
+        {
+          "enum": [
+            "BASKET",
+            "PEG_HEAD",
+            "MARTINI",
+            "TULIP"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Headarchitecture"
+    },
+    "seatMode": {
+      "anyOf": [
+        {
+          "enum": [
+            "NONE",
+            "REFERENCE_SEAT"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seatmode"
+    },
+    "stoneInstanceAssignments": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Stoneinstanceassignments",
+      "type": "object"
+    }
+  },
+  "required": [
+    "settingId",
+    "settingType",
+    "generatedComponents",
+    "productionComponents",
+    "referenceComponents",
+    "attachmentInterfaces",
+    "geometryFacts",
+    "compatibilityStatus"
+  ],
+  "type": "object"
+}

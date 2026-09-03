@@ -147,19 +147,66 @@ def test_current_jewelry_categories_match_the_live_category_registry():
     assert recorded == live_generatable
 
 
-def test_seats_bearings_and_cutters_are_planned_everywhere():
-    """Brief section 24: no seat/bearing/cutter geometry exists, so the
-    guard and the Setting registry must agree on that."""
+def test_seats_bearings_and_cutters_are_reported_honestly():
+    """Sprint 19 asserted all three were PLANNED. That was true then.
+
+    Sprint 23 added real opt-in `REFERENCE_SEAT` relief, so seat support is now
+    PARTIAL in both registries — PARTIAL rather than CURRENT because relief is
+    not a cut seat with a bearing shoulder. Bearing and cutter must keep saying
+    PLANNED: a bearing is sized by a setter, a cutter is manufacturing tooling,
+    and no sourced professional geometry exists for either.
+
+    The two registries must agree, which is the whole point of this guard.
+    """
 
     from jewelmind.setting.capability import SETTING_CAPABILITIES
 
     keys = _by_key()
-    for capability in ("stone_seat", "bearing", "cutter"):
+    assert keys[("setting", "stone_seat")]["status"] == "PARTIAL"
+    for capability in ("bearing", "cutter"):
         assert keys[("setting", capability)]["status"] == "PLANNED"
     for capability in SETTING_CAPABILITIES.values():
-        assert capability.seatSupport == "PLANNED"
+        assert capability.seatSupport == "PARTIAL"
         assert capability.bearingSupport == "PLANNED"
         assert capability.cutterSupport == "PLANNED"
+
+
+def test_advanced_head_and_prong_capabilities_match_the_live_registries():
+    """A CURRENT head or prong capability must have a real builder behind it."""
+
+    from jewelmind.setting.capability import (
+        HEAD_ARCHITECTURE_CAPABILITIES,
+        PRONG_STYLE_CAPABILITIES,
+    )
+    from jewelmind.setting.head import head_architectures
+    from jewelmind.setting.prong_styles import prong_solid_builders
+
+    keys = _by_key()
+    assert keys[("setting", "prong_style_variants")]["status"] == "CURRENT"
+    assert keys[("setting", "head_architectures")]["status"] == "CURRENT"
+
+    # Registry and builders agree in BOTH directions: an entry with no builder
+    # advertises a capability that does not exist, and a builder with no entry
+    # ships one nobody declared.
+    assert set(prong_solid_builders()) == {
+        name for name, e in PRONG_STYLE_CAPABILITIES.items() if e.generatable
+    }
+    assert set(head_architectures()) == {
+        name for name, e in HEAD_ARCHITECTURE_CAPABILITIES.items() if e.generatable
+    }
+
+
+def test_trellis_and_rails_are_not_claimed():
+    keys = _by_key()
+    for capability in (
+        "trellis_head",
+        "support_rails",
+        "anchor_driven_prong_placement",
+    ):
+        assert keys[("setting", capability)]["status"] == "PLANNED", capability
+    # Shared prong geometry resolves and reports, but does not build against two
+    # stones — PARTIAL, never CURRENT.
+    assert keys[("setting", "shared_prong_geometry")]["status"] == "PARTIAL"
 
 
 def test_no_professionally_validated_setting_geometry_is_claimed():

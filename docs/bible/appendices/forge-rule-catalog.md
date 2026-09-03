@@ -43,6 +43,9 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-GEM-004` | Visual profile resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-GEM-005` | Treatment set coherence | SEMANTIC_COMPATIBILITY | FORGE-1 | warning/error | 1.0.0 | ACCEPTED |
 | `JM-GEM-006` | Entry deprecated but resolvable | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-SETTING-005` | Head parameters complete | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
+| `JM-SETTING-006` | Field applicable to family | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-SETTING-007` | Seat relief feasible | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-001` | Instance ids unique | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-002` | Arrangement references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-003` | Stone reference resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |

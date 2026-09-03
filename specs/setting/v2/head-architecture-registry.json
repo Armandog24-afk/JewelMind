@@ -1,0 +1,83 @@
+{
+  "settingGeometryVersion": "1.1.0",
+  "generatedFrom": "backend/jewelmind/setting/capability.py::HEAD_ARCHITECTURE_CAPABILITIES",
+  "note": "Generated from the live registry, never hand-maintained. Every listed architecture has a real builder in setting/head.py and produces one connected solid; a builder that produced more raises rather than shipping a floating head. The generated component is named 'basket_support' for EVERY architecture — the name is a structural role wired into the role map, the inspection required-component set, every preview manifest and all 39 Golden baselines, and the architecture is reported in the result rather than in the name.",
+  "componentName": "basket_support",
+  "architectures": [
+    {
+      "architecture": "BASKET",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": true,
+      "singleSolid": true,
+      "requiredParameters": [],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "The pre-Sprint-23 hollow cylindrical wall, reproduced character-for-character and still the default. The Ring adapter passes the original bore expression so the solid is bit-identical."
+    },
+    {
+      "architecture": "PEG_HEAD",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "singleSolid": true,
+      "requiredParameters": [
+        "pegDiameterMm",
+        "pegHeightMm"
+      ],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A basket wall on a narrower solid peg, joined by a conical flare. The flare is not decoration: a peg narrower than the wall's bore never touches it, and stacking the two produced two disconnected solids until the flare was added."
+    },
+    {
+      "architecture": "MARTINI",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "singleSolid": true,
+      "requiredParameters": [],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A hollow conical wall, wide at the girdle and narrow at the base. A software reference silhouette; no commercial martini proportion is claimed."
+    },
+    {
+      "architecture": "TULIP",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "singleSolid": true,
+      "requiredParameters": [],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A concave flare approximated by stacked cone frusta following a quadratic. Section count and curve are construction choices; no commercial tulip proportion is claimed."
+    }
+  ],
+  "reserved": [
+    {
+      "architecture": "cathedral",
+      "reason": "A cathedral head is defined by how the SHANK rises to meet it, which is shank geometry rather than head geometry. It belongs to a Shank milestone, not to this registry."
+    },
+    {
+      "architecture": "compass_point",
+      "reason": "Compass-point heads position prongs at the stone's own anchors. The anchors exist (Stone v2); anchor-driven placement does not."
+    },
+    {
+      "architecture": "double_gallery",
+      "reason": "Two stacked galleries need a second head instance per setting, which the one-head-per-setting contract does not express."
+    },
+    {
+      "architecture": "trellis",
+      "reason": "Interwoven curved rails require a swept solid along a 3D spline. The current pipeline builds solids of revolution and lofts reliably; a swept trellis is not yet verifiable, so no builder exists."
+    }
+  ],
+  "reservedSupportElements": [
+    {
+      "element": "bearing",
+      "reason": "A bearing is a cut shoulder inside a seat, sized by a setter. No sourced professional geometry exists for one, so none is invented."
+    },
+    {
+      "element": "cutter",
+      "reason": "Cutter geometry is manufacturing tooling, not part of the jewelry model. It would belong to a manufacturing-preparation milestone."
+    },
+    {
+      "element": "rail",
+      "reason": "A rail joins two or more heads, so it requires multi-head geometry. One setting builds one head today."
+    }
+  ]
+}

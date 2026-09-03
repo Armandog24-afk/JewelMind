@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v2/head-setting-definition.schema.json",
+  "title": "HeadSettingDefinition",
+  "additionalProperties": false,
+  "description": "Head-family parameters: the structure between the attachment plane and\nthe stone (Sprint 23).\n\nEvery dimension here is a CONSTRUCTION PARAMETER. `wallThicknessMm` and\nthe taper ratios are deliberate software choices chosen to produce robust\ngeometry, exactly like the bezel's wall dimensions — never professional\nrecommendations, and no minimum is enforced because no sourced professional\nminimum exists (SETTING-GOV-010).",
+  "properties": {
+    "architecture": {
+      "default": "BASKET",
+      "enum": [
+        "BASKET",
+        "PEG_HEAD",
+        "MARTINI",
+        "TULIP"
+      ],
+      "title": "Architecture",
+      "type": "string"
+    },
+    "outerRadiusMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 100.0,
+      "title": "Outerradiusmm",
+      "type": "number"
+    },
+    "wallThicknessMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Wallthicknessmm",
+      "type": "number"
+    },
+    "innerRadiusMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Innerradiusmm"
+    },
+    "heightMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 100.0,
+      "title": "Heightmm",
+      "type": "number"
+    },
+    "baseRadiusRatio": {
+      "default": 0.55,
+      "exclusiveMinimum": 0.05,
+      "maximum": 1.0,
+      "title": "Baseradiusratio",
+      "type": "number"
+    },
+    "pegDiameterMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 20.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pegdiametermm"
+    },
+    "pegHeightMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 50.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pegheightmm"
+    }
+  },
+  "required": [
+    "outerRadiusMm",
+    "wallThicknessMm",
+    "heightMm"
+  ],
+  "type": "object"
+}

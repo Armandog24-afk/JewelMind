@@ -28,6 +28,13 @@ export const RULE_IDS = {
   // not a jewelry threshold). No minimum bezel wall dimension is asserted.
   BEZEL_WALL_THICKNESS_POSITIVE: 'JM-SETTING-003',
   BEZEL_WALL_HEIGHT_POSITIVE: 'JM-SETTING-004',
+
+  // Sprint 23 — structural checks on the advanced head/prong fields. No
+  // professional threshold: nothing here judges whether a prong is thick
+  // enough or a head castable.
+  SETTING_HEAD_PARAMETERS_COMPLETE: 'JM-SETTING-005',
+  SETTING_FIELD_APPLICABLE: 'JM-SETTING-006',
+  SETTING_SEAT_FEASIBLE: 'JM-SETTING-007',
   // Sprint 21 — GEM_IDENTITY_ONLY. Referential and coherence invariants
   // only; no gemological or manufacturing claim.
   GEM_REFERENCE_EXISTS: 'JM-GEM-001',

@@ -1,8 +1,8 @@
 {
   "generatedFrom": "jewelmind.utils.hashing.definition_hash / geometry_hash",
   "note": "definitionHash covers the whole document; geometryHash excludes the fields empirically verified not to affect geometry. A semantic-only edit therefore changes definitionHash and NOT geometryHash, which is what lets Atlas reuse already-built geometry.",
-  "baseDefinitionHash": "5af770afaee4561d",
-  "baseGeometryHash": "6f4b99688525eb87",
+  "baseDefinitionHash": "19af9da57f91cb99",
+  "baseGeometryHash": "08ebcf5803d81988",
   "vectors": [
     {
       "case": "same design",

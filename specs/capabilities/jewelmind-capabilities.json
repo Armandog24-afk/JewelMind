@@ -71,8 +71,8 @@
     {
       "domain": "setting",
       "capability": "stone_seat",
-      "status": "PLANNED",
-      "note": "No seat geometry exists. Stone/metal overlap is NOT a seat."
+      "status": "PARTIAL",
+      "note": "Sprint 23: opt-in REFERENCE_SEAT relief cuts the stone volume out of the head and prongs, using the stone as a CUTTING TOOL (never a fuse, so LAW-006 holds). PARTIAL because relief is not a cut seat with a bearing shoulder, and no claim is made that a stone would sit correctly in it. Off by default."
     },
     {
       "domain": "setting",
@@ -1021,6 +1021,60 @@
       "capability": "multiple_named_stone_specifications",
       "status": "PLANNED",
       "note": "stoneRef resolves only 'primary' today because JDL carries one stone; any other value is reported unresolved (JM-ARRANGE-003) rather than silently treated as the primary one."
+    },
+    {
+      "domain": "setting",
+      "capability": "prong_style_variants",
+      "status": "CURRENT",
+      "note": "setting/prong_styles.py; ROUND (the preserved pre-Sprint-23 cylinder), TAPERED, CLAW and V, each a real solid from a registered builder. Notch and taper parameters are software construction values."
+    },
+    {
+      "domain": "setting",
+      "capability": "head_architectures",
+      "status": "CURRENT",
+      "note": "setting/head.py; BASKET (preserved byte-identically), PEG_HEAD, MARTINI and TULIP, each one connected solid. Head construction is now category-neutral; geometry/components/basket.py is a thin re-export."
+    },
+    {
+      "domain": "setting",
+      "capability": "explicit_prong_positions",
+      "status": "CURRENT",
+      "note": "positionSource='EXPLICIT' takes positions verbatim — the escape hatch for a layout no strategy derives. Never mixed with derived positions, because a half-overridden layout has no determinate meaning."
+    },
+    {
+      "domain": "setting",
+      "capability": "prong_groups",
+      "status": "CURRENT",
+      "note": "Named subsets carrying a per-prong style override, so a mixed layout (V prongs at a tip, round elsewhere) needs no second setting."
+    },
+    {
+      "domain": "setting",
+      "capability": "setting_to_stone_instance_mapping",
+      "status": "CURRENT",
+      "note": "SettingGeometryResult.stoneInstanceAssignments maps each generated component to the stone instance IDs it serves, by ID rather than by inferred position. The Setting System carries the references and never resolves them, so it stays free of the arrangement layer."
+    },
+    {
+      "domain": "setting",
+      "capability": "shared_prong_geometry",
+      "status": "PARTIAL",
+      "note": "A prong serving two stones is representable (explicit position plus servesStoneInstanceIds) and its assignment is reported, but it cannot be generated against two stones: one stone component is built per model. Blocked on the Stone Arrangement execution boundary."
+    },
+    {
+      "domain": "setting",
+      "capability": "trellis_head",
+      "status": "PLANNED",
+      "note": "Interwoven curved rails need a swept solid along a 3D spline, which the current pipeline cannot build verifiably. No builder exists, and TRELLIS is not a HeadArchitecture enum member."
+    },
+    {
+      "domain": "setting",
+      "capability": "support_rails",
+      "status": "PLANNED",
+      "note": "A rail joins two or more heads, so it requires multi-head geometry. One setting builds one head today."
+    },
+    {
+      "domain": "setting",
+      "capability": "anchor_driven_prong_placement",
+      "status": "PLANNED",
+      "note": "Placing prongs at a stone's own anchors (tip, cleft, corners). The anchors exist in Stone v2; no strategy consumes them, so OUTLINE_CARDINAL remains the non-round default."
     }
   ]
 }

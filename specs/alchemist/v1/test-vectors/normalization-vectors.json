@@ -6,7 +6,7 @@
       "input": {
         "schemaVersion": "0.1.0"
       },
-      "normalizedDefinitionHash": "ce6a799efdd4fe13",
+      "normalizedDefinitionHash": "6edd0c3c2696639f",
       "note": "An authored document with every field omitted except schemaVersion normalizes to byte-identical canonical JSON as the fully-explicit default document — proof that normalization adds defaults, never invents or alters a value the author actually provided."
     },
     {
@@ -18,7 +18,7 @@
           "profile": "comfort_fit"
         }
       },
-      "normalizedDefinitionHash": "ce6a799efdd4fe13",
+      "normalizedDefinitionHash": "6edd0c3c2696639f",
       "note": "Explicitly restating the default values produces the identical hash — normalization is idempotent."
     },
     {
@@ -30,7 +30,7 @@
           "profile": "comfort_fit"
         }
       },
-      "normalizedDefinitionHash": "fac39ae607e64c98",
+      "normalizedDefinitionHash": "a9f0ff3c9e87e7ed",
       "note": "A negative band.width passes structurally through normalization unchanged (Pydantic has no positivity constraint on this field — see specs/jdl/v1/jdl.schema.json) and is only later rejected by Forge semantic validation (JM-BAND-001, JM-GEOMETRY-001). Normalization never silently clamps or fixes it."
     }
   ],

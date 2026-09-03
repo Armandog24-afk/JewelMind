@@ -330,6 +330,19 @@ export interface SettingSpec {
   prongDiameter: number
   prongHeight: number
   basketHeight: number
+
+  /** Sprint 23. Each defaults to the pre-Sprint-23 behaviour, so a stored
+   * design saved before this sprint behaves identically. */
+  prongStyle: ProngStyle
+  headArchitecture: HeadArchitecture
+  seatMode: SeatMode
+  prongTipRatio: number
+  headBaseRatio: number
+  /** Required by, and only read by, `PEG_HEAD`. Deliberately not defaulted to
+   * a number: an invented peg size would be a construction choice the user
+   * never made. */
+  pegDiameter: number | null
+  pegHeight: number | null
   /**
    * Bezel-family parameters (Sprint 19). Present on every definition so the
    * flat JDL shape stays backward compatible; unread when `type === 'prong'`.
@@ -522,6 +535,35 @@ export interface ResolvedArrangement {
   patternExpandedCount: number
   notes: string[]
 }
+
+/**
+ * Setting System v2 vocabularies (Sprint 23). Mirrors
+ * `backend/jewelmind/setting/models.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a
+ * style or architecture the backend has no builder for. `TRELLIS` is
+ * deliberately absent from `HeadArchitecture` for exactly that reason.
+ */
+
+/** Prong body styles with a real builder. `ROUND_PRONG` is the pre-Sprint-23
+ * cylinder and remains the default, so existing designs are unchanged. */
+export type ProngStyle =
+  | 'ROUND_PRONG'
+  | 'CLAW_PRONG'
+  | 'V_PRONG'
+  | 'TAPERED_PRONG'
+
+/** The structure between the top of the band and the stone. The generated
+ * component is named `basket_support` for EVERY architecture — the name is a
+ * structural role, and the architecture is reported separately. */
+export type HeadArchitecture = 'BASKET' | 'PEG_HEAD' | 'MARTINI' | 'TULIP'
+
+/** Whether metal is relieved where the stone sits.
+ *
+ * `REFERENCE_SEAT` CUTS the stone volume out of the metal — never a fuse, so
+ * the stone is never part of the production body. It is reference relief, not
+ * a setter's seat with a bearing shoulder. */
+export type SeatMode = 'NONE' | 'REFERENCE_SEAT'
 
 export interface JewelryDefinition {
   schemaVersion: string
@@ -725,6 +767,14 @@ export function createDefaultDefinition(): JewelryDefinition {
       prongDiameter: 1.1,
       prongHeight: 4.8,
       basketHeight: 3.5,
+      // Sprint 23 defaults: exactly the pre-Sprint-23 geometry.
+      prongStyle: 'ROUND_PRONG',
+      headArchitecture: 'BASKET',
+      seatMode: 'NONE',
+      prongTipRatio: 0.6,
+      headBaseRatio: 0.55,
+      pegDiameter: null,
+      pegHeight: null,
       bezelWallThickness: 0.6,
       bezelWallHeight: 2.5,
     },

@@ -40,12 +40,12 @@
         "CUSTOM_OUTLINE",
         "MEASURED"
       ],
-      "seatSupport": "PLANNED",
+      "seatSupport": "PARTIAL",
       "bearingSupport": "PLANNED",
       "cutterSupport": "PLANNED",
       "professionalValidationStatus": "NOT_REVIEWED",
-      "settingGeometryVersion": "1.0.0",
-      "description": "Cylindrical reference prongs. RADIAL placement for round (byte-identical to pre-Sprint-19); OUTLINE_CARDINAL placement for every other outline, including custom ones. Placement is not tip-, corner- or anchor-aware. No seat, bearing, or cutter geometry exists."
+      "settingGeometryVersion": "1.1.0",
+      "description": "Cylindrical reference prongs. RADIAL placement for round (byte-identical to pre-Sprint-19); OUTLINE_CARDINAL placement for every other outline, including custom ones. Placement is not tip-, corner- or anchor-aware. No seat, bearing, or cutter geometry exists. Sprint 23: opt-in REFERENCE_SEAT relief cuts the stone volume out of the metal; that is relief, not a cut seat with a bearing shoulder."
     },
     {
       "settingType": "bezel",
@@ -87,12 +87,12 @@
         "CUSTOM_OUTLINE",
         "MEASURED"
       ],
-      "seatSupport": "PLANNED",
+      "seatSupport": "PARTIAL",
       "bearingSupport": "PLANNED",
       "cutterSupport": "PLANNED",
       "professionalValidationStatus": "NOT_REVIEWED",
-      "settingGeometryVersion": "1.0.0",
-      "description": "Parametric wall built by offsetting the stone's own girdle outline, so the pipeline is outline-agnostic rather than per-shape \u2014 which is why a custom outline needs no bezel code of its own. Wall thickness/height are preliminary software values, not professional recommendations. No seat, bearing, or cutter geometry exists."
+      "settingGeometryVersion": "1.1.0",
+      "description": "Parametric wall built by offsetting the stone's own girdle outline, so the pipeline is outline-agnostic rather than per-shape — which is why a custom outline needs no bezel code of its own. Wall thickness/height are preliminary software values, not professional recommendations. Sprint 23: opt-in REFERENCE_SEAT relief is available; no bearing or cutter geometry exists."
     }
   ],
   "reservedFamilies": [

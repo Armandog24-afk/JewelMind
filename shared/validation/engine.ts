@@ -522,6 +522,111 @@ function arrangementRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/**
+ * Advanced head and prong validation (Sprint 23).
+ *
+ * Mirrors `_setting_v2_rules` in full: every check is local and structural, so
+ * unlike the arrangement mirror there is no backend-only remainder. The
+ * backend's verdict still wins (FORGE-GOV-004).
+ */
+function settingV2Rules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const setting = d.setting
+
+  if (setting.headArchitecture === 'PEG_HEAD') {
+    const missing: string[] = []
+    if (setting.pegDiameter === null || setting.pegDiameter === undefined) {
+      missing.push('pegDiameter')
+    }
+    if (setting.pegHeight === null || setting.pegHeight === undefined) {
+      missing.push('pegHeight')
+    }
+    if (missing.length > 0) {
+      out.push({
+        ruleId: RULE_IDS.SETTING_HEAD_PARAMETERS_COMPLETE,
+        severity: 'error',
+        message:
+          'A PEG_HEAD requires ' +
+          missing.map((name) => `setting.${name}`).join(' and ') +
+          '. No default is applied, because an invented peg size would be a ' +
+          'construction choice you did not make.',
+        parameter: `setting.${missing[0]}`,
+      })
+    } else {
+      for (const [name, value] of [
+        ['pegDiameter', setting.pegDiameter],
+        ['pegHeight', setting.pegHeight],
+      ] as const) {
+        if (value !== null && value !== undefined && value <= 0) {
+          out.push({
+            ruleId: RULE_IDS.SETTING_HEAD_PARAMETERS_COMPLETE,
+            severity: 'error',
+            message: `setting.${name} must be greater than 0 mm.`,
+            parameter: `setting.${name}`,
+          })
+        }
+      }
+      if (
+        setting.pegHeight !== null &&
+        setting.pegHeight !== undefined &&
+        setting.pegHeight >= setting.basketHeight
+      ) {
+        out.push({
+          ruleId: RULE_IDS.SETTING_HEAD_PARAMETERS_COMPLETE,
+          severity: 'error',
+          message:
+            `setting.pegHeight (${setting.pegHeight} mm) must be less than ` +
+            `setting.basketHeight (${setting.basketHeight} mm); otherwise no ` +
+            'head wall remains above the peg.',
+          parameter: 'setting.pegHeight',
+        })
+      }
+    }
+  }
+
+  // An unread field is reported rather than silently ignored. INFORMATION, not
+  // a warning: the design is valid, the value simply has no effect.
+  if (setting.type !== 'prong' && setting.prongStyle !== 'ROUND_PRONG') {
+    out.push({
+      ruleId: RULE_IDS.SETTING_FIELD_APPLICABLE,
+      severity: 'information',
+      message:
+        `setting.prongStyle '${setting.prongStyle}' is not read by a ` +
+        `'${setting.type}' setting and has no effect on the generated geometry.`,
+      parameter: 'setting.prongStyle',
+    })
+  }
+  if (
+    setting.headArchitecture !== 'PEG_HEAD' &&
+    ((setting.pegDiameter !== null && setting.pegDiameter !== undefined) ||
+      (setting.pegHeight !== null && setting.pegHeight !== undefined))
+  ) {
+    out.push({
+      ruleId: RULE_IDS.SETTING_FIELD_APPLICABLE,
+      severity: 'information',
+      message:
+        'setting.pegDiameter/pegHeight are read only by a PEG_HEAD; this ' +
+        `design uses '${setting.headArchitecture}', so they have no effect.`,
+      parameter: 'setting.pegDiameter',
+    })
+  }
+
+  if (setting.seatMode !== 'NONE' && d.stone.source === 'IMPORTED_CAD') {
+    out.push({
+      ruleId: RULE_IDS.SETTING_SEAT_FEASIBLE,
+      severity: 'warning',
+      message:
+        `Seat relief '${setting.seatMode}' cuts the stone volume out of the ` +
+        'metal, which requires the stone to parse as a solid. An imported ' +
+        'asset may be a mesh, in which case no relief can be cut and ' +
+        'generation will report the failure rather than silently skipping it.',
+      parameter: 'setting.seatMode',
+    })
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -532,6 +637,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...prongRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),
+    ...settingV2Rules(definition),
     ...manufacturingRules(definition),
     ...geometryRules(definition),
   ]

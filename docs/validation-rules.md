@@ -49,6 +49,9 @@ results are shown but never block anything.
 | `JM-GEM-004` | `stone.gem.visualProfileId` | The visual profile override does not resolve; a neutral fallback appearance is used. Affects how the stone is drawn, never what it is. | warning |
 | `JM-GEM-005` | `stone.gem.treatments` | A duplicate treatment record is a warning; the same treatment recorded as both `PRESENT` and `NOT_PRESENT` is an error. | warning / error |
 | `JM-GEM-006` | `stone.gem.gemId` | The entry is deprecated but still resolvable. | warning |
+| `JM-SETTING-005` | `setting.pegDiameter`, `setting.pegHeight` | A `PEG_HEAD` requires both, and the peg must be positive and shorter than `setting.basketHeight`. No default is applied: an invented peg size would be a construction choice the user never made. | error |
+| `JM-SETTING-006` | `setting.prongStyle`, `setting.pegDiameter`, `setting.pegHeight` | A field the chosen family or architecture does not read. `information`, not a warning: the design is valid and only the value is inert. | information |
+| `JM-SETTING-007` | `setting.seatMode` | Seat relief cuts the stone volume out of the metal, which needs the stone to parse as a solid; an imported asset may be a mesh. Whether it does is only knowable after import, hence a warning. | warning |
 | `JM-ARRANGE-001` | `arrangement.instances` | Two stone instances declare the same id. Ids are the authoritative identity, so a duplicate makes every reference to it ambiguous. | error |
 | `JM-ARRANGE-002` | `arrangement.instances`, `arrangement.patterns` | A placement or pattern names a group or instance that is not declared. | error |
 | `JM-ARRANGE-003` | `arrangement.instances` | An instance references a stone specification other than `primary`, which no current document declares. A **warning**: the design is structurally valid and still generates, and only that instance produces no geometry. | warning |
