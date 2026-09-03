@@ -15,6 +15,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from jewelmind.arrangement.models import ArrangementDefinition
+
 # The Stone and Gem systems own their canonical vocabularies; importing them
 # here keeps one source of truth instead of hand-maintained duplicates. Safe
 # against circular imports because both packages' `__init__.py` deliberately
@@ -440,3 +442,19 @@ class JewelryDefinition(StrictModel):
     material: MaterialSpec = Field(default_factory=MaterialSpec)
     manufacturing: ManufacturingSpec = Field(default_factory=ManufacturingSpec)
     preview: PreviewSpec = Field(default_factory=PreviewSpec)
+
+    #: Multiple stone occurrences and their relationships (Sprint 22).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, which is a compatibility decision rather
+    #: than an oversight. Every pre-Sprint-22 document has no arrangement, and
+    #: defaulting this to a one-instance arrangement would give all of them an
+    #: arrangement they never declared — changing their canonical JSON and
+    #: therefore their `definitionHash`, and breaking every stored hash, Golden
+    #: baseline and test vector in the repository. `None` means "single-stone
+    #: design", and behaves exactly as before.
+    #:
+    #: Carried as the real `ArrangementDefinition` rather than a `Jdl*` mirror;
+    #: see that model's docstring for why. `schemaVersion` stays `0.1.0`: an
+    #: optional additive field is backward compatible, the same judgment
+    #: Sprint 21 made for `stone.gem`.
+    arrangement: ArrangementDefinition | None = None

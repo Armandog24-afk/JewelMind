@@ -1673,5 +1673,101 @@ full 16 GEM-GOV rules. The machine-readable half lives in
   `GemOrigin`/`GemTreatmentType` member, a multi-stone arrangement, or an
   external gem/gemological data source.
 
+## STONE ARRANGEMENT RULES
+
+`docs/bible/24-arrangement/` is the authoritative Stone Arrangement Engine
+specification — start at
+[`docs/bible/24-arrangement/README.md`](docs/bible/24-arrangement/README.md),
+then
+[`arrangement-governance.md`](docs/bible/24-arrangement/arrangement-governance.md)
+for the full 14 ARRANGE-GOV rules, and
+[`execution-boundary.md`](docs/bible/24-arrangement/execution-boundary.md) for
+exactly what does and does not execute. The machine-readable half lives in
+[`specs/arrangement/v1/`](specs/arrangement/v1/README.md). Future coding agents
+must:
+
+- **Read `docs/bible/24-arrangement/README.md` before changing multi-stone
+  representation** — before modifying anything in
+  `backend/jewelmind/arrangement/`, `domain/schema.py::JewelryDefinition.arrangement`,
+  `geometry/roles.py`, or `validation/engine.py::_arrangement_rules`.
+- **Keep the arrangement layer category- and kernel-neutral** — nothing under
+  `backend/jewelmind/arrangement/` may import `jewelmind.ring`,
+  `jewelmind.jewelry_category`, any geometry module, the CAD kernel, or
+  `JewelryDefinition` (which would smuggle the whole ring domain across in one
+  import). Enforced by AST inspection in
+  `backend/tests/test_arrangement_no_category_dependency.py` (ARRANGE-GOV-001).
+- **Keep `jewelmind/arrangement/__init__.py` importing nothing.** It is
+  load-bearing: `domain/schema.py` imports `arrangement.models`, so an eager
+  package init would make the import graph cyclic — the same trap
+  `jewelmind/stone/__init__.py` and `jewelmind/gem/__init__.py` document.
+- **Never let an arrangement construct geometry.** This layer produces NUMBERS;
+  Atlas turns numbers into solids. No field may hold a kernel object and no
+  module may call a construction operation (ARRANGE-GOV-002).
+- **Address everything by ID, never by array position.** Reordering
+  `instances`/`groups`/`patterns`/`relations` must not change meaning, canonical
+  JSON, or the fingerprint. Primary-instance selection uses the lowest ID, never
+  `instances[0]` (ARRANGE-GOV-003).
+- **Keep resolution a pure, directly-evaluated function** — one pass, fixed
+  order, closed-form pattern expansion. No solver, no iteration to convergence,
+  no wall-clock time, no randomness, and no runtime-generated identifiers:
+  generated member IDs are derived from the pattern ID and member index
+  (ARRANGE-GOV-004).
+- **Reject, never repair.** A missing reference, a duplicate ID or an
+  inconsistent relation raises. Normalization may reorder, round and wrap; it
+  may never fill in a plausible value (ARRANGE-GOV-005).
+- **Consume `ResolvedArrangement`, never the raw definition** — a second
+  consumer expanding patterns itself would eventually disagree with the
+  resolver, and the disagreement would surface as geometry that does not match
+  the preview (ARRANGE-GOV-006).
+- **Keep the three identities distinct** — `definitionHash` (whole document),
+  `geometryHash` (geometry-affecting fields, which INCLUDE the arrangement), and
+  `arrangementFingerprint` (the arrangement's own content plus the resolver
+  version). Never repurpose one as another, and never exclude the arrangement
+  from `geometryHash`: it will drive geometry, and a stale-geometry cache hit is
+  worse than a rebuild (ARRANGE-GOV-007).
+- **Never invent a jewelry threshold here** — no minimum spacing, clearance,
+  stone-count limit, accent proportion or pavé density, in a model, a rule or a
+  message. `MAX_INSTANCES`/`MAX_COORDINATE_MM`/`COORDINATE_DECIMALS` are
+  software limits and say so. Whether two placed stones overlap is a GEOMETRIC
+  fact for Geometry Inspection (ARRANGE-GOV-008).
+- **Report an ungenerated instance, never drop it** — `NOT_GENERATED` REQUIRES a
+  reason and `GENERATED` REQUIRES a component name, both enforced by a model
+  validator. Never emit a placeholder or empty solid to make a count match
+  (ARRANGE-GOV-009).
+- **Keep the three capability axes apart** — `representable`, `resolvable` and
+  `generatable` are independent. A capability that resolves but builds nothing
+  is PARTIAL, never presented as supported, and nothing may be marked
+  `generatable` without real geometry behind it (ARRANGE-GOV-010).
+- **Give an unrepresentable capability no field at all** — accepting a tilt
+  angle or a path curve nothing can execute would be a silently ignored field,
+  which is worse than an absent one (ARRANGE-GOV-011).
+- **Keep the stone component naming contract** — the primary instance keeps the
+  bare `stone_reference` name; an additional instance is
+  `stone_reference.<instanceId>`. `geometry/roles.py` must classify that prefix
+  as a stone reference and never fall through to the `production_metal` default,
+  which would fuse a stone into the metal body and ship it in a production
+  export (ARRANGE-GOV-012, restating LAW-006).
+- **Keep an absent arrangement absent** — `compile_arrangement(None)` returns
+  `None`, nothing synthesizes a one-instance arrangement for a single-stone
+  design, and a design declaring no arrangement must generate byte-identical
+  geometry to its pre-Sprint-22 self (ARRANGE-GOV-013).
+- **Generate every `specs/arrangement/v1/` artifact by running the real
+  implementation** — schemas, registry, examples and vectors are mirrors of live
+  code, re-derived by `backend/tests/test_arrangement_schemas.py` on every run
+  (ARRANGE-GOV-014).
+- **Never relabel `multi_stone_geometry` as CURRENT** until a per-instance stone
+  transform and instance-aware Geometry Inspection both exist. See
+  `execution-boundary.md` for the dependency order.
+- **Create an ADR** before introducing a constraint solver or any iterative
+  resolution, changing the resolution arithmetic (which also bumps
+  `RESOLVER_VERSION`), letting the arrangement layer construct geometry,
+  changing what `geometryHash` includes, merging any two of the three
+  identities, changing the stone component naming contract, or generalizing
+  Geometry Inspection's required-component set.
+- **Create an RFC** before adding a pattern kind beyond LINEAR/RADIAL/MIRROR,
+  enforcing (rather than declaring) relations, adding a setting strategy for
+  accent stones, allowing multiple named stone specifications in one document,
+  or adding any professional arrangement rule.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

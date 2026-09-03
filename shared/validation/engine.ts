@@ -409,14 +409,127 @@ function geometryRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/**
+ * Arrangement structural validation (Sprint 22).
+ *
+ * A DELIBERATE SUBSET of `backend/jewelmind/validation/engine.py::_arrangement_rules`,
+ * and the boundary is where the resolver is. The frontend checks what it can
+ * see locally — duplicate ids, references that name nothing, an unresolvable
+ * stone, an ambiguous CENTER — and does NOT reimplement pattern expansion, so
+ * `JM-ARRANGE-004` (does the arrangement actually resolve?) and
+ * `JM-ARRANGE-006` (the generation notice) are backend-only.
+ *
+ * A second local resolver would eventually disagree with the real one, and the
+ * backend's verdict always wins (FORGE-GOV-004). This mirror never reports
+ * something the backend would not.
+ */
+function arrangementRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const arrangement = d.arrangement
+
+  // A design with no arrangement is a single-stone design, not a broken one.
+  if (arrangement === null || arrangement === undefined) {
+    return out
+  }
+
+  const seen = new Set<string>()
+  for (const instance of arrangement.instances) {
+    if (seen.has(instance.instanceId)) {
+      out.push({
+        ruleId: RULE_IDS.ARRANGEMENT_INSTANCE_IDS_UNIQUE,
+        severity: 'error',
+        message:
+          `Stone instance id '${instance.instanceId}' is declared more than once. ` +
+          'Instance ids are the authoritative identity, so a duplicate makes every ' +
+          'reference to it ambiguous.',
+        parameter: 'arrangement.instances',
+      })
+    }
+    seen.add(instance.instanceId)
+  }
+
+  const groupIds = new Set(arrangement.groups.map((group) => group.groupId))
+  for (const instance of arrangement.instances) {
+    const groupId = instance.placement.groupId
+    if (groupId !== null && groupId !== undefined && !groupIds.has(groupId)) {
+      out.push({
+        ruleId: RULE_IDS.ARRANGEMENT_REFERENCES_RESOLVE,
+        severity: 'error',
+        message:
+          `Stone instance '${instance.instanceId}' belongs to group '${groupId}', ` +
+          'which is not declared in this arrangement.',
+        parameter: 'arrangement.instances',
+      })
+    }
+  }
+
+  for (const pattern of arrangement.patterns) {
+    if (!seen.has(pattern.sourceInstanceId)) {
+      out.push({
+        ruleId: RULE_IDS.ARRANGEMENT_REFERENCES_RESOLVE,
+        severity: 'error',
+        message:
+          `Pattern '${pattern.patternId}' repeats stone instance ` +
+          `'${pattern.sourceInstanceId}', which is not declared in this arrangement.`,
+        parameter: 'arrangement.patterns',
+      })
+    }
+    if (
+      pattern.groupId !== null &&
+      pattern.groupId !== undefined &&
+      !groupIds.has(pattern.groupId)
+    ) {
+      out.push({
+        ruleId: RULE_IDS.ARRANGEMENT_REFERENCES_RESOLVE,
+        severity: 'error',
+        message:
+          `Pattern '${pattern.patternId}' places its members in group ` +
+          `'${pattern.groupId}', which is not declared.`,
+        parameter: 'arrangement.patterns',
+      })
+    }
+  }
+
+  for (const instance of arrangement.instances) {
+    if (instance.stoneRef !== 'primary') {
+      out.push({
+        ruleId: RULE_IDS.ARRANGEMENT_STONE_REFERENCE_RESOLVES,
+        severity: 'warning',
+        message:
+          `Stone instance '${instance.instanceId}' references stone ` +
+          `'${instance.stoneRef}', but this definition declares only the primary ` +
+          'stone. No geometry will be built for that instance.',
+        parameter: 'arrangement.instances',
+      })
+    }
+  }
+
+  const centers = arrangement.instances
+    .filter((instance) => instance.role === 'CENTER')
+    .map((instance) => instance.instanceId)
+  if (centers.length > 1) {
+    out.push({
+      ruleId: RULE_IDS.ARRANGEMENT_ROLE_COHERENT,
+      severity: 'warning',
+      message:
+        `${centers.length} stone instances claim the CENTER role ` +
+        `(${[...centers].sort().join(', ')}). The lowest id is treated as the ` +
+        'primary stone; give the others a different role to make the intent explicit.',
+      parameter: 'arrangement.instances',
+    })
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
     ...bandRules(definition),
     ...stoneRules(definition),
     ...gemRules(definition),
+    ...arrangementRules(definition),
     ...prongRules(definition),
-    ...bezelRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),
     ...manufacturingRules(definition),

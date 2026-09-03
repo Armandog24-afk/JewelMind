@@ -1,5 +1,5 @@
 {
-  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Authored during Sprint 19 and extended each sprint since (gem/gem_visual: Sprint 21) and validated by backend/tests/test_capability_coverage.py.",
+  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Authored during Sprint 19 and extended each sprint since (gem/gem_visual: Sprint 21; arrangement: Sprint 22) and validated by backend/tests/test_capability_coverage.py.",
   "statusValues": [
     "CURRENT",
     "PARTIAL",
@@ -162,19 +162,19 @@
       "domain": "stone_arrangement",
       "capability": "three_stone",
       "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; StoneArrangementDefinition supports only SINGLE_CENTER today."
+      "note": "Multi-stone arrangement. RFC required; StoneArrangementDefinition supports only SINGLE_CENTER today. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
     },
     {
       "domain": "stone_arrangement",
       "capability": "halo",
       "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work."
+      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
     },
     {
       "domain": "stone_arrangement",
       "capability": "pave",
       "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; pave boundaries would consume the stone outline contract."
+      "note": "Multi-stone arrangement. RFC required; pave boundaries would consume the stone outline contract. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
     },
     {
       "domain": "stone_arrangement",
@@ -919,6 +919,108 @@
       "capability": "physically_measured_gem_optics",
       "status": "PLANNED",
       "note": "No measured refractive index, dispersion or absorption spectrum. The renderer's ior/dispersion values are chosen for plausibility on screen."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "stone_instance",
+      "status": "CURRENT",
+      "note": "arrangement/models.py::StoneInstanceDef; stable id, stone reference, gem reference, role, placement and a closed set of overrides. An occurrence references what a stone IS rather than restating it."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "declarative_arrangement",
+      "status": "CURRENT",
+      "note": "arrangement.instances/groups/patterns/relations in JDL; optional and nullable, so a pre-Sprint-22 document is a single-stone design and behaves exactly as before."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "deterministic_resolution",
+      "status": "CURRENT",
+      "note": "arrangement/resolve.py; one pass, closed-form pattern expansion, frame composition, canonical ordering. No solver, no iteration, no random ids."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "arrangement_fingerprint",
+      "status": "CURRENT",
+      "note": "arrangement/normalize.py; separate from definitionHash and geometryHash. Reordering instances cannot change it; the resolver version participates."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "structural_validation",
+      "status": "CURRENT",
+      "note": "JM-ARRANGE-001..006 in validation/engine.py::_arrangement_rules. Structural and referential only — no spacing, proportion or density rule exists, and overlap is a geometric question for Inspection."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "compilation_boundary",
+      "status": "CURRENT",
+      "note": "arrangement/compile.py, surfaced on GeneratedModel.arrangement_result. Reports each instance's generation status; NOT_GENERATED always carries a reason and GENERATED always names its component."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "component_naming_contract",
+      "status": "CURRENT",
+      "note": "Primary instance keeps stone_reference exactly; an additional instance is stone_reference.<instanceId>, classified as a stone reference by geometry/roles.py rather than falling through to production_metal."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "multi_stone_geometry",
+      "status": "PARTIAL",
+      "note": "Every instance resolves and reports its status, but the pipeline emits ONE stone component; additional instances are NOT_GENERATED with a reason. Requires a per-instance stone transform and instance-aware Geometry Inspection. See docs/bible/24-arrangement/execution-boundary.md."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "instance_overrides_applied_to_geometry",
+      "status": "PARTIAL",
+      "note": "scale and orientationDeg are representable and carried through resolution; neither reaches geometry yet, because that needs the multi-stone emission path."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "enforced_relationships",
+      "status": "PLANNED",
+      "note": "Five relation kinds are representable, reference-checked and preserved. They are DECLARATIONS: nothing moves an instance to satisfy one."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "instance_relative_placement",
+      "status": "PLANNED",
+      "note": "Placement relative to another INSTANCE needs a dependency order, and a cyclic reference has no determinate resolution. Group-relative placement is CURRENT."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "constraint_solving",
+      "status": "PLANNED",
+      "note": "Explicitly out of scope: a solver's output depends on iteration order and starting values, which this layer's determinism guarantee forbids."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "path_pattern",
+      "status": "PLANNED",
+      "note": "Members along an arbitrary curve. Needs curve evaluation, which belongs to the geometry core, not to a declarative arrangement."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "full_3d_instance_orientation",
+      "status": "PLANNED",
+      "note": "Tilt and roll. Deliberately not representable: a rotation no builder can execute would be a silently ignored field."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "arrangement_collision_checking",
+      "status": "PLANNED",
+      "note": "Whether two placed stones overlap is a geometric fact, answerable only by Geometry Inspection once multi-stone geometry exists. No spacing threshold is invented."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "professional_arrangement_rules",
+      "status": "PLANNED",
+      "note": "Minimum spacing, accent-to-centre proportion, pave density. Each needs sourced professional evidence this project does not have."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "multiple_named_stone_specifications",
+      "status": "PLANNED",
+      "note": "stoneRef resolves only 'primary' today because JDL carries one stone; any other value is reported unresolved (JM-ARRANGE-003) rather than silently treated as the primary one."
     }
   ]
 }

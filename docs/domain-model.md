@@ -72,6 +72,11 @@ This is also the exact default definition (see `default_definition()` /
 | `stone.gem.origin` | enum | `NATURAL`, `SYNTHETIC`, `SIMULANT`, `COMPOSITE`, `UNKNOWN`. Independent of treatment and of identity. |
 | `stone.gem.treatments` | list | DECLARED treatments, each with a status and a disclosure source. An empty list means nothing was recorded, not that the stone is untreated. |
 | `stone.gem.visualProfileId` | string \| null | Overrides the entry's default appearance. Presentation only — it never changes identity, and it is excluded from the geometry hash along with the rest of `stone.gem`. |
+| `arrangement` | `ArrangementDefinition` \| null | Which stone occurrences a design contains and how they relate (Sprint 22). `null` on every pre-Sprint-22 document, which is a single-stone design and behaves exactly as before. Participates in `geometryHash`, because an arrangement will drive geometry. See `docs/bible/24-arrangement/README.md`. |
+| `arrangement.instances[]` | list | One occurrence each: a stable `instanceId`, a `stoneRef` (only `primary` resolves today), a `role`, a `placement`, a closed set of `overrides`, and an optional per-instance `gem`. An occurrence references what a stone IS rather than restating it. |
+| `arrangement.groups[]` | list | Named sets with their own origin. Membership is declared by an instance naming its `groupId` — one direction only, because two would need to agree. |
+| `arrangement.patterns[]` | list | `LINEAR`, `RADIAL` or `MIRROR`, each a closed-form generator applied to a named source instance. Members get derived ids (`halo.0`, …) so re-resolving is deterministic. |
+| `arrangement.relations[]` | list | Declared relationships (mirrored pair, aligned, evenly spaced, concentric, shared transform). RECORDED and reference-checked, never solved: nothing moves an instance to satisfy one. |
 | `material.metal` | enum | `yellow_gold_18k`, `white_gold_18k`, `rose_gold_18k`, `platinum`, `silver`. Cosmetic only in this milestone — see known limitations. |
 | `manufacturing.method` | enum | `lost_wax_casting`, `direct_resin_printing`. Affects one validation rule (JM-MANUFACTURING-001). |
 | `preview.meshTolerance` | number, mm | Linear tessellation tolerance for preview meshes and STL export. |

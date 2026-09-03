@@ -95,7 +95,8 @@
       "preview": {
         "meshTolerance": 0.1,
         "angularTolerance": 0.2
-      }
+      },
+      "arrangement": null
     },
     "validation": [],
     "forgeEvaluation": {

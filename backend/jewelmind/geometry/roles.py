@@ -32,8 +32,50 @@ PRODUCTION_ROLE: dict[str, ProductionRole] = {
 }
 
 
+#: Prefix marking an additional stone instance's component,
+#: `stone_reference.<instanceId>` (Sprint 22). Kept in sync with
+#: `arrangement/compile.py::STONE_INSTANCE_COMPONENT_PREFIX`, which is the
+#: naming authority; duplicated as a literal here only because
+#: `jewelmind.geometry` must not import `jewelmind.arrangement` for a string —
+#: `test_arrangement.py` asserts the two agree.
+_STONE_INSTANCE_PREFIX = "stone_reference."
+
+
+def geometry_role(name: str) -> GeometryRole:
+    """The role a named component plays.
+
+    An instance-suffixed stone name resolves to `stone_reference`, NOT to the
+    `production_metal` default. That default is correct for an unknown metal
+    part and catastrophic for a stone: it would let an additional stone be
+    fused into the metal body and shipped inside a production export, breaking
+    LAW-006 silently the first time a second stone was emitted. Handling the
+    prefix here means the guarantee holds before any such geometry exists.
+    """
+
+    if name in GEOMETRY_ROLE:
+        return GEOMETRY_ROLE[name]
+    if name.startswith(_STONE_INSTANCE_PREFIX):
+        return "stone_reference"
+    return "production_metal"
+
+
+def production_role(name: str) -> ProductionRole:
+    """Whether a named component is included in a production artifact.
+
+    Instance-suffixed stones inherit `excluded_by_default`, for the same reason
+    as above: a stone is a reference, and a caller must opt in explicitly
+    (`includeStoneReference: true`) to get one in a STEP/STL export.
+    """
+
+    if name in PRODUCTION_ROLE:
+        return PRODUCTION_ROLE[name]
+    if name.startswith(_STONE_INSTANCE_PREFIX):
+        return "excluded_by_default"
+    return "included_by_default"
+
+
 def is_production_component(name: str) -> bool:
-    return GEOMETRY_ROLE.get(name, "production_metal") == "production_metal"
+    return geometry_role(name) == "production_metal"
 
 
 def production_component_names(all_names: list[str]) -> list[str]:

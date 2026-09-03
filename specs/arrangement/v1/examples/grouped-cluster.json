@@ -1,0 +1,84 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "cluster.a",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "PARENT_GROUP",
+        "transform": {
+          "xMm": 1.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": "cluster"
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "cluster.b",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "PARENT_GROUP",
+        "transform": {
+          "xMm": -1.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": "cluster"
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "cluster",
+      "label": "Shoulder cluster",
+      "transform": {
+        "xMm": 5.0,
+        "yMm": 2.0,
+        "zMm": 0.0,
+        "rotationDeg": 30.0
+      }
+    }
+  ],
+  "patterns": [],
+  "relations": []
+}

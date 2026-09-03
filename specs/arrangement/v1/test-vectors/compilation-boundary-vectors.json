@@ -1,0 +1,173 @@
+{
+  "generatedFrom": "jewelmind.arrangement.compile.compile_arrangement",
+  "note": "The honest execution boundary. Every resolved instance is reported with its generation status, and an ungenerated one always carries a reason — nothing is silently dropped and no placeholder solid is invented.",
+  "vectors": [
+    {
+      "case": "single-center-stone.json",
+      "instanceCount": 1,
+      "generatedCount": 1,
+      "instances": [
+        {
+          "instanceId": "center",
+          "generationStatus": "GENERATED",
+          "componentName": "stone_reference",
+          "hasReason": false
+        }
+      ]
+    },
+    {
+      "case": "halo-eight-accents.json",
+      "instanceCount": 9,
+      "generatedCount": 1,
+      "instances": [
+        {
+          "instanceId": "center",
+          "generationStatus": "GENERATED",
+          "componentName": "stone_reference",
+          "hasReason": false
+        },
+        {
+          "instanceId": "halo.0",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.1",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.2",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.3",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.4",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.5",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.6",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "halo.7",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        }
+      ]
+    },
+    {
+      "case": "three-stone-mirrored.json",
+      "instanceCount": 3,
+      "generatedCount": 1,
+      "instances": [
+        {
+          "instanceId": "center",
+          "generationStatus": "GENERATED",
+          "componentName": "stone_reference",
+          "hasReason": false
+        },
+        {
+          "instanceId": "side-mirror.1",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "side.right",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        }
+      ]
+    },
+    {
+      "case": "linear-accent-row.json",
+      "instanceCount": 6,
+      "generatedCount": 1,
+      "instances": [
+        {
+          "instanceId": "anchor",
+          "generationStatus": "GENERATED",
+          "componentName": "stone_reference",
+          "hasReason": false
+        },
+        {
+          "instanceId": "row.0",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "row.1",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "row.2",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "row.3",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "row.4",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        }
+      ]
+    },
+    {
+      "case": "grouped-cluster.json",
+      "instanceCount": 3,
+      "generatedCount": 1,
+      "instances": [
+        {
+          "instanceId": "center",
+          "generationStatus": "GENERATED",
+          "componentName": "stone_reference",
+          "hasReason": false
+        },
+        {
+          "instanceId": "cluster.a",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        },
+        {
+          "instanceId": "cluster.b",
+          "generationStatus": "NOT_GENERATED",
+          "componentName": null,
+          "hasReason": true
+        }
+      ]
+    }
+  ]
+}

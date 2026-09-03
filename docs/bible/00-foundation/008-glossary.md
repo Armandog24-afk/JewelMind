@@ -969,3 +969,47 @@ is what lets a semantic-only edit reuse already-built geometry. See
 **StoneInstance** — a stone's `instanceId`, `StoneRole` (`CENTER`, `SIDE`,
 `ACCENT`, `HALO`, `PAVE`, `UNKNOWN`) and its own gem. A model only: no
 generator builds more than one stone, so multi-stone arrangement is PLANNED.
+
+## Arrangement terms (Sprint 22)
+
+**Arrangement** — a declarative description of WHICH stones participate in a
+design and WHERE they sit. Data, never geometry: resolution produces numbers and
+the geometry core turns numbers into solids. See
+[`24-arrangement/README.md`](../24-arrangement/README.md).
+
+**Stone Instance** — one OCCURRENCE of a stone. Carries a stable id, a reference
+to the stone specification, an optional per-instance gem, a role, a placement
+and a closed set of overrides. It carries no shape and no material of its own,
+because two accents cut from one specification are two occurrences of one stone.
+
+**Placement** — where an instance sits: a translation plus one rotation about the
+vertical axis, measured in the design frame or in a parent group's frame. Every
+placement is rewritten to an explicit design-frame position by resolution.
+
+**Arrangement Group** — a named set of instances that move and are edited
+together, with its own origin. Membership is declared by an instance naming its
+group, one direction only.
+
+**Arrangement Pattern** — a closed-form generator applied to a source instance:
+`LINEAR` (a run), `RADIAL` (a circle or arc), `MIRROR` (one reflected copy).
+Members get DERIVED ids so re-resolving the same pattern is deterministic.
+
+**Arrangement Relation** — a declared relationship between instances (mirrored
+pair, aligned, evenly spaced, concentric, shared transform). RECORDED and
+reference-checked, never solved: nothing moves an instance to satisfy one.
+
+**Resolution** — the single pass that expands patterns, composes group frames and
+produces a `ResolvedArrangement` of explicit placements. Direct evaluation in a
+fixed order, never iterative solving, so the output is a pure function of the
+input.
+
+**Arrangement Fingerprint** — a deterministic hash of an arrangement's own
+content plus the resolver version. Separate from `definitionHash` and from
+`geometryHash`: the same arrangement reused in two rings has one fingerprint and
+two definition hashes.
+
+**Execution Boundary** — the recorded line between what the arrangement layer
+resolves and what the geometry pipeline builds. Today every instance resolves
+and one stone solid is emitted; the rest are reported `NOT_GENERATED` with a
+reason. See
+[`24-arrangement/execution-boundary.md`](../24-arrangement/execution-boundary.md).

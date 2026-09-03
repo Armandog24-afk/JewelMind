@@ -49,6 +49,12 @@ results are shown but never block anything.
 | `JM-GEM-004` | `stone.gem.visualProfileId` | The visual profile override does not resolve; a neutral fallback appearance is used. Affects how the stone is drawn, never what it is. | warning |
 | `JM-GEM-005` | `stone.gem.treatments` | A duplicate treatment record is a warning; the same treatment recorded as both `PRESENT` and `NOT_PRESENT` is an error. | warning / error |
 | `JM-GEM-006` | `stone.gem.gemId` | The entry is deprecated but still resolvable. | warning |
+| `JM-ARRANGE-001` | `arrangement.instances` | Two stone instances declare the same id. Ids are the authoritative identity, so a duplicate makes every reference to it ambiguous. | error |
+| `JM-ARRANGE-002` | `arrangement.instances`, `arrangement.patterns` | A placement or pattern names a group or instance that is not declared. | error |
+| `JM-ARRANGE-003` | `arrangement.instances` | An instance references a stone specification other than `primary`, which no current document declares. A **warning**: the design is structurally valid and still generates, and only that instance produces no geometry. | warning |
+| `JM-ARRANGE-004` | `arrangement` | The arrangement cannot be resolved. Evaluated by running the REAL resolver, so Forge can never disagree with what generation does. | error |
+| `JM-ARRANGE-005` | `arrangement.instances` | More than one instance claims the `CENTER` role, which is ambiguous about which stone the single-stone pipeline builds. The lowest id is used. | warning |
+| `JM-ARRANGE-006` | `arrangement.instances` | The arrangement resolves more than one instance. Multi-stone geometry is not implemented, so one stone is built and the rest are reported as placements only. Not a fault in the design. | information |
 | `JM-MANUFACTURING-001` | `band.thickness`, `band.width` | For `manufacturing.method = direct_resin_printing`, either dimension below 0.8 mm. (`setting.prongDiameter` is excluded here — `JM-PRONG-002` already errors below 0.8 mm regardless of manufacturing method.) | warning |
 | `JM-GEOMETRY-001` | `band.thickness`, `band.width` | Defense-in-depth: rejects any combination that would produce a non-positive outer band dimension (e.g. zero/negative thickness or width), independent of the rules above. | error |
 

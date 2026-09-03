@@ -14,6 +14,7 @@ import time
 
 import cadquery as cq
 
+from jewelmind.arrangement.compile import compile_arrangement
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.components.band import build_ring_band
 from jewelmind.geometry.components.basket import build_basket_support
@@ -114,4 +115,9 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         bounding_box=full_bbox,
         warnings=warnings,
         setting_result=setting_result,
+        # Sprint 22. Compiled here rather than in `ModelService` so the
+        # arrangement outcome travels with the geometry it describes, exactly
+        # like `setting_result`. `None` in, `None` out: a design with no
+        # arrangement is unchanged.
+        arrangement_result=compile_arrangement(definition.arrangement),
     )

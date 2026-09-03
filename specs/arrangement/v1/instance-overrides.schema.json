@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/instance-overrides.schema.json",
+  "title": "InstanceOverrides",
+  "additionalProperties": false,
+  "description": "The EXPLICITLY supported per-instance deviations from the referenced\nstone specification.\n\nA CLOSED SET, on purpose. Allowing an instance to override any stone field\nwould make the reference meaningless — the instance would become a second\nstone definition, and \"same stone, eight times\" would stop being expressible.\nSo an instance may scale a size and rotate itself, and nothing else. It can\nnever override the shape, the source, the outline, or the profile: those are\nwhat make two occurrences occurrences OF something.\n\nA field left `None` means \"inherit\", which is different from \"same value as\nthe parent\" — an inherited size follows a later edit to the stone\nspecification, a copied one would not.",
+  "properties": {
+    "scale": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale"
+    },
+    "orientationDeg": {
+      "anyOf": [
+        {
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orientationdeg"
+    }
+  },
+  "type": "object"
+}

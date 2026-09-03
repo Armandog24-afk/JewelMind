@@ -353,6 +353,176 @@ export interface PreviewSpec {
   angularTolerance: number
 }
 
+/** A stone's semantic role in a design. Mirrors
+ * `backend/jewelmind/gem/models.py::StoneRole`. */
+export type StoneRole = 'CENTER' | 'SIDE' | 'ACCENT' | 'HALO' | 'PAVE' | 'UNKNOWN'
+
+/**
+ * Stone Arrangement Engine v1 (Sprint 22). Mirrors
+ * `backend/jewelmind/arrangement/models.py`.
+ *
+ * A MIRROR, with the usual obligation: the backend is authoritative, and this
+ * file must never describe a placement mode, pattern kind or relation the
+ * backend cannot resolve. Resolution itself is deliberately NOT mirrored — the
+ * frontend reads a resolved arrangement from the backend rather than expanding
+ * patterns locally, because two implementations of the same arithmetic
+ * eventually disagree and the disagreement shows up as a preview that does not
+ * match the exported model.
+ */
+
+/** How an instance's placement is expressed. Every mode resolves to
+ * `EXPLICIT`, so a consumer of a RESOLVED arrangement never interprets one. */
+export type PlacementMode = 'EXPLICIT' | 'PATTERN_MEMBER' | 'RELATIVE'
+
+/** The frame a placement's coordinates are measured in. */
+export type PlacementFrame = 'DESIGN_ORIGIN' | 'PARENT_GROUP'
+
+/** Pattern kinds. Each is a closed-form generator, evaluated directly. */
+export type ArrangementPatternKind = 'LINEAR' | 'RADIAL' | 'MIRROR'
+
+/** The plane a MIRROR pattern reflects across, named by its normal axis. */
+export type MirrorPlane = 'YZ' | 'XZ'
+
+/** Relationship kinds. DECLARATIONS that survive editing, never constraints
+ * something solves — nothing moves an instance to satisfy one. */
+export type ArrangementRelationKind =
+  | 'MIRRORED_PAIR'
+  | 'ALIGNED_WITH'
+  | 'EVENLY_SPACED_WITH'
+  | 'CONCENTRIC_WITH'
+  | 'SHARES_TRANSFORM_WITH'
+
+/** Whether a resolved instance actually became geometry. The honest reporting
+ * channel for the current execution boundary: multi-stone geometry is PARTIAL,
+ * so an instance the pipeline did not build says so and says why. */
+export type InstanceGenerationStatus = 'GENERATED' | 'NOT_GENERATED'
+
+/** An instance's rigid placement: a translation plus ONE rotation, about the
+ * vertical axis only. Millimetres and degrees, like everything else. */
+export interface InstanceTransform {
+  xMm: number
+  yMm: number
+  zMm: number
+  rotationDeg: number
+}
+
+export interface InstancePlacement {
+  mode: PlacementMode
+  frame: PlacementFrame
+  transform: InstanceTransform
+  groupId: string | null
+}
+
+/** The EXPLICITLY supported per-instance deviations. A closed set: an instance
+ * may scale and rotate itself and nothing else, because overriding the shape
+ * would make the stone reference meaningless. `null` means inherit. */
+export interface InstanceOverrides {
+  scale: number | null
+  orientationDeg: number | null
+}
+
+/** One occurrence of a stone. References the stone and gem rather than
+ * restating them — two accents cut from one specification are two occurrences
+ * of one stone, not two stones that happen to match. */
+export interface StoneInstanceDef {
+  instanceId: string
+  stoneRef: string
+  role: StoneRole
+  placement: InstancePlacement
+  overrides: InstanceOverrides
+  gem: GemIdentity | null
+  sourcePatternId: string | null
+}
+
+export interface ArrangementGroup {
+  groupId: string
+  label: string | null
+  transform: InstanceTransform
+}
+
+export interface LinearPatternSpec {
+  kind: 'LINEAR'
+  count: number
+  spacingMm: number
+  directionDeg: number
+  centered: boolean
+}
+
+export interface RadialPatternSpec {
+  kind: 'RADIAL'
+  count: number
+  radiusMm: number
+  startAngleDeg: number
+  sweepDeg: number
+  alignToRadius: boolean
+}
+
+export interface MirrorPatternSpec {
+  kind: 'MIRROR'
+  plane: MirrorPlane
+  mirrorOrientation: boolean
+}
+
+export type ArrangementPatternSpec =
+  | LinearPatternSpec
+  | RadialPatternSpec
+  | MirrorPatternSpec
+
+export interface ArrangementPattern {
+  patternId: string
+  sourceInstanceId: string
+  spec: ArrangementPatternSpec
+  memberRole: StoneRole
+  groupId: string | null
+}
+
+export interface ArrangementRelation {
+  relationId: string
+  kind: ArrangementRelationKind
+  members: string[]
+  note: string | null
+}
+
+/** The declarative arrangement. ABSENT IS NOT EMPTY: a definition with no
+ * arrangement is a single-stone design and behaves exactly as before, which is
+ * why the field is nullable rather than defaulting to one instance. */
+export interface ArrangementDefinition {
+  instances: StoneInstanceDef[]
+  groups: ArrangementGroup[]
+  patterns: ArrangementPattern[]
+  relations: ArrangementRelation[]
+}
+
+/** One instance after resolution: an explicit position in the design frame,
+ * plus whether geometry was built for it. */
+export interface ResolvedInstance {
+  instanceId: string
+  stoneRef: string
+  role: StoneRole
+  transform: InstanceTransform
+  overrides: InstanceOverrides
+  gem: GemIdentity | null
+  sourcePatternId: string | null
+  groupId: string | null
+  generationStatus: InstanceGenerationStatus
+  generationNote: string | null
+  componentName: string | null
+}
+
+/** The resolved arrangement a consumer reads. `arrangementFingerprint` is
+ * SEPARATE from `definitionHash`: the same arrangement in two different rings
+ * has one fingerprint and two definition hashes. */
+export interface ResolvedArrangement {
+  instances: ResolvedInstance[]
+  relations: ArrangementRelation[]
+  arrangementFingerprint: string
+  resolverVersion: string
+  instanceCount: number
+  generatedCount: number
+  patternExpandedCount: number
+  notes: string[]
+}
+
 export interface JewelryDefinition {
   schemaVersion: string
   project: ProjectInfo
@@ -364,6 +534,13 @@ export interface JewelryDefinition {
   material: MaterialSpec
   manufacturing: ManufacturingSpec
   preview: PreviewSpec
+
+  /** Multiple stone occurrences and their relationships (Sprint 22).
+   *
+   * `null` on every pre-Sprint-22 document, and that is deliberate: defaulting
+   * it to a one-instance arrangement would give every stored design an
+   * arrangement it never declared, changing its `definitionHash`. */
+  arrangement: ArrangementDefinition | null
 }
 
 const METAL_TYPES: readonly MetalType[] = [
@@ -554,5 +731,7 @@ export function createDefaultDefinition(): JewelryDefinition {
     material: { metal: 'yellow_gold_18k' },
     manufacturing: { method: 'lost_wax_casting' },
     preview: { meshTolerance: 0.1, angularTolerance: 0.2 },
+    // No arrangement: a single-stone design, exactly as before Sprint 22.
+    arrangement: null,
   }
 }

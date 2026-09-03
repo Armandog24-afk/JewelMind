@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/arrangement-pattern.schema.json",
+  "title": "ArrangementPattern",
+  "$defs": {
+    "LinearPatternSpec": {
+      "additionalProperties": false,
+      "description": "`count` copies along a straight line, evenly spaced.\n\n`spacingMm` is centre-to-centre distance. It is a POSITION parameter, never\na clearance: nothing here knows a stone's size, so nothing here can claim\ntwo stones do not collide. Whether a spacing is manufacturable is a\ngeometric and professional question, asked downstream.",
+      "properties": {
+        "kind": {
+          "const": "LINEAR",
+          "default": "LINEAR",
+          "title": "Kind",
+          "type": "string"
+        },
+        "count": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "spacingMm": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 500.0,
+          "title": "Spacingmm",
+          "type": "number"
+        },
+        "directionDeg": {
+          "default": 0.0,
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "title": "Directiondeg",
+          "type": "number"
+        },
+        "centered": {
+          "default": true,
+          "title": "Centered",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "count",
+        "spacingMm"
+      ],
+      "title": "LinearPatternSpec",
+      "type": "object"
+    },
+    "MirrorPatternSpec": {
+      "additionalProperties": false,
+      "description": "One reflected copy across a principal plane through the design origin.\n\nA pattern rather than a relation because it PRODUCES an instance. The\n`MIRRORED_PAIR` relation records that two existing instances are a pair;\nthis creates the second one.",
+      "properties": {
+        "kind": {
+          "const": "MIRROR",
+          "default": "MIRROR",
+          "title": "Kind",
+          "type": "string"
+        },
+        "plane": {
+          "default": "YZ",
+          "enum": [
+            "YZ",
+            "XZ"
+          ],
+          "title": "Plane",
+          "type": "string"
+        },
+        "mirrorOrientation": {
+          "default": true,
+          "title": "Mirrororientation",
+          "type": "boolean"
+        }
+      },
+      "title": "MirrorPatternSpec",
+      "type": "object"
+    },
+    "RadialPatternSpec": {
+      "additionalProperties": false,
+      "description": "`count` copies around a circle of radius `radiusMm`.\n\n`startAngleDeg` and `sweepDeg` make a partial arc expressible, so a halo\nthat stops short of the shank is a first-class arrangement rather than a\nfull circle with members deleted.",
+      "properties": {
+        "kind": {
+          "const": "RADIAL",
+          "default": "RADIAL",
+          "title": "Kind",
+          "type": "string"
+        },
+        "count": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "radiusMm": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 500.0,
+          "title": "Radiusmm",
+          "type": "number"
+        },
+        "startAngleDeg": {
+          "default": 0.0,
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "title": "Startangledeg",
+          "type": "number"
+        },
+        "sweepDeg": {
+          "default": 360.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 360.0,
+          "title": "Sweepdeg",
+          "type": "number"
+        },
+        "alignToRadius": {
+          "default": true,
+          "title": "Aligntoradius",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "count",
+        "radiusMm"
+      ],
+      "title": "RadialPatternSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A pattern plus what it applies to.\n\n`sourceInstanceId` names the instance being repeated: a pattern is always\n\"more of this one\", never a free-floating count of nothing. That keeps every\ngenerated member's stone reference, gem and overrides traceable to a real\ninstance the user can see and edit.",
+  "properties": {
+    "patternId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Patternid",
+      "type": "string"
+    },
+    "sourceInstanceId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Sourceinstanceid",
+      "type": "string"
+    },
+    "spec": {
+      "discriminator": {
+        "mapping": {
+          "LINEAR": "#/$defs/LinearPatternSpec",
+          "MIRROR": "#/$defs/MirrorPatternSpec",
+          "RADIAL": "#/$defs/RadialPatternSpec"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/LinearPatternSpec"
+        },
+        {
+          "$ref": "#/$defs/RadialPatternSpec"
+        },
+        {
+          "$ref": "#/$defs/MirrorPatternSpec"
+        }
+      ],
+      "title": "Spec"
+    },
+    "memberRole": {
+      "default": "ACCENT",
+      "enum": [
+        "CENTER",
+        "SIDE",
+        "ACCENT",
+        "HALO",
+        "PAVE",
+        "UNKNOWN"
+      ],
+      "title": "Memberrole",
+      "type": "string"
+    },
+    "groupId": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Groupid"
+    }
+  },
+  "required": [
+    "patternId",
+    "sourceInstanceId",
+    "spec"
+  ],
+  "type": "object"
+}

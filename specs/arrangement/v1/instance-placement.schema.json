@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/instance-placement.schema.json",
+  "title": "InstancePlacement",
+  "$defs": {
+    "InstanceTransform": {
+      "additionalProperties": false,
+      "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+      "properties": {
+        "xMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Xmm",
+          "type": "number"
+        },
+        "yMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Ymm",
+          "type": "number"
+        },
+        "zMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Zmm",
+          "type": "number"
+        },
+        "rotationDeg": {
+          "default": 0.0,
+          "maximum": 3600.0,
+          "minimum": -3600.0,
+          "title": "Rotationdeg",
+          "type": "number"
+        }
+      },
+      "title": "InstanceTransform",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Where an instance sits, and how that was expressed.\n\n`mode` records the ORIGIN of the placement so an editor can tell a position\nthe user typed from one a pattern produced. Resolution rewrites every mode\nto `EXPLICIT`; before that, a `PATTERN_MEMBER` placement's transform is the\npattern's own offset for that member and is not yet the final position.",
+  "properties": {
+    "mode": {
+      "default": "EXPLICIT",
+      "enum": [
+        "EXPLICIT",
+        "PATTERN_MEMBER",
+        "RELATIVE"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "frame": {
+      "default": "DESIGN_ORIGIN",
+      "enum": [
+        "DESIGN_ORIGIN",
+        "PARENT_GROUP"
+      ],
+      "title": "Frame",
+      "type": "string"
+    },
+    "transform": {
+      "$ref": "#/$defs/InstanceTransform"
+    },
+    "groupId": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Groupid"
+    }
+  },
+  "type": "object"
+}

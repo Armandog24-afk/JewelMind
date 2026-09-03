@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/instance-transform.schema.json",
+  "title": "InstanceTransform",
+  "additionalProperties": false,
+  "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+  "properties": {
+    "xMm": {
+      "default": 0.0,
+      "maximum": 500.0,
+      "minimum": -500.0,
+      "title": "Xmm",
+      "type": "number"
+    },
+    "yMm": {
+      "default": 0.0,
+      "maximum": 500.0,
+      "minimum": -500.0,
+      "title": "Ymm",
+      "type": "number"
+    },
+    "zMm": {
+      "default": 0.0,
+      "maximum": 500.0,
+      "minimum": -500.0,
+      "title": "Zmm",
+      "type": "number"
+    },
+    "rotationDeg": {
+      "default": 0.0,
+      "maximum": 3600.0,
+      "minimum": -3600.0,
+      "title": "Rotationdeg",
+      "type": "number"
+    }
+  },
+  "type": "object"
+}

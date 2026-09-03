@@ -1,0 +1,117 @@
+{
+  "generatedFrom": "ArrangementDefinition.model_validate + jewelmind.arrangement.resolve.resolve_arrangement",
+  "note": "Reject, never repair. Each case records WHICH layer refused it, because a schema rejection and a resolver rejection are different facts: the first means the document is malformed, the second that it is well-formed and inconsistent.",
+  "vectors": [
+    {
+      "case": "duplicate instance id",
+      "input": {
+        "instances": [
+          {
+            "instanceId": "c"
+          },
+          {
+            "instanceId": "c",
+            "role": "SIDE"
+          }
+        ]
+      },
+      "rejectedBy": "RESOLVER",
+      "error": "DuplicateInstanceIdError",
+      "message": "instance id 'c' is declared more than once. IDs are the authoritative identity, so a duplicate makes every reference to it ambiguous."
+    },
+    {
+      "case": "pattern references a missing instance",
+      "input": {
+        "instances": [
+          {
+            "instanceId": "c"
+          }
+        ],
+        "patterns": [
+          {
+            "patternId": "p",
+            "sourceInstanceId": "ghost",
+            "spec": {
+              "kind": "MIRROR"
+            }
+          }
+        ]
+      },
+      "rejectedBy": "RESOLVER",
+      "error": "UnresolvedInstanceReferenceError",
+      "message": "pattern 'p' repeats instance 'ghost', which does not exist."
+    },
+    {
+      "case": "placement references a missing group",
+      "input": {
+        "instances": [
+          {
+            "instanceId": "c",
+            "placement": {
+              "frame": "PARENT_GROUP",
+              "groupId": "ghost"
+            }
+          }
+        ]
+      },
+      "rejectedBy": "RESOLVER",
+      "error": "UnresolvedGroupReferenceError",
+      "message": "instance 'c' names group 'ghost', which does not exist."
+    },
+    {
+      "case": "relation references a missing member",
+      "input": {
+        "instances": [
+          {
+            "instanceId": "c"
+          }
+        ],
+        "relations": [
+          {
+            "relationId": "r",
+            "kind": "ALIGNED_WITH",
+            "members": [
+              "c",
+              "ghost"
+            ]
+          }
+        ]
+      },
+      "rejectedBy": "RESOLVER",
+      "error": "UnresolvedInstanceReferenceError",
+      "message": "relation 'r' references 'ghost', which is neither an instance nor a group in this arrangement."
+    },
+    {
+      "case": "mirrored pair with three members",
+      "input": {
+        "instances": [
+          {
+            "instanceId": "a"
+          },
+          {
+            "instanceId": "b",
+            "role": "SIDE"
+          },
+          {
+            "instanceId": "d",
+            "role": "SIDE"
+          }
+        ],
+        "relations": [
+          {
+            "relationId": "r",
+            "kind": "MIRRORED_PAIR",
+            "members": [
+              "a",
+              "b",
+              "d"
+            ]
+          }
+        ]
+      },
+      "rejectedBy": "RESOLVER",
+      "error": "ArrangementRelationInvalidError",
+      "message": "relation 'r' of kind MIRRORED_PAIR requires exactly 2 members, got 3."
+    }
+  ]
+}

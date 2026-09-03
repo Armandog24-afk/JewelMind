@@ -255,6 +255,8 @@ def test_coverage_spans_the_expected_domains():
         # Sprint 21.
         "gem",
         "gem_visual",
+        # Sprint 22.
+        "arrangement",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"
@@ -314,3 +316,52 @@ def test_no_gem_property_rule_is_claimed_as_current():
 def test_gem_arrangement_is_not_advertised_as_current():
     keys = _by_key()
     assert keys[("gem", "per_stone_gem_in_a_multi_stone_design")]["status"] == "PLANNED"
+
+
+def test_current_arrangement_capabilities_match_the_live_registry():
+    """An arrangement capability marked CURRENT must be backed by live code.
+
+    The cross-product registry and `arrangement/capability.py` answer the same
+    question, so they must agree — the drift Sprint 20 had to remove three
+    times.
+    """
+
+    from jewelmind.arrangement.capability import ARRANGEMENT_CAPABILITIES
+
+    keys = _by_key()
+    live = ARRANGEMENT_CAPABILITIES
+
+    # The boundary, asserted in both registries.
+    assert keys[("arrangement", "multi_stone_geometry")]["status"] == "PARTIAL"
+    assert live["multi_stone_geometry"].status == "PARTIAL"
+    assert live["multi_stone_geometry"].generatable is False
+
+    # Exactly one arrangement capability builds geometry today.
+    generatable = [name for name, e in live.items() if e.generatable]
+    assert generatable == ["stone_instance"]
+    assert keys[("arrangement", "stone_instance")]["status"] == "CURRENT"
+
+
+def test_no_arrangement_solver_or_professional_rule_is_claimed():
+    keys = _by_key()
+    for capability in (
+        "constraint_solving",
+        "professional_arrangement_rules",
+        "arrangement_collision_checking",
+        "enforced_relationships",
+        "path_pattern",
+        "full_3d_instance_orientation",
+    ):
+        assert keys[("arrangement", capability)]["status"] == "PLANNED", capability
+
+
+def test_the_stone_arrangement_domain_does_not_contradict_the_new_one():
+    """The pre-existing `stone_arrangement` domain was a forward-looking
+    placeholder. It must not now claim geometry the pipeline cannot build."""
+
+    for entry in _entries():
+        if entry["domain"] != "stone_arrangement":
+            continue
+        if entry["capability"] == "single_center":
+            continue
+        assert entry["status"] in {"PLANNED", "PARTIAL"}, entry

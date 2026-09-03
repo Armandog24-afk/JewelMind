@@ -62,3 +62,20 @@ GEM_CUSTOM_COHERENT = "JM-GEM-003"
 GEM_VISUAL_PROFILE_RESOLVES = "JM-GEM-004"
 GEM_TREATMENT_COHERENT = "JM-GEM-005"
 GEM_ENTRY_DEPRECATED = "JM-GEM-006"
+
+# Sprint 22 — ARRANGEMENT_ONLY. Every one is a STRUCTURAL or REFERENTIAL
+# invariant of the declarative arrangement: do the referenced things exist, are
+# the authoritative IDs unique, does the declared structure resolve.
+#
+# NONE is a jewelry or manufacturing claim. There is deliberately no rule about
+# minimum stone spacing, accent-to-centre proportion, pave density or setting
+# suitability, because each needs sourced professional evidence this project
+# does not have. Whether two placed stones physically overlap is a GEOMETRIC
+# fact, answerable only by Geometry Inspection once multi-stone geometry
+# exists — not a threshold to invent here.
+ARRANGEMENT_INSTANCE_IDS_UNIQUE = "JM-ARRANGE-001"
+ARRANGEMENT_REFERENCES_RESOLVE = "JM-ARRANGE-002"
+ARRANGEMENT_STONE_REFERENCE_RESOLVES = "JM-ARRANGE-003"
+ARRANGEMENT_STRUCTURE_RESOLVES = "JM-ARRANGE-004"
+ARRANGEMENT_ROLE_COHERENT = "JM-ARRANGE-005"
+ARRANGEMENT_GENERATION_PARTIAL = "JM-ARRANGE-006"

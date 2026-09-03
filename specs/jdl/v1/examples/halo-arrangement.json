@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "name": "Halo Solitaire",
+    "units": "mm"
+  },
+  "jewelry": {
+    "category": "ring",
+    "style": "solitaire"
+  },
+  "ring": {
+    "sizeSystem": "EU",
+    "size": 16.0,
+    "innerDiameter": 17.8
+  },
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
+  },
+  "stone": {
+    "shape": "round",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null,
+    "gem": null
+  },
+  "setting": {
+    "type": "prong",
+    "prongCount": 6,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5,
+    "bezelWallThickness": 0.6,
+    "bezelWallHeight": 2.5
+  },
+  "material": {
+    "metal": "yellow_gold_18k"
+  },
+  "manufacturing": {
+    "method": "lost_wax_casting"
+  },
+  "preview": {
+    "meshTolerance": 0.1,
+    "angularTolerance": 0.2
+  },
+  "arrangement": {
+    "instances": [
+      {
+        "instanceId": "center",
+        "stoneRef": "primary",
+        "role": "CENTER",
+        "placement": {
+          "mode": "EXPLICIT",
+          "frame": "DESIGN_ORIGIN",
+          "transform": {
+            "xMm": 0.0,
+            "yMm": 0.0,
+            "zMm": 0.0,
+            "rotationDeg": 0.0
+          },
+          "groupId": null
+        },
+        "overrides": {
+          "scale": null,
+          "orientationDeg": null
+        },
+        "gem": {
+          "gemId": "diamond",
+          "origin": "NATURAL",
+          "treatments": [],
+          "visualProfileId": null,
+          "customName": null,
+          "note": null
+        },
+        "sourcePatternId": null
+      }
+    ],
+    "groups": [
+      {
+        "groupId": "halo-ring",
+        "label": "Halo",
+        "transform": {
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        }
+      }
+    ],
+    "patterns": [
+      {
+        "patternId": "halo",
+        "sourceInstanceId": "center",
+        "spec": {
+          "kind": "RADIAL",
+          "count": 8,
+          "radiusMm": 4.6,
+          "startAngleDeg": 0.0,
+          "sweepDeg": 360.0,
+          "alignToRadius": true
+        },
+        "memberRole": "HALO",
+        "groupId": "halo-ring"
+      }
+    ],
+    "relations": []
+  }
+}

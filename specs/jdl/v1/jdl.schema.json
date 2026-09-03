@@ -13,7 +13,10 @@
       "description": "MINOR, additive Sprint 17 field (see docs/bible/19-shank/README.md and docs/bible/05-jdl/081-schema-versioning-and-migrations.md). mode=\"NONE\" (the default) is bit-identical to pre-Sprint-17 geometry; bottomRatio is ignored when mode=\"NONE\".",
       "properties": {
         "mode": {
-          "enum": ["NONE", "TOWARD_BOTTOM"],
+          "enum": [
+            "NONE",
+            "TOWARD_BOTTOM"
+          ],
           "default": "NONE"
         },
         "bottomRatio": {
@@ -23,6 +26,973 @@
           "default": 1.0,
           "description": "Fraction of the base (head) dimension retained at the bottom of the ring when mode=\"TOWARD_BOTTOM\"."
         }
+      }
+    },
+    "arrangementDefs": {
+      "ArrangementGroup": {
+        "additionalProperties": false,
+        "description": "A named set of instances that move and are edited together.\n\nGrouping is expressed by an instance naming its `groupId`, not by the group\nlisting members. One direction only: two directions would need to agree, and\na membership list that disagrees with its members is a malformed document\nthat nothing can resolve correctly.",
+        "properties": {
+          "groupId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Groupid",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          },
+          "transform": {
+            "$ref": "#/$defs/arrangementDefs/InstanceTransform"
+          }
+        },
+        "required": [
+          "groupId"
+        ],
+        "title": "ArrangementGroup",
+        "type": "object"
+      },
+      "ArrangementPattern": {
+        "additionalProperties": false,
+        "description": "A pattern plus what it applies to.\n\n`sourceInstanceId` names the instance being repeated: a pattern is always\n\"more of this one\", never a free-floating count of nothing. That keeps every\ngenerated member's stone reference, gem and overrides traceable to a real\ninstance the user can see and edit.",
+        "properties": {
+          "patternId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Patternid",
+            "type": "string"
+          },
+          "sourceInstanceId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Sourceinstanceid",
+            "type": "string"
+          },
+          "spec": {
+            "discriminator": {
+              "mapping": {
+                "LINEAR": "#/$defs/arrangementDefs/LinearPatternSpec",
+                "MIRROR": "#/$defs/arrangementDefs/MirrorPatternSpec",
+                "RADIAL": "#/$defs/arrangementDefs/RadialPatternSpec"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/arrangementDefs/LinearPatternSpec"
+              },
+              {
+                "$ref": "#/$defs/arrangementDefs/RadialPatternSpec"
+              },
+              {
+                "$ref": "#/$defs/arrangementDefs/MirrorPatternSpec"
+              }
+            ],
+            "title": "Spec"
+          },
+          "memberRole": {
+            "default": "ACCENT",
+            "enum": [
+              "CENTER",
+              "SIDE",
+              "ACCENT",
+              "HALO",
+              "PAVE",
+              "UNKNOWN"
+            ],
+            "title": "Memberrole",
+            "type": "string"
+          },
+          "groupId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Groupid"
+          }
+        },
+        "required": [
+          "patternId",
+          "sourceInstanceId",
+          "spec"
+        ],
+        "title": "ArrangementPattern",
+        "type": "object"
+      },
+      "ArrangementRelation": {
+        "additionalProperties": false,
+        "description": "A declared relationship between two or more instances or groups.\n\nRelations are RECORDED AND VALIDATED, never solved. `resolve.py` checks that\nevery referenced ID exists and that the relation's arity is respected, and\npasses them through untouched. Enforcing them — moving a stone because its\nmirror moved — is a future editing capability, marked PLANNED rather than\nimplied.",
+        "properties": {
+          "relationId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Relationid",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "MIRRORED_PAIR",
+              "ALIGNED_WITH",
+              "EVENLY_SPACED_WITH",
+              "CONCENTRIC_WITH",
+              "SHARES_TRANSFORM_WITH"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "members": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 200,
+            "minItems": 2,
+            "title": "Members",
+            "type": "array"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "relationId",
+          "kind",
+          "members"
+        ],
+        "title": "ArrangementRelation",
+        "type": "object"
+      },
+      "GemIdentity": {
+        "additionalProperties": false,
+        "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+        "properties": {
+          "gemId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+            "title": "Gemid",
+            "type": "string"
+          },
+          "origin": {
+            "default": "UNKNOWN",
+            "enum": [
+              "NATURAL",
+              "SYNTHETIC",
+              "SIMULANT",
+              "COMPOSITE",
+              "UNKNOWN"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "treatments": {
+            "items": {
+              "$ref": "#/$defs/arrangementDefs/GemTreatment"
+            },
+            "title": "Treatments",
+            "type": "array"
+          },
+          "visualProfileId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Visualprofileid"
+          },
+          "customName": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Customname"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "gemId"
+        ],
+        "title": "GemIdentity",
+        "type": "object"
+      },
+      "GemTreatment": {
+        "additionalProperties": false,
+        "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+        "properties": {
+          "treatment": {
+            "enum": [
+              "HEAT",
+              "IRRADIATION",
+              "FRACTURE_FILLING",
+              "GLASS_FILLING",
+              "COATING",
+              "DIFFUSION",
+              "DYEING",
+              "IMPREGNATION",
+              "RESIN_IMPREGNATION",
+              "BLEACHING",
+              "LASER_DRILLING",
+              "HPHT",
+              "OTHER",
+              "UNKNOWN"
+            ],
+            "title": "Treatment",
+            "type": "string"
+          },
+          "status": {
+            "default": "PRESENT",
+            "enum": [
+              "PRESENT",
+              "NOT_PRESENT",
+              "SUSPECTED",
+              "UNKNOWN"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "disclosure": {
+            "default": "USER_DECLARED",
+            "enum": [
+              "USER_DECLARED",
+              "VENDOR_DECLARED",
+              "LAB_REPORT_CLAIMED",
+              "UNDISCLOSED",
+              "UNKNOWN"
+            ],
+            "title": "Disclosure",
+            "type": "string"
+          },
+          "confidence": {
+            "default": "UNKNOWN",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "treatment"
+        ],
+        "title": "GemTreatment",
+        "type": "object"
+      },
+      "InstanceOverrides": {
+        "additionalProperties": false,
+        "description": "The EXPLICITLY supported per-instance deviations from the referenced\nstone specification.\n\nA CLOSED SET, on purpose. Allowing an instance to override any stone field\nwould make the reference meaningless — the instance would become a second\nstone definition, and \"same stone, eight times\" would stop being expressible.\nSo an instance may scale a size and rotate itself, and nothing else. It can\nnever override the shape, the source, the outline, or the profile: those are\nwhat make two occurrences occurrences OF something.\n\nA field left `None` means \"inherit\", which is different from \"same value as\nthe parent\" — an inherited size follows a later edit to the stone\nspecification, a copied one would not.",
+        "properties": {
+          "scale": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.01,
+                "maximum": 10.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scale"
+          },
+          "orientationDeg": {
+            "anyOf": [
+              {
+                "maximum": 360.0,
+                "minimum": -360.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Orientationdeg"
+          }
+        },
+        "title": "InstanceOverrides",
+        "type": "object"
+      },
+      "InstancePlacement": {
+        "additionalProperties": false,
+        "description": "Where an instance sits, and how that was expressed.\n\n`mode` records the ORIGIN of the placement so an editor can tell a position\nthe user typed from one a pattern produced. Resolution rewrites every mode\nto `EXPLICIT`; before that, a `PATTERN_MEMBER` placement's transform is the\npattern's own offset for that member and is not yet the final position.",
+        "properties": {
+          "mode": {
+            "default": "EXPLICIT",
+            "enum": [
+              "EXPLICIT",
+              "PATTERN_MEMBER",
+              "RELATIVE"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "frame": {
+            "default": "DESIGN_ORIGIN",
+            "enum": [
+              "DESIGN_ORIGIN",
+              "PARENT_GROUP"
+            ],
+            "title": "Frame",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/$defs/arrangementDefs/InstanceTransform"
+          },
+          "groupId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Groupid"
+          }
+        },
+        "title": "InstancePlacement",
+        "type": "object"
+      },
+      "InstanceTransform": {
+        "additionalProperties": false,
+        "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+        "properties": {
+          "xMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Xmm",
+            "type": "number"
+          },
+          "yMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Ymm",
+            "type": "number"
+          },
+          "zMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Zmm",
+            "type": "number"
+          },
+          "rotationDeg": {
+            "default": 0.0,
+            "maximum": 3600.0,
+            "minimum": -3600.0,
+            "title": "Rotationdeg",
+            "type": "number"
+          }
+        },
+        "title": "InstanceTransform",
+        "type": "object"
+      },
+      "LinearPatternSpec": {
+        "additionalProperties": false,
+        "description": "`count` copies along a straight line, evenly spaced.\n\n`spacingMm` is centre-to-centre distance. It is a POSITION parameter, never\na clearance: nothing here knows a stone's size, so nothing here can claim\ntwo stones do not collide. Whether a spacing is manufacturable is a\ngeometric and professional question, asked downstream.",
+        "properties": {
+          "kind": {
+            "const": "LINEAR",
+            "default": "LINEAR",
+            "title": "Kind",
+            "type": "string"
+          },
+          "count": {
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Count",
+            "type": "integer"
+          },
+          "spacingMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 500.0,
+            "title": "Spacingmm",
+            "type": "number"
+          },
+          "directionDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Directiondeg",
+            "type": "number"
+          },
+          "centered": {
+            "default": true,
+            "title": "Centered",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "count",
+          "spacingMm"
+        ],
+        "title": "LinearPatternSpec",
+        "type": "object"
+      },
+      "MirrorPatternSpec": {
+        "additionalProperties": false,
+        "description": "One reflected copy across a principal plane through the design origin.\n\nA pattern rather than a relation because it PRODUCES an instance. The\n`MIRRORED_PAIR` relation records that two existing instances are a pair;\nthis creates the second one.",
+        "properties": {
+          "kind": {
+            "const": "MIRROR",
+            "default": "MIRROR",
+            "title": "Kind",
+            "type": "string"
+          },
+          "plane": {
+            "default": "YZ",
+            "enum": [
+              "YZ",
+              "XZ"
+            ],
+            "title": "Plane",
+            "type": "string"
+          },
+          "mirrorOrientation": {
+            "default": true,
+            "title": "Mirrororientation",
+            "type": "boolean"
+          }
+        },
+        "title": "MirrorPatternSpec",
+        "type": "object"
+      },
+      "RadialPatternSpec": {
+        "additionalProperties": false,
+        "description": "`count` copies around a circle of radius `radiusMm`.\n\n`startAngleDeg` and `sweepDeg` make a partial arc expressible, so a halo\nthat stops short of the shank is a first-class arrangement rather than a\nfull circle with members deleted.",
+        "properties": {
+          "kind": {
+            "const": "RADIAL",
+            "default": "RADIAL",
+            "title": "Kind",
+            "type": "string"
+          },
+          "count": {
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Count",
+            "type": "integer"
+          },
+          "radiusMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 500.0,
+            "title": "Radiusmm",
+            "type": "number"
+          },
+          "startAngleDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Startangledeg",
+            "type": "number"
+          },
+          "sweepDeg": {
+            "default": 360.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 360.0,
+            "title": "Sweepdeg",
+            "type": "number"
+          },
+          "alignToRadius": {
+            "default": true,
+            "title": "Aligntoradius",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "count",
+          "radiusMm"
+        ],
+        "title": "RadialPatternSpec",
+        "type": "object"
+      },
+      "StoneInstanceDef": {
+        "additionalProperties": false,
+        "description": "One occurrence of a stone in a design.\n\nReferences the stone specification and the gem identity rather than\nrestating them (see this module's docstring). `stoneRef` is a symbolic name\nresolved by the consumer — `\"primary\"` means the definition's own\n`stone` — which is what keeps this model free of a `StoneSpec` import and\ntherefore free of the whole domain schema.\n\nSupersedes `jewelmind.gem.models.StoneInstance`, which carried identity and\nrole but deliberately no placement (it predates this layer). That model\nremains for gem-only consumers; this one is what an arrangement holds.",
+        "properties": {
+          "instanceId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Instanceid",
+            "type": "string"
+          },
+          "stoneRef": {
+            "default": "primary",
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Stoneref",
+            "type": "string"
+          },
+          "role": {
+            "default": "CENTER",
+            "enum": [
+              "CENTER",
+              "SIDE",
+              "ACCENT",
+              "HALO",
+              "PAVE",
+              "UNKNOWN"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "placement": {
+            "$ref": "#/$defs/arrangementDefs/InstancePlacement"
+          },
+          "overrides": {
+            "$ref": "#/$defs/arrangementDefs/InstanceOverrides"
+          },
+          "gem": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/arrangementDefs/GemIdentity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "sourcePatternId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sourcepatternid"
+          }
+        },
+        "required": [
+          "instanceId"
+        ],
+        "title": "StoneInstanceDef",
+        "type": "object"
+      }
+    },
+    "arrangement": {
+      "additionalProperties": false,
+      "description": "Stone Arrangement Engine v1 (Sprint 22). OPTIONAL and nullable: a document without it is a single-stone design and behaves exactly as before, which is why adding this field is a MINOR, additive change and schemaVersion stays \"0.1.0\". Instance/group/pattern/relation ids are the authoritative identity; array order carries no meaning and is canonicalized before hashing. Structural validity is enforced here; whether the arrangement RESOLVES is the semantic layer's job (JM-ARRANGE-001..006), per 075-validation-pipeline.md's layering. Multi-stone GEOMETRY generation is PARTIAL — see docs/bible/24-arrangement/execution-boundary.md.",
+      "properties": {
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/arrangementDefs/StoneInstanceDef"
+          },
+          "maxItems": 200,
+          "title": "Instances",
+          "type": "array"
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/arrangementDefs/ArrangementGroup"
+          },
+          "maxItems": 50,
+          "title": "Groups",
+          "type": "array"
+        },
+        "patterns": {
+          "items": {
+            "$ref": "#/$defs/arrangementDefs/ArrangementPattern"
+          },
+          "maxItems": 200,
+          "title": "Patterns",
+          "type": "array"
+        },
+        "relations": {
+          "items": {
+            "$ref": "#/$defs/arrangementDefs/ArrangementRelation"
+          },
+          "maxItems": 200,
+          "title": "Relations",
+          "type": "array"
+        }
+      },
+      "title": "ArrangementDefinition",
+      "type": "object"
+    },
+    "stoneDefs": {
+      "JdlCustomOutline": {
+        "additionalProperties": false,
+        "description": "A caller-supplied closed stone outline (brief section 23).\n\nOrdered points only. No JDL representation may ever carry an expression,\nscript or function body (JDL's no-executable-code rule), and a point list\nis the representation that cannot.\n\nThe outline is closed implicitly; the first point must not be repeated at\nthe end. Semantic validation (self-intersection, zero area, degenerate\nsegments) lives in `jewelmind/stone/outline_validation.py`, not here —\nstructural and semantic validation stay separate layers.",
+        "properties": {
+          "points": {
+            "items": {
+              "$ref": "#/$defs/stoneDefs/JdlOutlinePoint"
+            },
+            "maxItems": 10000,
+            "minItems": 3,
+            "title": "Points",
+            "type": "array"
+          },
+          "unit": {
+            "default": "mm",
+            "enum": [
+              "mm",
+              "cm",
+              "m",
+              "in"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          }
+        },
+        "required": [
+          "points"
+        ],
+        "title": "JdlCustomOutline",
+        "type": "object"
+      },
+      "JdlGemIdentity": {
+        "additionalProperties": false,
+        "description": "What gem THIS stone is (brief sections 3/4/17).\n\nDeliberately separate from every geometry field. A round stone is not\nautomatically a diamond, and the same `StoneSpec` is reusable with any gem —\nwhich is why this is its own object rather than a `stone.material` string.\n\n`gemId` references the canonical registry\n(`backend/jewelmind/gem/registry.py`). IDs are language-independent and\nconstrained so one can never become a filesystem path or a shell argument.\n\nAbsent entirely on a legacy document, which normalizes to `unknown` — never\nto diamond (brief section 18).",
+        "properties": {
+          "gemId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+            "title": "Gemid",
+            "type": "string"
+          },
+          "origin": {
+            "default": "UNKNOWN",
+            "enum": [
+              "NATURAL",
+              "SYNTHETIC",
+              "SIMULANT",
+              "COMPOSITE",
+              "UNKNOWN"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "treatments": {
+            "items": {
+              "$ref": "#/$defs/stoneDefs/JdlGemTreatment"
+            },
+            "maxItems": 20,
+            "title": "Treatments",
+            "type": "array"
+          },
+          "visualProfileId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Visualprofileid"
+          },
+          "customName": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Customname"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "gemId"
+        ],
+        "title": "JdlGemIdentity",
+        "type": "object"
+      },
+      "JdlGemTreatment": {
+        "additionalProperties": false,
+        "description": "One treatment claim about this stone (brief section 7).\n\nJewelMind records the claim and who made it. It never decides whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which need professional evidence this project does not\nhave.",
+        "properties": {
+          "treatment": {
+            "enum": [
+              "HEAT",
+              "IRRADIATION",
+              "FRACTURE_FILLING",
+              "GLASS_FILLING",
+              "COATING",
+              "DIFFUSION",
+              "DYEING",
+              "IMPREGNATION",
+              "RESIN_IMPREGNATION",
+              "BLEACHING",
+              "LASER_DRILLING",
+              "HPHT",
+              "OTHER",
+              "UNKNOWN"
+            ],
+            "title": "Treatment",
+            "type": "string"
+          },
+          "status": {
+            "default": "PRESENT",
+            "enum": [
+              "PRESENT",
+              "NOT_PRESENT",
+              "SUSPECTED",
+              "UNKNOWN"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "disclosure": {
+            "default": "USER_DECLARED",
+            "enum": [
+              "USER_DECLARED",
+              "VENDOR_DECLARED",
+              "LAB_REPORT_CLAIMED",
+              "UNDISCLOSED",
+              "UNKNOWN"
+            ],
+            "title": "Disclosure",
+            "type": "string"
+          },
+          "confidence": {
+            "default": "UNKNOWN",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "treatment"
+        ],
+        "title": "JdlGemTreatment",
+        "type": "object"
+      },
+      "JdlImportedStoneAsset": {
+        "additionalProperties": false,
+        "description": "Reference to externally supplied stone geometry (brief sections 30/31).\n\n`assetHash` is a content hash, never a filesystem path: a path in a design\ndocument would leak an internal server location into every export and\nreview package (FOUNDRY-GOV-011).\n\n`declaredUnit` is required rather than inferred, because no format\nJewelMind reads carries a reliable, universally-populated unit, and\nguessing one silently rescales a real physical object.",
+        "properties": {
+          "assetHash": {
+            "maxLength": 128,
+            "minLength": 8,
+            "title": "Assethash",
+            "type": "string"
+          },
+          "assetName": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Assetname"
+          },
+          "declaredUnit": {
+            "enum": [
+              "mm",
+              "cm",
+              "m",
+              "in"
+            ],
+            "title": "Declaredunit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "assetHash",
+          "declaredUnit"
+        ],
+        "title": "JdlImportedStoneAsset",
+        "type": "object"
+      },
+      "JdlOutlinePoint": {
+        "additionalProperties": false,
+        "description": "One 2D point of a custom stone outline, in the stone's local frame.",
+        "properties": {
+          "x": {
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "title": "Y",
+            "type": "number"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "JdlOutlinePoint",
+        "type": "object"
+      },
+      "JdlStoneMeasurement": {
+        "additionalProperties": false,
+        "description": "Provenance for a physically measured stone (brief section 28).\n\nEvery field is optional and caller-supplied. JewelMind never fills one in:\nan absent measurement source is an honest absence, not a value to invent\n(STONEV2-GOV-006).",
+        "properties": {
+          "measurementSource": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Measurementsource"
+          },
+          "measurementDate": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Measurementdate"
+          },
+          "operatorNote": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Operatornote"
+          }
+        },
+        "title": "JdlStoneMeasurement",
+        "type": "object"
       }
     }
   },
@@ -96,34 +1066,74 @@
           "description": "Millimeters. Minimum 1.4mm is semantic rule JM-BAND-002, not enforced here."
         },
         "profile": {
-          "enum": ["comfort_fit", "flat"],
+          "enum": [
+            "comfort_fit",
+            "flat"
+          ],
           "default": "comfort_fit"
         },
-        "widthTaper": { "$ref": "#/$defs/bandTaper" },
-        "thicknessTaper": { "$ref": "#/$defs/bandTaper" }
+        "widthTaper": {
+          "$ref": "#/$defs/bandTaper"
+        },
+        "thicknessTaper": {
+          "$ref": "#/$defs/bandTaper"
+        }
       }
     },
     "stone": {
       "type": "object",
       "additionalProperties": false,
-      "description": "MINOR, additive Sprint 18 field set (see docs/bible/20-stone/README.md and docs/bible/05-jdl/081-schema-versioning-and-migrations.md): shape gained 6 new enum members, length/width/orientation are new optional fields. `diameter` required (only meaningfully) for shape=\"round\"; `length`/`width` required (only meaningfully) for every other shape — enforced at the semantic/Pydantic layer (StoneSpec's own model_validator), deliberately not as a JSON-Schema if/then conditional here, per 075-validation-pipeline.md's structural/semantic layering.",
+      "description": "MINOR, additive Sprint 18 field set (see docs/bible/20-stone/README.md and docs/bible/05-jdl/081-schema-versioning-and-migrations.md): shape gained 6 new enum members, length/width/orientation are new optional fields. `diameter` required (only meaningfully) for shape=\"round\"; `length`/`width` required (only meaningfully) for every other shape — enforced at the semantic/Pydantic layer (StoneSpec's own model_validator), deliberately not as a JSON-Schema if/then conditional here, per 075-validation-pipeline.md's structural/semantic layering. Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts.",
       "properties": {
         "shape": {
-          "enum": ["round", "oval", "pear", "emerald", "cushion", "princess", "marquise"],
+          "enum": [
+            "round",
+            "oval",
+            "pear",
+            "emerald",
+            "cushion",
+            "princess",
+            "marquise",
+            "heart",
+            "radiant",
+            "asscher",
+            "trillion",
+            "baguette",
+            "tapered_baguette",
+            "triangle",
+            "trapezoid",
+            "lozenge",
+            "hexagon",
+            "kite",
+            "shield",
+            "half_moon",
+            "pearl",
+            "custom",
+            "imported"
+          ],
           "default": "round"
         },
         "diameter": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "default": 6.5,
           "description": "Millimeters. Meaningful only when shape=\"round\". Range (2mm to 15mm) is semantic rule JM-STONE-001, not enforced here."
         },
         "length": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "default": null,
           "description": "Millimeters. Major horizontal dimension (local Y axis). Required (semantic layer) when shape != \"round\"."
         },
         "width": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "default": null,
           "description": "Millimeters. Minor horizontal dimension (local X axis). Required (semantic layer) when shape != \"round\"."
         },
@@ -136,6 +1146,83 @@
           "type": "number",
           "default": 0.0,
           "description": "Degrees, rotation around the stone's local vertical axis. See docs/bible/20-stone/565-stone-coordinate-and-orientation.md."
+        },
+        "narrowWidth": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Narrowwidth"
+        },
+        "source": {
+          "default": "PARAMETRIC_REFERENCE",
+          "enum": [
+            "PARAMETRIC_REFERENCE",
+            "CUSTOM_OUTLINE",
+            "MEASURED",
+            "IMPORTED_CAD"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "profile": {
+          "default": "FACETED_REFERENCE",
+          "enum": [
+            "FACETED_REFERENCE",
+            "CABOCHON_REFERENCE",
+            "SPHERICAL_REFERENCE"
+          ],
+          "title": "Profile",
+          "type": "string"
+        },
+        "customOutline": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/stoneDefs/JdlCustomOutline"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "measurement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/stoneDefs/JdlStoneMeasurement"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "importedAsset": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/stoneDefs/JdlImportedStoneAsset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "gem": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/stoneDefs/JdlGemIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       }
     },
@@ -166,15 +1253,32 @@
           "type": "number",
           "default": 3.5,
           "description": "Millimeters. Positivity and 8mm warning ceiling are semantic rules JM-SETTING-001/JM-SETTING-002, not enforced here."
+        },
+        "bezelWallThickness": {
+          "default": 0.6,
+          "title": "Bezelwallthickness",
+          "type": "number"
+        },
+        "bezelWallHeight": {
+          "default": 2.5,
+          "title": "Bezelwallheight",
+          "type": "number"
         }
-      }
+      },
+      "description": " Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts."
     },
     "material": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "metal": {
-          "enum": ["yellow_gold_18k", "white_gold_18k", "rose_gold_18k", "platinum", "silver"],
+          "enum": [
+            "yellow_gold_18k",
+            "white_gold_18k",
+            "rose_gold_18k",
+            "platinum",
+            "silver"
+          ],
           "default": "yellow_gold_18k"
         }
       }
@@ -184,7 +1288,10 @@
       "additionalProperties": false,
       "properties": {
         "method": {
-          "enum": ["lost_wax_casting", "direct_resin_printing"],
+          "enum": [
+            "lost_wax_casting",
+            "direct_resin_printing"
+          ],
           "default": "lost_wax_casting"
         }
       }
@@ -206,6 +1313,17 @@
           "description": "Radians (confirmed by inspecting the installed CadQuery source: Shape.mesh() passes this value directly into OCCT's BRepMesh_IncrementalMesh angular-deflection parameter, which OCCT documents in radians). Positivity IS enforced structurally here, matching Pydantic Field(gt=0)."
         }
       }
+    },
+    "arrangement": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/arrangement"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   }
 }

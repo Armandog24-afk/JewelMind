@@ -262,6 +262,175 @@ def _gem_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _arrangement_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Stone Arrangement structural validation (Sprint 22).
+
+    SCOPE: ARRANGEMENT_ONLY, and STRUCTURAL ONLY. Every finding here is about
+    whether the declared arrangement is internally consistent and resolvable —
+    unique IDs, references that exist, a structure the resolver can evaluate.
+    None of them is a jewelry judgment.
+
+    THREE KINDS OF VALIDATION, KEPT APART DELIBERATELY:
+
+    - structural/software (here): does the document resolve at all?
+    - geometric (Geometry Inspection): do the resulting solids intersect,
+      connect, hold together? Unanswerable until multi-stone geometry exists.
+    - professional/manufacturing (unavailable): is this spacing settable, is
+      this accent size sensible? Needs sourced expert evidence this project
+      does not have, so no such rule exists.
+
+    A design with no arrangement produces NO results — a single-stone document
+    is not a broken arrangement, and reporting one would make every
+    pre-Sprint-22 project suddenly noisy.
+    """
+
+    arrangement = d.arrangement
+    if arrangement is None:
+        return []
+
+    from jewelmind.arrangement.errors import ArrangementError
+    from jewelmind.arrangement.resolve import resolve_arrangement
+
+    out: list[R.ValidationResult] = []
+
+    # Duplicate IDs are checked here rather than only inside the resolver so a
+    # caller gets a rule-identified finding instead of only an exception, and
+    # so several duplicates are all reported rather than just the first.
+    seen: set[str] = set()
+    for instance in arrangement.instances:
+        if instance.instanceId in seen:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.ARRANGEMENT_INSTANCE_IDS_UNIQUE,
+                    severity="error",
+                    message=(
+                        f"Stone instance id '{instance.instanceId}' is declared more "
+                        "than once. Instance ids are the authoritative identity, so a "
+                        "duplicate makes every reference to it ambiguous."
+                    ),
+                    parameter="arrangement.instances",
+                )
+            )
+        seen.add(instance.instanceId)
+
+    group_ids = {group.groupId for group in arrangement.groups}
+    for instance in arrangement.instances:
+        group_id = instance.placement.groupId
+        if group_id is not None and group_id not in group_ids:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.ARRANGEMENT_REFERENCES_RESOLVE,
+                    severity="error",
+                    message=(
+                        f"Stone instance '{instance.instanceId}' belongs to group "
+                        f"'{group_id}', which is not declared in this arrangement."
+                    ),
+                    parameter="arrangement.instances",
+                )
+            )
+
+    for pattern in arrangement.patterns:
+        if pattern.sourceInstanceId not in seen:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.ARRANGEMENT_REFERENCES_RESOLVE,
+                    severity="error",
+                    message=(
+                        f"Pattern '{pattern.patternId}' repeats stone instance "
+                        f"'{pattern.sourceInstanceId}', which is not declared in this "
+                        "arrangement."
+                    ),
+                    parameter="arrangement.patterns",
+                )
+            )
+        if pattern.groupId is not None and pattern.groupId not in group_ids:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.ARRANGEMENT_REFERENCES_RESOLVE,
+                    severity="error",
+                    message=(
+                        f"Pattern '{pattern.patternId}' places its members in group "
+                        f"'{pattern.groupId}', which is not declared."
+                    ),
+                    parameter="arrangement.patterns",
+                )
+            )
+
+    # A stone reference other than 'primary' names a stone specification that
+    # does not exist yet: JDL carries exactly one `stone`. A WARNING, not an
+    # error, and the distinction matters — the document is structurally valid
+    # and still generates, it simply produces no geometry for that instance.
+    for instance in arrangement.instances:
+        if instance.stoneRef != "primary":
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.ARRANGEMENT_STONE_REFERENCE_RESOLVES,
+                    severity="warning",
+                    message=(
+                        f"Stone instance '{instance.instanceId}' references stone "
+                        f"'{instance.stoneRef}', but this definition declares only the "
+                        "primary stone. No geometry will be built for that instance."
+                    ),
+                    parameter="arrangement.instances",
+                )
+            )
+
+    # More than one CENTER is not wrong, but it IS ambiguous about which stone
+    # the current single-stone pipeline will build, so it is reported rather
+    # than resolved silently.
+    centers = [i.instanceId for i in arrangement.instances if i.role == "CENTER"]
+    if len(centers) > 1:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.ARRANGEMENT_ROLE_COHERENT,
+                severity="warning",
+                message=(
+                    f"{len(centers)} stone instances claim the CENTER role "
+                    f"({', '.join(sorted(centers))}). The lowest id is treated as the "
+                    "primary stone; give the others a different role to make the "
+                    "intent explicit."
+                ),
+                parameter="arrangement.instances",
+            )
+        )
+
+    # The authoritative structural check: does the real resolver evaluate this
+    # arrangement? Running it here means Forge can never disagree with what
+    # generation will do, because it is the same code path.
+    try:
+        resolved = resolve_arrangement(arrangement)
+    except ArrangementError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.ARRANGEMENT_STRUCTURE_RESOLVES,
+                severity="error",
+                message=f"The arrangement cannot be resolved: {exc}",
+                parameter="arrangement",
+            )
+        )
+        return out
+
+    # The execution boundary, surfaced as an INFORMATION result rather than
+    # hidden in a log. A caller must be able to see that a resolved instance
+    # produced no solid, and must not be told the design is faulty for it.
+    if resolved.instanceCount > 1:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.ARRANGEMENT_GENERATION_PARTIAL,
+                severity="information",
+                message=(
+                    f"This arrangement resolves {resolved.instanceCount} stone "
+                    "instances. Multi-stone geometry generation is not yet "
+                    "implemented, so one stone is built and the remaining instances "
+                    "are reported as placements only."
+                ),
+                parameter="arrangement.instances",
+            )
+        )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -555,6 +724,7 @@ _RULE_GROUPS = (
     _band_rules,
     _stone_rules,
     _gem_rules,
+    _arrangement_rules,
     _prong_rules,
     _bezel_rules,
     _setting_rules,

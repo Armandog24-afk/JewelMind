@@ -86,5 +86,19 @@ class GeneratedModel:
     #: is what a hand-constructed test fixture produces.
     geometry_hash: str = ""
 
+    #: The compiled Stone Arrangement outcome (Sprint 22), or `None` for a
+    #: design that declares no arrangement — which is every pre-Sprint-22
+    #: document, and which behaves exactly as before.
+    #:
+    #: Typed `Any` for the same reason as `setting_result`: this dataclass must
+    #: not import `jewelmind.arrangement`, and the arrangement package must not
+    #: import geometry. The concrete type is
+    #: `jewelmind.arrangement.models.ResolvedArrangement`.
+    #:
+    #: Carries each instance's `generationStatus`, so a caller can see exactly
+    #: which resolved placements became geometry and which did not, with the
+    #: reason attached (ATLAS-GOV-006: never silently discard a component).
+    arrangement_result: Any = None
+
     def component_volumes(self) -> dict[str, float]:
         return {name: c.volume_mm3 for name, c in self.components.items()}

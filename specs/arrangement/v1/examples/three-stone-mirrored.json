@@ -1,0 +1,87 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "diamond",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "side.right",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 4.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.6,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "corundum.sapphire",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null
+    }
+  ],
+  "groups": [],
+  "patterns": [
+    {
+      "patternId": "side-mirror",
+      "sourceInstanceId": "side.right",
+      "spec": {
+        "kind": "MIRROR",
+        "plane": "YZ",
+        "mirrorOrientation": true
+      },
+      "memberRole": "SIDE",
+      "groupId": null
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "side-pair",
+      "kind": "MIRRORED_PAIR",
+      "members": [
+        "side.right",
+        "side-mirror.1"
+      ],
+      "note": "Declared, not enforced: nothing moves one to satisfy it."
+    }
+  ]
+}

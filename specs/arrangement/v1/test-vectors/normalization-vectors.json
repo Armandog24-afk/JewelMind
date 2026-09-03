@@ -1,0 +1,18 @@
+{
+  "generatedFrom": "jewelmind.arrangement.normalize",
+  "note": "Normalization may reorder, round and wrap. It may NEVER change what the arrangement means: no repairing a malformed transform, no filling a missing reference, no dropping a duplicate — those are validation failures, and a normalizer that quietly fixed them would hide a real defect.",
+  "vectors": [
+    {
+      "case": "instance order is irrelevant",
+      "fingerprintA": "15c0c73a07acd701",
+      "fingerprintB": "15c0c73a07acd701",
+      "equal": true
+    },
+    {
+      "case": "370 degrees folds to 10 degrees",
+      "fingerprintA": "57002f73ffd5f331",
+      "fingerprintB": "57002f73ffd5f331",
+      "equal": true
+    }
+  ]
+}

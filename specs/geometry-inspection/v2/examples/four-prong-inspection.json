@@ -1,7 +1,7 @@
 {
   "inspectionId": "inspection-5b6381fd-1361-4139-8796-bc15e3013998",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "9bd053f5005df93a",
+  "definitionHash": "819a2e3e0d8b4209",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
   "startedAt": "2026-09-02T15:55:19.119271+00:00",
@@ -571,7 +571,7 @@
         "intersectionSolidCount": 2,
         "unit": "mm3",
         "tolerance": 1e-06,
-        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume — see 471-component-intersection-model.md."
       },
       {
         "componentA": "band",
@@ -581,7 +581,7 @@
         "intersectionSolidCount": 2,
         "unit": "mm3",
         "tolerance": 1e-06,
-        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume — see 471-component-intersection-model.md."
       },
       {
         "componentA": "stone_reference",
@@ -591,7 +591,7 @@
         "intersectionSolidCount": 4,
         "unit": "mm3",
         "tolerance": 1e-06,
-        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume — see 471-component-intersection-model.md."
       },
       {
         "componentA": "stone_reference",
@@ -601,7 +601,7 @@
         "intersectionSolidCount": 1,
         "unit": "mm3",
         "tolerance": 1e-06,
-        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume — see 471-component-intersection-model.md."
       },
       {
         "componentA": "prongs",
@@ -611,7 +611,7 @@
         "intersectionSolidCount": 4,
         "unit": "mm3",
         "tolerance": 1e-06,
-        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume \u2014 see 471-component-intersection-model.md."
+        "note": "Positive intersection volume confirms real 3D overlap. A NO_INTERSECTION result with a distance of exactly 0 can still mean the shapes touch at a surface with zero enclosed volume — see 471-component-intersection-model.md."
       }
     ],
     "distances": [

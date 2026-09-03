@@ -939,6 +939,10 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-GEM-README | Gem Identity & Material System v1 — Index | accepted | current | [`23-gem-identity/README.md`](../23-gem-identity/README.md) |
 | JM-BIBLE-GEM-GOVERNANCE | Gem System Governance | accepted | current | [`23-gem-identity/gem-governance.md`](../23-gem-identity/gem-governance.md) |
 | JM-BIBLE-GEM-SPRINT-21-REPORT | Sprint 21 Validation Report — Gem Identity & Material System v1 | accepted | current | [`23-gem-identity/SPRINT-21-VALIDATION-REPORT.md`](../23-gem-identity/SPRINT-21-VALIDATION-REPORT.md) |
+| JM-BIBLE-ARRANGE-README | Stone Arrangement Engine v1 — Index | accepted | partial | [`24-arrangement/README.md`](../24-arrangement/README.md) |
+| JM-BIBLE-ARRANGE-GOVERNANCE | Stone Arrangement Governance | accepted | current | [`24-arrangement/arrangement-governance.md`](../24-arrangement/arrangement-governance.md) |
+| JM-BIBLE-ARRANGE-BOUNDARY | Stone Arrangement Execution Boundary | accepted | partial | [`24-arrangement/execution-boundary.md`](../24-arrangement/execution-boundary.md) |
+| JM-BIBLE-ARRANGE-SPRINT-22-REPORT | Sprint 22 Validation Report — Stone Arrangement Engine v1 | accepted | current | [`24-arrangement/SPRINT-22-VALIDATION-REPORT.md`](../24-arrangement/SPRINT-22-VALIDATION-REPORT.md) |
 
 ## Root-level project documents
 

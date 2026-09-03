@@ -1,0 +1,32 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference"
+    }
+  ],
+  "relations": [],
+  "arrangementFingerprint": "dbeaf1f78841ba10",
+  "resolverVersion": "1.0.0",
+  "instanceCount": 1,
+  "generatedCount": 1,
+  "patternExpandedCount": 0,
+  "notes": []
+}

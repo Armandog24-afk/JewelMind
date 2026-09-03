@@ -1,0 +1,142 @@
+{
+  "registryVersion": "1.0.0",
+  "resolverVersion": "1.0.0",
+  "generatedFrom": "backend/jewelmind/arrangement/capability.py::ARRANGEMENT_CAPABILITIES",
+  "note": "Generated from the live registry, never hand-maintained. THREE INDEPENDENT AXES: representable (the model can express it), resolvable (the resolver turns it into explicit numbers), generatable (the geometry pipeline builds a solid for it). A capability may be representable and resolvable while remaining ungeneratable, and reporting that as 'supported' would be a misstatement. Multi-stone GEOMETRY is PARTIAL: the arrangement resolves every instance and the compilation boundary reports each one's generation status, but one stone component is emitted.",
+  "componentNaming": {
+    "primary": "stone_reference",
+    "additionalPrefix": "stone_reference.",
+    "note": "An additional instance's component is stone_reference.<instanceId>. The prefix is recognized by backend/jewelmind/geometry/roles.py, so such a component is classified as a stone reference and stays excluded from production exports by default (LAW-006) rather than falling through to the production_metal default."
+  },
+  "coordinateDecimals": 6,
+  "capabilities": [
+    {
+      "capability": "stone_instance",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": true,
+      "note": "A first-class occurrence with a stable ID, a stone reference, a role, a placement and a gem. One instance is generated as the existing stone_reference component."
+    },
+    {
+      "capability": "explicit_placement",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "An instance placed by explicit XYZ plus a vertical-axis rotation. Resolved exactly; a non-zero XY offset is not yet built, because the current stone builder places one stone on the design axis."
+    },
+    {
+      "capability": "group",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "Named groups with their own origin; a member's placement composes with the group transform during resolution."
+    },
+    {
+      "capability": "linear_pattern",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "count/spacing/direction, optionally centred on the anchor. Expanded to explicit member placements by closed-form evaluation."
+    },
+    {
+      "capability": "radial_pattern",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "count/radius/startAngle/sweep, optionally aligning each member to its radius. Expanded by closed-form evaluation."
+    },
+    {
+      "capability": "mirror_pattern",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "One reflected copy across the YZ or XZ plane, flipping a chiral stone's own orientation."
+    },
+    {
+      "capability": "relative_placement",
+      "status": "PARTIAL",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "A RELATIVE placement mode resolves against the parent group's frame. Placement relative to ANOTHER INSTANCE is PLANNED: it needs a dependency order, and a cyclic reference has no determinate resolution."
+    },
+    {
+      "capability": "relationships",
+      "status": "PARTIAL",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "Five relation kinds are representable, reference-checked and preserved through resolution. They are DECLARATIONS, not constraints: nothing moves an instance to satisfy one. Enforcement is PLANNED."
+    },
+    {
+      "capability": "multi_stone_geometry",
+      "status": "PARTIAL",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "The arrangement resolves every instance, and the compilation boundary reports each one's generation status. The current pipeline emits ONE stone component, so additional instances are reported NOT_GENERATED with a reason. See docs/bible/24-arrangement/execution-boundary.md."
+    },
+    {
+      "capability": "instance_overrides",
+      "status": "PARTIAL",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "scale and orientationDeg are representable and carried through resolution. Neither is applied to geometry yet, because doing so requires the multi-stone emission path."
+    },
+    {
+      "capability": "per_instance_gem",
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": false,
+      "note": "Each instance may carry its own GemIdentity, resolved through the real Sprint 21 registry. Semantic only — it never affects geometry, exactly as for the single-stone case."
+    },
+    {
+      "capability": "full_3d_instance_orientation",
+      "status": "PLANNED",
+      "representable": false,
+      "resolvable": false,
+      "generatable": false,
+      "note": "Tilt and roll. Deliberately not representable: accepting a rotation no builder can execute would be a silently ignored field."
+    },
+    {
+      "capability": "path_pattern",
+      "status": "PLANNED",
+      "representable": false,
+      "resolvable": false,
+      "generatable": false,
+      "note": "Members distributed along an arbitrary curve. Needs curve evaluation, which belongs to Atlas, not to a declarative arrangement."
+    },
+    {
+      "capability": "constraint_solving",
+      "status": "PLANNED",
+      "representable": false,
+      "resolvable": false,
+      "generatable": false,
+      "note": "Iterative satisfaction of relations. Explicitly out of scope: a solver's output depends on iteration order and starting values, which this layer's determinism guarantee forbids."
+    },
+    {
+      "capability": "arrangement_collision_checking",
+      "status": "PLANNED",
+      "representable": false,
+      "resolvable": false,
+      "generatable": false,
+      "note": "Whether two placed stones overlap is a GEOMETRIC fact, answerable only by Geometry Inspection once multi-stone geometry exists. No spacing rule is invented here."
+    },
+    {
+      "capability": "professional_arrangement_rules",
+      "status": "PLANNED",
+      "representable": false,
+      "resolvable": false,
+      "generatable": false,
+      "note": "Minimum spacing, accent-to-centre proportion, pave density. Each needs sourced professional evidence this project does not have, so none exists."
+    }
+  ]
+}

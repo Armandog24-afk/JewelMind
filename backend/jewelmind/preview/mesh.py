@@ -16,8 +16,8 @@ from typing import Any
 
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.model import GeneratedModel
-from jewelmind.geometry.roles import GEOMETRY_ROLE as _GEOMETRY_ROLE
-from jewelmind.geometry.roles import PRODUCTION_ROLE as _PRODUCTION_ROLE
+from jewelmind.geometry.roles import geometry_role as _geometry_role
+from jewelmind.geometry.roles import production_role as _production_role
 
 # The role mapping itself now lives in jewelmind.geometry.roles (Sprint 14
 # — Geometry Inspection v2 needed the same mapping and a second private
@@ -67,8 +67,12 @@ def write_component_previews(
             # Additive metadata for Vision (Sprint 8): explicit component
             # identity so the frontend never has to infer role from name
             # string-matching. See docs/bible/10-vision/223-atlas-to-vision-contract.md.
-            "geometryRole": _GEOMETRY_ROLE.get(name, "production_metal"),
-            "productionRole": _PRODUCTION_ROLE.get(name, "included_by_default"),
+            # Sprint 22: resolved through the role FUNCTIONS rather than by a
+            # dict lookup with a default, so an instance-suffixed stone
+            # component (`stone_reference.<instanceId>`) is classified as a
+            # stone reference instead of falling through to production metal.
+            "geometryRole": _geometry_role(name),
+            "productionRole": _production_role(name),
             "meshSource": "stl",
             "generationStatus": "SUCCEEDED" if has_geometry else "EMPTY",
         }

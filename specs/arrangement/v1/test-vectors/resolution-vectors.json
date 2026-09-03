@@ -1,0 +1,187 @@
+{
+  "generatedFrom": "jewelmind.arrangement.resolve.resolve_arrangement",
+  "note": "Direct evaluation, not solving: a single pass in a fixed order, so the output is a pure function of the input. Resolution reports every instance NOT_GENERATED — generation status is the compilation boundary's job, which is what keeps a stored resolution stable across pipeline versions.",
+  "vectors": [
+    {
+      "case": "radial full circle does not double a member",
+      "instanceCount": 5,
+      "patternExpandedCount": 4,
+      "placements": [
+        {
+          "instanceId": "c",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": null
+        },
+        {
+          "instanceId": "p.0",
+          "role": "ACCENT",
+          "xMm": 5.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.1",
+          "role": "ACCENT",
+          "xMm": 0.0,
+          "yMm": 5.0,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.2",
+          "role": "ACCENT",
+          "xMm": -5.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.3",
+          "role": "ACCENT",
+          "xMm": -0.0,
+          "yMm": -5.0,
+          "zMm": 0.0,
+          "rotationDeg": 270.0,
+          "sourcePatternId": "p"
+        }
+      ]
+    },
+    {
+      "case": "radial arc includes both endpoints",
+      "instanceCount": 4,
+      "patternExpandedCount": 3,
+      "placements": [
+        {
+          "instanceId": "c",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": null
+        },
+        {
+          "instanceId": "p.0",
+          "role": "ACCENT",
+          "xMm": 4.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.1",
+          "role": "ACCENT",
+          "xMm": 0.0,
+          "yMm": 4.0,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.2",
+          "role": "ACCENT",
+          "xMm": -4.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "sourcePatternId": "p"
+        }
+      ]
+    },
+    {
+      "case": "centred linear run is symmetric about the anchor",
+      "instanceCount": 5,
+      "patternExpandedCount": 4,
+      "placements": [
+        {
+          "instanceId": "c",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": null
+        },
+        {
+          "instanceId": "p.0",
+          "role": "ACCENT",
+          "xMm": -3.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.1",
+          "role": "ACCENT",
+          "xMm": -1.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.2",
+          "role": "ACCENT",
+          "xMm": 1.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        },
+        {
+          "instanceId": "p.3",
+          "role": "ACCENT",
+          "xMm": 3.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": "p"
+        }
+      ]
+    },
+    {
+      "case": "group transform composes into the member placement",
+      "instanceCount": 3,
+      "patternExpandedCount": 0,
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "sourcePatternId": null
+        },
+        {
+          "instanceId": "cluster.a",
+          "role": "ACCENT",
+          "xMm": 5.866025,
+          "yMm": 2.5,
+          "zMm": 0.0,
+          "rotationDeg": 30.0,
+          "sourcePatternId": null
+        },
+        {
+          "instanceId": "cluster.b",
+          "role": "ACCENT",
+          "xMm": 4.133975,
+          "yMm": 1.5,
+          "zMm": 0.0,
+          "rotationDeg": 30.0,
+          "sourcePatternId": null
+        }
+      ]
+    }
+  ]
+}

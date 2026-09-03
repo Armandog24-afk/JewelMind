@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/stone-instance-def.schema.json",
+  "title": "StoneInstanceDef",
+  "$defs": {
+    "GemIdentity": {
+      "additionalProperties": false,
+      "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+      "properties": {
+        "gemId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Gemid",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "NATURAL",
+            "SYNTHETIC",
+            "SIMULANT",
+            "COMPOSITE",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "treatments": {
+          "items": {
+            "$ref": "#/$defs/GemTreatment"
+          },
+          "title": "Treatments",
+          "type": "array"
+        },
+        "visualProfileId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visualprofileid"
+        },
+        "customName": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customname"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "gemId"
+      ],
+      "title": "GemIdentity",
+      "type": "object"
+    },
+    "GemTreatment": {
+      "additionalProperties": false,
+      "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "HEAT",
+            "IRRADIATION",
+            "FRACTURE_FILLING",
+            "GLASS_FILLING",
+            "COATING",
+            "DIFFUSION",
+            "DYEING",
+            "IMPREGNATION",
+            "RESIN_IMPREGNATION",
+            "BLEACHING",
+            "LASER_DRILLING",
+            "HPHT",
+            "OTHER",
+            "UNKNOWN"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "status": {
+          "default": "PRESENT",
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT",
+            "SUSPECTED",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "USER_DECLARED",
+          "enum": [
+            "USER_DECLARED",
+            "VENDOR_DECLARED",
+            "LAB_REPORT_CLAIMED",
+            "UNDISCLOSED",
+            "UNKNOWN"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "UNKNOWN",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "treatment"
+      ],
+      "title": "GemTreatment",
+      "type": "object"
+    },
+    "InstanceOverrides": {
+      "additionalProperties": false,
+      "description": "The EXPLICITLY supported per-instance deviations from the referenced\nstone specification.\n\nA CLOSED SET, on purpose. Allowing an instance to override any stone field\nwould make the reference meaningless — the instance would become a second\nstone definition, and \"same stone, eight times\" would stop being expressible.\nSo an instance may scale a size and rotate itself, and nothing else. It can\nnever override the shape, the source, the outline, or the profile: those are\nwhat make two occurrences occurrences OF something.\n\nA field left `None` means \"inherit\", which is different from \"same value as\nthe parent\" — an inherited size follows a later edit to the stone\nspecification, a copied one would not.",
+      "properties": {
+        "scale": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.01,
+              "maximum": 10.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scale"
+        },
+        "orientationDeg": {
+          "anyOf": [
+            {
+              "maximum": 360.0,
+              "minimum": -360.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Orientationdeg"
+        }
+      },
+      "title": "InstanceOverrides",
+      "type": "object"
+    },
+    "InstancePlacement": {
+      "additionalProperties": false,
+      "description": "Where an instance sits, and how that was expressed.\n\n`mode` records the ORIGIN of the placement so an editor can tell a position\nthe user typed from one a pattern produced. Resolution rewrites every mode\nto `EXPLICIT`; before that, a `PATTERN_MEMBER` placement's transform is the\npattern's own offset for that member and is not yet the final position.",
+      "properties": {
+        "mode": {
+          "default": "EXPLICIT",
+          "enum": [
+            "EXPLICIT",
+            "PATTERN_MEMBER",
+            "RELATIVE"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "frame": {
+          "default": "DESIGN_ORIGIN",
+          "enum": [
+            "DESIGN_ORIGIN",
+            "PARENT_GROUP"
+          ],
+          "title": "Frame",
+          "type": "string"
+        },
+        "transform": {
+          "$ref": "#/$defs/InstanceTransform"
+        },
+        "groupId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Groupid"
+        }
+      },
+      "title": "InstancePlacement",
+      "type": "object"
+    },
+    "InstanceTransform": {
+      "additionalProperties": false,
+      "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+      "properties": {
+        "xMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Xmm",
+          "type": "number"
+        },
+        "yMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Ymm",
+          "type": "number"
+        },
+        "zMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Zmm",
+          "type": "number"
+        },
+        "rotationDeg": {
+          "default": 0.0,
+          "maximum": 3600.0,
+          "minimum": -3600.0,
+          "title": "Rotationdeg",
+          "type": "number"
+        }
+      },
+      "title": "InstanceTransform",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One occurrence of a stone in a design.\n\nReferences the stone specification and the gem identity rather than\nrestating them (see this module's docstring). `stoneRef` is a symbolic name\nresolved by the consumer — `\"primary\"` means the definition's own\n`stone` — which is what keeps this model free of a `StoneSpec` import and\ntherefore free of the whole domain schema.\n\nSupersedes `jewelmind.gem.models.StoneInstance`, which carried identity and\nrole but deliberately no placement (it predates this layer). That model\nremains for gem-only consumers; this one is what an arrangement holds.",
+  "properties": {
+    "instanceId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Instanceid",
+      "type": "string"
+    },
+    "stoneRef": {
+      "default": "primary",
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Stoneref",
+      "type": "string"
+    },
+    "role": {
+      "default": "CENTER",
+      "enum": [
+        "CENTER",
+        "SIDE",
+        "ACCENT",
+        "HALO",
+        "PAVE",
+        "UNKNOWN"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "placement": {
+      "$ref": "#/$defs/InstancePlacement"
+    },
+    "overrides": {
+      "$ref": "#/$defs/InstanceOverrides"
+    },
+    "gem": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GemIdentity"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "sourcePatternId": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sourcepatternid"
+    }
+  },
+  "required": [
+    "instanceId"
+  ],
+  "type": "object"
+}

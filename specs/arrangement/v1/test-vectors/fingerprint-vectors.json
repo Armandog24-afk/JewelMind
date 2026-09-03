@@ -1,0 +1,32 @@
+{
+  "generatedFrom": "jewelmind.arrangement.normalize.arrangement_fingerprint",
+  "note": "Arrangement identity is SEPARATE from definition identity and from geometry identity: the same arrangement reused in two different rings has one fingerprint and two definition hashes. Reordering instances, groups, patterns or relations must not change the fingerprint, because ids are the authoritative identity and array order is a serialization artifact.",
+  "resolverVersion": "1.0.0",
+  "vectors": [
+    {
+      "case": "single-center-stone.json",
+      "fingerprint": "dbeaf1f78841ba10",
+      "canonicalJsonLength": 333
+    },
+    {
+      "case": "halo-eight-accents.json",
+      "fingerprint": "b95dcc3b639b7b4d",
+      "canonicalJsonLength": 734
+    },
+    {
+      "case": "three-stone-mirrored.json",
+      "fingerprint": "1fa67e148e978626",
+      "canonicalJsonLength": 1140
+    },
+    {
+      "case": "linear-accent-row.json",
+      "fingerprint": "72488e1fb5070305",
+      "canonicalJsonLength": 503
+    },
+    {
+      "case": "grouped-cluster.json",
+      "fingerprint": "0cf33aa23bd8527b",
+      "canonicalJsonLength": 1013
+    }
+  ]
+}

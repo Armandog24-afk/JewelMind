@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/arrangement/v1/arrangement-relation.schema.json",
+  "title": "ArrangementRelation",
+  "additionalProperties": false,
+  "description": "A declared relationship between two or more instances or groups.\n\nRelations are RECORDED AND VALIDATED, never solved. `resolve.py` checks that\nevery referenced ID exists and that the relation's arity is respected, and\npasses them through untouched. Enforcing them — moving a stone because its\nmirror moved — is a future editing capability, marked PLANNED rather than\nimplied.",
+  "properties": {
+    "relationId": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Relationid",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "MIRRORED_PAIR",
+        "ALIGNED_WITH",
+        "EVENLY_SPACED_WITH",
+        "CONCENTRIC_WITH",
+        "SHARES_TRANSFORM_WITH"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "members": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 200,
+      "minItems": 2,
+      "title": "Members",
+      "type": "array"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    }
+  },
+  "required": [
+    "relationId",
+    "kind",
+    "members"
+  ],
+  "type": "object"
+}

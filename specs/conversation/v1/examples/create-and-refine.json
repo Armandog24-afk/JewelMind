@@ -4,7 +4,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "c967672f8629fa2e",
+        "currentJDLHash": "ce6a799efdd4fe13",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -24,8 +24,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -34,8 +34,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
-          "turnId": "turn-8165eaa2-5fbd-4a5c-a0b3-cf552af14b8c",
-          "baseDefinitionHash": "c967672f8629fa2e",
+          "turnId": "turn-08ec54b9-4845-4e82-a7c5-99c0648e1328",
+          "baseDefinitionHash": "ce6a799efdd4fe13",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-ea410877-3a77-4e1e-b767-b979e00f84e0",
@@ -124,7 +124,8 @@
               "preview": {
                 "meshTolerance": 0.1,
                 "angularTolerance": 0.2
-              }
+              },
+              "arrangement": null
             },
             "validation": [],
             "forgeEvaluation": {
@@ -405,8 +406,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "c967672f8629fa2e",
-        "relatedJDLHashAfter": "c967672f8629fa2e",
+        "relatedJDLHashBefore": "ce6a799efdd4fe13",
+        "relatedJDLHashAfter": "ce6a799efdd4fe13",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -416,7 +417,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "c967672f8629fa2e",
+        "currentJDLHash": "ce6a799efdd4fe13",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -436,8 +437,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -459,8 +460,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -502,8 +503,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal accepted.",
         "accepted": true,
-        "relatedJDLHashBefore": "c967672f8629fa2e",
-        "relatedJDLHashAfter": "c967672f8629fa2e",
+        "relatedJDLHashBefore": "ce6a799efdd4fe13",
+        "relatedJDLHashAfter": "ce6a799efdd4fe13",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -513,7 +514,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "c967672f8629fa2e",
+        "currentJDLHash": "ce6a799efdd4fe13",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -533,8 +534,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -556,8 +557,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -579,8 +580,8 @@
             "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "c967672f8629fa2e",
-            "relatedJDLHashAfter": "c967672f8629fa2e",
+            "relatedJDLHashBefore": "ce6a799efdd4fe13",
+            "relatedJDLHashAfter": "ce6a799efdd4fe13",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -589,8 +590,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
-          "turnId": "turn-0603c70d-ccae-4b5f-9140-8e1bcbaccca0",
-          "baseDefinitionHash": "c967672f8629fa2e",
+          "turnId": "turn-c563afac-59dc-41a0-8adc-d7dc63ae0ee7",
+          "baseDefinitionHash": "ce6a799efdd4fe13",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-d5aaeeda-8a4c-4c26-846d-2c898a02802a",
@@ -671,7 +672,8 @@
               "preview": {
                 "meshTolerance": 0.1,
                 "angularTolerance": 0.2
-              }
+              },
+              "arrangement": null
             },
             "validation": [],
             "forgeEvaluation": {
@@ -956,8 +958,8 @@
         "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "c967672f8629fa2e",
-        "relatedJDLHashAfter": "c967672f8629fa2e",
+        "relatedJDLHashBefore": "ce6a799efdd4fe13",
+        "relatedJDLHashAfter": "ce6a799efdd4fe13",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []

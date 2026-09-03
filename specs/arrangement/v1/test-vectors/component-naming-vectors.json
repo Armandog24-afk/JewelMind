@@ -1,0 +1,30 @@
+{
+  "generatedFrom": "jewelmind.arrangement.compile.stone_component_name + jewelmind.geometry.roles",
+  "note": "The primary instance keeps the historical bare name, so every Golden baseline, exporter, inspection check and frontend consumer is unaffected. An additional instance is stone_reference.<instanceId>, which the role module classifies as a stone reference — NOT as the production_metal default, which would let a stone be fused into metal and shipped in a production export.",
+  "vectors": [
+    {
+      "instanceId": "center",
+      "isPrimary": true,
+      "componentName": "stone_reference",
+      "geometryRole": "stone_reference",
+      "productionRole": "excluded_by_default",
+      "isProductionComponent": false
+    },
+    {
+      "instanceId": "halo.0",
+      "isPrimary": false,
+      "componentName": "stone_reference.halo.0",
+      "geometryRole": "stone_reference",
+      "productionRole": "excluded_by_default",
+      "isProductionComponent": false
+    },
+    {
+      "instanceId": "side.right",
+      "isPrimary": false,
+      "componentName": "stone_reference.side.right",
+      "geometryRole": "stone_reference",
+      "productionRole": "excluded_by_default",
+      "isProductionComponent": false
+    }
+  ]
+}

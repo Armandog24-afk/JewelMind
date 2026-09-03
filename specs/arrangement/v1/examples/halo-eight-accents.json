@@ -1,0 +1,62 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "diamond",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "halo-ring",
+      "label": "Halo",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "patternId": "halo",
+      "sourceInstanceId": "center",
+      "spec": {
+        "kind": "RADIAL",
+        "count": 8,
+        "radiusMm": 4.6,
+        "startAngleDeg": 0.0,
+        "sweepDeg": 360.0,
+        "alignToRadius": true
+      },
+      "memberRole": "HALO",
+      "groupId": "halo-ring"
+    }
+  ],
+  "relations": []
+}
