@@ -238,10 +238,14 @@ and
 [`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md)'s
 explicit warning against conflating it with a structural category.
 
-**Halo** — a ring style where a center stone is surrounded by a ring of
-smaller accent stones. **Not implemented** (requires multi-stone
-arrangement support the current schema does not have) — see
-[`04-jewelry-domain/042-ring-taxonomy.md`](../04-jewelry-domain/042-ring-taxonomy.md).
+**Halo** — a structural relationship in which a centre stone (or a
+multi-stone centre) is surrounded by one or more rings of smaller stones.
+**PARTIAL since Sprint 25**: `SINGLE`, `DOUBLE` and `HIDDEN` halos compose,
+resolve and build real per-stone geometry, and no metal is generated to hold
+those stones — see [`../27-halo/README.md`](../27-halo/README.md) and
+[`../27-halo/execution-boundary.md`](../27-halo/execution-boundary.md). A halo
+is not a ring style and not a Multi-Stone Family; it is a composable structure
+that adds rings to whatever placement a design already declares.
 
 **Bezel** — a setting type where the stone is fully or partially
 encircled by a continuous metal rim, with no discrete prongs.
@@ -1063,7 +1067,9 @@ gem, scale and orientation; it never restates what the stone is.
 
 **Family Type** — `THREE_STONE`, `TOI_ET_MOI`, `CLUSTER` or
 `CENTER_WITH_ACCENTS`. Each has a real compiler. A halo is deliberately not a
-type: it is a `CENTER_WITH_ACCENTS` whose accents sit against the centre.
+type — a fifth type would create two ways to say one thing — and since Sprint 25
+that is because a halo is not a family at all, but a composable structure. See
+[`../27-halo/halo-rfc.md`](../27-halo/halo-rfc.md).
 
 **Family Symmetry** — whether secondary members are mirrored about the design
 axis (`SYMMETRIC`) or placed from their own values (`ASYMMETRIC`), so a
@@ -1072,6 +1078,29 @@ deliberately unbalanced design is expressible rather than approximated.
 **Family Compilation** — the transformation from family semantics to arrangement
 primitives. The arrangement engine then resolves them, which is why a family can
 never disagree with an arrangement about where a stone goes.
+
+**Halo Variant** — `SINGLE` (one ring level with the centre), `DOUBLE` (two
+concentric rings, each independently parameterized) or `HIDDEN` (one ring below
+the centre stone's girdle plane). Each has a real compiler. `HIDDEN` is a
+structural claim, enforced: its ring's vertical offset must be negative.
+
+**Halo Ring** — one concentric ring of stones, the unit a designer actually
+specifies. Every stone in it still becomes a separately identifiable arrangement
+instance, and `members` overrides the individual stones that differ.
+
+**Halo Composition** — adding a halo's rings to whatever placement a design
+already declares (a family, an explicit arrangement, or neither), rather than
+replacing it. This is what makes "three-stone with a halo around the centre" one
+document.
+
+**Halo Centre Anchor** — the arrangement instance a halo surrounds. A named
+`centerMemberId` is resolved against the real compiled instances and refused if
+absent; `null` anchors on the design origin, which is how a halo encircles a
+multi-stone centre.
+
+**Halo Metal** — the metal that would hold a halo's stones: a shared bezel rail,
+a row of shared prongs, or cut-down bead setting. **PLANNED, none exists.** A
+halo design builds every halo stone and one setting, the centre stone's.
 
 **Single Placement Authority** — the rule that a document declares a family OR
 an explicit arrangement, never both. Two authorities over one set of placements

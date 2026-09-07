@@ -104,7 +104,8 @@
         "angularTolerance": 0.2
       },
       "arrangement": null,
-      "family": null
+      "family": null,
+      "halo": null
     },
     "validation": [],
     "forgeEvaluation": {

@@ -1,0 +1,286 @@
+{
+  "generatedFrom": "HaloDefinition.model_validate + jewelmind.halo.compile.compose_halo",
+  "note": "Reject, never repair. Each case records WHICH layer refused it: a schema rejection means the document is malformed, a compiler rejection means it is well-formed and not composable against the placement this design actually declares.",
+  "vectors": [
+    {
+      "case": "double halo with one ring",
+      "input": {
+        "variant": "DOUBLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "single halo with two rings",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0
+          },
+          {
+            "ringId": "halo.outer",
+            "count": 8,
+            "radiusMm": 4.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "hidden halo not offset below the centre",
+      "input": {
+        "variant": "HIDDEN",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0,
+            "zOffsetMm": 0.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "duplicate ring ids",
+      "input": {
+        "variant": "DOUBLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0
+          },
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 4.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "duplicate member ids across rings",
+      "input": {
+        "variant": "DOUBLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 2,
+            "radiusMm": 3.0,
+            "members": [
+              {
+                "memberId": "shared",
+                "role": "HALO"
+              }
+            ]
+          },
+          {
+            "ringId": "halo.outer",
+            "count": 2,
+            "radiusMm": 4.0,
+            "members": [
+              {
+                "memberId": "shared",
+                "role": "HALO"
+              }
+            ]
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "more members than stones",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 1,
+            "radiusMm": 3.0,
+            "members": [
+              {
+                "memberId": "a",
+                "role": "HALO"
+              },
+              {
+                "memberId": "b",
+                "role": "HALO"
+              }
+            ]
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "malformed ring id",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "../etc/passwd",
+            "count": 8,
+            "radiusMm": 3.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "non-finite radius",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": Infinity
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "jdl-style string number",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": "3.0"
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "unknown field",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0,
+            "bling": 1
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "reserved variant",
+      "input": {
+        "variant": "cushion_halo",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "no rings at all",
+      "input": {
+        "variant": "SINGLE",
+        "rings": []
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "named centre in a family that has none",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 8,
+            "radiusMm": 3.0,
+            "radiusYMm": null,
+            "startAngleDeg": 0.0,
+            "sweepDeg": 360.0,
+            "zOffsetMm": 0.0,
+            "memberScale": 0.25,
+            "alignToRadius": true,
+            "stoneRef": "primary",
+            "gem": null,
+            "settingRef": null,
+            "members": []
+          }
+        ],
+        "centerMemberId": "center",
+        "label": null
+      },
+      "baseFamilyType": "TOI_ET_MOI",
+      "rejectedBy": "COMPILER",
+      "error": "HaloCenterUnresolvedError"
+    },
+    {
+      "case": "halo member id collides with the centre instance",
+      "input": {
+        "variant": "SINGLE",
+        "rings": [
+          {
+            "ringId": "halo.inner",
+            "count": 2,
+            "radiusMm": 3.0,
+            "radiusYMm": null,
+            "startAngleDeg": 0.0,
+            "sweepDeg": 360.0,
+            "zOffsetMm": 0.0,
+            "memberScale": 0.25,
+            "alignToRadius": true,
+            "stoneRef": "primary",
+            "gem": null,
+            "settingRef": null,
+            "members": [
+              {
+                "memberId": "center",
+                "role": "HALO",
+                "stoneRef": "primary",
+                "gem": null,
+                "scale": null,
+                "orientationDeg": null,
+                "placementOverride": null,
+                "settingRef": null
+              }
+            ]
+          }
+        ],
+        "centerMemberId": "center",
+        "label": null
+      },
+      "baseFamilyType": null,
+      "rejectedBy": "COMPILER",
+      "error": "HaloIdentityCollisionError"
+    }
+  ]
+}

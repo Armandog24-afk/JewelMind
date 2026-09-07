@@ -51,6 +51,11 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-FAMILY-003` | Family compiles | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-004` | Family references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-005` | Family setting coverage | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-HALO-001` | Halo centre resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-HALO-002` | Halo composes | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-HALO-003` | Halo composition supported | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-HALO-004` | Halo references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-HALO-005` | Halo setting coverage | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-001` | Instance ids unique | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-002` | Arrangement references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-003` | Stone reference resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
@@ -65,4 +70,4 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `FORGE-GEOM-001` | Fuse must yield a solid | GEOMETRY_INSPECTION | FORGE-7 | warning | 1.0.0 | ACCEPTED |
 | `FORGE-EXPORT-001` | Export requires a valid cached record | EXPORT_PRECONDITION | FORGE-8 | error-equivalent | 1.0.0 | ACCEPTED |
 
-**Total: 21 rules. Professionally validated: 0.**
+**Total: 48 rules. Professionally validated: 0.**

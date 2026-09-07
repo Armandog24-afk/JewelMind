@@ -951,6 +951,11 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-FAMILY-GOVERNANCE | Multi-Stone Families Governance | accepted | current | [`26-multi-stone-families/family-governance.md`](../26-multi-stone-families/family-governance.md) |
 | JM-BIBLE-FAMILY-BOUNDARY | Multi-Stone Family Execution Boundary | accepted | partial | [`26-multi-stone-families/execution-boundary.md`](../26-multi-stone-families/execution-boundary.md) |
 | JM-BIBLE-FAMILY-SPRINT-24-REPORT | Sprint 24 Validation Report — Multi-Stone Families v1 | accepted | current | [`26-multi-stone-families/SPRINT-24-VALIDATION-REPORT.md`](../26-multi-stone-families/SPRINT-24-VALIDATION-REPORT.md) |
+| JM-BIBLE-HALO-README | Halo System v1 — Index | accepted | partial | [`27-halo/README.md`](../27-halo/README.md) |
+| JM-BIBLE-HALO-GOVERNANCE | Halo System Governance | accepted | current | [`27-halo/halo-governance.md`](../27-halo/halo-governance.md) |
+| JM-BIBLE-HALO-RFC | RFC: Implementing the Reserved `halo` Name | accepted | current | [`27-halo/halo-rfc.md`](../27-halo/halo-rfc.md) |
+| JM-BIBLE-HALO-BOUNDARY | Halo Execution Boundary | accepted | partial | [`27-halo/execution-boundary.md`](../27-halo/execution-boundary.md) |
+| JM-BIBLE-HALO-SPRINT-25-REPORT | Sprint 25 Validation Report — Halo System v1 | accepted | current | [`27-halo/SPRINT-25-VALIDATION-REPORT.md`](../27-halo/SPRINT-25-VALIDATION-REPORT.md) |
 
 ## Root-level project documents
 

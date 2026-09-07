@@ -30,7 +30,7 @@ This is **Sprint 4** of the Technical Bible: **Forge Rule System v1**. Forge is 
 
 ## Zero professionally validated rules
 
-As of this Sprint, **0 of the 21 registered Forge rules are professionally validated.** Every rule is `preliminary` or `not_required` — see [`103-professional-validation-lifecycle.md`](103-professional-validation-lifecycle.md) and [`appendices/forge-professional-validation-matrix.md`](../appendices/forge-professional-validation-matrix.md). Existing implementation, no matter how long it has run in production, does not itself count as professional validation.
+As of Sprint 25, **0 of the 48 registered Forge rules are professionally validated.** Every rule is `preliminary` or `not_required` — see [`103-professional-validation-lifecycle.md`](103-professional-validation-lifecycle.md) and [`appendices/forge-professional-validation-matrix.md`](../appendices/forge-professional-validation-matrix.md). Existing implementation, no matter how long it has run in production, does not itself count as professional validation.
 
 ## Reading order
 

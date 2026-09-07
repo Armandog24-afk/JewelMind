@@ -74,6 +74,11 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `FAM-003-toi-et-moi-diagonal` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 2 equal stone components on a 30° axis, placed by point reflection | Sprint 24 milestone | 2026-09-07 |
 | `FAM-004-cluster-eight` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 9 stone components, closed-form ring arithmetic, memberScale 0.35 | Sprint 24 milestone | 2026-09-07 |
 | `FAM-005-center-with-accents` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 7 stone components, accentScale 0.3 reaching geometry | Sprint 24 milestone | 2026-09-07 |
+| `HALO-001-single-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 17 stone components, one 3.4mm ring of 16 at 0.22 scale | Sprint 25 milestone | 2026-09-07 |
+| `HALO-002-double-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 33 stone components, two independently parameterized rings (0.22 and 0.16 scale) | Sprint 25 milestone | 2026-09-07 |
+| `HALO-003-hidden-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 13 stone components, ring offset −1.4mm below the centre plane | Sprint 25 milestone | 2026-09-07 |
+| `HALO-004-three-stone-with-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 17 stone components; a family's MIRROR pattern and a halo in one document | Sprint 25 milestone | 2026-09-07 |
+| `HALO-005-halo-around-toi-et-moi` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 20 stone components, origin-anchored 6.0mm ring around a pair | Sprint 25 milestone | 2026-09-07 |
 
 ### Sprint 19: the six non-round prong-placement acceptances
 
@@ -170,6 +175,46 @@ rather than approximated here.
 `83.155758`, prongs `29.650351`, one fully-connected production group), which is
 the geometric proof that additional stone references never reach a metal fuse
 (LAW-006, ATLAS-GOV-011).
+
+### Sprint 25: five new halo cases, zero baseline updates
+
+All five are `INITIAL_BASELINE` creations. **No existing baseline was modified**
+— all 44 pre-existing cases reverified unchanged, including the exact-equality
+guards (`combined_metal_volume_mm3 == 341.44334316909976`, prong volume
+`== 29.650351464580467`, round stone volume `== 58.22141924499569`).
+
+That matters more than usual this sprint, because Sprint 25 **extracted** the
+radial ring arithmetic out of the resolver and the family compiler into one
+shared `arrangement/radial.py`. Float addition is not associative, so a
+re-expressed loop would have moved every ring stone by ~1e-14 and shown up as a
+diff on the five Sprint 24 `FAM-*` cases. It did not: the extraction is
+expression-for-expression identical, and the unchanged `FAM-*` baselines are the
+evidence.
+
+Created through the sanctioned path: `design.json` written from a real validated
+definition, registered in `manifest.json`, then `generate-candidate` → `diff`
+(reviewed per case) → `accept --reason` with the per-case reason recorded in the
+table above, transient `candidate.json` removed, and a full `verify-all` re-run.
+Nothing was hand-authored.
+
+**Every one of the five records the same real limitation**, in its own
+`knownLimitations`:
+
+> `HALO_METAL_ABSENT`: a stone solid is built for every halo stone, but no metal
+> is generated to hold them. A setting is built only for the primary stone; the
+> halo stones are placed reference geometry.
+
+**The metal body is identical in all five cases** (band `250.991683`, head
+`83.155758`, prongs `29.650351`, one fully-connected production group), which is
+the geometric proof that thirty-three additional stone references never reach a
+metal fuse (LAW-006, ATLAS-GOV-011).
+
+**The scales are verifiable arithmetic, not recorded opinion.** Volume scales
+with the cube of a uniform scale: `HALO-001`'s ring stones measure `0.619942` =
+`58.221419 × 0.22³`, `HALO-002`'s outer ring `0.238475` = `58.221419 × 0.16³`,
+and `HALO-004`'s side stones `9.686589` = `58.221419 × 0.55³`. A per-ring scale
+that never reached the solid would have produced identical stones and still
+passed a component count.
 
 ## How a future entry gets added
 

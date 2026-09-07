@@ -32,6 +32,7 @@ from jewelmind.gem.models import (
     GemTreatmentStatus,
     GemTreatmentType,
 )
+from jewelmind.halo.models import HaloDefinition
 from jewelmind.setting.models import (
     HeadArchitecture,
     ProngStyle,
@@ -524,3 +525,22 @@ class JewelryDefinition(StrictModel):
     #: Sprints 21-23 made for `stone.gem`, `arrangement` and the advanced
     #: setting fields.
     family: FamilyDefinition | None = None
+
+    #: The design's halo (Sprint 25).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, for the same compatibility reason as
+    #: `arrangement` and `family`: every pre-Sprint-25 document declares no
+    #: halo, and synthesizing one would change its canonical JSON and therefore
+    #: every stored hash, Golden baseline and test vector.
+    #:
+    #: A halo COMPOSES rather than replaces, which is why it sits BESIDE
+    #: `family`/`arrangement` instead of inside either: a halo adds rings to
+    #: whatever placement the design already declares, so "three-stone with a
+    #: halo around the centre" is one design rather than a choice between two.
+    #: All three meet at `family/effective.py::effective_arrangement()`, the
+    #: single resolution point every consumer uses.
+    #:
+    #: `schemaVersion` stays "0.1.0": an optional additive field is backward
+    #: compatible, the same judgment Sprints 21-24 made for `stone.gem`,
+    #: `arrangement`, the advanced setting fields and `family`.
+    halo: HaloDefinition | None = None

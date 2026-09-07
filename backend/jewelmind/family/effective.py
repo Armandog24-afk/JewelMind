@@ -1,11 +1,12 @@
-"""The effective arrangement: family-compiled, or declared directly (Sprint 24).
+"""The effective arrangement: family-compiled, declared directly, or haloed.
 
 ONE PLACEMENT AUTHORITY, REACHED ONE WAY. A design may declare a `family` (which
 compiles into an arrangement) or an `arrangement` (which is one already), and
-every consumer resolves placements from whichever this function returns. Without
-that single resolution point, the assembly, Forge and any future consumer would
-each decide how a family and an arrangement relate, and they would eventually
-decide differently.
+either may additionally carry a `halo` (Sprint 25) whose rings are COMPOSED onto
+whichever of the two is present. Every consumer resolves placements from
+whatever this function returns. Without that single resolution point, the
+assembly, Forge and any future consumer would each decide how a family, an
+arrangement and a halo relate, and they would eventually decide differently.
 
 DECLARING BOTH IS REFUSED, never merged. A family IS an arrangement expressed
 semantically, so accepting both would leave two authorities over one set of
@@ -25,6 +26,7 @@ from typing import TYPE_CHECKING
 from jewelmind.arrangement.models import ArrangementDefinition
 from jewelmind.family.compile import compile_family
 from jewelmind.family.errors import FamilyConflictError
+from jewelmind.halo.compile import compose_halo
 
 if TYPE_CHECKING:  # pragma: no cover - import cycle guard, typing only
     from jewelmind.domain.schema import JewelryDefinition
@@ -40,6 +42,16 @@ def effective_arrangement(
     - neither               -> `None`, and the design behaves exactly as it did
                                before families and arrangements existed
     - both                  -> `FamilyConflictError`
+
+    A `halo`, if present, is then COMPOSED onto that result (Sprint 25) — added
+    to it rather than replacing it, which is what makes a halo orthogonal to a
+    family instead of a fifth family type. A halo declared on its own composes
+    onto `None` and supplies its own centre instance, because a halo with no
+    centre is not a halo.
+
+    NO HALO STILL MEANS NO CHANGE. `compose_halo(base, None)` returns `base`
+    untouched, so every pre-Sprint-25 design reaches the geometry pipeline
+    through exactly the arrangement it reached it through before.
     """
 
     family = definition.family
@@ -54,6 +66,5 @@ def effective_arrangement(
             "family's semantics."
         )
 
-    if family is not None:
-        return compile_family(family)
-    return arrangement
+    base = compile_family(family) if family is not None else arrangement
+    return compose_halo(base, definition.halo)

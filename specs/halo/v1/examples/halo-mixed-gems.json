@@ -1,0 +1,47 @@
+{
+  "variant": "SINGLE",
+  "rings": [
+    {
+      "ringId": "halo.inner",
+      "count": 8,
+      "radiusMm": 3.4,
+      "radiusYMm": null,
+      "startAngleDeg": 0.0,
+      "sweepDeg": 360.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.24,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": {
+        "gemId": "corundum.sapphire",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "settingRef": null,
+      "members": [
+        {
+          "memberId": "halo.inner.crest",
+          "role": "HALO",
+          "stoneRef": "primary",
+          "gem": {
+            "gemId": "corundum.ruby",
+            "origin": "NATURAL",
+            "treatments": [],
+            "visualProfileId": null,
+            "customName": null,
+            "note": null
+          },
+          "scale": 0.34,
+          "orientationDeg": null,
+          "placementOverride": null,
+          "settingRef": null
+        }
+      ]
+    }
+  ],
+  "centerMemberId": "center",
+  "label": "Sapphire halo with one ruby"
+}

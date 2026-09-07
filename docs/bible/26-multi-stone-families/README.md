@@ -87,11 +87,16 @@ two authorities over one set of placements has no determinate resolution.
   neither a strict three-stone nor a cluster still has a semantic home instead
   of forcing one of the others to stretch.
 
-A **halo** is deliberately *not* a fifth type: it is a `CENTER_WITH_ACCENTS`
-whose accents sit against the centre, and a separate type would create two ways
-to say one thing that would eventually compile differently. See
-`RESERVED_FAMILY_TYPES` for `pave`, `eternity`, `bypass` and `channel_row`, each
-with its real reason.
+A **halo** is deliberately *not* a fifth type, and that judgment still holds
+after Sprint 25 implemented one: a fifth `FamilyType` would create two ways to
+say one thing. What Sprint 25 established is that a halo is not a family at all
+— it is a **composable structure** that adds rings to whatever placement a
+design declares, which is why "three-stone with a halo around the centre" is one
+document rather than a choice between two. `FamilyType` gained no member. See
+[`../27-halo/halo-rfc.md`](../27-halo/halo-rfc.md).
+
+See `RESERVED_FAMILY_TYPES` for `pave`, `eternity`, `bypass` and `channel_row`,
+each with its real reason.
 
 ## Mixed stones, mixed shapes
 

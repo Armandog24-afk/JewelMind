@@ -1568,6 +1568,472 @@
       ],
       "title": "FamilyDefinition",
       "type": "object"
+    },
+    "haloDefs": {
+      "FamilyMember": {
+        "additionalProperties": false,
+        "description": "One participating stone, by role.\n\nTHE ROLE IS THE POINT. A three-stone family holds a `CENTER` and two\n`SIDE`s, not three anonymous stones — which is what lets a consumer ask\n\"what is the centre stone?\" without guessing from size or position.\n\nEverything about what the stone IS lives elsewhere: `stoneRef` names the\nstone specification and `gem` names the material. Neither is copied here.",
+        "properties": {
+          "memberId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Memberid",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "CENTER",
+              "SIDE",
+              "ACCENT",
+              "HALO",
+              "PAVE",
+              "UNKNOWN"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "stoneRef": {
+            "default": "primary",
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Stoneref",
+            "type": "string"
+          },
+          "gem": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/haloDefs/GemIdentity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "scale": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.01,
+                "maximum": 10.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scale"
+          },
+          "orientationDeg": {
+            "anyOf": [
+              {
+                "maximum": 360.0,
+                "minimum": -360.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Orientationdeg"
+          },
+          "placementOverride": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/haloDefs/InstanceTransform"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "settingRef": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Settingref"
+          }
+        },
+        "required": [
+          "memberId",
+          "role"
+        ],
+        "title": "FamilyMember",
+        "type": "object"
+      },
+      "GemIdentity": {
+        "additionalProperties": false,
+        "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+        "properties": {
+          "gemId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+            "title": "Gemid",
+            "type": "string"
+          },
+          "origin": {
+            "default": "UNKNOWN",
+            "enum": [
+              "NATURAL",
+              "SYNTHETIC",
+              "SIMULANT",
+              "COMPOSITE",
+              "UNKNOWN"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "treatments": {
+            "items": {
+              "$ref": "#/$defs/haloDefs/GemTreatment"
+            },
+            "title": "Treatments",
+            "type": "array"
+          },
+          "visualProfileId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Visualprofileid"
+          },
+          "customName": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Customname"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "gemId"
+        ],
+        "title": "GemIdentity",
+        "type": "object"
+      },
+      "GemTreatment": {
+        "additionalProperties": false,
+        "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+        "properties": {
+          "treatment": {
+            "enum": [
+              "HEAT",
+              "IRRADIATION",
+              "FRACTURE_FILLING",
+              "GLASS_FILLING",
+              "COATING",
+              "DIFFUSION",
+              "DYEING",
+              "IMPREGNATION",
+              "RESIN_IMPREGNATION",
+              "BLEACHING",
+              "LASER_DRILLING",
+              "HPHT",
+              "OTHER",
+              "UNKNOWN"
+            ],
+            "title": "Treatment",
+            "type": "string"
+          },
+          "status": {
+            "default": "PRESENT",
+            "enum": [
+              "PRESENT",
+              "NOT_PRESENT",
+              "SUSPECTED",
+              "UNKNOWN"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "disclosure": {
+            "default": "USER_DECLARED",
+            "enum": [
+              "USER_DECLARED",
+              "VENDOR_DECLARED",
+              "LAB_REPORT_CLAIMED",
+              "UNDISCLOSED",
+              "UNKNOWN"
+            ],
+            "title": "Disclosure",
+            "type": "string"
+          },
+          "confidence": {
+            "default": "UNKNOWN",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "treatment"
+        ],
+        "title": "GemTreatment",
+        "type": "object"
+      },
+      "HaloRing": {
+        "additionalProperties": false,
+        "description": "One concentric ring of stones.\n\nTHE RING IS THE UNIT, not the individual stone, because that is what a\ndesigner actually specifies: \"sixteen stones at 3.2mm, a third the size of\nthe centre\". Individual stones remain separately identifiable — each becomes\nits own arrangement instance with its own id — and `members` exists for the\ncases where one of them differs.",
+        "properties": {
+          "ringId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Ringid",
+            "type": "string"
+          },
+          "count": {
+            "maximum": 60,
+            "minimum": 1,
+            "title": "Count",
+            "type": "integer"
+          },
+          "radiusMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 200.0,
+            "title": "Radiusmm",
+            "type": "number"
+          },
+          "radiusYMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 200.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Radiusymm"
+          },
+          "startAngleDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Startangledeg",
+            "type": "number"
+          },
+          "sweepDeg": {
+            "default": 360.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 360.0,
+            "title": "Sweepdeg",
+            "type": "number"
+          },
+          "zOffsetMm": {
+            "default": 0.0,
+            "maximum": 200.0,
+            "minimum": -200.0,
+            "title": "Zoffsetmm",
+            "type": "number"
+          },
+          "memberScale": {
+            "default": 0.25,
+            "exclusiveMinimum": 0.01,
+            "maximum": 10.0,
+            "title": "Memberscale",
+            "type": "number"
+          },
+          "alignToRadius": {
+            "default": true,
+            "title": "Aligntoradius",
+            "type": "boolean"
+          },
+          "stoneRef": {
+            "default": "primary",
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Stoneref",
+            "type": "string"
+          },
+          "gem": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/haloDefs/GemIdentity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "settingRef": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Settingref"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/$defs/haloDefs/FamilyMember"
+            },
+            "maxItems": 60,
+            "title": "Members",
+            "type": "array"
+          }
+        },
+        "required": [
+          "ringId",
+          "count",
+          "radiusMm"
+        ],
+        "title": "HaloRing",
+        "type": "object"
+      },
+      "InstanceTransform": {
+        "additionalProperties": false,
+        "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+        "properties": {
+          "xMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Xmm",
+            "type": "number"
+          },
+          "yMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Ymm",
+            "type": "number"
+          },
+          "zMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Zmm",
+            "type": "number"
+          },
+          "rotationDeg": {
+            "default": 0.0,
+            "maximum": 3600.0,
+            "minimum": -3600.0,
+            "title": "Rotationdeg",
+            "type": "number"
+          }
+        },
+        "title": "InstanceTransform",
+        "type": "object"
+      }
+    },
+    "halo": {
+      "additionalProperties": false,
+      "description": "Halo System v1 (Sprint 25). OPTIONAL and nullable: a document without it behaves exactly as before, which is why adding this field is a MINOR, additive change and schemaVersion stays \"0.1.0\". A halo COMPOSES onto whatever placement the design already declares — a `family`, an `arrangement`, or neither — rather than replacing it, so a three-stone design with a halo around its centre is one document. Ring and member ids are the authoritative identity; array order carries no meaning and is canonicalized before hashing. Structural validity is enforced here; whether the halo COMPOSES against this design's real placement is the semantic layer's job (JM-HALO-001..005), per 075-validation-pipeline.md's layering. Halo stone geometry is real; halo SETTING metal does not exist — see docs/bible/27-halo/execution-boundary.md.",
+      "properties": {
+        "variant": {
+          "enum": [
+            "SINGLE",
+            "DOUBLE",
+            "HIDDEN"
+          ],
+          "title": "Variant",
+          "type": "string"
+        },
+        "rings": {
+          "items": {
+            "$ref": "#/$defs/haloDefs/HaloRing"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Rings",
+          "type": "array"
+        },
+        "centerMemberId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "center",
+          "title": "Centermemberid"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        }
+      },
+      "required": [
+        "variant",
+        "rings"
+      ],
+      "title": "HaloDefinition",
+      "type": "object"
     }
   },
   "properties": {
@@ -1972,6 +2438,17 @@
       "oneOf": [
         {
           "$ref": "#/$defs/family"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "halo": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/halo"
         },
         {
           "type": "null"

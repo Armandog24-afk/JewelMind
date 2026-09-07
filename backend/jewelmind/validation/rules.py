@@ -108,3 +108,19 @@ FAMILY_ROLES_VALID = "JM-FAMILY-002"
 FAMILY_COMPILES = "JM-FAMILY-003"
 FAMILY_REFERENCES_RESOLVE = "JM-FAMILY-004"
 FAMILY_SETTING_COVERAGE = "JM-FAMILY-005"
+
+# Sprint 25 — HALO_ONLY. Structural and referential checks on a halo: does the
+# centre it names exist, does it compose, is the family/halo combination one the
+# real compiler supports, do its stone and setting references resolve, and what
+# does a composed halo NOT get.
+#
+# NONE is a professional or jewelry claim. There is deliberately no rule about
+# minimum halo stone spacing, a centre-to-halo proportion, a settable radius, or
+# whether a hidden halo clears the centre stone's pavilion — each needs sourced
+# professional evidence this project does not have. Whether two placed stones
+# overlap is a GEOMETRIC fact for Geometry Inspection.
+HALO_CENTER_RESOLVES = "JM-HALO-001"
+HALO_COMPOSES = "JM-HALO-002"
+HALO_COMPOSITION_SUPPORTED = "JM-HALO-003"
+HALO_REFERENCES_RESOLVE = "JM-HALO-004"
+HALO_SETTING_COVERAGE = "JM-HALO-005"

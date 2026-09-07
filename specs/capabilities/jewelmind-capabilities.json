@@ -168,7 +168,7 @@
       "domain": "stone_arrangement",
       "capability": "halo",
       "status": "PARTIAL",
-      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work. Sprint 24: this configuration is now a first-class FAMILY (docs/bible/26-multi-stone-families/), compiles into a real arrangement and builds real stone geometry for every member. PARTIAL because a setting is generated only for the primary stone."
+      "note": "Multi-stone arrangement. Sprint 25: a halo is a first-class COMPOSABLE structure (docs/bible/27-halo/), not a family — it compiles into real arrangement primitives and builds real, individually placed, scaled and offset stone geometry for every halo stone. PARTIAL because no metal is generated to hold those stones: a setting is built only for the primary stone. See the `halo` domain rows for the per-variant detail."
     },
     {
       "domain": "stone_arrangement",
@@ -209,8 +209,8 @@
     {
       "domain": "ring_family",
       "capability": "halo",
-      "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "status": "OUT_OF_SCOPE",
+      "note": "Not a family, and deliberately so since Sprint 25. A halo COMPOSES onto whatever placement a design declares, so it lives beside `family` as its own HaloDefinition rather than as a fifth family type — a hidden halo needs a vertical axis and a double halo needs two independent rings, neither of which a family's single accent parameter set expresses. Superseded by docs/bible/27-halo/halo-rfc.md; the live capability rows are in the `halo` domain."
     },
     {
       "domain": "ring_family",
@@ -1159,6 +1159,120 @@
       "capability": "instance_aware_inspection",
       "status": "CURRENT",
       "note": "Geometry Inspection derives its stone set from the role map, requires every stone component, and evaluates stone/metal separation across all of them. A stone-to-stone overlap is reported as a geometric fact, not as a separation failure."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_single",
+      "status": "PARTIAL",
+      "note": "One ring of stones around a centre, level with it. Every stone is an individually identifiable instance with real placed, scaled and oriented geometry. No metal holds them: only the primary stone receives a setting."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_double",
+      "status": "PARTIAL",
+      "note": "Two concentric rings, each with its own count, radius, start angle and scale — which is why a halo is not a CENTER_WITH_ACCENTS family, whose single accent parameter set cannot carry two rings. Real stone geometry for every stone in both rings; no halo metal."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_hidden",
+      "status": "PARTIAL",
+      "note": "One ring below the centre stone's girdle plane, which is what 'hidden' means structurally. The vertical offset reaches the solid through the arrangement's own transform, so the stones are genuinely lower — verified by measuring the built geometry's bounding box, not by trusting the field. No halo metal."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_over_family",
+      "status": "PARTIAL",
+      "note": "A halo composes onto a compiled family rather than replacing it, so centre + halo, centre + accents + halo, and three-stone + halo are one design each. The centre is resolved by id against the real compiled instances; an unresolvable centre is refused, never re-anchored. Halo stones get geometry; halo metal does not exist."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_over_arrangement",
+      "status": "PARTIAL",
+      "note": "A halo composes onto an explicit arrangement the same way it composes onto a family, so a hand-placed multi-stone centre can carry one. Same stone-geometry and metal boundary."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_around_multi_stone_center",
+      "status": "PARTIAL",
+      "note": "centerMemberId=null anchors the halo on the design origin, which encircles a multi-stone centre (a toi-et-moi pair, a cluster) rather than one of its stones. What does NOT exist is a halo whose radius follows the combined outline of that centre: the ring is a circle or an ellipse, and no group-outline offset capability exists to make it hug an arbitrary group."
+    },
+    {
+      "domain": "halo",
+      "capability": "elliptical_halo",
+      "status": "CURRENT",
+      "note": "radiusYMm gives a second semi-axis, so a halo around an oval or marquise centre is an ellipse rather than a circle. A geometric parameter, not a claim that the result suits any particular centre stone."
+    },
+    {
+      "domain": "halo",
+      "capability": "partial_halo",
+      "status": "CURRENT",
+      "note": "sweepDeg under 360 lays a ring on an arc, with both endpoints included — the same closed-form distinction the arrangement resolver applies to a RADIAL pattern, from the same shared function."
+    },
+    {
+      "domain": "halo",
+      "capability": "mixed_halo_stone_identities",
+      "status": "CURRENT",
+      "note": "A ring may carry its own GemIdentity and an individual stone may override it, resolved through the real Sprint 21 registry. Semantic only, exactly as for a single stone: it never affects geometry."
+    },
+    {
+      "domain": "halo",
+      "capability": "per_stone_halo_override",
+      "status": "CURRENT",
+      "note": "A ring's `members` list overrides individual stones' scale, orientation, gem and placement. Members are matched to positions by sorted id, never by array order, so reordering the list cannot move a stone. It reuses the family's own FamilyMember model rather than declaring a parallel one."
+    },
+    {
+      "domain": "halo",
+      "capability": "mixed_halo_stone_shapes",
+      "status": "PARTIAL",
+      "note": "A halo stone's `stoneRef` may name a stone specification other than 'primary', and that reference is preserved and reported. It does not resolve, because JDL carries exactly one `stone` — so such a stone produces no geometry and says so (JM-HALO-004). A compass halo alternating shapes therefore cannot be built yet."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_setting_metal",
+      "status": "PLANNED",
+      "note": "The metal that holds a halo — a shared bezel rail, a row of shared prongs, cut-down bead setting — does not exist. A ring's `settingRef` is carried and reported, and only the primary stone receives a setting. Sprint 23 built the contract a future strategy will use (explicit prong positions carrying servesStoneInstanceIds); SETTING-GOV requires an RFC before a halo setting family is added, and this sprint did not bypass it."
+    },
+    {
+      "domain": "halo",
+      "capability": "outline_following_halo",
+      "status": "PLANNED",
+      "note": "A halo whose stones follow the centre stone's own girdle outline (a cushion or emerald halo) needs an outline-offset walk that does not exist. An ellipse is offered and is honestly an ellipse."
+    },
+    {
+      "domain": "halo",
+      "capability": "designer_halo_language",
+      "status": "PLANNED",
+      "note": "Designer proposes flat scalar JDL paths only; neither `family` nor `halo` is in its allow-list, because a provider proposing a nested structure could not be diffed field by field or shown with real provenance. Adding halo alone would advertise a capability families do not have."
+    },
+    {
+      "domain": "halo",
+      "capability": "professional_halo_rules",
+      "status": "PLANNED",
+      "note": "Minimum halo stone spacing, a centre-to-halo proportion, a settable radius, or whether a hidden halo clears the centre's pavilion. Each needs sourced professional evidence this project does not have, so none exists. Whether two placed stones overlap is a GEOMETRIC fact for Geometry Inspection."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_composition",
+      "status": "CURRENT",
+      "note": "A halo compiles into arrangement primitives and is COMPOSED onto whatever placement the design declares, at the single resolution point family/effective.py::effective_arrangement(). There is no second placement engine: the ring's angular sequence comes from arrangement/radial.py, the same function the resolver uses for a RADIAL pattern."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_centre_resolution",
+      "status": "CURRENT",
+      "note": "A named centerMemberId is resolved by id against the real compiled instances and refused if absent (JM-HALO-001), never silently re-anchored. centerMemberId=null anchors on the design origin."
+    },
+    {
+      "domain": "halo",
+      "capability": "halo_structural_validation",
+      "status": "CURRENT",
+      "note": "JM-HALO-001..005: the centre resolves, the halo composes through the real compiler, the family/halo combination is supported, references resolve, and the metal-coverage limitation is reported. All structural; no professional threshold exists."
+    },
+    {
+      "domain": "halo",
+      "capability": "reserved_halo_variants",
+      "status": "PLANNED",
+      "note": "Reserved names with real reasons and no compiler: compass_halo, cushion_halo, floral_halo, pave_halo, triple_halo. Each is refused by the model rather than substituted with a SINGLE halo."
     }
   ]
 }

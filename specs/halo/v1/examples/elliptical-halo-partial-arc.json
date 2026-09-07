@@ -1,0 +1,22 @@
+{
+  "variant": "SINGLE",
+  "rings": [
+    {
+      "ringId": "halo.inner",
+      "count": 9,
+      "radiusMm": 4.4,
+      "radiusYMm": 3.2,
+      "startAngleDeg": 20.0,
+      "sweepDeg": 140.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.2,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": null,
+      "settingRef": null,
+      "members": []
+    }
+  ],
+  "centerMemberId": "center",
+  "label": "Elliptical partial halo"
+}

@@ -1,0 +1,2542 @@
+{
+  "goldenId": "HALO-005-halo-around-toi-et-moi",
+  "description": "Halo encircling a multi-stone centre: eighteen stones on an origin-anchored 6.0mm ring around a toi-et-moi pair.",
+  "sourceJDLPath": "goldens/solitaire-v1/HALO-005-halo-around-toi-et-moi/design.json",
+  "definitionHash": "e223ecead80e409e",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "prongs",
+    "stone_reference",
+    "stone_reference.halo.inner.1",
+    "stone_reference.halo.inner.10",
+    "stone_reference.halo.inner.11",
+    "stone_reference.halo.inner.12",
+    "stone_reference.halo.inner.13",
+    "stone_reference.halo.inner.14",
+    "stone_reference.halo.inner.15",
+    "stone_reference.halo.inner.16",
+    "stone_reference.halo.inner.17",
+    "stone_reference.halo.inner.2",
+    "stone_reference.halo.inner.3",
+    "stone_reference.halo.inner.4",
+    "stone_reference.halo.inner.5",
+    "stone_reference.halo.inner.6",
+    "stone_reference.halo.inner.7",
+    "stone_reference.halo.inner.8",
+    "stone_reference.halo.inner.9",
+    "stone_reference.side.left",
+    "stone_reference.side.right"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "e223ecead80e409e",
+    "assembly": {
+      "componentCount": 23,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 20,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.635,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.635,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 7.27,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 83.15575842566426,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000000000001,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.2216883706749933,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.2216883706749933,
+          "zmax": 15.5,
+          "sizeX": 7.27,
+          "sizeY": 6.4433767413499865,
+          "sizeZ": 5.199999999999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": 5.4149999,
+          "ymin": -0.5850000999999999,
+          "zmin": 13.239999900000003,
+          "xmax": 6.5850001,
+          "ymax": 0.5850000999999999,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 6.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.1",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": 5.0531559,
+          "ymin": 1.4671209,
+          "zmin": 13.239999900000003,
+          "xmax": 6.223156100000001,
+          "ymax": 2.6371211,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 5.638156,
+          "centerY": 2.052121,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.10",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": -6.223156100000001,
+          "ymin": -2.6371211,
+          "zmin": 13.239999900000003,
+          "xmax": -5.0531559,
+          "ymax": -1.4671209,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -5.638156,
+          "centerY": -2.052121,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.11",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": -5.1812671,
+          "ymin": -4.4417261,
+          "zmin": 13.239999900000003,
+          "xmax": -4.0112669,
+          "ymax": -3.2717259000000003,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700002,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -4.596267,
+          "centerY": -3.856726,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.12",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368148,
+        "boundingBox": {
+          "xmin": -3.5850001,
+          "ymin": -5.7811521,
+          "zmin": 13.239999900000003,
+          "xmax": -2.4149999,
+          "ymax": -4.611151899999999,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700001999999996,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -3.0,
+          "centerY": -5.196152,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.13",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": -1.6268891,
+          "ymin": -6.4938471,
+          "zmin": 13.239999900000003,
+          "xmax": -0.4568889000000001,
+          "ymax": -5.3238468999999995,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -1.041889,
+          "centerY": -5.908847,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.14",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": 0.4568889000000001,
+          "ymin": -6.4938471,
+          "zmin": 13.239999900000003,
+          "xmax": 1.6268891,
+          "ymax": -5.3238468999999995,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 1.041889,
+          "centerY": -5.908847,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.15",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368148,
+        "boundingBox": {
+          "xmin": 2.4149999,
+          "ymin": -5.7811521,
+          "zmin": 13.239999900000003,
+          "xmax": 3.5850001,
+          "ymax": -4.611151899999999,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700001999999996,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 3.0,
+          "centerY": -5.196152,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.16",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368147,
+        "boundingBox": {
+          "xmin": 4.0112669,
+          "ymin": -4.4417261,
+          "zmin": 13.239999900000003,
+          "xmax": 5.1812671,
+          "ymax": -3.2717259000000003,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700002,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 4.596267,
+          "centerY": -3.856726,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.17",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368146,
+        "boundingBox": {
+          "xmin": 5.0531559,
+          "ymin": -2.6371211,
+          "zmin": 13.239999900000003,
+          "xmax": 6.223156100000001,
+          "ymax": -1.4671209,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 5.638156,
+          "centerY": -2.052121,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.2",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": 4.0112669,
+          "ymin": 3.2717259000000003,
+          "zmin": 13.239999900000003,
+          "xmax": 5.1812671,
+          "ymax": 4.4417261,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700002,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 4.596267,
+          "centerY": 3.856726,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.3",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368148,
+        "boundingBox": {
+          "xmin": 2.4149999,
+          "ymin": 4.611151899999999,
+          "zmin": 13.239999900000003,
+          "xmax": 3.5850001,
+          "ymax": 5.7811521,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700001999999996,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 3.0,
+          "centerY": 5.196152,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.4",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": 0.4568889000000001,
+          "ymin": 5.3238468999999995,
+          "zmin": 13.239999900000003,
+          "xmax": 1.6268891,
+          "ymax": 6.4938471,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 1.041889,
+          "centerY": 5.908847,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.5",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": -1.6268891,
+          "ymin": 5.3238468999999995,
+          "zmin": 13.239999900000003,
+          "xmax": -0.4568889000000001,
+          "ymax": 6.4938471,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -1.041889,
+          "centerY": 5.908847,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.6",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368148,
+        "boundingBox": {
+          "xmin": -3.5850001,
+          "ymin": 4.611151899999999,
+          "zmin": 13.239999900000003,
+          "xmax": -2.4149999,
+          "ymax": 5.7811521,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700001999999996,
+          "sizeY": 1.1700002000000005,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -3.0,
+          "centerY": 5.196152,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.7",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368147,
+        "boundingBox": {
+          "xmin": -5.1812671,
+          "ymin": 3.2717259000000003,
+          "zmin": 13.239999900000003,
+          "xmax": -4.0112669,
+          "ymax": 4.4417261,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700002,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -4.596267,
+          "centerY": 3.856726,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.8",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368148,
+        "boundingBox": {
+          "xmin": -6.223156100000001,
+          "ymin": 1.4671209,
+          "zmin": 13.239999900000003,
+          "xmax": -5.0531559,
+          "ymax": 2.6371211,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -5.638156,
+          "centerY": 2.052121,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.halo.inner.9",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": -6.5850001,
+          "ymin": -0.5850000999999999,
+          "zmin": 13.239999900000003,
+          "xmax": -5.4149999,
+          "ymax": 0.5850000999999999,
+          "zmax": 13.9600001,
+          "sizeX": 1.1700002000000005,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": -6.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.side.left",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -5.588269100000001,
+          "ymin": -4.6000001,
+          "zmin": 11.599999900000002,
+          "xmax": 0.9117311,
+          "ymax": 1.9000001,
+          "zmax": 15.6000001,
+          "sizeX": 6.500000200000001,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": -2.3382690000000004,
+          "centerY": -1.35,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.side.right",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.221419244995694,
+        "boundingBox": {
+          "xmin": -0.9117311,
+          "ymin": -1.9000001,
+          "zmin": 11.599999900000002,
+          "xmax": 5.588269100000001,
+          "ymax": 4.6000001,
+          "zmax": 15.6000001,
+          "sizeX": 6.500000200000001,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 2.3382690000000004,
+          "centerY": 1.35,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.832366668922168
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.837553166804727
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.8375531668047276
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.3316588008793735
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.863633642719534
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.226879663120058
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.22687966312006
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.863633642719534
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.3316588009103985
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.8375531668047276
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.331658800910401
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.863633642719533
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.226879663120059
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.226879663120058
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.863633642719534
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.331658800879375
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.8375531668047276
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.832366668922168
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.1736972769786698
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.1736972769786687
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800000000000002
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800000000000002
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782221188991
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693331567588
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311887065072
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304634059954
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533576644145
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451727840785
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.829999633925321
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241924444147
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782221188991
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241924444147
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.829999633925321
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451727840785
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533576644145
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304634059954
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311887065072
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693331567588
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.83
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.638016801375834
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3988994385574478
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800003065814094
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638282682782
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.83000061316282
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693811075747
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311478620347
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305456396526
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534026714995
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.54345114477722
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342420000000002
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782737964231
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342414657640448
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.8300004811970645
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451668423224
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533383637887
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305487665095
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693331567588
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.861624981166154
+      },
+      {
+        "componentA": "stone_reference.halo.inner.1",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.05772470274416025
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800003065814094
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638282682782
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782737964231
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342414657640448
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.8300004811970645
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451668423224
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533383637887
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305487665095
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693811075747
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311478620347
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305456396526
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534026714995
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.54345114477722
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342420000000002
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782221188991
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.05772470274416025
+      },
+      {
+        "componentA": "stone_reference.halo.inner.10",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.861624981166154
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800004811970638
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638422232409
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137779019763601
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342421426525265
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000306581409
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451519570535
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305487665095
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.830000962394127
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693193604791
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312300511412
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.22230575883971
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533297093515
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543452
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241924444147
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.05772489859621178
+      },
+      {
+        "componentA": "stone_reference.halo.inner.11",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.861625101347781
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7799996339253221
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7799996339253255
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137785034273674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241811997193
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.83
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451519570535
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533383637887
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693193604791
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.829999267850644
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693069221337
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311519212387
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533297093515
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.54345114477722
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.829999633925321
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.39889936749217086
+      },
+      {
+        "componentA": "stone_reference.halo.inner.12",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.638016330916446
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.780000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638466731999
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137780000000002
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241811997193
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000306581409
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451668423224
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312300511412
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693069221337
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.830000926288298
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647694
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311519212387
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.22230575883971
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534026714995
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451727840785
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.0297291146816459
+      },
+      {
+        "componentA": "stone_reference.halo.inner.13",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.201175730242887
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.780000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638466731999
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137785034273674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342421426525265
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.8300004811970645
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.22230575883971
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311519212387
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647694
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.830000926288298
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693069221337
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312300511412
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305456396526
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533576644145
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9048920536550107
+      },
+      {
+        "componentA": "stone_reference.halo.inner.14",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5727392988275217
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7799996339253221
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.779999633925326
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137779019763601
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342414657640448
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533297093515
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311519212387
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693069221337
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.829999267850644
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693193604791
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311478620347
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304634059954
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.7882646391027306
+      },
+      {
+        "componentA": "stone_reference.halo.inner.15",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.7882641005352355
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800004811970638
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.14063842223241
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782737964231
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543452
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533297093515
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.22230575883971
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106312300511412
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693193604791
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.830000962394127
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693811075747
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311887065072
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5727395607991674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.16",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9048917585454361
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800003065814094
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638282682782
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.54345114477722
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534026714995
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305456396526
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311478620347
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693811075747
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.83000061316282
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.647693331567588
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.201175842170801
+      },
+      {
+        "componentA": "stone_reference.halo.inner.17",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.0297285991930343
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800004811970638
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.14063842223241
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137779019763601
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342421426525265
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000306581409
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451519570535
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022534
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222305487665095
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.106311887065072
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.861625101347781
+      },
+      {
+        "componentA": "stone_reference.halo.inner.2",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.057724898596210814
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7799996339253221
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.779999633925326
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137785034273674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241811997193
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.83
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451519570535
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533383637887
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.222304634059954
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.638016330916447
+      },
+      {
+        "componentA": "stone_reference.halo.inner.3",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3988993674921708
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.780000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638466731999
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.halo.inner.5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137780000000002
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241811997193
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.830000306581409
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451668423224
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.022533576644145
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.201175730242888
+      },
+      {
+        "componentA": "stone_reference.halo.inner.4",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.0297291146816459
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.780000463144149
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638466731998
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.halo.inner.6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137785034273674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342421426525265
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.8300004811970645
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.543451727840785
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5727392988275217
+      },
+      {
+        "componentA": "stone_reference.halo.inner.5",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9048920536550107
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7799996339253221
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.779999633925326
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "stone_reference.halo.inner.7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137779019763601
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.9342414657640448
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.829999633925321
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.7882641005352355
+      },
+      {
+        "componentA": "stone_reference.halo.inner.6",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.7882646391027306
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800004811970638
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.140638422232411
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "stone_reference.halo.inner.8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782737964231
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.934241924444147
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9048917585454357
+      },
+      {
+        "componentA": "stone_reference.halo.inner.7",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5727395607991674
+      },
+      {
+        "componentA": "stone_reference.halo.inner.8",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800003065814094
+      },
+      {
+        "componentA": "stone_reference.halo.inner.8",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.1406382826827812
+      },
+      {
+        "componentA": "stone_reference.halo.inner.8",
+        "componentB": "stone_reference.halo.inner.9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9137782221188991
+      },
+      {
+        "componentA": "stone_reference.halo.inner.8",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.0297285991930338
+      },
+      {
+        "componentA": "stone_reference.halo.inner.8",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.201175842170802
+      },
+      {
+        "componentA": "stone_reference.halo.inner.9",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7800000000000002
+      },
+      {
+        "componentA": "stone_reference.halo.inner.9",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.78
+      },
+      {
+        "componentA": "stone_reference.halo.inner.9",
+        "componentB": "stone_reference.side.left",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3988994385574479
+      },
+      {
+        "componentA": "stone_reference.halo.inner.9",
+        "componentB": "stone_reference.side.right",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.638016801375834
+      },
+      {
+        "componentA": "stone_reference.side.left",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference.side.left",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference.side.left",
+        "componentB": "stone_reference.side.right",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference.side.right",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference.side.right",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "HALO_METAL_ABSENT: a stone solid is built for every halo stone, but no metal is generated to hold them. A setting is built only for the primary stone; the halo stones are placed reference geometry."
+  ],
+  "createdAt": "2026-09-07T13:39:01.267939+00:00",
+  "acceptedAt": "2026-09-07T13:40:57.932846+00:00",
+  "notes": "Sprint 25 Halo System v1: INITIAL_BASELINE for a newly executable halo variant or composition. Created by running the real pipeline; no existing baseline was modified."
+}

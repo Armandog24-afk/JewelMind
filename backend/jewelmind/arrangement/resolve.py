@@ -58,6 +58,7 @@ from jewelmind.arrangement.normalize import (
     normalize_definition,
     normalize_transform,
 )
+from jewelmind.arrangement.radial import ring_angles_deg
 
 #: Relation kinds that mean exactly two participants. Checked here rather than
 #: in the model because arity is a semantic property of the KIND, and a single
@@ -123,17 +124,14 @@ def _radial_offsets(spec: RadialPatternSpec) -> list[InstanceTransform]:
     `sweep / count`. On a partial arc both endpoints are wanted, so the step is
     `sweep / (count - 1)`. Using one formula for both would either double a
     stone at 0° or leave an arc short of its stated end.
+
+    The angular sequence itself moved to `radial.py` in Sprint 25, unchanged
+    expression for expression, so the family compiler and the halo compiler
+    place a ring at exactly the angles a hand-written `RADIAL` pattern would
+    rather than through a second copy of this arithmetic.
     """
 
-    if spec.count == 1:
-        # A single member sits at the start angle; neither divisor applies.
-        angles = [spec.startAngleDeg]
-    elif spec.sweepDeg >= 360.0:
-        step = spec.sweepDeg / spec.count
-        angles = [spec.startAngleDeg + step * i for i in range(spec.count)]
-    else:
-        step = spec.sweepDeg / (spec.count - 1)
-        angles = [spec.startAngleDeg + step * i for i in range(spec.count)]
+    angles = ring_angles_deg(spec.count, spec.startAngleDeg, spec.sweepDeg)
 
     offsets: list[InstanceTransform] = []
     for angle in angles:

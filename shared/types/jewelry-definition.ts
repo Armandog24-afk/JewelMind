@@ -570,9 +570,13 @@ export type SeatMode = 'NONE' | 'REFERENCE_SEAT'
  * `backend/jewelmind/family/models.py`.
  *
  * A MIRROR: the backend is authoritative, and this file must never offer a
- * family type the backend has no compiler for. `halo`, `pave`, `eternity` and
- * `bypass` are deliberately absent for exactly that reason — a halo is already
- * expressible as CENTER_WITH_ACCENTS.
+ * family type the backend has no compiler for. `pave`, `eternity` and `bypass`
+ * are deliberately absent for exactly that reason.
+ *
+ * A halo is absent from this list too, but for a different reason since
+ * Sprint 25: it is not a family at all. A halo COMPOSES onto whatever placement
+ * a design declares, so it lives beside `family` as its own `HaloDefinition`
+ * rather than as a fifth family type. See `docs/bible/27-halo/halo-rfc.md`.
  *
  * A family describes SEMANTIC STRUCTURE. It compiles into an arrangement, which
  * remains the placement authority, and it never restates what a stone is or
@@ -661,6 +665,66 @@ export interface FamilyDefinition {
   label: string | null
 }
 
+/**
+ * Halo System v1 (Sprint 25). Mirrors `backend/jewelmind/halo/models.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a
+ * variant the backend has no compiler for. `cushion_halo`, `floral_halo`,
+ * `compass_halo`, `triple_halo` and `pave_halo` are deliberately absent —
+ * each is reserved with a real reason in
+ * `backend/jewelmind/halo/capability.py::RESERVED_HALO_VARIANTS`.
+ */
+
+/** Halo variants with a real compiler.
+ *
+ * `HIDDEN` is a structural claim, not a label: its ring must be offset BELOW
+ * the centre plane, which the backend enforces. */
+export type HaloVariant = 'SINGLE' | 'DOUBLE' | 'HIDDEN'
+
+/** One concentric ring of stones.
+ *
+ * The ring is the unit a designer specifies; every stone in it still becomes a
+ * separately identifiable arrangement instance. `members` overrides the
+ * individual stones that differ, and reuses `FamilyMember` rather than
+ * declaring a parallel member model. */
+export interface HaloRing {
+  ringId: string
+  count: number
+  /** A POSITION parameter, never a clearance: this layer knows no stone's
+   * size, so it cannot claim two stones do not touch. */
+  radiusMm: number
+  /** `null` means circular. A second semi-axis gives an elliptical halo. */
+  radiusYMm: number | null
+  startAngleDeg: number
+  /** Under 360 lays the ring on an arc — a partial halo. */
+  sweepDeg: number
+  /** What makes a hidden halo real rather than a label: it reaches the stone
+   * solid through the arrangement's own transform. */
+  zOffsetMm: number
+  memberScale: number
+  alignToRadius: boolean
+  stoneRef: string
+  gem: GemIdentity | null
+  /** A REQUEST, not an implementation. No halo metal is generated today. */
+  settingRef: string | null
+  members: FamilyMember[]
+}
+
+/** A halo around a centre.
+ *
+ * ABSENT IS NOT EMPTY: a definition with no halo behaves exactly as it did
+ * before this sprint. */
+export interface HaloDefinition {
+  variant: HaloVariant
+  rings: HaloRing[]
+  /** `null` anchors the halo on the design origin, which is how it encircles a
+   * multi-stone centre. A named value must exist in the arrangement the halo
+   * composes onto; the backend refuses it otherwise (`JM-HALO-001`) rather
+   * than silently re-anchoring. */
+  centerMemberId: string | null
+  label: string | null
+}
+
 export interface JewelryDefinition {
   schemaVersion: string
   project: ProjectInfo
@@ -686,6 +750,13 @@ export interface JewelryDefinition {
    * arrangement, so declaring both is refused by the backend
    * (`JM-FAMILY-001`) rather than merged. */
   family: FamilyDefinition | null
+
+  /** The design's halo (Sprint 25).
+   *
+   * `null` on every pre-Sprint-25 document. A halo COMPOSES onto whatever
+   * placement the design declares — a family, an arrangement, or neither — so
+   * it sits beside them rather than inside either. */
+  halo: HaloDefinition | null
 }
 
 const METAL_TYPES: readonly MetalType[] = [
@@ -888,5 +959,7 @@ export function createDefaultDefinition(): JewelryDefinition {
     arrangement: null,
     // No family: a single-stone design, exactly as before Sprint 24.
     family: null,
+    // No halo: exactly as before Sprint 25.
+    halo: null,
   }
 }

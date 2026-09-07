@@ -62,6 +62,19 @@ export const RULE_IDS = {
   FAMILY_COMPILES: 'JM-FAMILY-003',
   FAMILY_REFERENCES_RESOLVE: 'JM-FAMILY-004',
   FAMILY_SETTING_COVERAGE: 'JM-FAMILY-005',
+
+  // Sprint 25 — HALO_ONLY. A DOCUMENTED SUBSET is mirrored: JM-HALO-003
+  // (composition support) and JM-HALO-004 (reference resolution) are decidable
+  // from the document alone, so the client can report them instantly.
+  // JM-HALO-001 (does the named centre exist in the real compiled placement),
+  // JM-HALO-002 (does the real compiler accept it) and JM-HALO-005 (the
+  // metal-coverage report) need the backend compiler and stay backend-only.
+  // FORGE-GOV-004: the mirror may only ever be a subset.
+  HALO_CENTER_RESOLVES: 'JM-HALO-001',
+  HALO_COMPOSES: 'JM-HALO-002',
+  HALO_COMPOSITION_SUPPORTED: 'JM-HALO-003',
+  HALO_REFERENCES_RESOLVE: 'JM-HALO-004',
+  HALO_SETTING_COVERAGE: 'JM-HALO-005',
   MANUFACTURING_MIN_FEATURE: 'JM-MANUFACTURING-001',
   GEOMETRY_OUTER_BAND_POSITIVE: 'JM-GEOMETRY-001',
 } as const

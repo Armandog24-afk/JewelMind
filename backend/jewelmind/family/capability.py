@@ -37,13 +37,15 @@ FAMILY_REGISTRY_VERSION = "1.0.0"
 #: Family types named for architectural completeness but with NO compiler and
 #: NO membership in `FamilyType`. The mapped value is the real reason, not a
 #: roadmap slogan.
+#:
+#: `halo` was reserved here in Sprint 24 and is no longer, because Sprint 25
+#: established that a halo is not a family at all — it is a COMPOSABLE
+#: structure that adds rings to whatever placement a design declares
+#: (`jewelmind.halo`). Sprint 24's stated concern was that a fifth family type
+#: would create two ways to say one thing; that concern is honoured rather than
+#: overturned, since `FamilyType` still gains no member. See
+#: `docs/bible/27-halo/halo-rfc.md`.
 RESERVED_FAMILY_TYPES: dict[str, str] = {
-    "halo": (
-        "A halo is a CENTER_WITH_ACCENTS whose accents sit immediately against "
-        "the centre stone. It is already expressible, so adding a separate type "
-        "would create two ways to say one thing — and the two would eventually "
-        "compile differently."
-    ),
     "pave": (
         "Pave is a surface treatment covering a region, not a set of "
         "individually placed stones. It needs a region-fill capability the "

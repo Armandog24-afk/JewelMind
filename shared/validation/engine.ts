@@ -739,6 +739,104 @@ function familyRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/** Which family types accept a halo that NAMES its centre.
+ *
+ * A MIRROR of `backend/jewelmind/halo/capability.py::HALO_COMPOSITION`, and a
+ * deliberate subset of it: the backend derives the authoritative answer from
+ * the real compiled instances, which the client cannot do. A toi-et-moi has no
+ * CENTER member — the pair IS the design — so a halo there must anchor on the
+ * design origin (`centerMemberId: null`), which encircles both stones. */
+const HALO_NAMED_CENTER_SUPPORTED: Record<string, boolean> = {
+  THREE_STONE: true,
+  TOI_ET_MOI: false,
+  CLUSTER: true,
+  CENTER_WITH_ACCENTS: true,
+}
+
+function haloRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const halo = d.halo
+
+  if (halo === null || halo === undefined) {
+    return out
+  }
+
+  // A family/arrangement conflict is familyRules()'s finding; a second derived
+  // failure here would obscure the real one.
+  if (
+    d.family !== null &&
+    d.family !== undefined &&
+    d.arrangement !== null &&
+    d.arrangement !== undefined
+  ) {
+    return out
+  }
+
+  if (
+    d.family !== null &&
+    d.family !== undefined &&
+    halo.centerMemberId !== null &&
+    halo.centerMemberId !== undefined &&
+    HALO_NAMED_CENTER_SUPPORTED[d.family.familyType] === false
+  ) {
+    out.push({
+      ruleId: RULE_IDS.HALO_COMPOSITION_SUPPORTED,
+      severity: 'error',
+      message:
+        `A halo cannot name a centre in a ${d.family.familyType} family, ` +
+        'which has no CENTER member. Set centerMemberId to null to encircle ' +
+        'the whole group instead.',
+      parameter: 'halo.centerMemberId',
+    })
+    return out
+  }
+
+  for (const ring of halo.rings) {
+    const stoneRefs = new Set<string>([ring.stoneRef])
+    for (const member of ring.members) {
+      stoneRefs.add(member.stoneRef)
+    }
+    for (const ref of Array.from(stoneRefs).sort()) {
+      if (ref !== 'primary') {
+        out.push({
+          ruleId: RULE_IDS.HALO_REFERENCES_RESOLVE,
+          severity: 'warning',
+          message:
+            `Halo ring '${ring.ringId}' references stone '${ref}', but this ` +
+            'definition declares only the primary stone. No geometry will be ' +
+            'built for those halo stones.',
+          parameter: 'halo.rings',
+        })
+      }
+    }
+
+    const settingRefs = new Set<string>()
+    if (ring.settingRef !== null && ring.settingRef !== undefined) {
+      settingRefs.add(ring.settingRef)
+    }
+    for (const member of ring.members) {
+      if (member.settingRef !== null && member.settingRef !== undefined) {
+        settingRefs.add(member.settingRef)
+      }
+    }
+    for (const ref of Array.from(settingRefs).sort()) {
+      if (ref !== d.setting.type) {
+        out.push({
+          ruleId: RULE_IDS.HALO_REFERENCES_RESOLVE,
+          severity: 'warning',
+          message:
+            `Halo ring '${ring.ringId}' requests setting '${ref}', but this ` +
+            `design's setting is '${d.setting.type}'. No halo setting is ` +
+            'generated: only the primary stone receives one.',
+          parameter: 'halo.rings',
+        })
+      }
+    }
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -747,6 +845,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...gemRules(definition),
     ...arrangementRules(definition),
     ...familyRules(definition),
+    ...haloRules(definition),
     ...prongRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),

@@ -1,0 +1,37 @@
+{
+  "variant": "DOUBLE",
+  "rings": [
+    {
+      "ringId": "halo.inner",
+      "count": 12,
+      "radiusMm": 3.2,
+      "radiusYMm": null,
+      "startAngleDeg": 0.0,
+      "sweepDeg": 360.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.22,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": null,
+      "settingRef": null,
+      "members": []
+    },
+    {
+      "ringId": "halo.outer",
+      "count": 20,
+      "radiusMm": 4.6,
+      "radiusYMm": null,
+      "startAngleDeg": 9.0,
+      "sweepDeg": 360.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.16,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": null,
+      "settingRef": null,
+      "members": []
+    }
+  ],
+  "centerMemberId": "center",
+  "label": "Double halo"
+}

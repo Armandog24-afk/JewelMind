@@ -178,6 +178,26 @@
     {
       "goldenId": "FAM-005-center-with-accents",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "HALO-001-single-halo",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "HALO-002-double-halo",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "HALO-003-hidden-halo",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "HALO-004-three-stone-with-halo",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "HALO-005-halo-around-toi-et-moi",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [

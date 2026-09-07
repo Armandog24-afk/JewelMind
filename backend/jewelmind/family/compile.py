@@ -39,6 +39,7 @@ from jewelmind.arrangement.models import (
     MirrorPatternSpec,
     StoneInstanceDef,
 )
+from jewelmind.arrangement.radial import ring_angles_deg
 from jewelmind.family.errors import (
     FamilyCapacityExceededError,
     FamilyMemberMissingError,
@@ -375,11 +376,11 @@ def _radial_members(
     keeps its source and generates `count` more.
 
     So the ring is placed directly, using the SAME closed-form arithmetic the
-    arrangement resolver applies to a radial pattern — a full sweep steps by
-    `sweep / count` (at 360 degrees the last member would land on the first)
-    and an arc by `sweep / (count - 1)` so both endpoints are included. These
-    are still arrangement primitives: explicit instances, resolved and
-    fingerprinted by the arrangement engine exactly like any others.
+    arrangement resolver applies to a radial pattern — `arrangement/radial.py`
+    is that arithmetic, shared rather than copied since Sprint 25, so a family's
+    ring and a hand-written `RADIAL` pattern can never drift apart. These are
+    still arrangement primitives: explicit instances, resolved and fingerprinted
+    by the arrangement engine exactly like any others.
 
     Placing directly also lets a document name its own ring members and lets a
     ring be elliptical, neither of which a circular pattern can express.
@@ -388,12 +389,7 @@ def _radial_members(
     grouped = _members_by_role(family)
     named = grouped.get(role, [])
 
-    if count == 1:
-        angles = [start_angle]
-    elif sweep >= 360.0:
-        angles = [start_angle + (sweep / count) * i for i in range(count)]
-    else:
-        angles = [start_angle + (sweep / (count - 1)) * i for i in range(count)]
+    angles = ring_angles_deg(count, start_angle, sweep)
 
     semi_y = radius if radius_y is None else radius_y
     instances: list[StoneInstanceDef] = []

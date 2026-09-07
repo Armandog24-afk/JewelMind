@@ -1,0 +1,22 @@
+{
+  "variant": "SINGLE",
+  "rings": [
+    {
+      "ringId": "halo.inner",
+      "count": 18,
+      "radiusMm": 6.0,
+      "radiusYMm": null,
+      "startAngleDeg": 0.0,
+      "sweepDeg": 360.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.18,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": null,
+      "settingRef": null,
+      "members": []
+    }
+  ],
+  "centerMemberId": null,
+  "label": "Halo encircling a toi-et-moi pair"
+}

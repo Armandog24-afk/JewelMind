@@ -179,10 +179,6 @@
       "reason": "An eternity band places stones around the shank's own path, so it requires placement along a category-specific curve. That is Shank territory, and this layer is category-neutral."
     },
     {
-      "family": "halo",
-      "reason": "A halo is a CENTER_WITH_ACCENTS whose accents sit immediately against the centre stone. It is already expressible, so adding a separate type would create two ways to say one thing — and the two would eventually compile differently."
-    },
-    {
       "family": "pave",
       "reason": "Pave is a surface treatment covering a region, not a set of individually placed stones. It needs a region-fill capability the arrangement engine does not have, and approximating it as a dense radial pattern would misrepresent both the design and its stone count."
     }

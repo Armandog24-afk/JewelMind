@@ -1,0 +1,1525 @@
+{
+  "generatedFrom": "jewelmind.halo.compile.compose_halo + jewelmind.arrangement.compile.compile_arrangement",
+  "compilerVersion": "1.0.0",
+  "note": "A halo composes onto whatever placement a design declares; the arrangement engine then resolves the result. Every generated instance builds a real stone solid, and `settingCoverage` records that a setting is built only for the primary instance — no halo metal exists.",
+  "vectors": [
+    {
+      "name": "single-halo-solitaire",
+      "variant": "SINGLE",
+      "familyType": null,
+      "centerMemberId": "center",
+      "arrangementFingerprint": "25e4cceb4c773815",
+      "instanceCount": 17,
+      "generatedCount": 17,
+      "haloStoneCount": 16,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 3.4,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 3.14119,
+          "yMm": 1.301124,
+          "zMm": 0.0,
+          "rotationDeg": 22.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": -2.404163,
+          "yMm": -2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 225.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": -1.301124,
+          "yMm": -3.14119,
+          "zMm": 0.0,
+          "rotationDeg": 247.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.12",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": -3.4,
+          "zMm": 0.0,
+          "rotationDeg": 270.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.12"
+        },
+        {
+          "instanceId": "halo.inner.13",
+          "role": "HALO",
+          "xMm": 1.301124,
+          "yMm": -3.14119,
+          "zMm": 0.0,
+          "rotationDeg": 292.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.13"
+        },
+        {
+          "instanceId": "halo.inner.14",
+          "role": "HALO",
+          "xMm": 2.404163,
+          "yMm": -2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 315.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.14"
+        },
+        {
+          "instanceId": "halo.inner.15",
+          "role": "HALO",
+          "xMm": 3.14119,
+          "yMm": -1.301124,
+          "zMm": 0.0,
+          "rotationDeg": 337.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.15"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 2.404163,
+          "yMm": 2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 45.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 1.301124,
+          "yMm": 3.14119,
+          "zMm": 0.0,
+          "rotationDeg": 67.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 3.4,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -1.301124,
+          "yMm": 3.14119,
+          "zMm": 0.0,
+          "rotationDeg": 112.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -2.404163,
+          "yMm": 2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 135.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -3.14119,
+          "yMm": 1.301124,
+          "zMm": 0.0,
+          "rotationDeg": 157.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -3.4,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": -3.14119,
+          "yMm": -1.301124,
+          "zMm": 0.0,
+          "rotationDeg": 202.5,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.9"
+        }
+      ]
+    },
+    {
+      "name": "double-halo-solitaire",
+      "variant": "DOUBLE",
+      "familyType": null,
+      "centerMemberId": "center",
+      "arrangementFingerprint": "e8a50e7e08fef193",
+      "instanceCount": 33,
+      "generatedCount": 33,
+      "haloStoneCount": 32,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 3.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 2.771281,
+          "yMm": 1.6,
+          "zMm": 0.0,
+          "rotationDeg": 30.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": 1.6,
+          "yMm": -2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 300.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": 2.771281,
+          "yMm": -1.6,
+          "zMm": 0.0,
+          "rotationDeg": 330.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 1.6,
+          "yMm": 2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 60.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 3.2,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": -1.6,
+          "yMm": 2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 120.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -2.771281,
+          "yMm": 1.6,
+          "zMm": 0.0,
+          "rotationDeg": 150.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -3.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -2.771281,
+          "yMm": -1.6,
+          "zMm": 0.0,
+          "rotationDeg": 210.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -1.6,
+          "yMm": -2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 240.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": -3.2,
+          "zMm": 0.0,
+          "rotationDeg": 270.0,
+          "scale": 0.22,
+          "componentName": "stone_reference.halo.inner.9"
+        },
+        {
+          "instanceId": "halo.outer.0",
+          "role": "HALO",
+          "xMm": 4.543366,
+          "yMm": 0.719599,
+          "zMm": 0.0,
+          "rotationDeg": 9.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.0"
+        },
+        {
+          "instanceId": "halo.outer.1",
+          "role": "HALO",
+          "xMm": 4.09863,
+          "yMm": 2.088356,
+          "zMm": 0.0,
+          "rotationDeg": 27.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.1"
+        },
+        {
+          "instanceId": "halo.outer.10",
+          "role": "HALO",
+          "xMm": -4.543366,
+          "yMm": -0.719599,
+          "zMm": 0.0,
+          "rotationDeg": 189.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.10"
+        },
+        {
+          "instanceId": "halo.outer.11",
+          "role": "HALO",
+          "xMm": -4.09863,
+          "yMm": -2.088356,
+          "zMm": 0.0,
+          "rotationDeg": 207.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.11"
+        },
+        {
+          "instanceId": "halo.outer.12",
+          "role": "HALO",
+          "xMm": -3.252691,
+          "yMm": -3.252691,
+          "zMm": 0.0,
+          "rotationDeg": 225.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.12"
+        },
+        {
+          "instanceId": "halo.outer.13",
+          "role": "HALO",
+          "xMm": -2.088356,
+          "yMm": -4.09863,
+          "zMm": 0.0,
+          "rotationDeg": 243.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.13"
+        },
+        {
+          "instanceId": "halo.outer.14",
+          "role": "HALO",
+          "xMm": -0.719599,
+          "yMm": -4.543366,
+          "zMm": 0.0,
+          "rotationDeg": 261.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.14"
+        },
+        {
+          "instanceId": "halo.outer.15",
+          "role": "HALO",
+          "xMm": 0.719599,
+          "yMm": -4.543366,
+          "zMm": 0.0,
+          "rotationDeg": 279.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.15"
+        },
+        {
+          "instanceId": "halo.outer.16",
+          "role": "HALO",
+          "xMm": 2.088356,
+          "yMm": -4.09863,
+          "zMm": 0.0,
+          "rotationDeg": 297.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.16"
+        },
+        {
+          "instanceId": "halo.outer.17",
+          "role": "HALO",
+          "xMm": 3.252691,
+          "yMm": -3.252691,
+          "zMm": 0.0,
+          "rotationDeg": 315.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.17"
+        },
+        {
+          "instanceId": "halo.outer.18",
+          "role": "HALO",
+          "xMm": 4.09863,
+          "yMm": -2.088356,
+          "zMm": 0.0,
+          "rotationDeg": 333.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.18"
+        },
+        {
+          "instanceId": "halo.outer.19",
+          "role": "HALO",
+          "xMm": 4.543366,
+          "yMm": -0.719599,
+          "zMm": 0.0,
+          "rotationDeg": 351.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.19"
+        },
+        {
+          "instanceId": "halo.outer.2",
+          "role": "HALO",
+          "xMm": 3.252691,
+          "yMm": 3.252691,
+          "zMm": 0.0,
+          "rotationDeg": 45.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.2"
+        },
+        {
+          "instanceId": "halo.outer.3",
+          "role": "HALO",
+          "xMm": 2.088356,
+          "yMm": 4.09863,
+          "zMm": 0.0,
+          "rotationDeg": 63.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.3"
+        },
+        {
+          "instanceId": "halo.outer.4",
+          "role": "HALO",
+          "xMm": 0.719599,
+          "yMm": 4.543366,
+          "zMm": 0.0,
+          "rotationDeg": 81.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.4"
+        },
+        {
+          "instanceId": "halo.outer.5",
+          "role": "HALO",
+          "xMm": -0.719599,
+          "yMm": 4.543366,
+          "zMm": 0.0,
+          "rotationDeg": 99.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.5"
+        },
+        {
+          "instanceId": "halo.outer.6",
+          "role": "HALO",
+          "xMm": -2.088356,
+          "yMm": 4.09863,
+          "zMm": 0.0,
+          "rotationDeg": 117.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.6"
+        },
+        {
+          "instanceId": "halo.outer.7",
+          "role": "HALO",
+          "xMm": -3.252691,
+          "yMm": 3.252691,
+          "zMm": 0.0,
+          "rotationDeg": 135.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.7"
+        },
+        {
+          "instanceId": "halo.outer.8",
+          "role": "HALO",
+          "xMm": -4.09863,
+          "yMm": 2.088356,
+          "zMm": 0.0,
+          "rotationDeg": 153.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.8"
+        },
+        {
+          "instanceId": "halo.outer.9",
+          "role": "HALO",
+          "xMm": -4.543366,
+          "yMm": 0.719599,
+          "zMm": 0.0,
+          "rotationDeg": 171.0,
+          "scale": 0.16,
+          "componentName": "stone_reference.halo.outer.9"
+        }
+      ]
+    },
+    {
+      "name": "hidden-halo-solitaire",
+      "variant": "HIDDEN",
+      "familyType": null,
+      "centerMemberId": "center",
+      "arrangementFingerprint": "e081f535eecafa46",
+      "instanceCount": 13,
+      "generatedCount": 13,
+      "haloStoneCount": 12,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 2.9,
+          "yMm": 0.0,
+          "zMm": -1.4,
+          "rotationDeg": 0.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 2.511474,
+          "yMm": 1.45,
+          "zMm": -1.4,
+          "rotationDeg": 30.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": 1.45,
+          "yMm": -2.511474,
+          "zMm": -1.4,
+          "rotationDeg": 300.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": 2.511474,
+          "yMm": -1.45,
+          "zMm": -1.4,
+          "rotationDeg": 330.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 1.45,
+          "yMm": 2.511474,
+          "zMm": -1.4,
+          "rotationDeg": 60.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 2.9,
+          "zMm": -1.4,
+          "rotationDeg": 90.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": -1.45,
+          "yMm": 2.511474,
+          "zMm": -1.4,
+          "rotationDeg": 120.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -2.511474,
+          "yMm": 1.45,
+          "zMm": -1.4,
+          "rotationDeg": 150.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -2.9,
+          "yMm": 0.0,
+          "zMm": -1.4,
+          "rotationDeg": 180.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -2.511474,
+          "yMm": -1.45,
+          "zMm": -1.4,
+          "rotationDeg": 210.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -1.45,
+          "yMm": -2.511474,
+          "zMm": -1.4,
+          "rotationDeg": 240.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": -2.9,
+          "zMm": -1.4,
+          "rotationDeg": 270.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.9"
+        }
+      ]
+    },
+    {
+      "name": "elliptical-halo-partial-arc",
+      "variant": "SINGLE",
+      "familyType": null,
+      "centerMemberId": "center",
+      "arrangementFingerprint": "72e3b324d66e315d",
+      "instanceCount": 10,
+      "generatedCount": 10,
+      "haloStoneCount": 9,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 4.134648,
+          "yMm": 1.094464,
+          "zMm": 0.0,
+          "rotationDeg": 20.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 3.490755,
+          "yMm": 1.948037,
+          "zMm": 0.0,
+          "rotationDeg": 37.5,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 2.523736,
+          "yMm": 2.621287,
+          "zMm": 0.0,
+          "rotationDeg": 55.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 1.323106,
+          "yMm": 3.051894,
+          "zMm": 0.0,
+          "rotationDeg": 72.5,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 3.2,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -1.323106,
+          "yMm": 3.051894,
+          "zMm": 0.0,
+          "rotationDeg": 107.5,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -2.523736,
+          "yMm": 2.621287,
+          "zMm": 0.0,
+          "rotationDeg": 125.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -3.490755,
+          "yMm": 1.948037,
+          "zMm": 0.0,
+          "rotationDeg": 142.5,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -4.134648,
+          "yMm": 1.094464,
+          "zMm": 0.0,
+          "rotationDeg": 160.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.8"
+        }
+      ]
+    },
+    {
+      "name": "halo-mixed-gems",
+      "variant": "SINGLE",
+      "familyType": null,
+      "centerMemberId": "center",
+      "arrangementFingerprint": "9706ef1f9cfbaed5",
+      "instanceCount": 9,
+      "generatedCount": 9,
+      "haloStoneCount": 8,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 2.404163,
+          "yMm": 2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 45.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 3.4,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": -2.404163,
+          "yMm": 2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 135.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": -3.4,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -2.404163,
+          "yMm": -2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 225.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": -3.4,
+          "zMm": 0.0,
+          "rotationDeg": 270.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": 2.404163,
+          "yMm": -2.404163,
+          "zMm": 0.0,
+          "rotationDeg": 315.0,
+          "scale": 0.24,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.crest",
+          "role": "HALO",
+          "xMm": 3.4,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.34,
+          "componentName": "stone_reference.halo.inner.crest"
+        }
+      ]
+    },
+    {
+      "name": "three-stone-with-halo",
+      "variant": "SINGLE",
+      "familyType": "THREE_STONE",
+      "centerMemberId": "center",
+      "arrangementFingerprint": "23fa1beb6f771978",
+      "instanceCount": 17,
+      "generatedCount": 17,
+      "haloStoneCount": 14,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "CENTER",
+        "HALO",
+        "SIDE"
+      ],
+      "placements": [
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 3.3,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 2.973197,
+          "yMm": 1.431816,
+          "zMm": 0.0,
+          "rotationDeg": 25.714286,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": -0.734319,
+          "yMm": -3.217262,
+          "zMm": 0.0,
+          "rotationDeg": 257.142857,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": 0.734319,
+          "yMm": -3.217262,
+          "zMm": 0.0,
+          "rotationDeg": 282.857143,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.12",
+          "role": "HALO",
+          "xMm": 2.057516,
+          "yMm": -2.580044,
+          "zMm": 0.0,
+          "rotationDeg": 308.571429,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.12"
+        },
+        {
+          "instanceId": "halo.inner.13",
+          "role": "HALO",
+          "xMm": 2.973197,
+          "yMm": -1.431816,
+          "zMm": 0.0,
+          "rotationDeg": 334.285714,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.13"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 2.057516,
+          "yMm": 2.580044,
+          "zMm": 0.0,
+          "rotationDeg": 51.428571,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 0.734319,
+          "yMm": 3.217262,
+          "zMm": 0.0,
+          "rotationDeg": 77.142857,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": -0.734319,
+          "yMm": 3.217262,
+          "zMm": 0.0,
+          "rotationDeg": 102.857143,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -2.057516,
+          "yMm": 2.580044,
+          "zMm": 0.0,
+          "rotationDeg": 128.571429,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -2.973197,
+          "yMm": 1.431816,
+          "zMm": 0.0,
+          "rotationDeg": 154.285714,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -3.3,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -2.973197,
+          "yMm": -1.431816,
+          "zMm": 0.0,
+          "rotationDeg": 205.714286,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": -2.057516,
+          "yMm": -2.580044,
+          "zMm": 0.0,
+          "rotationDeg": 231.428571,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.9"
+        },
+        {
+          "instanceId": "side.left",
+          "role": "SIDE",
+          "xMm": 5.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.55,
+          "componentName": "stone_reference.side.left"
+        },
+        {
+          "instanceId": "side.left.mirror.1",
+          "role": "SIDE",
+          "xMm": -5.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.55,
+          "componentName": "stone_reference.side.left.mirror.1"
+        }
+      ]
+    },
+    {
+      "name": "center-accents-with-halo",
+      "variant": "SINGLE",
+      "familyType": "CENTER_WITH_ACCENTS",
+      "centerMemberId": "center",
+      "arrangementFingerprint": "3bce8106de51738e",
+      "instanceCount": 19,
+      "generatedCount": 19,
+      "haloStoneCount": 12,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "ACCENT",
+        "CENTER",
+        "HALO"
+      ],
+      "placements": [
+        {
+          "instanceId": "accent.0",
+          "role": "ACCENT",
+          "xMm": 6.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.0"
+        },
+        {
+          "instanceId": "accent.1",
+          "role": "ACCENT",
+          "xMm": 3.1,
+          "yMm": 5.369358,
+          "zMm": 0.0,
+          "rotationDeg": 60.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.1"
+        },
+        {
+          "instanceId": "accent.2",
+          "role": "ACCENT",
+          "xMm": -3.1,
+          "yMm": 5.369358,
+          "zMm": 0.0,
+          "rotationDeg": 120.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.2"
+        },
+        {
+          "instanceId": "accent.3",
+          "role": "ACCENT",
+          "xMm": -6.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.3"
+        },
+        {
+          "instanceId": "accent.4",
+          "role": "ACCENT",
+          "xMm": -3.1,
+          "yMm": -5.369358,
+          "zMm": 0.0,
+          "rotationDeg": 240.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.4"
+        },
+        {
+          "instanceId": "accent.5",
+          "role": "ACCENT",
+          "xMm": 3.1,
+          "yMm": -5.369358,
+          "zMm": 0.0,
+          "rotationDeg": 300.0,
+          "scale": 0.3,
+          "componentName": "stone_reference.accent.5"
+        },
+        {
+          "instanceId": "center",
+          "role": "CENTER",
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 3.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.0"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 2.771281,
+          "yMm": 1.6,
+          "zMm": 0.0,
+          "rotationDeg": 30.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": 1.6,
+          "yMm": -2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 300.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": 2.771281,
+          "yMm": -1.6,
+          "zMm": 0.0,
+          "rotationDeg": 330.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 1.6,
+          "yMm": 2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 60.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": 3.2,
+          "zMm": 0.0,
+          "rotationDeg": 90.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": -1.6,
+          "yMm": 2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 120.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -2.771281,
+          "yMm": 1.6,
+          "zMm": 0.0,
+          "rotationDeg": 150.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -3.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -2.771281,
+          "yMm": -1.6,
+          "zMm": 0.0,
+          "rotationDeg": 210.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -1.6,
+          "yMm": -2.771281,
+          "zMm": 0.0,
+          "rotationDeg": 240.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": 0.0,
+          "yMm": -3.2,
+          "zMm": 0.0,
+          "rotationDeg": 270.0,
+          "scale": 0.2,
+          "componentName": "stone_reference.halo.inner.9"
+        }
+      ]
+    },
+    {
+      "name": "halo-around-toi-et-moi",
+      "variant": "SINGLE",
+      "familyType": "TOI_ET_MOI",
+      "centerMemberId": null,
+      "arrangementFingerprint": "c6c8f9b25ad11163",
+      "instanceCount": 20,
+      "generatedCount": 20,
+      "haloStoneCount": 18,
+      "settingCoverage": "PRIMARY_ONLY",
+      "roles": [
+        "HALO",
+        "SIDE"
+      ],
+      "placements": [
+        {
+          "instanceId": "halo.inner.0",
+          "role": "HALO",
+          "xMm": 6.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": 0.18,
+          "componentName": "stone_reference"
+        },
+        {
+          "instanceId": "halo.inner.1",
+          "role": "HALO",
+          "xMm": 5.638156,
+          "yMm": 2.052121,
+          "zMm": 0.0,
+          "rotationDeg": 20.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.1"
+        },
+        {
+          "instanceId": "halo.inner.10",
+          "role": "HALO",
+          "xMm": -5.638156,
+          "yMm": -2.052121,
+          "zMm": 0.0,
+          "rotationDeg": 200.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.10"
+        },
+        {
+          "instanceId": "halo.inner.11",
+          "role": "HALO",
+          "xMm": -4.596267,
+          "yMm": -3.856726,
+          "zMm": 0.0,
+          "rotationDeg": 220.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.11"
+        },
+        {
+          "instanceId": "halo.inner.12",
+          "role": "HALO",
+          "xMm": -3.0,
+          "yMm": -5.196152,
+          "zMm": 0.0,
+          "rotationDeg": 240.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.12"
+        },
+        {
+          "instanceId": "halo.inner.13",
+          "role": "HALO",
+          "xMm": -1.041889,
+          "yMm": -5.908847,
+          "zMm": 0.0,
+          "rotationDeg": 260.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.13"
+        },
+        {
+          "instanceId": "halo.inner.14",
+          "role": "HALO",
+          "xMm": 1.041889,
+          "yMm": -5.908847,
+          "zMm": 0.0,
+          "rotationDeg": 280.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.14"
+        },
+        {
+          "instanceId": "halo.inner.15",
+          "role": "HALO",
+          "xMm": 3.0,
+          "yMm": -5.196152,
+          "zMm": 0.0,
+          "rotationDeg": 300.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.15"
+        },
+        {
+          "instanceId": "halo.inner.16",
+          "role": "HALO",
+          "xMm": 4.596267,
+          "yMm": -3.856726,
+          "zMm": 0.0,
+          "rotationDeg": 320.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.16"
+        },
+        {
+          "instanceId": "halo.inner.17",
+          "role": "HALO",
+          "xMm": 5.638156,
+          "yMm": -2.052121,
+          "zMm": 0.0,
+          "rotationDeg": 340.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.17"
+        },
+        {
+          "instanceId": "halo.inner.2",
+          "role": "HALO",
+          "xMm": 4.596267,
+          "yMm": 3.856726,
+          "zMm": 0.0,
+          "rotationDeg": 40.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.2"
+        },
+        {
+          "instanceId": "halo.inner.3",
+          "role": "HALO",
+          "xMm": 3.0,
+          "yMm": 5.196152,
+          "zMm": 0.0,
+          "rotationDeg": 60.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.3"
+        },
+        {
+          "instanceId": "halo.inner.4",
+          "role": "HALO",
+          "xMm": 1.041889,
+          "yMm": 5.908847,
+          "zMm": 0.0,
+          "rotationDeg": 80.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.4"
+        },
+        {
+          "instanceId": "halo.inner.5",
+          "role": "HALO",
+          "xMm": -1.041889,
+          "yMm": 5.908847,
+          "zMm": 0.0,
+          "rotationDeg": 100.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.5"
+        },
+        {
+          "instanceId": "halo.inner.6",
+          "role": "HALO",
+          "xMm": -3.0,
+          "yMm": 5.196152,
+          "zMm": 0.0,
+          "rotationDeg": 120.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.6"
+        },
+        {
+          "instanceId": "halo.inner.7",
+          "role": "HALO",
+          "xMm": -4.596267,
+          "yMm": 3.856726,
+          "zMm": 0.0,
+          "rotationDeg": 140.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.7"
+        },
+        {
+          "instanceId": "halo.inner.8",
+          "role": "HALO",
+          "xMm": -5.638156,
+          "yMm": 2.052121,
+          "zMm": 0.0,
+          "rotationDeg": 160.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.8"
+        },
+        {
+          "instanceId": "halo.inner.9",
+          "role": "HALO",
+          "xMm": -6.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 180.0,
+          "scale": 0.18,
+          "componentName": "stone_reference.halo.inner.9"
+        },
+        {
+          "instanceId": "side.left",
+          "role": "SIDE",
+          "xMm": -2.338269,
+          "yMm": -1.35,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference.side.left"
+        },
+        {
+          "instanceId": "side.right",
+          "role": "SIDE",
+          "xMm": 2.338269,
+          "yMm": 1.35,
+          "zMm": 0.0,
+          "rotationDeg": 0.0,
+          "scale": null,
+          "componentName": "stone_reference.side.right"
+        }
+      ]
+    }
+  ]
+}

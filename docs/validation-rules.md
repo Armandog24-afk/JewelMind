@@ -57,6 +57,11 @@ results are shown but never block anything.
 | `JM-FAMILY-003` | `family` | The family cannot be compiled into an arrangement. Evaluated by running the REAL compiler, so Forge can never disagree with what generation does. | error |
 | `JM-FAMILY-004` | `family.members` | A member references a stone specification other than `primary`, or requests a setting the design does not use. A **warning**: the design is valid and only that member is affected. | warning |
 | `JM-FAMILY-005` | `family` | The family builds stone geometry for every member, but a setting is generated only for the primary stone. Not a fault in the design. | information |
+| `JM-HALO-001` | `halo.centerMemberId` | The halo names a centre this design's placement does not contain. Refused rather than re-anchored on the design origin — a halo around the wrong stone is worse than one that fails loudly. | error |
+| `JM-HALO-002` | `halo` | The halo cannot be composed onto this design's placement. Evaluated by running the REAL compiler, so Forge can never disagree with what generation does. | error |
+| `JM-HALO-003` | `halo.centerMemberId` | This family/halo combination is not supported — e.g. a halo naming a centre in a toi-et-moi, which has no CENTER member. Reported with the real reason rather than only refused. | error |
+| `JM-HALO-004` | `halo.rings` | A ring references a stone specification other than `primary`, or requests a setting the design does not use. A **warning**: the design is valid and only those stones are affected. | warning |
+| `JM-HALO-005` | `halo` | The halo builds stone geometry for every halo stone, but no metal is generated to hold them. Not a fault in the design. | information |
 | `JM-ARRANGE-001` | `arrangement.instances` | Two stone instances declare the same id. Ids are the authoritative identity, so a duplicate makes every reference to it ambiguous. | error |
 | `JM-ARRANGE-002` | `arrangement.instances`, `arrangement.patterns` | A placement or pattern names a group or instance that is not declared. | error |
 | `JM-ARRANGE-003` | `arrangement.instances` | An instance references a stone specification other than `primary`, which no current document declares. A **warning**: the design is structurally valid and still generates, and only that instance produces no geometry. | warning |

@@ -720,6 +720,163 @@ def _family_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _halo_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Halo validation (Sprint 25).
+
+    SCOPE: HALO_ONLY, and STRUCTURAL ONLY. Five questions: does the centre the
+    halo names actually exist in this design's placement, does the halo compose,
+    is this family/halo combination one the real compiler supports, do the
+    halo's stone and setting references resolve, and what does a composed halo
+    NOT get.
+
+    None of them is a jewelry judgment. There is no rule here about how far a
+    halo stone must sit from its neighbour, what fraction of the centre a halo
+    stone should be, or whether a hidden halo clears the centre's pavilion —
+    each needs sourced professional evidence this project does not have, so none
+    exists. Whether two placed stones physically overlap is a GEOMETRIC question
+    for Geometry Inspection.
+
+    A design with no halo produces NO results, so the entire existing corpus
+    stays quiet.
+    """
+
+    halo = d.halo
+    if halo is None:
+        return []
+
+    from jewelmind.family.compile import compile_family
+    from jewelmind.family.errors import FamilyError
+    from jewelmind.halo.capability import HALO_COMPOSITION
+    from jewelmind.halo.compile import compose_halo
+    from jewelmind.halo.errors import HaloCenterUnresolvedError, HaloError
+
+    out: list[R.ValidationResult] = []
+
+    # A halo composes onto whatever placement the design declares, so the base
+    # must exist before the halo can be judged. A family/arrangement conflict is
+    # JM-FAMILY-001's finding; reporting a second, derived failure here would
+    # obscure the real one.
+    if d.family is not None and d.arrangement is not None:
+        return out
+
+    try:
+        base = compile_family(d.family) if d.family is not None else d.arrangement
+    except FamilyError:
+        # The family itself does not compile. JM-FAMILY-003 reports that; the
+        # halo's own validity cannot be assessed against a base that does not
+        # exist, and inventing a verdict for it would be guesswork.
+        return out
+
+    # THE SUPPORT TABLE IS REPORTING, NOT THE GATE. The authoritative check is
+    # the real compiler below. This branch exists so an unsupported combination
+    # is EXPLAINED rather than merely refused.
+    if d.family is not None and halo.centerMemberId is not None:
+        composition = HALO_COMPOSITION.get(d.family.familyType)
+        if composition is not None and not composition["namedCenter"]:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.HALO_COMPOSITION_SUPPORTED,
+                    severity="error",
+                    message=(
+                        f"A halo cannot name a centre in a "
+                        f"{d.family.familyType} family. {composition['note']}"
+                    ),
+                    parameter="halo.centerMemberId",
+                )
+            )
+            # The authoritative check below would refuse this too, as an
+            # unresolvable centre. Returning here keeps ONE error for one cause:
+            # the explanatory message is strictly more useful than "no such
+            # instance", and two findings for a single mistake reads as two
+            # mistakes.
+            return out
+
+    # THE AUTHORITATIVE STRUCTURAL CHECK: does the real compiler accept this
+    # halo against this design's real placement? Running it here means Forge can
+    # never disagree with what generation will do, because it is the same code
+    # path.
+    try:
+        composed = compose_halo(base, halo)
+    except HaloCenterUnresolvedError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.HALO_CENTER_RESOLVES,
+                severity="error",
+                message=str(exc),
+                parameter="halo.centerMemberId",
+            )
+        )
+        return out
+    except HaloError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.HALO_COMPOSES,
+                severity="error",
+                message=f"This halo cannot be composed: {exc}",
+                parameter="halo",
+            )
+        )
+        return out
+
+    # A ring naming a stone specification other than 'primary' is reported as a
+    # WARNING: the document is structurally valid and still generates, and only
+    # that ring's stones produce no geometry.
+    for ring in halo.rings:
+        refs = {ring.stoneRef} | {m.stoneRef for m in ring.members}
+        for ref in sorted(refs):
+            if ref != "primary":
+                out.append(
+                    R.ValidationResult(
+                        ruleId=R.HALO_REFERENCES_RESOLVE,
+                        severity="warning",
+                        message=(
+                            f"Halo ring '{ring.ringId}' references stone "
+                            f"'{ref}', but this definition declares only the "
+                            "primary stone. No geometry will be built for those "
+                            "halo stones."
+                        ),
+                        parameter="halo.rings",
+                    )
+                )
+        setting_refs = {ring.settingRef} | {m.settingRef for m in ring.members}
+        for setting_ref in sorted(r for r in setting_refs if r is not None):
+            if setting_ref != d.setting.type:
+                out.append(
+                    R.ValidationResult(
+                        ruleId=R.HALO_REFERENCES_RESOLVE,
+                        severity="warning",
+                        message=(
+                            f"Halo ring '{ring.ringId}' requests setting "
+                            f"'{setting_ref}', but this design's setting is "
+                            f"'{d.setting.type}'. No halo setting is generated: "
+                            "only the primary stone receives one."
+                        ),
+                        parameter="halo.rings",
+                    )
+                )
+
+    # THE REMAINING LIMITATION, surfaced as INFORMATION rather than hidden in a
+    # log. The design is not faulty; the halo's stones simply have no metal
+    # holding them yet.
+    if composed is not None:
+        stones = sum(ring.count for ring in halo.rings)
+        out.append(
+            R.ValidationResult(
+                ruleId=R.HALO_SETTING_COVERAGE,
+                severity="information",
+                message=(
+                    f"This {halo.variant} halo builds real stone geometry for "
+                    f"all {stones} halo stone(s), but no metal is generated to "
+                    "hold them: a setting is built only for the primary stone. "
+                    "No halo-setting strategy exists yet."
+                ),
+                parameter="halo",
+            )
+        )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -1015,6 +1172,7 @@ _RULE_GROUPS = (
     _gem_rules,
     _arrangement_rules,
     _family_rules,
+    _halo_rules,
     _prong_rules,
     _bezel_rules,
     _setting_rules,

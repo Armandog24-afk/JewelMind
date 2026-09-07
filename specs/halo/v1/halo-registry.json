@@ -1,0 +1,209 @@
+{
+  "registryVersion": "1.0.0",
+  "compilerVersion": "1.0.0",
+  "generatedFrom": "backend/jewelmind/halo/capability.py::HALO_CAPABILITIES",
+  "note": "Generated from the live registry, never hand-maintained. FOUR INDEPENDENT AXES: representable, composable, stoneGeometry, settingGeometry. Every implemented variant composes and builds real, individually placed, scaled and offset stone geometry for every halo stone; NONE builds the metal that would hold them, because a halo setting is real setter geometry and no sourced professional evidence exists for it. That is why every variant is PARTIAL rather than CURRENT. Nothing here is professionally validated.",
+  "ringCardinality": {
+    "SINGLE": 1,
+    "DOUBLE": 2,
+    "HIDDEN": 1
+  },
+  "composition": {
+    "THREE_STONE": {
+      "namedCenter": true,
+      "originAnchor": true,
+      "note": "A three-stone family derives a CENTER member, so a halo may surround it by name. Anchoring on the origin instead encircles the whole trio."
+    },
+    "TOI_ET_MOI": {
+      "namedCenter": false,
+      "originAnchor": true,
+      "note": "A toi-et-moi has no CENTER member — the pair IS the design — so a halo cannot name one and is refused if it tries. It is supported with centerMemberId=null, which encircles the pair: the two stones straddle the design origin, so an origin-anchored ring surrounds both rather than one."
+    },
+    "CLUSTER": {
+      "namedCenter": true,
+      "originAnchor": true,
+      "note": "A cluster derives a CENTER member when includeCenter is true. A cluster declared without one has no centre to name, and the halo must anchor on the origin."
+    },
+    "CENTER_WITH_ACCENTS": {
+      "namedCenter": true,
+      "originAnchor": true,
+      "note": "The centre-plus-accents family always derives a CENTER member, so centre + accents + halo composes directly."
+    }
+  },
+  "variants": [
+    {
+      "capability": "SINGLE",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": 1,
+      "note": "One ring of stones around a centre, level with it. Every stone is an individually identifiable instance with real placed, scaled and oriented geometry. No metal holds them: only the primary stone receives a setting."
+    },
+    {
+      "capability": "DOUBLE",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": 2,
+      "note": "Two concentric rings, each with its own count, radius, start angle and scale — which is why a halo is not a CENTER_WITH_ACCENTS family, whose single accent parameter set cannot carry two rings. Real stone geometry for every stone in both rings; no halo metal."
+    },
+    {
+      "capability": "HIDDEN",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": 1,
+      "note": "One ring below the centre stone's girdle plane, which is what 'hidden' means structurally. The vertical offset reaches the solid through the arrangement's own transform, so the stones are genuinely lower — verified by measuring the built geometry's bounding box, not by trusting the field. No halo metal."
+    }
+  ],
+  "features": [
+    {
+      "capability": "halo_over_family",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A halo composes onto a compiled family rather than replacing it, so centre + halo, centre + accents + halo, and three-stone + halo are one design each. The centre is resolved by id against the real compiled instances; an unresolvable centre is refused, never re-anchored. Halo stones get geometry; halo metal does not exist."
+    },
+    {
+      "capability": "halo_over_arrangement",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A halo composes onto an explicit arrangement the same way it composes onto a family, so a hand-placed multi-stone centre can carry one. Same stone-geometry and metal boundary."
+    },
+    {
+      "capability": "halo_around_multi_stone_center",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "centerMemberId=null anchors the halo on the design origin, which encircles a multi-stone centre (a toi-et-moi pair, a cluster) rather than one of its stones. What does NOT exist is a halo whose radius follows the combined outline of that centre: the ring is a circle or an ellipse, and no group-outline offset capability exists to make it hug an arbitrary group."
+    },
+    {
+      "capability": "elliptical_halo",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "radiusYMm gives a second semi-axis, so a halo around an oval or marquise centre is an ellipse rather than a circle. A geometric parameter, not a claim that the result suits any particular centre stone."
+    },
+    {
+      "capability": "partial_halo",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "sweepDeg under 360 lays a ring on an arc, with both endpoints included — the same closed-form distinction the arrangement resolver applies to a RADIAL pattern, from the same shared function."
+    },
+    {
+      "capability": "mixed_halo_stone_identities",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A ring may carry its own GemIdentity and an individual stone may override it, resolved through the real Sprint 21 registry. Semantic only, exactly as for a single stone: it never affects geometry."
+    },
+    {
+      "capability": "per_stone_halo_override",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A ring's `members` list overrides individual stones' scale, orientation, gem and placement. Members are matched to positions by sorted id, never by array order, so reordering the list cannot move a stone. It reuses the family's own FamilyMember model rather than declaring a parallel one."
+    },
+    {
+      "capability": "mixed_halo_stone_shapes",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A halo stone's `stoneRef` may name a stone specification other than 'primary', and that reference is preserved and reported. It does not resolve, because JDL carries exactly one `stone` — so such a stone produces no geometry and says so (JM-HALO-004). A compass halo alternating shapes therefore cannot be built yet."
+    },
+    {
+      "capability": "halo_setting_metal",
+      "status": "PLANNED",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "The metal that holds a halo — a shared bezel rail, a row of shared prongs, cut-down bead setting — does not exist. A ring's `settingRef` is carried and reported, and only the primary stone receives a setting. Sprint 23 built the contract a future strategy will use (explicit prong positions carrying servesStoneInstanceIds); SETTING-GOV requires an RFC before a halo setting family is added, and this sprint did not bypass it."
+    },
+    {
+      "capability": "outline_following_halo",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "A halo whose stones follow the centre stone's own girdle outline (a cushion or emerald halo) needs an outline-offset walk that does not exist. An ellipse is offered and is honestly an ellipse."
+    },
+    {
+      "capability": "designer_halo_language",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "Designer proposes flat scalar JDL paths only; neither `family` nor `halo` is in its allow-list, because a provider proposing a nested structure could not be diffed field by field or shown with real provenance. Adding halo alone would advertise a capability families do not have."
+    },
+    {
+      "capability": "professional_halo_rules",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "rings": null,
+      "note": "Minimum halo stone spacing, a centre-to-halo proportion, a settable radius, or whether a hidden halo clears the centre's pavilion. Each needs sourced professional evidence this project does not have, so none exists. Whether two placed stones overlap is a GEOMETRIC fact for Geometry Inspection."
+    }
+  ],
+  "reserved": [
+    {
+      "variant": "compass_halo",
+      "reason": "A compass halo alternates stone SHAPES around the ring (round with marquise or baguette at the cardinals). That requires more than one stone specification in a document, which JDL does not yet carry: `stoneRef` other than 'primary' is preserved and reported unresolved."
+    },
+    {
+      "variant": "cushion_halo",
+      "reason": "A halo following a cushion or emerald outline rather than an ellipse needs stones distributed along the CENTRE STONE'S OWN girdle outline, which means an outline-offset walk the arrangement engine does not have. `radiusYMm` gives an ellipse, and calling an ellipse a cushion halo would misdescribe where every corner stone sits."
+    },
+    {
+      "variant": "floral_halo",
+      "reason": "A floral or petal halo groups halo stones into clusters at intervals rather than distributing them evenly. It is a nested arrangement — a ring of clusters — and the arrangement engine expands one pattern per source, not a pattern of patterns."
+    },
+    {
+      "variant": "pave_halo",
+      "reason": "A pave halo is a surface treatment covering the halo region rather than a set of individually placed stones. It needs the region-fill capability Sprint 24 recorded as absent, and approximating it as a dense ring would misrepresent both the design and its stone count."
+    },
+    {
+      "variant": "triple_halo",
+      "reason": "Three concentric rings are expressible in every respect except the software bound (MAX_HALO_RINGS = 2), which is deliberately set to what is tested rather than to what the arithmetic would tolerate. Raising it is a bound change plus a Golden case, not a redesign."
+    }
+  ]
+}

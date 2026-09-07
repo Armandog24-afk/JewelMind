@@ -1,0 +1,752 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.0,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.0",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 3.2,
+          "yMm": 0.0,
+          "zMm": 0.0,
+          "rotationDeg": 0.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.1",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 2.771281292110204,
+          "yMm": 1.5999999999999999,
+          "zMm": 0.0,
+          "rotationDeg": 30.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.2",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 1.6000000000000005,
+          "yMm": 2.7712812921102037,
+          "zMm": 0.0,
+          "rotationDeg": 60.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.3",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 1.9594348786357652e-16,
+          "yMm": 3.2,
+          "zMm": 0.0,
+          "rotationDeg": 90.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.4",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -1.5999999999999994,
+          "yMm": 2.771281292110204,
+          "zMm": 0.0,
+          "rotationDeg": 120.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.5",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -2.771281292110204,
+          "yMm": 1.5999999999999999,
+          "zMm": 0.0,
+          "rotationDeg": 150.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.6",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -3.2,
+          "yMm": 3.9188697572715305e-16,
+          "zMm": 0.0,
+          "rotationDeg": 180.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.7",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -2.7712812921102037,
+          "yMm": -1.6000000000000005,
+          "zMm": 0.0,
+          "rotationDeg": 210.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.8",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -1.6000000000000014,
+          "yMm": -2.7712812921102032,
+          "zMm": 0.0,
+          "rotationDeg": 240.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.9",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -5.878304635907295e-16,
+          "yMm": -3.2,
+          "zMm": 0.0,
+          "rotationDeg": 270.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.10",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 1.6000000000000005,
+          "yMm": -2.7712812921102037,
+          "zMm": 0.0,
+          "rotationDeg": 300.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.inner.11",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 2.771281292110203,
+          "yMm": -1.6000000000000014,
+          "zMm": 0.0,
+          "rotationDeg": 330.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.22,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.0",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 4.543366366737634,
+          "yMm": 0.7195985391850619,
+          "zMm": 0.0,
+          "rotationDeg": 9.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.1",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 4.098630011266492,
+          "yMm": 2.088356298801915,
+          "zMm": 0.0,
+          "rotationDeg": 27.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.2",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 3.2526911934581184,
+          "yMm": 3.2526911934581184,
+          "zMm": 0.0,
+          "rotationDeg": 45.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.3",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 2.0883562988019153,
+          "yMm": 4.098630011266492,
+          "zMm": 0.0,
+          "rotationDeg": 63.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.4",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.7195985391850622,
+          "yMm": 4.543366366737634,
+          "zMm": 0.0,
+          "rotationDeg": 81.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.5",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -0.7195985391850617,
+          "yMm": 4.543366366737634,
+          "zMm": 0.0,
+          "rotationDeg": 99.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.6",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -2.088356298801915,
+          "yMm": 4.098630011266492,
+          "zMm": 0.0,
+          "rotationDeg": 117.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.7",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -3.252691193458118,
+          "yMm": 3.2526911934581184,
+          "zMm": 0.0,
+          "rotationDeg": 135.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.8",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -4.098630011266492,
+          "yMm": 2.0883562988019153,
+          "zMm": 0.0,
+          "rotationDeg": 153.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.9",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -4.543366366737633,
+          "yMm": 0.7195985391850624,
+          "zMm": 0.0,
+          "rotationDeg": 171.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.10",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -4.543366366737634,
+          "yMm": -0.7195985391850613,
+          "zMm": 0.0,
+          "rotationDeg": 189.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.11",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -4.098630011266492,
+          "yMm": -2.0883562988019144,
+          "zMm": 0.0,
+          "rotationDeg": 207.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.12",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -3.2526911934581193,
+          "yMm": -3.252691193458118,
+          "zMm": 0.0,
+          "rotationDeg": 225.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.13",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -2.0883562988019158,
+          "yMm": -4.098630011266492,
+          "zMm": 0.0,
+          "rotationDeg": 243.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.14",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": -0.7195985391850627,
+          "yMm": -4.543366366737633,
+          "zMm": 0.0,
+          "rotationDeg": 261.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.15",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 0.719598539185061,
+          "yMm": -4.543366366737634,
+          "zMm": 0.0,
+          "rotationDeg": 279.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.16",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 2.0883562988019144,
+          "yMm": -4.098630011266493,
+          "zMm": 0.0,
+          "rotationDeg": 297.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.17",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 3.2526911934581175,
+          "yMm": -3.2526911934581193,
+          "zMm": 0.0,
+          "rotationDeg": 315.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.18",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 4.098630011266492,
+          "yMm": -2.0883562988019158,
+          "zMm": 0.0,
+          "rotationDeg": 333.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    },
+    {
+      "instanceId": "halo.outer.19",
+      "stoneRef": "primary",
+      "role": "HALO",
+      "placement": {
+        "mode": "EXPLICIT",
+        "frame": "DESIGN_ORIGIN",
+        "transform": {
+          "xMm": 4.543366366737633,
+          "yMm": -0.719598539185063,
+          "zMm": 0.0,
+          "rotationDeg": 351.0
+        },
+        "groupId": null
+      },
+      "overrides": {
+        "scale": 0.16,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null
+    }
+  ],
+  "groups": [],
+  "patterns": [],
+  "relations": [
+    {
+      "relationId": "halo.inner.concentric",
+      "kind": "CONCENTRIC_WITH",
+      "members": [
+        "center",
+        "halo.inner.0"
+      ],
+      "note": "Halo ring 'halo.inner' is concentric with the centre stone 'center'."
+    },
+    {
+      "relationId": "halo.outer.concentric",
+      "kind": "CONCENTRIC_WITH",
+      "members": [
+        "center",
+        "halo.outer.0"
+      ],
+      "note": "Halo ring 'halo.outer' is concentric with the centre stone 'center'."
+    }
+  ]
+}

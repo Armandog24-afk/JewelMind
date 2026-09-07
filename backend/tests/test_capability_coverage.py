@@ -306,6 +306,8 @@ def test_coverage_spans_the_expected_domains():
         "arrangement",
         # Sprint 24.
         "family",
+        # Sprint 25.
+        "halo",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"
@@ -400,6 +402,45 @@ def test_no_family_claims_a_setting_it_does_not_build():
     assert keys[("family", "per_member_setting")]["status"] == "PLANNED"
     assert keys[("family", "family_aware_head")]["status"] == "PLANNED"
     assert keys[("family", "professional_family_rules")]["status"] == "PLANNED"
+
+
+def test_halo_capabilities_match_the_live_registry():
+    """A halo variant capability must be backed by a real compiler, and the
+    cross-product registry must agree with the halo registry (Sprint 25)."""
+
+    from jewelmind.halo.capability import HALO_CAPABILITIES
+    from jewelmind.halo.compile import halo_variants
+
+    keys = _by_key()
+    assert set(HALO_CAPABILITIES) == set(halo_variants())
+    for name, entry in HALO_CAPABILITIES.items():
+        recorded = keys[("halo", f"halo_{name.lower()}")]
+        assert recorded["status"] == entry.status, name
+        # PARTIAL everywhere, because halo stone geometry is real and halo
+        # METAL is not.
+        assert recorded["status"] == "PARTIAL", name
+
+
+def test_no_halo_claims_a_setting_it_does_not_build():
+    from jewelmind.halo.capability import halo_variants_with_setting_geometry
+
+    keys = _by_key()
+    assert halo_variants_with_setting_geometry() == ()
+    assert keys[("halo", "halo_setting_metal")]["status"] == "PLANNED"
+    assert keys[("halo", "outline_following_halo")]["status"] == "PLANNED"
+    assert keys[("halo", "professional_halo_rules")]["status"] == "PLANNED"
+    assert keys[("halo", "designer_halo_language")]["status"] == "PLANNED"
+
+
+def test_the_reserved_halo_rows_no_longer_call_a_halo_a_family():
+    """Two pre-Sprint-25 rows described a halo as a reserved FAMILY name and as
+    needing an RFC. Both were true then and neither is now, so both were
+    corrected rather than left to contradict the live registry."""
+
+    keys = _by_key()
+    assert keys[("ring_family", "halo")]["status"] == "OUT_OF_SCOPE"
+    assert "not a family" in keys[("ring_family", "halo")]["note"].lower()
+    assert keys[("stone_arrangement", "halo")]["status"] == "PARTIAL"
 
 
 def test_multi_stone_stone_geometry_is_now_claimed_honestly():

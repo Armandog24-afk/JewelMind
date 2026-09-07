@@ -1,0 +1,22 @@
+{
+  "variant": "SINGLE",
+  "rings": [
+    {
+      "ringId": "halo.inner",
+      "count": 14,
+      "radiusMm": 3.3,
+      "radiusYMm": null,
+      "startAngleDeg": 0.0,
+      "sweepDeg": 360.0,
+      "zOffsetMm": 0.0,
+      "memberScale": 0.2,
+      "alignToRadius": true,
+      "stoneRef": "primary",
+      "gem": null,
+      "settingRef": null,
+      "members": []
+    }
+  ],
+  "centerMemberId": "center",
+  "label": "Three-stone with a halo around the centre"
+}

@@ -88,19 +88,24 @@ professional question, and no spacing threshold is invented.
 
 ### Reserved families — PLANNED
 
-`halo` (already expressible as `CENTER_WITH_ACCENTS`), `pave` (needs region
-fill, not individual placement), `eternity` (needs placement along the shank's
-own path — Shank territory), `bypass` (a shank capability), `channel_row`
-(needs the rails Sprint 23 recorded as PLANNED). Each reason is recorded in
-`RESERVED_FAMILY_TYPES`, and none is a `FamilyType` member, so a caller naming
-one is refused rather than given something else.
+`pave` (needs region fill, not individual placement), `eternity` (needs
+placement along the shank's own path — Shank territory), `bypass` (a shank
+capability), `channel_row` (needs the rails Sprint 23 recorded as PLANNED). Each
+reason is recorded in `RESERVED_FAMILY_TYPES`, and none is a `FamilyType`
+member, so a caller naming one is refused rather than given something else.
+
+`halo` was reserved here in Sprint 24 and no longer is: Sprint 25 established
+that a halo is not a family but a composable structure, implemented as
+`jewelmind.halo` with `FamilyType` unchanged. See
+[`../27-halo/halo-rfc.md`](../27-halo/halo-rfc.md).
 
 ## What was deliberately not done
 
 - **No accent setting invented.** A prong placed by guesswork at each side
   stone would look like support and would be setter geometry nobody sourced.
 - **No fifth family for a halo.** Two ways to express one design eventually
-  compile differently.
+  compile differently. Sprint 25 kept that constraint while implementing a
+  halo: it is a composable structure beside `family`, not inside it.
 - **No radial pattern for a scaled ring.** A pattern's members inherit their
   source's overrides, so routing accents through one silently dropped their
   scale. The ring is placed explicitly, with the resolver's own arithmetic.
