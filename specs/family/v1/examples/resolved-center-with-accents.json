@@ -1,0 +1,170 @@
+{
+  "instances": [
+    {
+      "instanceId": "accent.0",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": 4.8,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.0"
+    },
+    {
+      "instanceId": "accent.1",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": 2.4,
+        "yMm": 4.156922,
+        "zMm": 0.0,
+        "rotationDeg": 60.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.1"
+    },
+    {
+      "instanceId": "accent.2",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": -2.4,
+        "yMm": 4.156922,
+        "zMm": 0.0,
+        "rotationDeg": 120.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.2"
+    },
+    {
+      "instanceId": "accent.3",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": -4.8,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 180.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.3"
+    },
+    {
+      "instanceId": "accent.4",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": -2.4,
+        "yMm": -4.156922,
+        "zMm": 0.0,
+        "rotationDeg": 240.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.4"
+    },
+    {
+      "instanceId": "accent.5",
+      "stoneRef": "primary",
+      "role": "ACCENT",
+      "transform": {
+        "xMm": 2.4,
+        "yMm": -4.156922,
+        "zMm": 0.0,
+        "rotationDeg": 300.0
+      },
+      "overrides": {
+        "scale": 0.3,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.accent.5"
+    },
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference"
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "accents.concentric",
+      "kind": "CONCENTRIC_WITH",
+      "members": [
+        "accent.0",
+        "center"
+      ],
+      "note": "Accents are concentric with the centre stone."
+    }
+  ],
+  "arrangementFingerprint": "c035dd70ce6cec7e",
+  "resolverVersion": "1.0.0",
+  "instanceCount": 7,
+  "generatedCount": 7,
+  "patternExpandedCount": 0,
+  "notes": [
+    "7 stone instances were generated. A setting is built only for the primary instance: no accent-setting strategy exists yet. See docs/bible/26-multi-stone-families/execution-boundary.md."
+  ]
+}

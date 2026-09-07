@@ -16,12 +16,14 @@ import cadquery as cq
 
 from jewelmind.arrangement.compile import compile_arrangement
 from jewelmind.domain.schema import JewelryDefinition
+from jewelmind.family.effective import effective_arrangement
 from jewelmind.geometry.components.band import build_ring_band
 from jewelmind.geometry.components.basket import build_basket_support
 from jewelmind.geometry.components.stone import build_stone_reference
 from jewelmind.geometry.constants import GENERATOR_VERSION
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent, GeneratedModel
 from jewelmind.geometry.setting_adapter import setting_definition_from_jdl
+from jewelmind.geometry.stone.placement import stone_components
 from jewelmind.setting.dispatch import generate_setting
 from jewelmind.setting.head import HEAD_COMPONENT
 from jewelmind.utils.hashing import definition_hash, geometry_hash
@@ -71,6 +73,11 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
     band = build_ring_band(definition)
     stone = build_stone_reference(definition)
 
+    # THE EFFECTIVE ARRANGEMENT (Sprint 24). A family compiles into one; a
+    # document may also declare one directly. Both routes end here, so there is
+    # exactly one placement authority and a family can never disagree with it.
+    arrangement_result = compile_arrangement(effective_arrangement(definition))
+
     setting_definition = setting_definition_from_jdl(definition, stone)
     # The stone SHAPE is passed as an argument, never stored on the setting
     # contract, and only so seat relief can cut against the real generated
@@ -107,10 +114,18 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         warnings.extend(component.warnings)
     warnings.extend(fuse_warnings)
 
-    components: dict[str, GeneratedComponent] = {
-        "band": band,
-        "stone_reference": stone,
-    }
+    components: dict[str, GeneratedComponent] = {"band": band}
+
+    # STONE COMPONENTS, one per generated instance (Sprint 24).
+    #
+    # With no arrangement there is exactly one: the historical
+    # `stone_reference`, returned by the identity placement path so its solid is
+    # the same object the builder produced. With an arrangement or a family,
+    # each generated instance gets its own placed copy, named for the instance
+    # it came from.
+    for name, component in stone_components(stone, arrangement_result).items():
+        components[name] = component
+
     components.update(setting_components)
     components["basket_support"] = basket
 
@@ -127,9 +142,9 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         bounding_box=full_bbox,
         warnings=warnings,
         setting_result=setting_result,
-        # Sprint 22. Compiled here rather than in `ModelService` so the
-        # arrangement outcome travels with the geometry it describes, exactly
-        # like `setting_result`. `None` in, `None` out: a design with no
-        # arrangement is unchanged.
-        arrangement_result=compile_arrangement(definition.arrangement),
+        # Sprint 22, extended in Sprint 24 to cover a compiled family. Carried
+        # on the model so the arrangement outcome travels with the geometry it
+        # describes, exactly like `setting_result`. `None` in, `None` out: a
+        # design with neither a family nor an arrangement is unchanged.
+        arrangement_result=arrangement_result,
     )

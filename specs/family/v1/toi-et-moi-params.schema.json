@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/family/v1/toi-et-moi-params.schema.json",
+  "title": "ToiEtMoiParams",
+  "additionalProperties": false,
+  "description": "Two stones set side by side as a deliberate pair.\n\nA DISTINCT FAMILY, not a two-element list. The pair is the design: the two\nstones face each other across the design axis, and the relationship between\nthem is the thing a consumer needs to preserve when either one is edited.",
+  "properties": {
+    "kind": {
+      "const": "TOI_ET_MOI",
+      "default": "TOI_ET_MOI",
+      "title": "Kind",
+      "type": "string"
+    },
+    "separationMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 200.0,
+      "title": "Separationmm",
+      "type": "number"
+    },
+    "axisAngleDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Axisangledeg",
+      "type": "number"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    }
+  },
+  "required": [
+    "separationMm"
+  ],
+  "type": "object"
+}

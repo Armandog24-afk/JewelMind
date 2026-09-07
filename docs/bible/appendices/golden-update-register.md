@@ -69,6 +69,11 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `STV2-014-oval-cabochon-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — oval 8 x 6 with a CABOCHON_REFERENCE profile | Sprint 20 milestone | 2026-09-02 |
 | `STV2-015-custom-outline-bezel` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — CUSTOM_OUTLINE source through the generic bezel interface | Sprint 20 milestone | 2026-09-02 |
 | `STV2-016-measured-oval-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — MEASURED source, MEASURED_DIMENSION_REFERENCE geometry | Sprint 20 milestone | 2026-09-02 |
+| `FAM-001-three-stone-symmetric` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 3 stone components, centre plus two mirrored sides at 0.6 scale via the arrangement MIRROR pattern | Sprint 24 milestone | 2026-09-07 |
+| `FAM-002-three-stone-mixed-gems` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 3 stone components, explicit placement, per-member scales 0.55/0.45, three declared gems | Sprint 24 milestone | 2026-09-07 |
+| `FAM-003-toi-et-moi-diagonal` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 2 equal stone components on a 30° axis, placed by point reflection | Sprint 24 milestone | 2026-09-07 |
+| `FAM-004-cluster-eight` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 9 stone components, closed-form ring arithmetic, memberScale 0.35 | Sprint 24 milestone | 2026-09-07 |
+| `FAM-005-center-with-accents` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 7 stone components, accentScale 0.3 reaching geometry | Sprint 24 milestone | 2026-09-07 |
 
 ### Sprint 19: the six non-round prong-placement acceptances
 
@@ -130,6 +135,41 @@ has no derived outline, so both setting families refuse them and no ring can be
 assembled. Their geometry is covered by unit tests and by real import vectors
 instead. See
 [`../22-stone-v2/stone-v2-golden-strategy.md`](../22-stone-v2/stone-v2-golden-strategy.md).
+
+### Sprint 24: five new multi-stone family cases, zero baseline updates
+
+All five are `INITIAL_BASELINE` creations. **No existing baseline was modified**
+— all 39 pre-existing cases reverified unchanged, including the exact-equality
+guards (`combined_metal_volume_mm3 == 341.44334316909976`, prong volume
+`== 29.650351464580467`, round stone volume `== 58.22141924499569`). That is the
+evidence for ARRANGE-GOV-013's requirement that a design declaring no family and
+no arrangement generate byte-identical geometry to its pre-Sprint-22 self: the
+new per-instance placement path is reached only when an arrangement exists, and
+the identity-placement path returns the builder's own solid object.
+
+Created through the sanctioned path: `design.json` written from a real validated
+definition, registered in `manifest.json`, then `generate-candidate` → `diff`
+(reviewed per case) → `accept --reason` with the per-case reason recorded in the
+table above, transient `candidate.json` removed, and a full `verify-all` re-run.
+Nothing was hand-authored.
+
+**Every one of the five records the same real limitation**, in its own
+`knownLimitations`:
+
+> `SETTING_COVERAGE_PRIMARY_ONLY`: a stone solid is built for every family
+> member, but a setting is built only for the primary instance. The additional
+> stones are placed reference geometry with no metal holding them.
+
+The baselines therefore lock in what actually exists — nine stone solids in a
+cluster, one setting — rather than a shape the pipeline does not yet produce. An
+accent-setting strategy is an RFC, identified explicitly in
+[`../26-multi-stone-families/execution-boundary.md`](../26-multi-stone-families/execution-boundary.md)
+rather than approximated here.
+
+**The metal body is identical in all five cases** (band `250.991683`, head
+`83.155758`, prongs `29.650351`, one fully-connected production group), which is
+the geometric proof that additional stone references never reach a metal fuse
+(LAW-006, ATLAS-GOV-011).
 
 ## How a future entry gets added
 

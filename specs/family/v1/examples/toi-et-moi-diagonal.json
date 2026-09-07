@@ -1,0 +1,11 @@
+{
+  "familyType": "TOI_ET_MOI",
+  "params": {
+    "kind": "TOI_ET_MOI",
+    "separationMm": 5.2,
+    "axisAngleDeg": 30.0,
+    "symmetry": "SYMMETRIC"
+  },
+  "members": [],
+  "label": "Toi-et-moi on a diagonal"
+}

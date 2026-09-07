@@ -1117,20 +1117,47 @@ class TestCompilationBoundary:
         assert instance.componentName == PRIMARY_STONE_COMPONENT == "stone_reference"
         assert compiled.generatedCount == 1
 
-    def test_additional_instances_are_reported_not_generated_with_a_reason(self):
+    def test_every_instance_resolving_the_primary_stone_is_generated(self):
+        """Sprint 22 generated one instance and reported the rest; Sprint 24
+        builds real geometry for all of them.
+
+        The remaining limitation is a SETTING for a non-primary instance, which
+        is reported on the model rather than per instance — a stone that exists
+        but is unheld is a different fact from a stone that was never built.
+        """
+
         compiled = compile_arrangement(halo(4))
         assert compiled is not None
         assert compiled.instanceCount == 5
+        assert compiled.generatedCount == 5
+        for instance in compiled.instances:
+            assert instance.generationStatus == "GENERATED"
+            assert instance.componentName
+            assert instance.generationNote is None
+        # The setting limitation is stated once, on the model.
+        assert any("setting is built" in note for note in compiled.notes)
+
+    def test_an_instance_naming_another_stone_is_still_not_generated(self):
+        """Only `primary` resolves: JDL carries exactly one `stone`."""
+
+        compiled = compile_arrangement(
+            ArrangementDefinition(
+                instances=[
+                    StoneInstanceDef(instanceId="center"),
+                    StoneInstanceDef(
+                        instanceId="accent", role="ACCENT", stoneRef="secondary"
+                    ),
+                ]
+            )
+        )
+        assert compiled is not None
         assert compiled.generatedCount == 1
         ungenerated = [
             i for i in compiled.instances if i.generationStatus == "NOT_GENERATED"
         ]
-        assert len(ungenerated) == 4
-        for instance in ungenerated:
-            # Never silently dropped, and never given a placeholder component.
-            assert instance.componentName is None
-            assert instance.generationNote
-            assert "PARTIAL" in instance.generationNote
+        assert len(ungenerated) == 1
+        assert ungenerated[0].componentName is None
+        assert "secondary" in (ungenerated[0].generationNote or "")
 
     def test_an_ungenerated_instance_cannot_be_constructed_without_a_reason(self):
         """Enforced by the model, so no code path can omit the explanation."""
@@ -1187,12 +1214,22 @@ class TestCompilationBoundary:
         for definition in (forward, reverse):
             compiled = compile_arrangement(definition)
             assert compiled is not None
-            generated = [
-                i for i in compiled.instances if i.generationStatus == "GENERATED"
+            # Both instances are built (Sprint 24), but only one is PRIMARY —
+            # and which one must not depend on list order, because the primary
+            # instance is the one that keeps the historical component name and
+            # receives the setting.
+            primary = [
+                i
+                for i in compiled.instances
+                if i.componentName == PRIMARY_STONE_COMPONENT
             ]
-            assert [i.instanceId for i in generated] == ["middle"]
+            assert [i.instanceId for i in primary] == ["middle"]
 
-    def test_an_arrangement_with_no_center_still_builds_one_stone(self):
+    def test_an_arrangement_with_no_center_still_picks_a_primary(self):
+        """Every instance is built; the lowest id becomes the primary one, so
+        the historical component name is assigned deterministically even when
+        no instance claims the CENTER role."""
+
         compiled = compile_arrangement(
             ArrangementDefinition(
                 instances=[
@@ -1202,8 +1239,11 @@ class TestCompilationBoundary:
             )
         )
         assert compiled is not None
-        generated = [i for i in compiled.instances if i.generationStatus == "GENERATED"]
-        assert [i.instanceId for i in generated] == ["a"]
+        assert compiled.generatedCount == 2
+        primary = [
+            i for i in compiled.instances if i.componentName == PRIMARY_STONE_COMPONENT
+        ]
+        assert [i.instanceId for i in primary] == ["a"]
 
     def test_an_instance_with_an_unresolvable_stone_reports_that_specifically(self):
         """A reader must tell "the pipeline cannot yet" from "your document is
@@ -1305,29 +1345,63 @@ class TestCapabilityRegistry:
                 assert entry.resolvable, name
 
     def test_multi_stone_geometry_is_reported_partial_not_current(self):
+        """Sprint 22 had it PARTIAL because no stone was built for an extra
+        instance. Sprint 24 builds them all, and it is STILL PARTIAL — for a
+        different and now-narrower reason: a setting is generated only for the
+        primary instance, so a stone can exist without being held.
+        """
+
         entry = ARRANGEMENT_CAPABILITIES["multi_stone_geometry"]
         assert entry.status == "PARTIAL"
         assert entry.representable is True
         assert entry.resolvable is True
-        assert entry.generatable is False
+        # Stone geometry does now run.
+        assert entry.generatable is True
+        assert "SETTING is generated only for the primary" in entry.note
 
     def test_no_capability_claims_generation_it_does_not_have(self):
-        """Only the stone-instance capability generates geometry today, and it
-        does so as the single existing `stone_reference` component."""
+        """Sprint 24 widened this set, so it is asserted exactly rather than
+        loosened: every placement and pattern kind now builds real geometry,
+        and nothing else does.
 
-        assert generatable_capabilities() == ["stone_instance"]
+        The PLANNED capabilities are excluded by construction — a capability
+        that is not representable cannot be generatable.
+        """
+
+        assert generatable_capabilities() == [
+            "explicit_placement",
+            "group",
+            "instance_overrides",
+            "linear_pattern",
+            "mirror_pattern",
+            "multi_stone_geometry",
+            "radial_pattern",
+            "stone_instance",
+        ]
+        for name in ("constraint_solving", "path_pattern", "relationships"):
+            assert not ARRANGEMENT_CAPABILITIES[name].generatable, name
 
     def test_solver_and_professional_rules_are_planned_and_unrepresentable(self):
         for name in (
             "constraint_solving",
             "professional_arrangement_rules",
-            "arrangement_collision_checking",
             "full_3d_instance_orientation",
             "path_pattern",
         ):
             entry = ARRANGEMENT_CAPABILITIES[name]
             assert entry.status == "PLANNED", name
             assert entry.representable is False, name
+
+    def test_collision_checking_reports_facts_without_interpreting_them(self):
+        """Sprint 24 made multi-stone geometry real, so Inspection now reports
+        stone-to-stone intersections. It moved to PARTIAL rather than CURRENT
+        because no RULE interprets those facts — whether an overlap is
+        acceptable is a professional question, and no threshold is invented."""
+
+        entry = ARRANGEMENT_CAPABILITIES["arrangement_collision_checking"]
+        assert entry.status == "PARTIAL"
+        assert entry.representable is False
+        assert "no spacing threshold is invented" in entry.note
 
     def test_full_3d_orientation_is_genuinely_not_representable(self):
         """Not merely documented as planned — the model has no field for it.
@@ -1389,25 +1463,33 @@ class TestBackwardCompatibility:
         assert arranged.arrangement_result is not None
         assert arranged.arrangement_result.generatedCount == 1
 
-    def test_a_halo_arrangement_does_not_add_a_component_yet(self):
-        """The honest boundary, asserted rather than described.
+    def test_a_halo_arrangement_now_adds_real_stone_components(self):
+        """Sprint 22 asserted that it did not, which was true then.
 
-        No placeholder solid is emitted to make a count match.
+        Sprint 24 made per-instance stone geometry real, so a nine-instance halo
+        produces nine stone components. Asserted as real solids, not merely as
+        names, so a placeholder could not satisfy this.
         """
 
         from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
+        from jewelmind.geometry.roles import geometry_role
 
         definition = default_definition()
         definition.arrangement = halo(8)
         model = build_solitaire_ring(definition)
-        assert sorted(model.components) == [
-            "band",
-            "basket_support",
-            "prongs",
-            "stone_reference",
-        ]
+
+        stones = sorted(
+            n for n in model.components if geometry_role(n) == "stone_reference"
+        )
+        assert len(stones) == 9
+        assert PRIMARY_STONE_COMPONENT in stones
+        for name in stones:
+            component = model.components[name]
+            assert len(component.shape.Solids()) == 1, name
+            assert component.volume_mm3 > 0.0, name
+
         assert model.arrangement_result.instanceCount == 9
-        assert model.arrangement_result.generatedCount == 1
+        assert model.arrangement_result.generatedCount == 9
 
     def test_an_arranged_model_still_excludes_the_stone_from_production(self):
         from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring

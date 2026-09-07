@@ -93,46 +93,51 @@ ARRANGEMENT_CAPABILITIES: dict[str, ArrangementCapabilityEntry] = {
             "CURRENT",
             True,
             True,
-            False,
+            True,
             "An instance placed by explicit XYZ plus a vertical-axis rotation. "
-            "Resolved exactly; a non-zero XY offset is not yet built, because the "
-            "current stone builder places one stone on the design axis.",
+            "Sprint 24: the offset now reaches geometry — "
+            "geometry/stone/instance.py applies each resolved instance's own "
+            "transform, so a displaced stone is genuinely displaced.",
         ),
         _entry(
             "group",
             "CURRENT",
             True,
             True,
-            False,
+            True,
             "Named groups with their own origin; a member's placement composes with "
-            "the group transform during resolution.",
+            "the group transform during resolution, and the composed position "
+            "reaches geometry (Sprint 24).",
         ),
         _entry(
             "linear_pattern",
             "CURRENT",
             True,
             True,
-            False,
+            True,
             "count/spacing/direction, optionally centred on the anchor. Expanded to "
-            "explicit member placements by closed-form evaluation.",
+            "explicit member placements by closed-form evaluation, and every member "
+            "builds a real stone solid (Sprint 24).",
         ),
         _entry(
             "radial_pattern",
             "CURRENT",
             True,
             True,
-            False,
+            True,
             "count/radius/startAngle/sweep, optionally aligning each member to its "
-            "radius. Expanded by closed-form evaluation.",
+            "radius. Expanded by closed-form evaluation, and every member builds a "
+            "real stone solid (Sprint 24).",
         ),
         _entry(
             "mirror_pattern",
             "CURRENT",
             True,
             True,
-            False,
+            True,
             "One reflected copy across the YZ or XZ plane, flipping a chiral stone's "
-            "own orientation.",
+            "own orientation. The reflected member builds a real stone solid "
+            "(Sprint 24).",
         ),
         _entry(
             "relative_placement",
@@ -159,21 +164,24 @@ ARRANGEMENT_CAPABILITIES: dict[str, ArrangementCapabilityEntry] = {
             "PARTIAL",
             True,
             True,
-            False,
-            "The arrangement resolves every instance, and the compilation boundary "
-            "reports each one's generation status. The current pipeline emits ONE stone "
-            "component, so additional instances are reported NOT_GENERATED with a "
-            "reason. See docs/bible/24-arrangement/execution-boundary.md.",
+            True,
+            "Sprint 24: every instance resolving the primary stone builds a real "
+            "stone solid, named stone_reference.<instanceId> and inspected as a "
+            "stone. STILL PARTIAL because a SETTING is generated only for the "
+            "primary instance — no accent-setting strategy exists, and inventing "
+            "one would mean inventing setter geometry. See "
+            "docs/bible/26-multi-stone-families/execution-boundary.md.",
         ),
         _entry(
             "instance_overrides",
-            "PARTIAL",
+            "CURRENT",
             True,
             True,
-            False,
-            "scale and orientationDeg are representable and carried through resolution. "
-            "Neither is applied to geometry yet, because doing so requires the "
-            "multi-stone emission path.",
+            True,
+            "Sprint 24: scale and orientationDeg now reach geometry. Scale is applied "
+            "about the stone's own centre (scaling about the global origin would drop "
+            "a stone sitting above the band) and orientation spins it about its own "
+            "axis rather than swinging it around the design axis.",
         ),
         _entry(
             "per_instance_gem",
@@ -215,13 +223,15 @@ ARRANGEMENT_CAPABILITIES: dict[str, ArrangementCapabilityEntry] = {
         ),
         _entry(
             "arrangement_collision_checking",
-            "PLANNED",
+            "PARTIAL",
             False,
             False,
             False,
-            "Whether two placed stones overlap is a GEOMETRIC fact, answerable only by "
-            "Geometry Inspection once multi-stone geometry exists. No spacing rule is "
-            "invented here.",
+            "Sprint 24: multi-stone geometry exists, so Geometry Inspection now "
+            "reports pairwise intersections between stone components as the "
+            "geometric facts they are. PARTIAL because no rule INTERPRETS those "
+            "facts: whether an overlap is acceptable is a professional question, "
+            "and no spacing threshold is invented here.",
         ),
         _entry(
             "professional_arrangement_rules",

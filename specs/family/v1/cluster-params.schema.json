@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/family/v1/cluster-params.schema.json",
+  "title": "ClusterParams",
+  "additionalProperties": false,
+  "description": "Stones grouped around a common structure.\n\nNOT NECESSARILY CIRCULAR. `sweepDeg` under 360 lays the cluster on an arc,\nand `radiusYMm` makes it elliptical, so an oval or crescent cluster is a\nparameter change rather than a new family.",
+  "properties": {
+    "kind": {
+      "const": "CLUSTER",
+      "default": "CLUSTER",
+      "title": "Kind",
+      "type": "string"
+    },
+    "count": {
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Count",
+      "type": "integer"
+    },
+    "radiusMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 200.0,
+      "title": "Radiusmm",
+      "type": "number"
+    },
+    "radiusYMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 200.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radiusymm"
+    },
+    "startAngleDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Startangledeg",
+      "type": "number"
+    },
+    "sweepDeg": {
+      "default": 360.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 360.0,
+      "title": "Sweepdeg",
+      "type": "number"
+    },
+    "includeCenter": {
+      "default": true,
+      "title": "Includecenter",
+      "type": "boolean"
+    },
+    "memberScale": {
+      "default": 0.4,
+      "exclusiveMinimum": 0.01,
+      "maximum": 10.0,
+      "title": "Memberscale",
+      "type": "number"
+    },
+    "alignToRadius": {
+      "default": true,
+      "title": "Aligntoradius",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "count",
+    "radiusMm"
+  ],
+  "type": "object"
+}

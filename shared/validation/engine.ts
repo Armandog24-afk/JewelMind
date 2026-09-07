@@ -627,6 +627,118 @@ function settingV2Rules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/**
+ * Multi-stone family validation (Sprint 24).
+ *
+ * A DELIBERATE SUBSET of `_family_rules`, and the boundary is where the
+ * compiler is. The frontend checks what it can see locally — one placement
+ * authority, valid roles and cardinality, resolvable references — and does NOT
+ * reimplement family compilation, so `JM-FAMILY-003` (does it compile?) and
+ * `JM-FAMILY-005` (the setting-coverage notice) are backend-only.
+ *
+ * A second local compiler would eventually disagree with the real one, and the
+ * backend's verdict always wins (FORGE-GOV-004).
+ */
+const FAMILY_ROLE_RULES: Record<string, Record<string, number | null>> = {
+  THREE_STONE: { CENTER: 1, SIDE: 2 },
+  TOI_ET_MOI: { SIDE: 2 },
+  CLUSTER: { CENTER: null, ACCENT: null },
+  CENTER_WITH_ACCENTS: { CENTER: 1, ACCENT: null },
+}
+
+function familyRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const family = d.family
+
+  if (family === null || family === undefined) {
+    return out
+  }
+
+  if (d.arrangement !== null && d.arrangement !== undefined) {
+    out.push({
+      ruleId: RULE_IDS.FAMILY_SINGLE_PLACEMENT_AUTHORITY,
+      severity: 'error',
+      message:
+        'This design declares both a family and an explicit arrangement. A ' +
+        'family compiles into an arrangement, so only one may be present: ' +
+        "remove the arrangement to keep the family's semantics, or remove the " +
+        'family for full manual control.',
+      parameter: 'family',
+    })
+    // The conflict must be resolved before anything else is meaningful, and a
+    // second derived failure would obscure the real one.
+    return out
+  }
+
+  const rules = FAMILY_ROLE_RULES[family.familyType] ?? {}
+  const counts: Record<string, number> = {}
+  for (const member of family.members) {
+    counts[member.role] = (counts[member.role] ?? 0) + 1
+  }
+
+  for (const role of Object.keys(counts).sort()) {
+    if (!(role in rules)) {
+      out.push({
+        ruleId: RULE_IDS.FAMILY_ROLES_VALID,
+        severity: 'error',
+        message:
+          `Role '${role}' is not part of a ${family.familyType} family. ` +
+          `Accepted roles: ${Object.keys(rules).sort().join(', ')}.`,
+        parameter: 'family.members',
+      })
+      continue
+    }
+    const expected = rules[role]
+    if (
+      expected !== null &&
+      expected !== undefined &&
+      counts[role] !== expected &&
+      family.members.length > 0
+    ) {
+      out.push({
+        ruleId: RULE_IDS.FAMILY_ROLES_VALID,
+        severity: 'error',
+        message:
+          `A ${family.familyType} family requires exactly ${expected} ` +
+          `member(s) with role '${role}', found ${counts[role]}.`,
+        parameter: 'family.members',
+      })
+    }
+  }
+
+  for (const member of family.members) {
+    if (member.stoneRef !== 'primary') {
+      out.push({
+        ruleId: RULE_IDS.FAMILY_REFERENCES_RESOLVE,
+        severity: 'warning',
+        message:
+          `Family member '${member.memberId}' references stone ` +
+          `'${member.stoneRef}', but this definition declares only the primary ` +
+          'stone. No geometry will be built for that member.',
+        parameter: 'family.members',
+      })
+    }
+    if (
+      member.settingRef !== null &&
+      member.settingRef !== undefined &&
+      member.settingRef !== d.setting.type
+    ) {
+      out.push({
+        ruleId: RULE_IDS.FAMILY_REFERENCES_RESOLVE,
+        severity: 'warning',
+        message:
+          `Family member '${member.memberId}' requests setting ` +
+          `'${member.settingRef}', but this design's setting is ` +
+          `'${d.setting.type}'. Per-member settings are not generated: only ` +
+          'the primary stone receives one.',
+        parameter: 'family.members',
+      })
+    }
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -634,6 +746,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...stoneRules(definition),
     ...gemRules(definition),
     ...arrangementRules(definition),
+    ...familyRules(definition),
     ...prongRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),

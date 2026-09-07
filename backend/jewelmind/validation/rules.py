@@ -92,3 +92,19 @@ ARRANGEMENT_STONE_REFERENCE_RESOLVES = "JM-ARRANGE-003"
 ARRANGEMENT_STRUCTURE_RESOLVES = "JM-ARRANGE-004"
 ARRANGEMENT_ROLE_COHERENT = "JM-ARRANGE-005"
 ARRANGEMENT_GENERATION_PARTIAL = "JM-ARRANGE-006"
+
+# Sprint 24 — FAMILY_ONLY. Structural and referential checks on a multi-stone
+# family: does the document declare one authority or two, do the roles match
+# the family's own rules, does the family compile, and do its references
+# resolve.
+#
+# NONE is a professional or jewelry claim. There is deliberately no rule about
+# centre-to-accent proportion, minimum stone spacing, whether a cluster is
+# settable, or how many stones a design should carry — each needs sourced
+# professional evidence this project does not have. Whether two placed stones
+# overlap is a GEOMETRIC fact for Geometry Inspection.
+FAMILY_SINGLE_PLACEMENT_AUTHORITY = "JM-FAMILY-001"
+FAMILY_ROLES_VALID = "JM-FAMILY-002"
+FAMILY_COMPILES = "JM-FAMILY-003"
+FAMILY_REFERENCES_RESOLVE = "JM-FAMILY-004"
+FAMILY_SETTING_COVERAGE = "JM-FAMILY-005"

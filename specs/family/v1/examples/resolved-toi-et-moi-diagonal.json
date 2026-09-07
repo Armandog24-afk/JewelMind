@@ -1,0 +1,65 @@
+{
+  "instances": [
+    {
+      "instanceId": "side.left",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": -2.251666,
+        "yMm": -1.3,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference"
+    },
+    {
+      "instanceId": "side.right",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": 2.251666,
+        "yMm": 1.3,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": 180.0
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.side.right"
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "toi-et-moi.pair",
+      "kind": "MIRRORED_PAIR",
+      "members": [
+        "side.left",
+        "side.right"
+      ],
+      "note": "Symmetric toi-et-moi: the pair is a point reflection through the design centre, with the second stone's orientation flipped so the two face each other."
+    }
+  ],
+  "arrangementFingerprint": "305e849e744ed011",
+  "resolverVersion": "1.0.0",
+  "instanceCount": 2,
+  "generatedCount": 2,
+  "patternExpandedCount": 0,
+  "notes": [
+    "2 stone instances were generated. A setting is built only for the primary instance: no accent-setting strategy exists yet. See docs/bible/26-multi-stone-families/execution-boundary.md."
+  ]
+}

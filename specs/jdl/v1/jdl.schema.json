@@ -994,6 +994,580 @@
         "title": "JdlStoneMeasurement",
         "type": "object"
       }
+    },
+    "familyDefs": {
+      "CenterWithAccentsParams": {
+        "additionalProperties": false,
+        "description": "The general centre-plus-accents family.\n\nDeliberately the LEAST specialized of the four: it exists so a design that\nis neither a strict three-stone nor a cluster still has a semantic home,\nrather than forcing one of the others to stretch. Accents are placed on an\narc by the same closed-form evaluation a cluster uses.",
+        "properties": {
+          "kind": {
+            "const": "CENTER_WITH_ACCENTS",
+            "default": "CENTER_WITH_ACCENTS",
+            "title": "Kind",
+            "type": "string"
+          },
+          "accentCount": {
+            "maximum": 40,
+            "minimum": 1,
+            "title": "Accentcount",
+            "type": "integer"
+          },
+          "accentRadiusMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 200.0,
+            "title": "Accentradiusmm",
+            "type": "number"
+          },
+          "accentStartAngleDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Accentstartangledeg",
+            "type": "number"
+          },
+          "accentSweepDeg": {
+            "default": 360.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 360.0,
+            "title": "Accentsweepdeg",
+            "type": "number"
+          },
+          "accentScale": {
+            "default": 0.35,
+            "exclusiveMinimum": 0.01,
+            "maximum": 10.0,
+            "title": "Accentscale",
+            "type": "number"
+          },
+          "symmetry": {
+            "default": "SYMMETRIC",
+            "enum": [
+              "SYMMETRIC",
+              "ASYMMETRIC"
+            ],
+            "title": "Symmetry",
+            "type": "string"
+          }
+        },
+        "required": [
+          "accentCount",
+          "accentRadiusMm"
+        ],
+        "title": "CenterWithAccentsParams",
+        "type": "object"
+      },
+      "ClusterParams": {
+        "additionalProperties": false,
+        "description": "Stones grouped around a common structure.\n\nNOT NECESSARILY CIRCULAR. `sweepDeg` under 360 lays the cluster on an arc,\nand `radiusYMm` makes it elliptical, so an oval or crescent cluster is a\nparameter change rather than a new family.",
+        "properties": {
+          "kind": {
+            "const": "CLUSTER",
+            "default": "CLUSTER",
+            "title": "Kind",
+            "type": "string"
+          },
+          "count": {
+            "maximum": 40,
+            "minimum": 1,
+            "title": "Count",
+            "type": "integer"
+          },
+          "radiusMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 200.0,
+            "title": "Radiusmm",
+            "type": "number"
+          },
+          "radiusYMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 200.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Radiusymm"
+          },
+          "startAngleDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Startangledeg",
+            "type": "number"
+          },
+          "sweepDeg": {
+            "default": 360.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 360.0,
+            "title": "Sweepdeg",
+            "type": "number"
+          },
+          "includeCenter": {
+            "default": true,
+            "title": "Includecenter",
+            "type": "boolean"
+          },
+          "memberScale": {
+            "default": 0.4,
+            "exclusiveMinimum": 0.01,
+            "maximum": 10.0,
+            "title": "Memberscale",
+            "type": "number"
+          },
+          "alignToRadius": {
+            "default": true,
+            "title": "Aligntoradius",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "count",
+          "radiusMm"
+        ],
+        "title": "ClusterParams",
+        "type": "object"
+      },
+      "FamilyMember": {
+        "additionalProperties": false,
+        "description": "One participating stone, by role.\n\nTHE ROLE IS THE POINT. A three-stone family holds a `CENTER` and two\n`SIDE`s, not three anonymous stones — which is what lets a consumer ask\n\"what is the centre stone?\" without guessing from size or position.\n\nEverything about what the stone IS lives elsewhere: `stoneRef` names the\nstone specification and `gem` names the material. Neither is copied here.",
+        "properties": {
+          "memberId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Memberid",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "CENTER",
+              "SIDE",
+              "ACCENT",
+              "HALO",
+              "PAVE",
+              "UNKNOWN"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "stoneRef": {
+            "default": "primary",
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+            "title": "Stoneref",
+            "type": "string"
+          },
+          "gem": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/familyDefs/GemIdentity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "scale": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.01,
+                "maximum": 10.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scale"
+          },
+          "orientationDeg": {
+            "anyOf": [
+              {
+                "maximum": 360.0,
+                "minimum": -360.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Orientationdeg"
+          },
+          "placementOverride": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/familyDefs/InstanceTransform"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "settingRef": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Settingref"
+          }
+        },
+        "required": [
+          "memberId",
+          "role"
+        ],
+        "title": "FamilyMember",
+        "type": "object"
+      },
+      "GemIdentity": {
+        "additionalProperties": false,
+        "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+        "properties": {
+          "gemId": {
+            "maxLength": 80,
+            "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+            "title": "Gemid",
+            "type": "string"
+          },
+          "origin": {
+            "default": "UNKNOWN",
+            "enum": [
+              "NATURAL",
+              "SYNTHETIC",
+              "SIMULANT",
+              "COMPOSITE",
+              "UNKNOWN"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "treatments": {
+            "items": {
+              "$ref": "#/$defs/familyDefs/GemTreatment"
+            },
+            "title": "Treatments",
+            "type": "array"
+          },
+          "visualProfileId": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Visualprofileid"
+          },
+          "customName": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Customname"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "gemId"
+        ],
+        "title": "GemIdentity",
+        "type": "object"
+      },
+      "GemTreatment": {
+        "additionalProperties": false,
+        "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+        "properties": {
+          "treatment": {
+            "enum": [
+              "HEAT",
+              "IRRADIATION",
+              "FRACTURE_FILLING",
+              "GLASS_FILLING",
+              "COATING",
+              "DIFFUSION",
+              "DYEING",
+              "IMPREGNATION",
+              "RESIN_IMPREGNATION",
+              "BLEACHING",
+              "LASER_DRILLING",
+              "HPHT",
+              "OTHER",
+              "UNKNOWN"
+            ],
+            "title": "Treatment",
+            "type": "string"
+          },
+          "status": {
+            "default": "PRESENT",
+            "enum": [
+              "PRESENT",
+              "NOT_PRESENT",
+              "SUSPECTED",
+              "UNKNOWN"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "disclosure": {
+            "default": "USER_DECLARED",
+            "enum": [
+              "USER_DECLARED",
+              "VENDOR_DECLARED",
+              "LAB_REPORT_CLAIMED",
+              "UNDISCLOSED",
+              "UNKNOWN"
+            ],
+            "title": "Disclosure",
+            "type": "string"
+          },
+          "confidence": {
+            "default": "UNKNOWN",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNKNOWN"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Note"
+          }
+        },
+        "required": [
+          "treatment"
+        ],
+        "title": "GemTreatment",
+        "type": "object"
+      },
+      "InstanceTransform": {
+        "additionalProperties": false,
+        "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+        "properties": {
+          "xMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Xmm",
+            "type": "number"
+          },
+          "yMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Ymm",
+            "type": "number"
+          },
+          "zMm": {
+            "default": 0.0,
+            "maximum": 500.0,
+            "minimum": -500.0,
+            "title": "Zmm",
+            "type": "number"
+          },
+          "rotationDeg": {
+            "default": 0.0,
+            "maximum": 3600.0,
+            "minimum": -3600.0,
+            "title": "Rotationdeg",
+            "type": "number"
+          }
+        },
+        "title": "InstanceTransform",
+        "type": "object"
+      },
+      "ThreeStoneParams": {
+        "additionalProperties": false,
+        "description": "A centre with two flanking stones.\n\n`sideSpacingMm` is a centre-to-centre distance along the design's X axis. A\nPOSITION parameter, never a clearance: this layer knows no stone's size, so\nit cannot claim two stones do not touch. Whether a spacing is settable is a\ngeometric question for Inspection and a professional one nobody here can\nanswer.",
+        "properties": {
+          "kind": {
+            "const": "THREE_STONE",
+            "default": "THREE_STONE",
+            "title": "Kind",
+            "type": "string"
+          },
+          "sideSpacingMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 200.0,
+            "title": "Sidespacingmm",
+            "type": "number"
+          },
+          "sideScale": {
+            "default": 0.6,
+            "exclusiveMinimum": 0.01,
+            "maximum": 10.0,
+            "title": "Sidescale",
+            "type": "number"
+          },
+          "symmetry": {
+            "default": "SYMMETRIC",
+            "enum": [
+              "SYMMETRIC",
+              "ASYMMETRIC"
+            ],
+            "title": "Symmetry",
+            "type": "string"
+          }
+        },
+        "required": [
+          "sideSpacingMm"
+        ],
+        "title": "ThreeStoneParams",
+        "type": "object"
+      },
+      "ToiEtMoiParams": {
+        "additionalProperties": false,
+        "description": "Two stones set side by side as a deliberate pair.\n\nA DISTINCT FAMILY, not a two-element list. The pair is the design: the two\nstones face each other across the design axis, and the relationship between\nthem is the thing a consumer needs to preserve when either one is edited.",
+        "properties": {
+          "kind": {
+            "const": "TOI_ET_MOI",
+            "default": "TOI_ET_MOI",
+            "title": "Kind",
+            "type": "string"
+          },
+          "separationMm": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 200.0,
+            "title": "Separationmm",
+            "type": "number"
+          },
+          "axisAngleDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Axisangledeg",
+            "type": "number"
+          },
+          "symmetry": {
+            "default": "SYMMETRIC",
+            "enum": [
+              "SYMMETRIC",
+              "ASYMMETRIC"
+            ],
+            "title": "Symmetry",
+            "type": "string"
+          }
+        },
+        "required": [
+          "separationMm"
+        ],
+        "title": "ToiEtMoiParams",
+        "type": "object"
+      }
+    },
+    "family": {
+      "additionalProperties": false,
+      "description": "Multi-Stone Families v1 (Sprint 24). OPTIONAL and nullable: a document without it is a single-stone design and behaves exactly as before, which is why this is a MINOR, additive change and schemaVersion stays \"0.1.0\". A family COMPILES INTO an arrangement, so declaring both `family` and `arrangement` is refused by the semantic layer (JM-FAMILY-001) rather than merged. Member ids are the authoritative identity; array order carries no meaning. Every member builds real stone geometry; a SETTING is generated only for the primary stone — see docs/bible/26-multi-stone-families/execution-boundary.md.",
+      "properties": {
+        "familyType": {
+          "enum": [
+            "THREE_STONE",
+            "TOI_ET_MOI",
+            "CLUSTER",
+            "CENTER_WITH_ACCENTS"
+          ],
+          "title": "Familytype",
+          "type": "string"
+        },
+        "params": {
+          "discriminator": {
+            "mapping": {
+              "CENTER_WITH_ACCENTS": "#/$defs/familyDefs/CenterWithAccentsParams",
+              "CLUSTER": "#/$defs/familyDefs/ClusterParams",
+              "THREE_STONE": "#/$defs/familyDefs/ThreeStoneParams",
+              "TOI_ET_MOI": "#/$defs/familyDefs/ToiEtMoiParams"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/familyDefs/ThreeStoneParams"
+            },
+            {
+              "$ref": "#/$defs/familyDefs/ToiEtMoiParams"
+            },
+            {
+              "$ref": "#/$defs/familyDefs/ClusterParams"
+            },
+            {
+              "$ref": "#/$defs/familyDefs/CenterWithAccentsParams"
+            }
+          ],
+          "title": "Params"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/$defs/familyDefs/FamilyMember"
+          },
+          "maxItems": 60,
+          "title": "Members",
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        }
+      },
+      "required": [
+        "familyType",
+        "params"
+      ],
+      "title": "FamilyDefinition",
+      "type": "object"
     }
   },
   "properties": {
@@ -1387,6 +1961,17 @@
       "oneOf": [
         {
           "$ref": "#/$defs/arrangement"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "family": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/family"
         },
         {
           "type": "null"

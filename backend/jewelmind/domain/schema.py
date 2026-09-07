@@ -16,6 +16,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from jewelmind.arrangement.models import ArrangementDefinition
+from jewelmind.family.models import FamilyDefinition
 
 # The Stone and Gem systems own their canonical vocabularies; importing them
 # here keeps one source of truth instead of hand-maintained duplicates. Safe
@@ -508,3 +509,18 @@ class JewelryDefinition(StrictModel):
     #: optional additive field is backward compatible, the same judgment
     #: Sprint 21 made for `stone.gem`.
     arrangement: ArrangementDefinition | None = None
+
+    #: The design's multi-stone family (Sprint 24).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, for the same compatibility reason as
+    #: `arrangement`: every pre-Sprint-24 document declares no family, and
+    #: synthesizing a solitaire family for them would change their canonical
+    #: JSON and therefore every stored hash.
+    #:
+    #: A family COMPILES INTO an arrangement, so declaring both is refused
+    #: (`JM-FAMILY-001`) rather than merged — two authorities over one set of
+    #: placements has no determinate resolution. `schemaVersion` stays "0.1.0":
+    #: an optional additive field is backward compatible, the same judgment
+    #: Sprints 21-23 made for `stone.gem`, `arrangement` and the advanced
+    #: setting fields.
+    family: FamilyDefinition | None = None

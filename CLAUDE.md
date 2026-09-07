@@ -1007,8 +1007,9 @@ for the full 18 QUALITY-GOV rules. The machine-readable half lives in
 [`specs/geometry-quality/v1/`](specs/geometry-quality/v1/README.md) (6
 JSON Schemas, 5 test-vector files, all generated from real code) and the
 real Golden Suite lives at
-[`goldens/solitaire-v1/`](goldens/solitaire-v1/) (9 real fixtures, no
-committed STEP/STL binaries). Future coding agents must:
+[`goldens/solitaire-v1/`](goldens/solitaire-v1/) (44 real fixtures as of
+Sprint 24 — 9 at Sprint 15 — no committed STEP/STL binaries). Future coding
+agents must:
 
 - **Read `docs/bible/17-geometry-quality/README.md` before changing
   output geometry** — before modifying anything in
@@ -1844,6 +1845,103 @@ SETTING-GOV rules still apply in full. Future coding agents must:
   seat with a bearing shoulder, cutter geometry, anchor-driven or
   instance-aware placement, or any professional threshold on prong/head/seat
   dimensions.
+
+## MULTI-STONE FAMILY RULES
+
+`docs/bible/26-multi-stone-families/` is the authoritative Multi-Stone Families
+v1 specification — start at
+[`docs/bible/26-multi-stone-families/README.md`](docs/bible/26-multi-stone-families/README.md),
+then
+[`family-governance.md`](docs/bible/26-multi-stone-families/family-governance.md)
+for the 13 FAMILY-GOV rules, and
+[`execution-boundary.md`](docs/bible/26-multi-stone-families/execution-boundary.md)
+for exactly what does and does not execute. The machine-readable half lives in
+[`specs/family/v1/`](specs/family/v1/README.md). Sprint 22's
+[`docs/bible/24-arrangement/`](docs/bible/24-arrangement/README.md) and its 14
+ARRANGE-GOV rules still apply in full. Future coding agents must:
+
+- **Read `docs/bible/26-multi-stone-families/README.md` before changing
+  multi-stone semantics** — before modifying anything in
+  `backend/jewelmind/family/`, `domain/schema.py::JewelryDefinition.family`,
+  `geometry/stone/instance.py`, `geometry/stone/placement.py`, or
+  `validation/engine.py::_family_rules`.
+- **Never create a second placement engine.** A family compiles into an
+  `ArrangementDefinition`; the Stone Arrangement Engine performs every piece of
+  placement arithmetic. `family/compile.py` chooses primitives, never positions
+  of its own, so a family can never disagree with an arrangement about where a
+  stone goes (FAMILY-GOV).
+- **Keep the family layer category- and kernel-neutral** — nothing under
+  `backend/jewelmind/family/` may import `jewelmind.ring`,
+  `jewelmind.jewelry_category`, any geometry module or the CAD kernel.
+  `family/effective.py` is the ONE sanctioned meeting point with
+  `JewelryDefinition`, and imports it only under `TYPE_CHECKING` — the same role
+  `geometry/setting_adapter.py` plays for the Setting System. Enforced by AST
+  inspection in `backend/tests/test_multi_stone_families.py`.
+- **Keep `jewelmind/family/__init__.py` importing nothing.** It is load-bearing:
+  `domain/schema.py` imports `family.models`, so an eager package init would
+  make the import graph cyclic — the trap `stone`, `gem` and `arrangement`
+  already document.
+- **Never duplicate stone or gem data inside a family.** A `FamilyMember` is an
+  occurrence OF something: it carries a role, a stone reference and optionally a
+  `GemIdentity`, and no shape, dimension, material or source field. Its
+  `placementOverride` REUSES the arrangement layer's `InstanceTransform`; a
+  parallel transform model would be two definitions of one concept.
+- **Never embed a CAD solid in the family model** — no field may hold a kernel
+  object. The output of this layer is arrangement data.
+- **Refuse a family and an arrangement together** — `JM-FAMILY-001`, never
+  merged. Two authorities over one set of placements has no determinate
+  resolution. `effective_arrangement()` is the single resolution point every
+  consumer must use.
+- **Address members by id, never by array position** — reordering `members` must
+  produce the same compiled arrangement, the same canonical JSON and the same
+  `arrangementFingerprint`. Derived ids (`side.left`, `accent.0`) come from the
+  family's structure, never from a counter, a UUID, a timestamp or a
+  memory-derived value.
+- **Reject, never repair** — a missing role, a wrong cardinality or an
+  unresolvable reference raises. `FAMILY_ROLE_RULES` is stated as inspectable
+  DATA so Forge reports the same failure without compiling.
+- **Never create family-specific prong or head implementations.** A setting
+  comes from the Setting System's registries; a family requests one by name at
+  most.
+- **Never invent a jewelry threshold here** — no minimum spacing, accent
+  proportion, stone-count limit, cluster density or settability judgment, in a
+  model, a rule or a message. `MAX_FAMILY_MEMBERS`/`MAX_CLUSTER_COUNT` are
+  software limits and say so.
+- **Keep the four capability axes apart** — `representable`, `compilable`,
+  `stoneGeometry` and `settingGeometry` are independent. Today the first three
+  are `true` for all four families and the fourth is `false` for all of them;
+  collapsing the last two would turn "the stones exist" into "the design is
+  complete". Never mark a family `CURRENT` while `settingGeometry` is `false`
+  (FAMILY-GOV; mirrors ARRANGE-GOV-010).
+- **Never make an unimplemented family an enum member** — halo, pavé, eternity,
+  bypass and channel row live in `RESERVED_FAMILY_TYPES` with real reasons, are
+  refused by the model, and must never be silently substituted with a cluster.
+- **Preserve the stone component naming contract** — the primary instance keeps
+  the bare `stone_reference` name and an additional instance is
+  `stone_reference.<instanceId>`; `geometry/roles.py` must keep classifying that
+  prefix as a stone reference so a stone can never reach a metal fuse or a
+  default production export (LAW-006, ARRANGE-GOV-012). Scale about the stone's
+  OWN centre and rotate about its OWN axis: `cadquery.Shape.scale()` is about
+  the GLOBAL origin, and the design axis would swing the stone round the ring.
+- **Keep an absent family absent** — `compile_family(None)` returns `None`,
+  nothing synthesizes a one-member family for a single-stone design, and a
+  document declaring neither a family nor an arrangement must generate
+  byte-identical geometry to its pre-Sprint-22 self.
+- **Generate every `specs/family/v1/` artifact by running the real
+  implementation** — schemas, registry, examples and vectors are mirrors of live
+  code, re-derived by `backend/tests/test_multi_stone_families.py` on every run.
+- **Add a NEW Golden case for a new family — never retrofit an existing one.**
+  `FAM-001`–`FAM-005` cover the current scope; every accepted baseline needs an
+  entry in `docs/bible/appendices/golden-update-register.md` and an honest
+  `knownLimitations` (today: `SETTING_COVERAGE_PRIMARY_ONLY`).
+- **Create an ADR** before letting the family layer construct geometry or
+  compute placements itself, accepting both a family and an arrangement, merging
+  any of the four capability axes, changing the derived member-id scheme, or
+  changing what `geometryHash` includes.
+- **Create an RFC** before adding a family type beyond the four implemented
+  (including any reserved name), a setting strategy for a non-primary member
+  (**the identified next step — do not bypass it**), per-member stone
+  specifications, or any professional arrangement/proportion rule.
 
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

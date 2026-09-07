@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/family/v1/three-stone-params.schema.json",
+  "title": "ThreeStoneParams",
+  "additionalProperties": false,
+  "description": "A centre with two flanking stones.\n\n`sideSpacingMm` is a centre-to-centre distance along the design's X axis. A\nPOSITION parameter, never a clearance: this layer knows no stone's size, so\nit cannot claim two stones do not touch. Whether a spacing is settable is a\ngeometric question for Inspection and a professional one nobody here can\nanswer.",
+  "properties": {
+    "kind": {
+      "const": "THREE_STONE",
+      "default": "THREE_STONE",
+      "title": "Kind",
+      "type": "string"
+    },
+    "sideSpacingMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 200.0,
+      "title": "Sidespacingmm",
+      "type": "number"
+    },
+    "sideScale": {
+      "default": 0.6,
+      "exclusiveMinimum": 0.01,
+      "maximum": 10.0,
+      "title": "Sidescale",
+      "type": "number"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sideSpacingMm"
+  ],
+  "type": "object"
+}

@@ -1049,3 +1049,39 @@ in it.
 the stone instance IDs it serves. What makes a shared prong a real concept
 rather than a coincidence of position. The Setting System carries these
 references and never resolves them.
+
+## Multi-stone family terms (Sprint 24)
+
+**Multi-Stone Family** — the SEMANTIC structure of a multi-stone design: that it
+IS a three-stone ring, which member is the centre, and that the sides are meant
+to be a pair. It compiles into an arrangement and never places a stone itself.
+See [`26-multi-stone-families/README.md`](../26-multi-stone-families/README.md).
+
+**Family Member** — one participating stone, identified by a stable `memberId`
+and a semantic role. It REFERENCES a stone specification and may carry its own
+gem, scale and orientation; it never restates what the stone is.
+
+**Family Type** — `THREE_STONE`, `TOI_ET_MOI`, `CLUSTER` or
+`CENTER_WITH_ACCENTS`. Each has a real compiler. A halo is deliberately not a
+type: it is a `CENTER_WITH_ACCENTS` whose accents sit against the centre.
+
+**Family Symmetry** — whether secondary members are mirrored about the design
+axis (`SYMMETRIC`) or placed from their own values (`ASYMMETRIC`), so a
+deliberately unbalanced design is expressible rather than approximated.
+
+**Family Compilation** — the transformation from family semantics to arrangement
+primitives. The arrangement engine then resolves them, which is why a family can
+never disagree with an arrangement about where a stone goes.
+
+**Single Placement Authority** — the rule that a document declares a family OR
+an explicit arrangement, never both. Two authorities over one set of placements
+has no determinate resolution.
+
+**Stone Instance Placement** — applying a resolved instance's transform, scale
+and orientation to the built stone. Scale is applied about the stone's own
+centre and rotation about its own vertical axis; an identity placement returns
+the builder's own shape unchanged.
+
+**Setting Coverage** — how many of a family's stones receive a setting. Today
+`PRIMARY_ONLY`: every stone is built, and only the primary one is held. See
+[`execution-boundary.md`](../26-multi-stone-families/execution-boundary.md).

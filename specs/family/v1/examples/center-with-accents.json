@@ -1,0 +1,14 @@
+{
+  "familyType": "CENTER_WITH_ACCENTS",
+  "params": {
+    "kind": "CENTER_WITH_ACCENTS",
+    "accentCount": 6,
+    "accentRadiusMm": 4.8,
+    "accentStartAngleDeg": 0.0,
+    "accentSweepDeg": 360.0,
+    "accentScale": 0.3,
+    "symmetry": "SYMMETRIC"
+  },
+  "members": [],
+  "label": "Centre stone with six accents"
+}

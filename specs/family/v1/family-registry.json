@@ -1,0 +1,190 @@
+{
+  "registryVersion": "1.0.0",
+  "compilerVersion": "1.0.0",
+  "generatedFrom": "backend/jewelmind/family/capability.py::FAMILY_CAPABILITIES",
+  "note": "Generated from the live registry, never hand-maintained. FOUR INDEPENDENT AXES: representable, compilable, stoneGeometry, settingGeometry. Every implemented family compiles and builds real stone geometry for each member; NONE builds a setting for a non-primary member, because no accent-setting strategy exists. That is why every family is PARTIAL rather than CURRENT. Nothing here is professionally validated.",
+  "roleRules": {
+    "THREE_STONE": {
+      "CENTER": 1,
+      "SIDE": 2
+    },
+    "TOI_ET_MOI": {
+      "SIDE": 2
+    },
+    "CLUSTER": {
+      "CENTER": null,
+      "ACCENT": null
+    },
+    "CENTER_WITH_ACCENTS": {
+      "CENTER": 1,
+      "ACCENT": null
+    }
+  },
+  "families": [
+    {
+      "family": "THREE_STONE",
+      "status": "PARTIAL",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {
+        "CENTER": 1,
+        "SIDE": 2
+      },
+      "note": "A centre with two flanking stones. Compiles to a centre instance plus a MIRROR pattern when symmetric, or two explicit side instances when not. Real stone geometry for all three; only the primary stone receives a setting."
+    },
+    {
+      "family": "TOI_ET_MOI",
+      "status": "PARTIAL",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {
+        "SIDE": 2
+      },
+      "note": "Two stones as a deliberate pair, straddling the design axis along a settable angle. Symmetric compiles to a mirror, which also flips a chiral stone's own orientation. Real stone geometry for both; only the primary stone receives a setting."
+    },
+    {
+      "family": "CLUSTER",
+      "status": "PARTIAL",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {
+        "CENTER": null,
+        "ACCENT": null
+      },
+      "note": "Stones grouped around an optional centre. Not necessarily circular (radiusYMm makes it elliptical) and not necessarily centred. Real stone geometry for every member; only the primary stone receives a setting."
+    },
+    {
+      "family": "CENTER_WITH_ACCENTS",
+      "status": "PARTIAL",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {
+        "CENTER": 1,
+        "ACCENT": null
+      },
+      "note": "The general centre-plus-accents family, for designs that are neither a strict three-stone nor a cluster. Real stone geometry for every member; only the primary stone receives a setting."
+    }
+  ],
+  "features": [
+    {
+      "family": "mixed_gem_identities",
+      "status": "CURRENT",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "Each member may carry its own GemIdentity, resolved through the real Sprint 21 registry. Semantic only, exactly as for a single stone: it never affects geometry."
+    },
+    {
+      "family": "mixed_member_scale",
+      "status": "CURRENT",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "A member's `scale` (or the family's default) is applied to the stone's real resolved dimensions when its solid is built, so a smaller side stone is genuinely smaller geometry."
+    },
+    {
+      "family": "member_orientation",
+      "status": "CURRENT",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "A member's `orientationDeg` rotates its stone about its own vertical axis, which is what lets a toi-et-moi's two pears point in opposite directions."
+    },
+    {
+      "family": "asymmetric_layout",
+      "status": "CURRENT",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "`symmetry='ASYMMETRIC'` places each member from its own values instead of mirroring, so a deliberately unbalanced design is expressible rather than approximated."
+    },
+    {
+      "family": "explicit_member_placement",
+      "status": "CURRENT",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "`placementOverride` carries an arrangement `InstanceTransform` verbatim — the escape hatch for a position no family parameter derives. It reuses the arrangement's own transform model rather than declaring a second one."
+    },
+    {
+      "family": "mixed_stone_specifications",
+      "status": "PARTIAL",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "A member's `stoneRef` may name a stone specification other than 'primary', and that reference is preserved and reported. It does not resolve, because JDL carries exactly one `stone` — so such a member produces no geometry and says so (JM-FAMILY-004)."
+    },
+    {
+      "family": "per_member_setting",
+      "status": "PLANNED",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "A member's `settingRef` is carried and reported, but only the primary stone receives a setting. A setting strategy for accent stones does not exist, and inventing one would mean inventing setter geometry."
+    },
+    {
+      "family": "family_aware_head",
+      "status": "PLANNED",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "A single head spanning several stones (a three-stone gallery, a cluster basket) needs multi-stone head geometry, which Sprint 23 recorded as one head per setting."
+    },
+    {
+      "family": "professional_family_rules",
+      "status": "PLANNED",
+      "representable": false,
+      "compilable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "roles": {},
+      "note": "Proportion rules between a centre and its accents, minimum spacing, or whether a cluster is settable. Each needs sourced professional evidence this project does not have, so none exists."
+    }
+  ],
+  "reserved": [
+    {
+      "family": "bypass",
+      "reason": "A bypass design is defined by how the SHANK splits and crosses, not by how its stones relate. The stones can already be expressed as a toi-et-moi; the bypass itself is a shank capability."
+    },
+    {
+      "family": "channel_row",
+      "reason": "A row of stones held between two rails needs the rail geometry Sprint 23 recorded as PLANNED, and a channel setting family that does not exist."
+    },
+    {
+      "family": "eternity",
+      "reason": "An eternity band places stones around the shank's own path, so it requires placement along a category-specific curve. That is Shank territory, and this layer is category-neutral."
+    },
+    {
+      "family": "halo",
+      "reason": "A halo is a CENTER_WITH_ACCENTS whose accents sit immediately against the centre stone. It is already expressible, so adding a separate type would create two ways to say one thing — and the two would eventually compile differently."
+    },
+    {
+      "family": "pave",
+      "reason": "Pave is a surface treatment covering a region, not a set of individually placed stones. It needs a region-fill capability the arrangement engine does not have, and approximating it as a dense radial pattern would misrepresent both the design and its stone count."
+    }
+  ]
+}

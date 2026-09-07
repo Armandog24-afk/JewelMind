@@ -46,6 +46,11 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-SETTING-005` | Head parameters complete | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
 | `JM-SETTING-006` | Field applicable to family | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-SETTING-007` | Seat relief feasible | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-FAMILY-001` | Single placement authority | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-FAMILY-002` | Family roles valid | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-FAMILY-003` | Family compiles | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-FAMILY-004` | Family references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-FAMILY-005` | Family setting coverage | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-001` | Instance ids unique | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-002` | Arrangement references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-003` | Stone reference resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |

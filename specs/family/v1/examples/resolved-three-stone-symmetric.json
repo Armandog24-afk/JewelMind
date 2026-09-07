@@ -1,0 +1,86 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference"
+    },
+    {
+      "instanceId": "side.left",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": 4.6,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": 0.6,
+        "orientationDeg": null
+      },
+      "gem": null,
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.side.left"
+    },
+    {
+      "instanceId": "side.left.mirror.1",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": -4.6,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 180.0
+      },
+      "overrides": {
+        "scale": 0.6,
+        "orientationDeg": 180.0
+      },
+      "gem": null,
+      "sourcePatternId": "side.left.mirror",
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.side.left.mirror.1"
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "three-stone.sides",
+      "kind": "MIRRORED_PAIR",
+      "members": [
+        "side.left",
+        "side.left.mirror.1"
+      ],
+      "note": "Symmetric three-stone sides. The document's second SIDE member ('side.right') is realized as this mirror's generated member."
+    }
+  ],
+  "arrangementFingerprint": "c830e87d79cf26ca",
+  "resolverVersion": "1.0.0",
+  "instanceCount": 3,
+  "generatedCount": 3,
+  "patternExpandedCount": 1,
+  "notes": [
+    "3 stone instances were generated. A setting is built only for the primary instance: no accent-setting strategy exists yet. See docs/bible/26-multi-stone-families/execution-boundary.md."
+  ]
+}

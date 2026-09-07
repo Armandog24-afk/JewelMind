@@ -1,5 +1,5 @@
 {
-  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Authored during Sprint 19 and extended each sprint since (gem/gem_visual: Sprint 21; arrangement: Sprint 22) and validated by backend/tests/test_capability_coverage.py.",
+  "description": "Cross-product Capability Coverage Guard. Every capability carries one of CURRENT/PARTIAL/PLANNED/BLOCKED/OUT_OF_SCOPE. CURRENT requires real implementation AND tests. Authored during Sprint 19 and extended each sprint since (gem/gem_visual: Sprint 21; arrangement: Sprint 22; family: Sprint 24) and validated by backend/tests/test_capability_coverage.py.",
   "statusValues": [
     "CURRENT",
     "PARTIAL",
@@ -161,14 +161,14 @@
     {
       "domain": "stone_arrangement",
       "capability": "three_stone",
-      "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; StoneArrangementDefinition supports only SINGLE_CENTER today. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
+      "status": "PARTIAL",
+      "note": "Multi-stone arrangement. RFC required; StoneArrangementDefinition supports only SINGLE_CENTER today. Sprint 24: this configuration is now a first-class FAMILY (docs/bible/26-multi-stone-families/), compiles into a real arrangement and builds real stone geometry for every member. PARTIAL because a setting is generated only for the primary stone."
     },
     {
       "domain": "stone_arrangement",
       "capability": "halo",
-      "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
+      "status": "PARTIAL",
+      "note": "Multi-stone arrangement. RFC required; needs both arrangement and setting work. Sprint 24: this configuration is now a first-class FAMILY (docs/bible/26-multi-stone-families/), compiles into a real arrangement and builds real stone geometry for every member. PARTIAL because a setting is generated only for the primary stone."
     },
     {
       "domain": "stone_arrangement",
@@ -185,8 +185,8 @@
     {
       "domain": "stone_arrangement",
       "capability": "cluster",
-      "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; no arrangement geometry exists."
+      "status": "PARTIAL",
+      "note": "Multi-stone arrangement. RFC required; no arrangement geometry exists. Sprint 24: this configuration is now a first-class FAMILY (docs/bible/26-multi-stone-families/), compiles into a real arrangement and builds real stone geometry for every member. PARTIAL because a setting is generated only for the primary stone."
     },
     {
       "domain": "ring_family",
@@ -966,13 +966,13 @@
       "domain": "arrangement",
       "capability": "multi_stone_geometry",
       "status": "PARTIAL",
-      "note": "Every instance resolves and reports its status, but the pipeline emits ONE stone component; additional instances are NOT_GENERATED with a reason. Requires a per-instance stone transform and instance-aware Geometry Inspection. See docs/bible/24-arrangement/execution-boundary.md."
+      "note": "Sprint 24: every resolved instance naming the primary stone builds a REAL stone solid, named stone_reference.<instanceId>, classified as a stone reference and inspected as one. STILL PARTIAL because a SETTING is generated only for the primary instance — no accent-setting strategy exists, and inventing one would mean inventing setter geometry. See docs/bible/26-multi-stone-families/execution-boundary.md."
     },
     {
       "domain": "arrangement",
       "capability": "instance_overrides_applied_to_geometry",
-      "status": "PARTIAL",
-      "note": "scale and orientationDeg are representable and carried through resolution; neither reaches geometry yet, because that needs the multi-stone emission path."
+      "status": "CURRENT",
+      "note": "Sprint 24: scale and orientationDeg reach geometry. Scale is applied about the stone's own centre (scaling about the global origin would drop a stone sitting above the band), and orientation spins the stone about its own axis rather than swinging it around the design axis."
     },
     {
       "domain": "arrangement",
@@ -1007,8 +1007,8 @@
     {
       "domain": "arrangement",
       "capability": "arrangement_collision_checking",
-      "status": "PLANNED",
-      "note": "Whether two placed stones overlap is a geometric fact, answerable only by Geometry Inspection once multi-stone geometry exists. No spacing threshold is invented."
+      "status": "PARTIAL",
+      "note": "Sprint 24: multi-stone geometry exists, so Geometry Inspection reports pairwise intersections between stone components as geometric facts. PARTIAL because no rule INTERPRETS them: whether an overlap is acceptable is a professional question, and no spacing threshold is invented."
     },
     {
       "domain": "arrangement",
@@ -1075,6 +1075,90 @@
       "capability": "anchor_driven_prong_placement",
       "status": "PLANNED",
       "note": "Placing prongs at a stone's own anchors (tip, cleft, corners). The anchors exist in Stone v2; no strategy consumes them, so OUTLINE_CARDINAL remains the non-round default."
+    },
+    {
+      "domain": "family",
+      "capability": "family_three_stone",
+      "status": "PARTIAL",
+      "note": "A centre with two flanking stones. Compiles to a centre instance plus a MIRROR pattern when symmetric, or two explicit side instances when not. Real stone geometry for all three; only the primary stone receives a setting."
+    },
+    {
+      "domain": "family",
+      "capability": "family_toi_et_moi",
+      "status": "PARTIAL",
+      "note": "Two stones as a deliberate pair, straddling the design axis along a settable angle. Symmetric compiles to a mirror, which also flips a chiral stone's own orientation. Real stone geometry for both; only the primary stone receives a setting."
+    },
+    {
+      "domain": "family",
+      "capability": "family_cluster",
+      "status": "PARTIAL",
+      "note": "Stones grouped around an optional centre. Not necessarily circular (radiusYMm makes it elliptical) and not necessarily centred. Real stone geometry for every member; only the primary stone receives a setting."
+    },
+    {
+      "domain": "family",
+      "capability": "family_center_with_accents",
+      "status": "PARTIAL",
+      "note": "The general centre-plus-accents family, for designs that are neither a strict three-stone nor a cluster. Real stone geometry for every member; only the primary stone receives a setting."
+    },
+    {
+      "domain": "family",
+      "capability": "family_compilation",
+      "status": "CURRENT",
+      "note": "family/compile.py turns family semantics into arrangement primitives, so the Stone Arrangement Engine remains the sole placement authority. A registry, not a branch chain."
+    },
+    {
+      "domain": "family",
+      "capability": "single_placement_authority",
+      "status": "CURRENT",
+      "note": "family/effective.py is the one place a family and an explicit arrangement meet. Declaring both is refused (JM-FAMILY-001) rather than merged: two authorities over one set of placements has no determinate resolution."
+    },
+    {
+      "domain": "family",
+      "capability": "family_structural_validation",
+      "status": "CURRENT",
+      "note": "JM-FAMILY-001..005. Structural and referential only: one authority, valid roles, correct cardinality, resolvable references, and an honest report of what a compiled family does not get. No proportion, spacing or settability rule exists."
+    },
+    {
+      "domain": "family",
+      "capability": "mixed_stone_families",
+      "status": "CURRENT",
+      "note": "Members may carry different gem identities, scales and orientations, each REFERENCING the authoritative Gem and Stone systems rather than restating them."
+    },
+    {
+      "domain": "family",
+      "capability": "per_member_setting",
+      "status": "PLANNED",
+      "note": "A member's settingRef is carried and reported, but only the primary stone receives a setting. An accent-setting strategy does not exist."
+    },
+    {
+      "domain": "family",
+      "capability": "family_aware_head",
+      "status": "PLANNED",
+      "note": "A single head spanning several stones (a three-stone gallery, a cluster basket) needs multi-stone head geometry; Sprint 23 builds one head per setting."
+    },
+    {
+      "domain": "family",
+      "capability": "professional_family_rules",
+      "status": "PLANNED",
+      "note": "Centre-to-accent proportion, minimum spacing, or whether a cluster is settable. Each needs sourced professional evidence this project does not have, so none exists."
+    },
+    {
+      "domain": "family",
+      "capability": "reserved_families",
+      "status": "PLANNED",
+      "note": "halo, pave, eternity, bypass and channel_row are named with real reasons in family/capability.py::RESERVED_FAMILY_TYPES and have no compiler. A halo is already expressible as CENTER_WITH_ACCENTS."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "per_instance_stone_geometry",
+      "status": "CURRENT",
+      "note": "geometry/stone/instance.py applies each resolved instance's own transform, scale and orientation to the built stone. An instance at the origin with no scale or rotation returns the builder's own shape object, so single-stone geometry is provably untouched."
+    },
+    {
+      "domain": "arrangement",
+      "capability": "instance_aware_inspection",
+      "status": "CURRENT",
+      "note": "Geometry Inspection derives its stone set from the role map, requires every stone component, and evaluates stone/metal separation across all of them. A stone-to-stone overlap is reported as a geometric fact, not as a separation failure."
     }
   ]
 }

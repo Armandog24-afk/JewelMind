@@ -103,7 +103,8 @@
         "meshTolerance": 0.1,
         "angularTolerance": 0.2
       },
-      "arrangement": null
+      "arrangement": null,
+      "family": null
     },
     "validation": [],
     "forgeEvaluation": {

@@ -947,6 +947,10 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-SETTINGV2-GOVERNANCE | Setting System v2 Governance | accepted | current | [`25-setting-v2/setting-v2-governance.md`](../25-setting-v2/setting-v2-governance.md) |
 | JM-BIBLE-SETTINGV2-BOUNDARY | Setting v2 Execution Boundary | accepted | partial | [`25-setting-v2/head-execution-boundary.md`](../25-setting-v2/head-execution-boundary.md) |
 | JM-BIBLE-SETTINGV2-SPRINT-23-REPORT | Sprint 23 Validation Report — Setting System v2 | accepted | current | [`25-setting-v2/SPRINT-23-VALIDATION-REPORT.md`](../25-setting-v2/SPRINT-23-VALIDATION-REPORT.md) |
+| JM-BIBLE-FAMILY-README | Multi-Stone Families v1 — Index | accepted | partial | [`26-multi-stone-families/README.md`](../26-multi-stone-families/README.md) |
+| JM-BIBLE-FAMILY-GOVERNANCE | Multi-Stone Families Governance | accepted | current | [`26-multi-stone-families/family-governance.md`](../26-multi-stone-families/family-governance.md) |
+| JM-BIBLE-FAMILY-BOUNDARY | Multi-Stone Family Execution Boundary | accepted | partial | [`26-multi-stone-families/execution-boundary.md`](../26-multi-stone-families/execution-boundary.md) |
+| JM-BIBLE-FAMILY-SPRINT-24-REPORT | Sprint 24 Validation Report — Multi-Stone Families v1 | accepted | current | [`26-multi-stone-families/SPRINT-24-VALIDATION-REPORT.md`](../26-multi-stone-families/SPRINT-24-VALIDATION-REPORT.md) |
 
 ## Root-level project documents
 

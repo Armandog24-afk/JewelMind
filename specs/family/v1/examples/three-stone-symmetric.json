@@ -1,0 +1,11 @@
+{
+  "familyType": "THREE_STONE",
+  "params": {
+    "kind": "THREE_STONE",
+    "sideSpacingMm": 4.6,
+    "sideScale": 0.6,
+    "symmetry": "SYMMETRIC"
+  },
+  "members": [],
+  "label": "Classic three-stone"
+}

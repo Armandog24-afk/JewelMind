@@ -1,0 +1,114 @@
+{
+  "generatedFrom": "FamilyDefinition.model_validate + jewelmind.family.compile.compile_family",
+  "note": "Reject, never repair. Each case records WHICH layer refused it: a schema rejection means the document is malformed, a compiler rejection means it is well-formed and not the family it claims to be.",
+  "vectors": [
+    {
+      "case": "params kind does not match family type",
+      "input": {
+        "familyType": "CLUSTER",
+        "params": {
+          "kind": "THREE_STONE",
+          "sideSpacingMm": 4.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "duplicate member ids",
+      "input": {
+        "familyType": "TOI_ET_MOI",
+        "params": {
+          "kind": "TOI_ET_MOI",
+          "separationMm": 5.0
+        },
+        "members": [
+          {
+            "memberId": "a",
+            "role": "SIDE"
+          },
+          {
+            "memberId": "a",
+            "role": "SIDE"
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "malformed member id",
+      "input": {
+        "familyType": "TOI_ET_MOI",
+        "params": {
+          "kind": "TOI_ET_MOI",
+          "separationMm": 5.0
+        },
+        "members": [
+          {
+            "memberId": "../etc",
+            "role": "SIDE"
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "non-finite parameter",
+      "input": {
+        "familyType": "THREE_STONE",
+        "params": {
+          "kind": "THREE_STONE",
+          "sideSpacingMm": Infinity
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "role not accepted by the family",
+      "input": {
+        "familyType": "TOI_ET_MOI",
+        "params": {
+          "kind": "TOI_ET_MOI",
+          "separationMm": 5.0
+        },
+        "members": [
+          {
+            "memberId": "a",
+            "role": "SIDE"
+          },
+          {
+            "memberId": "b",
+            "role": "HALO"
+          }
+        ]
+      },
+      "rejectedBy": "COMPILER",
+      "error": "FamilyRoleInvalidError"
+    },
+    {
+      "case": "wrong role cardinality",
+      "input": {
+        "familyType": "THREE_STONE",
+        "params": {
+          "kind": "THREE_STONE",
+          "sideSpacingMm": 4.0
+        },
+        "members": [
+          {
+            "memberId": "c",
+            "role": "CENTER"
+          },
+          {
+            "memberId": "s",
+            "role": "SIDE"
+          }
+        ]
+      },
+      "rejectedBy": "COMPILER",
+      "error": "FamilyRoleCardinalityError"
+    }
+  ]
+}

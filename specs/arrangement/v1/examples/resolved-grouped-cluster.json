@@ -38,9 +38,9 @@
       "gem": null,
       "sourcePatternId": null,
       "groupId": "cluster",
-      "generationStatus": "NOT_GENERATED",
-      "generationNote": "Placement resolved (declared explicitly), but no geometry was built: the current pipeline emits one stone component per model. Multi-stone geometry is PARTIAL — see docs/bible/24-arrangement/execution-boundary.md.",
-      "componentName": null
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.cluster.a"
     },
     {
       "instanceId": "cluster.b",
@@ -59,19 +59,18 @@
       "gem": null,
       "sourcePatternId": null,
       "groupId": "cluster",
-      "generationStatus": "NOT_GENERATED",
-      "generationNote": "Placement resolved (declared explicitly), but no geometry was built: the current pipeline emits one stone component per model. Multi-stone geometry is PARTIAL — see docs/bible/24-arrangement/execution-boundary.md.",
-      "componentName": null
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.cluster.b"
     }
   ],
   "relations": [],
   "arrangementFingerprint": "0cf33aa23bd8527b",
   "resolverVersion": "1.0.0",
   "instanceCount": 3,
-  "generatedCount": 1,
+  "generatedCount": 3,
   "patternExpandedCount": 0,
   "notes": [
-    "Placement resolved (declared explicitly), but no geometry was built: the current pipeline emits one stone component per model. Multi-stone geometry is PARTIAL — see docs/bible/24-arrangement/execution-boundary.md.",
-    "Placement resolved (declared explicitly), but no geometry was built: the current pipeline emits one stone component per model. Multi-stone geometry is PARTIAL — see docs/bible/24-arrangement/execution-boundary.md."
+    "3 stone instances were generated. A setting is built only for the primary instance: no accent-setting strategy exists yet. See docs/bible/26-multi-stone-families/execution-boundary.md."
   ]
 }

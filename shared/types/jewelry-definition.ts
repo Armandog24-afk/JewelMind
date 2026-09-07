@@ -565,6 +565,102 @@ export type HeadArchitecture = 'BASKET' | 'PEG_HEAD' | 'MARTINI' | 'TULIP'
  * a setter's seat with a bearing shoulder. */
 export type SeatMode = 'NONE' | 'REFERENCE_SEAT'
 
+/**
+ * Multi-Stone Families v1 (Sprint 24). Mirrors
+ * `backend/jewelmind/family/models.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a
+ * family type the backend has no compiler for. `halo`, `pave`, `eternity` and
+ * `bypass` are deliberately absent for exactly that reason — a halo is already
+ * expressible as CENTER_WITH_ACCENTS.
+ *
+ * A family describes SEMANTIC STRUCTURE. It compiles into an arrangement, which
+ * remains the placement authority, and it never restates what a stone is or
+ * what it is made of.
+ */
+
+/** Families with a real compiler. */
+export type FamilyType =
+  | 'THREE_STONE'
+  | 'TOI_ET_MOI'
+  | 'CLUSTER'
+  | 'CENTER_WITH_ACCENTS'
+
+/** Whether secondary members mirror about the design axis or are placed from
+ * their own values. */
+export type FamilySymmetry = 'SYMMETRIC' | 'ASYMMETRIC'
+
+/** One participating stone, by role. Everything about what the stone IS lives
+ * elsewhere: `stoneRef` names the specification, `gem` names the material. */
+export interface FamilyMember {
+  memberId: string
+  role: StoneRole
+  stoneRef: string
+  gem: GemIdentity | null
+  scale: number | null
+  orientationDeg: number | null
+  /** Reuses the arrangement's own transform rather than declaring a second
+   * one — the value IS an arrangement transform. */
+  placementOverride: InstanceTransform | null
+  /** A REQUEST, not an implementation. Only the primary stone receives a
+   * setting today. */
+  settingRef: string | null
+}
+
+export interface ThreeStoneParams {
+  kind: 'THREE_STONE'
+  sideSpacingMm: number
+  sideScale: number
+  symmetry: FamilySymmetry
+}
+
+export interface ToiEtMoiParams {
+  kind: 'TOI_ET_MOI'
+  separationMm: number
+  axisAngleDeg: number
+  symmetry: FamilySymmetry
+}
+
+export interface ClusterParams {
+  kind: 'CLUSTER'
+  count: number
+  radiusMm: number
+  /** `null` means circular. A cluster is not necessarily circular. */
+  radiusYMm: number | null
+  startAngleDeg: number
+  sweepDeg: number
+  includeCenter: boolean
+  memberScale: number
+  alignToRadius: boolean
+}
+
+export interface CenterWithAccentsParams {
+  kind: 'CENTER_WITH_ACCENTS'
+  accentCount: number
+  accentRadiusMm: number
+  accentStartAngleDeg: number
+  accentSweepDeg: number
+  accentScale: number
+  symmetry: FamilySymmetry
+}
+
+export type FamilyParams =
+  | ThreeStoneParams
+  | ToiEtMoiParams
+  | ClusterParams
+  | CenterWithAccentsParams
+
+/** A multi-stone design's semantic structure.
+ *
+ * ABSENT IS NOT EMPTY: a definition with no family is a single-stone design and
+ * behaves exactly as it did before this sprint. */
+export interface FamilyDefinition {
+  familyType: FamilyType
+  params: FamilyParams
+  members: FamilyMember[]
+  label: string | null
+}
+
 export interface JewelryDefinition {
   schemaVersion: string
   project: ProjectInfo
@@ -583,6 +679,13 @@ export interface JewelryDefinition {
    * it to a one-instance arrangement would give every stored design an
    * arrangement it never declared, changing its `definitionHash`. */
   arrangement: ArrangementDefinition | null
+
+  /** The design's multi-stone family (Sprint 24).
+   *
+   * `null` on every pre-Sprint-24 document. A family compiles into an
+   * arrangement, so declaring both is refused by the backend
+   * (`JM-FAMILY-001`) rather than merged. */
+  family: FamilyDefinition | null
 }
 
 const METAL_TYPES: readonly MetalType[] = [
@@ -783,5 +886,7 @@ export function createDefaultDefinition(): JewelryDefinition {
     preview: { meshTolerance: 0.1, angularTolerance: 0.2 },
     // No arrangement: a single-stone design, exactly as before Sprint 22.
     arrangement: null,
+    // No family: a single-stone design, exactly as before Sprint 24.
+    family: null,
   }
 }

@@ -22,7 +22,7 @@ from jewelmind.geometry.inspection.models import (
 from jewelmind.geometry.inspection.shape import bounding_box_fact_from_box
 from jewelmind.geometry.inspection.topology import inspect_topology
 from jewelmind.geometry.model import GeneratedModel
-from jewelmind.geometry.roles import is_production_component, production_component_names
+from jewelmind.geometry.roles import geometry_role, is_production_component, production_component_names
 
 # Components every assembly must have regardless of which Setting family
 # was requested (Sprint 19). `prongs` deliberately moved OUT of this tuple:
@@ -36,6 +36,27 @@ REQUIRED_COMPONENT_NAMES = ("band", "stone_reference", "basket_support")
 SETTING_COMPONENT_NAMES = ("prongs", "bezel")
 
 
+def stone_component_names(model: GeneratedModel) -> tuple[str, ...]:
+    """Every stone-reference component in this assembly, in sorted order.
+
+    Sprint 24: a design may now carry several. Derived from
+    `geometry/roles.py::geometry_role()` rather than by matching a name prefix
+    here, so the role map stays the single authority on what counts as a stone —
+    the same reason the prefix classification landed in Sprint 22 before any
+    such geometry existed.
+
+    Sorted so a report's component order never depends on dict insertion order.
+    """
+
+    return tuple(
+        sorted(
+            name
+            for name in model.components
+            if geometry_role(name) == "stone_reference"
+        )
+    )
+
+
 def required_component_names(model: GeneratedModel) -> tuple[str, ...]:
     """The components this specific assembly is required to have.
 
@@ -43,10 +64,18 @@ def required_component_names(model: GeneratedModel) -> tuple[str, ...]:
     component the model actually produced. If no setting component is
     present at all, `prongs` is reported as the expected one so a genuinely
     setting-less assembly still fails loudly rather than silently passing.
+
+    Stone-count-aware since Sprint 24: `stone_reference` is required, and every
+    ADDITIONAL stone component is required too. Listing only the primary would
+    let an accent stone vanish from a multi-stone model without any check
+    noticing (ATLAS-GOV-006).
     """
 
     present = [n for n in SETTING_COMPONENT_NAMES if n in model.components]
-    return (*REQUIRED_COMPONENT_NAMES, *(present or ["prongs"]))
+    extra_stones = tuple(
+        n for n in stone_component_names(model) if n not in REQUIRED_COMPONENT_NAMES
+    )
+    return (*REQUIRED_COMPONENT_NAMES, *extra_stones, *(present or ["prongs"]))
 
 
 def _inspection_pairs(names: list[str]) -> tuple[tuple[str, str], ...]:
@@ -66,8 +95,16 @@ def _inspection_pairs(names: list[str]) -> tuple[tuple[str, str], ...]:
 def _stone_metal_separation(
     model: GeneratedModel, intersections: list, component_results: dict[str, ComponentInspectionResult]
 ) -> StoneMetalSeparationResult:
-    stone_exists = "stone_reference" in model.components and component_results["stone_reference"].exists
-    if not stone_exists:
+    # EVERY stone component, not just the primary one (Sprint 24). Checking
+    # only `stone_reference` would leave an accent stone's relationship with
+    # production metal uninspected, which is precisely the case a multi-stone
+    # design introduces.
+    stone_names = [
+        name
+        for name in stone_component_names(model)
+        if name in component_results and component_results[name].exists
+    ]
+    if not stone_names:
         return StoneMetalSeparationResult(
             stoneReferenceExists=False,
             productionIncluded=False,
@@ -76,13 +113,24 @@ def _stone_metal_separation(
             note="No stone_reference component was generated.",
         )
 
-    intersecting_production = [
-        i.componentB if i.componentA == "stone_reference" else i.componentA
-        for i in intersections
-        if "stone_reference" in (i.componentA, i.componentB)
-        and i.status == "INTERSECTS"
-        and is_production_component(i.componentA if i.componentB == "stone_reference" else i.componentB)
-    ]
+    stone_set = set(stone_names)
+    intersecting_production: list[str] = []
+    for i in intersections:
+        pair = (i.componentA, i.componentB)
+        if i.status != "INTERSECTS":
+            continue
+        stone_side = [n for n in pair if n in stone_set]
+        if not stone_side:
+            continue
+        other = i.componentB if i.componentA in stone_set else i.componentA
+        # A stone-to-stone intersection is NOT a separation finding: two stones
+        # overlapping is a geometric fact about the arrangement, reported by
+        # pairwise intersection, and has nothing to do with whether a stone
+        # became production metal.
+        if other in stone_set or not is_production_component(other):
+            continue
+        intersecting_production.append(other)
+    intersecting_production = sorted(set(intersecting_production))
 
     # The stone is never passed into `_fuse_metal()` — real geometric
     # overlap with a production component (grip/embedding) is expected

@@ -1,0 +1,16 @@
+{
+  "familyType": "CLUSTER",
+  "params": {
+    "kind": "CLUSTER",
+    "count": 8,
+    "radiusMm": 3.6,
+    "radiusYMm": null,
+    "startAngleDeg": 0.0,
+    "sweepDeg": 360.0,
+    "includeCenter": true,
+    "memberScale": 0.35,
+    "alignToRadius": true
+  },
+  "members": [],
+  "label": "Eight-stone cluster"
+}

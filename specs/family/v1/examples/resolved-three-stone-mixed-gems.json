@@ -1,0 +1,107 @@
+{
+  "instances": [
+    {
+      "instanceId": "center",
+      "stoneRef": "primary",
+      "role": "CENTER",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": null,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "diamond",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference"
+    },
+    {
+      "instanceId": "side.left",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": -4.4,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": 0.55,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "corundum.sapphire",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.side.left"
+    },
+    {
+      "instanceId": "side.right",
+      "stoneRef": "primary",
+      "role": "SIDE",
+      "transform": {
+        "xMm": 4.4,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0
+      },
+      "overrides": {
+        "scale": 0.45,
+        "orientationDeg": null
+      },
+      "gem": {
+        "gemId": "corundum.ruby",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "sourcePatternId": null,
+      "groupId": null,
+      "generationStatus": "GENERATED",
+      "generationNote": null,
+      "componentName": "stone_reference.side.right"
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "three-stone.sides",
+      "kind": "ALIGNED_WITH",
+      "members": [
+        "side.left",
+        "side.right"
+      ],
+      "note": "Asymmetric three-stone sides: aligned, not mirrored."
+    }
+  ],
+  "arrangementFingerprint": "1de20cb041451b13",
+  "resolverVersion": "1.0.0",
+  "instanceCount": 3,
+  "generatedCount": 3,
+  "patternExpandedCount": 0,
+  "notes": [
+    "3 stone instances were generated. A setting is built only for the primary instance: no accent-setting strategy exists yet. See docs/bible/26-multi-stone-families/execution-boundary.md."
+  ]
+}

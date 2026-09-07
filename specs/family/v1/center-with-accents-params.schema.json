@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/family/v1/center-with-accents-params.schema.json",
+  "title": "CenterWithAccentsParams",
+  "additionalProperties": false,
+  "description": "The general centre-plus-accents family.\n\nDeliberately the LEAST specialized of the four: it exists so a design that\nis neither a strict three-stone nor a cluster still has a semantic home,\nrather than forcing one of the others to stretch. Accents are placed on an\narc by the same closed-form evaluation a cluster uses.",
+  "properties": {
+    "kind": {
+      "const": "CENTER_WITH_ACCENTS",
+      "default": "CENTER_WITH_ACCENTS",
+      "title": "Kind",
+      "type": "string"
+    },
+    "accentCount": {
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Accentcount",
+      "type": "integer"
+    },
+    "accentRadiusMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 200.0,
+      "title": "Accentradiusmm",
+      "type": "number"
+    },
+    "accentStartAngleDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Accentstartangledeg",
+      "type": "number"
+    },
+    "accentSweepDeg": {
+      "default": 360.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 360.0,
+      "title": "Accentsweepdeg",
+      "type": "number"
+    },
+    "accentScale": {
+      "default": 0.35,
+      "exclusiveMinimum": 0.01,
+      "maximum": 10.0,
+      "title": "Accentscale",
+      "type": "number"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    }
+  },
+  "required": [
+    "accentCount",
+    "accentRadiusMm"
+  ],
+  "type": "object"
+}

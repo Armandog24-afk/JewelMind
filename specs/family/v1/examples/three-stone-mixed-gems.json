@@ -1,0 +1,63 @@
+{
+  "familyType": "THREE_STONE",
+  "params": {
+    "kind": "THREE_STONE",
+    "sideSpacingMm": 4.4,
+    "sideScale": 0.6,
+    "symmetry": "ASYMMETRIC"
+  },
+  "members": [
+    {
+      "memberId": "center",
+      "role": "CENTER",
+      "stoneRef": "primary",
+      "gem": {
+        "gemId": "diamond",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "scale": null,
+      "orientationDeg": null,
+      "placementOverride": null,
+      "settingRef": null
+    },
+    {
+      "memberId": "side.left",
+      "role": "SIDE",
+      "stoneRef": "primary",
+      "gem": {
+        "gemId": "corundum.sapphire",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "scale": 0.55,
+      "orientationDeg": null,
+      "placementOverride": null,
+      "settingRef": null
+    },
+    {
+      "memberId": "side.right",
+      "role": "SIDE",
+      "stoneRef": "primary",
+      "gem": {
+        "gemId": "corundum.ruby",
+        "origin": "NATURAL",
+        "treatments": [],
+        "visualProfileId": null,
+        "customName": null,
+        "note": null
+      },
+      "scale": 0.45,
+      "orientationDeg": null,
+      "placementOverride": null,
+      "settingRef": null
+    }
+  ],
+  "label": "Asymmetric three-stone with three different gems"
+}

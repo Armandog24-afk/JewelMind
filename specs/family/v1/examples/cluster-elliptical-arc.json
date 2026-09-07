@@ -1,0 +1,16 @@
+{
+  "familyType": "CLUSTER",
+  "params": {
+    "kind": "CLUSTER",
+    "count": 5,
+    "radiusMm": 4.2,
+    "radiusYMm": 2.4,
+    "startAngleDeg": 0.0,
+    "sweepDeg": 180.0,
+    "includeCenter": false,
+    "memberScale": 0.4,
+    "alignToRadius": true
+  },
+  "members": [],
+  "label": "Elliptical crescent cluster, no centre stone"
+}

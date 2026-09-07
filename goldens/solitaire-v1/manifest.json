@@ -1,7 +1,7 @@
 {
   "suiteId": "solitaire-v1",
   "version": "1.0.0",
-  "purpose": "Software regression baseline for the current solitaire ring \u2014 never a professional or manufacturing approval. See docs/bible/17-geometry-quality/README.md.",
+  "purpose": "Software regression baseline for the current solitaire ring — never a professional or manufacturing approval. See docs/bible/17-geometry-quality/README.md.",
   "goldenIds": [
     {
       "goldenId": "SOL-001-default-solitaire",
@@ -157,6 +157,26 @@
     },
     {
       "goldenId": "STV2-016-measured-oval-prong",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "FAM-001-three-stone-symmetric",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "FAM-002-three-stone-mixed-gems",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "FAM-003-toi-et-moi-diagonal",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "FAM-004-cluster-eight",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "FAM-005-center-with-accents",
       "status": "STABLE"
     }
   ],

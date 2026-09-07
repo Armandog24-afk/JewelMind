@@ -304,6 +304,8 @@ def test_coverage_spans_the_expected_domains():
         "gem_visual",
         # Sprint 22.
         "arrangement",
+        # Sprint 24.
+        "family",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"
@@ -361,8 +363,55 @@ def test_no_gem_property_rule_is_claimed_as_current():
 
 
 def test_gem_arrangement_is_not_advertised_as_current():
+    """Sprint 24 built multi-stone STONE geometry, and each instance may carry
+    its own gem — but a gem is semantic and never affects geometry, so this
+    stays PARTIAL rather than CURRENT until per-member settings and rendering
+    are proven end to end."""
+
     keys = _by_key()
-    assert keys[("gem", "per_stone_gem_in_a_multi_stone_design")]["status"] == "PLANNED"
+    assert keys[("gem", "per_stone_gem_in_a_multi_stone_design")]["status"] in {
+        "PLANNED",
+        "PARTIAL",
+    }
+
+
+def test_family_capabilities_match_the_live_registry():
+    """A family capability must be backed by a real compiler, and the
+    cross-product registry must agree with the family registry."""
+
+    from jewelmind.family.capability import FAMILY_CAPABILITIES
+    from jewelmind.family.compile import family_compilers
+
+    keys = _by_key()
+    assert set(FAMILY_CAPABILITIES) == set(family_compilers())
+    for name, entry in FAMILY_CAPABILITIES.items():
+        recorded = keys[("family", f"family_{name.lower()}")]
+        assert recorded["status"] == entry.status, name
+        # PARTIAL everywhere, because stone geometry is real and an accent
+        # setting is not.
+        assert recorded["status"] == "PARTIAL", name
+
+
+def test_no_family_claims_a_setting_it_does_not_build():
+    from jewelmind.family.capability import families_with_setting_geometry
+
+    keys = _by_key()
+    assert families_with_setting_geometry() == ()
+    assert keys[("family", "per_member_setting")]["status"] == "PLANNED"
+    assert keys[("family", "family_aware_head")]["status"] == "PLANNED"
+    assert keys[("family", "professional_family_rules")]["status"] == "PLANNED"
+
+
+def test_multi_stone_stone_geometry_is_now_claimed_honestly():
+    """The one place this sprint could most easily overstate itself: stone
+    geometry is real, a setting for an accent is not."""
+
+    keys = _by_key()
+    assert keys[("arrangement", "per_instance_stone_geometry")]["status"] == "CURRENT"
+    assert keys[("arrangement", "instance_aware_inspection")]["status"] == "CURRENT"
+    multi = keys[("arrangement", "multi_stone_geometry")]
+    assert multi["status"] == "PARTIAL"
+    assert "setting" in multi["note"].lower()
 
 
 def test_current_arrangement_capabilities_match_the_live_registry():
@@ -378,14 +427,31 @@ def test_current_arrangement_capabilities_match_the_live_registry():
     keys = _by_key()
     live = ARRANGEMENT_CAPABILITIES
 
-    # The boundary, asserted in both registries.
+    # The boundary, asserted in both registries. Sprint 22 had
+    # `generatable is False`; Sprint 24 made per-instance stone geometry real,
+    # so the flag is True and the capability is STILL PARTIAL — for the
+    # narrower reason that a setting is generated only for the primary
+    # instance.
     assert keys[("arrangement", "multi_stone_geometry")]["status"] == "PARTIAL"
     assert live["multi_stone_geometry"].status == "PARTIAL"
-    assert live["multi_stone_geometry"].generatable is False
+    assert live["multi_stone_geometry"].generatable is True
 
-    # Exactly one arrangement capability builds geometry today.
-    generatable = [name for name, e in live.items() if e.generatable]
-    assert generatable == ["stone_instance"]
+    # Every placement and pattern kind now builds geometry; nothing that cannot
+    # be expressed claims to.
+    generatable = sorted(name for name, e in live.items() if e.generatable)
+    assert generatable == [
+        "explicit_placement",
+        "group",
+        "instance_overrides",
+        "linear_pattern",
+        "mirror_pattern",
+        "multi_stone_geometry",
+        "radial_pattern",
+        "stone_instance",
+    ]
+    for name, entry in live.items():
+        if not entry.representable:
+            assert entry.generatable is False, name
     assert keys[("arrangement", "stone_instance")]["status"] == "CURRENT"
 
 
@@ -394,12 +460,19 @@ def test_no_arrangement_solver_or_professional_rule_is_claimed():
     for capability in (
         "constraint_solving",
         "professional_arrangement_rules",
-        "arrangement_collision_checking",
         "enforced_relationships",
         "path_pattern",
         "full_3d_instance_orientation",
     ):
         assert keys[("arrangement", capability)]["status"] == "PLANNED", capability
+
+    # Collision checking moved to PARTIAL in Sprint 24: multi-stone geometry
+    # exists, so Inspection reports stone-to-stone intersections as FACTS — but
+    # no rule interprets them, because that would need a spacing threshold
+    # nobody here can source.
+    collision = keys[("arrangement", "arrangement_collision_checking")]
+    assert collision["status"] == "PARTIAL"
+    assert "no spacing threshold is invented" in collision["note"]
 
 
 def test_the_stone_arrangement_domain_does_not_contradict_the_new_one():

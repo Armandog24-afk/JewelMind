@@ -567,6 +567,159 @@ def _setting_v2_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _family_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Multi-stone family validation (Sprint 24).
+
+    SCOPE: FAMILY_ONLY, and STRUCTURAL ONLY. Four questions: does the document
+    name one placement authority or two, do the members' roles match the
+    family's own rules, does the family actually compile, and do its references
+    resolve. Plus one honest report of what a compiled family does NOT get.
+
+    None of them is a jewelry judgment. There is no rule here about how large
+    an accent should be relative to a centre, how far apart two stones must
+    sit, or whether a twelve-stone cluster could be set — each needs sourced
+    professional evidence this project does not have, so none exists. Whether
+    two placed stones physically overlap is a GEOMETRIC question for Geometry
+    Inspection.
+
+    A design with no family produces NO results, so the entire existing corpus
+    stays quiet.
+    """
+
+    family = d.family
+    if family is None:
+        return []
+
+    from jewelmind.family.compile import FAMILY_ROLE_RULES, compile_family
+    from jewelmind.family.errors import FamilyError
+
+    out: list[R.ValidationResult] = []
+
+    # TWO AUTHORITIES OVER ONE SET OF PLACEMENTS. A family compiles into an
+    # arrangement, so a document carrying both has no determinate resolution.
+    # Refused rather than merged, and reported before generation is attempted.
+    if d.arrangement is not None:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.FAMILY_SINGLE_PLACEMENT_AUTHORITY,
+                severity="error",
+                message=(
+                    "This design declares both a family and an explicit "
+                    "arrangement. A family compiles into an arrangement, so only "
+                    "one may be present: remove the arrangement to keep the "
+                    "family's semantics, or remove the family for full manual "
+                    "control."
+                ),
+                parameter="family",
+            )
+        )
+        # Compilation cannot proceed meaningfully while the conflict stands, and
+        # reporting a second, derived failure would obscure the real one.
+        return out
+
+    rules = FAMILY_ROLE_RULES.get(family.familyType, {})
+    grouped: dict[str, int] = {}
+    for member in family.members:
+        grouped[member.role] = grouped.get(member.role, 0) + 1
+
+    for role, count in sorted(grouped.items()):
+        if role not in rules:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.FAMILY_ROLES_VALID,
+                    severity="error",
+                    message=(
+                        f"Role '{role}' is not part of a {family.familyType} "
+                        f"family. Accepted roles: {', '.join(sorted(rules))}."
+                    ),
+                    parameter="family.members",
+                )
+            )
+            continue
+        expected = rules[role]
+        if expected is not None and count != expected and family.members:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.FAMILY_ROLES_VALID,
+                    severity="error",
+                    message=(
+                        f"A {family.familyType} family requires exactly "
+                        f"{expected} member(s) with role '{role}', found {count}."
+                    ),
+                    parameter="family.members",
+                )
+            )
+
+    # A member naming a stone specification other than 'primary' is reported as
+    # a WARNING: the document is structurally valid and still generates, and
+    # only that member produces no geometry.
+    for member in family.members:
+        if member.stoneRef != "primary":
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.FAMILY_REFERENCES_RESOLVE,
+                    severity="warning",
+                    message=(
+                        f"Family member '{member.memberId}' references stone "
+                        f"'{member.stoneRef}', but this definition declares only "
+                        "the primary stone. No geometry will be built for that "
+                        "member."
+                    ),
+                    parameter="family.members",
+                )
+            )
+        if member.settingRef is not None and member.settingRef != d.setting.type:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.FAMILY_REFERENCES_RESOLVE,
+                    severity="warning",
+                    message=(
+                        f"Family member '{member.memberId}' requests setting "
+                        f"'{member.settingRef}', but this design's setting is "
+                        f"'{d.setting.type}'. Per-member settings are not "
+                        "generated: only the primary stone receives one."
+                    ),
+                    parameter="family.members",
+                )
+            )
+
+    # THE AUTHORITATIVE STRUCTURAL CHECK: does the real compiler accept this
+    # family? Running it here means Forge can never disagree with what
+    # generation will do, because it is the same code path.
+    try:
+        arrangement = compile_family(family)
+    except FamilyError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.FAMILY_COMPILES,
+                severity="error",
+                message=f"This family cannot be compiled: {exc}",
+                parameter="family",
+            )
+        )
+        return out
+
+    # The remaining limitation, surfaced as INFORMATION rather than hidden in a
+    # log. The design is not faulty; a setting is simply built for one stone.
+    if arrangement is not None and len(arrangement.instances) + sum(
+        p.spec.count - 1 if p.spec.kind == "RADIAL" else 1 for p in arrangement.patterns
+    ) > 1:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.FAMILY_SETTING_COVERAGE,
+                severity="information",
+                message=(
+                    f"This {family.familyType} family builds stone geometry for "
+                    "every member, but a setting is generated only for the "
+                    "primary stone: no accent-setting strategy exists yet."
+                ),
+                parameter="family",
+            )
+        )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -861,6 +1014,7 @@ _RULE_GROUPS = (
     _stone_rules,
     _gem_rules,
     _arrangement_rules,
+    _family_rules,
     _prong_rules,
     _bezel_rules,
     _setting_rules,

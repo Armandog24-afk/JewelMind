@@ -145,15 +145,27 @@ def test_the_registry_spec_matches_the_live_registry():
 
 
 def test_the_registry_spec_never_claims_ungenerated_support():
-    """The specification must state the boundary as plainly as the code does."""
+    """The specification must state the boundary as plainly as the code does.
+
+    Sprint 22 asserted `generatable is False`, which was true then. Sprint 24
+    made per-instance stone geometry real, so the flag is now True and the
+    capability is STILL PARTIAL — for the narrower, honest reason that a
+    setting is generated only for the primary instance.
+    """
 
     spec = _load(SPECS_DIR / "arrangement-registry.json")
     multi = next(
         e for e in spec["capabilities"] if e["capability"] == "multi_stone_geometry"
     )
     assert multi["status"] == "PARTIAL"
-    assert multi["generatable"] is False
+    assert multi["generatable"] is True
+    assert "SETTING is generated only for the primary" in multi["note"]
     assert "PARTIAL" in spec["note"]
+
+    # Nothing that cannot be expressed may claim generation.
+    for entry in spec["capabilities"]:
+        if not entry["representable"]:
+            assert entry["generatable"] is False, entry["capability"]
 
 
 def test_the_fingerprint_vectors_still_hold():
