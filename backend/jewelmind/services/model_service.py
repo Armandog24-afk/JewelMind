@@ -19,6 +19,11 @@ from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
+from jewelmind.compilation.environment import current_fingerprint
+from jewelmind.compilation.identity import (
+    CompilationFingerprint,
+    compilation_hash,
+)
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.exporters.integrity import validate_non_empty
 from jewelmind.exporters.json_exporter import export_json
@@ -42,7 +47,28 @@ MAX_CACHED_MODELS = 20
 
 @dataclass
 class ModelRecord:
+    #: The cache key, and the id every API route addresses this model by.
+    #:
+    #: THE COMPILATION HASH, not the definition hash (ALCHEMIST-GOV-010). Two
+    #: identities answer two questions — see
+    #: `jewelmind/compilation/identity.py` — and a cache is asking the second:
+    #: "would compiling this design today produce what I have?" Keyed on
+    #: `definitionHash` alone, this cache could serve geometry across a
+    #: compiler, rule-set or kernel change that would now produce something
+    #: different.
     model_id: str
+
+    #: The design's own identity, carried explicitly alongside.
+    #:
+    #: Still exactly `utils/hashing.py::definition_hash()`, unchanged and
+    #: unreplaced: it remains what every Golden baseline, spec vector and
+    #: stored hash means. The two are separate fields precisely so neither can
+    #: silently stand in for the other.
+    definition_hash: str
+
+    #: The environment the geometry was actually produced in.
+    compilation_fingerprint: CompilationFingerprint
+
     definition: JewelryDefinition
     generated_model: GeneratedModel
     validation_results: list[ValidationResult]
@@ -97,10 +123,18 @@ class ModelService:
         second index would be a second thing to keep consistent.
         """
 
+        # Geometry reuse is subject to the SAME environment constraint as the
+        # cache itself: a cached model built by another kernel build may not
+        # lend its shapes to a new definition, however identical the geometry
+        # hash. Without this the compilation key would be honoured on lookup
+        # and bypassed on reuse.
+        wanted_fingerprint = current_fingerprint()
         wanted = geometry_hash(definition)
         with self._lock:
             for record in reversed(self._records.values()):
                 model = record.generated_model
+                if record.compilation_fingerprint != wanted_fingerprint:
+                    continue
                 if model.geometry_hash and model.geometry_hash == wanted:
                     return record
         return None
@@ -147,7 +181,24 @@ class ModelService:
             # docs/bible/18-ring-architecture/532-ring-generation-contract.md.
             generated_model = generate_jewelry(definition)
 
-        model_id = generated_model.definition_hash
+        # THE CACHE KEY IS THE COMPILATION IDENTITY, not the design identity.
+        #
+        # `definitionHash` answers "is this the same design?"; a cache needs
+        # "would compiling this design in this environment produce what I
+        # already have?". Those differ whenever the compiler, the Forge
+        # rule-set or the CadQuery/OpenCascade build changes — and Sprint 5's
+        # CI already proved two OCCT builds produce different volumes for one
+        # design. Keying on `definitionHash` alone left that as a live
+        # structural risk (ALCHEMIST-GOV-010, recorded in
+        # docs/bible/08-alchemist/176-compilation-cache-model.md); the fix is a
+        # different key, not an invalidation routine, so a version bump simply
+        # misses the cache.
+        #
+        # Computed from the environment BEFORE any lookup, which is possible
+        # because every component is a module constant or an installed library
+        # version rather than a property of a generated model.
+        fingerprint = current_fingerprint()
+        model_id = compilation_hash(generated_model.definition_hash, fingerprint)
 
         temp_dir = Path(tempfile.mkdtemp(prefix=f"jewelmind_{model_id}_"))
         preview_manifest = write_component_previews(generated_model, definition, temp_dir)
@@ -159,6 +210,8 @@ class ModelService:
 
         record = ModelRecord(
             model_id=model_id,
+            definition_hash=generated_model.definition_hash,
+            compilation_fingerprint=fingerprint,
             definition=definition,
             generated_model=generated_model,
             validation_results=results,

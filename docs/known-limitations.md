@@ -88,6 +88,14 @@ to every limitation below and to the design as a whole.
   `backend/jewelmind/services/model_service.py`) with LRU eviction.
   Restarting the backend clears all generated models; clients must
   regenerate. There is no database in this milestone.
+
+  The cache is keyed on `compilationHash` (design identity plus the
+  compiler, Forge rule-set, generator and kernel/OCP versions), not on
+  `definitionHash` alone — see
+  [`ADR-012`](bible/03-decisions/ADR-012-compilation-hash-as-cache-key.md).
+  That distinction was closed while the cache was still volatile,
+  specifically so a future durable cache cannot inherit the ambiguity and
+  serve geometry no current code would produce.
 - **Docker build has not been executed end-to-end.** Docker was not
   available in the environment this project was built and tested in. The
   backend and frontend were both fully built, tested, and manually verified

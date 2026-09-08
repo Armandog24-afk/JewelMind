@@ -1,32 +1,56 @@
 {
-  "description": "compilationHash does NOT exist in the current implementation. This file documents a PROPOSED formula (never implemented, never used to produce a real API response) and shows real, deterministically-computed example values for that formula, so a future implementation has a concrete, tested target rather than a vague description. See docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md.",
-  "status": "PROPOSED, NOT IMPLEMENTED",
-  "proposedFormula": "sha256(f'{definitionHash}|{compilerVersion}|{geometryGeneratorVersion}|{forgeRuleSetVersion}').hexdigest()[:16] — deliberately modeled on the existing definition_hash() truncation scheme in backend/jewelmind/utils/hashing.py, not a new hashing convention.",
+  "description": "compilationHash as implemented in backend/jewelmind/compilation/identity.py and used as the ModelService cache key. Every value below was produced by running that code against the checked-in JDL examples and the environment this repository is tested in. See docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md and docs/bible/03-decisions/ADR-012-compilation-hash-as-cache-key.md.",
+  "status": "IMPLEMENTED",
+  "formula": "sha256(f'{definitionHash}|{compilerVersion}|{geometryGeneratorVersion}|{forgeRuleSetVersion}|{kernelVersion}|{ocpVersion}').hexdigest()[:16] - the same truncation scheme as definition_hash(), not a new hashing convention. An unreadable ocpVersion is hashed as the literal 'absent' rather than omitted, so a shorter input cannot collide with a build named for the placeholder.",
+  "excludedComponents": {
+    "jdlSchemaVersion": "already inside definitionHash, since schemaVersion is a field of the document",
+    "inspectionVersion": "Geometry Inspection is read-only by contract (INSPECT-GOV-013); including it would discard correct cached geometry for a change that cannot affect geometry"
+  },
+  "environmentNote": "kernelVersion and ocpVersion are the versions installed in this environment. A different CadQuery/OpenCascade build legitimately produces different compilationHash values for the same design - that is the entire purpose of the identifier - so these vectors are verified by RECOMPUTING from the recorded components, never by pinning a hash to a particular machine.",
   "vectors": [
     {
-      "definitionHash": "355ddca57e7e49ad",
+      "case": "default solitaire, this environment",
+      "definitionHash": "aee3a916fc345721",
       "compilerVersion": "0.1.0",
       "geometryGeneratorVersion": "0.1.0",
-      "forgeRuleSetVersion": "none",
-      "proposedCompilationHash": "49092ec7ab9154a8"
+      "forgeRuleSetVersion": "1.0.0",
+      "kernelVersion": "2.8.0",
+      "ocpVersion": "7.9.3.1",
+      "compilationHash": "8d317ed2db9d71be"
     },
     {
-      "definitionHash": "fc385afc962b175d",
+      "case": "different design, same environment",
+      "definitionHash": "3fbc2f0eb8a625a7",
       "compilerVersion": "0.1.0",
       "geometryGeneratorVersion": "0.1.0",
-      "forgeRuleSetVersion": "none",
-      "proposedCompilationHash": "87833266dfc3d97b",
-      "note": "Different definitionHash (four-prong-solitaire) yields a different compilationHash, as expected."
+      "forgeRuleSetVersion": "1.0.0",
+      "kernelVersion": "2.8.0",
+      "ocpVersion": "7.9.3.1",
+      "compilationHash": "759800f1840a0f42",
+      "note": "A different definitionHash yields a different compilationHash, as expected."
     },
     {
-      "definitionHash": "355ddca57e7e49ad",
+      "case": "same design, hypothetically different compiler",
+      "definitionHash": "aee3a916fc345721",
       "compilerVersion": "0.2.0",
       "geometryGeneratorVersion": "0.1.0",
-      "forgeRuleSetVersion": "none",
-      "proposedCompilationHash": "be7fb8f04b7282e5",
-      "note": "Same definitionHash, hypothetically-different compilerVersion, yields a different compilationHash — this is the entire point of a separate compilationHash: it changes when ANY output-affecting version changes, even if design intent (definitionHash) did not."
+      "forgeRuleSetVersion": "1.0.0",
+      "kernelVersion": "2.8.0",
+      "ocpVersion": "7.9.3.1",
+      "compilationHash": "3b5dfee178c16171",
+      "note": "Same definitionHash, different compilerVersion, different compilationHash - the entire point of a separate identity: it changes when any output-affecting version changes, even though design intent did not."
+    },
+    {
+      "case": "same design, hypothetically different kernel",
+      "definitionHash": "aee3a916fc345721",
+      "compilerVersion": "0.1.0",
+      "geometryGeneratorVersion": "0.1.0",
+      "forgeRuleSetVersion": "1.0.0",
+      "kernelVersion": "2.9.0",
+      "ocpVersion": "7.9.3.1",
+      "compilationHash": "312ffed7884800b9",
+      "note": "Same definitionHash, different kernelVersion, different compilationHash. Sprint 5's CI proved two OCCT builds produce different volumes for one design, so this is the component empirically shown to matter."
     }
   ],
-  "whyForgeRuleSetVersionIsPlaceholder": "No aggregate Forge rule-set version currently exists (each of the 21 rules is independently versioned — see specs/forge/v1/current-rule-registry.json); 'none' is used as a placeholder string in these vectors, not a real value.",
-  "doNotSilentlyReplaceDefinitionHash": "definitionHash (backend/jewelmind/utils/hashing.py::definition_hash()) is unchanged by this proposal and remains the current, real, tested model-cache key. compilationHash would be a NEW, additive identifier layered on top, never a replacement."
+  "doNotSilentlyReplaceDefinitionHash": "definitionHash (backend/jewelmind/utils/hashing.py::definition_hash()) is unchanged and remains the identity of canonical design intent. compilationHash was added beside it; ModelRecord carries both as separate fields so neither can stand in for the other."
 }

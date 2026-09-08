@@ -31,7 +31,7 @@ The normative shape is `specs/alchemist/v1/compilation-result.schema.json`; two 
 | `forgeRuleSetVersion` | PLANNED (no aggregate version exists) | — |
 | `kernelVersion` | PLANNED | — |
 | `sourceDefinitionHash` | CURRENT | `GeneratedModel.definition_hash` |
-| `compilationHash` | PLANNED | see [`175-definition-hash-vs-compilation-hash.md`](175-definition-hash-vs-compilation-hash.md) |
+| `compilationHash` | CURRENT | the cache key, and returned on the generate/metadata responses — see [`175-definition-hash-vs-compilation-hash.md`](175-definition-hash-vs-compilation-hash.md) |
 | `normalizedDefinition` | CURRENT | the `JewelryDefinition` instance |
 | `forgeEvaluation` | CURRENT | `list[ValidationResult]` |
 | `geometryPlanSummary` | PLANNED | no `GeometryPlan` exists |

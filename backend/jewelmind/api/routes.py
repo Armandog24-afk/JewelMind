@@ -157,6 +157,7 @@ def generate_model(definition: JewelryDefinition) -> GenerateResponse:
     return GenerateResponse(
         modelId=record.model_id,
         definitionHash=gm.definition_hash,
+        compilationHash=record.model_id,
         validation=record.validation_results,
         metadata={
             "generatorVersion": gm.generator_version,
@@ -235,6 +236,7 @@ def model_metadata(model_id: str) -> ModelMetadataResponse:
     return ModelMetadataResponse(
         modelId=record.model_id,
         definitionHash=gm.definition_hash,
+        compilationHash=record.model_id,
         generatorVersion=gm.generator_version,
         generatedAt=record.generated_at,
         generationDurationSeconds=gm.generation_duration_s,

@@ -1447,6 +1447,66 @@
       "capability": "reserved_retention_strategies",
       "status": "PLANNED",
       "note": "Named with real reasons and no builder: CHANNEL, GRAIN, SHARED_PRONG, THREAD_SET. Each is refused by the model rather than substituted with a bead."
+    },
+    {
+      "domain": "alchemist",
+      "capability": "compilation_identity",
+      "status": "CURRENT",
+      "note": "compilationHash: design identity plus the compiler, Forge rule-set, geometry generator, CadQuery and OpenCascade versions. Implemented in backend/jewelmind/compilation/. definitionHash is unchanged and carried separately. See ADR-012."
+    },
+    {
+      "domain": "alchemist",
+      "capability": "version_fingerprint",
+      "status": "CURRENT",
+      "note": "Six of the eight conceptual fingerprint fields are read from real installed versions and participate in compilationHash; the two remaining (a separate exporter version, the operating environment) do not exist as versioned things. One reader, in compilation/environment.py, so the cache key and the Golden fingerprint cannot disagree."
+    },
+    {
+      "domain": "alchemist",
+      "capability": "compilation_cache",
+      "status": "PARTIAL",
+      "note": "In-memory OrderedDict, capped at 20, LRU, cleared on restart, keyed on compilationHash so a compiler/rule-set/kernel change misses rather than serving stale geometry (ALCHEMIST-GOV-010 now enforced). PARTIAL because it is volatile: nothing survives a restart, by design."
+    },
+    {
+      "domain": "alchemist",
+      "capability": "geometry_plan",
+      "status": "PLANNED",
+      "note": "GeometryPlan is not a materialized object. ALCHEMIST-GOV-004 describes it conditionally and materializing it requires an ADR. Compilation output travels on GeneratedModel's setting_result/arrangement_result/pave_result."
+    },
+    {
+      "domain": "persistence",
+      "capability": "durable_datastore",
+      "status": "PLANNED",
+      "note": "No database of any kind exists: no technology, no schema, no migrations, no ORM, no driver, no declared dependency. The absence is intentional for this phase and is asserted by backend/tests/test_persistence_boundary.py. No technology has been chosen and no ADR selects one; that decision is open."
+    },
+    {
+      "domain": "persistence",
+      "capability": "domain_persistence_independence",
+      "status": "CURRENT",
+      "note": "The domain and CAD layers import no database or storage technology and perform no filesystem I/O outside the asset-store abstraction, so a future persistence layer can be added without touching them. Asserted over the real package tree by AST inspection, not by convention."
+    },
+    {
+      "domain": "persistence",
+      "capability": "project_repository",
+      "status": "PLANNED",
+      "note": "No repository, DAO or data-access layer exists, and none was created: an unused interface would be the speculative abstraction this phase deliberately avoided. The boundary is proven by test instead. Projects, versions and variants remain PLANNED (see history.project_versioning)."
+    },
+    {
+      "domain": "persistence",
+      "capability": "definition_serializability",
+      "status": "CURRENT",
+      "note": "Every JDL/domain model round-trips through plain JSON with a stable definitionHash, including the optional arrangement/family/halo/pave blocks. Not a claim that persistence exists — a checked statement that nothing in the domain blocks it. GeneratedModel is deliberately NOT serializable: it holds kernel objects, and geometry is reproduced from the definition plus the compilation fingerprint."
+    },
+    {
+      "domain": "persistence",
+      "capability": "authentication",
+      "status": "PLANNED",
+      "note": "No authentication, accounts, sessions, roles or project ownership exist, and no auth dependency is declared. commercial.auth_payments_marketplace is OUT_OF_SCOPE per README/CLAUDE.md; this row records the persistence-layer prerequisite rather than reopening that scope decision."
+    },
+    {
+      "domain": "persistence",
+      "capability": "object_storage",
+      "status": "PLANNED",
+      "note": "Asset storage is a Protocol (stone/importing.py::StoneAssetStore) with a single content-addressed filesystem implementation. No object storage exists. The interface was found sufficient and left unmodified; its resolve() returns a Path today, which a future non-filesystem implementation would have to satisfy."
     }
   ]
 }

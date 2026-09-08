@@ -10,7 +10,6 @@ start rather than reactively.
 
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 
@@ -68,18 +67,62 @@ def test_normalization_vectors_match_live_implementation():
         assert definition_hash(definition) == vector["normalizedDefinitionHash"], vector["name"]
 
 
-def test_proposed_compilation_hash_vectors_are_reproducible():
-    """The proposed formula is not implemented in application code, but this
-    test proves the checked-in vectors are at least internally consistent
-    and reproducible from the documented formula itself."""
+def test_compilation_hash_vectors_are_reproducible():
+    """The checked-in vectors recompute from the REAL implementation.
+
+    Renamed from `test_proposed_...` when `compilationHash` stopped being a
+    proposal (ADR-012). It now exercises the shipped function rather than a
+    formula transcribed into the test — a transcription would pass even if the
+    implementation diverged from it, which is the whole failure mode a vector
+    file exists to prevent.
+
+    Recomputed from each vector's own recorded components rather than compared
+    against a pinned digest, because two CadQuery/OpenCascade builds
+    legitimately produce different hashes for one design: that is the
+    identifier's purpose, not a defect.
+    """
+
+    from jewelmind.compilation.identity import CompilationFingerprint, compilation_hash
+
     vectors = _load_json(SPECS_DIR / "test-vectors" / "compilation-hash-vectors.json")
+    assert vectors["status"] == "IMPLEMENTED"
+    assert vectors["vectors"]
     for vector in vectors["vectors"]:
-        payload = (
-            f"{vector['definitionHash']}|{vector['compilerVersion']}|"
-            f"{vector['geometryGeneratorVersion']}|{vector['forgeRuleSetVersion']}"
-        ).encode()
-        expected = hashlib.sha256(payload).hexdigest()[:16]
-        assert expected == vector["proposedCompilationHash"]
+        fingerprint = CompilationFingerprint(
+            compilerVersion=vector["compilerVersion"],
+            geometryGeneratorVersion=vector["geometryGeneratorVersion"],
+            forgeRuleSetVersion=vector["forgeRuleSetVersion"],
+            kernelVersion=vector["kernelVersion"],
+            ocpVersion=vector["ocpVersion"],
+        )
+        assert compilation_hash(vector["definitionHash"], fingerprint) == (
+            vector["compilationHash"]
+        ), vector["case"]
+
+    # And the vectors must actually demonstrate the distinction they exist for:
+    # one design under two environments, hashing differently.
+    by_case = {v["case"]: v for v in vectors["vectors"]}
+    same_design = [
+        v
+        for v in vectors["vectors"]
+        if v["definitionHash"] == by_case["default solitaire, this environment"]["definitionHash"]
+    ]
+    assert len({v["compilationHash"] for v in same_design}) == len(same_design)
+
+
+def test_the_live_environment_reproduces_its_own_vector():
+    """The first vector is this environment's real value, not a recorded one."""
+
+    from jewelmind.compilation.environment import current_fingerprint
+    from jewelmind.compilation.identity import compilation_hash
+
+    vectors = _load_json(SPECS_DIR / "test-vectors" / "compilation-hash-vectors.json")
+    live = next(
+        v for v in vectors["vectors"] if v["case"] == "default solitaire, this environment"
+    )
+    assert compilation_hash(live["definitionHash"], current_fingerprint()) == (
+        live["compilationHash"]
+    )
 
 
 def test_capability_vectors_match_live_schema_enums():

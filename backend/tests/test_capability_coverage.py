@@ -308,6 +308,12 @@ def test_coverage_spans_the_expected_domains():
         "family",
         # Sprint 25.
         "halo",
+        # Sprint 26.
+        "pave",
+        # Pre-Sprint-27: compilation identity, and persistence represented
+        # honestly for the first time.
+        "alchemist",
+        "persistence",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"
@@ -528,3 +534,50 @@ def test_the_stone_arrangement_domain_does_not_contradict_the_new_one():
         if entry["capability"] == "single_center":
             continue
         assert entry["status"] in {"PLANNED", "PARTIAL"}, entry
+
+def test_persistence_is_represented_honestly():
+    """No persistence capability may claim to exist (pre-Sprint-27).
+
+    The registry gained a `persistence` domain because the preceding audit
+    found the subject entirely unrepresented — implicit inside
+    `history.project_versioning`, never named. These assertions exist so a
+    future change cannot flip a row to CURRENT without a real datastore behind
+    it.
+    """
+
+    keys = _by_key()
+    assert keys[("persistence", "durable_datastore")]["status"] == "PLANNED"
+    assert keys[("persistence", "project_repository")]["status"] == "PLANNED"
+    assert keys[("persistence", "authentication")]["status"] == "PLANNED"
+    assert keys[("persistence", "object_storage")]["status"] == "PLANNED"
+
+    # The two that ARE current are properties of the domain layer, not stores:
+    # they say a future persistence layer is unobstructed, never that one runs.
+    for capability in ("domain_persistence_independence", "definition_serializability"):
+        assert keys[("persistence", capability)]["status"] == "CURRENT", capability
+
+    # And the pre-existing scope decisions are untouched by this intervention.
+    assert keys[("commercial", "auth_payments_marketplace")]["status"] == "OUT_OF_SCOPE"
+    assert keys[("collaboration", "multi_user")]["status"] == "OUT_OF_SCOPE"
+    assert keys[("history", "project_versioning")]["status"] == "PLANNED"
+    assert keys[("library", "component_library")]["status"] == "PLANNED"
+
+
+def test_the_compilation_identity_rows_match_the_live_code():
+    """A CURRENT compilation capability must be backed by real code."""
+
+    from jewelmind.compilation.environment import current_fingerprint
+    from jewelmind.compilation.identity import CompilationFingerprint, compilation_hash
+
+    keys = _by_key()
+    assert keys[("alchemist", "compilation_identity")]["status"] == "CURRENT"
+    assert keys[("alchemist", "version_fingerprint")]["status"] == "CURRENT"
+    # Volatile by design, so PARTIAL rather than CURRENT.
+    assert keys[("alchemist", "compilation_cache")]["status"] == "PARTIAL"
+    # Still not a materialized object; naming it would be the overstatement
+    # this registry exists to prevent.
+    assert keys[("alchemist", "geometry_plan")]["status"] == "PLANNED"
+
+    live = current_fingerprint()
+    assert isinstance(live, CompilationFingerprint)
+    assert compilation_hash("0123456789abcdef", live) != "0123456789abcdef"

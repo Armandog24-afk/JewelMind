@@ -6,50 +6,37 @@ Sprint 6/7 identified missing version fingerprint information; this
 closes the gap for the fields that matter to geometry regression, without
 a broader compiler-orchestration refactor (see
 docs/bible/17-geometry-quality/510-version-fingerprint-policy.md).
+
+DERIVED, NOT DUPLICATED. The version-reading logic moved to
+`jewelmind/compilation/environment.py` when `compilationHash` was implemented,
+because the cache key and this report must never disagree about which kernel
+built a model. This module now reports the same environment plus the two fields
+the Golden suite needs and the compilation identity deliberately excludes:
+`jdlSchemaVersion` (already inside `definitionHash`) and `inspectionVersion`
+(read-only measurement, which cannot affect geometry) — see
+`jewelmind/compilation/identity.py::CompilationFingerprint` for why.
 """
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
-import cadquery as cq
-
-from jewelmind import __version__ as compiler_version
+from jewelmind.compilation.environment import current_fingerprint
 from jewelmind.domain.schema import SCHEMA_VERSION
 from jewelmind.geometry.inspection.version import INSPECTION_VERSION
 from jewelmind.geometry.model import GeneratedModel
 from jewelmind.geometry_quality.models import VersionFingerprint
 
-_FORGE_REGISTRY_PATH = (
-    Path(__file__).resolve().parents[3] / "specs" / "forge" / "v1" / "current-rule-registry.json"
-)
-
-
-def _forge_registry_version() -> str:
-    try:
-        data = json.loads(_FORGE_REGISTRY_PATH.read_text(encoding="utf-8"))
-        return str(data.get("registryVersion", "unknown"))
-    except OSError:
-        return "unknown"
-
-
-def _ocp_version() -> str | None:
-    try:
-        import OCP
-
-        return getattr(OCP, "__version__", None)
-    except Exception:
-        return None
-
 
 def collect_fingerprint(model: GeneratedModel) -> VersionFingerprint:
+    environment = current_fingerprint()
     return VersionFingerprint(
         jdlSchemaVersion=SCHEMA_VERSION,
-        forgeRuleSetVersion=_forge_registry_version(),
-        compilerVersion=compiler_version,
+        forgeRuleSetVersion=environment.forgeRuleSetVersion,
+        compilerVersion=environment.compilerVersion,
+        # The MODEL'S OWN stamped generator, not the environment's: a snapshot
+        # must report what actually built the geometry it describes, which for
+        # a reused or reloaded model need not be this process's constant.
         atlasGeneratorVersion=model.generator_version,
         inspectionVersion=INSPECTION_VERSION,
-        kernelVersion=cq.__version__,
-        ocpVersion=_ocp_version(),
+        kernelVersion=environment.kernelVersion,
+        ocpVersion=environment.ocpVersion,
     )

@@ -30,6 +30,11 @@ class ValidateResponse(BaseModel):
 class GenerateResponse(BaseModel):
     modelId: str
     definitionHash: str
+    #: The compilation identity: this design PLUS the compiler, rule-set and
+    #: kernel versions that produced it. Equal to `modelId`, and named
+    #: explicitly so a client never has to know that. See
+    #: docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md.
+    compilationHash: str
     validation: list[ValidationResult]
     metadata: dict[str, Any]
     previewComponents: dict[str, Any]
@@ -40,6 +45,11 @@ class GenerateResponse(BaseModel):
 class ModelMetadataResponse(BaseModel):
     modelId: str
     definitionHash: str
+    #: The compilation identity: this design PLUS the compiler, rule-set and
+    #: kernel versions that produced it. Equal to `modelId`, and named
+    #: explicitly so a client never has to know that. See
+    #: docs/bible/08-alchemist/175-definition-hash-vs-compilation-hash.md.
+    compilationHash: str
     generatorVersion: str
     generatedAt: str
     generationDurationSeconds: float
