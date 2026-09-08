@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/pave-spec.schema.json",
+  "title": "PaveSpec",
+  "additionalProperties": false,
+  "description": "SURFACE POPULATION: cover a region at a pitch.\n\nThe designer states the AREA and the DENSITY; the stone count follows. That\nis the difference from a microsetting, where the count is stated and the\narea follows — and it is why these are two models rather than one with a\nflag.\n\n`angularSpanDeg` and `axialSpanMm` describe the region in the host\nsurface's OWN parameterization: an angle about the surface axis and a\ndistance along it. For a planar host the angular span is read as a sweep\nabout the surface's normal and the axial span as a radius extent, which is\nwhat makes one spec cover both a shank and a flat gallery.",
+  "properties": {
+    "kind": {
+      "const": "PAVE",
+      "default": "PAVE",
+      "title": "Kind",
+      "type": "string"
+    },
+    "angularSpanDeg": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 360.0,
+      "title": "Angularspandeg",
+      "type": "number"
+    },
+    "startAngleDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Startangledeg",
+      "type": "number"
+    },
+    "axialSpanMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 200.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Axialspanmm"
+    },
+    "pitchMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Pitchmm",
+      "type": "number"
+    },
+    "rowPitchMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 50.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rowpitchmm"
+    },
+    "rowCount": {
+      "default": 1,
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Rowcount",
+      "type": "integer"
+    },
+    "pattern": {
+      "default": "GRID",
+      "enum": [
+        "GRID",
+        "STAGGERED",
+        "ROW_OFFSET",
+        "RADIAL",
+        "EXPLICIT"
+      ],
+      "title": "Pattern",
+      "type": "string"
+    },
+    "rowOffsetFraction": {
+      "default": 0.5,
+      "maximum": 1.0,
+      "minimum": -1.0,
+      "title": "Rowoffsetfraction",
+      "type": "number"
+    },
+    "termination": {
+      "default": "CENTERED",
+      "enum": [
+        "FULL_STONES",
+        "CENTERED"
+      ],
+      "title": "Termination",
+      "type": "string"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    }
+  },
+  "required": [
+    "angularSpanDeg",
+    "pitchMm"
+  ],
+  "type": "object"
+}

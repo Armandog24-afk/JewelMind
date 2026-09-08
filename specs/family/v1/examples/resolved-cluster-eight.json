@@ -8,7 +8,9 @@
         "xMm": 3.6,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -29,7 +31,9 @@
         "xMm": 2.545584,
         "yMm": 2.545584,
         "zMm": 0.0,
-        "rotationDeg": 45.0
+        "rotationDeg": 45.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -50,7 +54,9 @@
         "xMm": 0.0,
         "yMm": 3.6,
         "zMm": 0.0,
-        "rotationDeg": 90.0
+        "rotationDeg": 90.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -71,7 +77,9 @@
         "xMm": -2.545584,
         "yMm": 2.545584,
         "zMm": 0.0,
-        "rotationDeg": 135.0
+        "rotationDeg": 135.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -92,7 +100,9 @@
         "xMm": -3.6,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 180.0
+        "rotationDeg": 180.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -113,7 +123,9 @@
         "xMm": -2.545584,
         "yMm": -2.545584,
         "zMm": 0.0,
-        "rotationDeg": 225.0
+        "rotationDeg": 225.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -134,7 +146,9 @@
         "xMm": 0.0,
         "yMm": -3.6,
         "zMm": 0.0,
-        "rotationDeg": 270.0
+        "rotationDeg": 270.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -155,7 +169,9 @@
         "xMm": 2.545584,
         "yMm": -2.545584,
         "zMm": 0.0,
-        "rotationDeg": 315.0
+        "rotationDeg": 315.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.35,
@@ -176,7 +192,9 @@
         "xMm": 0.0,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": null,
@@ -201,7 +219,7 @@
       "note": "The ring is concentric with the cluster's centre stone."
     }
   ],
-  "arrangementFingerprint": "cfe7edebaa4cbe64",
+  "arrangementFingerprint": "5ad17691c91fe7b0",
   "resolverVersion": "1.0.0",
   "instanceCount": 9,
   "generatedCount": 9,

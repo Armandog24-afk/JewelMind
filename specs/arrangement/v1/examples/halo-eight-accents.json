@@ -11,7 +11,9 @@
           "xMm": 0.0,
           "yMm": 0.0,
           "zMm": 0.0,
-          "rotationDeg": 0.0
+          "rotationDeg": 0.0,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -38,7 +40,9 @@
         "xMm": 0.0,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       }
     }
   ],

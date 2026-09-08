@@ -198,6 +198,26 @@
     {
       "goldenId": "HALO-005-halo-around-toi-et-moi",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "PAVE-001-shank-single-row",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "PAVE-002-shank-staggered",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "PAVE-003-microsetting",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "PAVE-004-head-plane-gallery",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "PAVE-005-three-stone-with-pave",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [

@@ -195,12 +195,20 @@ ARRANGEMENT_CAPABILITIES: dict[str, ArrangementCapabilityEntry] = {
         ),
         _entry(
             "full_3d_instance_orientation",
-            "PLANNED",
-            False,
-            False,
-            False,
-            "Tilt and roll. Deliberately not representable: accepting a rotation no "
-            "builder can execute would be a silently ignored field.",
+            "CURRENT",
+            True,
+            True,
+            True,
+            "An instance's axis can be tilted away from vertical (`tiltDeg`) in a "
+            "stated direction (`tiltAzimuthDeg`), which together with the "
+            "existing spin about its own axis gives a complete ZXZ orientation. "
+            "Sprint 22 recorded this PLANNED on the correct ground that no "
+            "builder could execute it; Sprint 26 built one "
+            "(`geometry/stone/instance.py::_tilted_about_own_center`) because a "
+            "pave on a curved shank needs its stones to follow the surface "
+            "normal. The field follows the capability, not the reverse — see "
+            "ADR-011. There is no separate 'roll': a roll about the instance's "
+            "own axis IS `rotationDeg`.",
         ),
         _entry(
             "path_pattern",

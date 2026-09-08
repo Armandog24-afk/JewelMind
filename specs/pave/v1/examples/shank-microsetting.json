@@ -1,0 +1,36 @@
+{
+  "paveId": "pave",
+  "enabled": true,
+  "kind": "MICROSETTING",
+  "spec": {
+    "kind": "MICROSETTING",
+    "columnCount": 14,
+    "rowCount": 2,
+    "stoneSpacingMm": 0.75,
+    "rowSpacingMm": 0.8,
+    "startAngleDeg": 0.0,
+    "axialOffsetMm": 0.0,
+    "pattern": "STAGGERED",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "BAND_OUTER",
+  "stoneRef": "primary",
+  "stoneScale": 0.075,
+  "stoneOrientationDeg": 0.0,
+  "gem": null,
+  "retention": {
+    "strategy": "MICRO_PRONG",
+    "beadRadiusMm": 0.1,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.28
+  },
+  "seat": {
+    "mode": "REFERENCE_RECESS",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [],
+  "label": "Micro-set shank structure"
+}

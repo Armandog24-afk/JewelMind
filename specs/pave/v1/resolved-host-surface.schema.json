@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/resolved-host-surface.schema.json",
+  "title": "ResolvedHostSurface",
+  "additionalProperties": false,
+  "description": "Everything the pavé layer needs to know about a surface, as numbers.\n\nSupplied by the jewelry category, never measured here. Every field is a\nplain float in millimetres or degrees, so this object is serializable,\ncomparable, hashable and free of any kernel dependency.",
+  "properties": {
+    "host": {
+      "maxLength": 40,
+      "title": "Host",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "CYLINDRICAL",
+        "PLANAR"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "hostComponent": {
+      "maxLength": 80,
+      "title": "Hostcomponent",
+      "type": "string"
+    },
+    "radiusMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radiusmm"
+    },
+    "axisAzimuthDeg": {
+      "default": 90.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Axisazimuthdeg",
+      "type": "number"
+    },
+    "axialExtentMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Axialextentmm"
+    },
+    "axialCenterMm": {
+      "default": 0.0,
+      "title": "Axialcentermm",
+      "type": "number"
+    },
+    "planeZMm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Planezmm"
+    },
+    "innerRadiusMm": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Innerradiusmm"
+    },
+    "outerRadiusMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outerradiusmm"
+    },
+    "stoneAnchorZMm": {
+      "title": "Stoneanchorzmm",
+      "type": "number"
+    }
+  },
+  "required": [
+    "host",
+    "kind",
+    "hostComponent",
+    "stoneAnchorZMm"
+  ],
+  "type": "object"
+}

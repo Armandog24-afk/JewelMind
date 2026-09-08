@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "name": "Solitaire Ring",
+    "units": "mm"
+  },
+  "jewelry": {
+    "category": "ring",
+    "style": "solitaire"
+  },
+  "ring": {
+    "sizeSystem": "EU",
+    "size": 16.0,
+    "innerDiameter": 17.8
+  },
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
+  },
+  "stone": {
+    "shape": "round",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null,
+    "gem": null
+  },
+  "setting": {
+    "type": "prong",
+    "prongCount": 6,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5,
+    "prongStyle": "ROUND_PRONG",
+    "headArchitecture": "BASKET",
+    "seatMode": "NONE",
+    "prongTipRatio": 0.6,
+    "headBaseRatio": 0.55,
+    "pegDiameter": null,
+    "pegHeight": null,
+    "bezelWallThickness": 0.6,
+    "bezelWallHeight": 2.5
+  },
+  "material": {
+    "metal": "yellow_gold_18k"
+  },
+  "manufacturing": {
+    "method": "lost_wax_casting"
+  },
+  "preview": {
+    "meshTolerance": 0.1,
+    "angularTolerance": 0.2
+  },
+  "arrangement": null,
+  "family": null,
+  "halo": null,
+  "pave": {
+    "paveId": "pave",
+    "enabled": true,
+    "kind": "MICROSETTING",
+    "spec": {
+      "kind": "MICROSETTING",
+      "columnCount": 14,
+      "rowCount": 2,
+      "stoneSpacingMm": 0.75,
+      "rowSpacingMm": 0.8,
+      "startAngleDeg": 0.0,
+      "axialOffsetMm": 0.0,
+      "pattern": "STAGGERED",
+      "rowOffsetFraction": 0.5,
+      "termination": "CENTERED",
+      "symmetry": "SYMMETRIC"
+    },
+    "host": "BAND_OUTER",
+    "stoneRef": "primary",
+    "stoneScale": 0.07,
+    "stoneOrientationDeg": 0.0,
+    "gem": null,
+    "retention": {
+      "strategy": "MICRO_PRONG",
+      "beadRadiusMm": 0.1,
+      "beadEmbedMm": 0.06,
+      "prongHeightMm": 0.28
+    },
+    "seat": {
+      "mode": "REFERENCE_RECESS",
+      "clearanceMm": 0.02
+    },
+    "containment": "CLIP",
+    "explicitPlacements": [],
+    "label": "Micro-set shank structure"
+  }
+}

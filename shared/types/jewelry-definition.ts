@@ -410,13 +410,21 @@ export type ArrangementRelationKind =
  * so an instance the pipeline did not build says so and says why. */
 export type InstanceGenerationStatus = 'GENERATED' | 'NOT_GENERATED'
 
-/** An instance's rigid placement: a translation plus ONE rotation, about the
- * vertical axis only. Millimetres and degrees, like everything else. */
+/** An instance's rigid placement: a translation plus a complete orientation.
+ *
+ * `rotationDeg` spins the instance about its own axis; `tiltDeg`/
+ * `tiltAzimuthDeg` tip that axis away from vertical and say which way it leans
+ * (Sprint 26, ADR-011). Together they are ZXZ Euler angles. Both tilt fields
+ * are `0` on every pre-Sprint-26 document, which is the identity.
+ *
+ * Millimetres and degrees, like everything else. */
 export interface InstanceTransform {
   xMm: number
   yMm: number
   zMm: number
   rotationDeg: number
+  tiltDeg: number
+  tiltAzimuthDeg: number
 }
 
 export interface InstancePlacement {
@@ -725,6 +733,120 @@ export interface HaloDefinition {
   label: string | null
 }
 
+/**
+ * Pavé & Microsetting Engine v1 (Sprint 26). Mirrors
+ * `backend/jewelmind/pave/models.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a
+ * host, pattern or retention strategy the backend has no builder for.
+ * `SETTING_SURFACE`, `BAND_INNER`, `BAND_SIDE`, `CUSTOM_SURFACE` and
+ * `PRONG_SURFACE` are deliberately absent as hosts, and `SHARED_PRONG`,
+ * `CHANNEL`, `GRAIN` and `THREAD_SET` as strategies — each is reserved with a
+ * real reason in `backend/jewelmind/pave/capability.py`.
+ */
+
+/** The two first-class field kinds.
+ *
+ * `PAVE` populates a surface region at a pitch: the designer gives the area and
+ * the density and the count follows. `MICROSETTING` states rows, columns and
+ * spacings: the designer gives the structure and the area follows. */
+export type PaveKind = 'PAVE' | 'MICROSETTING'
+
+/** Host surfaces with a real resolver. Only these two.
+ *
+ * A halo plane is NOT among them: a halo has no metal, so a pavé there would
+ * have nothing to fuse its beads into. */
+export type PaveHost = 'BAND_OUTER' | 'HEAD_PLANE'
+
+export type PavePattern = 'GRID' | 'STAGGERED' | 'ROW_OFFSET' | 'RADIAL' | 'EXPLICIT'
+
+/** Retention strategies with a real builder. `NONE` is an explicit choice
+ * (a stone field with no metal), not a missing capability. */
+export type PaveRetentionStrategy = 'NONE' | 'BEAD' | 'SHARED_BEAD' | 'MICRO_PRONG'
+
+export type PaveContainmentPolicy = 'CLIP' | 'REJECT'
+export type PaveTermination = 'FULL_STONES' | 'CENTERED'
+export type PaveSymmetry = 'SYMMETRIC' | 'ASYMMETRIC'
+
+/** How metal holds the field's stones. Every dimension is a CONSTRUCTION
+ * parameter: JewelMind states no minimum bead size and none is enforced. */
+export interface PaveRetention {
+  strategy: PaveRetentionStrategy
+  beadRadiusMm: number
+  beadEmbedMm: number
+  prongHeightMm: number
+}
+
+/** Whether the host metal is recessed for the stones. A CUT, never a fuse.
+ * Deliberately not called a seat: it has no bearing shoulder. */
+export interface PaveSeat {
+  mode: 'NONE' | 'REFERENCE_RECESS'
+  clearanceMm: number
+}
+
+/** One stone placed by the document rather than by the pattern. Reuses the
+ * arrangement's own transform. */
+export interface PaveExplicitPlacement {
+  placementId: string
+  transform: InstanceTransform
+  gem: GemIdentity | null
+  scale: number | null
+}
+
+export interface PaveSpec {
+  kind: 'PAVE'
+  angularSpanDeg: number
+  startAngleDeg: number
+  /** `null` means the host's own full extent, resolved by the backend. */
+  axialSpanMm: number | null
+  /** A POSITION parameter, never a clearance. */
+  pitchMm: number
+  rowPitchMm: number | null
+  rowCount: number
+  pattern: PavePattern
+  rowOffsetFraction: number
+  termination: PaveTermination
+  symmetry: PaveSymmetry
+}
+
+export interface MicrosettingSpec {
+  kind: 'MICROSETTING'
+  columnCount: number
+  rowCount: number
+  stoneSpacingMm: number
+  rowSpacingMm: number | null
+  startAngleDeg: number
+  axialOffsetMm: number
+  pattern: PavePattern
+  rowOffsetFraction: number
+  termination: PaveTermination
+  symmetry: PaveSymmetry
+}
+
+export type PaveFieldSpec = PaveSpec | MicrosettingSpec
+
+/** A pavé or microsetting field.
+ *
+ * ABSENT IS NOT EMPTY, and `enabled: false` is a third state again: it keeps
+ * the parameters and builds nothing, which is how a field is switched off
+ * without losing how it was configured. */
+export interface PaveDefinition {
+  paveId: string
+  enabled: boolean
+  kind: PaveKind
+  spec: PaveFieldSpec
+  host: PaveHost
+  stoneRef: string
+  stoneScale: number
+  stoneOrientationDeg: number
+  gem: GemIdentity | null
+  retention: PaveRetention
+  seat: PaveSeat
+  containment: PaveContainmentPolicy
+  explicitPlacements: PaveExplicitPlacement[]
+  label: string | null
+}
+
 export interface JewelryDefinition {
   schemaVersion: string
   project: ProjectInfo
@@ -757,6 +879,13 @@ export interface JewelryDefinition {
    * placement the design declares — a family, an arrangement, or neither — so
    * it sits beside them rather than inside either. */
   halo: HaloDefinition | null
+
+  /** The design's pavé or microsetting field (Sprint 26).
+   *
+   * `null` on every pre-Sprint-26 document. ONE field, not a list: two fields
+   * in one document needs a rule for what happens where they meet, which does
+   * not exist. */
+  pave: PaveDefinition | null
 }
 
 const METAL_TYPES: readonly MetalType[] = [
@@ -961,5 +1090,7 @@ export function createDefaultDefinition(): JewelryDefinition {
     family: null,
     // No halo: exactly as before Sprint 25.
     halo: null,
+    // No pavé: exactly as before Sprint 26.
+    pave: null,
   }
 }

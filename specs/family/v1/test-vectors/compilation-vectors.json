@@ -8,7 +8,7 @@
       "familyType": "THREE_STONE",
       "instanceCount": 3,
       "generatedCount": 3,
-      "arrangementFingerprint": "c830e87d79cf26ca",
+      "arrangementFingerprint": "0bde33f4e1d1767b",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "CENTER",
@@ -49,7 +49,7 @@
       "familyType": "THREE_STONE",
       "instanceCount": 3,
       "generatedCount": 3,
-      "arrangementFingerprint": "1de20cb041451b13",
+      "arrangementFingerprint": "7cf2e516c096bcb4",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "CENTER",
@@ -90,7 +90,7 @@
       "familyType": "TOI_ET_MOI",
       "instanceCount": 2,
       "generatedCount": 2,
-      "arrangementFingerprint": "305e849e744ed011",
+      "arrangementFingerprint": "c15eb8b13570a1a0",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "SIDE"
@@ -121,7 +121,7 @@
       "familyType": "CLUSTER",
       "instanceCount": 9,
       "generatedCount": 9,
-      "arrangementFingerprint": "cfe7edebaa4cbe64",
+      "arrangementFingerprint": "5ad17691c91fe7b0",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "ACCENT",
@@ -216,7 +216,7 @@
       "familyType": "CLUSTER",
       "instanceCount": 5,
       "generatedCount": 5,
-      "arrangementFingerprint": "763f86b45a25bbf1",
+      "arrangementFingerprint": "b7db2a5e18d443fa",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "ACCENT"
@@ -274,7 +274,7 @@
       "familyType": "CENTER_WITH_ACCENTS",
       "instanceCount": 7,
       "generatedCount": 7,
-      "arrangementFingerprint": "c035dd70ce6cec7e",
+      "arrangementFingerprint": "49e38fcf02241db9",
       "settingCoverage": "PRIMARY_ONLY",
       "roles": [
         "ACCENT",

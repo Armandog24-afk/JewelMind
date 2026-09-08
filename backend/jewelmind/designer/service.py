@@ -92,6 +92,31 @@ def _missing_stone_dimensions(patch: dict[str, Any]) -> list[tuple[str, str]]:
 
 def _apply_patch(base: JewelryDefinition, patch: dict[str, Any]) -> JewelryDefinition | None:
     data = base.model_dump(mode="python")
+
+    # A PAVÉ CANNOT BE BUILT FROM A DOTTED PATCH ALONE (Sprint 26). `pave.spec`
+    # is a discriminated union with required members, so setting `pave.host` on
+    # a design that has no pavé would leave a half-formed object the schema
+    # rejects — and "add a pavé to the shank" would fail for a reason the user
+    # could not act on.
+    #
+    # The DOMAIN's own default field is materialized first, so the patch lands
+    # on a valid pavé and every value the request did not state stays visibly a
+    # system default in the proposal's diff. Deliberately the same field the
+    # Studio toggle offers, from one function, so a spoken instruction and a UI
+    # toggle cannot produce different designs.
+    if data.get("pave") is None and any(
+        path == "pave" or path.startswith("pave.") for path in patch
+    ):
+        from jewelmind.pave.models import default_pave_field
+
+        # The requested kind decides which default is seeded, because the two
+        # specs are different models: seeding a PAVE and then setting
+        # `kind = MICROSETTING` would leave the discriminator disagreeing with
+        # the spec, which the schema refuses — correctly.
+        requested = patch.get("pave.kind")
+        kind = "MICROSETTING" if requested == "MICROSETTING" else "PAVE"
+        data["pave"] = default_pave_field(kind).model_dump(mode="python")
+
     for path, value in patch.items():
         # Walks the whole dotted path rather than splitting once (Sprint 21):
         # `stone.gem.gemId` is three segments deep, and a single split would
@@ -271,10 +296,19 @@ class DesignerService:
                     )
                     continue
                 if normalized is None:
-                    reason = capability.KNOWN_UNSUPPORTED_CONCEPTS.get(
-                        str(pv.value).strip().lower(),
-                        f"'{pv.value}' is not a supported value for {path}.",
-                    )
+                    token = str(pv.value).strip().lower()
+                    # THREE DIFFERENT STATEMENTS, and the distinction is the
+                    # point (Sprint 26). A concept the product does not have is
+                    # unsupported; a concept the product HAS but Designer
+                    # cannot compose is a different fact and says so, rather
+                    # than telling a user a real capability is missing; and
+                    # anything else is simply not a value for this field.
+                    reason = capability.KNOWN_UNSUPPORTED_CONCEPTS.get(token)
+                    if reason is None:
+                        reason = capability.PRODUCT_SUPPORTED_NOT_PROPOSABLE.get(
+                            token,
+                            f"'{pv.value}' is not a supported value for {path}.",
+                        )
                     unsupported_features.append(
                         UnsupportedFeature(
                             feature=str(pv.value),

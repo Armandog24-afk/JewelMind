@@ -173,8 +173,8 @@
     {
       "domain": "stone_arrangement",
       "capability": "pave",
-      "status": "PLANNED",
-      "note": "Multi-stone arrangement. RFC required; pave boundaries would consume the stone outline contract. Sprint 22 note: the ARRANGEMENT is now declarable, validated and resolvable (see the 'arrangement' domain); the GEOMETRY for more than one stone is still not built."
+      "status": "PARTIAL",
+      "note": "Sprint 26: a pave is a first-class field (docs/bible/28-pave/) that compiles into real arrangement primitives and builds real stone geometry AND real retention metal - beads, shared beads or micro-prongs fused into the host, plus an optional recess cut out of it. PARTIAL because only two host surfaces are resolvable (BAND_OUTER, HEAD_PLANE) and one field per design is supported. See the `pave` domain rows for per-capability detail."
     },
     {
       "domain": "stone_arrangement",
@@ -1273,6 +1273,180 @@
       "capability": "reserved_halo_variants",
       "status": "PLANNED",
       "note": "Reserved names with real reasons and no compiler: compass_halo, cushion_halo, floral_halo, pave_halo, triple_halo. Each is refused by the model rather than substituted with a SINGLE halo."
+    },
+    {
+      "domain": "pave",
+      "capability": "PAVE",
+      "status": "CURRENT",
+      "note": "Surface population: an angular span and a row count filled at a stated pitch, so the designer gives the area and the density and the stone count follows. Real stone solids and real retention metal."
+    },
+    {
+      "domain": "pave",
+      "capability": "MICROSETTING",
+      "status": "CURRENT",
+      "note": "A stated retention topology: explicit rows and columns with explicit spacings, so the designer gives the structure and the area follows. The inverse specification of a PAVE, sharing its lattice, surface and retention primitives."
+    },
+    {
+      "domain": "pave",
+      "capability": "BAND_OUTER",
+      "status": "CURRENT",
+      "note": "The shank's outer surface, cylindrical about the finger axis — the classic shank pavé. Executable because Sprint 26 gave the arrangement a real axis tilt, so each stone follows the surface normal instead of standing upright through the metal. Retention beads fuse into the band and a recess is cut out of it."
+    },
+    {
+      "domain": "pave",
+      "capability": "HEAD_PLANE",
+      "status": "CURRENT",
+      "note": "The horizontal plane at the top of the head. Planar, so no tilt is needed. The field is bounded away from the centre stone by the inner radius the Ring adapter reports, so a gallery pavé cannot land on top of the stone it surrounds."
+    },
+    {
+      "domain": "pave",
+      "capability": "HALO_PLANE",
+      "status": "PARTIAL",
+      "note": "The plane a declared halo's rings sit in, resolved from the real halo definition. PARTIAL because it requires a halo: a design without one is refused rather than given a substituted plane, and the pavé does not follow a hidden halo's own vertical offset — it sits in the plane the halo's inner ring defines."
+    },
+    {
+      "domain": "pave",
+      "capability": "GRID",
+      "status": "CURRENT",
+      "note": "Rows and columns aligned. Every row starts at the same angular position."
+    },
+    {
+      "domain": "pave",
+      "capability": "STAGGERED",
+      "status": "CURRENT",
+      "note": "Alternate rows shifted by half the column pitch — the fixed 0.5 case of ROW_OFFSET, kept separate because a half shift is the case a designer names."
+    },
+    {
+      "domain": "pave",
+      "capability": "ROW_OFFSET",
+      "status": "CURRENT",
+      "note": "Every successive row shifted by a declared fraction of the column pitch, so a diagonal lattice is a parameter rather than a new pattern."
+    },
+    {
+      "domain": "pave",
+      "capability": "RADIAL",
+      "status": "CURRENT",
+      "note": "Stones distributed about the host surface's own axis. On a full 360-degree planar sweep the angular sequence comes from `arrangement/radial.py` — the same function the resolver uses for a RADIAL pattern — so a pavé ring and a hand-written one place their stones identically."
+    },
+    {
+      "domain": "pave",
+      "capability": "EXPLICIT",
+      "status": "CURRENT",
+      "note": "The document states each placement, carrying an arrangement `InstanceTransform` verbatim. The escape hatch for a field no lattice derives; refused rather than silently replaced by a generated lattice when the list is empty."
+    },
+    {
+      "domain": "pave",
+      "capability": "NONE",
+      "status": "CURRENT",
+      "note": "No retention metal, stated explicitly. An honest option rather than a missing capability: it produces the stone field alone, which is what a layout preview is. Reported in the compiled field's notes so it can never be mistaken for a failure to build metal."
+    },
+    {
+      "domain": "pave",
+      "capability": "BEAD",
+      "status": "CURRENT",
+      "note": "One bead per lattice corner of each stone, individually — four solids per stone. Each is a real sphere fused into the host, embedded below the surface so the boolean produces genuine 3D overlap rather than a tangent touch."
+    },
+    {
+      "domain": "pave",
+      "capability": "SHARED_BEAD",
+      "status": "CURRENT",
+      "note": "One bead per lattice corner, shared by every stone touching it. Genuinely fewer solids, and each names the stones it serves, so 'shared' is a checkable statement about the topology rather than a label."
+    },
+    {
+      "domain": "pave",
+      "capability": "MICRO_PRONG",
+      "status": "CURRENT",
+      "note": "A small cylinder standing normal to the host surface at each corner. Normal to the SURFACE, not vertical, which is what makes it a prong on a curved shank rather than a pin through it."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_over_family",
+      "status": "CURRENT",
+      "note": "A pavé composes onto a compiled family or an explicit arrangement rather than replacing it, so 'three-stone with a pavé shank' is one design. Same composition contract Sprint 25 established for the halo."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_over_halo",
+      "status": "PARTIAL",
+      "note": "A pavé and a halo coexist in one design: both compose onto the same placement and both build real stones. PARTIAL because a pavé cannot target the HALO's own plane — a halo has no metal to hold beads — so the two are concentric neighbours rather than one structure. Nothing prevents a dense field and a halo ring from occupying the same radius; that overlap is reported as a geometric fact, not refused."
+    },
+    {
+      "domain": "pave",
+      "capability": "reference_recess",
+      "status": "CURRENT",
+      "note": "The stones' own volumes cut out of the host, reusing `setting/seat.py` — the module whose source is asserted never to fuse a stone shape. Deliberately NOT called a seat: it has no bearing shoulder and makes no claim that a stone would sit correctly in it."
+    },
+    {
+      "domain": "pave",
+      "capability": "containment_policy",
+      "status": "CURRENT",
+      "note": "A cell outside the host's declared extent is either clipped or the whole field is refused, by declared policy. A clipped field reports how many cells it lost, so a field that lost a third of its stones to an edge is visible rather than silently smaller."
+    },
+    {
+      "domain": "pave",
+      "capability": "mixed_pave_gem_identities",
+      "status": "CURRENT",
+      "note": "The field carries its own GemIdentity and an explicit placement may override it, resolved through the real Sprint 21 registry. Semantic only, exactly as for a single stone: it never affects geometry."
+    },
+    {
+      "domain": "pave",
+      "capability": "mixed_pave_stone_specifications",
+      "status": "PARTIAL",
+      "note": "A field's `stoneRef` may name a stone specification other than 'primary', and that reference is preserved and reported. It does not resolve, because JDL carries exactly one `stone` — so such a field produces no geometry and says so (JM-PAVE-004)."
+    },
+    {
+      "domain": "pave",
+      "capability": "multiple_pave_fields",
+      "status": "PLANNED",
+      "note": "One field per design. A shank pavé AND a gallery pavé in one document needs a list of fields, each with its own host and retention, plus a rule for what happens where two fields meet. The single field is `pave`, not `paves`, so the limitation is visible in the schema rather than implied."
+    },
+    {
+      "domain": "pave",
+      "capability": "outline_following_pave",
+      "status": "PLANNED",
+      "note": "A field following a non-circular stone's own girdle outline needs the outline-offset walk Sprint 25 already recorded as absent for halos. The planar host offers concentric circles and says so."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_collision_checking",
+      "status": "PARTIAL",
+      "note": "Whether two pavé stones, or a pavé stone and a halo stone, physically overlap is a GEOMETRIC fact Geometry Inspection reports for every named component pair. What does not exist is a rule interpreting that overlap as a defect — that requires a professional minimum this project has no evidence for."
+    },
+    {
+      "domain": "pave",
+      "capability": "professional_pave_rules",
+      "status": "PLANNED",
+      "note": "A minimum pavé spacing, a minimum bead diameter, a maximum stone density, a settable seat depth, or whether a field could be cut by a setter. Each needs sourced professional evidence this project does not have, so none exists — see the brief's own prohibition on inventing them."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_compilation",
+      "status": "CURRENT",
+      "note": "A pave compiles into arrangement primitives and is COMPOSED onto whatever placement the design declares. There is no second placement engine: the lattice is expressed as explicit arrangement instances and the angular sequence of a full planar ring comes from arrangement/radial.py, the same function the resolver uses for a RADIAL pattern."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_surface_targeting",
+      "status": "PARTIAL",
+      "note": "Two host surfaces resolve: BAND_OUTER (cylindrical) and HEAD_PLANE (planar). Both are derived from the same constants.py expressions the assembly uses, never picked out of a solid - a face index is not reproducible across kernel versions. Reserved targets: BAND_INNER, BAND_SIDE, CUSTOM_SURFACE, HALO_PLANE, PRONG_SURFACE, SETTING_SURFACE."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_axis_tilt",
+      "status": "CURRENT",
+      "note": "A pave stone follows the host surface normal, which required a real axis tilt on the arrangement transform (ADR-011). Verified by measuring the built solid's bounding box, not by trusting the field: at 90 degrees a stone's X and Z extents swap exactly and its volume is unchanged."
+    },
+    {
+      "domain": "pave",
+      "capability": "pave_structural_validation",
+      "status": "CURRENT",
+      "note": "JM-PAVE-001..006: the host resolves, the field compiles through the real compiler, clipped cells are reported, references resolve, the pitch is checked for MATHEMATICAL consistency against the stones' own footprint, and the execution boundary plus the professional-review requirement are stated on every field."
+    },
+    {
+      "domain": "pave",
+      "capability": "reserved_retention_strategies",
+      "status": "PLANNED",
+      "note": "Named with real reasons and no builder: CHANNEL, GRAIN, SHARED_PRONG, THREAD_SET. Each is refused by the model rather than substituted with a bead."
     }
   ]
 }

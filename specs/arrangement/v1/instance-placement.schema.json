@@ -34,6 +34,20 @@
           "minimum": -3600.0,
           "title": "Rotationdeg",
           "type": "number"
+        },
+        "tiltDeg": {
+          "default": 0.0,
+          "maximum": 180.0,
+          "minimum": -180.0,
+          "title": "Tiltdeg",
+          "type": "number"
+        },
+        "tiltAzimuthDeg": {
+          "default": 0.0,
+          "maximum": 3600.0,
+          "minimum": -3600.0,
+          "title": "Tiltazimuthdeg",
+          "type": "number"
         }
       },
       "title": "InstanceTransform",

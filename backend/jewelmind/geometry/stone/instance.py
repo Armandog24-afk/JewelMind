@@ -24,6 +24,8 @@ component — it never reads an arrangement, a family, or a jewelry category.
 
 from __future__ import annotations
 
+import math
+
 import cadquery as cq
 
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent
@@ -71,6 +73,38 @@ def _rotated_about_own_axis(shape: cq.Shape, degrees: float) -> cq.Shape:
     )
 
 
+def _tilted_about_own_center(
+    shape: cq.Shape, tilt_deg: float, azimuth_deg: float
+) -> cq.Shape:
+    """Tip a solid's own axis away from +Z by `tilt_deg`, leaning toward
+    `azimuth_deg`.
+
+    THE OPERATION SPRINT 22 RECORDED AS PLANNED, implemented in Sprint 26
+    because a pavé on a curved band needs its stones to follow the surface
+    normal — a stone left upright on the flank of a shank does not sit on the
+    shank, it passes through it.
+
+    The rotation axis is HORIZONTAL, through the solid's own centre, and
+    perpendicular to the lean direction: leaning toward azimuth `a` means
+    rotating about the axis at `a + 90°`. Rotating about the lean direction
+    itself would roll the stone rather than tip it.
+
+    About its OWN centre for the same reason `_rotated_about_own_axis` is:
+    tipping about the design origin would swing an off-centre stone through an
+    arc instead of tilting it in place.
+    """
+
+    box = shape.BoundingBox()
+    center = cq.Vector(
+        (box.xmin + box.xmax) / 2.0,
+        (box.ymin + box.ymax) / 2.0,
+        (box.zmin + box.zmax) / 2.0,
+    )
+    radians = math.radians(azimuth_deg + 90.0)
+    axis = cq.Vector(math.cos(radians), math.sin(radians), 0.0)
+    return shape.rotate(center, center + axis, tilt_deg)
+
+
 def place_stone_instance(
     component: GeneratedComponent,
     component_name: str,
@@ -83,6 +117,8 @@ def place_stone_instance(
     orientation_deg: float | None,
     instance_id: str,
     role: str,
+    tilt_deg: float = 0.0,
+    tilt_azimuth_deg: float = 0.0,
 ) -> GeneratedComponent:
     """One stone occurrence, placed.
 
@@ -113,6 +149,15 @@ def place_stone_instance(
         shape = _rotated_about_own_axis(shape, spin)
         applied.append("ROTATE")
 
+    # TILT AFTER SPIN, and the order is not interchangeable: spinning a stone
+    # about its own axis and then tipping that axis gives ZXZ Euler angles — a
+    # complete orientation. Tipping first would make the spin happen about the
+    # already-tilted axis, so the same two numbers would describe a different
+    # placement depending on which operation ran first.
+    if abs(tilt_deg) > _IDENTITY_EPSILON:
+        shape = _tilted_about_own_center(shape, tilt_deg, tilt_azimuth_deg)
+        applied.append("TILT")
+
     if (
         abs(x_mm) > _IDENTITY_EPSILON
         or abs(y_mm) > _IDENTITY_EPSILON
@@ -130,6 +175,8 @@ def place_stone_instance(
         "instanceTransformOperations": applied,
         "instanceTranslationMm": {"x": x_mm, "y": y_mm, "z": z_mm},
         "instanceRotationDeg": spin,
+        "instanceTiltDeg": tilt_deg,
+        "instanceTiltAzimuthDeg": tilt_azimuth_deg,
         "instanceScale": scale,
     }
 

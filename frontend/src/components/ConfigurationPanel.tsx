@@ -12,6 +12,7 @@ import type {
 import { useProjectStore } from '../store/useProjectStore'
 import { FormSection } from './FormSection'
 import { NumericField } from './NumericField'
+import { PaveSection } from './PaveSection'
 import { SelectField } from './SelectField'
 import { TextField } from './TextField'
 
@@ -517,6 +518,8 @@ export function ConfigurationPanel() {
           </>
         )}
       </FormSection>
+
+      <PaveSection />
 
       <FormSection title="Material">
         <SelectField

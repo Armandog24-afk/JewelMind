@@ -1,0 +1,47 @@
+{
+  "paveId": "pave",
+  "kind": "PAVE",
+  "host": "BAND_OUTER",
+  "hostComponent": "band",
+  "pattern": "EXPLICIT",
+  "retentionStrategy": "NONE",
+  "enabled": true,
+  "placements": [
+    {
+      "placementId": "pave.hand.a",
+      "rowIndex": -1,
+      "columnIndex": -1,
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
+      },
+      "scale": 0.1,
+      "gem": null
+    },
+    {
+      "placementId": "pave.hand.b",
+      "rowIndex": -1,
+      "columnIndex": -1,
+      "transform": {
+        "xMm": 1.2,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
+      },
+      "scale": 0.14,
+      "gem": null
+    }
+  ],
+  "retentionAnchors": [],
+  "clippedCells": 0,
+  "notes": [
+    "This field's placements are stated by the document, so its retention anchors are offset in the tangent frame at each stone rather than shared across a lattice: an explicit field has no lattice to share.",
+    "Retention is 'NONE', so the field's stones were built with no metal holding them. An explicit choice, not a missing capability."
+  ]
+}

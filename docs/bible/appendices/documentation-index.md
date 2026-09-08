@@ -956,6 +956,12 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-HALO-RFC | RFC: Implementing the Reserved `halo` Name | accepted | current | [`27-halo/halo-rfc.md`](../27-halo/halo-rfc.md) |
 | JM-BIBLE-HALO-BOUNDARY | Halo Execution Boundary | accepted | partial | [`27-halo/execution-boundary.md`](../27-halo/execution-boundary.md) |
 | JM-BIBLE-HALO-SPRINT-25-REPORT | Sprint 25 Validation Report — Halo System v1 | accepted | current | [`27-halo/SPRINT-25-VALIDATION-REPORT.md`](../27-halo/SPRINT-25-VALIDATION-REPORT.md) |
+| JM-BIBLE-PAVE-README | Pavé & Microsetting Engine v1 — Index | accepted | partial | [`28-pave/README.md`](../28-pave/README.md) |
+| JM-BIBLE-PAVE-GOVERNANCE | Pavé & Microsetting Governance | accepted | current | [`28-pave/pave-governance.md`](../28-pave/pave-governance.md) |
+| JM-BIBLE-PAVE-BOUNDARY | Pavé Execution Boundary | accepted | partial | [`28-pave/execution-boundary.md`](../28-pave/execution-boundary.md) |
+| JM-BIBLE-PAVE-RESEARCH | Pavé Capability Coverage Review | accepted | current | [`28-pave/capability-coverage-review.md`](../28-pave/capability-coverage-review.md) |
+| JM-BIBLE-PAVE-SPRINT-26-REPORT | Sprint 26 Validation Report — Pavé & Microsetting Engine v1 | accepted | current | [`28-pave/SPRINT-26-VALIDATION-REPORT.md`](../28-pave/SPRINT-26-VALIDATION-REPORT.md) |
+| JM-BIBLE-ADR-011 | ADR-011: Instance Axis Tilt | accepted | current | [`03-decisions/ADR-011-instance-axis-tilt.md`](../03-decisions/ADR-011-instance-axis-tilt.md) |
 
 ## Root-level project documents
 

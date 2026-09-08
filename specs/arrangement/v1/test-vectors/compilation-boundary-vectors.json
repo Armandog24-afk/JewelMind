@@ -1,6 +1,6 @@
 {
   "generatedFrom": "jewelmind.arrangement.compile.compile_arrangement",
-  "note": "The honest execution boundary. Every resolved instance resolving the primary stone now builds real geometry (Sprint 24) and reports the component it became; an instance naming another stone specification still reports NOT_GENERATED with a reason. A SETTING is generated only for the primary instance, which the model records in its notes.",
+  "note": "The honest execution boundary. Every resolved instance is reported with its generation status, and an ungenerated one always carries a reason — nothing is silently dropped and no placeholder solid is invented.",
   "vectors": [
     {
       "case": "single-center-stone.json",

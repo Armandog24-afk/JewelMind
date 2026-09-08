@@ -1,0 +1,15 @@
+{
+  "paveId": "pave",
+  "kind": "PAVE",
+  "host": "BAND_OUTER",
+  "hostComponent": "band",
+  "pattern": "GRID",
+  "retentionStrategy": "SHARED_BEAD",
+  "enabled": false,
+  "placements": [],
+  "retentionAnchors": [],
+  "clippedCells": 0,
+  "notes": [
+    "This pavé is declared and disabled, so no stones and no retention metal were built. The parameters are preserved."
+  ]
+}

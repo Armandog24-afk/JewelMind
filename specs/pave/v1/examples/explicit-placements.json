@@ -1,0 +1,63 @@
+{
+  "paveId": "pave",
+  "enabled": true,
+  "kind": "PAVE",
+  "spec": {
+    "kind": "PAVE",
+    "angularSpanDeg": 30.0,
+    "startAngleDeg": 0.0,
+    "axialSpanMm": null,
+    "pitchMm": 1.0,
+    "rowPitchMm": null,
+    "rowCount": 1,
+    "pattern": "EXPLICIT",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "BAND_OUTER",
+  "stoneRef": "primary",
+  "stoneScale": 0.1,
+  "stoneOrientationDeg": 0.0,
+  "gem": null,
+  "retention": {
+    "strategy": "NONE",
+    "beadRadiusMm": 0.18,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.35
+  },
+  "seat": {
+    "mode": "NONE",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [
+    {
+      "placementId": "pave.hand.a",
+      "transform": {
+        "xMm": 0.0,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
+      },
+      "gem": null,
+      "scale": null
+    },
+    {
+      "placementId": "pave.hand.b",
+      "transform": {
+        "xMm": 1.2,
+        "yMm": 0.0,
+        "zMm": 0.0,
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
+      },
+      "gem": null,
+      "scale": 0.14
+    }
+  ],
+  "label": "Hand-placed field"
+}

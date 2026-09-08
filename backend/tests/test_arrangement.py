@@ -1360,9 +1360,10 @@ class TestCapabilityRegistry:
         assert "SETTING is generated only for the primary" in entry.note
 
     def test_no_capability_claims_generation_it_does_not_have(self):
-        """Sprint 24 widened this set, so it is asserted exactly rather than
-        loosened: every placement and pattern kind now builds real geometry,
-        and nothing else does.
+        """Sprint 24 widened this set and Sprint 26 widened it once more, so it
+        is asserted exactly rather than loosened: every placement and pattern
+        kind builds real geometry, an instance's axis can now be tilted and
+        that tilt reaches the solid, and nothing else does.
 
         The PLANNED capabilities are excluded by construction — a capability
         that is not representable cannot be generatable.
@@ -1370,6 +1371,7 @@ class TestCapabilityRegistry:
 
         assert generatable_capabilities() == [
             "explicit_placement",
+            "full_3d_instance_orientation",
             "group",
             "instance_overrides",
             "linear_pattern",
@@ -1382,15 +1384,28 @@ class TestCapabilityRegistry:
             assert not ARRANGEMENT_CAPABILITIES[name].generatable, name
 
     def test_solver_and_professional_rules_are_planned_and_unrepresentable(self):
+        """`full_3d_instance_orientation` LEFT this list in Sprint 26.
+
+        It belonged here while no builder could execute a tilt, which was the
+        whole justification for refusing the field. ADR-011 built one, so the
+        capability moved and this assertion moved with it rather than being
+        loosened — the remaining three are still genuinely unrepresentable.
+        """
+
         for name in (
             "constraint_solving",
             "professional_arrangement_rules",
-            "full_3d_instance_orientation",
             "path_pattern",
         ):
             entry = ARRANGEMENT_CAPABILITIES[name]
             assert entry.status == "PLANNED", name
             assert entry.representable is False, name
+
+        # And the one that moved is now backed by a real builder in all three
+        # axes, asserted here so the move cannot be a documentation-only claim.
+        tilt = ARRANGEMENT_CAPABILITIES["full_3d_instance_orientation"]
+        assert tilt.status == "CURRENT"
+        assert tilt.representable and tilt.resolvable and tilt.generatable
 
     def test_collision_checking_reports_facts_without_interpreting_them(self):
         """Sprint 24 made multi-stone geometry real, so Inspection now reports
@@ -1403,11 +1418,18 @@ class TestCapabilityRegistry:
         assert entry.representable is False
         assert "no spacing threshold is invented" in entry.note
 
-    def test_full_3d_orientation_is_genuinely_not_representable(self):
-        """Not merely documented as planned — the model has no field for it.
+    def test_the_transform_carries_exactly_the_orientation_it_can_execute(self):
+        """The field set follows the capability, in both directions.
 
-        Accepting a rotation no builder can execute would be a silently
-        ignored field.
+        Sprint 22 asserted that no tilt field existed, on the correct ground
+        that accepting a rotation no builder could execute would be a silently
+        ignored field. Sprint 26 built the tilt (ADR-011), so the assertion
+        moves to the new truth rather than being deleted: the transform carries
+        a translation plus a COMPLETE orientation — a spin about the instance's
+        own axis, and two angles orienting that axis — and nothing beyond it.
+
+        Still exact rather than a subset check, so a future field added without
+        a builder fails here.
         """
 
         assert set(InstanceTransform.model_fields) == {
@@ -1415,7 +1437,14 @@ class TestCapabilityRegistry:
             "yMm",
             "zMm",
             "rotationDeg",
+            "tiltDeg",
+            "tiltAzimuthDeg",
         }
+        # And the identity is still the default, which is what keeps every
+        # pre-Sprint-26 document's geometry untouched.
+        identity = InstanceTransform()
+        assert identity.tiltDeg == 0.0
+        assert identity.tiltAzimuthDeg == 0.0
 
     def test_the_resolvable_pattern_kinds_match_the_real_expanders(self):
         assert resolvable_pattern_kinds() == ("LINEAR", "MIRROR", "RADIAL")

@@ -1,0 +1,36 @@
+{
+  "paveId": "pave",
+  "enabled": true,
+  "kind": "PAVE",
+  "spec": {
+    "kind": "PAVE",
+    "angularSpanDeg": 90.0,
+    "startAngleDeg": 0.0,
+    "axialSpanMm": null,
+    "pitchMm": 0.85,
+    "rowPitchMm": null,
+    "rowCount": 2,
+    "pattern": "STAGGERED",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "BAND_OUTER",
+  "stoneRef": "primary",
+  "stoneScale": 0.09,
+  "stoneOrientationDeg": 0.0,
+  "gem": null,
+  "retention": {
+    "strategy": "SHARED_BEAD",
+    "beadRadiusMm": 0.14,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.35
+  },
+  "seat": {
+    "mode": "REFERENCE_RECESS",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [],
+  "label": "Staggered two-row shank pave"
+}

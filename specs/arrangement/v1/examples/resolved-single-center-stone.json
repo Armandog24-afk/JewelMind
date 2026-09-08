@@ -8,7 +8,9 @@
         "xMm": 0.0,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": null,
@@ -23,7 +25,7 @@
     }
   ],
   "relations": [],
-  "arrangementFingerprint": "dbeaf1f78841ba10",
+  "arrangementFingerprint": "a0e6712ce36328b8",
   "resolverVersion": "1.0.0",
   "instanceCount": 1,
   "generatedCount": 1,

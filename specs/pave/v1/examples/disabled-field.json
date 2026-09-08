@@ -1,0 +1,36 @@
+{
+  "paveId": "pave",
+  "enabled": false,
+  "kind": "PAVE",
+  "spec": {
+    "kind": "PAVE",
+    "angularSpanDeg": 90.0,
+    "startAngleDeg": 0.0,
+    "axialSpanMm": null,
+    "pitchMm": 1.0,
+    "rowPitchMm": null,
+    "rowCount": 1,
+    "pattern": "GRID",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "BAND_OUTER",
+  "stoneRef": "primary",
+  "stoneScale": 0.1,
+  "stoneOrientationDeg": 0.0,
+  "gem": null,
+  "retention": {
+    "strategy": "SHARED_BEAD",
+    "beadRadiusMm": 0.18,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.35
+  },
+  "seat": {
+    "mode": "NONE",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [],
+  "label": "Configured and switched off"
+}

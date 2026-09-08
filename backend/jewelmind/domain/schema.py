@@ -33,6 +33,7 @@ from jewelmind.gem.models import (
     GemTreatmentType,
 )
 from jewelmind.halo.models import HaloDefinition
+from jewelmind.pave.models import PaveDefinition
 from jewelmind.setting.models import (
     HeadArchitecture,
     ProngStyle,
@@ -544,3 +545,23 @@ class JewelryDefinition(StrictModel):
     #: compatible, the same judgment Sprints 21-24 made for `stone.gem`,
     #: `arrangement`, the advanced setting fields and `family`.
     halo: HaloDefinition | None = None
+
+    #: The design's pavé or microsetting field (Sprint 26).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, for the same compatibility reason as
+    #: `arrangement`, `family` and `halo`: every pre-Sprint-26 document declares
+    #: no pavé, and synthesizing one would change its canonical JSON and
+    #: therefore every stored hash, Golden baseline and test vector.
+    #:
+    #: A pavé COMPOSES onto whatever placement the design already declares, so
+    #: it sits beside `family`/`arrangement`/`halo` rather than inside any of
+    #: them; all four meet at `family/effective.py::effective_arrangement()`.
+    #:
+    #: ONE FIELD, not a list, and the singular name says so: a shank pavé AND a
+    #: gallery pavé in one document needs a rule for what happens where two
+    #: fields meet, which does not exist. `multiple_pave_fields` is PLANNED in
+    #: the capability registry rather than implied by a plural field.
+    #:
+    #: `schemaVersion` stays "0.1.0": an optional additive field is backward
+    #: compatible, the same judgment Sprints 21-25 made.
+    pave: PaveDefinition | None = None

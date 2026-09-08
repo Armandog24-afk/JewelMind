@@ -34,7 +34,7 @@ function instance(
     placement: {
       mode: 'EXPLICIT' as const,
       frame: 'DESIGN_ORIGIN' as const,
-      transform: { xMm: 0, yMm: 0, zMm: 0, rotationDeg: 0 },
+      transform: { xMm: 0, yMm: 0, zMm: 0, rotationDeg: 0, tiltDeg: 0, tiltAzimuthDeg: 0 },
       groupId: null,
     },
     overrides: { scale: null, orientationDeg: null },
@@ -109,7 +109,7 @@ describe('arrangement structural rules', () => {
           placement: {
             mode: 'EXPLICIT',
             frame: 'PARENT_GROUP',
-            transform: { xMm: 0, yMm: 0, zMm: 0, rotationDeg: 0 },
+            transform: { xMm: 0, yMm: 0, zMm: 0, rotationDeg: 0, tiltDeg: 0, tiltAzimuthDeg: 0 },
             groupId: 'ghost',
           },
         }),
@@ -216,7 +216,7 @@ describe('arrangement structural rules', () => {
           placement: {
             mode: 'EXPLICIT',
             frame: 'DESIGN_ORIGIN',
-            transform: { xMm: 0.001, yMm: 0, zMm: 0, rotationDeg: 0 },
+            transform: { xMm: 0.001, yMm: 0, zMm: 0, rotationDeg: 0, tiltDeg: 0, tiltAzimuthDeg: 0 },
             groupId: null,
           },
         }),

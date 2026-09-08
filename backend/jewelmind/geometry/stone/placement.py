@@ -66,6 +66,10 @@ def stone_components(
             orientation_deg=instance.overrides.orientationDeg,
             instance_id=instance.instanceId,
             role=instance.role,
+            # Sprint 26. Zero on every pre-Sprint-26 instance, which takes the
+            # identity path in the placer and leaves those solids untouched.
+            tilt_deg=instance.transform.tiltDeg,
+            tilt_azimuth_deg=instance.transform.tiltAzimuthDeg,
         )
 
     if not components:

@@ -1,0 +1,1615 @@
+{
+  "paveId": "pave",
+  "kind": "PAVE",
+  "host": "BAND_OUTER",
+  "hostComponent": "band",
+  "pattern": "STAGGERED",
+  "retentionStrategy": "SHARED_BEAD",
+  "enabled": true,
+  "placements": [
+    {
+      "placementId": "pave.r0.c0",
+      "rowIndex": 0,
+      "columnIndex": 0,
+      "transform": {
+        "xMm": 7.234132354272263,
+        "yMm": -0.4250000000000009,
+        "zMm": -6.507085787500863,
+        "rotationDeg": 0.0,
+        "tiltDeg": 43.23957192225606,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c1",
+      "rowIndex": 0,
+      "columnIndex": 1,
+      "transform": {
+        "xMm": 6.600841714744416,
+        "yMm": -0.4250000000000008,
+        "zMm": -5.957276623779613,
+        "rotationDeg": 0.0,
+        "tiltDeg": 38.68803803570279,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c2",
+      "rowIndex": 0,
+      "columnIndex": 2,
+      "transform": {
+        "xMm": 5.925917738907853,
+        "yMm": -0.4250000000000007,
+        "zMm": -5.459456598603424,
+        "rotationDeg": 0.0,
+        "tiltDeg": 34.136504149149516,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c3",
+      "rowIndex": 0,
+      "columnIndex": 3,
+      "transform": {
+        "xMm": 5.21361735914835,
+        "yMm": -0.42500000000000066,
+        "zMm": -5.016765600705437,
+        "rotationDeg": 0.0,
+        "tiltDeg": 29.584970262596244,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c4",
+      "rowIndex": 0,
+      "columnIndex": 4,
+      "transform": {
+        "xMm": 4.468433251179834,
+        "yMm": -0.42500000000000054,
+        "zMm": -4.63199580477985,
+        "rotationDeg": 0.0,
+        "tiltDeg": 25.03343637604297,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c5",
+      "rowIndex": 0,
+      "columnIndex": 5,
+      "transform": {
+        "xMm": 3.6950654974947663,
+        "yMm": -0.42500000000000043,
+        "zMm": -4.307574060463038,
+        "rotationDeg": 0.0,
+        "tiltDeg": 20.4819024894897,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c6",
+      "rowIndex": 0,
+      "columnIndex": 6,
+      "transform": {
+        "xMm": 2.8983919426425095,
+        "yMm": -0.4250000000000003,
+        "zMm": -4.045546585520963,
+        "rotationDeg": 0.0,
+        "tiltDeg": 15.930368602936426,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c7",
+      "rowIndex": 0,
+      "columnIndex": 7,
+      "transform": {
+        "xMm": 2.0834374273132052,
+        "yMm": -0.42500000000000027,
+        "zMm": -3.8475660597871713,
+        "rotationDeg": 0.0,
+        "tiltDeg": 11.378834716383182,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c8",
+      "rowIndex": 0,
+      "columnIndex": 8,
+      "transform": {
+        "xMm": 1.2553420952762775,
+        "yMm": -0.42500000000000016,
+        "zMm": -3.7148812012534957,
+        "rotationDeg": 0.0,
+        "tiltDeg": 6.827300829829909,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c9",
+      "rowIndex": 0,
+      "columnIndex": 9,
+      "transform": {
+        "xMm": 0.41932897307050304,
+        "yMm": -0.42500000000000004,
+        "zMm": -3.6483288900599433,
+        "rotationDeg": 0.0,
+        "tiltDeg": 2.2757669432766363,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c10",
+      "rowIndex": 0,
+      "columnIndex": 10,
+      "transform": {
+        "xMm": -0.41932897307050304,
+        "yMm": -0.42499999999999993,
+        "zMm": -3.6483288900599433,
+        "rotationDeg": 0.0,
+        "tiltDeg": 2.2757669432766363,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c11",
+      "rowIndex": 0,
+      "columnIndex": 11,
+      "transform": {
+        "xMm": -1.2553420952762775,
+        "yMm": -0.4249999999999998,
+        "zMm": -3.7148812012534957,
+        "rotationDeg": 0.0,
+        "tiltDeg": 6.827300829829909,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c12",
+      "rowIndex": 0,
+      "columnIndex": 12,
+      "transform": {
+        "xMm": -2.0834374273132052,
+        "yMm": -0.4249999999999997,
+        "zMm": -3.8475660597871713,
+        "rotationDeg": 0.0,
+        "tiltDeg": 11.378834716383182,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c13",
+      "rowIndex": 0,
+      "columnIndex": 13,
+      "transform": {
+        "xMm": -2.8983919426425095,
+        "yMm": -0.42499999999999966,
+        "zMm": -4.045546585520963,
+        "rotationDeg": 0.0,
+        "tiltDeg": 15.930368602936426,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c14",
+      "rowIndex": 0,
+      "columnIndex": 14,
+      "transform": {
+        "xMm": -3.6950654974947663,
+        "yMm": -0.42499999999999954,
+        "zMm": -4.307574060463038,
+        "rotationDeg": 0.0,
+        "tiltDeg": 20.4819024894897,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c15",
+      "rowIndex": 0,
+      "columnIndex": 15,
+      "transform": {
+        "xMm": -4.468433251179834,
+        "yMm": -0.42499999999999943,
+        "zMm": -4.63199580477985,
+        "rotationDeg": 0.0,
+        "tiltDeg": 25.03343637604297,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c16",
+      "rowIndex": 0,
+      "columnIndex": 16,
+      "transform": {
+        "xMm": -5.21361735914835,
+        "yMm": -0.4249999999999993,
+        "zMm": -5.016765600705437,
+        "rotationDeg": 0.0,
+        "tiltDeg": 29.584970262596244,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c17",
+      "rowIndex": 0,
+      "columnIndex": 17,
+      "transform": {
+        "xMm": -5.925917738907853,
+        "yMm": -0.42499999999999927,
+        "zMm": -5.459456598603424,
+        "rotationDeg": 0.0,
+        "tiltDeg": 34.136504149149516,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c18",
+      "rowIndex": 0,
+      "columnIndex": 18,
+      "transform": {
+        "xMm": -6.600841714744416,
+        "yMm": -0.42499999999999916,
+        "zMm": -5.957276623779613,
+        "rotationDeg": 0.0,
+        "tiltDeg": 38.68803803570279,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r0.c19",
+      "rowIndex": 0,
+      "columnIndex": 19,
+      "transform": {
+        "xMm": -7.234132354272263,
+        "yMm": -0.4249999999999991,
+        "zMm": -6.507085787500863,
+        "rotationDeg": 0.0,
+        "tiltDeg": 43.23957192225606,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c0",
+      "rowIndex": 1,
+      "columnIndex": 0,
+      "transform": {
+        "xMm": 6.922947306004787,
+        "yMm": 0.42499999999999916,
+        "zMm": -6.22589186188944,
+        "rotationDeg": 0.0,
+        "tiltDeg": 40.9638049789794,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c1",
+      "rowIndex": 1,
+      "columnIndex": 1,
+      "transform": {
+        "xMm": 6.268323683153514,
+        "yMm": 0.4249999999999992,
+        "zMm": -5.701663797941578,
+        "rotationDeg": 0.0,
+        "tiltDeg": 36.41227109242615,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c2",
+      "rowIndex": 1,
+      "columnIndex": 2,
+      "transform": {
+        "xMm": 5.574164007284992,
+        "yMm": 0.4249999999999993,
+        "zMm": -5.23103709340436,
+        "rotationDeg": 0.0,
+        "tiltDeg": 31.86073720587288,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c3",
+      "rowIndex": 1,
+      "columnIndex": 3,
+      "transform": {
+        "xMm": 4.844846535670995,
+        "yMm": 0.4249999999999994,
+        "zMm": -4.816980121208484,
+        "rotationDeg": 0.0,
+        "tiltDeg": 27.309203319319607,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c4",
+      "rowIndex": 1,
+      "columnIndex": 4,
+      "transform": {
+        "xMm": 4.084971275535403,
+        "yMm": 0.4249999999999995,
+        "zMm": -4.462104453319975,
+        "rotationDeg": 0.0,
+        "tiltDeg": 22.757669432766335,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c5",
+      "rowIndex": 1,
+      "columnIndex": 5,
+      "transform": {
+        "xMm": 3.299330970535016,
+        "yMm": 0.4249999999999996,
+        "zMm": -4.168648388832716,
+        "rotationDeg": 0.0,
+        "tiltDeg": 18.206135546213062,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c6",
+      "rowIndex": 1,
+      "columnIndex": 6,
+      "transform": {
+        "xMm": 2.4928808715983193,
+        "yMm": 0.4249999999999997,
+        "zMm": -3.938462836396333,
+        "rotationDeg": 0.0,
+        "tiltDeg": 13.654601659659818,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c7",
+      "rowIndex": 1,
+      "columnIndex": 7,
+      "transform": {
+        "xMm": 1.670707482785882,
+        "yMm": 0.42499999999999977,
+        "zMm": -3.772999640022867,
+        "rotationDeg": 0.0,
+        "tiltDeg": 9.103067773106545,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c8",
+      "rowIndex": 1,
+      "columnIndex": 8,
+      "transform": {
+        "xMm": 0.8379964793009204,
+        "yMm": 0.4249999999999999,
+        "zMm": -3.673302421904614,
+        "rotationDeg": 0.0,
+        "tiltDeg": 4.551533886553273,
+        "tiltAzimuthDeg": 360.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c9",
+      "rowIndex": 1,
+      "columnIndex": 9,
+      "transform": {
+        "xMm": 2.6023744481881253e-17,
+        "yMm": 0.425,
+        "zMm": -3.6400000000000006,
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c10",
+      "rowIndex": 1,
+      "columnIndex": 10,
+      "transform": {
+        "xMm": -0.8379964793009204,
+        "yMm": 0.4250000000000001,
+        "zMm": -3.673302421904614,
+        "rotationDeg": 0.0,
+        "tiltDeg": 4.551533886553273,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c11",
+      "rowIndex": 1,
+      "columnIndex": 11,
+      "transform": {
+        "xMm": -1.670707482785882,
+        "yMm": 0.4250000000000002,
+        "zMm": -3.772999640022867,
+        "rotationDeg": 0.0,
+        "tiltDeg": 9.103067773106545,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c12",
+      "rowIndex": 1,
+      "columnIndex": 12,
+      "transform": {
+        "xMm": -2.4928808715983193,
+        "yMm": 0.42500000000000027,
+        "zMm": -3.938462836396333,
+        "rotationDeg": 0.0,
+        "tiltDeg": 13.654601659659818,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c13",
+      "rowIndex": 1,
+      "columnIndex": 13,
+      "transform": {
+        "xMm": -3.299330970535016,
+        "yMm": 0.4250000000000004,
+        "zMm": -4.168648388832716,
+        "rotationDeg": 0.0,
+        "tiltDeg": 18.206135546213062,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c14",
+      "rowIndex": 1,
+      "columnIndex": 14,
+      "transform": {
+        "xMm": -4.084971275535403,
+        "yMm": 0.4250000000000005,
+        "zMm": -4.462104453319975,
+        "rotationDeg": 0.0,
+        "tiltDeg": 22.757669432766335,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c15",
+      "rowIndex": 1,
+      "columnIndex": 15,
+      "transform": {
+        "xMm": -4.844846535670995,
+        "yMm": 0.4250000000000006,
+        "zMm": -4.816980121208484,
+        "rotationDeg": 0.0,
+        "tiltDeg": 27.309203319319607,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c16",
+      "rowIndex": 1,
+      "columnIndex": 16,
+      "transform": {
+        "xMm": -5.574164007284992,
+        "yMm": 0.42500000000000066,
+        "zMm": -5.23103709340436,
+        "rotationDeg": 0.0,
+        "tiltDeg": 31.86073720587288,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c17",
+      "rowIndex": 1,
+      "columnIndex": 17,
+      "transform": {
+        "xMm": -6.268323683153514,
+        "yMm": 0.42500000000000077,
+        "zMm": -5.701663797941578,
+        "rotationDeg": 0.0,
+        "tiltDeg": 36.41227109242615,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c18",
+      "rowIndex": 1,
+      "columnIndex": 18,
+      "transform": {
+        "xMm": -6.922947306004787,
+        "yMm": 0.4250000000000008,
+        "zMm": -6.22589186188944,
+        "rotationDeg": 0.0,
+        "tiltDeg": 40.9638049789794,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    },
+    {
+      "placementId": "pave.r1.c19",
+      "rowIndex": 1,
+      "columnIndex": 19,
+      "transform": {
+        "xMm": -7.533905983400003,
+        "yMm": 0.42500000000000093,
+        "zMm": -6.8004148337025265,
+        "rotationDeg": 0.0,
+        "tiltDeg": 45.51533886553267,
+        "tiltAzimuthDeg": 180.0
+      },
+      "scale": 0.09,
+      "gem": null
+    }
+  ],
+  "retentionAnchors": [
+    {
+      "anchorId": "pave.bead.0",
+      "xMm": 7.633787312725382,
+      "yMm": -0.8500000000000009,
+      "zMm": 7.497685727214297,
+      "tiltDeg": 45.51533886553267,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c0"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.1",
+      "xMm": 7.633787312725382,
+      "yMm": -9.348693197900814e-16,
+      "zMm": 7.497685727214297,
+      "tiltDeg": 45.51533886553267,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c0"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.2",
+      "xMm": 7.014728804379851,
+      "yMm": -0.8500000000000009,
+      "zMm": 8.079825480850664,
+      "tiltDeg": 40.9638049789794,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c0",
+        "pave.r0.c1"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.3",
+      "xMm": 7.014728804379851,
+      "yMm": -8.590565177170524e-16,
+      "zMm": 8.079825480850664,
+      "tiltDeg": 40.9638049789794,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c0",
+        "pave.r0.c1"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.4",
+      "xMm": 6.3514264592559275,
+      "yMm": -0.8500000000000008,
+      "zMm": 8.61100353807056,
+      "tiltDeg": 36.41227109242615,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c1",
+        "pave.r0.c2"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.5",
+      "xMm": 6.3514264592559275,
+      "yMm": -7.778254083347578e-16,
+      "zMm": 8.61100353807056,
+      "tiltDeg": 36.41227109242615,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c1",
+        "pave.r0.c2"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.6",
+      "xMm": 5.6480639088967255,
+      "yMm": -0.8500000000000006,
+      "zMm": 9.08786961179672,
+      "tiltDeg": 31.86073720587288,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c2",
+        "pave.r0.c3"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.7",
+      "xMm": 5.6480639088967255,
+      "yMm": -6.916883387410063e-16,
+      "zMm": 9.08786961179672,
+      "tiltDeg": 31.86073720587288,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c2",
+        "pave.r0.c3"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.8",
+      "xMm": 4.909077455651483,
+      "yMm": -0.8500000000000005,
+      "zMm": 9.507415975669435,
+      "tiltDeg": 27.309203319319607,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c3",
+        "pave.r0.c4"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.9",
+      "xMm": 4.909077455651483,
+      "yMm": -6.011885992830021e-16,
+      "zMm": 9.507415975669435,
+      "tiltDeg": 27.309203319319607,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c3",
+        "pave.r0.c4"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.10",
+      "xMm": 4.139128091688335,
+      "yMm": -0.8500000000000005,
+      "zMm": 9.866996434609497,
+      "tiltDeg": 22.757669432766335,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c4",
+        "pave.r0.c5"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.11",
+      "xMm": 4.139128091688335,
+      "yMm": -5.068969968747011e-16,
+      "zMm": 9.866996434609497,
+      "tiltDeg": 22.757669432766335,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c4",
+        "pave.r0.c5"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.12",
+      "xMm": 3.3430721008262,
+      "yMm": -0.8500000000000004,
+      "zMm": 10.164343015103215,
+      "tiltDeg": 18.206135546213062,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c5",
+        "pave.r0.c6"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.13",
+      "xMm": 3.3430721008262,
+      "yMm": -4.0940825475956234e-16,
+      "zMm": 10.164343015103215,
+      "tiltDeg": 18.206135546213062,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c5",
+        "pave.r0.c6"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.14",
+      "xMm": 2.5259304286081457,
+      "yMm": -0.8500000000000003,
+      "zMm": 10.397580269939322,
+      "tiltDeg": 13.654601659659818,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c6",
+        "pave.r0.c7"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.15",
+      "xMm": 2.5259304286081457,
+      "yMm": -3.0933726142638675e-16,
+      "zMm": 10.397580269939322,
+      "tiltDeg": 13.654601659659818,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c6",
+        "pave.r0.c7"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.16",
+      "xMm": 1.6928570138076648,
+      "yMm": -0.8500000000000002,
+      "zMm": 10.5652371071738,
+      "tiltDeg": 9.103067773106545,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c7",
+        "pave.r0.c8"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.17",
+      "xMm": 1.6928570138076648,
+      "yMm": -2.0731519233737035e-16,
+      "zMm": 10.5652371071738,
+      "tiltDeg": 9.103067773106545,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c7",
+        "pave.r0.c8"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.18",
+      "xMm": 0.849106281109834,
+      "yMm": -0.8500000000000001,
+      "zMm": 10.666256068714077,
+      "tiltDeg": 4.551533886553273,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c8",
+        "pave.r0.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.19",
+      "xMm": 0.849106281109834,
+      "yMm": -1.0398552892970709e-16,
+      "zMm": 10.666256068714077,
+      "tiltDeg": 4.551533886553273,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r0.c8",
+        "pave.r0.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.20",
+      "xMm": -5.204748896376251e-17,
+      "yMm": -0.85,
+      "zMm": 10.700000000000001,
+      "tiltDeg": 0.0,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c10",
+        "pave.r0.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.21",
+      "xMm": 0.0,
+      "yMm": 0.0,
+      "zMm": 10.700000000000001,
+      "tiltDeg": 0.0,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c10",
+        "pave.r0.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.22",
+      "xMm": -0.8491062811098341,
+      "yMm": -0.8499999999999999,
+      "zMm": 10.666256068714077,
+      "tiltDeg": 4.551533886553273,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c10",
+        "pave.r0.c11"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.23",
+      "xMm": -0.8491062811098341,
+      "yMm": 1.039855289297071e-16,
+      "zMm": 10.666256068714077,
+      "tiltDeg": 4.551533886553273,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c10",
+        "pave.r0.c11"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.24",
+      "xMm": -1.6928570138076648,
+      "yMm": -0.8499999999999998,
+      "zMm": 10.5652371071738,
+      "tiltDeg": 9.103067773106545,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c11",
+        "pave.r0.c12"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.25",
+      "xMm": -1.6928570138076648,
+      "yMm": 2.0731519233737035e-16,
+      "zMm": 10.5652371071738,
+      "tiltDeg": 9.103067773106545,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c11",
+        "pave.r0.c12"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.26",
+      "xMm": -2.5259304286081457,
+      "yMm": -0.8499999999999996,
+      "zMm": 10.397580269939322,
+      "tiltDeg": 13.654601659659818,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c12",
+        "pave.r0.c13"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.27",
+      "xMm": -2.5259304286081457,
+      "yMm": 3.0933726142638675e-16,
+      "zMm": 10.397580269939322,
+      "tiltDeg": 13.654601659659818,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c12",
+        "pave.r0.c13"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.28",
+      "xMm": -3.3430721008262,
+      "yMm": -0.8499999999999995,
+      "zMm": 10.164343015103215,
+      "tiltDeg": 18.206135546213062,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c13",
+        "pave.r0.c14"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.29",
+      "xMm": -3.3430721008262,
+      "yMm": 4.0940825475956234e-16,
+      "zMm": 10.164343015103215,
+      "tiltDeg": 18.206135546213062,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c13",
+        "pave.r0.c14"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.30",
+      "xMm": -4.139128091688334,
+      "yMm": -0.8499999999999994,
+      "zMm": 9.866996434609497,
+      "tiltDeg": 22.757669432766335,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c14",
+        "pave.r0.c15"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.31",
+      "xMm": -4.139128091688334,
+      "yMm": 5.06896996874701e-16,
+      "zMm": 9.866996434609497,
+      "tiltDeg": 22.757669432766335,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c14",
+        "pave.r0.c15"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.32",
+      "xMm": -4.909077455651482,
+      "yMm": -0.8499999999999994,
+      "zMm": 9.507415975669435,
+      "tiltDeg": 27.309203319319607,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c15",
+        "pave.r0.c16"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.33",
+      "xMm": -4.909077455651482,
+      "yMm": 6.01188599283002e-16,
+      "zMm": 9.507415975669435,
+      "tiltDeg": 27.309203319319607,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c15",
+        "pave.r0.c16"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.34",
+      "xMm": -5.6480639088967255,
+      "yMm": -0.8499999999999993,
+      "zMm": 9.08786961179672,
+      "tiltDeg": 31.86073720587288,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c16",
+        "pave.r0.c17"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.35",
+      "xMm": -5.6480639088967255,
+      "yMm": 6.916883387410063e-16,
+      "zMm": 9.08786961179672,
+      "tiltDeg": 31.86073720587288,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c16",
+        "pave.r0.c17"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.36",
+      "xMm": -6.3514264592559275,
+      "yMm": -0.8499999999999992,
+      "zMm": 8.61100353807056,
+      "tiltDeg": 36.41227109242615,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c17",
+        "pave.r0.c18"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.37",
+      "xMm": -6.3514264592559275,
+      "yMm": 7.778254083347578e-16,
+      "zMm": 8.61100353807056,
+      "tiltDeg": 36.41227109242615,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c17",
+        "pave.r0.c18"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.38",
+      "xMm": -7.014728804379852,
+      "yMm": -0.8499999999999991,
+      "zMm": 8.079825480850662,
+      "tiltDeg": 40.963804978979425,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c18",
+        "pave.r0.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.39",
+      "xMm": -7.014728804379852,
+      "yMm": 8.590565177170526e-16,
+      "zMm": 8.079825480850662,
+      "tiltDeg": 40.963804978979425,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c18",
+        "pave.r0.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.40",
+      "xMm": -7.633787312725382,
+      "yMm": -0.8499999999999991,
+      "zMm": 7.497685727214297,
+      "tiltDeg": 45.51533886553267,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.41",
+      "xMm": -7.633787312725382,
+      "yMm": 9.348693197900814e-16,
+      "zMm": 7.497685727214297,
+      "tiltDeg": 45.51533886553267,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r0.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.42",
+      "xMm": 7.330039411999358,
+      "yMm": -8.976709303528962e-16,
+      "zMm": 7.794903605467877,
+      "tiltDeg": 43.23957192225606,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c0"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.43",
+      "xMm": 7.330039411999358,
+      "yMm": 0.8499999999999991,
+      "zMm": 7.794903605467877,
+      "tiltDeg": 43.23957192225606,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c0"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.44",
+      "xMm": 6.688352873841405,
+      "yMm": -8.190869938517877e-16,
+      "zMm": 8.352001905829372,
+      "tiltDeg": 38.68803803570279,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c0",
+        "pave.r1.c1"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.45",
+      "xMm": 6.688352873841405,
+      "yMm": 0.8499999999999992,
+      "zMm": 8.352001905829372,
+      "tiltDeg": 38.68803803570279,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c0",
+        "pave.r1.c1"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.46",
+      "xMm": 6.004481042264587,
+      "yMm": -7.353368488950289e-16,
+      "zMm": 8.856421817702971,
+      "tiltDeg": 34.136504149149516,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c1",
+        "pave.r1.c2"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.47",
+      "xMm": 6.004481042264587,
+      "yMm": 0.8499999999999992,
+      "zMm": 8.856421817702971,
+      "tiltDeg": 34.136504149149516,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c1",
+        "pave.r1.c2"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.48",
+      "xMm": 5.282737286258271,
+      "yMm": -6.469487308352567e-16,
+      "zMm": 9.304981825042788,
+      "tiltDeg": 29.584970262596244,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c2",
+        "pave.r1.c3"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.49",
+      "xMm": 5.282737286258271,
+      "yMm": 0.8499999999999993,
+      "zMm": 9.304981825042788,
+      "tiltDeg": 29.584970262596244,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c2",
+        "pave.r1.c3"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.50",
+      "xMm": 4.5276738435250214,
+      "yMm": -5.544801280056112e-16,
+      "zMm": 9.694852735687087,
+      "tiltDeg": 25.03343637604297,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c3",
+        "pave.r1.c4"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.51",
+      "xMm": 4.5276738435250214,
+      "yMm": 0.8499999999999994,
+      "zMm": 9.694852735687087,
+      "tiltDeg": 25.03343637604297,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c3",
+        "pave.r1.c4"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.52",
+      "xMm": 3.7440531082570083,
+      "yMm": -4.585142654864644e-16,
+      "zMm": 10.023575525856582,
+      "tiltDeg": 20.4819024894897,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c4",
+        "pave.r1.c5"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.53",
+      "xMm": 3.7440531082570083,
+      "yMm": 0.8499999999999995,
+      "zMm": 10.023575525856582,
+      "tiltDeg": 20.4819024894897,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c4",
+        "pave.r1.c5"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.54",
+      "xMm": 2.93681759339724,
+      "yMm": -3.596564265433563e-16,
+      "zMm": 10.289076849898269,
+      "tiltDeg": 15.930368602936426,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c5",
+        "pave.r1.c6"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.55",
+      "xMm": 2.93681759339724,
+      "yMm": 0.8499999999999996,
+      "zMm": 10.289076849898269,
+      "tiltDeg": 15.930368602936426,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c5",
+        "pave.r1.c6"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.56",
+      "xMm": 2.1110587568419787,
+      "yMm": -2.5853013493785197e-16,
+      "zMm": 10.489682117450501,
+      "tiltDeg": 11.378834716383182,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c6",
+        "pave.r1.c7"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.57",
+      "xMm": 2.1110587568419787,
+      "yMm": 0.8499999999999998,
+      "zMm": 10.489682117450501,
+      "tiltDeg": 11.378834716383182,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c6",
+        "pave.r1.c7"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.58",
+      "xMm": 1.2719848882060767,
+      "yMm": -1.5577322219053758e-16,
+      "zMm": 10.62412605554807,
+      "tiltDeg": 6.827300829829909,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c7",
+        "pave.r1.c8"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.59",
+      "xMm": 1.2719848882060767,
+      "yMm": 0.8499999999999999,
+      "zMm": 10.62412605554807,
+      "tiltDeg": 6.827300829829909,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c7",
+        "pave.r1.c8"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.60",
+      "xMm": 0.4248882586983317,
+      "yMm": -5.203380460102045e-17,
+      "zMm": 10.691560689049112,
+      "tiltDeg": 2.2757669432766363,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c8",
+        "pave.r1.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.61",
+      "xMm": 0.42488825869833174,
+      "yMm": 0.85,
+      "zMm": 10.691560689049112,
+      "tiltDeg": 2.2757669432766363,
+      "tiltAzimuthDeg": 360.0,
+      "servesPlacementIds": [
+        "pave.r1.c8",
+        "pave.r1.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.62",
+      "xMm": -0.4248882586983317,
+      "yMm": 5.203380460102045e-17,
+      "zMm": 10.691560689049112,
+      "tiltDeg": 2.2757669432766363,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c10",
+        "pave.r1.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.63",
+      "xMm": -0.42488825869833163,
+      "yMm": 0.85,
+      "zMm": 10.691560689049112,
+      "tiltDeg": 2.2757669432766363,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c10",
+        "pave.r1.c9"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.64",
+      "xMm": -1.2719848882060767,
+      "yMm": 1.5577322219053758e-16,
+      "zMm": 10.62412605554807,
+      "tiltDeg": 6.827300829829909,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c10",
+        "pave.r1.c11"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.65",
+      "xMm": -1.2719848882060767,
+      "yMm": 0.8500000000000001,
+      "zMm": 10.62412605554807,
+      "tiltDeg": 6.827300829829909,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c10",
+        "pave.r1.c11"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.66",
+      "xMm": -2.1110587568419787,
+      "yMm": 2.5853013493785197e-16,
+      "zMm": 10.489682117450501,
+      "tiltDeg": 11.378834716383182,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c11",
+        "pave.r1.c12"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.67",
+      "xMm": -2.1110587568419787,
+      "yMm": 0.8500000000000002,
+      "zMm": 10.489682117450501,
+      "tiltDeg": 11.378834716383182,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c11",
+        "pave.r1.c12"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.68",
+      "xMm": -2.93681759339724,
+      "yMm": 3.596564265433563e-16,
+      "zMm": 10.289076849898269,
+      "tiltDeg": 15.930368602936426,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c12",
+        "pave.r1.c13"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.69",
+      "xMm": -2.93681759339724,
+      "yMm": 0.8500000000000003,
+      "zMm": 10.289076849898269,
+      "tiltDeg": 15.930368602936426,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c12",
+        "pave.r1.c13"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.70",
+      "xMm": -3.7440531082570074,
+      "yMm": 4.585142654864642e-16,
+      "zMm": 10.023575525856582,
+      "tiltDeg": 20.4819024894897,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c13",
+        "pave.r1.c14"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.71",
+      "xMm": -3.7440531082570074,
+      "yMm": 0.8500000000000004,
+      "zMm": 10.023575525856582,
+      "tiltDeg": 20.4819024894897,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c13",
+        "pave.r1.c14"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.72",
+      "xMm": -4.5276738435250214,
+      "yMm": 5.544801280056112e-16,
+      "zMm": 9.694852735687087,
+      "tiltDeg": 25.03343637604297,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c14",
+        "pave.r1.c15"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.73",
+      "xMm": -4.5276738435250214,
+      "yMm": 0.8500000000000005,
+      "zMm": 9.694852735687087,
+      "tiltDeg": 25.03343637604297,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c14",
+        "pave.r1.c15"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.74",
+      "xMm": -5.28273728625827,
+      "yMm": 6.469487308352566e-16,
+      "zMm": 9.304981825042788,
+      "tiltDeg": 29.584970262596244,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c15",
+        "pave.r1.c16"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.75",
+      "xMm": -5.28273728625827,
+      "yMm": 0.8500000000000006,
+      "zMm": 9.304981825042788,
+      "tiltDeg": 29.584970262596244,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c15",
+        "pave.r1.c16"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.76",
+      "xMm": -6.004481042264587,
+      "yMm": 7.353368488950289e-16,
+      "zMm": 8.856421817702971,
+      "tiltDeg": 34.136504149149516,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c16",
+        "pave.r1.c17"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.77",
+      "xMm": -6.004481042264587,
+      "yMm": 0.8500000000000008,
+      "zMm": 8.856421817702971,
+      "tiltDeg": 34.136504149149516,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c16",
+        "pave.r1.c17"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.78",
+      "xMm": -6.688352873841406,
+      "yMm": 8.190869938517879e-16,
+      "zMm": 8.35200190582937,
+      "tiltDeg": 38.68803803570279,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c17",
+        "pave.r1.c18"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.79",
+      "xMm": -6.688352873841406,
+      "yMm": 0.8500000000000008,
+      "zMm": 8.35200190582937,
+      "tiltDeg": 38.68803803570279,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c17",
+        "pave.r1.c18"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.80",
+      "xMm": -7.330039411999358,
+      "yMm": 8.976709303528962e-16,
+      "zMm": 7.794903605467877,
+      "tiltDeg": 43.23957192225606,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c18",
+        "pave.r1.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.81",
+      "xMm": -7.330039411999358,
+      "yMm": 0.8500000000000009,
+      "zMm": 7.794903605467877,
+      "tiltDeg": 43.23957192225606,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c18",
+        "pave.r1.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.82",
+      "xMm": -7.925493362074764,
+      "yMm": 9.705930077528454e-16,
+      "zMm": 7.188640689845951,
+      "tiltDeg": 47.791105808809334,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c19"
+      ]
+    },
+    {
+      "anchorId": "pave.bead.83",
+      "xMm": -7.925493362074764,
+      "yMm": 0.850000000000001,
+      "zMm": 7.188640689845951,
+      "tiltDeg": 47.791105808809334,
+      "tiltAzimuthDeg": 180.0,
+      "servesPlacementIds": [
+        "pave.r1.c19"
+      ]
+    }
+  ],
+  "clippedCells": 0,
+  "notes": []
+}

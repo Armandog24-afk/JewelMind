@@ -1,0 +1,43 @@
+{
+  "paveId": "pave",
+  "enabled": true,
+  "kind": "PAVE",
+  "spec": {
+    "kind": "PAVE",
+    "angularSpanDeg": 60.0,
+    "startAngleDeg": 0.0,
+    "axialSpanMm": null,
+    "pitchMm": 1.1,
+    "rowPitchMm": null,
+    "rowCount": 1,
+    "pattern": "GRID",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "BAND_OUTER",
+  "stoneRef": "primary",
+  "stoneScale": 0.1,
+  "stoneOrientationDeg": 0.0,
+  "gem": {
+    "gemId": "corundum.sapphire",
+    "origin": "NATURAL",
+    "treatments": [],
+    "visualProfileId": null,
+    "customName": null,
+    "note": null
+  },
+  "retention": {
+    "strategy": "BEAD",
+    "beadRadiusMm": 0.15,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.35
+  },
+  "seat": {
+    "mode": "NONE",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [],
+  "label": "Sapphire shank pave"
+}

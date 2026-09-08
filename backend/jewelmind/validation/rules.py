@@ -124,3 +124,23 @@ HALO_COMPOSES = "JM-HALO-002"
 HALO_COMPOSITION_SUPPORTED = "JM-HALO-003"
 HALO_REFERENCES_RESOLVE = "JM-HALO-004"
 HALO_SETTING_COVERAGE = "JM-HALO-005"
+
+# Sprint 26 — PAVE_ONLY. Structural, referential and MATHEMATICAL checks on a
+# pavé or microsetting field: does its host surface resolve for this design,
+# does the field compile, did it lose cells to the surface edge, do its
+# references resolve, is the requested pitch geometrically consistent with the
+# stones it must carry, and what does a compiled field NOT include.
+#
+# JM-PAVE-006 is the only numeric one, and it is a MATHEMATICAL CONSTRAINT
+# rather than a professional threshold: two stones whose footprints are wider
+# than the pitch between them overlap as a matter of arithmetic, whatever a
+# setter would say about it. There is deliberately NO minimum pavé spacing, no
+# minimum bead diameter, no maximum density and no settable seat depth — each
+# needs sourced professional evidence this project does not have, and the
+# Sprint 26 brief prohibits inventing them.
+PAVE_HOST_RESOLVES = "JM-PAVE-001"
+PAVE_COMPILES = "JM-PAVE-002"
+PAVE_FIELD_CONTAINMENT = "JM-PAVE-003"
+PAVE_REFERENCES_RESOLVE = "JM-PAVE-004"
+PAVE_EXECUTION_BOUNDARY = "JM-PAVE-005"
+PAVE_PITCH_CONSISTENCY = "JM-PAVE-006"

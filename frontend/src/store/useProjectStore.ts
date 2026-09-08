@@ -5,6 +5,7 @@ import {
   type JewelryDefinition,
   type ManufacturingSpec,
   type MaterialSpec,
+  type PaveDefinition,
   type PreviewSpec,
   type ProjectInfo,
   type RingSpec,
@@ -53,6 +54,17 @@ interface ProjectState {
   updateMaterial: (patch: Partial<MaterialSpec>) => void
   updateManufacturing: (patch: Partial<ManufacturingSpec>) => void
   updatePreview: (patch: Partial<PreviewSpec>) => void
+  /** Replaces the design's pavé field, or removes it with `null` (Sprint 26).
+   *
+   * WHOLESALE rather than a partial patch, because `PaveDefinition.spec` is a
+   * discriminated union: a partial merge could leave `kind` and `spec.kind`
+   * disagreeing, which is a state the backend refuses and the UI should never
+   * be able to construct. */
+  setPave: (pave: PaveDefinition | null) => void
+  /** Merges a patch into the EXISTING pavé, and does nothing when there is
+   * none. For the scalar controls, so a slider does not have to restate the
+   * whole field. */
+  updatePave: (patch: Partial<PaveDefinition>) => void
   setIncludeStoneReferenceInExport: (value: boolean) => void
   /** Applies an accepted Designer proposal's candidate JDL wholesale — see
    * docs/bible/12-designer/310-user-review-and-acceptance.md. Never called
@@ -133,6 +145,25 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
         setting: { ...state.currentDefinition.setting, ...patch },
       }),
     ),
+
+  setPave: (pave) =>
+    set((state) =>
+      withUpdatedDefinition(state, { ...state.currentDefinition, pave }),
+    ),
+
+  updatePave: (patch) =>
+    set((state) => {
+      const current = state.currentDefinition.pave
+      if (current === null) {
+        // Nothing to patch. Silently creating a field here would invent a host
+        // and a span the user never chose.
+        return {}
+      }
+      return withUpdatedDefinition(state, {
+        ...state.currentDefinition,
+        pave: { ...current, ...patch },
+      })
+    }),
 
   updateMaterial: (patch) =>
     set((state) =>

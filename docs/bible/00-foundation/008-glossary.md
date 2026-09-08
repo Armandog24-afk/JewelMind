@@ -1079,6 +1079,36 @@ deliberately unbalanced design is expressible rather than approximated.
 primitives. The arrangement engine then resolves them, which is why a family can
 never disagree with an arrangement about where a stone goes.
 
+**Pavé Field** — a rule for populating a host surface: which region, at what
+pitch, in what pattern, held how. **PARTIAL since Sprint 26**: two host
+surfaces resolve, both field kinds build real stone geometry AND real retention
+metal — see [`../28-pave/README.md`](../28-pave/README.md).
+
+**Microsetting** — the inverse specification of a pavé field: the designer
+states the rows, columns and spacings, and the area covered follows. Distinct
+from a pavé, where the area and density are stated and the count follows.
+
+**Retention** — the metal that holds a pavé field's stones: a bead, a shared
+bead, or a micro-prong. Owned by the Setting System, because that system is
+authoritative for how metal holds a stone.
+
+**Shared Bead** — one bead at a lattice corner, holding every stone that
+touches it. "Shared" is a checkable statement about the topology — each bead
+names the stones it serves — never a label on a smaller number of beads.
+
+**Reference Recess** — the pavé stones' own volume cut out of the host metal. A
+CUT, never a fuse. Deliberately not called a seat: it has no bearing shoulder
+and makes no claim that a stone would sit correctly in it.
+
+**Host Surface** — the surface a pavé field is applied to, resolved from the
+design's own parameters and never by selecting a face out of a generated solid,
+because a face index is not reproducible.
+
+**Instance Axis Tilt** — an arrangement instance's own axis oriented away from
+vertical in a stated direction. What lets a stone on a curved shank follow the
+surface normal instead of standing through it. See
+[`../03-decisions/ADR-011-instance-axis-tilt.md`](../03-decisions/ADR-011-instance-axis-tilt.md).
+
 **Halo Variant** — `SINGLE` (one ring level with the centre), `DOUBLE` (two
 concentric rings, each independently parameterized) or `HIDDEN` (one ring below
 the centre stone's girdle plane). Each has a real compiler. `HIDDEN` is a

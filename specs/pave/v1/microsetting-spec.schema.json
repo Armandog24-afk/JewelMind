@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/microsetting-spec.schema.json",
+  "title": "MicrosettingSpec",
+  "additionalProperties": false,
+  "description": "SMALL-STONE RETENTION TOPOLOGY: a stated structure.\n\nThe designer states the ROWS and COLUMNS and their spacings; the area\nfollows. That is the inverse of a `PaveSpec`, and the reason both exist: a\nmicrosetting is specified as a structure to be cut, not as a region to be\ncovered.",
+  "properties": {
+    "kind": {
+      "const": "MICROSETTING",
+      "default": "MICROSETTING",
+      "title": "Kind",
+      "type": "string"
+    },
+    "columnCount": {
+      "maximum": 60,
+      "minimum": 1,
+      "title": "Columncount",
+      "type": "integer"
+    },
+    "rowCount": {
+      "default": 1,
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Rowcount",
+      "type": "integer"
+    },
+    "stoneSpacingMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Stonespacingmm",
+      "type": "number"
+    },
+    "rowSpacingMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 50.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rowspacingmm"
+    },
+    "startAngleDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Startangledeg",
+      "type": "number"
+    },
+    "axialOffsetMm": {
+      "default": 0.0,
+      "maximum": 100.0,
+      "minimum": -100.0,
+      "title": "Axialoffsetmm",
+      "type": "number"
+    },
+    "pattern": {
+      "default": "STAGGERED",
+      "enum": [
+        "GRID",
+        "STAGGERED",
+        "ROW_OFFSET",
+        "RADIAL",
+        "EXPLICIT"
+      ],
+      "title": "Pattern",
+      "type": "string"
+    },
+    "rowOffsetFraction": {
+      "default": 0.5,
+      "maximum": 1.0,
+      "minimum": -1.0,
+      "title": "Rowoffsetfraction",
+      "type": "number"
+    },
+    "termination": {
+      "default": "CENTERED",
+      "enum": [
+        "FULL_STONES",
+        "CENTERED"
+      ],
+      "title": "Termination",
+      "type": "string"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    }
+  },
+  "required": [
+    "columnCount",
+    "stoneSpacingMm"
+  ],
+  "type": "object"
+}

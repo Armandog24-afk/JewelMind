@@ -1943,5 +1943,106 @@ ARRANGE-GOV rules still apply in full. Future coding agents must:
   (**the identified next step — do not bypass it**), per-member stone
   specifications, or any professional arrangement/proportion rule.
 
+## PAVÉ & MICROSETTING RULES
+
+`docs/bible/28-pave/` is the authoritative Pavé & Microsetting Engine v1
+specification — start at
+[`docs/bible/28-pave/README.md`](docs/bible/28-pave/README.md), then
+[`pave-governance.md`](docs/bible/28-pave/pave-governance.md) for the 14
+PAVE-GOV rules, and
+[`execution-boundary.md`](docs/bible/28-pave/execution-boundary.md) for exactly
+what does and does not execute. The machine-readable half lives in
+[`specs/pave/v1/`](specs/pave/v1/README.md). Future coding agents must:
+
+- **Read `docs/bible/28-pave/README.md` before changing surface population** —
+  before modifying anything in `backend/jewelmind/pave/`,
+  `geometry/pave_surface.py`, `geometry/pave_adapter.py`,
+  `setting/retention.py`, `domain/schema.py::JewelryDefinition.pave`, or
+  `validation/engine.py::_pave_rules`.
+- **Keep the pavé layer category- and kernel-neutral** — nothing under
+  `backend/jewelmind/pave/` may import a jewelry category, any geometry module,
+  the Setting System, the CAD kernel, or `JewelryDefinition`. Enforced by AST
+  inspection in `backend/tests/test_pave.py` (PAVE-GOV-001).
+- **Keep `jewelmind/pave/__init__.py` importing nothing.** Load-bearing:
+  `domain/schema.py` imports `pave.models`.
+- **Never create a second placement engine.** A field compiles into
+  `StoneInstanceDef`s; the arrangement resolver resolves them, and a full
+  planar ring's angles come from `arrangement/radial.py` — the same function
+  the resolver uses. The lattice is placed EXPLICITLY rather than through a
+  `RADIAL` pattern, because a pattern's members inherit the centre stone's own
+  scale (PAVE-GOV-002).
+- **A pavé composes; it never replaces** — it is added to whatever placement the
+  design declares, and `compose_pave(base, None)` returns `base` itself. A
+  pavé-only design synthesizes one `CENTER` instance, without which the
+  deterministic primary selection would pick a pavé stone and the centre stone
+  would silently become one (PAVE-GOV-003).
+- **Resolve a host surface from PARAMETERS, never by picking a face.** A face
+  index is not reproducible across kernel versions or across a change to an
+  unrelated parameter. A host with no resolver raises rather than being
+  approximated onto another surface (PAVE-GOV-004).
+- **Keep `geometry/pave_surface.py` kernel-free** — Forge imports it so a pavé
+  rule resolves a surface with the SAME code generation uses, and Forge must
+  not import CadQuery (PAVE-GOV-005).
+- **Keep retention geometry in the Setting System** — the bead and micro-prong
+  builders live in `setting/retention.py`, because Setting System v2 is
+  authoritative for how metal holds a stone. The pavé owns WHERE retention
+  goes; the Setting System owns WHAT a piece is. No kernel code in
+  `jewelmind/pave/` (PAVE-GOV-006).
+- **Derive retention anchors in the surface's own parameters** — a corner
+  computed in the tangent plane at each stone lands on the chord rather than the
+  surface, so a `SHARED_BEAD` field silently degrades into an individual-bead
+  one with four times the solids. A shared bead must name every stone it
+  touches (PAVE-GOV-007).
+- **A recess is a CUT and is never called a seat** — it routes through
+  `setting/seat.py`, inheriting that module's never-fuse guarantee;
+  `pave_adapter.py` must contain no `.fuse` call at all. `REFERENCE_RECESS` has
+  no bearing shoulder (PAVE-GOV-008, LAW-006).
+- **Derive placement ids, and carry provenance separately** —
+  `<paveId>.r<row>.c<column>`, never a UUID or a counter. Row and column are
+  provenance; an explicit placement records `-1` rather than a fabricated cell
+  (PAVE-GOV-009).
+- **Reject, never repair** — an unsupported or unresolvable host, an empty
+  field, an over-capacity field, an id collision or a field that overruns under
+  `REJECT` containment raises. A clipped field reports how many cells it lost
+  (PAVE-GOV-010).
+- **Never invent a professional threshold** — no minimum pavé spacing, no
+  minimum bead diameter, no maximum density, no settable seat depth, no judgment
+  about whether a field could be cut. `JM-PAVE-006` is the only numeric rule and
+  it is a MATHEMATICAL CONSTRAINT classified `GEOMETRY_PRECONDITION`.
+  `MAX_PAVE_STONES`/`MAX_PAVE_ROWS`/`MAX_PAVE_COLUMNS` are software safety
+  limits and say so; `_INDIVIDUAL_BEAD_INSET_FRACTION` is a construction
+  parameter and says so (PAVE-GOV-011).
+- **Keep the four capability axes apart, and back each by a real builder** —
+  `representable`, `composable`, `stoneGeometry`, `settingGeometry`. A host
+  entry needs a resolver and a retention entry needs a builder, in both
+  directions. `settingGeometry` is `true` here for the first time in the
+  programme, and that claim is asserted comparatively against the Family and
+  Halo registries (PAVE-GOV-012).
+- **Keep an absent pavé absent** — nothing synthesizes a field, and a document
+  with no pavé must generate byte-identical geometry to its pre-Sprint-26 self.
+  A pavé IS inside `geometryHash`, because it places stones and cuts metal
+  (PAVE-GOV-013).
+- **Keep one definition of the default field** —
+  `pave/models.py::default_pave_field()`, shared by Designer's patch seeding and
+  mirrored by the Studio toggle, so a spoken instruction and a UI toggle cannot
+  produce different designs (PAVE-GOV-014).
+- **Never let Designer infer a metric spacing from a relative instruction** —
+  "denser" names a density, and turning it into a millimetre value requires the
+  professional judgment this project has no evidence for.
+  `normalizer.PAVE_DENSITY_TERMS` exists so such a request becomes a question.
+- **Add a NEW Golden case for a new host or retention strategy — never retrofit
+  an existing one.** `PAVE-001`–`PAVE-005` cover the current scope; every
+  accepted baseline needs an entry in
+  `docs/bible/appendices/golden-update-register.md` and an honest
+  `knownLimitations` (today: `PAVE_AWAITING_PROFESSIONAL_REVIEW`).
+- **Create an ADR** before letting the pavé layer construct geometry, accepting
+  more than one field per design, merging any of the four capability axes,
+  changing the derived placement-id scheme, selecting a host by face index, or
+  materializing `GeometryPlan` (which still does not exist).
+- **Create an RFC** before adding a host surface or retention strategy beyond
+  those implemented (including any reserved name), a real cut seat with a
+  bearing shoulder, an outline-following field, per-cell stone specifications,
+  or any professional pavé spacing, density or settability rule.
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

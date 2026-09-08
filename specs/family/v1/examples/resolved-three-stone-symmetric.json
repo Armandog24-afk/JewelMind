@@ -8,7 +8,9 @@
         "xMm": 0.0,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": null,
@@ -29,7 +31,9 @@
         "xMm": 4.6,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.6,
@@ -50,7 +54,9 @@
         "xMm": -4.6,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 180.0
+        "rotationDeg": 180.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.6,
@@ -75,7 +81,7 @@
       "note": "Symmetric three-stone sides. The document's second SIDE member ('side.right') is realized as this mirror's generated member."
     }
   ],
-  "arrangementFingerprint": "c830e87d79cf26ca",
+  "arrangementFingerprint": "0bde33f4e1d1767b",
   "resolverVersion": "1.0.0",
   "instanceCount": 3,
   "generatedCount": 3,

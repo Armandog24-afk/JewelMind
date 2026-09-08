@@ -39,6 +39,7 @@ to do differently, not a claim about a specific past meeting or debate.
 | [ADR-008](ADR-008-monorepo-architecture.md) | Monorepo architecture | Accepted |
 | [ADR-009](ADR-009-millimeter-coordinate-system.md) | Millimeter-only coordinate/unit system | Accepted |
 | [ADR-010](ADR-010-step-and-stl-export-strategy.md) | STEP and STL as the export strategy | Accepted |
+| [ADR-011](ADR-011-instance-axis-tilt.md) | A real axis tilt on the arrangement instance transform | Accepted |
 
 ## Numbering rule
 

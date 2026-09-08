@@ -192,6 +192,25 @@ button {
 .form-field--wide {
   grid-column: 1 / -1;
 }
+/* A short, always-visible note under a group of controls. Used for the pavé
+   panel's professional-review statement (Sprint 26), which must never be
+   collapsed away: LAW-010 requires the caveat to stay visible. */
+.form-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.form-note--warning {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--color-warning);
+  border-radius: 6px;
+  background: var(--color-warning-muted);
+  color: inherit;
+}
+
 
 .form-field label {
   font-size: 12px;

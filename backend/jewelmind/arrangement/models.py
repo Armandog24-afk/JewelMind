@@ -208,6 +208,37 @@ class InstanceTransform(ArrangementModel):
     #: by `normalize.py`, so 370° and 10° are the same arrangement.
     rotationDeg: float = Field(default=0.0, ge=-3600.0, le=3600.0, allow_inf_nan=False)
 
+    #: How far the instance's own vertical axis is tilted away from +Z, in
+    #: degrees (Sprint 26).
+    #:
+    #: ADDED BECAUSE GEOMETRY CAN NOW EXECUTE IT, which is the only ground on
+    #: which this model accepts a field. Sprint 22 recorded tilt as PLANNED and
+    #: deliberately refused it, on the correct principle that a rotation no
+    #: builder could apply would be a silently ignored field. Sprint 26 needed a
+    #: pavé to sit on a curved band, whose stones must follow the surface
+    #: normal, so `geometry/stone/instance.py` gained a real tilt and the field
+    #: follows the capability rather than preceding it. See
+    #: `docs/bible/03-decisions/ADR-011-instance-axis-tilt.md`.
+    #:
+    #: `0.0` is the identity and every pre-Sprint-26 document keeps it, so the
+    #: geometry of every existing design is untouched.
+    tiltDeg: float = Field(default=0.0, ge=-180.0, le=180.0, allow_inf_nan=False)
+
+    #: WHICH WAY the tilt leans: the azimuth, in degrees from +X in the XY
+    #: plane, of the direction the instance's axis tips toward.
+    #:
+    #: Two angles rather than one, because a tilt without a direction is not a
+    #: placement — a stone on the left of a band and one on the right are tilted
+    #: by the same amount in opposite directions. Together with `rotationDeg`
+    #: (the spin about the instance's own axis) these give a complete
+    #: orientation, in the ZXZ order `geometry/stone/instance.py` applies.
+    #:
+    #: Meaningless when `tiltDeg` is zero, and normalization folds it to `0.0`
+    #: in that case so an upright instance has exactly one representation.
+    tiltAzimuthDeg: float = Field(
+        default=0.0, ge=-3600.0, le=3600.0, allow_inf_nan=False
+    )
+
 
 class InstancePlacement(ArrangementModel):
     """Where an instance sits, and how that was expressed.

@@ -11,7 +11,9 @@
           "xMm": 0.0,
           "yMm": 0.0,
           "zMm": 0.0,
-          "rotationDeg": 0.0
+          "rotationDeg": 0.0,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -33,7 +35,9 @@
           "xMm": 5.0,
           "yMm": 0.0,
           "zMm": 0.0,
-          "rotationDeg": 0.0
+          "rotationDeg": 0.0,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -55,7 +59,9 @@
           "xMm": 3.3,
           "yMm": 0.0,
           "zMm": 0.0,
-          "rotationDeg": 0.0
+          "rotationDeg": 0.0,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -77,7 +83,9 @@
           "xMm": 2.973197264077983,
           "yMm": 1.4318163390879417,
           "zMm": 0.0,
-          "rotationDeg": 25.714285714285715
+          "rotationDeg": 25.714285714285715,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -99,7 +107,9 @@
           "xMm": 2.057516346133821,
           "yMm": 2.580043892144498,
           "zMm": 0.0,
-          "rotationDeg": 51.42857142857143
+          "rotationDeg": 51.42857142857143,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -121,7 +131,9 @@
           "xMm": 0.7343190820558376,
           "yMm": 3.217262110200018,
           "zMm": 0.0,
-          "rotationDeg": 77.14285714285714
+          "rotationDeg": 77.14285714285714,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -143,7 +155,9 @@
           "xMm": -0.7343190820558373,
           "yMm": 3.217262110200018,
           "zMm": 0.0,
-          "rotationDeg": 102.85714285714286
+          "rotationDeg": 102.85714285714286,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -165,7 +179,9 @@
           "xMm": -2.0575163461338213,
           "yMm": 2.5800438921444977,
           "zMm": 0.0,
-          "rotationDeg": 128.57142857142858
+          "rotationDeg": 128.57142857142858,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -187,7 +203,9 @@
           "xMm": -2.9731972640779825,
           "yMm": 1.4318163390879421,
           "zMm": 0.0,
-          "rotationDeg": 154.28571428571428
+          "rotationDeg": 154.28571428571428,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -209,7 +227,9 @@
           "xMm": -3.3,
           "yMm": 4.0413344371862655e-16,
           "zMm": 0.0,
-          "rotationDeg": 180.0
+          "rotationDeg": 180.0,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -231,7 +251,9 @@
           "xMm": -2.973197264077983,
           "yMm": -1.4318163390879413,
           "zMm": 0.0,
-          "rotationDeg": 205.71428571428572
+          "rotationDeg": 205.71428571428572,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -253,7 +275,9 @@
           "xMm": -2.0575163461338213,
           "yMm": -2.5800438921444977,
           "zMm": 0.0,
-          "rotationDeg": 231.42857142857144
+          "rotationDeg": 231.42857142857144,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -275,7 +299,9 @@
           "xMm": -0.7343190820558352,
           "yMm": -3.2172621102000183,
           "zMm": 0.0,
-          "rotationDeg": 257.14285714285717
+          "rotationDeg": 257.14285714285717,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -297,7 +323,9 @@
           "xMm": 0.7343190820558397,
           "yMm": -3.2172621102000174,
           "zMm": 0.0,
-          "rotationDeg": 282.8571428571429
+          "rotationDeg": 282.8571428571429,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -319,7 +347,9 @@
           "xMm": 2.05751634613382,
           "yMm": -2.5800438921444986,
           "zMm": 0.0,
-          "rotationDeg": 308.57142857142856
+          "rotationDeg": 308.57142857142856,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },
@@ -341,7 +371,9 @@
           "xMm": 2.9731972640779825,
           "yMm": -1.4318163390879424,
           "zMm": 0.0,
-          "rotationDeg": 334.2857142857143
+          "rotationDeg": 334.2857142857143,
+          "tiltDeg": 0.0,
+          "tiltAzimuthDeg": 0.0
         },
         "groupId": null
       },

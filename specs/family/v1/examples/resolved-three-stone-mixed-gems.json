@@ -8,7 +8,9 @@
         "xMm": 0.0,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": null,
@@ -36,7 +38,9 @@
         "xMm": -4.4,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.55,
@@ -64,7 +68,9 @@
         "xMm": 4.4,
         "yMm": 0.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.45,
@@ -96,7 +102,7 @@
       "note": "Asymmetric three-stone sides: aligned, not mirrored."
     }
   ],
-  "arrangementFingerprint": "1de20cb041451b13",
+  "arrangementFingerprint": "7cf2e516c096bcb4",
   "resolverVersion": "1.0.0",
   "instanceCount": 3,
   "generatedCount": 3,

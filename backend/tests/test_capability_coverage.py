@@ -477,11 +477,13 @@ def test_current_arrangement_capabilities_match_the_live_registry():
     assert live["multi_stone_geometry"].status == "PARTIAL"
     assert live["multi_stone_geometry"].generatable is True
 
-    # Every placement and pattern kind now builds geometry; nothing that cannot
-    # be expressed claims to.
+    # Every placement and pattern kind builds geometry; nothing that cannot be
+    # expressed claims to. Sprint 26 added `full_3d_instance_orientation`, which
+    # a pavé on a curved shank needs and which ADR-011 gave a real builder.
     generatable = sorted(name for name, e in live.items() if e.generatable)
     assert generatable == [
         "explicit_placement",
+        "full_3d_instance_orientation",
         "group",
         "instance_overrides",
         "linear_pattern",

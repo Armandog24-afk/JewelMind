@@ -8,7 +8,9 @@
         "xMm": 0.0,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -29,7 +31,9 @@
         "xMm": -3.2,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -50,7 +54,9 @@
         "xMm": -1.6,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -71,7 +77,9 @@
         "xMm": 0.0,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -92,7 +100,9 @@
         "xMm": 1.6,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -113,7 +123,9 @@
         "xMm": 3.2,
         "yMm": 6.0,
         "zMm": 0.0,
-        "rotationDeg": 0.0
+        "rotationDeg": 0.0,
+        "tiltDeg": 0.0,
+        "tiltAzimuthDeg": 0.0
       },
       "overrides": {
         "scale": 0.25,
@@ -128,7 +140,7 @@
     }
   ],
   "relations": [],
-  "arrangementFingerprint": "72488e1fb5070305",
+  "arrangementFingerprint": "3c07f0fcb1b09051",
   "resolverVersion": "1.0.0",
   "instanceCount": 6,
   "generatedCount": 6,

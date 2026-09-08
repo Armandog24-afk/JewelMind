@@ -236,12 +236,131 @@ MANUFACTURING_SYNONYMS: dict[str, str] = {
     "stampa in resina": "direct_resin_printing",
 }
 
+#: Sprint 26. Natural-language pavé vocabulary, EN and IT, mapping to the
+#: live model's own members. Kept beside the other synonym tables rather than
+#: in a new module, because it is the same kind of thing they are: a token to
+#: a canonical value, with no geometry and no threshold anywhere in it.
+PAVE_KIND_SYNONYMS: dict[str, str] = {
+    "pave": "PAVE",
+    "pavé": "PAVE",
+    "pave setting": "PAVE",
+    "pavimentazione": "PAVE",
+    "microsetting": "MICROSETTING",
+    "micro setting": "MICROSETTING",
+    "micro-setting": "MICROSETTING",
+    "micropave": "MICROSETTING",
+    "micro pave": "MICROSETTING",
+    "micro pavé": "MICROSETTING",
+    "micro-pavé": "MICROSETTING",
+    "microincassatura": "MICROSETTING",
+}
+
+PAVE_HOST_SYNONYMS: dict[str, str] = {
+    "band": "BAND_OUTER",
+    "shank": "BAND_OUTER",
+    "gambo": "BAND_OUTER",
+    "fascia": "BAND_OUTER",
+    "band outer": "BAND_OUTER",
+    "shoulder": "BAND_OUTER",
+    "shoulders": "BAND_OUTER",
+    "spalla": "BAND_OUTER",
+    "spalle": "BAND_OUTER",
+    "head": "HEAD_PLANE",
+    "gallery": "HEAD_PLANE",
+    "galleria": "HEAD_PLANE",
+    "testa": "HEAD_PLANE",
+    "head plane": "HEAD_PLANE",
+}
+
+PAVE_PATTERN_SYNONYMS: dict[str, str] = {
+    "grid": "GRID",
+    "griglia": "GRID",
+    "aligned": "GRID",
+    "allineato": "GRID",
+    "staggered": "STAGGERED",
+    "sfalsato": "STAGGERED",
+    "offset": "ROW_OFFSET",
+    "row offset": "ROW_OFFSET",
+    "diagonal": "ROW_OFFSET",
+    "diagonale": "ROW_OFFSET",
+    "radial": "RADIAL",
+    "radiale": "RADIAL",
+    "explicit": "EXPLICIT",
+    "esplicito": "EXPLICIT",
+}
+
+PAVE_RETENTION_SYNONYMS: dict[str, str] = {
+    "none": "NONE",
+    "nessuna": "NONE",
+    "bead": "BEAD",
+    "beads": "BEAD",
+    "grano": "BEAD",
+    "grani": "BEAD",
+    "shared bead": "SHARED_BEAD",
+    "shared beads": "SHARED_BEAD",
+    "grani condivisi": "SHARED_BEAD",
+    "micro prong": "MICRO_PRONG",
+    "micro prongs": "MICRO_PRONG",
+    "microgriffe": "MICRO_PRONG",
+    "micro griffe": "MICRO_PRONG",
+}
+
+PAVE_SEAT_SYNONYMS: dict[str, str] = {
+    "none": "NONE",
+    "nessuno": "NONE",
+    "recess": "REFERENCE_RECESS",
+    "recessed": "REFERENCE_RECESS",
+    "incasso": "REFERENCE_RECESS",
+    "reference recess": "REFERENCE_RECESS",
+}
+
+PAVE_CONTAINMENT_SYNONYMS: dict[str, str] = {
+    "clip": "CLIP",
+    "taglia": "CLIP",
+    "reject": "REJECT",
+    "rifiuta": "REJECT",
+}
+
+#: Terms that name a pavé DENSITY rather than a value.
+#:
+#: DELIBERATELY NOT MAPPED TO A NUMBER. "Denser" is a relative instruction, and
+#: turning it into a pitch would require knowing what pitch is appropriate —
+#: which is exactly the professional judgment this project has no evidence for.
+#: Recognized so a request can be understood and clarified, never resolved to a
+#: millimetre value on the user's behalf.
+PAVE_DENSITY_TERMS: frozenset[str] = frozenset(
+    {
+        "dense",
+        "denser",
+        "denso",
+        "più fitto",
+        "piu fitto",
+        "fitto",
+        "fitte",
+        "tight",
+        "tighter",
+        "sparse",
+        "sparser",
+        "rado",
+        "spaziato",
+        "loose",
+    }
+)
+
+
 _ENUM_SYNONYM_TABLES: dict[str, dict[str, str]] = {
     "material.metal": METAL_SYNONYMS,
     "band.profile": BAND_PROFILE_SYNONYMS,
     "stone.shape": STONE_SHAPE_SYNONYMS,
     "setting.type": SETTING_TYPE_SYNONYMS,
     "manufacturing.method": MANUFACTURING_SYNONYMS,
+    # Sprint 26.
+    "pave.kind": PAVE_KIND_SYNONYMS,
+    "pave.host": PAVE_HOST_SYNONYMS,
+    "pave.spec.pattern": PAVE_PATTERN_SYNONYMS,
+    "pave.retention.strategy": PAVE_RETENTION_SYNONYMS,
+    "pave.seat.mode": PAVE_SEAT_SYNONYMS,
+    "pave.containment": PAVE_CONTAINMENT_SYNONYMS,
 }
 
 # Prong count is numeric in the schema, but requests name it in words —
@@ -307,8 +426,29 @@ _NUMERIC_FIELDS: frozenset[str] = frozenset(
         "setting.basketHeight",
         "setting.bezelWallThickness",
         "setting.bezelWallHeight",
+        # Sprint 26.
+        "pave.stoneScale",
+        "pave.stoneOrientationDeg",
+        "pave.retention.beadRadiusMm",
+        "pave.spec.pitchMm",
+        "pave.spec.rowPitchMm",
+        "pave.spec.rowCount",
+        "pave.spec.angularSpanDeg",
+        "pave.spec.stoneSpacingMm",
+        "pave.spec.rowSpacingMm",
+        "pave.spec.columnCount",
     }
 )
+
+
+def is_pave_density_term(token: str) -> bool:
+    """Whether a token names a pavé density rather than a value.
+
+    Used to turn "make the stones denser" into a CLARIFICATION rather than a
+    silently invented pitch.
+    """
+
+    return token.strip().lower() in PAVE_DENSITY_TERMS
 
 
 def is_numeric_field(field: str) -> bool:

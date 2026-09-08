@@ -79,6 +79,11 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `HALO-003-hidden-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 13 stone components, ring offset −1.4mm below the centre plane | Sprint 25 milestone | 2026-09-07 |
 | `HALO-004-three-stone-with-halo` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 17 stone components; a family's MIRROR pattern and a halo in one document | Sprint 25 milestone | 2026-09-07 |
 | `HALO-005-halo-around-toi-et-moi` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 20 stone components, origin-anchored 6.0mm ring around a pair | Sprint 25 milestone | 2026-09-07 |
+| `PAVE-001-shank-single-row` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 24 stone components, shared-bead retention, recessed band | Sprint 26 milestone | 2026-09-08 |
+| `PAVE-002-shank-staggered` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 41 stone components in two staggered rows | Sprint 26 milestone | 2026-09-08 |
+| `PAVE-003-microsetting` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a stated 14x2 structure with micro-prong retention | Sprint 26 milestone | 2026-09-08 |
+| `PAVE-004-head-plane-gallery` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 16 stones on the planar head host, individual beads, no recess | Sprint 26 milestone | 2026-09-08 |
+| `PAVE-005-three-stone-with-pave` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a family and a pavé in one document | Sprint 26 milestone | 2026-09-08 |
 
 ### Sprint 19: the six non-round prong-placement acceptances
 
@@ -215,6 +220,44 @@ with the cube of a uniform scale: `HALO-001`'s ring stones measure `0.619942` =
 and `HALO-004`'s side stones `9.686589` = `58.221419 × 0.55³`. A per-ring scale
 that never reached the solid would have produced identical stones and still
 passed a component count.
+
+### Sprint 26: five new pavé cases, zero baseline updates
+
+All five are `INITIAL_BASELINE` creations. **No existing baseline was
+modified** — all 49 pre-existing cases reverified unchanged, including the
+exact-equality guards (`combined_metal_volume_mm3 == 341.44334316909976`, prong
+volume `== 29.650351464580467`, round stone volume `== 58.22141924499569`).
+
+That matters more than usual this sprint, because Sprint 26 added two fields to
+`InstanceTransform` — a real axis tilt (ADR-011). Both default to zero and take
+the placer's identity path, so every existing instance's solid is returned
+untouched. The unchanged `FAM-*` and `HALO-*` baselines are the evidence.
+
+Created through the sanctioned path: `design.json` written from a real validated
+definition, registered in `manifest.json`, then `generate-candidate` → `diff`
+(reviewed per case) → `accept --reason` with the per-case reason recorded in the
+table above, transient `candidate.json` removed, and a full `verify-all` re-run.
+Nothing was hand-authored.
+
+**These are the first Golden cases in the programme that record real setting
+geometry.** Every one carries a `pave_retention` production component with a
+non-zero volume, and every one reports four production components in a single
+fully-connected group — which is the geometric proof that retention metal joins
+the body rather than resting on it.
+
+**The recess is visible in the baselines.** `PAVE-001`/`002`/`003` record a band
+volume below the untouched `250.991683` (`249.38985`, `249.22781`, `250.27171`
+respectively); `PAVE-004`/`005`, which request no recess, record exactly
+`250.991683`. A recess that removed nothing would be indistinguishable from one
+that was never applied, and this is what makes the difference checkable.
+
+**Every one records the same professional limitation** in its own
+`knownLimitations`:
+
+> `PAVE_AWAITING_PROFESSIONAL_REVIEW`: every pitch, bead radius, seat depth and
+> stone scale in this field is a construction parameter. No pavé dimension in
+> JewelMind has been reviewed by a qualified jewelry professional, and this
+> baseline records generated geometry rather than a manufacturing standard.
 
 ## How a future entry gets added
 

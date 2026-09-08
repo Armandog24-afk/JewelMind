@@ -65,6 +65,18 @@ def normalize_transform(transform: InstanceTransform) -> InstanceTransform:
         yMm=round(transform.yMm + 0.0, COORDINATE_DECIMALS),
         zMm=round(transform.zMm + 0.0, COORDINATE_DECIMALS),
         rotationDeg=normalize_angle_deg(transform.rotationDeg),
+        # Rounded like a coordinate rather than folded like an angle: a tilt is
+        # a signed lean within [-180, 180], and folding -30 to 330 would make an
+        # upward lean read as a downward one.
+        tiltDeg=round(transform.tiltDeg + 0.0, COORDINATE_DECIMALS),
+        # An upright instance has exactly ONE representation. Without this, two
+        # identical upright placements differing only in a meaningless azimuth
+        # would produce different canonical JSON and different fingerprints.
+        tiltAzimuthDeg=(
+            normalize_angle_deg(transform.tiltAzimuthDeg)
+            if round(transform.tiltDeg + 0.0, COORDINATE_DECIMALS) != 0.0
+            else 0.0
+        ),
     )
 
 

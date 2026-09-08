@@ -1,0 +1,274 @@
+{
+  "registryVersion": "1.0.0",
+  "compilerVersion": "1.0.0",
+  "generatedFrom": "backend/jewelmind/pave/capability.py::PAVE_CAPABILITIES",
+  "note": "Generated from the live registry, never hand-maintained. FOUR INDEPENDENT AXES: representable, composable, stoneGeometry, settingGeometry. The fourth is TRUE here for the first time in this programme: Sprints 24-25 built stones with no metal holding them, and Sprint 26 builds real beads, shared beads and micro-prongs fused into the host plus an optional recess cut out of it. Statuses use JewelMind's established CURRENT/PARTIAL/PLANNED vocabulary. Nothing here is professionally validated: no pave dimension, spacing or retention size has been reviewed by a qualified jewelry professional.",
+  "patterns": [
+    "GRID",
+    "STAGGERED",
+    "ROW_OFFSET",
+    "RADIAL",
+    "EXPLICIT"
+  ],
+  "kinds": [
+    {
+      "capability": "PAVE",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "Surface population: an angular span and a row count filled at a stated pitch, so the designer gives the area and the density and the stone count follows. Real stone solids and real retention metal."
+    },
+    {
+      "capability": "MICROSETTING",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "A stated retention topology: explicit rows and columns with explicit spacings, so the designer gives the structure and the area follows. The inverse specification of a PAVE, sharing its lattice, surface and retention primitives."
+    }
+  ],
+  "hosts": [
+    {
+      "capability": "BAND_OUTER",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "The shank's outer surface, cylindrical about the finger axis — the classic shank pavé. Executable because Sprint 26 gave the arrangement a real axis tilt, so each stone follows the surface normal instead of standing upright through the metal. Retention beads fuse into the band and a recess is cut out of it."
+    },
+    {
+      "capability": "HEAD_PLANE",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "The horizontal plane at the top of the head. Planar, so no tilt is needed. The field is bounded away from the centre stone by the inner radius the Ring adapter reports, so a gallery pavé cannot land on top of the stone it surrounds."
+    }
+  ],
+  "patternCapabilities": [
+    {
+      "capability": "GRID",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "Rows and columns aligned. Every row starts at the same angular position."
+    },
+    {
+      "capability": "STAGGERED",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "Alternate rows shifted by half the column pitch — the fixed 0.5 case of ROW_OFFSET, kept separate because a half shift is the case a designer names."
+    },
+    {
+      "capability": "ROW_OFFSET",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "Every successive row shifted by a declared fraction of the column pitch, so a diagonal lattice is a parameter rather than a new pattern."
+    },
+    {
+      "capability": "RADIAL",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "Stones distributed about the host surface's own axis. On a full 360-degree planar sweep the angular sequence comes from `arrangement/radial.py` — the same function the resolver uses for a RADIAL pattern — so a pavé ring and a hand-written one place their stones identically."
+    },
+    {
+      "capability": "EXPLICIT",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "The document states each placement, carrying an arrangement `InstanceTransform` verbatim. The escape hatch for a field no lattice derives; refused rather than silently replaced by a generated lattice when the list is empty."
+    }
+  ],
+  "retention": [
+    {
+      "capability": "NONE",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "note": "No retention metal, stated explicitly. An honest option rather than a missing capability: it produces the stone field alone, which is what a layout preview is. Reported in the compiled field's notes so it can never be mistaken for a failure to build metal."
+    },
+    {
+      "capability": "BEAD",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "One bead per lattice corner of each stone, individually — four solids per stone. Each is a real sphere fused into the host, embedded below the surface so the boolean produces genuine 3D overlap rather than a tangent touch."
+    },
+    {
+      "capability": "SHARED_BEAD",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "One bead per lattice corner, shared by every stone touching it. Genuinely fewer solids, and each names the stones it serves, so 'shared' is a checkable statement about the topology rather than a label."
+    },
+    {
+      "capability": "MICRO_PRONG",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "A small cylinder standing normal to the host surface at each corner. Normal to the SURFACE, not vertical, which is what makes it a prong on a curved shank rather than a pin through it."
+    }
+  ],
+  "features": [
+    {
+      "capability": "pave_over_family",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "A pavé composes onto a compiled family or an explicit arrangement rather than replacing it, so 'three-stone with a pavé shank' is one design. Same composition contract Sprint 25 established for the halo."
+    },
+    {
+      "capability": "pave_over_halo",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "A pavé and a halo coexist in one design: both compose onto the same placement and both build real stones. PARTIAL because a pavé cannot target the HALO's own plane — a halo has no metal to hold beads — so the two are concentric neighbours rather than one structure. Nothing prevents a dense field and a halo ring from occupying the same radius; that overlap is reported as a geometric fact, not refused."
+    },
+    {
+      "capability": "reference_recess",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "The stones' own volumes cut out of the host, reusing `setting/seat.py` — the module whose source is asserted never to fuse a stone shape. Deliberately NOT called a seat: it has no bearing shoulder and makes no claim that a stone would sit correctly in it."
+    },
+    {
+      "capability": "containment_policy",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "note": "A cell outside the host's declared extent is either clipped or the whole field is refused, by declared policy. A clipped field reports how many cells it lost, so a field that lost a third of its stones to an edge is visible rather than silently smaller."
+    },
+    {
+      "capability": "mixed_pave_gem_identities",
+      "status": "CURRENT",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "note": "The field carries its own GemIdentity and an explicit placement may override it, resolved through the real Sprint 21 registry. Semantic only, exactly as for a single stone: it never affects geometry."
+    },
+    {
+      "capability": "mixed_pave_stone_specifications",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "note": "A field's `stoneRef` may name a stone specification other than 'primary', and that reference is preserved and reported. It does not resolve, because JDL carries exactly one `stone` — so such a field produces no geometry and says so (JM-PAVE-004)."
+    },
+    {
+      "capability": "multiple_pave_fields",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "note": "One field per design. A shank pavé AND a gallery pavé in one document needs a list of fields, each with its own host and retention, plus a rule for what happens where two fields meet. The single field is `pave`, not `paves`, so the limitation is visible in the schema rather than implied."
+    },
+    {
+      "capability": "outline_following_pave",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "note": "A field following a non-circular stone's own girdle outline needs the outline-offset walk Sprint 25 already recorded as absent for halos. The planar host offers concentric circles and says so."
+    },
+    {
+      "capability": "pave_collision_checking",
+      "status": "PARTIAL",
+      "representable": true,
+      "composable": true,
+      "stoneGeometry": true,
+      "settingGeometry": false,
+      "note": "Whether two pavé stones, or a pavé stone and a halo stone, physically overlap is a GEOMETRIC fact Geometry Inspection reports for every named component pair. What does not exist is a rule interpreting that overlap as a defect — that requires a professional minimum this project has no evidence for."
+    },
+    {
+      "capability": "professional_pave_rules",
+      "status": "PLANNED",
+      "representable": false,
+      "composable": false,
+      "stoneGeometry": false,
+      "settingGeometry": false,
+      "note": "A minimum pavé spacing, a minimum bead diameter, a maximum stone density, a settable seat depth, or whether a field could be cut by a setter. Each needs sourced professional evidence this project does not have, so none exists — see the brief's own prohibition on inventing them."
+    }
+  ],
+  "reservedHosts": [
+    {
+      "host": "BAND_INNER",
+      "reason": "The shank's inner surface is the finger bore. Setting stones into it is not a technique this project has evidence for, and the geometry would be a recess into the only surface whose dimensions the ring size fixes."
+    },
+    {
+      "host": "BAND_SIDE",
+      "reason": "The shank's flat side faces are planar and executable in principle, but their extent depends on the band profile's own section — comfort-fit has no flat side at all. Supporting it needs a profile capability that reports a side surface, which `geometry/shank/` does not have."
+    },
+    {
+      "host": "CUSTOM_SURFACE",
+      "reason": "An arbitrary user-supplied surface would need a real surface import and a robust offset walk. Neither exists, and `EXPLICIT` placements already cover the case where a document knows exactly where its stones go."
+    },
+    {
+      "host": "HALO_PLANE",
+      "reason": "The plane a declared halo's rings sit in is trivially resolvable, and the pavé would still have nothing to hold it: a halo has NO METAL. Sprint 25 recorded halo retention as PLANNED, so beads in a halo's plane would fuse into nothing and ship as a disconnected production solid. Blocked on the same setting RFC, not on surface targeting."
+    },
+    {
+      "host": "PRONG_SURFACE",
+      "reason": "Stones set into the prongs themselves need per-prong surface targeting and shared retention across two curved bodies, which Sprint 23 recorded as absent."
+    },
+    {
+      "host": "SETTING_SURFACE",
+      "reason": "A basket wall or a prong flank is a swept or lofted surface with no closed-form parameterization the pavé layer could walk. Targeting it means picking faces out of a solid, and a face index is not reproducible across kernel versions or across a change to an unrelated parameter — a pavé whose stones moved because a fillet renumbered a face would be indefensible."
+    }
+  ],
+  "reservedRetention": [
+    {
+      "strategy": "CHANNEL",
+      "reason": "A channel holds stones between two continuous rails. Sprint 23 recorded support rails as PLANNED, and approximating a channel as a row of beads would misdescribe both the metal and how the stones are retained."
+    },
+    {
+      "strategy": "GRAIN",
+      "reason": "Raised grain work is a cut-and-pushed surface treatment rather than a placed solid. Representing it as a sphere would be a bead with a different name."
+    },
+    {
+      "strategy": "SHARED_PRONG",
+      "reason": "One prong body gripping two adjacent stones needs the shared-prong geometry Sprint 23 explicitly recorded as PLANNED. A bead already shares between four cells; a shared PRONG is a different solid with a different contact topology, and substituting one for the other would report a technique the metal does not implement."
+    },
+    {
+      "strategy": "THREAD_SET",
+      "reason": "Thread or bright-cut setting removes metal along a continuous line between stones. It needs a swept cut along the lattice, which the recess operation (a per-stone cut) does not express."
+    }
+  ]
+}

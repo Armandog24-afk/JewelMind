@@ -100,5 +100,13 @@ class GeneratedModel:
     #: reason attached (ATLAS-GOV-006: never silently discard a component).
     arrangement_result: Any = None
 
+    #: The compiled pavé field, or `None` for a design without one (Sprint 26).
+    #:
+    #: Typed `Any` for the same reason as `setting_result` and
+    #: `arrangement_result`: this dataclass must not import
+    #: `jewelmind.pave`, and the pavé package must not import geometry. The
+    #: concrete type is `jewelmind.pave.compile.CompiledPaveField`.
+    pave_result: Any = None
+
     def component_volumes(self) -> dict[str, float]:
         return {name: c.volume_mm3 for name, c in self.components.items()}

@@ -1,0 +1,656 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/pave-definition.schema.json",
+  "title": "PaveDefinition",
+  "$defs": {
+    "GemIdentity": {
+      "additionalProperties": false,
+      "description": "What THIS stone actually is (brief sections 4/6/7/16).\n\nThis is what JDL stores per stone, and it is deliberately separate from the\nregistry entry it points at.\n\n`gemId` alone is not an identity: a natural untreated sapphire and a\nheat-treated lab-grown sapphire share a `gemId` and are different stones.",
+      "properties": {
+        "gemId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+          "title": "Gemid",
+          "type": "string"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "NATURAL",
+            "SYNTHETIC",
+            "SIMULANT",
+            "COMPOSITE",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "treatments": {
+          "items": {
+            "$ref": "#/$defs/GemTreatment"
+          },
+          "title": "Treatments",
+          "type": "array"
+        },
+        "visualProfileId": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visualprofileid"
+        },
+        "customName": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customname"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "gemId"
+      ],
+      "title": "GemIdentity",
+      "type": "object"
+    },
+    "GemTreatment": {
+      "additionalProperties": false,
+      "description": "One treatment claim about one stone (brief section 7).\n\nTreatments live on `GemIdentity`, never on a registry entry: whether a\nparticular ruby was heated is a fact about that stone.\n\nJewelMind records the claim and its source. It does not decide whether a\ntreatment must be disclosed, whether it is stable, or whether it affects\ndurability — all of which require professional evidence\n(GEM-GOV-006).",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "HEAT",
+            "IRRADIATION",
+            "FRACTURE_FILLING",
+            "GLASS_FILLING",
+            "COATING",
+            "DIFFUSION",
+            "DYEING",
+            "IMPREGNATION",
+            "RESIN_IMPREGNATION",
+            "BLEACHING",
+            "LASER_DRILLING",
+            "HPHT",
+            "OTHER",
+            "UNKNOWN"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "status": {
+          "default": "PRESENT",
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT",
+            "SUSPECTED",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "USER_DECLARED",
+          "enum": [
+            "USER_DECLARED",
+            "VENDOR_DECLARED",
+            "LAB_REPORT_CLAIMED",
+            "UNDISCLOSED",
+            "UNKNOWN"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "UNKNOWN",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "treatment"
+      ],
+      "title": "GemTreatment",
+      "type": "object"
+    },
+    "InstanceTransform": {
+      "additionalProperties": false,
+      "description": "An instance's rigid placement: a translation plus one rotation.\n\nONE ROTATION, ABOUT THE VERTICAL AXIS ONLY, and that is a decision rather\nthan an omission. `StoneSpec.orientation` already rotates a stone about its\nown vertical axis, and a full 3×3 orientation here would create a second,\noverlapping way to express the same thing plus five more ways to express\nsomething no current geometry builder can execute. Tilt and roll are\nrecorded as PLANNED in the capability registry instead of being accepted\nand ignored.\n\nMillimetres and degrees, like every other length and angle in JewelMind\n(LAW-007). No unit field, no conversion.",
+      "properties": {
+        "xMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Xmm",
+          "type": "number"
+        },
+        "yMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Ymm",
+          "type": "number"
+        },
+        "zMm": {
+          "default": 0.0,
+          "maximum": 500.0,
+          "minimum": -500.0,
+          "title": "Zmm",
+          "type": "number"
+        },
+        "rotationDeg": {
+          "default": 0.0,
+          "maximum": 3600.0,
+          "minimum": -3600.0,
+          "title": "Rotationdeg",
+          "type": "number"
+        },
+        "tiltDeg": {
+          "default": 0.0,
+          "maximum": 180.0,
+          "minimum": -180.0,
+          "title": "Tiltdeg",
+          "type": "number"
+        },
+        "tiltAzimuthDeg": {
+          "default": 0.0,
+          "maximum": 3600.0,
+          "minimum": -3600.0,
+          "title": "Tiltazimuthdeg",
+          "type": "number"
+        }
+      },
+      "title": "InstanceTransform",
+      "type": "object"
+    },
+    "MicrosettingSpec": {
+      "additionalProperties": false,
+      "description": "SMALL-STONE RETENTION TOPOLOGY: a stated structure.\n\nThe designer states the ROWS and COLUMNS and their spacings; the area\nfollows. That is the inverse of a `PaveSpec`, and the reason both exist: a\nmicrosetting is specified as a structure to be cut, not as a region to be\ncovered.",
+      "properties": {
+        "kind": {
+          "const": "MICROSETTING",
+          "default": "MICROSETTING",
+          "title": "Kind",
+          "type": "string"
+        },
+        "columnCount": {
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Columncount",
+          "type": "integer"
+        },
+        "rowCount": {
+          "default": 1,
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Rowcount",
+          "type": "integer"
+        },
+        "stoneSpacingMm": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 50.0,
+          "title": "Stonespacingmm",
+          "type": "number"
+        },
+        "rowSpacingMm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 50.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rowspacingmm"
+        },
+        "startAngleDeg": {
+          "default": 0.0,
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "title": "Startangledeg",
+          "type": "number"
+        },
+        "axialOffsetMm": {
+          "default": 0.0,
+          "maximum": 100.0,
+          "minimum": -100.0,
+          "title": "Axialoffsetmm",
+          "type": "number"
+        },
+        "pattern": {
+          "default": "STAGGERED",
+          "enum": [
+            "GRID",
+            "STAGGERED",
+            "ROW_OFFSET",
+            "RADIAL",
+            "EXPLICIT"
+          ],
+          "title": "Pattern",
+          "type": "string"
+        },
+        "rowOffsetFraction": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "title": "Rowoffsetfraction",
+          "type": "number"
+        },
+        "termination": {
+          "default": "CENTERED",
+          "enum": [
+            "FULL_STONES",
+            "CENTERED"
+          ],
+          "title": "Termination",
+          "type": "string"
+        },
+        "symmetry": {
+          "default": "SYMMETRIC",
+          "enum": [
+            "SYMMETRIC",
+            "ASYMMETRIC"
+          ],
+          "title": "Symmetry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "columnCount",
+        "stoneSpacingMm"
+      ],
+      "title": "MicrosettingSpec",
+      "type": "object"
+    },
+    "PaveExplicitPlacement": {
+      "additionalProperties": false,
+      "description": "One stone placed by the document rather than by the pattern.\n\nTHE ESCAPE HATCH, and it reuses the arrangement's own `InstanceTransform`\nverbatim rather than declaring a parallel transform model — the value this\ncarries IS an arrangement transform, and is handed to the arrangement\nunchanged.",
+      "properties": {
+        "placementId": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+          "title": "Placementid",
+          "type": "string"
+        },
+        "transform": {
+          "$ref": "#/$defs/InstanceTransform"
+        },
+        "gem": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GemIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "scale": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.01,
+              "maximum": 10.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scale"
+        }
+      },
+      "required": [
+        "placementId",
+        "transform"
+      ],
+      "title": "PaveExplicitPlacement",
+      "type": "object"
+    },
+    "PaveRetention": {
+      "additionalProperties": false,
+      "description": "How metal holds the field's stones.\n\nA REQUEST plus its construction parameters. The Setting System owns what a\nbead IS and builds it; this states which strategy the field wants and at\nwhat size. Keeping the two apart is why there is no second prong model\nhere.",
+      "properties": {
+        "strategy": {
+          "default": "SHARED_BEAD",
+          "enum": [
+            "NONE",
+            "BEAD",
+            "SHARED_BEAD",
+            "MICRO_PRONG"
+          ],
+          "title": "Strategy",
+          "type": "string"
+        },
+        "beadRadiusMm": {
+          "default": 0.18,
+          "exclusiveMinimum": 0.0,
+          "maximum": 5.0,
+          "title": "Beadradiusmm",
+          "type": "number"
+        },
+        "beadEmbedMm": {
+          "default": 0.06,
+          "maximum": 5.0,
+          "minimum": 0.0,
+          "title": "Beadembedmm",
+          "type": "number"
+        },
+        "prongHeightMm": {
+          "default": 0.35,
+          "exclusiveMinimum": 0.0,
+          "maximum": 10.0,
+          "title": "Prongheightmm",
+          "type": "number"
+        }
+      },
+      "title": "PaveRetention",
+      "type": "object"
+    },
+    "PaveSeat": {
+      "additionalProperties": false,
+      "description": "Whether the host metal is recessed for the stones.\n\nA CUT, NEVER A FUSE, enforced at the geometry layer by reusing\n`setting/seat.py` — the module whose own source is asserted never to call\n`.fuse()` on a stone shape (SETTINGV2-GOV-008, LAW-006).\n\n`REFERENCE_RECESS` is deliberately not called a seat: it has no bearing\nshoulder and makes no claim that a stone would sit correctly in it. It is\nthe stone's own volume removed from the host, which is a real recess and\nnothing more.",
+      "properties": {
+        "mode": {
+          "default": "NONE",
+          "enum": [
+            "NONE",
+            "REFERENCE_RECESS"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "clearanceMm": {
+          "default": 0.02,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Clearancemm",
+          "type": "number"
+        }
+      },
+      "title": "PaveSeat",
+      "type": "object"
+    },
+    "PaveSpec": {
+      "additionalProperties": false,
+      "description": "SURFACE POPULATION: cover a region at a pitch.\n\nThe designer states the AREA and the DENSITY; the stone count follows. That\nis the difference from a microsetting, where the count is stated and the\narea follows — and it is why these are two models rather than one with a\nflag.\n\n`angularSpanDeg` and `axialSpanMm` describe the region in the host\nsurface's OWN parameterization: an angle about the surface axis and a\ndistance along it. For a planar host the angular span is read as a sweep\nabout the surface's normal and the axial span as a radius extent, which is\nwhat makes one spec cover both a shank and a flat gallery.",
+      "properties": {
+        "kind": {
+          "const": "PAVE",
+          "default": "PAVE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "angularSpanDeg": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 360.0,
+          "title": "Angularspandeg",
+          "type": "number"
+        },
+        "startAngleDeg": {
+          "default": 0.0,
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "title": "Startangledeg",
+          "type": "number"
+        },
+        "axialSpanMm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 200.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Axialspanmm"
+        },
+        "pitchMm": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 50.0,
+          "title": "Pitchmm",
+          "type": "number"
+        },
+        "rowPitchMm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 50.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rowpitchmm"
+        },
+        "rowCount": {
+          "default": 1,
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Rowcount",
+          "type": "integer"
+        },
+        "pattern": {
+          "default": "GRID",
+          "enum": [
+            "GRID",
+            "STAGGERED",
+            "ROW_OFFSET",
+            "RADIAL",
+            "EXPLICIT"
+          ],
+          "title": "Pattern",
+          "type": "string"
+        },
+        "rowOffsetFraction": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "title": "Rowoffsetfraction",
+          "type": "number"
+        },
+        "termination": {
+          "default": "CENTERED",
+          "enum": [
+            "FULL_STONES",
+            "CENTERED"
+          ],
+          "title": "Termination",
+          "type": "string"
+        },
+        "symmetry": {
+          "default": "SYMMETRIC",
+          "enum": [
+            "SYMMETRIC",
+            "ASYMMETRIC"
+          ],
+          "title": "Symmetry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "angularSpanDeg",
+        "pitchMm"
+      ],
+      "title": "PaveSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A pavé or microsetting field.\n\n`spec` says how the lattice is described, `host` says which surface it is\napplied to, `retention` says how metal holds it, and `seat` says whether the\nhost is recessed for it. Compilation turns the first two into a real\n`ArrangementDefinition`, which is where placement actually lives.\n\nABSENT IS NOT EMPTY. A definition with no pavé behaves exactly as it did\nbefore this sprint. `enabled: false` keeps the parameters in the document\nand produces no stones — which is what lets a designer switch a field off\nwithout losing how it was configured, and is a different state from having\nno pavé at all.",
+  "properties": {
+    "paveId": {
+      "default": "pave",
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Paveid",
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "kind": {
+      "enum": [
+        "PAVE",
+        "MICROSETTING"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "spec": {
+      "discriminator": {
+        "mapping": {
+          "MICROSETTING": "#/$defs/MicrosettingSpec",
+          "PAVE": "#/$defs/PaveSpec"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PaveSpec"
+        },
+        {
+          "$ref": "#/$defs/MicrosettingSpec"
+        }
+      ],
+      "title": "Spec"
+    },
+    "host": {
+      "enum": [
+        "BAND_OUTER",
+        "HEAD_PLANE"
+      ],
+      "title": "Host",
+      "type": "string"
+    },
+    "stoneRef": {
+      "default": "primary",
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z0-9][a-z0-9_-]*)*$",
+      "title": "Stoneref",
+      "type": "string"
+    },
+    "stoneScale": {
+      "default": 0.12,
+      "exclusiveMinimum": 0.001,
+      "maximum": 10.0,
+      "title": "Stonescale",
+      "type": "number"
+    },
+    "stoneOrientationDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Stoneorientationdeg",
+      "type": "number"
+    },
+    "gem": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GemIdentity"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "retention": {
+      "$ref": "#/$defs/PaveRetention"
+    },
+    "seat": {
+      "$ref": "#/$defs/PaveSeat"
+    },
+    "containment": {
+      "default": "CLIP",
+      "enum": [
+        "CLIP",
+        "REJECT"
+      ],
+      "title": "Containment",
+      "type": "string"
+    },
+    "explicitPlacements": {
+      "items": {
+        "$ref": "#/$defs/PaveExplicitPlacement"
+      },
+      "maxItems": 120,
+      "title": "Explicitplacements",
+      "type": "array"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "maxLength": 120,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label"
+    }
+  },
+  "required": [
+    "kind",
+    "spec",
+    "host"
+  ],
+  "type": "object"
+}

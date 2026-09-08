@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/pave-seat.schema.json",
+  "title": "PaveSeat",
+  "additionalProperties": false,
+  "description": "Whether the host metal is recessed for the stones.\n\nA CUT, NEVER A FUSE, enforced at the geometry layer by reusing\n`setting/seat.py` — the module whose own source is asserted never to call\n`.fuse()` on a stone shape (SETTINGV2-GOV-008, LAW-006).\n\n`REFERENCE_RECESS` is deliberately not called a seat: it has no bearing\nshoulder and makes no claim that a stone would sit correctly in it. It is\nthe stone's own volume removed from the host, which is a real recess and\nnothing more.",
+  "properties": {
+    "mode": {
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REFERENCE_RECESS"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "clearanceMm": {
+      "default": 0.02,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Clearancemm",
+      "type": "number"
+    }
+  },
+  "type": "object"
+}

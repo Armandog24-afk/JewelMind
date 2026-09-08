@@ -1,0 +1,311 @@
+{
+  "generatedFrom": "PaveDefinition.model_validate + jewelmind.pave.compile.compile_pave_field",
+  "note": "Reject, never repair. Each case records WHICH layer refused it: a schema rejection means the document is malformed, a compiler rejection means it is well-formed and not buildable against this design's real host surface. The last two are SOFTWARE SAFETY limits rather than jewelry limits — a pathological pitch must not be able to ask the kernel for an unbounded number of solids.",
+  "vectors": [
+    {
+      "case": "spec kind does not match field kind",
+      "input": {
+        "kind": "MICROSETTING",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "explicit pattern with no placements",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0,
+          "pattern": "EXPLICIT"
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "duplicate explicit placement ids",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0,
+          "pattern": "EXPLICIT"
+        },
+        "explicitPlacements": [
+          {
+            "placementId": "a",
+            "transform": {
+              "xMm": 0.0
+            }
+          },
+          {
+            "placementId": "a",
+            "transform": {
+              "xMm": 1.0
+            }
+          }
+        ]
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "microsetting above the software stone bound",
+      "input": {
+        "kind": "MICROSETTING",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "MICROSETTING",
+          "columnCount": 60,
+          "rowCount": 12,
+          "stoneSpacingMm": 0.5
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "reserved host",
+      "input": {
+        "kind": "PAVE",
+        "host": "SETTING_SURFACE",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "reserved retention strategy",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        },
+        "retention": {
+          "strategy": "CHANNEL"
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "zero pitch",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 0.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "negative pitch",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": -1.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "non-finite pitch",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": Infinity
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "nan bead radius",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        },
+        "retention": {
+          "strategy": "BEAD",
+          "beadRadiusMm": NaN
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "jdl-style string number",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": "1.0"
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "unknown field",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        },
+        "sparkle": true
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "malformed pave id",
+      "input": {
+        "paveId": "../etc/passwd",
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "row count above the software bound",
+      "input": {
+        "kind": "PAVE",
+        "host": "BAND_OUTER",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "pitchMm": 1.0,
+          "rowCount": 400
+        }
+      },
+      "rejectedBy": "SCHEMA",
+      "error": "ValidationError"
+    },
+    {
+      "case": "field overruns the host under REJECT containment",
+      "input": {
+        "paveId": "pave",
+        "enabled": true,
+        "kind": "PAVE",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 90.0,
+          "startAngleDeg": 0.0,
+          "axialSpanMm": null,
+          "pitchMm": 1.0,
+          "rowPitchMm": null,
+          "rowCount": 10,
+          "pattern": "GRID",
+          "rowOffsetFraction": 0.5,
+          "termination": "CENTERED",
+          "symmetry": "SYMMETRIC"
+        },
+        "host": "BAND_OUTER",
+        "stoneRef": "primary",
+        "stoneScale": 0.1,
+        "stoneOrientationDeg": 0.0,
+        "gem": null,
+        "retention": {
+          "strategy": "SHARED_BEAD",
+          "beadRadiusMm": 0.18,
+          "beadEmbedMm": 0.06,
+          "prongHeightMm": 0.35
+        },
+        "seat": {
+          "mode": "NONE",
+          "clearanceMm": 0.02
+        },
+        "containment": "REJECT",
+        "explicitPlacements": [],
+        "label": null
+      },
+      "rejectedBy": "COMPILER",
+      "error": "PaveContainmentError"
+    },
+    {
+      "case": "pathological pitch would produce a runaway field",
+      "input": {
+        "paveId": "pave",
+        "enabled": true,
+        "kind": "PAVE",
+        "spec": {
+          "kind": "PAVE",
+          "angularSpanDeg": 360.0,
+          "startAngleDeg": 0.0,
+          "axialSpanMm": null,
+          "pitchMm": 0.02,
+          "rowPitchMm": null,
+          "rowCount": 1,
+          "pattern": "GRID",
+          "rowOffsetFraction": 0.5,
+          "termination": "CENTERED",
+          "symmetry": "SYMMETRIC"
+        },
+        "host": "BAND_OUTER",
+        "stoneRef": "primary",
+        "stoneScale": 0.01,
+        "stoneOrientationDeg": 0.0,
+        "gem": null,
+        "retention": {
+          "strategy": "SHARED_BEAD",
+          "beadRadiusMm": 0.18,
+          "beadEmbedMm": 0.06,
+          "prongHeightMm": 0.35
+        },
+        "seat": {
+          "mode": "NONE",
+          "clearanceMm": 0.02
+        },
+        "containment": "CLIP",
+        "explicitPlacements": [],
+        "label": null
+      },
+      "rejectedBy": "COMPILER",
+      "error": "PaveCapacityExceededError"
+    }
+  ]
+}

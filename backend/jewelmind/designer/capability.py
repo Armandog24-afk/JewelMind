@@ -18,6 +18,13 @@ from typing import Any, get_args
 from jewelmind.domain import schema as S
 from jewelmind.gem.models import GemOrigin, GemTreatmentType
 from jewelmind.jewelry_category.registry import get_capability
+from jewelmind.pave.models import (
+    PaveContainmentPolicy,
+    PaveHost,
+    PaveKind,
+    PavePattern,
+    PaveRetentionStrategy,
+)
 from jewelmind.stone.capability import (
     RESERVED_STONE_SHAPES as _RESERVED_STONE_SHAPES,
 )
@@ -34,9 +41,16 @@ SUPPORTED_PRONG_COUNTS = (4, 6)
 # backstop for unsupported-feature detection, independent of whether the
 # provider itself flagged the request — see 301-unsupported-request-handling.md.
 KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
-    "halo": "Halo settings are not currently supported; only a single prong setting exists.",
-    "pave": "Pave bands are not currently supported.",
-    "pavé": "Pave bands are not currently supported.",
+    # Sprint 26: `pave` and `pavé` were REMOVED from this map. A pavé is now a
+    # real, generating field with real retention metal, and Designer can
+    # propose its parameters directly — reporting it as unsupported would have
+    # made Designer actively misreport a real capability, the same mistake
+    # Sprints 18 and 20 each had to correct.
+    #
+    # `halo` was also removed, for a different reason: the capability is real
+    # (Sprint 25) but Designer cannot compose a nested halo, so it belongs in
+    # `PRODUCT_SUPPORTED_NOT_PROPOSABLE` below rather than being described as
+    # absent from the product.
     "trilogy": "Only a single-stone solitaire is currently supported.",
     "three_stone": "Only a single-stone solitaire is currently supported.",
     "multi_stone": "Only a single-stone solitaire is currently supported.",
@@ -132,6 +146,15 @@ def current_capabilities() -> dict[str, Any]:
         "gemId": _current_gem_ids(),
         "gemOrigin": list(get_args(GemOrigin)),
         "gemTreatment": list(get_args(GemTreatmentType)),
+        # Sprint 26: read from the live pavé model, so a reserved host or a
+        # reserved retention strategy can never be offered — the model's
+        # `Literal` members ARE the set with a real builder.
+        "paveKind": list(get_args(PaveKind)),
+        "paveHost": list(get_args(PaveHost)),
+        "pavePattern": list(get_args(PavePattern)),
+        "paveRetentionStrategy": list(get_args(PaveRetentionStrategy)),
+        "paveSeatMode": ["NONE", "REFERENCE_RECESS"],
+        "paveContainment": list(get_args(PaveContainmentPolicy)),
     }
 
 
@@ -151,7 +174,37 @@ _ENUM_FIELD_CAPABILITY_KEY: dict[str, str] = {
     "ring.sizeSystem": "ringSizeSystem",
     "stone.gem.gemId": "gemId",
     "stone.gem.origin": "gemOrigin",
+    # Sprint 26.
+    "pave.kind": "paveKind",
+    "pave.host": "paveHost",
+    "pave.spec.pattern": "pavePattern",
+    "pave.retention.strategy": "paveRetentionStrategy",
+    "pave.seat.mode": "paveSeatMode",
+    "pave.containment": "paveContainment",
 }
+
+# Concepts the PRODUCT supports but Designer cannot PROPOSE (Sprint 26).
+#
+# A different statement from `KNOWN_UNSUPPORTED_CONCEPTS`, and the distinction
+# matters: telling a user a halo is unsupported when the product builds one is
+# a misreport, while telling them Designer cannot compose one is the truth.
+# Designer proposes flat dotted scalar paths, and a family or a halo is a
+# nested structure whose fields could not be diffed one by one or shown with
+# real per-field provenance.
+PRODUCT_SUPPORTED_NOT_PROPOSABLE: dict[str, str] = {
+    "halo": (
+        "Halos are supported and generate real geometry, but they are "
+        "configured in the workspace rather than proposed from a description: "
+        "a halo is a nested structure and every proposed field must carry its "
+        "own provenance."
+    ),
+    "three_stone": (
+        "Multi-stone families are supported and generate real geometry, but "
+        "they are configured in the workspace rather than proposed from a "
+        "description, for the same reason."
+    ),
+}
+
 
 # Fields Designer is allowed to propose at all. Anything outside this set
 # is rejected before it can reach a candidate JDL, regardless of what a
@@ -190,6 +243,35 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         "stone.gem.origin",
         "stone.gem.customName",
         "stone.gem.note",
+        # Sprint 26. The pavé block's geometrically meaningful fields are flat
+        # scalars by design, so Designer can propose them one at a time with
+        # real per-field provenance. Deliberately NOT the whole field:
+        # `spec` is a discriminated union and `explicitPlacements` is a list,
+        # neither of which a dotted-path patch can express — both are set
+        # through the workspace and the API.
+        "pave.enabled",
+        "pave.kind",
+        "pave.host",
+        "pave.stoneScale",
+        "pave.stoneOrientationDeg",
+        "pave.retention.strategy",
+        "pave.retention.beadRadiusMm",
+        "pave.seat.mode",
+        "pave.containment",
+        "pave.spec.pattern",
+        # `rowCount` is the ONE numeric field both specs share, so a dotted
+        # patch can set it whichever kind the field is.
+        "pave.spec.rowCount",
+        #
+        # The metric spacings are deliberately ABSENT. `pitchMm` belongs to a
+        # PaveSpec and `stoneSpacingMm` to a MicrosettingSpec, so a flat patch
+        # naming one could land on a spec that has no such field — and a
+        # request for "denser stones" names a relative density, not a
+        # millimetre value. Turning one into the other would require knowing
+        # what pitch is appropriate, which is exactly the professional judgment
+        # this project has no evidence for (see
+        # `normalizer.PAVE_DENSITY_TERMS`, recognized so such a request becomes
+        # a question rather than an invented number).
     }
 )
 

@@ -62,6 +62,12 @@ results are shown but never block anything.
 | `JM-HALO-003` | `halo.centerMemberId` | This family/halo combination is not supported — e.g. a halo naming a centre in a toi-et-moi, which has no CENTER member. Reported with the real reason rather than only refused. | error |
 | `JM-HALO-004` | `halo.rings` | A ring references a stone specification other than `primary`, or requests a setting the design does not use. A **warning**: the design is valid and only those stones are affected. | warning |
 | `JM-HALO-005` | `halo` | The halo builds stone geometry for every halo stone, but no metal is generated to hold them. Not a fault in the design. | information |
+| `JM-PAVE-001` | `pave.host` | The requested host surface has no resolver. Refused rather than approximated onto another surface. | error |
+| `JM-PAVE-002` | `pave` | The field cannot be compiled against this design's real host surface. Evaluated by running the REAL compiler, so Forge can never disagree with what generation does. | error |
+| `JM-PAVE-003` | `pave.spec` | Lattice cells fell outside the host surface's declared extent and were clipped. A **warning**: a clipped field is a real, buildable design. | warning |
+| `JM-PAVE-004` | `pave.stoneRef` | The field references a stone specification other than `primary`. A **warning**: only that field produces no geometry. | warning |
+| `JM-PAVE-005` | `pave` | What the field builds and does not build, plus the requirement that a qualified jewelry professional review it before production. Not a fault. | information |
+| `JM-PAVE-006` | `pave.stoneScale` | The stones are wider than the pitch between their centres, so they overlap as a matter of arithmetic. A GEOMETRIC inconsistency, **not** a manufacturing threshold: JewelMind states no minimum pavé spacing. | warning |
 | `JM-ARRANGE-001` | `arrangement.instances` | Two stone instances declare the same id. Ids are the authoritative identity, so a duplicate makes every reference to it ambiguous. | error |
 | `JM-ARRANGE-002` | `arrangement.instances`, `arrangement.patterns` | A placement or pattern names a group or instance that is not declared. | error |
 | `JM-ARRANGE-003` | `arrangement.instances` | An instance references a stone specification other than `primary`, which no current document declares. A **warning**: the design is structurally valid and still generates, and only that instance produces no geometry. | warning |

@@ -1,0 +1,36 @@
+{
+  "paveId": "pave",
+  "enabled": true,
+  "kind": "MICROSETTING",
+  "spec": {
+    "kind": "MICROSETTING",
+    "columnCount": 16,
+    "rowCount": 1,
+    "stoneSpacingMm": 0.7,
+    "rowSpacingMm": null,
+    "startAngleDeg": 0.0,
+    "axialOffsetMm": 0.0,
+    "pattern": "RADIAL",
+    "rowOffsetFraction": 0.5,
+    "termination": "CENTERED",
+    "symmetry": "SYMMETRIC"
+  },
+  "host": "HEAD_PLANE",
+  "stoneRef": "primary",
+  "stoneScale": 0.07,
+  "stoneOrientationDeg": 0.0,
+  "gem": null,
+  "retention": {
+    "strategy": "BEAD",
+    "beadRadiusMm": 0.1,
+    "beadEmbedMm": 0.06,
+    "prongHeightMm": 0.35
+  },
+  "seat": {
+    "mode": "NONE",
+    "clearanceMm": 0.02
+  },
+  "containment": "CLIP",
+  "explicitPlacements": [],
+  "label": "Gallery rim microsetting"
+}

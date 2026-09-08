@@ -877,6 +877,181 @@ def _halo_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _pave_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Pave and microsetting validation (Sprint 26).
+
+    SCOPE: PAVE_ONLY. Six questions: does the host surface resolve for this
+    design, does the field compile, did it lose cells to the surface edge, do
+    its references resolve, is the requested pitch geometrically consistent
+    with the stones it must carry, and what does a compiled field NOT include.
+
+    ONLY ONE IS NUMERIC, and it is a MATHEMATICAL CONSTRAINT rather than a
+    professional threshold: two stones whose footprints are wider than the
+    pitch between them overlap as a matter of arithmetic. There is deliberately
+    no minimum pave spacing, no minimum bead diameter, no maximum density and
+    no settable seat depth - each needs sourced professional evidence this
+    project does not have.
+
+    THE AUTHORITATIVE CHECK RUNS THE REAL COMPILER against the design's real
+    resolved surface, so Forge can never disagree with what generation will do.
+    That is why this module imports `geometry/pave_surface.py`, which is
+    deliberately kernel-free for exactly this reason: Forge must not import
+    CadQuery, and it must not resolve a surface differently from the assembly.
+
+    A design with no pave produces NO results, so the entire existing corpus
+    stays quiet.
+    """
+
+    pave = d.pave
+    if pave is None:
+        return []
+
+    from jewelmind.domain.stone_dimensions import resolved_width_mm
+    from jewelmind.geometry.pave_surface import resolve_pave_surface
+    from jewelmind.pave.compile import compile_pave_field, lattice_pitches
+    from jewelmind.pave.errors import PaveError, PaveHostUnsupportedError
+
+    out: list[R.ValidationResult] = []
+
+    try:
+        surface = resolve_pave_surface(d, pave)
+    except PaveHostUnsupportedError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_HOST_RESOLVES,
+                severity="error",
+                message=str(exc),
+                parameter="pave.host",
+            )
+        )
+        return out
+
+    # A field naming a stone specification other than 'primary' is reported as
+    # a WARNING: the document is structurally valid and the rest of the design
+    # still generates; only that field produces no geometry.
+    if pave.stoneRef != "primary":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_REFERENCES_RESOLVE,
+                severity="warning",
+                message=(
+                    f"Pave {pave.paveId!r} references stone "
+                    f"{pave.stoneRef!r}, but this definition declares only the "
+                    "primary stone. No geometry will be built for its stones."
+                ),
+                parameter="pave.stoneRef",
+            )
+        )
+
+    try:
+        field = compile_pave_field(pave, surface)
+    except PaveError as exc:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_COMPILES,
+                severity="error",
+                message=f"This pave cannot be compiled: {exc}",
+                parameter="pave",
+            )
+        )
+        return out
+
+    if not field.enabled:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_EXECUTION_BOUNDARY,
+                severity="information",
+                message=(
+                    f"Pave {pave.paveId!r} is declared and disabled, so no "
+                    "stones and no retention metal are built. Its parameters "
+                    "are preserved."
+                ),
+                parameter="pave.enabled",
+            )
+        )
+        return out
+
+    # CELLS LOST TO THE SURFACE EDGE. A warning rather than an error: a clipped
+    # field is a real, buildable design, and the caller chose CLIP. Reported
+    # because a field that lost a third of its stones to an edge is a fact the
+    # caller needs, not a detail to absorb silently.
+    if field.clippedCells:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_FIELD_CONTAINMENT,
+                severity="warning",
+                message=(
+                    f"{field.clippedCells} lattice cell(s) of pave "
+                    f"{pave.paveId!r} fall outside the {pave.host} surface's "
+                    f"declared extent and were clipped; {field.stone_count()} "
+                    "stone(s) remain. Reduce the row count, the span or the "
+                    "pitch to fit the surface."
+                ),
+                parameter="pave.spec",
+            )
+        )
+
+    # THE ONE NUMERIC CHECK, and it is arithmetic. The stone's own resolved
+    # footprint, scaled by the field's own scale, against the pitch between
+    # centres. Nothing here says how much clearance a setter needs; it says
+    # only that below this the stones intersect each other, which is a
+    # geometric fact Inspection will then report as one.
+    pitch, row_pitch = lattice_pitches(pave)
+    stone_width = resolved_width_mm(d.stone)
+    footprint = stone_width * pave.stoneScale
+    tightest = min(pitch, row_pitch)
+    if footprint > tightest:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.PAVE_PITCH_CONSISTENCY,
+                severity="warning",
+                message=(
+                    f"Pave {pave.paveId!r} sets stones {footprint:.3f}mm across "
+                    f"at a pitch of {tightest:.3f}mm, so adjacent stones "
+                    "overlap as a matter of arithmetic. A GEOMETRIC "
+                    "inconsistency, not a manufacturing threshold: JewelMind "
+                    "states no minimum pave spacing. Increase the pitch or "
+                    "reduce pave.stoneScale."
+                ),
+                parameter="pave.stoneScale",
+                suggestedValue=round(tightest / max(stone_width, 1e-9), 4),
+            )
+        )
+
+    # WHAT THE FIELD DOES NOT INCLUDE, surfaced as INFORMATION rather than
+    # hidden in a log, plus the professional-review statement the brief
+    # requires. The design is not faulty.
+    boundary: list[str] = []
+    if pave.retention.strategy == "NONE":
+        boundary.append(
+            "retention is 'NONE', so its stones are built with no metal "
+            "holding them"
+        )
+    if pave.seat.mode == "NONE":
+        boundary.append(
+            "no recess is cut, so its stones sit against the host surface "
+            "rather than into it"
+        )
+    detail = f" This field {', and '.join(boundary)}." if boundary else ""
+    out.append(
+        R.ValidationResult(
+            ruleId=R.PAVE_EXECUTION_BOUNDARY,
+            severity="information",
+            message=(
+                f"This {field.kind} field builds {field.stone_count()} stone(s) "
+                f"and {field.retention_count()} retention piece(s) on the "
+                f"{pave.host} surface.{detail} No pave dimension, spacing or "
+                "retention size in JewelMind is professionally validated: a "
+                "qualified jewelry professional must review this field before "
+                "production."
+            ),
+            parameter="pave",
+        )
+    )
+
+    return out
+
+
 def _stone_depth_rule_applies(stone) -> bool:
     """Whether STONE_DEPTH_RANGE's premise holds for this stone.
 
@@ -1173,6 +1348,7 @@ _RULE_GROUPS = (
     _arrangement_rules,
     _family_rules,
     _halo_rules,
+    _pave_rules,
     _prong_rules,
     _bezel_rules,
     _setting_rules,

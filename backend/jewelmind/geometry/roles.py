@@ -21,6 +21,11 @@ GEOMETRY_ROLE: dict[str, GeometryRole] = {
     "bezel": "production_metal",
     "basket_support": "production_metal",
     "stone_reference": "stone_reference",
+    # Sprint 26: the pavé/microsetting retention field — beads or
+    # micro-prongs, fused into the production body. Registered explicitly
+    # rather than left to the `production_metal` default, so the classification
+    # is a stated fact rather than a fallback that happens to be right.
+    "pave_retention": "production_metal",
 }
 
 PRODUCTION_ROLE: dict[str, ProductionRole] = {
@@ -29,6 +34,7 @@ PRODUCTION_ROLE: dict[str, ProductionRole] = {
     "bezel": "included_by_default",
     "basket_support": "included_by_default",
     "stone_reference": "excluded_by_default",
+    "pave_retention": "included_by_default",
 }
 
 

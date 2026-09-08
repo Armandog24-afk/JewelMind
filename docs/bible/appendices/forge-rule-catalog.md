@@ -56,6 +56,12 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-HALO-003` | Halo composition supported | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-HALO-004` | Halo references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-HALO-005` | Halo setting coverage | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-PAVE-001` | Pave host surface resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-PAVE-002` | Pave field compiles | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-PAVE-003` | Pave field containment | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-PAVE-004` | Pave references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-PAVE-005` | Pave execution boundary | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-PAVE-006` | Pave pitch consistency | GEOMETRY_PRECONDITION | FORGE-3 | warning | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-001` | Instance ids unique | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-002` | Arrangement references resolve | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-ARRANGE-003` | Stone reference resolves | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
@@ -70,4 +76,4 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `FORGE-GEOM-001` | Fuse must yield a solid | GEOMETRY_INSPECTION | FORGE-7 | warning | 1.0.0 | ACCEPTED |
 | `FORGE-EXPORT-001` | Export requires a valid cached record | EXPORT_PRECONDITION | FORGE-8 | error-equivalent | 1.0.0 | ACCEPTED |
 
-**Total: 48 rules. Professionally validated: 0.**
+**Total: 54 rules. Professionally validated: 0.**

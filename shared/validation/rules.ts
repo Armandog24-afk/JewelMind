@@ -75,6 +75,21 @@ export const RULE_IDS = {
   HALO_COMPOSITION_SUPPORTED: 'JM-HALO-003',
   HALO_REFERENCES_RESOLVE: 'JM-HALO-004',
   HALO_SETTING_COVERAGE: 'JM-HALO-005',
+
+  // Sprint 26 — PAVE_ONLY. A DOCUMENTED SUBSET is mirrored: JM-PAVE-004
+  // (reference resolution), JM-PAVE-005 (the execution boundary and the
+  // professional-review statement) and JM-PAVE-006 (pitch consistency, pure
+  // arithmetic) are decidable from the document alone. JM-PAVE-001 (does the
+  // host surface resolve), JM-PAVE-002 (does the real compiler accept it) and
+  // JM-PAVE-003 (how many cells the surface clipped) need the backend's
+  // resolved host surface and its compiler, and stay backend-only.
+  // FORGE-GOV-004: the mirror may only ever be a subset.
+  PAVE_HOST_RESOLVES: 'JM-PAVE-001',
+  PAVE_COMPILES: 'JM-PAVE-002',
+  PAVE_FIELD_CONTAINMENT: 'JM-PAVE-003',
+  PAVE_REFERENCES_RESOLVE: 'JM-PAVE-004',
+  PAVE_EXECUTION_BOUNDARY: 'JM-PAVE-005',
+  PAVE_PITCH_CONSISTENCY: 'JM-PAVE-006',
   MANUFACTURING_MIN_FEATURE: 'JM-MANUFACTURING-001',
   GEOMETRY_OUTER_BAND_POSITIVE: 'JM-GEOMETRY-001',
 } as const

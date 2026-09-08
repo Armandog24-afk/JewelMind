@@ -1140,6 +1140,150 @@
         "backend/tests/test_validation.py"
       ],
       "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-001",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-002",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-003",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-004",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-005",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-PAVE-006",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "GEOMETRY_PRECONDITION",
+      "stage": "FORGE-3",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "solitaire"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_pave_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_pave.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
     }
   ]
 }

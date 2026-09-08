@@ -22,10 +22,17 @@ from jewelmind.geometry.components.basket import build_basket_support
 from jewelmind.geometry.components.stone import build_stone_reference
 from jewelmind.geometry.constants import GENERATOR_VERSION
 from jewelmind.geometry.model import BoundingBox, GeneratedComponent, GeneratedModel
+from jewelmind.geometry.pave_adapter import (
+    apply_pave_recess,
+    resolve_pave_surface,
+    retention_component,
+)
 from jewelmind.geometry.setting_adapter import setting_definition_from_jdl
 from jewelmind.geometry.stone.placement import stone_components
+from jewelmind.pave.compile import compose_pave
 from jewelmind.setting.dispatch import generate_setting
 from jewelmind.setting.head import HEAD_COMPONENT
+from jewelmind.setting.retention import PAVE_RETENTION_COMPONENT
 from jewelmind.utils.hashing import definition_hash, geometry_hash
 
 
@@ -76,7 +83,22 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
     # THE EFFECTIVE ARRANGEMENT (Sprint 24). A family compiles into one; a
     # document may also declare one directly. Both routes end here, so there is
     # exactly one placement authority and a family can never disagree with it.
-    arrangement_result = compile_arrangement(effective_arrangement(definition))
+    # THE EFFECTIVE PLACEMENT, in one place (Sprint 26). A family or an
+    # explicit arrangement, plus a halo, plus a pavé field — all composed
+    # before anything is resolved, so there is exactly one placement authority.
+    #
+    # The pavé is composed HERE rather than inside `effective_arrangement()`
+    # because it needs a resolved host surface, and resolving one means
+    # measuring a band. `jewelmind.family` must not import a geometry module,
+    # so the category-aware half of the composition belongs on this side of the
+    # boundary.
+    placement = effective_arrangement(definition)
+    pave = definition.pave
+    pave_surface = (
+        resolve_pave_surface(definition, pave) if pave is not None else None
+    )
+    placement, pave_field = compose_pave(placement, pave, pave_surface)
+    arrangement_result = compile_arrangement(placement)
 
     setting_definition = setting_definition_from_jdl(definition, stone)
     # The stone SHAPE is passed as an argument, never stored on the setting
@@ -93,13 +115,45 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         definition
     )
 
+    # PAVÉ METAL (Sprint 26). Real solids: beads or micro-prongs, each fused
+    # into the production body. Built before the fuse so it participates in it,
+    # which is what makes retention part of the metal rather than a separate
+    # object resting on it.
+    pave_retention = retention_component(pave, pave_field) if pave else None
+
     # Fuse order preserved from pre-Sprint-19: band, basket, then setting.
     setting_metal = [
         setting_components[name]
         for name in setting_result.productionComponents
         if name in setting_components
     ]
-    combined_metal, fuse_warnings = _fuse_metal([band, basket, *setting_metal])
+    # THE PAVÉ RECESS, applied to the host BEFORE the fuse and before the
+    # retention is added, so the cut removes host metal rather than bead metal.
+    # A cut, never a fuse: it routes through `setting/seat.py` (LAW-006).
+    pave_recess_warnings: list[str] = []
+    if pave is not None and pave_field is not None and pave_field.enabled:
+        stone_shapes = [
+            component.shape
+            for name, component in stone_components(
+                stone, arrangement_result
+            ).items()
+            if name != "stone_reference"
+        ]
+        hosts = {"band": band, "basket_support": basket}
+        host = hosts.get(pave_field.hostComponent)
+        if host is not None:
+            relieved, pave_recess_warnings = apply_pave_recess(
+                host, pave, stone_shapes
+            )
+            if pave_field.hostComponent == "band":
+                band = relieved
+            else:
+                basket = relieved
+
+    metal_parts = [band, basket, *setting_metal]
+    if pave_retention is not None:
+        metal_parts.append(pave_retention)
+    combined_metal, fuse_warnings = _fuse_metal(metal_parts)
     combined_metal_volume = combined_metal.Volume()
 
     metal_bbox = BoundingBox.from_shape(combined_metal)
@@ -113,6 +167,9 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
     for component in setting_components.values():
         warnings.extend(component.warnings)
     warnings.extend(fuse_warnings)
+    warnings.extend(pave_recess_warnings)
+    if pave_retention is not None:
+        warnings.extend(pave_retention.warnings)
 
     components: dict[str, GeneratedComponent] = {"band": band}
 
@@ -128,6 +185,13 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
 
     components.update(setting_components)
     components["basket_support"] = basket
+
+    # ONE COMPONENT FOR THE WHOLE RETENTION FIELD, never one per bead: sixty
+    # named components would give Geometry Inspection an intersection matrix
+    # that grows with the stone count, and every anchor's own id and the stones
+    # it serves are carried in this component's metadata instead.
+    if pave_retention is not None:
+        components[PAVE_RETENTION_COMPONENT] = pave_retention
 
     duration = time.perf_counter() - start
 
@@ -147,4 +211,9 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         # describes, exactly like `setting_result`. `None` in, `None` out: a
         # design with neither a family nor an arrangement is unchanged.
         arrangement_result=arrangement_result,
+        # Sprint 26. Carried on the model beside the setting and arrangement
+        # results, so the pavé outcome — its stone count, its retention
+        # topology, its clipped cells and what it did NOT build — travels with
+        # the geometry it describes.
+        pave_result=pave_field,
     )

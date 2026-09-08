@@ -7,7 +7,7 @@
  * backend response.
  */
 
-import type { JewelryDefinition } from '../types/jewelry-definition'
+import type { JewelryDefinition, PaveDefinition } from '../types/jewelry-definition'
 import { RULE_IDS, type ValidationResult } from './rules'
 import { euSizeToInnerDiameter, sizingConsistency } from './sizing'
 
@@ -837,6 +837,102 @@ function haloRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/** The field's column and row pitch. Mirrors
+ * `backend/jewelmind/pave/compile.py::lattice_pitches`. */
+function latticePitches(pave: PaveDefinition): [number, number] {
+  if (pave.spec.kind === 'PAVE') {
+    const pitch = pave.spec.pitchMm
+    return [pitch, pave.spec.rowPitchMm ?? pitch]
+  }
+  const pitch = pave.spec.stoneSpacingMm
+  return [pitch, pave.spec.rowSpacingMm ?? pitch]
+}
+
+function paveRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const pave = d.pave
+
+  if (pave === null || pave === undefined) {
+    return out
+  }
+
+  if (!pave.enabled) {
+    out.push({
+      ruleId: RULE_IDS.PAVE_EXECUTION_BOUNDARY,
+      severity: 'information',
+      message:
+        `Pavé '${pave.paveId}' is declared and disabled, so no stones and no ` +
+        'retention metal are built. Its parameters are preserved.',
+      parameter: 'pave.enabled',
+    })
+    return out
+  }
+
+  if (pave.stoneRef !== 'primary') {
+    out.push({
+      ruleId: RULE_IDS.PAVE_REFERENCES_RESOLVE,
+      severity: 'warning',
+      message:
+        `Pavé '${pave.paveId}' references stone '${pave.stoneRef}', but this ` +
+        'definition declares only the primary stone. No geometry will be ' +
+        'built for its stones.',
+      parameter: 'pave.stoneRef',
+    })
+  }
+
+  // PURE ARITHMETIC, and the only numeric pavé rule: stones wider than the
+  // pitch between their centres overlap as a matter of geometry. NOT a
+  // manufacturing threshold — JewelMind states no minimum pavé spacing.
+  const [pitch, rowPitch] = latticePitches(pave)
+  // Reuses the existing mirror of `resolved_width_mm` rather than a second
+  // copy: the stone's minimum horizontal extent, never a fabricated
+  // equivalent diameter.
+  const stoneWidth = resolvedStoneWidth(d) ?? null
+  if (stoneWidth !== null) {
+    const footprint = stoneWidth * pave.stoneScale
+    const tightest = Math.min(pitch, rowPitch)
+    if (footprint > tightest) {
+      out.push({
+        ruleId: RULE_IDS.PAVE_PITCH_CONSISTENCY,
+        severity: 'warning',
+        message:
+          `Pavé '${pave.paveId}' sets stones ${footprint.toFixed(3)}mm across ` +
+          `at a pitch of ${tightest.toFixed(3)}mm, so adjacent stones overlap ` +
+          'as a matter of arithmetic. A GEOMETRIC inconsistency, not a ' +
+          'manufacturing threshold: JewelMind states no minimum pavé spacing. ' +
+          'Increase the pitch or reduce pave.stoneScale.',
+        parameter: 'pave.stoneScale',
+      })
+    }
+  }
+
+  const boundary: string[] = []
+  if (pave.retention.strategy === 'NONE') {
+    boundary.push(
+      "retention is 'NONE', so its stones are built with no metal holding them",
+    )
+  }
+  if (pave.seat.mode === 'NONE') {
+    boundary.push(
+      'no recess is cut, so its stones sit against the host surface rather ' +
+        'than into it',
+    )
+  }
+  const detail = boundary.length > 0 ? ` This field ${boundary.join(', and ')}.` : ''
+  out.push({
+    ruleId: RULE_IDS.PAVE_EXECUTION_BOUNDARY,
+    severity: 'information',
+    message:
+      `This ${pave.kind} field is set on the ${pave.host} surface.${detail} No ` +
+      'pavé dimension, spacing or retention size in JewelMind is ' +
+      'professionally validated: a qualified jewelry professional must review ' +
+      'this field before production.',
+    parameter: 'pave',
+  })
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -846,6 +942,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...arrangementRules(definition),
     ...familyRules(definition),
     ...haloRules(definition),
+    ...paveRules(definition),
     ...prongRules(definition),
     ...bezelRules(definition),
     ...settingRules(definition),

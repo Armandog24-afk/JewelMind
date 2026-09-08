@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/pave/v1/pave-retention.schema.json",
+  "title": "PaveRetention",
+  "additionalProperties": false,
+  "description": "How metal holds the field's stones.\n\nA REQUEST plus its construction parameters. The Setting System owns what a\nbead IS and builds it; this states which strategy the field wants and at\nwhat size. Keeping the two apart is why there is no second prong model\nhere.",
+  "properties": {
+    "strategy": {
+      "default": "SHARED_BEAD",
+      "enum": [
+        "NONE",
+        "BEAD",
+        "SHARED_BEAD",
+        "MICRO_PRONG"
+      ],
+      "title": "Strategy",
+      "type": "string"
+    },
+    "beadRadiusMm": {
+      "default": 0.18,
+      "exclusiveMinimum": 0.0,
+      "maximum": 5.0,
+      "title": "Beadradiusmm",
+      "type": "number"
+    },
+    "beadEmbedMm": {
+      "default": 0.06,
+      "maximum": 5.0,
+      "minimum": 0.0,
+      "title": "Beadembedmm",
+      "type": "number"
+    },
+    "prongHeightMm": {
+      "default": 0.35,
+      "exclusiveMinimum": 0.0,
+      "maximum": 10.0,
+      "title": "Prongheightmm",
+      "type": "number"
+    }
+  },
+  "type": "object"
+}

@@ -2,7 +2,7 @@
   "registryVersion": "1.0.0",
   "resolverVersion": "1.0.0",
   "generatedFrom": "backend/jewelmind/arrangement/capability.py::ARRANGEMENT_CAPABILITIES",
-  "note": "Generated from the live registry, never hand-maintained. THREE INDEPENDENT AXES: representable (the model can express it), resolvable (the resolver turns it into explicit numbers), generatable (the geometry pipeline builds a solid for it). Sprint 24: every placement and pattern kind is now generatable — each resolved instance builds a real stone solid. multi_stone_geometry remains PARTIAL because a SETTING is generated only for the primary instance.",
+  "note": "Generated from the live registry, never hand-maintained. THREE INDEPENDENT AXES: representable (the model can express it), resolvable (the resolver turns it into explicit numbers), generatable (the geometry pipeline builds a solid for it). A capability may be representable and resolvable while remaining ungeneratable, and reporting that as 'supported' would be a misstatement. Multi-stone GEOMETRY is PARTIAL: the arrangement resolves every instance and the compilation boundary reports each one's generation status, but one stone component is emitted.",
   "componentNaming": {
     "primary": "stone_reference",
     "additionalPrefix": "stone_reference.",
@@ -100,11 +100,11 @@
     },
     {
       "capability": "full_3d_instance_orientation",
-      "status": "PLANNED",
-      "representable": false,
-      "resolvable": false,
-      "generatable": false,
-      "note": "Tilt and roll. Deliberately not representable: accepting a rotation no builder can execute would be a silently ignored field."
+      "status": "CURRENT",
+      "representable": true,
+      "resolvable": true,
+      "generatable": true,
+      "note": "An instance's axis can be tilted away from vertical (`tiltDeg`) in a stated direction (`tiltAzimuthDeg`), which together with the existing spin about its own axis gives a complete ZXZ orientation. Sprint 22 recorded this PLANNED on the correct ground that no builder could execute it; Sprint 26 built one (`geometry/stone/instance.py::_tilted_about_own_center`) because a pave on a curved shank needs its stones to follow the surface normal. The field follows the capability, not the reverse — see ADR-011. There is no separate 'roll': a roll about the instance's own axis IS `rotationDeg`."
     },
     {
       "capability": "path_pattern",
