@@ -8,6 +8,8 @@ client believes.
 
 from __future__ import annotations
 
+import math
+
 from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.domain.stone_dimensions import (
     resolved_depth_mm,
@@ -1282,6 +1284,253 @@ def _setting_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     return out
 
 
+def _setting_mode_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Extended Setting Modes validation (Sprint 27).
+
+    SCOPE: EXTENDED_SETTING_MODES, and STRUCTURAL, REFERENTIAL or MATHEMATICAL
+    only. Six questions: does the declared mode belong to the family the
+    document chose, are the parameters it needs present, which parameters is it
+    not going to read, is the request geometrically possible, does the mode
+    carry a professional-review requirement, and is its status honest.
+
+    NONE OF THEM IS A PROFESSIONAL JUDGMENT. There is no rule here about whether
+    a channel wall is thick enough, a bar spacing settable, a flush collar
+    strong enough or a tension setting safe. Each needs sourced professional
+    evidence this project does not have, so none exists (SETTING-GOV-010).
+
+    A DESIGN WITH NO MODE BLOCK PRODUCES AT MOST THE STATUS RESULT. Every
+    pre-Sprint-27 document resolves to `PRONG_ROUND` or `BEZEL_FULL`, both
+    CURRENT and neither requiring review, so the whole existing corpus stays
+    silent here — the same discipline `_setting_v2_rules` follows for its own
+    defaults.
+
+    THE MODE IS RESOLVED BY THE REAL RESOLVER, not re-derived. `_family_rules`,
+    `_halo_rules` and `_pave_rules` each run the real compiler for exactly this
+    reason: a rule that reimplemented the resolution would eventually disagree
+    with the geometry, and the disagreement would surface as a design that
+    validates and then fails to build.
+    """
+
+    from jewelmind.domain.stone_dimensions import (
+        resolved_length_mm,
+        resolved_width_mm,
+    )
+    from jewelmind.setting.capability import setting_modes
+    from jewelmind.setting.modes import (
+        MODE_PARAMETER_FIELDS,
+        SettingModeParameters,
+        resolve_primary_mode,
+    )
+
+    setting = d.setting
+    out: list[R.ValidationResult] = []
+
+    try:
+        resolved = resolve_primary_mode(
+            setting.type, setting.prongStyle, setting.mode
+        )
+    except ValueError as exc:
+        # The resolver refuses a mode whose family disagrees with `type`, and a
+        # HEAD or RETENTION mode declared on the PRIMARY axis. Surfaced as a
+        # rule result here rather than only as a generation-time exception, so a
+        # caller learns about it from validation like every other refusal.
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_FAMILY_MATCHES,
+                severity="error",
+                message=str(exc),
+                parameter="setting.mode.modeId",
+            )
+        )
+        return out
+
+    entry = setting_modes().get(resolved.modeId)
+    if entry is None:  # pragma: no cover - closed literal makes this unreachable
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_FAMILY_MATCHES,
+                severity="error",
+                message=(
+                    f"setting mode '{resolved.modeId}' has no capability "
+                    "registry entry, so nothing is known about what it builds."
+                ),
+                parameter="setting.mode.modeId",
+            )
+        )
+        return out
+
+    parameters = resolved.parameters
+    read_fields = set(MODE_PARAMETER_FIELDS[resolved.modeId])
+
+    # UNREAD PARAMETERS. INFORMATION, not a warning: the document is perfectly
+    # valid and the value simply has no effect. Reported only when the author
+    # actually SET it — comparing against the model's own defaults rather than
+    # listing every field, so a mode with no parameters stays silent.
+    if setting.mode is not None and setting.mode.enabled:
+        defaults = SettingModeParameters()
+        unread = sorted(
+            name
+            for name in type(parameters).model_fields
+            if name not in read_fields
+            and getattr(parameters, name) != getattr(defaults, name)
+        )
+        if unread:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.SETTING_MODE_PARAMETER_APPLICABLE,
+                    severity="information",
+                    message=(
+                        f"setting mode '{resolved.modeId}' does not read "
+                        + ", ".join(f"setting.mode.parameters.{n}" for n in unread)
+                        + ". The value is kept in the document and has no effect "
+                        "on the geometry."
+                    ),
+                    parameter=f"setting.mode.parameters.{unread[0]}",
+                )
+            )
+
+    # A DISABLED MODE. INFORMATION: the parameters stay in the document and the
+    # family's default variant is used, which is a state worth naming rather
+    # than leaving the author to wonder why nothing changed.
+    if setting.mode is not None and not setting.mode.enabled:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_PARAMETER_APPLICABLE,
+                severity="information",
+                message=(
+                    f"setting.mode '{setting.mode.modeId}' is disabled, so the "
+                    f"'{setting.type}' family's default variant "
+                    f"'{resolved.modeId}' is built and the declared parameters "
+                    "are not read."
+                ),
+                parameter="setting.mode.enabled",
+            )
+        )
+
+    # REQUIREMENTS. A flush setting's recess IS half its geometry, so relief is
+    # a precondition rather than an option — see `flush.py`'s docstring.
+    if setting.type == "flush" and setting.seatMode == "NONE":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_REQUIREMENTS_MET,
+                severity="error",
+                message=(
+                    "A flush setting requires setting.seatMode = "
+                    "'REFERENCE_SEAT'. Without the recess the collar occupies "
+                    "the stone's whole volume, and the result is a solid mass "
+                    "with the stone buried inside it rather than a flush "
+                    "setting."
+                ),
+                parameter="setting.seatMode",
+                suggestedValue="REFERENCE_SEAT",
+            )
+        )
+
+    # GEOMETRIC FEASIBILITY. MATHEMATICAL CONSTRAINTS on the document's own
+    # requested dimensions, and NECESSARY rather than sufficient: only the built
+    # solid knows its measured crown height and its measured extent, so the
+    # generator performs the exact check. Both are reported here because
+    # catching an impossible request before the kernel is asked for solids is
+    # strictly better than catching it after.
+    if setting.type == "flush":
+        depth = d.stone.depth
+        if depth is not None and parameters.rimHeightMm >= depth:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.SETTING_MODE_GEOMETRY_FEASIBLE,
+                    severity="error",
+                    message=(
+                        f"The flush collar's rim height "
+                        f"({parameters.rimHeightMm} mm) is not below the "
+                        f"stone's whole depth ({depth} mm), so the stone would "
+                        "be entirely buried. The stone's crown is only part of "
+                        "its depth, so the generator applies the exact check "
+                        "against the measured crown height; this is the "
+                        "arithmetic one, checkable from the document alone."
+                    ),
+                    parameter="setting.mode.parameters.rimHeightMm",
+                )
+            )
+
+    if setting.type == "tension":
+        half_extent = _extent_along(
+            resolved_length_mm(d.stone),
+            resolved_width_mm(d.stone),
+            parameters.gripAxisDeg,
+        ) / 2.0
+        if parameters.padDepthMm >= half_extent:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.SETTING_MODE_GEOMETRY_FEASIBLE,
+                    severity="error",
+                    message=(
+                        f"The tension supports' inward reach "
+                        f"({parameters.padDepthMm} mm) is not less than half "
+                        f"the stone's requested extent along the grip axis "
+                        f"({half_extent:.4f} mm), so the two supports would "
+                        "meet through the middle of the stone. Arithmetic, not "
+                        "a statement about how deeply a stone may be gripped."
+                    ),
+                    parameter="setting.mode.parameters.padDepthMm",
+                )
+            )
+
+    # PROFESSIONAL REVIEW. The brief's third severity category, carried as a
+    # `warning` because the three severities are a published contract; the
+    # rule's own registry entry records `professionalValidationStatus: required`,
+    # which is where that distinction already lives.
+    if entry.professionalReviewRequirement == "REQUIRED":
+        from jewelmind.setting.capability import PROFESSIONAL_REVIEW_REQUIRED
+
+        reason = PROFESSIONAL_REVIEW_REQUIRED.get(setting.type, "")
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_PROFESSIONAL_REVIEW,
+                severity="warning",
+                message=(
+                    f"Setting mode '{resolved.modeId}' requires review by a "
+                    f"qualified jewelry professional. {reason} JewelMind "
+                    "generates the geometry and makes no claim about its "
+                    "function."
+                ),
+                parameter="setting.type",
+            )
+        )
+
+    # HONEST STATUS. A PARTIAL mode is reported as PARTIAL, with what is missing,
+    # so a caller never has to read the capability registry to learn that a mode
+    # it just used is not complete.
+    if entry.status != "CURRENT":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.SETTING_MODE_STATUS,
+                severity="information",
+                message=(
+                    f"Setting mode '{resolved.modeId}' is {entry.status}, not "
+                    f"CURRENT. {entry.description}"
+                ),
+                parameter="setting.type",
+            )
+        )
+
+    return out
+
+
+def _extent_along(length_mm: float, width_mm: float, axis_deg: float) -> float:
+    """A box's extent along a horizontal direction.
+
+    The same support-width arithmetic `setting/frame.py::stone_extent_along()`
+    applies to the MEASURED box, applied here to the REQUESTED dimensions.
+    Stated separately rather than imported because Forge must not depend on a
+    module that imports the CAD kernel, and duplicating two absolute values and
+    a sum is cheaper than the alternative — the same split
+    `geometry/pave_surface.py` documents for the pavé's host resolution.
+    """
+
+    radians = math.radians(axis_deg)
+    return abs(math.cos(radians)) * length_mm + abs(math.sin(radians)) * width_mm
+
+
 def _manufacturing_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     out: list[R.ValidationResult] = []
 
@@ -1353,6 +1602,7 @@ _RULE_GROUPS = (
     _bezel_rules,
     _setting_rules,
     _setting_v2_rules,
+    _setting_mode_rules,
     _manufacturing_rules,
     _geometry_rules,
 )

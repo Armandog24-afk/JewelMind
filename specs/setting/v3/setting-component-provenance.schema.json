@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "description": "Why one generated setting component exists (Sprint 27, brief §19).\n\nTHE PROVENANCE RECORD, and it deliberately lives on the setting result\nrather than on a `GeometryPlan`. `GeometryPlan` is still not materialized —\n`docs/bible/08-alchemist/` records it as PLANNED, and materializing it is an\nexplicit ADR condition (ALCHEMIST-GOV, \"materializing GeometryPlan\"). This\nsprint's requirement was that every setting component be traceable to the\nmode, the stone and the placements it came from, and that is a fact about the\ncomponent, so it is recorded where the component's other facts already live.\nInventing an unrequested compiler stage to hold it would have been a\nspeculative abstraction with an ADR attached.\n\nANONYMOUS COMPONENTS ARE THE FAILURE MODE THIS PREVENTS: without it, a\nreader looking at `bars` in a manifest can tell what it measures and not\nwhat asked for it.",
+  "properties": {
+    "componentId": {
+      "title": "Componentid",
+      "type": "string"
+    },
+    "settingModeId": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Settingmodeid"
+    },
+    "sourceStoneId": {
+      "title": "Sourcestoneid",
+      "type": "string"
+    },
+    "sourceStoneInstanceIds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sourcestoneinstanceids",
+      "type": "array"
+    },
+    "classification": {
+      "enum": [
+        "PRODUCTION",
+        "REFERENCE"
+      ],
+      "title": "Classification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "componentId",
+    "sourceStoneId",
+    "classification"
+  ],
+  "title": "SettingComponentProvenance",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v3/setting-component-provenance.schema.json"
+}

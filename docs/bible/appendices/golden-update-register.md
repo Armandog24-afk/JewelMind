@@ -84,6 +84,13 @@ Every accepted change to a Golden baseline, ever. Per QUALITY-GOV-018, an entry 
 | `PAVE-003-microsetting` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a stated 14x2 structure with micro-prong retention | Sprint 26 milestone | 2026-09-08 |
 | `PAVE-004-head-plane-gallery` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 16 stones on the planar head host, individual beads, no recess | Sprint 26 milestone | 2026-09-08 |
 | `PAVE-005-three-stone-with-pave` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a family and a pavé in one document | Sprint 26 milestone | 2026-09-08 |
+| `ESM-001-channel-set-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a real `channel_walls` component, 109.760 mm³, one solid: two 0.8mm walls 5.0mm apart over a 9.0mm run with closed ends | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-002-bar-set-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a real `bars` component, 66.150 mm³, three solids at a 3.6mm pitch | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-003-flush-gypsy-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a real `flush_collar` component, 229.758 mm³. `basket_support` records 79.372 rather than the untouched 83.156, which is the recess visible in the baseline | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-004-partial-bezel-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — `bezel` at 20.632 mm³ in THREE solids: three 46° openings leave three arcs | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-005-open-gallery-head` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — `basket_support` at 54.190 rather than 83.156, in ONE solid: six windows removed real metal and the rims kept the head connected | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-006-tension-solitaire` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — a real `tension_supports` component, 43.158 mm³, two solids. `basket_support` records 79.372, the relief again visible | Sprint 27 milestone / ADR-013 | 2026-09-09 |
+| `ESM-007-pave-shared-prong` | — | 1 | `INITIAL_BASELINE` | All facts (first creation) — 22 pavé stones with `pave_retention` in 46 solids rather than the 88 an individual field would need, which is the shared-corner topology measured | Sprint 27 milestone / ADR-013 | 2026-09-09 |
 
 ### Sprint 19: the six non-round prong-placement acceptances
 
@@ -258,6 +265,46 @@ that was never applied, and this is what makes the difference checkable.
 > stone scale in this field is a construction parameter. No pavé dimension in
 > JewelMind has been reviewed by a qualified jewelry professional, and this
 > baseline records generated geometry rather than a manufacturing standard.
+
+## Sprint 27 — Extended Setting Modes v1 (`ESM-001`–`ESM-007`)
+
+**Seven NEW cases, and zero existing baselines modified.** That second half is
+the point: `BEZEL_FULL`, `BASKET` and `ROUND_PRONG` reproduce their previous
+constructions exactly, so a default prong solitaire's metal volume is still
+`341.44334316909976 mm³` and all 54 pre-existing baselines verified unchanged.
+
+**One case per real capability, never one per number.** Each of the seven locks
+in something this sprint made executable for the first time — a channel wall
+pair, a bar row, a gypsy collar with its recess, a partial bezel's arcs, a
+pierced gallery, opposed tension supports, and shared micro-prong retention.
+
+**Three findings are visible IN the baselines rather than only asserted:**
+
+- The **recess removes real metal**. `ESM-003` and `ESM-006` record
+  `basket_support` at `79.3716` where an untouched head is `83.1558`. A recess
+  that removed nothing would be indistinguishable from one never applied.
+- The **openings and windows remove real metal**. `ESM-004`'s bezel is
+  `20.632 mm³` in three solids rather than one; `ESM-005`'s head is `54.190`
+  rather than `83.156` and still ONE solid, which is the rim guarantee measured.
+- **Sharing genuinely shares.** `ESM-007` carries 22 pavé stones and a
+  `pave_retention` component of **46 solids**. An individual field would need
+  88. That number is the only evidence that the shared-corner topology is real
+  rather than a label.
+
+**Every one records honest limitations** in its own `knownLimitations`:
+
+> `EXTENDED_SETTING_MODES_AWAITING_PROFESSIONAL_REVIEW`: every dimension in this
+> design is a software construction parameter. No minimum wall, minimum bar,
+> collar thickness, clearance or settability judgment is asserted anywhere,
+> because no sourced professional evidence for one exists in this project.
+
+and, for the tension case specifically:
+
+> `TENSION_STRUCTURAL_BEHAVIOUR_NOT_MODELLED`: the opposing supports are real
+> solids and nothing computes the elastic response of the metal, the force they
+> apply, or whether the stone would be retained under load or wear. This
+> baseline guards the geometry and makes no functional claim. Professional
+> review is required.
 
 ## How a future entry gets added
 

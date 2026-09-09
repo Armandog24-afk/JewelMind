@@ -55,12 +55,15 @@ KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
     "three_stone": "Only a single-stone solitaire is currently supported.",
     "multi_stone": "Only a single-stone solitaire is currently supported.",
     # Sprint 19: `bezel` was removed from this map — it is now a real,
-    # generatable setting family. The remaining entries are genuinely
-    # unimplemented reserved families.
-    "tension": "Only prong and bezel settings are currently supported (setting.type).",
-    "channel": "Only prong and bezel settings are currently supported (setting.type).",
-    "flush": "Only prong and bezel settings are currently supported (setting.type).",
-    "bar": "Only prong and bezel settings are currently supported (setting.type).",
+    # generatable setting family.
+    #
+    # Sprint 27: `tension`, `channel`, `flush` and `bar` were REMOVED for the
+    # same reason. Each is now a real, registered generator producing real
+    # solids, and Designer can propose `setting.type` directly. Leaving them
+    # here would have made Designer actively misreport a real capability —
+    # exactly the mistake Sprints 18, 20 and 26 each had to correct. The
+    # reserved setting MODES that genuinely do not exist are added below from
+    # `setting/modes.py::RESERVED_SETTING_MODES`, so the two can never disagree.
     # Sprint 20: heart, radiant, asscher, trillion, baguette, tapered baguette,
     # triangle, trapezoid, lozenge, hexagon, kite, shield, half moon, pearl and
     # cabochon were REMOVED from this map — every one is now a real, generating
@@ -79,6 +82,74 @@ for _shape, _reason in _RESERVED_STONE_SHAPES.items():
         f"(stone.shape). {_reason} A stone with no built-in cut can still be "
         "modelled today by supplying a custom outline."
     )
+
+
+def _reserved_setting_mode_concepts() -> dict[str, str]:
+    """Setting techniques a request may name that JewelMind does not build.
+
+    DERIVED from `setting/modes.py::RESERVED_SETTING_MODES` rather than hand
+    written, so a mode that gains a builder stops being reported as unsupported
+    on the next import — the anti-drift discipline this file already applies to
+    reserved stone shapes.
+
+    TWO KEYS PER MODE, and the second one is why this is a function rather than
+    a comprehension. The full lowercased id (`head_trellis`) is always emitted
+    and is always unambiguous; the axis-stripped token (`trellis`) is what a
+    request actually contains, and is emitted only when it is BOTH unambiguous
+    and not the name of something JewelMind actually builds.
+
+    Two guards, and each one caught a real misreport:
+
+    - `CHANNEL_TAPERED` and `BAR_TAPERED` both reduce to "tapered", so that
+      token is not emitted at all — answering a request for "a tapered setting"
+      with one of the two reasons would pick an interpretation the author never
+      gave.
+    - `RETENTION_CHANNEL` and `RETENTION_BAR` reduce to "channel" and "bar",
+      which are REAL setting families with real generators since Sprint 27.
+      Emitting those would have told a user that channel setting is
+      unsupported while the product was building it — precisely the misreport
+      Sprints 18, 20 and 26 each had to correct. Any token that names a live
+      `SettingType` is therefore refused.
+    """
+
+    from typing import get_args
+
+    from jewelmind.setting.modes import RESERVED_SETTING_MODES
+
+    #: Read from the live enum rather than listed, so a family added later is
+    #: protected without anyone remembering to protect it.
+    implemented_families = {value.lower() for value in get_args(S.SettingType)}
+
+    def _message(mode_id: str, reason: str) -> str:
+        label = mode_id.replace("_", " ").lower()
+        return (
+            f"The {label} setting mode is not currently supported. {reason}"
+        )
+
+    concepts: dict[str, str] = {
+        mode_id.lower(): _message(mode_id, reason)
+        for mode_id, reason in RESERVED_SETTING_MODES.items()
+    }
+
+    stripped: dict[str, list[str]] = {}
+    for mode_id in RESERVED_SETTING_MODES:
+        token = mode_id.split("_", 1)[1].lower() if "_" in mode_id else mode_id.lower()
+        stripped.setdefault(token, []).append(mode_id)
+
+    for token, mode_ids in stripped.items():
+        if len(mode_ids) != 1 or token in implemented_families:
+            continue
+        mode_id = mode_ids[0]
+        concepts.setdefault(
+            token, _message(mode_id, RESERVED_SETTING_MODES[mode_id])
+        )
+    return concepts
+
+
+for _concept, _message in _reserved_setting_mode_concepts().items():
+    # Never overwrite an existing entry: a stone shape and a setting mode could
+    # in principle share a token, and the shape's own message is more specific.
+    KNOWN_UNSUPPORTED_CONCEPTS.setdefault(_concept, _message)
 
 
 def _stone_source_capabilities() -> dict[str, str]:
@@ -155,7 +226,33 @@ def current_capabilities() -> dict[str, Any]:
         "paveRetentionStrategy": list(get_args(PaveRetentionStrategy)),
         "paveSeatMode": ["NONE", "REFERENCE_RECESS"],
         "paveContainment": list(get_args(PaveContainmentPolicy)),
+        # Sprint 27. The extended setting-mode axes, each read from the live
+        # source of truth: the PRIMARY mode ids come from the capability
+        # registry (whose `settingGeometry` axis is measured from the real
+        # builders), and the head/prong/seat vocabularies from the schema's own
+        # literals. A reserved mode is absent from all of them, so Designer
+        # cannot propose one.
+        "settingMode": _primary_setting_mode_ids(),
+        "headArchitecture": list(get_args(S.HeadArchitecture)),
+        "prongStyle": list(get_args(S.ProngStyle)),
+        "seatMode": list(get_args(S.SeatMode)),
     }
+
+
+def _primary_setting_mode_ids() -> list[str]:
+    """The PRIMARY setting modes Designer may propose.
+
+    Read from the live registry rather than restated, so a mode that loses its
+    builder stops being proposable on the next import. HEAD and RETENTION modes
+    are excluded because they are chosen by their own fields —
+    `setting.headArchitecture` and the pave's own retention strategy — and
+    offering them here would be a second authority over an axis that already
+    has one.
+    """
+
+    from jewelmind.setting.capability import setting_mode_ids
+
+    return list(setting_mode_ids("PRIMARY"))
 
 
 # Maps a JDL dotted field path to the capability-set key that constrains it,
@@ -181,6 +278,11 @@ _ENUM_FIELD_CAPABILITY_KEY: dict[str, str] = {
     "pave.retention.strategy": "paveRetentionStrategy",
     "pave.seat.mode": "paveSeatMode",
     "pave.containment": "paveContainment",
+    # Sprint 27.
+    "setting.mode.modeId": "settingMode",
+    "setting.headArchitecture": "headArchitecture",
+    "setting.prongStyle": "prongStyle",
+    "setting.seatMode": "seatMode",
 }
 
 # Concepts the PRODUCT supports but Designer cannot PROPOSE (Sprint 26).
@@ -262,6 +364,25 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         # `rowCount` is the ONE numeric field both specs share, so a dotted
         # patch can set it whichever kind the field is.
         "pave.spec.rowCount",
+        #
+        # Sprint 27. Four flat enum scalars, each naming a variant with a real
+        # builder: the PRIMARY mode, the head architecture, the prong body and
+        # whether metal is relieved. Every one of them was already a real
+        # capability — `prongStyle`, `headArchitecture` and `seatMode` since
+        # Sprint 23 — and none was proposable until now.
+        "setting.mode.modeId",
+        "setting.headArchitecture",
+        "setting.prongStyle",
+        "setting.seatMode",
+        #
+        # The mode PARAMETERS are deliberately ABSENT, for exactly the reason
+        # the pave's metric spacings are: a wall thickness, a collar width or a
+        # bar height is a dimension, and a request for "a heavier channel" names
+        # a WEIGHT. Converting one into the other requires knowing what
+        # thickness is appropriate, which is the professional judgment this
+        # project has no evidence for (see `normalizer.SETTING_WEIGHT_TERMS`,
+        # recognized so such a request becomes a question rather than an
+        # invented number). They are set through the workspace and the API.
         #
         # The metric spacings are deliberately ABSENT. `pitchMm` belongs to a
         # PaveSpec and `stoneSpacingMm` to a MicrosettingSpec, so a flat patch

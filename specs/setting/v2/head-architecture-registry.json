@@ -1,5 +1,5 @@
 {
-  "settingGeometryVersion": "1.1.0",
+  "settingGeometryVersion": "1.2.0",
   "generatedFrom": "backend/jewelmind/setting/capability.py::HEAD_ARCHITECTURE_CAPABILITIES",
   "note": "Generated from the live registry, never hand-maintained. Every listed architecture has a real builder in setting/head.py and produces one connected solid; a builder that produced more raises rather than shipping a floating head. The generated component is named 'basket_support' for EVERY architecture — the name is a structural role wired into the role map, the inspection required-component set, every preview manifest and all 39 Golden baselines, and the architecture is reported in the result rather than in the name.",
   "componentName": "basket_support",
@@ -15,6 +15,26 @@
       "description": "The pre-Sprint-23 hollow cylindrical wall, reproduced character-for-character and still the default. The Ring adapter passes the original bore expression so the solid is bit-identical."
     },
     {
+      "architecture": "MARTINI",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "singleSolid": true,
+      "requiredParameters": [],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A hollow conical wall, wide at the girdle and narrow at the base. A software reference silhouette; no commercial martini proportion is claimed."
+    },
+    {
+      "architecture": "OPEN_GALLERY",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "singleSolid": true,
+      "requiredParameters": [],
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "The basket wall with evenly spaced windows pierced through it, cut from the basket's own solid rather than built separately. The windows span only the middle fraction of the wall's height so a continuous rim survives at the top and the bottom — a construction correctness requirement, since a full-height window would sever the wall into disconnected pillars and a head must be one connected body. Deliberately NOT called azure: azure work is arbitrary decorative piercing, and this is the parametric subset of it."
+    },
+    {
       "architecture": "PEG_HEAD",
       "status": "CURRENT",
       "generatable": true,
@@ -26,16 +46,6 @@
       ],
       "professionalValidationStatus": "NOT_REVIEWED",
       "description": "A basket wall on a narrower solid peg, joined by a conical flare. The flare is not decoration: a peg narrower than the wall's bore never touches it, and stacking the two produced two disconnected solids until the flare was added."
-    },
-    {
-      "architecture": "MARTINI",
-      "status": "CURRENT",
-      "generatable": true,
-      "preservesLegacyGeometry": false,
-      "singleSolid": true,
-      "requiredParameters": [],
-      "professionalValidationStatus": "NOT_REVIEWED",
-      "description": "A hollow conical wall, wide at the girdle and narrow at the base. A software reference silhouette; no commercial martini proportion is claimed."
     },
     {
       "architecture": "TULIP",

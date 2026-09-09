@@ -33,7 +33,21 @@ REQUIRED_COMPONENT_NAMES = ("band", "stone_reference", "basket_support")
 
 # Setting components that satisfy the "a setting must exist" requirement.
 # Exactly one of these is expected per assembly.
-SETTING_COMPONENT_NAMES = ("prongs", "bezel")
+#
+# Sprint 27 added the four Extended Setting Modes components. Extending this
+# tuple is what makes a channel-, bar-, flush- or tension-set assembly report
+# its own setting component as required, instead of falling through to the
+# `prongs` fallback below and reporting a prong setting as missing from a
+# design that never asked for one — exactly the defect Sprint 19 fixed when it
+# moved `prongs` out of `REQUIRED_COMPONENT_NAMES` for the bezel.
+SETTING_COMPONENT_NAMES = (
+    "prongs",
+    "bezel",
+    "channel_walls",
+    "bars",
+    "flush_collar",
+    "tension_supports",
+)
 
 
 def stone_component_names(model: GeneratedModel) -> tuple[str, ...]:

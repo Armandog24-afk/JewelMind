@@ -278,6 +278,11 @@ export function PaveSection() {
               { value: 'SHARED_BEAD', label: 'Shared beads' },
               { value: 'BEAD', label: 'Beads' },
               { value: 'MICRO_PRONG', label: 'Micro prongs' },
+              // Sprint 27: shared micro prongs. Moved out of the reserved list
+              // because sharing is a property of the ANCHOR SET, not of the
+              // solid — the shared-corner topology the lattice already computed
+              // is what it needed, not a new builder.
+              { value: 'SHARED_PRONG', label: 'Shared micro prongs' },
               { value: 'NONE', label: 'None (stones only)' },
             ]}
             onChange={(value) =>

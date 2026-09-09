@@ -1,0 +1,1023 @@
+{
+  "taxonomyVersion": "1.0.0",
+  "settingGeometryVersion": "1.2.0",
+  "generatedFrom": "backend/jewelmind/setting/capability.py::setting_modes()",
+  "note": "Generated from the live registry, never hand-maintained. Each row's settingGeometry axis is MEASURED from the live builder registries (setting_generators, prong_solid_builders, head_builders, retention_builders) rather than declared, so a mode cannot claim a solid no builder produces and a builder cannot exist without a row. Both directions are asserted by backend/tests/test_extended_setting_modes.py.",
+  "pipelineStages": [
+    "schema",
+    "parser",
+    "validator",
+    "compiler",
+    "geometry",
+    "inspection",
+    "export",
+    "vision",
+    "studio",
+    "designer",
+    "conversation"
+  ],
+  "axes": {
+    "PRIMARY": [
+      "BAR_TRANSVERSE",
+      "BEZEL_FULL",
+      "BEZEL_PARTIAL",
+      "CHANNEL_LINEAR",
+      "FLUSH_GYPSY",
+      "PRONG_CLAW",
+      "PRONG_ROUND",
+      "PRONG_SHARED",
+      "PRONG_TAPERED",
+      "PRONG_V",
+      "TENSION_OPPOSED"
+    ],
+    "HEAD": [
+      "HEAD_BASKET",
+      "HEAD_MARTINI",
+      "HEAD_OPEN_GALLERY",
+      "HEAD_PEG",
+      "HEAD_TULIP"
+    ],
+    "RETENTION": [
+      "RETENTION_BEAD",
+      "RETENTION_MICRO_PRONG",
+      "RETENTION_SHARED_BEAD",
+      "RETENTION_SHARED_PRONG"
+    ]
+  },
+  "modes": [
+    {
+      "settingModeId": "BAR_TRANSVERSE",
+      "name": "Transverse bar",
+      "axis": "PRIMARY",
+      "family": "BAR",
+      "settingType": "bar",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "barCount",
+        "barWidth",
+        "barHeight"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "bar setting",
+        "bar",
+        "incastonatura a barrette",
+        "barrette"
+      ],
+      "description": "Transverse bars across a run, with the stones between adjacent bars. One component carrying every bar, with each bar's own offset reported. Spacing and length default to the stone's own measured extents."
+    },
+    {
+      "settingModeId": "BEZEL_FULL",
+      "name": "Full bezel",
+      "axis": "PRIMARY",
+      "family": "BEZEL",
+      "settingType": "bezel",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "bezel",
+        "full bezel",
+        "castone",
+        "montatura a castone"
+      ],
+      "description": "The continuous wall built by offsetting the stone's own girdle outline. Unchanged from Sprint 19 and preserved byte-identically, which is why it remains the bezel default."
+    },
+    {
+      "settingModeId": "BEZEL_PARTIAL",
+      "name": "Partial bezel",
+      "axis": "PRIMARY",
+      "family": "BEZEL",
+      "settingType": "bezel",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "partial bezel",
+        "half bezel",
+        "castone parziale"
+      ],
+      "description": "The full bezel's own wall with evenly spaced angular openings cut through it, so a partial bezel can never be a different wall from the full one it derives from. Legitimately several solids — n openings leave n arcs, joined through the head below — and that solid count is reported rather than repaired."
+    },
+    {
+      "settingModeId": "CHANNEL_LINEAR",
+      "name": "Linear channel",
+      "axis": "PRIMARY",
+      "family": "CHANNEL",
+      "settingType": "channel",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "channelWallThickness",
+        "channelWallHeight"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "channel",
+        "channel setting",
+        "incastonatura a canale",
+        "canale"
+      ],
+      "description": "Two parallel walls with the stones between them, with optional end caps. Extents default to the stone's own measured box, so the single-stone case needs no parameters. Multi-stone by declaration: a longer run holds the arrangement's instances and records their ids, without computing a single placement."
+    },
+    {
+      "settingModeId": "FLUSH_GYPSY",
+      "name": "Flush / gypsy",
+      "axis": "PRIMARY",
+      "family": "FLUSH",
+      "settingType": "flush",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "flushCollarWidth",
+        "flushRimHeight",
+        "seatMode"
+      ],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "flush setting",
+        "flush",
+        "gypsy",
+        "gypsy setting",
+        "incastonatura a filo"
+      ],
+      "description": "A solid collar offset from the stone's girdle outline with the stone's own solid cut out of it. Requires REFERENCE_SEAT relief, because without the cut the collar buries the stone — a geometric precondition, refused by the generator and reported by JM-SETTING-010. The rim must stay below the stone's measured crown height."
+    },
+    {
+      "settingModeId": "HEAD_BASKET",
+      "name": "Basket head",
+      "axis": "HEAD",
+      "family": "HEAD",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "basket",
+        "basket head",
+        "cestello"
+      ],
+      "description": "The pre-Sprint-23 hollow cylindrical wall, reproduced character-for-character and still the default."
+    },
+    {
+      "settingModeId": "HEAD_MARTINI",
+      "name": "Martini head",
+      "axis": "HEAD",
+      "family": "HEAD",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "martini",
+        "martini head",
+        "testa martini"
+      ],
+      "description": "A hollow conical wall, wide at the girdle and narrow at the base. A software reference silhouette; no commercial martini proportion is claimed."
+    },
+    {
+      "settingModeId": "HEAD_OPEN_GALLERY",
+      "name": "Open gallery head",
+      "axis": "HEAD",
+      "family": "HEAD",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "open gallery",
+        "gallery",
+        "open head",
+        "galleria aperta"
+      ],
+      "description": "The basket wall with evenly spaced windows pierced through it, cut from the basket's own solid. Windows span only the middle of the height so a continuous rim survives and the head stays one connected body. Deliberately not called azure."
+    },
+    {
+      "settingModeId": "HEAD_PEG",
+      "name": "Peg head",
+      "axis": "HEAD",
+      "family": "HEAD",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "pegDiameter",
+        "pegHeight"
+      ],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "peg head",
+        "peg",
+        "testa a perno"
+      ],
+      "description": "A basket wall on a narrower solid peg, joined by a conical flare. The flare is structural, not decorative: without it the peg never touches the bore and the head is two disconnected solids."
+    },
+    {
+      "settingModeId": "HEAD_TULIP",
+      "name": "Tulip head",
+      "axis": "HEAD",
+      "family": "HEAD",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "tulip",
+        "tulip head",
+        "testa tulipano",
+        "tulipano"
+      ],
+      "description": "A concave flare approximated by stacked cone frusta following a quadratic. Section count and curve are construction choices."
+    },
+    {
+      "settingModeId": "PRONG_CLAW",
+      "name": "Claw prong",
+      "axis": "PRIMARY",
+      "family": "PRONG",
+      "settingType": "prong",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "claw prong",
+        "claw",
+        "griffe artiglio"
+      ],
+      "description": "A cylindrical shaft fused to a tapered head, so the taper is concentrated near the tip."
+    },
+    {
+      "settingModeId": "PRONG_ROUND",
+      "name": "Round prong",
+      "axis": "PRIMARY",
+      "family": "PRONG",
+      "settingType": "prong",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "prong",
+        "prongs",
+        "griffe",
+        "griffa",
+        "claw prong set"
+      ],
+      "description": "The pre-Sprint-23 straight cylinder and still the default for every prong setting. Count, diameter and height are parameters, so a four- and a six-prong setting are one mode rather than two."
+    },
+    {
+      "settingModeId": "PRONG_SHARED",
+      "name": "Shared prong",
+      "axis": "PRIMARY",
+      "family": "PRONG",
+      "settingType": "prong",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "PARTIAL",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "PLANNED",
+        "designer": "PLANNED",
+        "conversation": "PLANNED"
+      },
+      "requiredParameters": [
+        "positions"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "shared prong",
+        "shared prongs",
+        "griffe condivise"
+      ],
+      "description": "A prong serving two or more stones, expressed through EXPLICIT prong positions carrying `servesStoneInstanceIds`. The prongs are real solids and the assignment is reported per component. What is NOT provided: derivation of the shared position from the two stones' own geometry, so whether a shared prong reaches both stones it names is a geometric fact for inspection rather than a guarantee. No interface authors explicit positions yet, which is why Studio, Designer and Conversation are PLANNED for this mode."
+    },
+    {
+      "settingModeId": "PRONG_TAPERED",
+      "name": "Tapered prong",
+      "axis": "PRIMARY",
+      "family": "PRONG",
+      "settingType": "prong",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "tapered prong",
+        "griffe rastremate"
+      ],
+      "description": "A cone frustum: full radius at the base, `prongTipRatio` of it at the tip. A software reference taper, not a measured claw profile."
+    },
+    {
+      "settingModeId": "PRONG_V",
+      "name": "V prong",
+      "axis": "PRIMARY",
+      "family": "PRONG",
+      "settingType": "prong",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "v prong",
+        "v-prong",
+        "griffe a v"
+      ],
+      "description": "A cylinder with a V notch cut into its tip. The notch angle and depth are construction parameters; no claim is made that a stone tip would seat correctly in one."
+    },
+    {
+      "settingModeId": "RETENTION_BEAD",
+      "name": "Bead",
+      "axis": "RETENTION",
+      "family": "RETENTION",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "beadRadiusMm"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "bead",
+        "beads",
+        "grain setting",
+        "granatura"
+      ],
+      "description": "One bead per lattice corner of each stone, individually. A hemisphere raised at the corner — named honestly as a sphere, because a real bead's shape depends on the graining tool and the hand."
+    },
+    {
+      "settingModeId": "RETENTION_MICRO_PRONG",
+      "name": "Micro prong",
+      "axis": "RETENTION",
+      "family": "RETENTION",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "prongHeightMm"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "micro prong",
+        "micro prongs",
+        "micro griffe"
+      ],
+      "description": "A small cylinder normal to the host surface at each corner, capped with a hemisphere, built individually per stone."
+    },
+    {
+      "settingModeId": "RETENTION_SHARED_BEAD",
+      "name": "Shared bead",
+      "axis": "RETENTION",
+      "family": "RETENTION",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "beadRadiusMm"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "shared bead",
+        "shared beads",
+        "pave condiviso",
+        "grani condivisi"
+      ],
+      "description": "One bead per lattice corner, shared by every stone touching it — genuinely fewer beads, which is the point of the technique. Anchors are derived in the surface's own parameters so neighbouring stones agree about where a corner is."
+    },
+    {
+      "settingModeId": "RETENTION_SHARED_PRONG",
+      "name": "Shared micro prong",
+      "axis": "RETENTION",
+      "family": "RETENTION",
+      "settingType": null,
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "CURRENT",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "prongHeightMm"
+      ],
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "designerTerms": [
+        "shared micro prong",
+        "shared prong retention",
+        "micro griffe condivise"
+      ],
+      "description": "A micro prong at each shared lattice corner, serving every stone that touches it. Sharing is a property of the ANCHOR SET, not of the solid, which is why this maps to the same builder as MICRO_PRONG — exactly as BEAD and SHARED_BEAD already do."
+    },
+    {
+      "settingModeId": "TENSION_OPPOSED",
+      "name": "Opposed tension",
+      "axis": "PRIMARY",
+      "family": "TENSION",
+      "settingType": "tension",
+      "modeVersion": "1.0.0",
+      "representable": true,
+      "compilable": true,
+      "stoneGeometry": true,
+      "settingGeometry": true,
+      "status": "PARTIAL",
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "parser": "CURRENT",
+        "validator": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "requiredParameters": [
+        "tensionPadWidth",
+        "tensionPadThickness",
+        "tensionPadDepth",
+        "tensionGripHeight"
+      ],
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "professionalReviewRequirement": "REQUIRED",
+      "designerTerms": [
+        "tension setting",
+        "tension",
+        "incastonatura a tensione"
+      ],
+      "description": "Two opposing supports with the stone between them, each reaching inward past the stone's edge so the seat relief leaves a real groove. The geometry is complete and the structural behaviour is NOT MODELLED: no force, no spring-back, no retention claim. Professional review is required before this geometry means anything functional."
+    }
+  ],
+  "reserved": [
+    {
+      "settingModeId": "BAR_TAPERED",
+      "reason": "A bar with a varying cross-section. Same construction gap as CHANNEL_TAPERED: it needs a swept or lofted profile per bar."
+    },
+    {
+      "settingModeId": "BEZEL_MILLGRAIN",
+      "reason": "A milled decorative edge. It is a surface texture applied along the wall's rim, and no texturing or knurling operation exists in the pipeline; approximating it with beads would be a different structure wearing the name."
+    },
+    {
+      "settingModeId": "BEZEL_OPEN_BACK",
+      "reason": "The generated bezel wall is already open at both ends, so an 'open-back' bezel is not a distinct solid here. A genuine open-back bezel differs by carrying a pierced seat rail the stone rests on, and no seat with a bearing shoulder exists (SETTINGV2-GOV-009)."
+    },
+    {
+      "settingModeId": "CHANNEL_SHARED_WALL",
+      "reason": "One wall shared between two adjacent channel rows. It requires two hosted rows resolved together, and one setting builds one channel."
+    },
+    {
+      "settingModeId": "CHANNEL_TAPERED",
+      "reason": "A channel whose clear width narrows along its run, for a graduated row. It needs a lofted wall pair rather than a pair of prisms, and a loft over a long shallow taper is not yet verifiable here."
+    },
+    {
+      "settingModeId": "FLUSH_MILLGRAIN",
+      "reason": "A milled rim around a flush-set stone. Same texturing gap as BEZEL_MILLGRAIN."
+    },
+    {
+      "settingModeId": "HALO_HIDDEN_SETTING",
+      "reason": "Retention metal for a hidden halo's own stones. Sprint 25 recorded halo settingGeometry as false and it still is: the halo layer composes placements, and no builder holds a halo member. A mode here would have nothing to build."
+    },
+    {
+      "settingModeId": "HEAD_AZURE",
+      "reason": "Azure/ajouré work is arbitrary decorative piercing, whose pattern is not expressible as parameters. HEAD_OPEN_GALLERY is the parametric subset that is — evenly spaced windows through the wall — and it is deliberately not called azure."
+    },
+    {
+      "settingModeId": "HEAD_CATHEDRAL",
+      "reason": "A cathedral head is defined by how the SHANK rises to meet it, which is shank geometry rather than head geometry. It belongs to a Shank milestone, not to this taxonomy."
+    },
+    {
+      "settingModeId": "HEAD_DOUBLE_GALLERY",
+      "reason": "Two stacked galleries need a second head instance per setting, which the one-head-per-setting contract does not express."
+    },
+    {
+      "settingModeId": "HEAD_TRELLIS",
+      "reason": "Interwoven curved rails require a swept solid along a 3D spline. The current pipeline builds solids of revolution and lofts reliably; a swept trellis is not yet verifiable, so no builder exists."
+    },
+    {
+      "settingModeId": "PRONG_COMPASS_POINT",
+      "reason": "Prongs placed at the stone's own named anchors (tip, cleft, corners). The anchors exist in Stone System v2; a placement strategy that consumes them does not, so OUTLINE_CARDINAL remains the non-round default and a compass-point request would silently be an outline-cardinal layout."
+    },
+    {
+      "settingModeId": "PRONG_CUSTOM_PROFILE",
+      "reason": "An arbitrary swept prong cross-section. EXPLICIT positions are the escape hatch for LAYOUT; an arbitrary profile is a different escape hatch and no builder accepts one."
+    },
+    {
+      "settingModeId": "RETENTION_BAR",
+      "reason": "Bars between adjacent pavé stones. Same topology reason as RETENTION_CHANNEL: a bar sits at a cell MIDPOINT, not at a corner. BAR_TRANSVERSE is the PRIMARY family that builds bars."
+    },
+    {
+      "settingModeId": "RETENTION_CHANNEL",
+      "reason": "A continuous rail holding a pavé row. The pavé's retention anchors are LATTICE CORNERS — the points where cells meet — which is the right topology for a bead and the wrong one for a rail that runs the whole row. Channel setting exists as its own PRIMARY family instead, which is where a rail's extent is actually stated."
+    },
+    {
+      "settingModeId": "RETENTION_GRAIN",
+      "reason": "A raised grain, as distinct from a bead. Its shape depends on the graining tool and the setter's hand; RETENTION_BEAD's sphere is the deterministic CAD reference for the volume a grain occupies, and a second id mapped to the same solid would imply a difference that is not there."
+    },
+    {
+      "settingModeId": "TENSION_COMPRESSION_MODELLED",
+      "reason": "A tension setting whose grip is derived from the metal's actual elastic response. That is an engineering calculation requiring material properties and a validated model, neither of which exists here. TENSION_OPPOSED builds the opposing supports and makes no structural claim (see its own capability row)."
+    },
+    {
+      "settingModeId": "UNDER_GALLERY_SUPPORT",
+      "reason": "Decorative structure below the gallery, joining a head to a shank or to a second head. It needs multi-head or rail geometry, and RESERVED_SUPPORT_ELEMENTS already records that a rail joins two heads while one setting builds one."
+    }
+  ],
+  "professionalReviewRequired": [
+    {
+      "settingType": "tension",
+      "whatIsNotModelled": "A tension setting holds its stone by the elastic force two opposing shoulders apply to it. Nothing here computes that force, the metal's spring-back, or whether the stone would be retained under load, wear or impact. The generated supports are geometry, not a structural statement."
+    }
+  ],
+  "parameterFieldsByMode": {
+    "BAR_TRANSVERSE": [
+      "axisDeg",
+      "barCount",
+      "barSpacingMm",
+      "barLengthMm",
+      "barHeightMm",
+      "wallThicknessMm",
+      "symmetry",
+      "offsetXMm",
+      "offsetYMm",
+      "offsetZMm"
+    ],
+    "BEZEL_FULL": [],
+    "BEZEL_PARTIAL": [
+      "openingCount",
+      "openingSweepDeg",
+      "openingStartAngleDeg"
+    ],
+    "CHANNEL_LINEAR": [
+      "axisDeg",
+      "spanMm",
+      "innerWidthMm",
+      "wallThicknessMm",
+      "wallHeightMm",
+      "termination",
+      "symmetry",
+      "offsetXMm",
+      "offsetYMm",
+      "offsetZMm"
+    ],
+    "FLUSH_GYPSY": [
+      "collarWidthMm",
+      "rimHeightMm",
+      "offsetXMm",
+      "offsetYMm",
+      "offsetZMm"
+    ],
+    "HEAD_BASKET": [],
+    "HEAD_MARTINI": [],
+    "HEAD_OPEN_GALLERY": [],
+    "HEAD_PEG": [],
+    "HEAD_TULIP": [],
+    "PRONG_CLAW": [],
+    "PRONG_ROUND": [],
+    "PRONG_SHARED": [],
+    "PRONG_TAPERED": [],
+    "PRONG_V": [],
+    "RETENTION_BEAD": [],
+    "RETENTION_MICRO_PRONG": [],
+    "RETENTION_SHARED_BEAD": [],
+    "RETENTION_SHARED_PRONG": [],
+    "TENSION_OPPOSED": [
+      "gripAxisDeg",
+      "padWidthMm",
+      "padThicknessMm",
+      "padDepthMm",
+      "gripHeightMm",
+      "offsetXMm",
+      "offsetYMm",
+      "offsetZMm"
+    ]
+  },
+  "designerTerms": {
+    "bar": "BAR_TRANSVERSE",
+    "bar setting": "BAR_TRANSVERSE",
+    "barrette": "BAR_TRANSVERSE",
+    "basket": "HEAD_BASKET",
+    "basket head": "HEAD_BASKET",
+    "bead": "RETENTION_BEAD",
+    "beads": "RETENTION_BEAD",
+    "bezel": "BEZEL_FULL",
+    "canale": "CHANNEL_LINEAR",
+    "castone": "BEZEL_FULL",
+    "castone parziale": "BEZEL_PARTIAL",
+    "cestello": "HEAD_BASKET",
+    "channel": "CHANNEL_LINEAR",
+    "channel setting": "CHANNEL_LINEAR",
+    "claw": "PRONG_CLAW",
+    "claw prong": "PRONG_CLAW",
+    "claw prong set": "PRONG_ROUND",
+    "flush": "FLUSH_GYPSY",
+    "flush setting": "FLUSH_GYPSY",
+    "full bezel": "BEZEL_FULL",
+    "galleria aperta": "HEAD_OPEN_GALLERY",
+    "gallery": "HEAD_OPEN_GALLERY",
+    "grain setting": "RETENTION_BEAD",
+    "granatura": "RETENTION_BEAD",
+    "grani condivisi": "RETENTION_SHARED_BEAD",
+    "griffa": "PRONG_ROUND",
+    "griffe": "PRONG_ROUND",
+    "griffe a v": "PRONG_V",
+    "griffe artiglio": "PRONG_CLAW",
+    "griffe condivise": "PRONG_SHARED",
+    "griffe rastremate": "PRONG_TAPERED",
+    "gypsy": "FLUSH_GYPSY",
+    "gypsy setting": "FLUSH_GYPSY",
+    "half bezel": "BEZEL_PARTIAL",
+    "incastonatura a barrette": "BAR_TRANSVERSE",
+    "incastonatura a canale": "CHANNEL_LINEAR",
+    "incastonatura a filo": "FLUSH_GYPSY",
+    "incastonatura a tensione": "TENSION_OPPOSED",
+    "martini": "HEAD_MARTINI",
+    "martini head": "HEAD_MARTINI",
+    "micro griffe": "RETENTION_MICRO_PRONG",
+    "micro griffe condivise": "RETENTION_SHARED_PRONG",
+    "micro prong": "RETENTION_MICRO_PRONG",
+    "micro prongs": "RETENTION_MICRO_PRONG",
+    "montatura a castone": "BEZEL_FULL",
+    "open gallery": "HEAD_OPEN_GALLERY",
+    "open head": "HEAD_OPEN_GALLERY",
+    "partial bezel": "BEZEL_PARTIAL",
+    "pave condiviso": "RETENTION_SHARED_BEAD",
+    "peg": "HEAD_PEG",
+    "peg head": "HEAD_PEG",
+    "prong": "PRONG_ROUND",
+    "prongs": "PRONG_ROUND",
+    "shared bead": "RETENTION_SHARED_BEAD",
+    "shared beads": "RETENTION_SHARED_BEAD",
+    "shared micro prong": "RETENTION_SHARED_PRONG",
+    "shared prong": "PRONG_SHARED",
+    "shared prong retention": "RETENTION_SHARED_PRONG",
+    "shared prongs": "PRONG_SHARED",
+    "tapered prong": "PRONG_TAPERED",
+    "tension": "TENSION_OPPOSED",
+    "tension setting": "TENSION_OPPOSED",
+    "testa a perno": "HEAD_PEG",
+    "testa martini": "HEAD_MARTINI",
+    "testa tulipano": "HEAD_TULIP",
+    "tulip": "HEAD_TULIP",
+    "tulip head": "HEAD_TULIP",
+    "tulipano": "HEAD_TULIP",
+    "v prong": "PRONG_V",
+    "v-prong": "PRONG_V"
+  }
+}

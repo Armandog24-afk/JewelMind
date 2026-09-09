@@ -374,6 +374,206 @@ def _setting_facts(now: str, model: GeneratedModel) -> list[GeometricFact]:
                 "Shape.Solids()",
             )
         )
+        # Sprint 27: which variant, and how many openings were actually cut.
+        # `bezelWallContinuous` above correctly reports `false` for a PARTIAL
+        # bezel — n openings leave n arcs — and reporting the variant beside it
+        # is what makes that a legible fact rather than a surprise.
+        facts.append(
+            _fact(
+                "bezelVariant",
+                "SETTING_BEZEL_VARIANT",
+                result.bezelVariant,
+                "SettingGeometryResult",
+            )
+        )
+        if result.bezelVariant == "PARTIAL":
+            facts.append(
+                _fact(
+                    "requestedOpeningCount",
+                    "SETTING_REQUESTED_OPENING_COUNT",
+                    result.requestedOpeningCount,
+                    "SettingGeometryResult",
+                )
+            )
+            facts.append(
+                _fact(
+                    "generatedOpeningCount",
+                    "SETTING_GENERATED_OPENING_COUNT",
+                    result.generatedOpeningCount,
+                    "SettingGeometryResult",
+                )
+            )
+
+    facts.extend(_extended_setting_facts(model, result, _fact))
+    return facts
+
+
+def _extended_setting_facts(model, result, _fact) -> list[GeometricFact]:
+    """Facts for the Extended Setting Modes families (Sprint 27, brief §21).
+
+    THE MODE FACTS ARE FAMILY-INDEPENDENT and always emitted: which mode built
+    this setting, its identity, and how many components carry provenance. Those
+    answer "why does this geometry exist?", which is the question anonymous
+    components make unanswerable — so they are reported for every family
+    including the two that predate this sprint.
+
+    THE FAMILY FACTS ARE EMITTED ONLY FOR THE FAMILY THAT BUILT THEM, exactly as
+    the prong and bezel facts already are, so a fact's PRESENCE is itself an
+    honest statement about what was built rather than a null for everything
+    else.
+
+    Every value is read from the structured result or from a component's own
+    metadata. Nothing is re-derived and nothing is judged: a bar count is a
+    count, and whether it is the right count is not a geometric question
+    (INSPECT-GOV-001).
+    """
+
+    facts: list[GeometricFact] = [
+        _fact(
+            "modeId", "SETTING_MODE_ID", result.settingModeId, "SettingGeometryResult"
+        ),
+        _fact(
+            "modeFingerprint",
+            "SETTING_MODE_FINGERPRINT",
+            result.settingModeFingerprint,
+            "SettingGeometryResult",
+        ),
+        _fact(
+            "componentProvenanceCount",
+            "SETTING_COMPONENT_PROVENANCE_COUNT",
+            len(result.componentProvenance),
+            "SettingGeometryResult",
+        ),
+        _fact(
+            "headArchitecture",
+            "SETTING_HEAD_ARCHITECTURE",
+            result.headArchitecture,
+            "SettingGeometryResult",
+        ),
+        _fact(
+            "seatMode", "SETTING_SEAT_MODE", result.seatMode, "SettingGeometryResult"
+        ),
+        _fact(
+            "professionalReviewRequirement",
+            "SETTING_PROFESSIONAL_REVIEW_REQUIREMENT",
+            result.professionalReviewRequirement,
+            "SettingGeometryResult",
+        ),
+    ]
+
+    if result.headArchitecture == "OPEN_GALLERY":
+        head = model.components.get("basket_support")
+        metadata = head.metadata if head else {}
+        facts.append(
+            _fact(
+                "requestedWindowCount",
+                "SETTING_REQUESTED_WINDOW_COUNT",
+                metadata.get("windowCount"),
+                "GeneratedComponent.metadata",
+            )
+        )
+        # Requested and generated are equal by construction here: the builder
+        # raises if a window cannot be cut rather than returning fewer. Both are
+        # reported anyway so a future divergence would be VISIBLE in the facts
+        # rather than only in an exception nobody recorded.
+        facts.append(
+            _fact(
+                "generatedWindowCount",
+                "SETTING_GENERATED_WINDOW_COUNT",
+                metadata.get("windowCount"),
+                "GeneratedComponent.metadata",
+            )
+        )
+
+    if result.settingType == "channel":
+        channel = model.components.get("channel_walls")
+        metadata = channel.metadata if channel else {}
+        facts.append(
+            _fact(
+                "channelWallCount",
+                "SETTING_CHANNEL_WALL_COUNT",
+                metadata.get("wallCount"),
+                "GeneratedComponent.metadata",
+            )
+        )
+        facts.append(
+            _fact(
+                "channelTermination",
+                "SETTING_CHANNEL_TERMINATION",
+                metadata.get("termination"),
+                "GeneratedComponent.metadata",
+            )
+        )
+        facts.append(
+            _fact(
+                "channelSolidCount",
+                "SETTING_COMPONENT_SOLID_COUNT",
+                metadata.get("solidCount"),
+                "Shape.Solids()",
+            )
+        )
+
+    if result.settingType == "bar":
+        facts.append(
+            _fact(
+                "requestedBarCount",
+                "SETTING_REQUESTED_BAR_COUNT",
+                result.requestedBarCount,
+                "SettingGeometryResult",
+            )
+        )
+        facts.append(
+            _fact(
+                "generatedBarCount",
+                "SETTING_GENERATED_BAR_COUNT",
+                result.generatedBarCount,
+                "SettingGeometryResult",
+            )
+        )
+        bars = model.components.get("bars")
+        facts.append(
+            _fact(
+                "barSolidCount",
+                "SETTING_COMPONENT_SOLID_COUNT",
+                (bars.metadata.get("solidCount") if bars else None),
+                "Shape.Solids()",
+            )
+        )
+
+    if result.settingType == "flush":
+        collar = model.components.get("flush_collar")
+        facts.append(
+            _fact(
+                "flushSolidCount",
+                "SETTING_COMPONENT_SOLID_COUNT",
+                (collar.metadata.get("solidCount") if collar else None),
+                "Shape.Solids()",
+            )
+        )
+
+    if result.settingType == "tension":
+        supports = model.components.get("tension_supports")
+        metadata = supports.metadata if supports else {}
+        facts.append(
+            _fact(
+                "tensionSupportCount",
+                "SETTING_TENSION_SUPPORT_COUNT",
+                metadata.get("supportCount"),
+                "GeneratedComponent.metadata",
+            )
+        )
+        # THE HONEST FACT, reported as geometry rather than left in prose: this
+        # model does not compute the structural behaviour that makes a tension
+        # setting hold a stone, and a consumer must be able to read that from
+        # the inspection report rather than from documentation.
+        facts.append(
+            _fact(
+                "structuralBehaviourModelled",
+                "SETTING_STRUCTURAL_BEHAVIOUR_MODELLED",
+                metadata.get("structuralBehaviourModelled"),
+                "GeneratedComponent.metadata",
+            )
+        )
 
     return facts
 

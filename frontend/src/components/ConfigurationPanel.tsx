@@ -13,6 +13,7 @@ import { useProjectStore } from '../store/useProjectStore'
 import { FormSection } from './FormSection'
 import { NumericField } from './NumericField'
 import { PaveSection } from './PaveSection'
+import { SettingModeSection } from './SettingModeSection'
 import { SelectField } from './SelectField'
 import { TextField } from './TextField'
 
@@ -102,9 +103,19 @@ const SHAPE_PROFILE_OPTIONS: Partial<
 // families (Sprint 19) — kept in sync by hand, same discipline as every
 // other option list here. Reserved families (channel, flush, bar, tension,
 // bead, pave, custom) have no generator and must NOT appear.
+// The setting families the backend can actually build (Sprint 27).
+//
+// A literal mirror of `SettingType`, which is itself asserted equal to the
+// backend's generator registry — so a family offered here always has a real
+// generator behind it. Reserved family names (`bead`, `pave`, `custom`) are
+// absent from the type and therefore cannot appear (STUDIO-GOV-011).
 const SETTING_TYPE_OPTIONS: Array<{ value: SettingType; label: string }> = [
   { value: 'prong', label: 'Prong' },
   { value: 'bezel', label: 'Bezel' },
+  { value: 'channel', label: 'Channel' },
+  { value: 'bar', label: 'Bar' },
+  { value: 'flush', label: 'Flush / gypsy' },
+  { value: 'tension', label: 'Tension' },
 ]
 
 // Gem identity options (Sprint 21).
@@ -485,7 +496,7 @@ export function ConfigurationPanel() {
           onChange={(value) => updateSetting({ type: value as SettingType })}
           wide
         />
-        {definition.setting.type === 'prong' ? (
+        {definition.setting.type === 'prong' && (
           <SelectField
             id="prong-count"
             label="Prong count"
@@ -493,7 +504,12 @@ export function ConfigurationPanel() {
             options={PRONG_COUNT_OPTIONS}
             onChange={(value) => updateSetting({ prongCount: Number(value) })}
           />
-        ) : (
+        )}
+        {/* Read only by a bezel. Gated on the bezel family rather than on "not
+            prong": the latter was correct with two families and became wrong
+            the moment there were six, since it would have offered bezel wall
+            dimensions for a channel. */}
+        {definition.setting.type === 'bezel' && (
           <>
             <NumericField
               id="bezel-wall-thickness"
@@ -518,6 +534,8 @@ export function ConfigurationPanel() {
           </>
         )}
       </FormSection>
+
+      <SettingModeSection />
 
       <PaveSection />
 

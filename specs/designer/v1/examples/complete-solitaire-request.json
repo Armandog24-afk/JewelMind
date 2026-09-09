@@ -91,7 +91,11 @@
         "pegDiameter": null,
         "pegHeight": null,
         "bezelWallThickness": 0.6,
-        "bezelWallHeight": 2.5
+        "bezelWallHeight": 2.5,
+        "galleryWindowCount": 4,
+        "galleryWindowSweep": 45.0,
+        "galleryWindowHeightFraction": 0.6,
+        "mode": null
       },
       "material": {
         "metal": "rose_gold_18k"

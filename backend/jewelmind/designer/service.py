@@ -117,6 +117,42 @@ def _apply_patch(base: JewelryDefinition, patch: dict[str, Any]) -> JewelryDefin
         kind = "MICROSETTING" if requested == "MICROSETTING" else "PAVE"
         data["pave"] = default_pave_field(kind).model_dump(mode="python")
 
+    # A SETTING MODE CANNOT BE BUILT FROM A DOTTED PATCH ALONE EITHER
+    # (Sprint 27), and for the same structural reason: `SettingModeSpec.modeId`
+    # is required, so setting `setting.mode.parameters.*` on a design that has
+    # no mode would leave a half-formed object the schema rejects — and "make it
+    # a partial bezel" would fail for a reason the user could not act on.
+    #
+    # The DOMAIN's own default is materialized first, from the same function the
+    # Studio panel mirrors, so the patch lands on a valid mode and every value
+    # the request did not state stays visibly a system default in the diff.
+    if data.get("setting", {}).get("mode") is None and any(
+        path == "setting.mode" or path.startswith("setting.mode.") for path in patch
+    ):
+        from jewelmind.setting.modes import (
+            SettingModeSpec,
+            default_primary_mode,
+        )
+
+        # The requested mode id decides what is seeded. Falling back to the
+        # family's own default variant means a patch that names only a
+        # parameter still resolves to the mode the document already meant,
+        # rather than to an arbitrary one.
+        requested = patch.get("setting.mode.modeId")
+        setting = data.get("setting", {})
+        mode_id = requested or default_primary_mode(
+            setting.get("type", "prong"),
+            setting.get("prongStyle", "ROUND_PRONG"),
+        )
+        try:
+            seeded = SettingModeSpec(modeId=mode_id)
+        except ValidationError:
+            # An unknown mode id reaches here only if the capability gate let it
+            # through; refusing the whole proposal is correct, and is what the
+            # `None` return below already means.
+            return None
+        data["setting"]["mode"] = seeded.model_dump(mode="python")
+
     for path, value in patch.items():
         # Walks the whole dotted path rather than splitting once (Sprint 21):
         # `stone.gem.gemId` is three segments deep, and a single split would

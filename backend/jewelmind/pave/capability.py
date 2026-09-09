@@ -38,9 +38,19 @@ CapabilityStatus = Literal["CURRENT", "PARTIAL", "PLANNED"]
 #: Bumped whenever pavé COMPILATION changes — the lattice arithmetic, the seat
 #: drop derivation, the retention anchor topology, or how a host surface is
 #: parameterized. A purely additive capability entry does not bump it.
+#:
+#: Still 1.0.0 after Sprint 27. `SHARED_PRONG` joined the retention set, and
+#: the anchor topology it uses is the SHARED one the lattice already computed
+#: for `SHARED_BEAD` — no arithmetic changed, and every pre-Sprint-27 field
+#: compiles to exactly what it did. A new strategy reaching an existing topology
+#: is an additive capability entry, which this comment already says does not
+#: bump the version.
 PAVE_COMPILER_VERSION = "1.0.0"
 
-PAVE_REGISTRY_VERSION = "1.0.0"
+#: 1.1.0 as of Sprint 27: the `SHARED_PRONG` retention strategy joined the
+#: registry and moved out of `RESERVED_RETENTION_STRATEGIES`. MINOR, because it
+#: is purely additive — nothing was removed, renamed or reclassified.
+PAVE_REGISTRY_VERSION = "1.1.0"
 
 #: Host surfaces named for architectural completeness but with NO resolver and
 #: NO membership in `PaveHost`. The mapped value is the real reason, not a
@@ -90,18 +100,13 @@ RESERVED_PAVE_HOSTS: dict[str, str] = {
 #: Retention strategies named but with no builder, and deliberately NOT
 #: `PaveRetentionStrategy` members.
 RESERVED_RETENTION_STRATEGIES: dict[str, str] = {
-    "SHARED_PRONG": (
-        "One prong body gripping two adjacent stones needs the shared-prong "
-        "geometry Sprint 23 explicitly recorded as PLANNED. A bead already "
-        "shares between four cells; a shared PRONG is a different solid with "
-        "a different contact topology, and substituting one for the other "
-        "would report a technique the metal does not implement."
-    ),
     "CHANNEL": (
-        "A channel holds stones between two continuous rails. Sprint 23 "
-        "recorded support rails as PLANNED, and approximating a channel as a "
-        "row of beads would misdescribe both the metal and how the stones are "
-        "retained."
+        "A channel holds stones between two continuous rails, and these "
+        "anchors are lattice CORNERS — the right topology for a bead or a "
+        "prong and the wrong one for a rail that runs the whole row. Sprint 27 "
+        "implemented channel setting as its own Setting System FAMILY, which is "
+        "where a rail's extent is actually stated; approximating a channel as a "
+        "row of beads would still misdescribe both the metal and the retention."
     ),
     "GRAIN": (
         "Raised grain work is a cut-and-pushed surface treatment rather than "
@@ -279,6 +284,18 @@ PAVE_RETENTION_CAPABILITIES: dict[str, PaveCapabilityEntry] = {
             "A small cylinder standing normal to the host surface at each "
             "corner. Normal to the SURFACE, not vertical, which is what makes "
             "it a prong on a curved shank rather than a pin through it.",
+        ),
+        _entry(
+            "SHARED_PRONG",
+            "CURRENT",
+            "A micro prong at each SHARED lattice corner, serving every stone "
+            "touching it. Sprint 27 moved this out of the reserved list, and "
+            "what changed was the ANCHOR SET, not a new solid: sharing is a "
+            "property of where a piece sits and which stones it names, so it "
+            "reaches the same builder MICRO_PRONG does — exactly as BEAD and "
+            "SHARED_BEAD already share one. The Sprint 23 reservation assumed a "
+            "shared prong needed a distinct body; the shared-corner topology "
+            "the pavé lattice already computes is what it actually needed.",
         ),
     )
 }

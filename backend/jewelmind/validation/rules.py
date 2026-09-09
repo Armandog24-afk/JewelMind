@@ -144,3 +144,35 @@ PAVE_FIELD_CONTAINMENT = "JM-PAVE-003"
 PAVE_REFERENCES_RESOLVE = "JM-PAVE-004"
 PAVE_EXECUTION_BOUNDARY = "JM-PAVE-005"
 PAVE_PITCH_CONSISTENCY = "JM-PAVE-006"
+
+# Sprint 27 — EXTENDED_SETTING_MODES. Structural, referential and MATHEMATICAL
+# checks on a declared setting mode: does the mode belong to the family the
+# document chose, are the parameters it needs present, are the ones it does not
+# read reported, is the request geometrically possible, and does the mode carry
+# an honest status or a review requirement.
+#
+# NOT ONE OF THEM IS A PROFESSIONAL JUDGMENT. There is deliberately no rule
+# about whether a channel wall is thick enough, whether a bar spacing is
+# settable, whether a flush collar leaves enough metal, or whether a tension
+# setting would hold. Each of those needs sourced professional evidence this
+# project does not have (SETTING-GOV-010).
+#
+# JM-SETTING-011 is the only numeric one and it is a MATHEMATICAL CONSTRAINT: a
+# collar rim taller than the whole stone buries it, and two supports reaching
+# further inward than the stone's half-extent meet through its middle. Both are
+# arithmetic, whatever a setter would say. It is a NECESSARY condition checked
+# against the document's own requested dimensions; the SUFFICIENT check runs at
+# generation time against the real measured stone, because only the built solid
+# knows its own crown height.
+#
+# JM-SETTING-012 carries the brief's PROFESSIONAL REVIEW category. It is emitted
+# as a `warning` rather than a fourth severity: the three severities are a
+# published contract, and the rule's own registry entry records
+# `professionalValidationStatus: required`, which is where that distinction
+# already lives.
+SETTING_MODE_FAMILY_MATCHES = "JM-SETTING-008"
+SETTING_MODE_PARAMETER_APPLICABLE = "JM-SETTING-009"
+SETTING_MODE_REQUIREMENTS_MET = "JM-SETTING-010"
+SETTING_MODE_GEOMETRY_FEASIBLE = "JM-SETTING-011"
+SETTING_MODE_PROFESSIONAL_REVIEW = "JM-SETTING-012"
+SETTING_MODE_STATUS = "JM-SETTING-013"

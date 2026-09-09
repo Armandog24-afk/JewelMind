@@ -69,14 +69,28 @@ def test_declared_status_values_match_the_real_set():
 
 
 def test_current_setting_families_match_the_live_setting_registry():
+    """Every registered family has a row, and the row's STATUS matches the code.
+
+    TIGHTENED in Sprint 27. The previous form collected only CURRENT rows and
+    compared the set, which would have silently accepted a row whose status
+    disagreed with the live registry — and `tension` is exactly that case: a
+    real registered family whose honest status is PARTIAL. Comparing the status
+    itself is what makes this guard say something about every family rather than
+    only about the ones marked CURRENT.
+    """
+
     from jewelmind.setting.capability import SETTING_CAPABILITIES
 
     recorded = {
-        e["capability"].removesuffix("_setting")
+        e["capability"].removesuffix("_setting"): e["status"]
         for e in _entries()
-        if e["domain"] == "setting" and e["status"] == "CURRENT" and e["capability"].endswith("_setting")
+        if e["domain"] == "setting" and e["capability"].endswith("_setting")
     }
-    assert recorded == set(SETTING_CAPABILITIES)
+    live = {
+        family: capability.status
+        for family, capability in SETTING_CAPABILITIES.items()
+    }
+    assert {k: v for k, v in recorded.items() if k in live} == live
 
 
 def test_planned_setting_families_are_not_registered_generators():
@@ -165,8 +179,14 @@ def test_seats_bearings_and_cutters_are_reported_honestly():
     assert keys[("setting", "stone_seat")]["status"] == "PARTIAL"
     for capability in ("bearing", "cutter"):
         assert keys[("setting", capability)]["status"] == "PLANNED"
-    for capability in SETTING_CAPABILITIES.values():
-        assert capability.seatSupport == "PARTIAL"
+    # Sprint 27 added ONE exception, and it is real rather than a relaxation:
+    # the `flush` family's recess IS half its geometry and the generator refuses
+    # without it, so its own seat support is CURRENT. The registry-wide
+    # `stone_seat` row stays PARTIAL, because relief is still not a cut seat
+    # with a bearing shoulder for any family.
+    for family, capability in SETTING_CAPABILITIES.items():
+        expected_seat = "CURRENT" if family == "flush" else "PARTIAL"
+        assert capability.seatSupport == expected_seat
         assert capability.bearingSupport == "PLANNED"
         assert capability.cutterSupport == "PLANNED"
 
@@ -270,6 +290,66 @@ def test_blocked_entries_explain_what_blocks_them():
         ), entry
 
 
+def test_setting_mode_rows_match_the_live_mode_registry():
+    """Every implemented mode has a row whose status matches the code, and every
+    reserved mode has a PLANNED row.
+
+    THE ANTI-DRIFT GUARD for the Sprint 27 taxonomy, and it checks BOTH
+    directions: a row for a mode that does not exist would advertise a
+    capability, and a mode with no row would ship one nobody declared. The
+    mode's own `settingGeometry` axis is measured from the live builder
+    registries inside `setting_modes()`, so a CURRENT row is backed by a real
+    builder by construction.
+    """
+
+    from jewelmind.setting.capability import setting_modes
+    from jewelmind.setting.modes import RESERVED_SETTING_MODES
+
+    rows = {
+        e["capability"]: e["status"]
+        for e in _entries()
+        if e["domain"] == "setting_mode"
+    }
+    live = {mode_id: entry.status for mode_id, entry in setting_modes().items()}
+    reserved = dict.fromkeys(RESERVED_SETTING_MODES, "PLANNED")
+
+    assert rows == {**live, **reserved}
+
+    # A reserved mode must never also be an implemented one.
+    assert not set(live) & set(reserved)
+
+
+def test_no_setting_mode_claims_geometry_without_a_builder():
+    """`settingGeometry` is DERIVED, so this asserts the derivation ran.
+
+    A row claiming geometry with no builder behind it is the exact failure the
+    measurement in `_mode_has_builder()` exists to prevent; asserting it here
+    means a future refactor that replaced the measurement with a declaration
+    would fail rather than pass quietly.
+    """
+
+    from jewelmind.setting.capability import setting_modes
+    from jewelmind.setting.dispatch import setting_generators
+    from jewelmind.setting.head import head_builders
+    from jewelmind.setting.modes import (
+        PRIMARY_FAMILY_SETTING_TYPE,
+        head_architecture_for_mode,
+        retention_strategy_for_mode,
+    )
+    from jewelmind.setting.retention import retention_builders
+
+    for mode_id, entry in setting_modes().items():
+        assert entry.settingGeometry is True, mode_id
+        if entry.axis == "HEAD":
+            assert head_architecture_for_mode(mode_id) in head_builders()
+        elif entry.axis == "RETENTION":
+            assert retention_strategy_for_mode(mode_id) in retention_builders()
+        else:
+            expected = PRIMARY_FAMILY_SETTING_TYPE[entry.family]
+            assert entry.settingType == expected
+            assert expected in setting_generators()
+
+
 def test_coverage_spans_the_expected_domains():
     domains = {e["domain"] for e in _entries()}
     expected = {
@@ -314,6 +394,9 @@ def test_coverage_spans_the_expected_domains():
         # honestly for the first time.
         "alchemist",
         "persistence",
+        # Sprint 27: one row per setting mode, generated from the live
+        # `setting_modes()` registry.
+        "setting_mode",
     }
     missing = expected - domains
     assert not missing, f"capability coverage is missing domains: {sorted(missing)}"

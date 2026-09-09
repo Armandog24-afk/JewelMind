@@ -26,6 +26,15 @@ GEOMETRY_ROLE: dict[str, GeometryRole] = {
     # rather than left to the `production_metal` default, so the classification
     # is a stated fact rather than a fallback that happens to be right.
     "pave_retention": "production_metal",
+    # Sprint 27: the Extended Setting Modes families. Each is real production
+    # metal, and each is registered EXPLICITLY rather than left to the
+    # `production_metal` default — the same discipline `pave_retention` follows,
+    # so the classification is a stated fact rather than a fallback that happens
+    # to be right.
+    "channel_walls": "production_metal",
+    "bars": "production_metal",
+    "flush_collar": "production_metal",
+    "tension_supports": "production_metal",
 }
 
 PRODUCTION_ROLE: dict[str, ProductionRole] = {
@@ -35,6 +44,10 @@ PRODUCTION_ROLE: dict[str, ProductionRole] = {
     "basket_support": "included_by_default",
     "stone_reference": "excluded_by_default",
     "pave_retention": "included_by_default",
+    "channel_walls": "included_by_default",
+    "bars": "included_by_default",
+    "flush_collar": "included_by_default",
+    "tension_supports": "included_by_default",
 }
 
 

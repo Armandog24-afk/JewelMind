@@ -123,10 +123,30 @@ PaveHost = Literal["BAND_OUTER", "HEAD_PLANE"]
 #:                 it. Genuinely fewer beads, which is the point of the
 #:                 technique rather than a rendering shortcut.
 #: `MICRO_PRONG` - a small cylinder normal to the surface at each corner.
+#: `SHARED_PRONG` - a micro prong at each SHARED corner, serving every stone
+#:                 touching it (Sprint 27). Sharing is a property of the ANCHOR
+#:                 SET rather than of the solid, which is why this and
+#:                 `MICRO_PRONG` reach the same builder — exactly as `BEAD` and
+#:                 `SHARED_BEAD` already do.
 #:
-#: Reserved strategies (`SHARED_PRONG`, `CHANNEL`, `GRAIN`) live in
-#: `capability.py::RESERVED_RETENTION_STRATEGIES`.
-PaveRetentionStrategy = Literal["NONE", "BEAD", "SHARED_BEAD", "MICRO_PRONG"]
+#: Reserved strategies (`CHANNEL`, `GRAIN`) live in
+#: `capability.py::RESERVED_RETENTION_STRATEGIES`. A channel rail is
+#: deliberately NOT a pavé retention strategy: these anchors are lattice
+#: CORNERS, which is the right topology for a bead or a prong and the wrong one
+#: for a rail running the whole row. Channel setting exists as its own Setting
+#: System family instead (Sprint 27).
+PaveRetentionStrategy = Literal[
+    "NONE", "BEAD", "SHARED_BEAD", "MICRO_PRONG", "SHARED_PRONG"
+]
+
+#: Strategies whose anchors are SHARED between the stones that touch them.
+#:
+#: Stated once, here, because it is the property the anchor derivation actually
+#: switches on: a shared strategy leaves its piece exactly on the corner where
+#: cells meet, while an individual one draws it in toward its own stone. Two
+#: copies of this membership test is how a new shared strategy silently becomes
+#: an individual one.
+SHARED_RETENTION_STRATEGIES: tuple[str, ...] = ("SHARED_BEAD", "SHARED_PRONG")
 
 #: What happens to a lattice cell that falls outside the host's declared
 #: extent.

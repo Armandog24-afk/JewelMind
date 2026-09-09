@@ -26,6 +26,7 @@ from jewelmind.setting.errors import (
 from jewelmind.setting.models import (
     ProngStyle,
     SettingComponentFact,
+    SettingComponentProvenance,
     SettingDefinition,
     SettingGeometryResult,
 )
@@ -190,6 +191,26 @@ def generate_prong_setting(
         placementStrategy=strategy,
         prongStyle=prong.style,
         seatMode=None,
+        # Sprint 27: the resolved mode and why this component exists. The mode
+        # is carried on the definition by the adapter, so a prong setting
+        # reports the same identity every other family does.
+        settingModeId=definition.settingModeId,
+        settingModeFingerprint=definition.settingModeFingerprint,
+        componentProvenance=[
+            SettingComponentProvenance(
+                componentId="prongs",
+                settingModeId=definition.settingModeId,
+                sourceStoneId=stone.stoneId,
+                sourceStoneInstanceIds=sorted(
+                    {
+                        instance_id
+                        for ids in assignments_by_index.values()
+                        for instance_id in ids
+                    }
+                ),
+                classification="PRODUCTION",
+            )
+        ],
         # THE SETTING -> STONE MAPPING (Sprint 23). Deterministic, and by ID
         # rather than by position: a consumer asks which stones this component
         # grips instead of inferring it from coordinates. The union of every

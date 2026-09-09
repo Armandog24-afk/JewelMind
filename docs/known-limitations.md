@@ -61,6 +61,48 @@ to every limitation below and to the design as a whole.
   color; it does not change density, shrinkage, or casting behavior in any
   exported file.
 
+### Extended Setting Modes (Sprint 27)
+
+- **A tension setting's structural behaviour is not modelled.** JewelMind builds
+  the two opposing supports as real solids and computes nothing about the
+  elastic response of the metal, the force they apply, or whether the stone
+  would be retained under load, wear or impact. That is why the mode is PARTIAL
+  rather than CURRENT, why `professionalReviewRequirement` is `REQUIRED`, why
+  the component metadata carries `structuralBehaviourModelled: false`, and why
+  `JM-SETTING-012` says a qualified professional must review it. No stress
+  threshold, spring constant or safety factor exists anywhere, and none may be
+  invented: it would be a fabricated professional claim about whether jewelry
+  holds a stone.
+- **A shared prong's position is stated, not derived.** `PRONG_SHARED` builds
+  real prongs at EXPLICIT positions carrying `servesStoneInstanceIds`. Whether
+  a shared prong actually reaches both stones it names is a geometric fact for
+  inspection rather than a guarantee, because deriving the position from two
+  stones' own geometry needs anchor-driven placement, which does not exist. No
+  interface authors explicit positions, so Studio, Designer and Conversation
+  are PLANNED for this one mode.
+- **Metal is generated for the design's own stone only.** A channel or bar row
+  spanning arrangement instances records which instances it holds and does not
+  build a separate setting per instance
+  (`SETTING_COVERAGE_PRIMARY_ONLY`). Closing this needs the setting strategy for
+  a non-primary member that Sprint 24 identified as an RFC.
+- **No minimum wall, bar, collar, clearance or spacing is enforced anywhere.**
+  Every dimension in a setting mode is a software CONSTRUCTION PARAMETER. No
+  sourced professional minimum exists for any of them, so none is asserted —
+  the same documented gap the bezel has carried since Sprint 19.
+- **`REFERENCE_SEAT` relief is not a cut seat.** It removes the stone's own
+  volume from the metal. It has no bearing shoulder, and no claim is made that a
+  stone would sit correctly in it. `bearingSupport` and `cutterSupport` remain
+  PLANNED for all six families.
+- **Fifteen setting techniques are reserved, not built** — a trellis head,
+  azure piercing, shared-wall and tapered channels, tapered bars, millgrain, an
+  open-back bezel, an under-gallery support, retention for a halo's own stones,
+  compass-point prongs, and channel/bar as pavé retention. Each has a recorded
+  technical reason in `setting/modes.py::RESERVED_SETTING_MODES`, and each is
+  refused by the model rather than silently substituted.
+- **`GeometryPlan` is still not materialized.** Component provenance lives on
+  `SettingGeometryResult` instead. Materializing `GeometryPlan` is an explicit
+  ADR condition and nothing in this sprint needed it.
+
 ## Preview / export
 
 - **GLB export was not implemented.** The preview pipeline was evaluated
@@ -124,6 +166,9 @@ to every limitation below and to the design as a whole.
   (`size = π·diameter − 40`) assumes the French/EU civil sizing convention,
   not the German convention (where size equals circumference directly) —
   see `docs/validation-rules.md` (JM-RING-003).
-- **Only round stones and 4/6-prong solitaire settings.** These are the
-  only values the geometry pipeline and validation rules support in this
-  milestone, per the product spec.
+- **Six setting families, not two.** Sprint 19 added `bezel` and Sprint 27
+  added `channel`, `bar`, `flush` and `tension`, each with a real registered
+  generator. Prong counts are still exactly 4 or 6 (`JM-PRONG-001`), and the
+  stone shape enum has covered 21 cuts plus custom and imported sources since
+  Sprint 20 — this bullet previously said "only round stones and 4/6-prong
+  solitaire settings", which had been stale since Sprint 18.

@@ -299,7 +299,21 @@ class TestSettingRegistry:
     """SETTING_REGISTRY / SETTING_CAPABILITY_MATRIX."""
 
     def test_only_implemented_families_are_registered(self):
-        assert set(setting_generators()) == {"prong", "bezel"}
+        """Sprint 27 added four families, each with a real generator.
+
+        The exact set is stated rather than a membership check, so a family
+        appearing here without a generator — or a generator without a public
+        `SettingType` — fails rather than passing quietly.
+        """
+
+        assert set(setting_generators()) == {
+            "prong",
+            "bezel",
+            "channel",
+            "bar",
+            "flush",
+            "tension",
+        }
 
     def test_every_registered_generator_has_a_capability_entry(self):
         assert set(setting_generators()) == set(SETTING_CAPABILITIES)
@@ -310,11 +324,26 @@ class TestSettingRegistry:
             assert family not in SETTING_CAPABILITIES
 
     def test_every_capability_is_generatable_and_inspectable_and_category_neutral(self):
-        for capability in SETTING_CAPABILITIES.values():
-            assert capability.status == "CURRENT"
+        """Sprint 19 asserted every family was CURRENT, which was true then.
+
+        Sprint 27 added `tension`, whose GEOMETRY is complete and whose STATUS
+        is PARTIAL: a tension setting's whole function is structural and none of
+        that behaviour is modelled. The assertion is tightened rather than
+        relaxed — a family may be PARTIAL only if it also declares a
+        professional-review requirement, so PARTIAL cannot become a place to
+        park an unfinished family.
+        """
+
+        from jewelmind.setting.capability import PROFESSIONAL_REVIEW_REQUIRED
+
+        for setting_type, capability in SETTING_CAPABILITIES.items():
             assert capability.generatable is True
             assert capability.inspectable is True
             assert capability.categoryNeutral is True
+            if setting_type in PROFESSIONAL_REVIEW_REQUIRED:
+                assert capability.status == "PARTIAL"
+            else:
+                assert capability.status == "CURRENT"
 
     def test_seats_bearings_and_cutters_are_reported_honestly(self):
         """Sprint 19 asserted all three were PLANNED, which was true then.
@@ -325,17 +354,24 @@ class TestSettingRegistry:
         exist and must keep saying PLANNED: a bearing is sized by a setter and a
         cutter is manufacturing tooling, and no sourced professional geometry
         exists for either.
+
+        Sprint 27 added one exception, and it is a real one rather than a
+        relaxation: for the `flush` family the recess IS half the geometry —
+        the generator refuses without it — so its seat support is CURRENT. Every
+        other family keeps PARTIAL, and bearing and cutter support stay PLANNED
+        for all six.
         """
 
-        for capability in SETTING_CAPABILITIES.values():
-            assert capability.seatSupport == "PARTIAL"
+        for setting_type, capability in SETTING_CAPABILITIES.items():
+            expected_seat = "CURRENT" if setting_type == "flush" else "PARTIAL"
+            assert capability.seatSupport == expected_seat
             assert capability.bearingSupport == "PLANNED"
             assert capability.cutterSupport == "PLANNED"
 
     def test_compatibility_matrix_covers_every_family_and_shape(self):
         rows = compatibility_matrix()
-        assert len(rows) == 2 * 7
-        assert {r["settingType"] for r in rows} == {"prong", "bezel"}
+        assert len(rows) == len(SETTING_CAPABILITIES) * 7
+        assert {r["settingType"] for r in rows} == set(SETTING_CAPABILITIES)
 
     def test_only_round_is_supported_for_prong(self):
         assert compatibility_status("prong", "round") == "SUPPORTED_SOFTWARE"
@@ -353,9 +389,16 @@ class TestSettingRegistry:
         # `asscher` here in Sprint 20: asscher became a real, generating shape
         # with EXPERIMENTAL setting compatibility, so this assertion had quietly
         # stopped testing what it claimed to.
-        assert compatibility_status("channel", "round") == "UNSUPPORTED"
+        # `channel` was the unregistered family here until Sprint 27 made it a
+        # real one with a real generator, at which point this assertion had
+        # quietly stopped testing what it claimed to — the same drift Sprint 20
+        # found when `asscher` became a real shape. `bead` replaces it: it is a
+        # genuinely RESERVED family name, because repeated small-stone retention
+        # is `setting/retention.py`'s builders driven by a pavé field rather
+        # than a setting family of its own.
+        assert compatibility_status("bead", "round") == "UNSUPPORTED"
         assert compatibility_status("prong", "briolette") == "UNSUPPORTED"
-        assert get_setting_capability("channel") is None
+        assert get_setting_capability("bead") is None
 
 
 class TestNoFakeProfessionalValidation:
@@ -384,7 +427,9 @@ class TestUnsupportedSettingCombination:
     def test_unregistered_setting_type_raises_explicitly(self):
         d = _definition(setting_type="bezel")
         setting_def = _setting_def(d)
-        broken = setting_def.model_copy(update={"settingType": "channel"})
+        # `bead` rather than `channel`: channel became a registered family in
+        # Sprint 27, so it no longer exercises the unregistered path.
+        broken = setting_def.model_copy(update={"settingType": "bead"})
         with pytest.raises(SettingTypeUnsupportedError):
             generate_setting(broken)
 
@@ -418,7 +463,7 @@ class TestUnsupportedSettingCombination:
 
     def test_error_messages_never_leak_a_kernel_stack_trace(self):
         d = _definition(setting_type="bezel")
-        broken = _setting_def(d).model_copy(update={"settingType": "channel"})
+        broken = _setting_def(d).model_copy(update={"settingType": "bead"})
         with pytest.raises(SettingTypeUnsupportedError) as exc:
             generate_setting(broken)
         assert "Traceback" not in str(exc.value)
@@ -428,10 +473,22 @@ class TestUnsupportedSettingCombination:
 class TestSettingProductionRoleAndStoneSeparation:
     """SETTING_PRODUCTION_ROLE / STONE_REFERENCE_SEPARATION."""
 
-    @pytest.mark.parametrize("setting_type", ["prong", "bezel"])
-    def test_setting_component_is_production_metal(self, setting_type):
+    @pytest.mark.parametrize(
+        ("setting_type", "name"),
+        [
+            ("prong", "prongs"),
+            ("bezel", "bezel"),
+            # Sprint 27. Every new family's component is registered in the role
+            # map EXPLICITLY rather than relying on the `production_metal`
+            # default, so this asserts a stated fact rather than a fallback that
+            # happens to be right.
+            ("channel", "channel_walls"),
+            ("bar", "bars"),
+            ("tension", "tension_supports"),
+        ],
+    )
+    def test_setting_component_is_production_metal(self, setting_type, name):
         build_solitaire_ring(_definition(setting_type=setting_type))
-        name = "prongs" if setting_type == "prong" else "bezel"
         assert GEOMETRY_ROLE[name] == "production_metal"
         assert PRODUCTION_ROLE[name] == "included_by_default"
         assert is_production_component(name)
@@ -577,8 +634,11 @@ class TestJdlSettingType:
     def test_unknown_setting_type_is_rejected(self):
         from pydantic import ValidationError
 
+        # `channel` is a real setting type since Sprint 27, so the rejected
+        # value here is one that genuinely is not: `bead` is a RESERVED family
+        # name with no generator and no enum membership.
         with pytest.raises(ValidationError):
-            SettingSpec.model_validate({"type": "channel"})
+            SettingSpec.model_validate({"type": "bead"})
 
     def test_prong_fields_are_not_required_for_a_bezel(self):
         spec = SettingSpec.model_validate({"type": "bezel", "bezelWallThickness": 0.5})

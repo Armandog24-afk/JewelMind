@@ -318,6 +318,93 @@ def _peg_head(
     }
 
 
+#: How far past the wall's own radial extent a gallery window's cutting tool
+#: reaches, as a multiple of the outer radius. Only has to exceed 1.
+_WINDOW_TOOL_RADIUS_FACTOR = 2.0
+
+
+def _open_gallery(
+    head: HeadSettingDefinition, attachment: SettingAttachmentInterface
+) -> tuple[cq.Shape, dict]:
+    """A basket wall with evenly spaced windows pierced through it (Sprint 27).
+
+    BUILT FROM THE BASKET IT PIERCES, not as a separate construction. The wall
+    is `_basket()`'s own solid and the windows are angular sectors cut from it,
+    so an open gallery can never be a different wall from the basket it is
+    derived from — the discipline SETTINGV2-GOV-003 applied when `BASKET` was
+    preserved character-for-character.
+
+    THE WINDOWS SPAN ONLY THE MIDDLE OF THE HEIGHT, and that is a construction
+    correctness requirement rather than a style choice. A window cut through the
+    full height would sever the wall into disconnected pillars, and `build_head()`
+    refuses a head that is not one connected body (SETTINGV2-GOV-006). The
+    surviving rim at the top and the bottom is what keeps it one solid, which is
+    why `windowHeightFraction` is bounded strictly below 1.0 by the schema.
+
+    DELIBERATELY NOT CALLED AZURE. Azure/ajouré work is arbitrary decorative
+    piercing whose pattern is not expressible as parameters; this is the
+    parametric subset — n evenly spaced windows of one angular width. See
+    `modes.py::RESERVED_SETTING_MODES['HEAD_AZURE']`.
+    """
+
+    wall, metadata = _basket(head, attachment)
+
+    base_z = metadata["baseZMm"]
+    height = metadata["heightMm"]
+    window_height = height * head.windowHeightFraction
+    window_bottom = base_z + (height - window_height) / 2.0
+
+    radius = head.outerRadiusMm * _WINDOW_TOOL_RADIUS_FACTOR
+    step = 360.0 / head.windowCount
+
+    pierced = wall
+    for index in range(head.windowCount):
+        center_angle = index * step
+        tool = cq.Solid.makeCylinder(
+            radius,
+            window_height,
+            pnt=cq.Vector(0, 0, window_bottom),
+            dir=cq.Vector(0, 0, 1),
+            angleDegrees=head.windowSweepDeg,
+        )
+        tool = tool.rotate(
+            cq.Vector(0, 0, 0),
+            cq.Vector(0, 0, 1),
+            center_angle - head.windowSweepDeg / 2.0,
+        )
+        try:
+            pierced = pierced.cut(tool)
+        except Exception as exc:  # noqa: BLE001 - OCC boolean failures vary
+            raise SettingGenerationFailedError(
+                f"Could not pierce window {index} of {head.windowCount} through "
+                f"the gallery wall: {exc}. Raised rather than returning a wall "
+                "with fewer windows than requested, which would report an open "
+                "gallery and deliver a different one."
+            ) from exc
+
+    # SETTINGV2-GOV-006, enforced for this architecture specifically. The
+    # surviving rims are what keep the pierced wall connected, so a count above
+    # one means the windows consumed them — a floating set of pillars, not a
+    # head.
+    if len(pierced.Solids()) != 1:
+        raise SettingGenerationFailedError(
+            f"OPEN_GALLERY produced {len(pierced.Solids())} disconnected "
+            f"solids: {head.windowCount} windows of {head.windowSweepDeg} "
+            "degrees left no continuous rim. A head that is not one connected "
+            "body is not a head."
+        )
+
+    return pierced, {
+        **metadata,
+        "windowCount": head.windowCount,
+        "windowSweepDeg": head.windowSweepDeg,
+        "windowHeightFraction": head.windowHeightFraction,
+        "windowHeightMm": window_height,
+        "windowBottomZMm": window_bottom,
+        "windowTopZMm": window_bottom + window_height,
+    }
+
+
 @lru_cache(maxsize=1)
 def head_builders() -> dict[str, HeadBuilder]:
     """The architecture registry. Every entry builds a real solid."""
@@ -327,6 +414,7 @@ def head_builders() -> dict[str, HeadBuilder]:
         "PEG_HEAD": _peg_head,
         "MARTINI": _martini,
         "TULIP": _tulip,
+        "OPEN_GALLERY": _open_gallery,
     }
 
 

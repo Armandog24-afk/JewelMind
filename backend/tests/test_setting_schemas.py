@@ -127,7 +127,12 @@ def test_no_registry_entry_claims_professional_validation():
         # relief is real — and PARTIAL rather than CURRENT, because relief is
         # not a cut seat with a bearing shoulder. Bearing and cutter geometry
         # still do not exist and must keep saying PLANNED.
-        assert entry["seatSupport"] == "PARTIAL"
+        #
+        # Sprint 27 added ONE exception, and it is real rather than a
+        # relaxation: the `flush` family's recess IS half its geometry, and the
+        # generator refuses a flush setting without relief.
+        expected_seat = "CURRENT" if entry["settingType"] == "flush" else "PARTIAL"
+        assert entry["seatSupport"] == expected_seat
         assert entry["bearingSupport"] == "PLANNED"
         assert entry["cutterSupport"] == "PLANNED"
 

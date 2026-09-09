@@ -1,0 +1,244 @@
+{
+  "goldenId": "ESM-003-flush-gypsy-solitaire",
+  "description": "Flush / gypsy setting: a 1.2mm collar with a 0.5mm rim above the girdle, with the stone's own solid cut out of it. Locks in the collar built from the bezel's verified outline offset, and that the recess is a CUT of the real stone rather than a bore extruded from the flat girdle outline.",
+  "sourceJDLPath": "goldens/solitaire-v1/ESM-003-flush-gypsy-solitaire/design.json",
+  "definitionHash": "675e8f6d59e61dfc",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "flush_collar",
+    "stone_reference"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "675e8f6d59e61dfc",
+    "assembly": {
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 1,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -4.45,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 4.45,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 8.9,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 79.37160268566105,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000100000002,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000001000000015,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25000005
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 5,
+          "edges": 8,
+          "vertices": 5
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "flush_collar",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 229.75843620574526,
+        "boundingBox": {
+          "xmin": -4.45,
+          "ymin": -4.45,
+          "zmin": 10.3,
+          "xmax": 4.45,
+          "ymax": 4.45,
+          "zmax": 14.7000001,
+          "sizeX": 8.9,
+          "sizeY": 8.9,
+          "sizeZ": 4.4000001,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.50000005
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 8,
+          "vertices": 5
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -3.2500001,
+          "ymin": -3.2500001,
+          "zmin": 11.599999900000002,
+          "xmax": 3.2500001,
+          "ymax": 3.2500001,
+          "zmax": 15.6000001,
+          "sizeX": 6.5000002,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "flush_collar",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9000000000000004
+      },
+      {
+        "componentA": "flush_collar",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009746200509249106
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "flush_collar",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.00974620050926817
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 0,
+      "generatedProngCount": 0,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "EXTENDED_SETTING_MODES_AWAITING_PROFESSIONAL_REVIEW: every dimension in this design is a software construction parameter. No minimum wall, minimum bar, collar thickness, clearance or settability judgment is asserted anywhere, because no sourced professional evidence for one exists in this project. The baseline is a software regression guard.",
+    "REFERENCE_RELIEF_IS_NOT_A_CUT_SEAT: the recess is the stone's own volume removed from the metal. It has no bearing shoulder, and no claim is made that a stone would sit correctly in it."
+  ],
+  "createdAt": "2026-09-08T14:04:31.249900+00:00",
+  "acceptedAt": "2026-09-08T14:04:37.094923+00:00",
+  "notes": "Sprint 27 Extended Setting Modes v1: INITIAL_BASELINE for a newly executable setting mode. Created by running the real pipeline; no existing baseline was modified."
+}

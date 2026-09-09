@@ -60,6 +60,7 @@ from jewelmind.setting.errors import (
 )
 from jewelmind.setting.models import (
     SettingComponentFact,
+    SettingComponentProvenance,
     SettingDefinition,
     SettingFallbackEvent,
     SettingGeometryResult,
@@ -89,8 +90,19 @@ def _resample_periodic(wire: cq.Wire, samples: int = _RESAMPLE_POINTS) -> cq.Wir
     return cq.Workplane("XY").spline(points, periodic=True).close().val()
 
 
-def _offset_outline(inner: cq.Wire, thickness_mm: float) -> tuple[cq.Wire, list[SettingFallbackEvent]]:
-    """Offset the stone outline outward, repairing STEP-unsafe curve types."""
+def offset_stone_outline(
+    inner: cq.Wire, thickness_mm: float
+) -> tuple[cq.Wire, list[SettingFallbackEvent]]:
+    """Offset the stone outline outward, repairing STEP-unsafe curve types.
+
+    PUBLIC BECAUSE THE FLUSH FAMILY REUSES IT (Sprint 27). A gypsy collar's
+    outer boundary is the same constant offset of the same stone outline, with
+    the same `OFFSET`-curve STEP hazard documented in this module's docstring. A
+    second offset implementation in `flush.py` would eventually miss the repair
+    and ship a collar that re-imports as a zero-solid shell — the exact failure
+    `step_roundtrip_check()` was built to catch. The offset pipeline lives here
+    because this is where its behaviour was verified per shape.
+    """
 
     try:
         offset = inner.offset2D(thickness_mm)
@@ -123,6 +135,92 @@ def _offset_outline(inner: cq.Wire, thickness_mm: float) -> tuple[cq.Wire, list[
     return outer, events
 
 
+#: How far past the wall's own vertical extent an opening's cutting tool
+#: reaches, in millimetres.
+#:
+#: A GEOMETRIC ROBUSTNESS value, not a design dimension: a tool that ends
+#: exactly at the wall's top and bottom faces produces a coplanar-face boolean,
+#: which is where OCCT is least reliable. The same reasoning `head.py`'s
+#: `_conical_wall()` already applies when it extends its bore past both ends.
+_OPENING_TOOL_MARGIN_MM = 1.0
+
+#: How much larger than the wall's own outer extent an opening's cutting tool
+#: is, as a multiple. Only has to exceed 1; 2 is chosen so the tool clears the
+#: wall for any stone outline without a per-shape calculation.
+_OPENING_TOOL_RADIUS_FACTOR = 2.0
+
+
+def _cut_openings(
+    solid: cq.Shape,
+    stone,
+    bezel,
+    bottom_z: float,
+    top_z: float,
+) -> tuple[cq.Shape, int]:
+    """Cut evenly spaced angular openings through a bezel wall.
+
+    THE OPENINGS ARE ANGULAR SECTORS about the stone's OWN vertical axis at its
+    OWN centre — not about the design origin, which would swing them around the
+    ring (the mistake FAMILY-GOV records for `Shape.scale()`). Each sector is a
+    pie-slice cylinder, built at the origin, rotated to its centre angle and
+    then translated onto the stone's centre.
+
+    A PARTIAL BEZEL IS LEGITIMATELY SEVERAL SOLIDS. Cutting n openings from a
+    closed ring leaves n arcs, and they are joined to each other through the
+    head below rather than to one another directly. That is reported as a real
+    solid count rather than repaired, and Geometry Inspection's
+    `bezelWallContinuous` fact correctly reports `false` for one — a fact about
+    the wall, never a judgement about it.
+    """
+
+    box = solid.BoundingBox()
+    reach = max(
+        abs(box.xmax - stone.centerXMm),
+        abs(box.xmin - stone.centerXMm),
+        abs(box.ymax - stone.centerYMm),
+        abs(box.ymin - stone.centerYMm),
+    )
+    radius = reach * _OPENING_TOOL_RADIUS_FACTOR
+    height = (top_z - bottom_z) + 2.0 * _OPENING_TOOL_MARGIN_MM
+    step = 360.0 / bezel.openingCount
+
+    cut = solid
+    for index in range(bezel.openingCount):
+        center_angle = bezel.openingStartAngleDeg + index * step
+        tool = cq.Solid.makeCylinder(
+            radius,
+            height,
+            pnt=cq.Vector(0, 0, bottom_z - _OPENING_TOOL_MARGIN_MM),
+            dir=cq.Vector(0, 0, 1),
+            angleDegrees=bezel.openingSweepDeg,
+        )
+        tool = tool.rotate(
+            cq.Vector(0, 0, 0),
+            cq.Vector(0, 0, 1),
+            center_angle - bezel.openingSweepDeg / 2.0,
+        )
+        tool = tool.translate((stone.centerXMm, stone.centerYMm, 0.0))
+        try:
+            cut = cut.cut(tool)
+        except Exception as exc:  # noqa: BLE001 - OCC boolean failures vary
+            raise BezelSolidInvalidError(
+                f"Could not cut opening {index} of {bezel.openingCount} through "
+                f"the bezel wall ({exc}). Raised rather than returning a wall "
+                "with fewer openings than requested, which would report a "
+                "partial bezel and deliver a different one."
+            ) from exc
+
+    if not cut.Solids():
+        raise BezelSolidInvalidError(
+            f"Cutting {bezel.openingCount} openings of "
+            f"{bezel.openingSweepDeg} degrees removed the whole bezel wall. The "
+            "schema already refuses a total sweep of 360 degrees or more; this "
+            "is the geometric check that the remaining wall is real."
+        )
+
+    return cut, bezel.openingCount
+
+
 def generate_bezel_setting(
     definition: SettingDefinition,
 ) -> tuple[dict[str, GeneratedComponent], SettingGeometryResult]:
@@ -146,7 +244,7 @@ def generate_bezel_setting(
     if stone.orientationDeg:
         inner = inner.rotate((0, 0, 0), (0, 0, 1), stone.orientationDeg)
 
-    outer, fallback_events = _offset_outline(inner, bezel.wallThicknessMm)
+    outer, fallback_events = offset_stone_outline(inner, bezel.wallThicknessMm)
 
     # Vertical extent: centred on the stone's girdle plane. An explicit,
     # symmetric rule — no fabricated crown/pavilion coverage split
@@ -171,11 +269,30 @@ def generate_bezel_setting(
             f"The bezel wall for stone shape {stone.shape!r} produced no valid solid."
         )
 
+    # PARTIAL (Sprint 27). Openings are cut from the SAME wall a full bezel
+    # produces, so a partial bezel can never be a different wall from the full
+    # one it is derived from — the discipline SETTINGV2-GOV-003 applied when
+    # `ROUND_PRONG` and `BASKET` were preserved character-for-character.
+    generated_openings: int | None = None
+    if bezel.variant == "PARTIAL":
+        solid, generated_openings = _cut_openings(
+            solid, stone, bezel, bottom_z, top_z
+        )
+
     bbox = BoundingBox.from_shape(solid)
     metadata = {
         "settingType": "bezel",
+        "settingModeId": definition.settingModeId,
         "stoneShape": stone.shape,
         "compatibilityStatus": status,
+        "variant": bezel.variant,
+        "openingCount": generated_openings,
+        "openingSweepDeg": (
+            bezel.openingSweepDeg if bezel.variant == "PARTIAL" else None
+        ),
+        "openingStartAngleDeg": (
+            bezel.openingStartAngleDeg if bezel.variant == "PARTIAL" else None
+        ),
         "wallThicknessMm": bezel.wallThicknessMm,
         "wallHeightMm": bezel.wallHeightMm,
         "verticalReference": bezel.verticalReference,
@@ -214,6 +331,23 @@ def generate_bezel_setting(
         ],
         fallbackEvents=fallback_events,
         compatibilityStatus=status,
+        # Sprint 27. The variant actually built, its requested-vs-generated
+        # opening count, and why this component exists.
+        settingModeId=definition.settingModeId,
+        settingModeFingerprint=definition.settingModeFingerprint,
+        bezelVariant=bezel.variant,
+        requestedOpeningCount=(
+            bezel.openingCount if bezel.variant == "PARTIAL" else None
+        ),
+        generatedOpeningCount=generated_openings,
+        componentProvenance=[
+            SettingComponentProvenance(
+                componentId="bezel",
+                settingModeId=definition.settingModeId,
+                sourceStoneId=stone.stoneId,
+                classification="PRODUCTION",
+            )
+        ],
     )
 
     return {"bezel": component}, result

@@ -4,7 +4,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "aee3a916fc345721",
+        "currentJDLHash": "1257cb82878d1659",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -24,8 +24,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -34,8 +34,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
-          "turnId": "turn-7bed38a3-2401-4b9f-a1bd-07b4aa294bcb",
-          "baseDefinitionHash": "aee3a916fc345721",
+          "turnId": "turn-cca4f2b3-7ca6-49c1-b5ef-b60be6990458",
+          "baseDefinitionHash": "1257cb82878d1659",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-ea410877-3a77-4e1e-b767-b979e00f84e0",
@@ -120,7 +120,11 @@
                 "pegDiameter": null,
                 "pegHeight": null,
                 "bezelWallThickness": 0.6,
-                "bezelWallHeight": 2.5
+                "bezelWallHeight": 2.5,
+                "galleryWindowCount": 4,
+                "galleryWindowSweep": 45.0,
+                "galleryWindowHeightFraction": 0.6,
+                "mode": null
               },
               "material": {
                 "metal": "rose_gold_18k"
@@ -390,6 +394,30 @@
                 "changed": false
               },
               {
+                "path": "setting.galleryWindowCount",
+                "previousValue": 4,
+                "proposedValue": 4,
+                "changed": false
+              },
+              {
+                "path": "setting.galleryWindowSweep",
+                "previousValue": 45.0,
+                "proposedValue": 45.0,
+                "changed": false
+              },
+              {
+                "path": "setting.galleryWindowHeightFraction",
+                "previousValue": 0.6,
+                "proposedValue": 0.6,
+                "changed": false
+              },
+              {
+                "path": "setting.mode",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "material.metal",
                 "previousValue": "yellow_gold_18k",
                 "proposedValue": "rose_gold_18k",
@@ -458,8 +486,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "aee3a916fc345721",
-        "relatedJDLHashAfter": "aee3a916fc345721",
+        "relatedJDLHashBefore": "1257cb82878d1659",
+        "relatedJDLHashAfter": "1257cb82878d1659",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -469,7 +497,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "aee3a916fc345721",
+        "currentJDLHash": "1257cb82878d1659",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -489,8 +517,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -512,8 +540,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -555,8 +583,8 @@
         "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
         "result": "Proposal accepted.",
         "accepted": true,
-        "relatedJDLHashBefore": "aee3a916fc345721",
-        "relatedJDLHashAfter": "aee3a916fc345721",
+        "relatedJDLHashBefore": "1257cb82878d1659",
+        "relatedJDLHashAfter": "1257cb82878d1659",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []
@@ -566,7 +594,7 @@
       "session": {
         "sessionId": "session-03855e47-e56e-40ff-b40b-296fbe011b70",
         "sessionVersion": "1.0.0",
-        "currentJDLHash": "aee3a916fc345721",
+        "currentJDLHash": "1257cb82878d1659",
         "currentIntentHash": "120c58f04f73bc92",
         "turns": [
           {
@@ -586,8 +614,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -609,8 +637,8 @@
             "proposalId": "conv-proposal-19cd9da3-c3bb-4ef3-bf07-b48e3d50f43d",
             "result": "Proposal accepted.",
             "accepted": true,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -632,8 +660,8 @@
             "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
             "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
             "accepted": null,
-            "relatedJDLHashBefore": "aee3a916fc345721",
-            "relatedJDLHashAfter": "aee3a916fc345721",
+            "relatedJDLHashBefore": "1257cb82878d1659",
+            "relatedJDLHashAfter": "1257cb82878d1659",
             "relatedIntentHashBefore": "120c58f04f73bc92",
             "relatedIntentHashAfter": "120c58f04f73bc92",
             "diagnostics": []
@@ -642,8 +670,8 @@
         "pendingClarification": null,
         "activeProposal": {
           "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
-          "turnId": "turn-5756e1cd-857c-4f95-8c16-a9b16e3f831a",
-          "baseDefinitionHash": "aee3a916fc345721",
+          "turnId": "turn-b94721c3-c7ab-49b3-bba7-d8568feb4b6f",
+          "baseDefinitionHash": "1257cb82878d1659",
           "baseIntentHash": "120c58f04f73bc92",
           "designerProposal": {
             "proposalId": "proposal-d5aaeeda-8a4c-4c26-846d-2c898a02802a",
@@ -720,7 +748,11 @@
                 "pegDiameter": null,
                 "pegHeight": null,
                 "bezelWallThickness": 0.6,
-                "bezelWallHeight": 2.5
+                "bezelWallHeight": 2.5,
+                "galleryWindowCount": 4,
+                "galleryWindowSweep": 45.0,
+                "galleryWindowHeightFraction": 0.6,
+                "mode": null
               },
               "material": {
                 "metal": "platinum"
@@ -990,6 +1022,30 @@
                 "changed": false
               },
               {
+                "path": "setting.galleryWindowCount",
+                "previousValue": 4,
+                "proposedValue": 4,
+                "changed": false
+              },
+              {
+                "path": "setting.galleryWindowSweep",
+                "previousValue": 45.0,
+                "proposedValue": 45.0,
+                "changed": false
+              },
+              {
+                "path": "setting.galleryWindowHeightFraction",
+                "previousValue": 0.6,
+                "proposedValue": 0.6,
+                "changed": false
+              },
+              {
+                "path": "setting.mode",
+                "previousValue": null,
+                "proposedValue": null,
+                "changed": false
+              },
+              {
                 "path": "material.metal",
                 "previousValue": "yellow_gold_18k",
                 "proposedValue": "platinum",
@@ -1062,8 +1118,8 @@
         "proposalId": "conv-proposal-20a5e8ab-4b73-4a37-8d29-e068bf0d1b29",
         "result": "Proposal ready: 1 technical change(s), 0 intent statement(s).",
         "accepted": null,
-        "relatedJDLHashBefore": "aee3a916fc345721",
-        "relatedJDLHashAfter": "aee3a916fc345721",
+        "relatedJDLHashBefore": "1257cb82878d1659",
+        "relatedJDLHashAfter": "1257cb82878d1659",
         "relatedIntentHashBefore": "120c58f04f73bc92",
         "relatedIntentHashAfter": "120c58f04f73bc92",
         "diagnostics": []

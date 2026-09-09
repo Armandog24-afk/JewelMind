@@ -46,6 +46,12 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-SETTING-005` | Head parameters complete | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
 | `JM-SETTING-006` | Field applicable to family | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-SETTING-007` | Seat relief feasible | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-SETTING-008` | Setting mode family matches the setting type | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-SETTING-009` | Setting mode parameter applicable | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-SETTING-010` | Setting mode requirements met | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
+| `JM-SETTING-011` | Setting mode geometrically feasible | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
+| `JM-SETTING-012` | Setting mode requires professional review | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
+| `JM-SETTING-013` | Setting mode capability status | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-001` | Single placement authority | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-002` | Family roles valid | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-003` | Family compiles | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
@@ -76,4 +82,4 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `FORGE-GEOM-001` | Fuse must yield a solid | GEOMETRY_INSPECTION | FORGE-7 | warning | 1.0.0 | ACCEPTED |
 | `FORGE-EXPORT-001` | Export requires a valid cached record | EXPORT_PRECONDITION | FORGE-8 | error-equivalent | 1.0.0 | ACCEPTED |
 
-**Total: 54 rules. Professionally validated: 0.**
+**Total: 60 rules. Professionally validated: 0.**

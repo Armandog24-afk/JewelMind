@@ -71,7 +71,20 @@ export type StoneReferenceProfile =
 
 /** Units a caller may declare for a custom outline or an imported asset. */
 export type DeclaredUnit = 'mm' | 'cm' | 'm' | 'in'
-export type SettingType = 'prong' | 'bezel'
+/**
+ * The public setting family. Sprint 27 added the four Extended Setting Modes
+ * families, each backed by a real registered backend generator.
+ *
+ * A MIRROR of `backend/jewelmind/domain/schema.py::SettingType`: this file
+ * must never offer a family the backend cannot build.
+ */
+export type SettingType =
+  | 'prong'
+  | 'bezel'
+  | 'channel'
+  | 'bar'
+  | 'flush'
+  | 'tension'
 export type MetalType =
   | 'yellow_gold_18k'
   | 'white_gold_18k'
@@ -351,6 +364,31 @@ export interface SettingSpec {
    */
   bezelWallThickness: number
   bezelWallHeight: number
+
+  /**
+   * Sprint 27. Window parameters, required by and only read by `OPEN_GALLERY`.
+   *
+   * Flat fields beside the other head parameters, deliberately: the head is its
+   * own axis, already selected by `headArchitecture`, so putting them inside
+   * `mode` — which declares the PRIMARY mode — would make one field carry two
+   * axes.
+   */
+  galleryWindowCount: number
+  galleryWindowSweep: number
+  galleryWindowHeightFraction: number
+
+  /**
+   * The extended setting mode this design declares (Sprint 27).
+   *
+   * `null` means "no mode declared", which resolves to the variant the existing
+   * `type`/`prongStyle` fields already meant — so a design saved before this
+   * sprint behaves identically.
+   *
+   * It REFINES `type`, it does not compete with it: a mode whose family
+   * disagrees with `type` is refused by the backend's `JM-SETTING-008` rather
+   * than resolved by precedence.
+   */
+  mode: SettingModeSpec | null
 }
 
 export interface MaterialSpec {
@@ -564,7 +602,15 @@ export type ProngStyle =
 /** The structure between the top of the band and the stone. The generated
  * component is named `basket_support` for EVERY architecture — the name is a
  * structural role, and the architecture is reported separately. */
-export type HeadArchitecture = 'BASKET' | 'PEG_HEAD' | 'MARTINI' | 'TULIP'
+export type HeadArchitecture =
+  | 'BASKET'
+  | 'PEG_HEAD'
+  | 'MARTINI'
+  | 'TULIP'
+  /** Sprint 27. The basket wall with evenly spaced windows pierced through it.
+   * Deliberately NOT called azure: azure work is arbitrary decorative
+   * piercing, and this is the parametric subset of it. */
+  | 'OPEN_GALLERY'
 
 /** Whether metal is relieved where the stone sits.
  *
@@ -572,6 +618,118 @@ export type HeadArchitecture = 'BASKET' | 'PEG_HEAD' | 'MARTINI' | 'TULIP'
  * the stone is never part of the production body. It is reference relief, not
  * a setter's seat with a bearing shoulder. */
 export type SeatMode = 'NONE' | 'REFERENCE_SEAT'
+
+/**
+ * Extended Setting Modes v1 (Sprint 27). Mirrors
+ * `backend/jewelmind/setting/modes.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a mode
+ * the backend has no builder for. Every reserved mode — `HEAD_TRELLIS`,
+ * `HEAD_AZURE`, `RETENTION_CHANNEL`, `TENSION_COMPRESSION_MODELLED` and the
+ * rest — is deliberately absent for exactly that reason. See
+ * `RESERVED_SETTING_MODES` for each one's real technical reason.
+ */
+
+/** Every setting mode with a real builder behind it. */
+export type SettingModeId =
+  // PRIMARY — how the design's own stone is held.
+  | 'PRONG_ROUND'
+  | 'PRONG_TAPERED'
+  | 'PRONG_CLAW'
+  | 'PRONG_V'
+  | 'PRONG_SHARED'
+  | 'BEZEL_FULL'
+  | 'BEZEL_PARTIAL'
+  | 'CHANNEL_LINEAR'
+  | 'BAR_TRANSVERSE'
+  | 'FLUSH_GYPSY'
+  | 'TENSION_OPPOSED'
+  // HEAD — what the setting rises from.
+  | 'HEAD_BASKET'
+  | 'HEAD_PEG'
+  | 'HEAD_MARTINI'
+  | 'HEAD_TULIP'
+  | 'HEAD_OPEN_GALLERY'
+  // RETENTION — how a field of small stones is held.
+  | 'RETENTION_BEAD'
+  | 'RETENTION_SHARED_BEAD'
+  | 'RETENTION_MICRO_PRONG'
+  | 'RETENTION_SHARED_PRONG'
+
+/** How a channel or bar run ends. Neither is a professional statement about
+ * how a setter finishes an edge; both are deterministic construction rules. */
+export type SettingTerminationMode = 'OPEN' | 'CLOSED_ENDS'
+
+/** Whether a run is centred on the stone or starts at it. A real geometric
+ * difference, read by the CHANNEL and BAR modes. */
+export type SettingModeSymmetry = 'SYMMETRIC' | 'ASYMMETRIC'
+
+/** Which structure a mode attaches to. `HEAD` is the attachment plane the
+ * category integration supplies — the only host the current families use. */
+export type SettingModeHost = 'HEAD'
+
+/**
+ * Construction parameters for a setting mode.
+ *
+ * ONE FLAT MODEL rather than a discriminated union, mirroring the backend: a
+ * discriminated union cannot be reached by a dotted-path patch, which is the
+ * defect Sprint 26 hit when Designer could not create a pavé. A field a mode
+ * does not read is reported as an INFORMATION result by `JM-SETTING-009`
+ * rather than silently ignored.
+ *
+ * EVERY DEFAULT IS A CONSTRUCTION PARAMETER, never a professional
+ * recommendation, a minimum, or a manufacturing tolerance.
+ */
+export interface SettingModeParameters {
+  /** BEZEL_PARTIAL. */
+  openingCount: number
+  openingSweepDeg: number
+  openingStartAngleDeg: number
+  /** FLUSH_GYPSY. `rimHeightMm` must stay below the stone's crown height — a
+   * geometric precondition, not a setting depth. */
+  collarWidthMm: number
+  rimHeightMm: number
+  /** TENSION_OPPOSED. `padDepthMm` is a geometric robustness overlap, never a
+   * grip depth: no structural behaviour is modelled. */
+  gripAxisDeg: number
+  padWidthMm: number
+  padThicknessMm: number
+  padDepthMm: number
+  gripHeightMm: number
+  /** CHANNEL_LINEAR and BAR_TRANSVERSE. A `null` extent means "the stone's own
+   * measured extent", resolved by the backend generator. */
+  axisDeg: number
+  spanMm: number | null
+  innerWidthMm: number | null
+  wallThicknessMm: number
+  wallHeightMm: number
+  barCount: number
+  barSpacingMm: number | null
+  barHeightMm: number
+  barLengthMm: number | null
+  termination: SettingTerminationMode
+  /** Shared. */
+  symmetry: SettingModeSymmetry
+  offsetXMm: number
+  offsetYMm: number
+  offsetZMm: number
+}
+
+/** A setting mode as a document declares it. */
+export interface SettingModeSpec {
+  modeId: SettingModeId
+  /** `false` keeps the parameters in the document and falls back to the
+   * family's default variant — a different state from declaring no mode. */
+  enabled: boolean
+  stoneRef: string
+  /** Which arrangement instances this mode holds, when it holds more than the
+   * design's own stone. Opaque ids: the arrangement stays the authority on
+   * where those instances are. */
+  arrangementInstanceIds: string[]
+  host: SettingModeHost
+  parameters: SettingModeParameters
+  label: string | null
+}
 
 /**
  * Multi-Stone Families v1 (Sprint 24). Mirrors
@@ -761,8 +919,19 @@ export type PaveHost = 'BAND_OUTER' | 'HEAD_PLANE'
 export type PavePattern = 'GRID' | 'STAGGERED' | 'ROW_OFFSET' | 'RADIAL' | 'EXPLICIT'
 
 /** Retention strategies with a real builder. `NONE` is an explicit choice
- * (a stone field with no metal), not a missing capability. */
-export type PaveRetentionStrategy = 'NONE' | 'BEAD' | 'SHARED_BEAD' | 'MICRO_PRONG'
+ * (a stone field with no metal), not a missing capability.
+ *
+ * Sprint 27 added `SHARED_PRONG`: a micro prong at each SHARED lattice corner,
+ * serving every stone that touches it. Sharing is a property of the anchor set
+ * rather than of the solid, which is why it reaches the same builder
+ * `MICRO_PRONG` does — exactly as `BEAD` and `SHARED_BEAD` already do. `CHANNEL`
+ * remains absent: a rail runs the whole row, and these anchors are corners. */
+export type PaveRetentionStrategy =
+  | 'NONE'
+  | 'BEAD'
+  | 'SHARED_BEAD'
+  | 'MICRO_PRONG'
+  | 'SHARED_PRONG'
 
 export type PaveContainmentPolicy = 'CLIP' | 'REJECT'
 export type PaveTermination = 'FULL_STONES' | 'CENTERED'
@@ -896,7 +1065,14 @@ const METAL_TYPES: readonly MetalType[] = [
   'silver',
 ]
 const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
-const SETTING_TYPES: readonly SettingType[] = ['prong', 'bezel']
+const SETTING_TYPES: readonly SettingType[] = [
+  'prong',
+  'bezel',
+  'channel',
+  'bar',
+  'flush',
+  'tension',
+]
 const STONE_SHAPES: readonly StoneShape[] = [
   'round',
   'oval',
@@ -1080,6 +1256,14 @@ export function createDefaultDefinition(): JewelryDefinition {
       pegHeight: null,
       bezelWallThickness: 0.6,
       bezelWallHeight: 2.5,
+      // Sprint 27 defaults. The gallery window values are read only by
+      // OPEN_GALLERY, and `mode: null` resolves to the variant `type` and
+      // `prongStyle` already meant - so this default definition's geometry is
+      // exactly what it was.
+      galleryWindowCount: 4,
+      galleryWindowSweep: 45,
+      galleryWindowHeightFraction: 0.6,
+      mode: null,
     },
     material: { metal: 'yellow_gold_18k' },
     manufacturing: { method: 'lost_wax_casting' },

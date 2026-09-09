@@ -1,6 +1,6 @@
 {
   "registryVersion": "1.3.0",
-  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) \u2014 inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26; extended with the 8 SETTING_*/BEZEL_* facts during Sprint 19 (inspector.py::_setting_facts), 2026-08-27",
+  "generatedFrom": "backend/jewelmind/geometry/inspection/ (models.py FactType, inspector.py fact construction) — inspected directly during Sprint 14, 2026-08-26; extended with the 6 STONE_* dimension facts during Sprint 18 (inspector.py::_stone_dimension_facts), 2026-08-26; extended with the 8 SETTING_*/BEZEL_* facts during Sprint 19 (inspector.py::_setting_facts), 2026-08-27",
   "facts": [
     {
       "factType": "SHAPE_EXISTS",
@@ -471,12 +471,202 @@
       "implementationStatus": "implemented",
       "sourceInspection": "geometry.roles.GEOMETRY_ROLE",
       "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_MODE_ID",
+      "meaning": "The stable id of the PRIMARY setting mode this setting was built as. Reported for every family, including the two that predate Sprint 27, so a component is never anonymous about what asked for it.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_MODE_FINGERPRINT",
+      "meaning": "Deterministic identity of the resolved setting mode: its id, axis, family, references and parameters. Not a replacement for definitionHash or geometryHash — it identifies one mode, so a report can name it without re-deriving it.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_MODE_AXIS",
+      "meaning": "Which pipeline axis a mode belongs to: PRIMARY (how the design's own stone is held), HEAD (what the setting rises from) or RETENTION (how a field of small stones is held). A primary and a head mode are both present at once; they are not alternatives.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_HEAD_ARCHITECTURE",
+      "meaning": "Which head architecture built the `basket_support` component. The component name is a structural role and never changes, so the architecture is reported rather than encoded in the name.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_SEAT_MODE",
+      "meaning": "Whether metal was relieved where the stone sits, and how. REFERENCE_SEAT is a CUT of the stone out of the metal, never a fuse.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_BEZEL_VARIANT",
+      "meaning": "FULL or PARTIAL. Reported beside BEZEL_WALL_CONTINUOUS, which correctly reports false for a partial bezel: n openings leave n arcs.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_REQUESTED_OPENING_COUNT",
+      "meaning": "How many openings a partial bezel was asked for.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_GENERATED_OPENING_COUNT",
+      "meaning": "How many openings were actually cut. Reported separately from the requested count because a count that could not be honoured must be visible rather than quietly smaller.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_REQUESTED_BAR_COUNT",
+      "meaning": "How many bars a bar setting was asked for.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_GENERATED_BAR_COUNT",
+      "meaning": "How many bars were actually built.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_REQUESTED_WINDOW_COUNT",
+      "meaning": "How many windows an open gallery was asked to pierce.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_GENERATED_WINDOW_COUNT",
+      "meaning": "How many windows were actually pierced. Equal to the requested count by construction — the builder raises rather than returning fewer — and reported anyway so a future divergence would appear in the facts rather than only in an exception nobody recorded.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_CHANNEL_WALL_COUNT",
+      "meaning": "How many walls a channel setting built. Two, always: a channel is a pair of walls, and the count is recorded rather than assumed.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_CHANNEL_TERMINATION",
+      "meaning": "OPEN or CLOSED_ENDS. A deterministic construction rule, never a statement about how a setter finishes an edge.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_TENSION_SUPPORT_COUNT",
+      "meaning": "How many opposing supports a tension setting built. Two, and not a parameter: 'tension' names a pair of supports in opposition.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_STRUCTURAL_BEHAVIOUR_MODELLED",
+      "meaning": "Whether the structural behaviour of the setting was computed. FALSE for a tension setting, and reported as a FACT rather than left in prose so a consumer can read it from the inspection report: no force, no spring-back and no retention claim is modelled anywhere in JewelMind.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "GeneratedComponent.metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_PROFESSIONAL_REVIEW_REQUIREMENT",
+      "meaning": "Whether a qualified jewelry professional must review before this geometry can be read as a functional claim. NOT a validation verdict and never becomes one: it says someone must look, not that anyone has.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_COMPONENT_SOLID_COUNT",
+      "meaning": "How many solids one setting component contains. A field of bars or a pair of channel walls is legitimately several until it is fused into the host, and recording the count makes that a reported fact rather than a surprise.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "Shape.Solids()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SETTING_COMPONENT_PROVENANCE_COUNT",
+      "meaning": "How many generated components carry a provenance record naming the mode, the stone and the placements they came from. An anonymous component is the failure this prevents.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "SettingGeometryResult",
+      "forgeConsumptionStatus": "not_consumed"
     }
   ],
   "notes": [
-    "No fact type in this registry encodes a professional or manufacturing threshold \u2014 every 'meaning' describes a geometric measurement or a structural presence/absence check only.",
-    "forgeConsumptionStatus is 'not_consumed' for every fact as of Sprint 14: Forge's real rule engine (backend/jewelmind/validation/engine.py) does not yet read GeometricFact objects \u2014 see docs/bible/16-geometry-inspection/487-forge-fact-contract.md for the kernel-neutral contract this registry establishes for a future integration, and 494-current-runtime-inspection-gap-analysis.md for why the wiring itself was not done this Sprint (a deliberate, documented scope boundary, not an oversight).",
-    "The 6 STONE_REQUESTED_*/STONE_MEASURED_* facts (Sprint 18) deliberately pair a CONSTRUCTION_PARAMETER with an independently MEASURED_GEOMETRY counterpart so an accidental scaling or shape regression is observable as a divergence between them \u2014 compared with a software geometry tolerance, never a professional or manufacturing tolerance. See docs/bible/20-stone/574-stone-inspection-contract.md.",
+    "No fact type in this registry encodes a professional or manufacturing threshold — every 'meaning' describes a geometric measurement or a structural presence/absence check only.",
+    "forgeConsumptionStatus is 'not_consumed' for every fact as of Sprint 14: Forge's real rule engine (backend/jewelmind/validation/engine.py) does not yet read GeometricFact objects — see docs/bible/16-geometry-inspection/487-forge-fact-contract.md for the kernel-neutral contract this registry establishes for a future integration, and 494-current-runtime-inspection-gap-analysis.md for why the wiring itself was not done this Sprint (a deliberate, documented scope boundary, not an oversight).",
+    "The 6 STONE_REQUESTED_*/STONE_MEASURED_* facts (Sprint 18) deliberately pair a CONSTRUCTION_PARAMETER with an independently MEASURED_GEOMETRY counterpart so an accidental scaling or shape regression is observable as a divergence between them — compared with a software geometry tolerance, never a professional or manufacturing tolerance. See docs/bible/20-stone/574-stone-inspection-contract.md.",
     "STONE_MEASURED_LENGTH/WIDTH derive from an axis-aligned bounding box, so they isolate LENGTH from WIDTH exactly only at stone.orientation == 0. This is a real, documented limitation of the current measurement, not an assumed exactness for every orientation.",
     "The 8 SETTING_*/BEZEL_* facts (Sprint 19) report what the Setting System built and which recorded compatibility status applies. SETTING_COMPATIBILITY_STATUS and BEZEL_WALL_CONTINUOUS are deliberately NOT quality judgements: the first echoes the capability registry, the second is pure topology. Professional interpretation belongs to Forge/Professional Validation (SETTING-GOV-016). Prong-only facts are emitted only for the prong family and bezel-only facts only for bezel, so a fact's presence is itself honest about what was generated."
   ]

@@ -112,10 +112,18 @@ the cache eviction policy).
 
 ### `GET /api/models/{modelId}/preview/{componentName}`
 
-`componentName` is one of `band`, `stone_reference`, `prongs`,
-`basket_support`. Returns the component's binary STL mesh
-(`Content-Type: model/stl`). `404 MODEL_NOT_FOUND` if the component has no
-geometry (e.g. an edge case with zero generated prongs).
+`componentName` is whichever component the model actually produced, which
+depends on the setting family and the design: always `band`,
+`stone_reference` and `basket_support`, plus the family's own setting
+component — `prongs`, `bezel`, `channel_walls`, `bars`, `flush_collar` or
+`tension_supports` — plus `pave_retention` and one
+`stone_reference.<instanceId>` per additional stone when the design declares a
+family, halo or pave. Never enumerate the list client-side: the generate
+response's `previewComponents` names exactly what exists, each with its own
+`geometryRole` and `productionRole`.
+
+Returns the component's binary STL mesh (`Content-Type: model/stl`).
+`404 MODEL_NOT_FOUND` if the component has no geometry.
 
 ### `POST /api/models/export/step`
 

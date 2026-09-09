@@ -2730,6 +2730,295 @@
       ],
       "title": "PaveDefinition",
       "type": "object"
+    },
+    "settingDefs": {
+      "SettingModeParameters": {
+        "additionalProperties": false,
+        "description": "Construction parameters for a setting mode.\n\nONE FLAT MODEL, NOT A DISCRIMINATED UNION, and that is a deliberate repeat\nof the judgment `SettingSpec` already documents: a discriminated union at\nthe JDL layer cannot be reached by a dotted-path patch, which is exactly the\ndefect Sprint 26 hit when Designer could not create a pavé. A flat model\nwith per-mode fields keeps every route — a UI control, a natural-language\nrequest, a hand-written document — able to set one value.\n\nTHE COST IS PAID EXPLICITLY. A field a mode does not read is reported as an\nINFORMATION result by `JM-SETTING-009` rather than silently ignored, the\nsame mechanism `JM-SETTING-006` already uses for `prongStyle` on a bezel. An\nunread field is a fact the author deserves to be told, not a bug to hide.\n\nEVERY DEFAULT IS A CONSTRUCTION PARAMETER. None of them is a professional\nrecommendation, a minimum, or a manufacturing tolerance; each was chosen to\nproduce robust geometry inside the schema's own range\n(SETTING-GOV-010).",
+        "properties": {
+          "openingCount": {
+            "default": 2,
+            "maximum": 24,
+            "minimum": 1,
+            "title": "Openingcount",
+            "type": "integer"
+          },
+          "openingSweepDeg": {
+            "default": 40.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 180.0,
+            "title": "Openingsweepdeg",
+            "type": "number"
+          },
+          "openingStartAngleDeg": {
+            "default": 90.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Openingstartangledeg",
+            "type": "number"
+          },
+          "collarWidthMm": {
+            "default": 1.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 20.0,
+            "title": "Collarwidthmm",
+            "type": "number"
+          },
+          "rimHeightMm": {
+            "default": 0.4,
+            "exclusiveMinimum": 0.0,
+            "maximum": 20.0,
+            "title": "Rimheightmm",
+            "type": "number"
+          },
+          "gripAxisDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Gripaxisdeg",
+            "type": "number"
+          },
+          "padWidthMm": {
+            "default": 2.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 50.0,
+            "title": "Padwidthmm",
+            "type": "number"
+          },
+          "padThicknessMm": {
+            "default": 1.6,
+            "exclusiveMinimum": 0.0,
+            "maximum": 50.0,
+            "title": "Padthicknessmm",
+            "type": "number"
+          },
+          "padDepthMm": {
+            "default": 0.6,
+            "exclusiveMinimum": 0.0,
+            "maximum": 10.0,
+            "title": "Paddepthmm",
+            "type": "number"
+          },
+          "gripHeightMm": {
+            "default": 1.2,
+            "exclusiveMinimum": 0.0,
+            "maximum": 50.0,
+            "title": "Gripheightmm",
+            "type": "number"
+          },
+          "axisDeg": {
+            "default": 0.0,
+            "maximum": 360.0,
+            "minimum": -360.0,
+            "title": "Axisdeg",
+            "type": "number"
+          },
+          "spanMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 200.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Spanmm"
+          },
+          "innerWidthMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 100.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Innerwidthmm"
+          },
+          "wallThicknessMm": {
+            "default": 0.7,
+            "exclusiveMinimum": 0.0,
+            "maximum": 20.0,
+            "title": "Wallthicknessmm",
+            "type": "number"
+          },
+          "wallHeightMm": {
+            "default": 0.8,
+            "exclusiveMinimum": 0.0,
+            "maximum": 50.0,
+            "title": "Wallheightmm",
+            "type": "number"
+          },
+          "barCount": {
+            "default": 2,
+            "maximum": 40,
+            "minimum": 1,
+            "title": "Barcount",
+            "type": "integer"
+          },
+          "barSpacingMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 100.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Barspacingmm"
+          },
+          "barHeightMm": {
+            "default": 0.8,
+            "exclusiveMinimum": 0.0,
+            "maximum": 50.0,
+            "title": "Barheightmm",
+            "type": "number"
+          },
+          "barLengthMm": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "maximum": 100.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Barlengthmm"
+          },
+          "termination": {
+            "default": "OPEN",
+            "enum": [
+              "OPEN",
+              "CLOSED_ENDS"
+            ],
+            "title": "Termination",
+            "type": "string"
+          },
+          "symmetry": {
+            "default": "SYMMETRIC",
+            "enum": [
+              "SYMMETRIC",
+              "ASYMMETRIC"
+            ],
+            "title": "Symmetry",
+            "type": "string"
+          },
+          "offsetXMm": {
+            "default": 0.0,
+            "maximum": 50.0,
+            "minimum": -50.0,
+            "title": "Offsetxmm",
+            "type": "number"
+          },
+          "offsetYMm": {
+            "default": 0.0,
+            "maximum": 50.0,
+            "minimum": -50.0,
+            "title": "Offsetymm",
+            "type": "number"
+          },
+          "offsetZMm": {
+            "default": 0.0,
+            "maximum": 50.0,
+            "minimum": -50.0,
+            "title": "Offsetzmm",
+            "type": "number"
+          }
+        },
+        "title": "SettingModeParameters",
+        "type": "object"
+      },
+      "SettingModeSpec": {
+        "additionalProperties": false,
+        "description": "A setting mode as a document declares it (Sprint 27).\n\nTHE FIRST-CLASS DECLARATION, carried directly in JDL as\n`setting.mode`. Absent by default: a document that declares no mode gets\nthe mode `resolve_primary_mode()` derives from its existing\n`type`/`prongStyle` fields, which is what keeps every pre-Sprint-27\ndocument generating exactly the geometry it did.\n\nIT REFINES `setting.type`, IT DOES NOT COMPETE WITH IT. `type` names the\nfamily and selects the generator; a mode names the variant within that\nfamily and carries its parameters. A mode whose family disagrees with\n`type` is refused by `JM-SETTING-008` rather than resolved by precedence —\ntwo authorities over one setting have no determinate resolution, the same\nreason `JM-FAMILY-001` refuses a family and an arrangement together.",
+        "properties": {
+          "modeId": {
+            "enum": [
+              "PRONG_ROUND",
+              "PRONG_TAPERED",
+              "PRONG_CLAW",
+              "PRONG_V",
+              "PRONG_SHARED",
+              "BEZEL_FULL",
+              "BEZEL_PARTIAL",
+              "CHANNEL_LINEAR",
+              "BAR_TRANSVERSE",
+              "FLUSH_GYPSY",
+              "TENSION_OPPOSED",
+              "HEAD_BASKET",
+              "HEAD_PEG",
+              "HEAD_MARTINI",
+              "HEAD_TULIP",
+              "HEAD_OPEN_GALLERY",
+              "RETENTION_BEAD",
+              "RETENTION_SHARED_BEAD",
+              "RETENTION_MICRO_PRONG",
+              "RETENTION_SHARED_PRONG"
+            ],
+            "title": "Modeid",
+            "type": "string"
+          },
+          "enabled": {
+            "default": true,
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "stoneRef": {
+            "default": "primary",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Stoneref",
+            "type": "string"
+          },
+          "arrangementInstanceIds": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 120,
+            "title": "Arrangementinstanceids",
+            "type": "array"
+          },
+          "host": {
+            "const": "HEAD",
+            "default": "HEAD",
+            "title": "Host",
+            "type": "string"
+          },
+          "parameters": {
+            "$ref": "#/$defs/settingDefs/SettingModeParameters"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          }
+        },
+        "required": [
+          "modeId"
+        ],
+        "title": "SettingModeSpec",
+        "type": "object"
+      }
     }
   },
   "properties": {
@@ -2963,41 +3252,40 @@
       }
     },
     "setting": {
-      "type": "object",
       "additionalProperties": false,
+      "description": " Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts. Sprint 23 note: prongStyle, headArchitecture, seatMode, prongTipRatio, headBaseRatio, pegDiameter and pegHeight are additive optional fields, each defaulting to the pre-Sprint-23 behaviour (ROUND_PRONG / BASKET / NONE), so every existing document generates byte-identical geometry and schemaVersion stays 0.1.0. Sprint 27 note: this subtree is now REGENERATED from `SettingSpec.model_json_schema()` rather than hand-maintained, which corrected a real pre-existing defect — `type` was declared as `{\"const\": \"prong\"}` and therefore structurally rejected every bezel document the backend has accepted since Sprint 19. The Sprint 27 additions are `channel`/`bar`/`flush`/`tension` on the `type` enum, `OPEN_GALLERY` on `headArchitecture`, the three `galleryWindow*` fields read only by an open gallery, and the optional `mode` block carrying the extended setting mode. Every one is additive and defaults to the pre-Sprint-27 behaviour, so schemaVersion stays 0.1.0.",
       "properties": {
         "type": {
-          "const": "prong",
-          "default": "prong"
+          "default": "prong",
+          "enum": [
+            "prong",
+            "bezel",
+            "channel",
+            "bar",
+            "flush",
+            "tension"
+          ],
+          "title": "Type",
+          "type": "string"
         },
         "prongCount": {
-          "type": "integer",
           "default": 6,
-          "description": "Deliberately NOT constrained to {4, 6} at this layer. The current backend intentionally keeps prong-count set membership as semantic rule JM-PRONG-001 so an out-of-set value produces a structured diagnostic rather than a raw schema-parse error (see backend/jewelmind/domain/schema.py comment on SettingSpec.prongCount)."
+          "title": "Prongcount",
+          "type": "integer"
         },
         "prongDiameter": {
-          "type": "number",
           "default": 1.1,
-          "description": "Millimeters. Minimum 0.8mm is semantic rule JM-PRONG-002, not enforced here."
-        },
-        "prongHeight": {
-          "type": "number",
-          "default": 4.8,
-          "description": "Millimeters. Must exceed basketHeight per semantic rule JM-PRONG-004, not enforced here."
-        },
-        "basketHeight": {
-          "type": "number",
-          "default": 3.5,
-          "description": "Millimeters. Positivity and 8mm warning ceiling are semantic rules JM-SETTING-001/JM-SETTING-002, not enforced here."
-        },
-        "bezelWallThickness": {
-          "default": 0.6,
-          "title": "Bezelwallthickness",
+          "title": "Prongdiameter",
           "type": "number"
         },
-        "bezelWallHeight": {
-          "default": 2.5,
-          "title": "Bezelwallheight",
+        "prongHeight": {
+          "default": 4.8,
+          "title": "Prongheight",
+          "type": "number"
+        },
+        "basketHeight": {
+          "default": 3.5,
+          "title": "Basketheight",
           "type": "number"
         },
         "prongStyle": {
@@ -3017,7 +3305,8 @@
             "BASKET",
             "PEG_HEAD",
             "MARTINI",
-            "TULIP"
+            "TULIP",
+            "OPEN_GALLERY"
           ],
           "title": "Headarchitecture",
           "type": "string"
@@ -3068,9 +3357,51 @@
           ],
           "default": null,
           "title": "Pegheight"
+        },
+        "bezelWallThickness": {
+          "default": 0.6,
+          "title": "Bezelwallthickness",
+          "type": "number"
+        },
+        "bezelWallHeight": {
+          "default": 2.5,
+          "title": "Bezelwallheight",
+          "type": "number"
+        },
+        "galleryWindowCount": {
+          "default": 4,
+          "maximum": 24,
+          "minimum": 1,
+          "title": "Gallerywindowcount",
+          "type": "integer"
+        },
+        "galleryWindowSweep": {
+          "default": 45.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 180.0,
+          "title": "Gallerywindowsweep",
+          "type": "number"
+        },
+        "galleryWindowHeightFraction": {
+          "default": 0.6,
+          "exclusiveMaximum": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Gallerywindowheightfraction",
+          "type": "number"
+        },
+        "mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/settingDefs/SettingModeSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
-      "description": " Sprint 22 note: the properties added by Sprints 19-21 (bezel wall dimensions; stone source/profile/narrowWidth/customOutline/measurement/importedAsset; gem identity) were missing from this schema and are now present, generated from the live Pydantic models. Until then this schema structurally rejected documents the backend accepts. Sprint 23 note: prongStyle, headArchitecture, seatMode, prongTipRatio, headBaseRatio, pegDiameter and pegHeight are additive optional fields, each defaulting to the pre-Sprint-23 behaviour (ROUND_PRONG / BASKET / NONE), so every existing document generates byte-identical geometry and schemaVersion stays 0.1.0."
+      "type": "object"
     },
     "material": {
       "type": "object",

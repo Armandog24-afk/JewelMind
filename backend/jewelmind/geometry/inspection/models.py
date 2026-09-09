@@ -67,6 +67,34 @@ FactType = Literal[
     "SETTING_COMPONENT_COUNT",
     "BEZEL_OUTLINE_SOURCE",
     "BEZEL_WALL_CONTINUOUS",
+    # --- Sprint 27 (Extended Setting Modes), brief section 21 --------------
+    # Every fact below reports WHAT WAS BUILT for a setting mode: which mode,
+    # its identity, a requested-versus-generated count, a solid count, whether a
+    # structural behaviour was modelled. None of them is a judgement, and
+    # turning any of them into one remains Forge's job (INSPECT-GOV-001).
+    #
+    # The requested/generated pairs matter specifically because a count that
+    # could not be honoured must be VISIBLE rather than quietly smaller
+    # (ATLAS-GOV-006) — the same reason the prong family already reports both.
+    "SETTING_MODE_ID",
+    "SETTING_MODE_FINGERPRINT",
+    "SETTING_MODE_AXIS",
+    "SETTING_HEAD_ARCHITECTURE",
+    "SETTING_SEAT_MODE",
+    "SETTING_BEZEL_VARIANT",
+    "SETTING_REQUESTED_OPENING_COUNT",
+    "SETTING_GENERATED_OPENING_COUNT",
+    "SETTING_REQUESTED_BAR_COUNT",
+    "SETTING_GENERATED_BAR_COUNT",
+    "SETTING_REQUESTED_WINDOW_COUNT",
+    "SETTING_GENERATED_WINDOW_COUNT",
+    "SETTING_CHANNEL_WALL_COUNT",
+    "SETTING_CHANNEL_TERMINATION",
+    "SETTING_TENSION_SUPPORT_COUNT",
+    "SETTING_STRUCTURAL_BEHAVIOUR_MODELLED",
+    "SETTING_PROFESSIONAL_REVIEW_REQUIREMENT",
+    "SETTING_COMPONENT_SOLID_COUNT",
+    "SETTING_COMPONENT_PROVENANCE_COUNT",
 ]
 
 InspectionStatus = Literal["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"]

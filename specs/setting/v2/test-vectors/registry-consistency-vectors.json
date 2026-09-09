@@ -16,12 +16,14 @@
   "headArchitecturesWithBuilders": [
     "BASKET",
     "MARTINI",
+    "OPEN_GALLERY",
     "PEG_HEAD",
     "TULIP"
   ],
   "headArchitecturesInRegistry": [
     "BASKET",
     "MARTINI",
+    "OPEN_GALLERY",
     "PEG_HEAD",
     "TULIP"
   ],
@@ -32,16 +34,16 @@
     "trellis"
   ],
   "reservedSettingFamilies": [
-    "bar",
     "bead",
-    "channel",
     "custom",
-    "flush",
-    "pave",
-    "tension"
+    "pave"
   ],
   "settingFamilies": [
+    "bar",
     "bezel",
-    "prong"
+    "channel",
+    "flush",
+    "prong",
+    "tension"
   ]
 }

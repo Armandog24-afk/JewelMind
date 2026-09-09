@@ -7,7 +7,11 @@
  * backend response.
  */
 
-import type { JewelryDefinition, PaveDefinition } from '../types/jewelry-definition'
+import type {
+  JewelryDefinition,
+  PaveDefinition,
+  SettingType,
+} from '../types/jewelry-definition'
 import { RULE_IDS, type ValidationResult } from './rules'
 import { euSizeToInnerDiameter, sizingConsistency } from './sizing'
 
@@ -933,6 +937,106 @@ function paveRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/**
+ * Which `setting.type` selects each setting-mode family (Sprint 27).
+ *
+ * A MIRROR of the backend's `PRIMARY_FAMILY_SETTING_TYPE`, kept as a mode-id
+ * prefix table rather than a full copy of the mode registry: the family is
+ * recoverable from the id, so this needs no per-mode row and cannot drift from
+ * one. The backend remains authoritative (FORGE-GOV-004).
+ */
+const MODE_ID_SETTING_TYPE: Readonly<Record<string, SettingType>> = {
+  PRONG: 'prong',
+  BEZEL: 'bezel',
+  CHANNEL: 'channel',
+  BAR: 'bar',
+  FLUSH: 'flush',
+  TENSION: 'tension',
+}
+
+/**
+ * Extended Setting Modes validation (Sprint 27) — the mirrored SUBSET.
+ *
+ * Three checks, each answerable from the document alone. See
+ * `shared/validation/rules.ts` for exactly which backend rules are NOT mirrored
+ * here and why.
+ *
+ * NOTHING HERE IS A PROFESSIONAL JUDGMENT. There is no check on whether a
+ * channel wall is thick enough or a tension setting safe; JM-SETTING-012 says a
+ * professional must LOOK, which is the opposite of a verdict.
+ */
+function settingModeRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const setting = d.setting
+  const mode = setting.mode
+
+  if (mode !== null && mode !== undefined && mode.enabled) {
+    const family = mode.modeId.split('_')[0] ?? ''
+    const expected = MODE_ID_SETTING_TYPE[family]
+    if (expected === undefined) {
+      // A HEAD or RETENTION mode declared on the PRIMARY axis. The head
+      // architecture is chosen by setting.headArchitecture and field retention
+      // by the pavé's own strategy; declaring one here would be a second
+      // authority over an axis that already has one.
+      out.push({
+        ruleId: RULE_IDS.SETTING_MODE_FAMILY_MATCHES,
+        severity: 'error',
+        message:
+          `setting.mode '${mode.modeId}' is not a PRIMARY setting mode. The ` +
+          'head architecture is chosen by setting.headArchitecture and field ' +
+          "retention by the pavé's own retention strategy.",
+        parameter: 'setting.mode.modeId',
+      })
+    } else if (expected !== setting.type) {
+      out.push({
+        ruleId: RULE_IDS.SETTING_MODE_FAMILY_MATCHES,
+        severity: 'error',
+        message:
+          `setting.mode '${mode.modeId}' belongs to the ${family} family, ` +
+          `which is selected by setting.type '${expected}', but setting.type ` +
+          `is '${setting.type}'. Refused rather than resolved by precedence: ` +
+          'two authorities over one setting have no determinate resolution.',
+        parameter: 'setting.mode.modeId',
+      })
+    }
+  }
+
+  // A flush setting's recess IS half its geometry, so relief is a precondition
+  // rather than an option: without it the collar occupies the stone's whole
+  // volume.
+  if (setting.type === 'flush' && setting.seatMode === 'NONE') {
+    out.push({
+      ruleId: RULE_IDS.SETTING_MODE_REQUIREMENTS_MET,
+      severity: 'error',
+      message:
+        "A flush setting requires setting.seatMode = 'REFERENCE_SEAT'. " +
+        "Without the recess the collar occupies the stone's whole volume, and " +
+        'the result is a solid mass with the stone buried inside it rather ' +
+        'than a flush setting.',
+      parameter: 'setting.seatMode',
+      suggestedValue: 'REFERENCE_SEAT',
+    })
+  }
+
+  // The brief's PROFESSIONAL REVIEW category, carried as a warning because the
+  // three severities are a published contract.
+  if (setting.type === 'tension') {
+    out.push({
+      ruleId: RULE_IDS.SETTING_MODE_PROFESSIONAL_REVIEW,
+      severity: 'warning',
+      message:
+        'A tension setting requires review by a qualified jewelry ' +
+        'professional. JewelMind generates the two opposing supports as real ' +
+        'geometry and models none of the structural behaviour that makes a ' +
+        'tension setting hold a stone — no force, no spring-back, no ' +
+        'retention claim.',
+      parameter: 'setting.type',
+    })
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -947,6 +1051,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...bezelRules(definition),
     ...settingRules(definition),
     ...settingV2Rules(definition),
+    ...settingModeRules(definition),
     ...manufacturingRules(definition),
     ...geometryRules(definition),
   ]

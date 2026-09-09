@@ -1,0 +1,234 @@
+{
+  "generatedFrom": "backend/jewelmind/geometry/assemblies/solitaire.py, one default design per setting family",
+  "note": "Real generated geometry. Volumes are kernel-derived and are NOT bit-identical across OpenCascade builds — compare them relatively (rel=1e-9), which is what the Golden suite does. Software comparison tolerances only; never a manufacturing tolerance.",
+  "vectors": [
+    {
+      "settingType": "prong",
+      "settingModeId": "PRONG_ROUND",
+      "settingModeFingerprint": "f3f54db500dae707",
+      "generatedComponents": [
+        "prongs",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "prongs",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "prongs": 6,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "prongs": 29.650351464580467,
+        "basket_support": 83.15575842566426
+      },
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "prongs",
+          "settingModeId": "PRONG_ROUND",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    },
+    {
+      "settingType": "bezel",
+      "settingModeId": "BEZEL_FULL",
+      "settingModeFingerprint": "cfaa90a7b7a76a40",
+      "generatedComponents": [
+        "bezel",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "bezel",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "bezel": 1,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "bezel": 33.45796176073132,
+        "basket_support": 83.15575842566426
+      },
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "bezel",
+          "settingModeId": "BEZEL_FULL",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    },
+    {
+      "settingType": "channel",
+      "settingModeId": "CHANNEL_LINEAR",
+      "settingModeFingerprint": "34bed2f3ac69bae5",
+      "generatedComponents": [
+        "channel_walls",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "channel_walls",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "channel_walls": 2,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "channel_walls": 42.77000131600001,
+        "basket_support": 83.15575842566426
+      },
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "channel_walls",
+          "settingModeId": "CHANNEL_LINEAR",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    },
+    {
+      "settingType": "bar",
+      "settingModeId": "BAR_TRANSVERSE",
+      "settingModeFingerprint": "b11834e899541c85",
+      "generatedComponents": [
+        "bars",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "bars",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "bars": 2,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "bars": 42.77000131600001,
+        "basket_support": 83.15575842566426
+      },
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "bars",
+          "settingModeId": "BAR_TRANSVERSE",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    },
+    {
+      "settingType": "flush",
+      "settingModeId": "FLUSH_GYPSY",
+      "settingModeFingerprint": "237d986fa548e13b",
+      "generatedComponents": [
+        "flush_collar",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "flush_collar",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "flush_collar": 1,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "flush_collar": 202.52010189046976,
+        "basket_support": 79.37160268566105
+      },
+      "professionalReviewRequirement": "NOT_REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "flush_collar",
+          "settingModeId": "FLUSH_GYPSY",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    },
+    {
+      "settingType": "tension",
+      "settingModeId": "TENSION_OPPOSED",
+      "settingModeFingerprint": "d408189f70369a3c",
+      "generatedComponents": [
+        "tension_supports",
+        "basket_support"
+      ],
+      "productionComponents": [
+        "tension_supports",
+        "basket_support"
+      ],
+      "componentSolidCounts": {
+        "tension_supports": 2,
+        "basket_support": 1
+      },
+      "componentVolumesMm3": {
+        "tension_supports": 32.639999999999986,
+        "basket_support": 83.15575842566426
+      },
+      "professionalReviewRequirement": "REQUIRED",
+      "componentProvenance": [
+        {
+          "componentId": "tension_supports",
+          "settingModeId": "TENSION_OPPOSED",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        },
+        {
+          "componentId": "basket_support",
+          "settingModeId": "HEAD_BASKET",
+          "sourceStoneId": "stone_reference",
+          "sourceStoneInstanceIds": [],
+          "classification": "PRODUCTION"
+        }
+      ]
+    }
+  ]
+}

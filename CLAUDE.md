@@ -2044,5 +2044,122 @@ what does and does not execute. The machine-readable half lives in
   bearing shoulder, an outline-following field, per-cell stone specifications,
   or any professional pavé spacing, density or settability rule.
 
+## EXTENDED SETTING MODES RULES
+
+`docs/bible/29-extended-setting-modes/` is the authoritative Extended Setting
+Modes v1 specification — start at
+[`docs/bible/29-extended-setting-modes/README.md`](docs/bible/29-extended-setting-modes/README.md),
+then
+[`setting-mode-governance.md`](docs/bible/29-extended-setting-modes/setting-mode-governance.md)
+for the 14 ESM-GOV rules,
+[`execution-boundary.md`](docs/bible/29-extended-setting-modes/execution-boundary.md)
+for exactly what does and does not execute, and
+[`taxonomy-coverage-review.md`](docs/bible/29-extended-setting-modes/taxonomy-coverage-review.md)
+for why each deferred technique is deferred. The machine-readable half lives in
+[`specs/setting/v3/`](specs/setting/v3/README.md). Sprint 19's 18 SETTING-GOV
+rules and Sprint 23's 12 SETTINGV2-GOV rules still apply in full. Future coding
+agents must:
+
+- **Read `docs/bible/29-extended-setting-modes/README.md` before changing
+  setting modes** — before modifying anything in `backend/jewelmind/setting/`
+  (`modes.py`, `frame.py`, `result.py`, `channel.py`, `bar.py`, `flush.py`,
+  `tension.py`, `capability.py`), `geometry/setting_adapter.py`,
+  `domain/schema.py::SettingSpec`, or `validation/engine.py::_setting_mode_rules`.
+- **Extend the Setting System; never build a second setting engine.** Every
+  family is registered in `setting_generators()` and reached through
+  `generate_setting()`, which is also where the head and seat steps run. There
+  is one dispatch, and the assembly calls it exactly once (ESM-GOV-001).
+- **Keep the mode registry DERIVED, never declared.** `setting_modes()` measures
+  each row's `settingGeometry` from the live builder registries
+  (`setting_generators()`, `prong_solid_builders()`, `head_builders()`,
+  `retention_builders()`). A row may not declare that axis. Sprint 20 deleted
+  three hand-copied registries that had already drifted and had caused Designer
+  and Setting to misreport real capabilities — this measurement is what makes
+  that impossible rather than unlikely (ESM-GOV-002).
+- **Keep the three axes separate and simultaneous.** `PRIMARY` (chosen by
+  `setting.type` + `setting.mode`), `HEAD` (chosen by
+  `setting.headArchitecture`) and `RETENTION` (chosen by the pavé's own
+  `retention.strategy`) are not alternatives — a bezel on a martini with relief
+  is one setting with three choices. A HEAD or RETENTION mode declared as
+  `setting.mode` is REFUSED (ESM-GOV-003).
+- **Never add a field to `SettingModeParameters` that no mode reads.**
+  `MODE_PARAMETER_FIELDS` is the authority, `JM-SETTING-009` reports an unread
+  value rather than dropping it, and a test asserts every field is read by at
+  least one mode. This is why the open gallery's window parameters live on
+  `SettingSpec` beside the other head fields: `mode` declares the PRIMARY mode
+  (ARRANGE-GOV-011's discipline).
+- **`setting.mode` refines `setting.type`; a disagreement is REFUSED.** Never
+  resolve one by precedence — two authorities over one setting have no
+  determinate resolution, the same reason `JM-FAMILY-001` refuses a family and
+  an arrangement together. `resolve_primary_mode()` is the single resolution
+  point (ESM-GOV-004/005; `JM-SETTING-008`).
+- **Keep a document with no mode generating exactly what it did.**
+  `setting.mode = null` resolves to the variant `type`/`prongStyle` already
+  meant, and a default prong solitaire's metal volume must stay
+  `341.44334316909976 mm³` with zero changed Golden baselines (ESM-GOV-006).
+- **Carry stone instance references; never resolve them.** Nothing under
+  `jewelmind/setting/` may import `jewelmind.arrangement`. A channel states its
+  own extent and never computes a stone position — a setting that computed one
+  would be the second placement engine ARRANGE-GOV-006 forbids
+  (ESM-GOV-007, SETTINGV2-GOV-011).
+- **Keep every new module category-neutral, and `modes.py` kernel-free.**
+  `modes.py` is carried in JDL and read by Forge, so it must not import
+  CadQuery — the same split `geometry/pave_surface.py` documents. Enforced by
+  AST inspection in `test_extended_setting_modes.py::TestArchitecturalAudit`
+  (ESM-GOV-008).
+- **A recess is a CUT, and relief is never called a seat.** The flush collar's
+  recess and the tension supports' grooves are the existing `REFERENCE_SEAT`
+  relief, routed through `setting/seat.py` so they inherit its never-fuse
+  guarantee. `bearingSupport`/`cutterSupport` stay PLANNED for all six families
+  (ESM-GOV-009, LAW-006, SETTINGV2-GOV-008).
+- **Reject, never repair, and never clamp.** Openings that would remove the
+  whole bezel wall, a rim above the stone's crown, supports meeting through the
+  stone, a degenerate prism — each RAISES. Reducing a value to fit would build
+  something the author never described (ESM-GOV-011, SETTING-GOV-013).
+- **Never invent a professional threshold, and never claim one.** No minimum
+  wall, bar, collar, clearance, spacing or settability judgment exists anywhere
+  in this sprint, and `TestNoInventedThresholds` reads the source, the registry
+  descriptions and every Forge message to keep it that way. `JM-SETTING-011` is
+  the only numeric rule and it is a MATHEMATICAL CONSTRAINT; `JM-SETTING-012`
+  carries the PROFESSIONAL REVIEW category and **is not a verdict** — it says a
+  qualified human must look, never that one has (ESM-GOV-012).
+- **Never let a tension setting imply a structural claim.** JewelMind models no
+  force, no spring-back and no retention behaviour. The mode is PARTIAL, the
+  component carries `structuralBehaviourModelled: false`, and
+  `SETTING_STRUCTURAL_BEHAVIOUR_MODELLED` reports it as a geometric fact.
+  Inventing a stress threshold would be a fabricated professional claim about
+  whether jewelry holds a stone.
+- **Keep every generated component traceable.** Each carries a
+  `SettingComponentProvenance` naming the mode, the stone and the arrangement
+  instances it holds. A requested count that could not be honoured is reported
+  as requested-versus-generated, never quietly smaller (ESM-GOV-013,
+  ATLAS-GOV-006).
+- **Do NOT materialize `GeometryPlan` to hold provenance.** A fact about a
+  component lives where the component's other facts live; materializing
+  `GeometryPlan` is an explicit ADR condition in
+  `docs/bible/08-alchemist/160-alchemist-governance.md`.
+- **Generate every `specs/setting/v3/` artifact by running the real
+  implementation** — the registry, the schemas, the examples and the vectors are
+  mirrors of live code, re-derived by
+  `test_extended_setting_modes.py::TestSpecArtifacts` on every run.
+- **Add a NEW Golden case for a new mode — never retrofit an existing one.**
+  `ESM-001`–`ESM-007` cover the current scope, one per real capability. Every
+  accepted baseline needs an entry in
+  `docs/bible/appendices/golden-update-register.md` and honest
+  `knownLimitations` (ESM-GOV-014).
+- **Create an ADR** before letting a setting family compute a stone's position,
+  merging any of the four capability axes, replacing the derived
+  `settingGeometry` measurement with a declaration, resolving a
+  mode/type disagreement by precedence, materializing `GeometryPlan`, adding a
+  fourth mode axis, renaming a component (`channel_walls`, `bars`,
+  `flush_collar`, `tension_supports`), or letting the stone shape reach a
+  `.fuse()` call.
+- **Create an RFC** before adding any setting mode beyond the twenty implemented
+  — **including every reserved name** — or a real cut seat with a bearing
+  shoulder, cutter geometry, anchor-driven prong placement (the identified next
+  step for `PRONG_SHARED`), any professional threshold on a wall/bar/collar/grip,
+  or a structural model of a tension setting (which additionally needs real
+  engineering evidence and a professional-validation record).
+
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.

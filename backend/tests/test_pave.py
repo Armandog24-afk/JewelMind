@@ -1106,11 +1106,19 @@ class TestCapabilityRegistry:
         assert set(PAVE_HOST_CAPABILITIES) == set(_HOST_RESOLVERS)
 
     def test_retention_geometry_is_claimed_only_where_it_exists(self):
-        assert set(retention_strategies_with_geometry()) == {
-            "BEAD",
-            "SHARED_BEAD",
-            "MICRO_PRONG",
-        }
+        """Sprint 27 added `SHARED_PRONG`, and it earns the claim the same way
+        the other three do: a real entry in `retention_builders()`.
+
+        Asserted against the LIVE builder registry rather than against a
+        restated set, so a strategy claiming geometry without a builder — or a
+        builder with no capability entry — fails in both directions.
+        """
+
+        from jewelmind.setting.retention import retention_builders
+
+        claimed = set(retention_strategies_with_geometry())
+        assert claimed == {"BEAD", "SHARED_BEAD", "MICRO_PRONG", "SHARED_PRONG"}
+        assert claimed == set(retention_builders())
         assert PAVE_RETENTION_CAPABILITIES["NONE"].settingGeometry is False
 
     def test_this_is_the_first_sprint_to_claim_setting_geometry(self):
@@ -1152,8 +1160,13 @@ class TestCapabilityRegistry:
         assert get_pave_capability("no_such_capability") is None
 
     def test_the_versions_are_declared(self):
+        # The COMPILER version is unchanged by Sprint 27: `SHARED_PRONG` reaches
+        # the SHARED anchor topology the lattice already computed for
+        # `SHARED_BEAD`, so no arithmetic moved and every pre-Sprint-27 field
+        # compiles to exactly what it did. The REGISTRY version is 1.1.0,
+        # because the capability set genuinely grew.
         assert PAVE_COMPILER_VERSION == "1.0.0"
-        assert PAVE_REGISTRY_VERSION == "1.0.0"
+        assert PAVE_REGISTRY_VERSION == "1.1.0"
 
 
 # ------------------------------------------------------------- boundaries

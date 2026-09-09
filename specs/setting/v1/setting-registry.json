@@ -1,7 +1,7 @@
 {
   "settings": [
     {
-      "settingType": "prong",
+      "settingType": "bar",
       "status": "CURRENT",
       "generatable": true,
       "inspectable": true,
@@ -44,8 +44,8 @@
       "bearingSupport": "PLANNED",
       "cutterSupport": "PLANNED",
       "professionalValidationStatus": "NOT_REVIEWED",
-      "settingGeometryVersion": "1.1.0",
-      "description": "Cylindrical reference prongs. RADIAL placement for round (byte-identical to pre-Sprint-19); OUTLINE_CARDINAL placement for every other outline, including custom ones. Placement is not tip-, corner- or anchor-aware. No seat, bearing, or cutter geometry exists. Sprint 23: opt-in REFERENCE_SEAT relief cuts the stone volume out of the metal; that is relief, not a cut seat with a bearing shoulder."
+      "settingGeometryVersion": "1.2.0",
+      "description": "Transverse bars across a run, with the stones between adjacent bars. One component carrying every bar, each bar's own offset reported in its metadata. Bar spacing and length default to the stone's own measured extents, which places one bar on each side of a single stone. Retention only: the stones are the arrangement's, and no bar position is ever derived from a stone position or the reverse."
     },
     {
       "settingType": "bezel",
@@ -91,20 +91,246 @@
       "bearingSupport": "PLANNED",
       "cutterSupport": "PLANNED",
       "professionalValidationStatus": "NOT_REVIEWED",
-      "settingGeometryVersion": "1.1.0",
+      "settingGeometryVersion": "1.2.0",
       "description": "Parametric wall built by offsetting the stone's own girdle outline, so the pipeline is outline-agnostic rather than per-shape — which is why a custom outline needs no bezel code of its own. Wall thickness/height are preliminary software values, not professional recommendations. Sprint 23: opt-in REFERENCE_SEAT relief is available; no bearing or cutter geometry exists."
+    },
+    {
+      "settingType": "channel",
+      "status": "CURRENT",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round"
+      ],
+      "stoneShapesExperimental": [
+        "oval",
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon",
+        "custom"
+      ],
+      "stoneShapesUnsupported": [
+        "pearl",
+        "imported"
+      ],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE",
+        "CUSTOM_OUTLINE",
+        "MEASURED"
+      ],
+      "seatSupport": "PARTIAL",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.2.0",
+      "description": "Two parallel walls with the stones between them, running along a stated axis in the stone's own horizontal frame. Real prisms, with optional end caps. The run's length and clear width default to the stone's own measured extents, so a channel-set solitaire needs no parameters; a longer run is stated, because only the document knows how many stones the row carries. The stones themselves come from the Stone Arrangement Engine — this family builds the walls and records which instances they hold, never where those instances are. Wall thickness and height are construction parameters; no minimum is enforced because no sourced professional minimum exists."
+    },
+    {
+      "settingType": "flush",
+      "status": "CURRENT",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round",
+        "oval",
+        "custom"
+      ],
+      "stoneShapesExperimental": [
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon"
+      ],
+      "stoneShapesUnsupported": [
+        "pearl",
+        "imported"
+      ],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE",
+        "CUSTOM_OUTLINE",
+        "MEASURED"
+      ],
+      "seatSupport": "CURRENT",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.2.0",
+      "description": "A solid collar built by offsetting the stone's own girdle outline — the bezel's verified offset pipeline, reused rather than reimplemented — extruded from the attachment plane to a rim above the girdle, with the stone's own solid then cut out of it. The cut is the existing REFERENCE_SEAT relief, so the stone is a cutting tool and never becomes production metal. Relief is a PRECONDITION of this family rather than an option: without it the collar buries the stone, so the generator refuses and JM-SETTING-010 reports it. The rim height must stay below the stone's measured crown height, which is a geometric precondition and not a setting depth."
+    },
+    {
+      "settingType": "prong",
+      "status": "CURRENT",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round"
+      ],
+      "stoneShapesExperimental": [
+        "oval",
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon",
+        "custom"
+      ],
+      "stoneShapesUnsupported": [
+        "pearl",
+        "imported"
+      ],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE",
+        "CUSTOM_OUTLINE",
+        "MEASURED"
+      ],
+      "seatSupport": "PARTIAL",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.2.0",
+      "description": "Cylindrical reference prongs. RADIAL placement for round (byte-identical to pre-Sprint-19); OUTLINE_CARDINAL placement for every other outline, including custom ones. Placement is not tip-, corner- or anchor-aware. No seat, bearing, or cutter geometry exists. Sprint 23: opt-in REFERENCE_SEAT relief cuts the stone volume out of the metal; that is relief, not a cut seat with a bearing shoulder."
+    },
+    {
+      "settingType": "tension",
+      "status": "PARTIAL",
+      "generatable": true,
+      "inspectable": true,
+      "categoryNeutral": true,
+      "stoneShapesSupported": [
+        "round"
+      ],
+      "stoneShapesExperimental": [
+        "oval",
+        "pear",
+        "emerald",
+        "cushion",
+        "princess",
+        "marquise",
+        "heart",
+        "radiant",
+        "asscher",
+        "trillion",
+        "baguette",
+        "tapered_baguette",
+        "triangle",
+        "trapezoid",
+        "lozenge",
+        "hexagon",
+        "kite",
+        "shield",
+        "half_moon",
+        "custom"
+      ],
+      "stoneShapesUnsupported": [
+        "pearl",
+        "imported"
+      ],
+      "stoneSourceModesSupported": [
+        "PARAMETRIC_REFERENCE",
+        "CUSTOM_OUTLINE",
+        "MEASURED"
+      ],
+      "seatSupport": "PARTIAL",
+      "bearingSupport": "PLANNED",
+      "cutterSupport": "PLANNED",
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "settingGeometryVersion": "1.2.0",
+      "description": "Two opposing supports, one on each side of the stone along a stated grip axis, each reaching inward past the stone's edge so the seat relief leaves a real groove. Real solids. WHAT IS NOT MODELLED: the elastic response of the metal, the force the supports apply, whether the stone would be held, and whether the configuration survives load or wear. Those require material properties and a validated engineering model that do not exist here, so no threshold is invented and professional review is REQUIRED before this geometry means anything structural."
     }
   ],
   "reservedFamilies": [
-    "channel",
-    "flush",
-    "bar",
-    "tension",
     "bead",
     "pave",
     "custom"
   ],
   "compatibilityMatrix": [
+    {
+      "settingType": "bar",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
     {
       "settingType": "bezel",
       "stoneShape": "round",
@@ -148,6 +374,90 @@
       "professionalValidation": "NOT_REVIEWED"
     },
     {
+      "settingType": "channel",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "oval",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
       "settingType": "prong",
       "stoneShape": "round",
       "compatibility": "SUPPORTED_SOFTWARE",
@@ -185,6 +495,48 @@
     },
     {
       "settingType": "prong",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
       "stoneShape": "marquise",
       "compatibility": "EXPERIMENTAL",
       "professionalValidation": "NOT_REVIEWED"

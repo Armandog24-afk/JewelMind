@@ -1,0 +1,106 @@
+{
+  "additionalProperties": false,
+  "description": "Bar-family parameters (Sprint 27).\n\nA bar setting is a set of TRANSVERSE BARS across a run, with the stones\nbetween adjacent bars. The bars are the retention; the stones are the\narrangement's. That separation is why this model carries a bar count and a\nspacing but no stone position.",
+  "properties": {
+    "axisDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Axisdeg",
+      "type": "number"
+    },
+    "barCount": {
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Barcount",
+      "type": "integer"
+    },
+    "barSpacingMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Barspacingmm"
+    },
+    "barWidthMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Barwidthmm",
+      "type": "number"
+    },
+    "barLengthMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Barlengthmm"
+    },
+    "barHeightMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Barheightmm",
+      "type": "number"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    },
+    "offsetXMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetxmm",
+      "type": "number"
+    },
+    "offsetYMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetymm",
+      "type": "number"
+    },
+    "offsetZMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetzmm",
+      "type": "number"
+    },
+    "stoneInstanceIds": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 120,
+      "title": "Stoneinstanceids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "barCount",
+    "barWidthMm",
+    "barHeightMm"
+  ],
+  "title": "BarSettingDefinition",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v3/bar-setting-definition.schema.json"
+}

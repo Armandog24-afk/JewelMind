@@ -1,6 +1,48 @@
 {
   "vectors": [
     {
+      "settingType": "bar",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "bar",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
       "settingType": "bezel",
       "stoneShape": "round",
       "compatibility": "SUPPORTED_SOFTWARE",
@@ -43,6 +85,90 @@
       "professionalValidation": "NOT_REVIEWED"
     },
     {
+      "settingType": "channel",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "channel",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "oval",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "flush",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
       "settingType": "prong",
       "stoneShape": "round",
       "compatibility": "SUPPORTED_SOFTWARE",
@@ -80,6 +206,48 @@
     },
     {
       "settingType": "prong",
+      "stoneShape": "marquise",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "round",
+      "compatibility": "SUPPORTED_SOFTWARE",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "oval",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "pear",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "emerald",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "cushion",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
+      "stoneShape": "princess",
+      "compatibility": "EXPERIMENTAL",
+      "professionalValidation": "NOT_REVIEWED"
+    },
+    {
+      "settingType": "tension",
       "stoneShape": "marquise",
       "compatibility": "EXPERIMENTAL",
       "professionalValidation": "NOT_REVIEWED"

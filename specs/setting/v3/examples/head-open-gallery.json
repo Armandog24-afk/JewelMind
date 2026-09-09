@@ -1,0 +1,20 @@
+{
+  "type": "prong",
+  "prongCount": 6,
+  "prongDiameter": 1.1,
+  "prongHeight": 4.8,
+  "basketHeight": 3.5,
+  "prongStyle": "ROUND_PRONG",
+  "headArchitecture": "OPEN_GALLERY",
+  "seatMode": "NONE",
+  "prongTipRatio": 0.6,
+  "headBaseRatio": 0.55,
+  "pegDiameter": null,
+  "pegHeight": null,
+  "bezelWallThickness": 0.6,
+  "bezelWallHeight": 2.5,
+  "galleryWindowCount": 6,
+  "galleryWindowSweep": 38.0,
+  "galleryWindowHeightFraction": 0.55,
+  "mode": null
+}

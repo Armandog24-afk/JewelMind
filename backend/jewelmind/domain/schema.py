@@ -39,6 +39,7 @@ from jewelmind.setting.models import (
     ProngStyle,
     SeatMode,
 )
+from jewelmind.setting.modes import SettingModeSpec
 from jewelmind.stone.models import (
     DeclaredUnit,
     StoneReferenceProfile,
@@ -74,7 +75,18 @@ _ROUND_LIKE_SHAPES: frozenset[str] = frozenset({"round", "pearl"})
 #: Shapes that require an explicit `narrowWidth`.
 _TAPERED_SHAPES: frozenset[str] = frozenset({"tapered_baguette", "trapezoid"})
 
-SettingType = Literal["prong", "bezel"]
+#: The public setting family a document chooses.
+#:
+#: Sprint 27 added `channel`, `bar`, `flush` and `tension`, each backed by a real
+#: registered generator — an ADDITIVE enum extension, so every existing document
+#: keeps validating and generating exactly as before, and `schemaVersion` stays
+#: `0.1.0` by the same MINOR definition Sprint 19 used when `bezel` joined.
+#:
+#: Mirrors `setting/models.py::SettingFamily` exactly, and
+#: `test_extended_setting_modes.py` asserts the two agree in both directions: a
+#: public type with no generator would be a promise the pipeline cannot keep,
+#: and a generator with no public type would be unreachable.
+SettingType = Literal["prong", "bezel", "channel", "bar", "flush", "tension"]
 MetalType = Literal[
     "yellow_gold_18k",
     "white_gold_18k",
@@ -466,6 +478,46 @@ class SettingSpec(StrictModel):
     pegHeight: float | None = Field(default=None, allow_inf_nan=False)
     bezelWallThickness: float = Field(default=0.6, allow_inf_nan=False)
     bezelWallHeight: float = Field(default=2.5, allow_inf_nan=False)
+
+    # ---- Sprint 27: extended setting modes ----------------------------------
+
+    #: Window parameters, required for and only meaningful to `OPEN_GALLERY`.
+    #:
+    #: Flat fields beside `headBaseRatio` and the peg dimensions, deliberately:
+    #: the HEAD is its own axis, already selected by `headArchitecture`, and
+    #: putting its parameters inside `mode` — which declares the PRIMARY mode —
+    #: would make one field carry two axes. `windowHeightFraction` is bounded
+    #: strictly below 1.0 because a full-height window severs the wall into
+    #: disconnected pillars; a construction correctness bound, not a proportion
+    #: anyone reviewed.
+    galleryWindowCount: int = Field(default=4, ge=1, le=24)
+    galleryWindowSweep: float = Field(
+        default=45.0, gt=0.0, le=180.0, allow_inf_nan=False
+    )
+    galleryWindowHeightFraction: float = Field(
+        default=0.6, gt=0.0, lt=1.0, allow_inf_nan=False
+    )
+
+    #: The extended setting mode this design declares (Sprint 27).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, for the compatibility reason every
+    #: optional block since Sprint 22 has been: a document with no mode resolves
+    #: to the variant its existing `type`/`prongStyle` fields already meant, so
+    #: its geometry is unchanged.
+    #:
+    #: ONE BLOCK RATHER THAN TWENTY FLAT FIELDS, and that is the one place this
+    #: sprint departs from `SettingSpec`'s flat style. Twenty flat fields would
+    #: put six families' dimensions in one namespace, where `channelWallHeight`
+    #: and `bezelWallHeight` sit side by side and nothing says which family
+    #: reads which. `mode` names the family's variant and carries its
+    #: parameters, which is the `{mode, variant, parameters}` shape the brief
+    #: described, expressed the way `arrangement`, `family`, `halo` and `pave`
+    #: were each added — as one optional block.
+    #:
+    #: IT REFINES `type`, IT DOES NOT COMPETE WITH IT: a mode whose family
+    #: disagrees with `type` is refused by `JM-SETTING-008` rather than resolved
+    #: by precedence. See `setting/modes.py::SettingModeSpec`.
+    mode: SettingModeSpec | None = None
 
 
 class MaterialSpec(StrictModel):

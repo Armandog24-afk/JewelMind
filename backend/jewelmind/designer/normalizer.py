@@ -10,6 +10,7 @@ docs/bible/12-designer/297-supported-language-scope.md and
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from typing import Any
 
 from jewelmind.designer import gem_language
@@ -223,7 +224,83 @@ SETTING_TYPE_SYNONYMS: dict[str, str] = {
     "castone": "bezel",
     "castone pieno": "bezel",
     "incastonatura a castone": "bezel",
+    # Sprint 27: the four new families, each with a real registered generator.
+    # A term here reaches a `setting.type` value the backend can build; a
+    # reserved technique (trellis, azure, shared-wall channel) is absent from
+    # the enum and is reported as an unsupported feature by
+    # `capability.py::KNOWN_UNSUPPORTED_CONCEPTS`, which derives its own list
+    # from `RESERVED_SETTING_MODES`.
+    "channel": "channel",
+    "channel setting": "channel",
+    "canale": "channel",
+    "a canale": "channel",
+    "incastonatura a canale": "channel",
+    "binario": "channel",
+    "bar": "bar",
+    "bar setting": "bar",
+    "barrette": "bar",
+    "a barrette": "bar",
+    "incastonatura a barrette": "bar",
+    "flush": "flush",
+    "flush setting": "flush",
+    "gypsy": "flush",
+    "gypsy setting": "flush",
+    "a filo": "flush",
+    "incastonatura a filo": "flush",
+    "incassata": "flush",
+    "tension": "tension",
+    "tension setting": "tension",
+    "a tensione": "tension",
+    "incastonatura a tensione": "tension",
 }
+
+#: Sprint 27. Natural-language names for a setting MODE — the variant within a
+#: family, the head architecture, or the field retention.
+#:
+#: DERIVED FROM THE LIVE REGISTRY rather than restated here, so a term can never
+#: name a mode that does not exist and a mode cannot be unreachable by name.
+#: `designer_mode_terms()` refuses an ambiguous term at the registry, which is
+#: where an ambiguity has to be resolved — not by whichever table was read last.
+def setting_mode_synonyms() -> dict[str, str]:
+    from jewelmind.setting.capability import designer_mode_terms
+
+    return designer_mode_terms()
+
+
+#: Sprint 27. Relative descriptions of a setting's SUBSTANCE.
+#:
+#: Recognized precisely so such a request becomes a QUESTION rather than an
+#: invented dimension. "A heavier channel" names a weight, and turning one into
+#: a wall thickness in millimetres requires professional judgment this project
+#: has no evidence for — the same discipline `PAVE_DENSITY_TERMS` established
+#: for "denser".
+SETTING_WEIGHT_TERMS: frozenset[str] = frozenset(
+    {
+        "heavier",
+        "lighter",
+        "chunkier",
+        "daintier",
+        "more delicate",
+        "sturdier",
+        "stronger",
+        "thinner walls",
+        "thicker walls",
+        "piu robusto",
+        "più robusto",
+        "piu leggero",
+        "più leggero",
+        "piu delicato",
+        "più delicato",
+        "piu massiccio",
+        "più massiccio",
+    }
+)
+
+
+def is_setting_weight_term(token: str) -> bool:
+    """Whether a token names a setting's substance rather than a dimension."""
+
+    return token.strip().lower() in SETTING_WEIGHT_TERMS
 
 MANUFACTURING_SYNONYMS: dict[str, str] = {
     "lost_wax_casting": "lost_wax_casting",
@@ -303,6 +380,13 @@ PAVE_RETENTION_SYNONYMS: dict[str, str] = {
     "micro prongs": "MICRO_PRONG",
     "microgriffe": "MICRO_PRONG",
     "micro griffe": "MICRO_PRONG",
+    # Sprint 27.
+    "shared prong": "SHARED_PRONG",
+    "shared prongs": "SHARED_PRONG",
+    "shared micro prong": "SHARED_PRONG",
+    "shared micro prongs": "SHARED_PRONG",
+    "micro griffe condivise": "SHARED_PRONG",
+    "griffe condivise": "SHARED_PRONG",
 }
 
 PAVE_SEAT_SYNONYMS: dict[str, str] = {
@@ -348,6 +432,81 @@ PAVE_DENSITY_TERMS: frozenset[str] = frozenset(
 )
 
 
+#: Sprint 27. Whether metal is relieved where the stone sits.
+#:
+#: A small static table rather than a registry-derived one, because relief is
+#: not a setting MODE — it is an orthogonal axis with its own two-member enum,
+#: recorded in `setting/capability.py::SEAT_CAPABILITIES`.
+SEAT_MODE_SYNONYMS: dict[str, str] = {
+    "none": "NONE",
+    "nessuno": "NONE",
+    "no relief": "NONE",
+    "reference_seat": "REFERENCE_SEAT",
+    "reference seat": "REFERENCE_SEAT",
+    "relief": "REFERENCE_SEAT",
+    "relieved": "REFERENCE_SEAT",
+    "seat": "REFERENCE_SEAT",
+    "sede": "REFERENCE_SEAT",
+    "incasso": "REFERENCE_SEAT",
+}
+
+
+@lru_cache(maxsize=1)
+def _setting_mode_tables() -> dict[str, dict[str, str]]:
+    """Synonym tables for the setting-mode axes, DERIVED from the registry.
+
+    Three tables, one per axis, and the split is what keeps each axis a single
+    authority: a head term must not resolve into `setting.mode.modeId`, which
+    declares the PRIMARY mode, and a primary term must not resolve into
+    `setting.headArchitecture`.
+
+    Built lazily and cached because the registry's own `settingGeometry` axis is
+    measured from the live builder registries, which import this package's
+    siblings — the discipline `setting/capability.py::setting_modes()` documents
+    for the same reason.
+    """
+
+    from jewelmind.setting.capability import setting_modes
+    from jewelmind.setting.modes import (
+        head_architecture_for_mode,
+        mode_axis,
+        prong_style_for_mode,
+    )
+
+    primary: dict[str, str] = {}
+    heads: dict[str, str] = {}
+    prongs: dict[str, str] = {}
+
+    for mode_id, entry in setting_modes().items():
+        axis = mode_axis(mode_id)
+        if axis == "PRIMARY":
+            primary[mode_id.lower()] = mode_id
+            for term in entry.designerTerms:
+                primary.setdefault(term.lower(), mode_id)
+            # A prong mode also names a BODY STYLE, which is a separate field.
+            # `PRONG_SHARED` is excluded: it maps to the round body, so a style
+            # alone can never imply sharing.
+            style = prong_style_for_mode(mode_id)
+            if style is not None and mode_id != "PRONG_SHARED":
+                prongs[style.lower()] = style
+                for term in entry.designerTerms:
+                    prongs.setdefault(term.lower(), style)
+        elif axis == "HEAD":
+            architecture = head_architecture_for_mode(mode_id)
+            if architecture is None:  # pragma: no cover - registry guarantees one
+                continue
+            heads[architecture.lower()] = architecture
+            heads[mode_id.lower()] = architecture
+            for term in entry.designerTerms:
+                heads.setdefault(term.lower(), architecture)
+
+    return {
+        "setting.mode.modeId": primary,
+        "setting.headArchitecture": heads,
+        "setting.prongStyle": prongs,
+    }
+
+
 _ENUM_SYNONYM_TABLES: dict[str, dict[str, str]] = {
     "material.metal": METAL_SYNONYMS,
     "band.profile": BAND_PROFILE_SYNONYMS,
@@ -361,6 +520,8 @@ _ENUM_SYNONYM_TABLES: dict[str, dict[str, str]] = {
     "pave.retention.strategy": PAVE_RETENTION_SYNONYMS,
     "pave.seat.mode": PAVE_SEAT_SYNONYMS,
     "pave.containment": PAVE_CONTAINMENT_SYNONYMS,
+    # Sprint 27.
+    "setting.seatMode": SEAT_MODE_SYNONYMS,
 }
 
 # Prong count is numeric in the schema, but requests name it in words —
@@ -403,6 +564,13 @@ def normalize_enum_token(field: str, raw_value: str) -> tuple[str | None, bool]:
     if field == "setting.prongCount":
         mapped = PRONG_COUNT_WORDS.get(token)
         return (str(mapped) if mapped is not None else None), False
+
+    # Sprint 27. The setting-mode axes are DERIVED from the live registry, so
+    # they are looked up through a cached builder rather than a module-level
+    # constant — see `_setting_mode_tables()`.
+    derived = _setting_mode_tables().get(field)
+    if derived is not None:
+        return derived.get(token), False
 
     table = _ENUM_SYNONYM_TABLES.get(field)
     if table is None:

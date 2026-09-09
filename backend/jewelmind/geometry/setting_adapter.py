@@ -22,12 +22,22 @@ from jewelmind.domain.schema import JewelryDefinition
 from jewelmind.geometry.connection import shank_connection_interface
 from jewelmind.geometry.model import GeneratedComponent
 from jewelmind.setting.models import (
+    BarSettingDefinition,
     BezelSettingDefinition,
+    ChannelSettingDefinition,
+    FlushSettingDefinition,
     HeadSettingDefinition,
     ProngSettingDefinition,
+    ProngStyle,
     SeatSettingDefinition,
     SettingAttachmentInterface,
     SettingDefinition,
+    TensionSettingDefinition,
+)
+from jewelmind.setting.modes import (
+    prong_style_for_mode,
+    resolve_primary_mode,
+    setting_mode_fingerprint,
 )
 from jewelmind.setting.placement import resolve_strategy
 from jewelmind.setting.stone_interface import build_stone_setting_reference
@@ -69,8 +79,27 @@ def setting_definition_from_jdl(
     stone_reference = build_stone_setting_reference(definition.stone, stone_component)
     attachment = setting_attachment_interface(definition)
 
+    # THE RESOLVED PRIMARY MODE, resolved ONCE, here (Sprint 27).
+    #
+    # `resolve_primary_mode()` is the single resolution point, the role
+    # `effective_arrangement()` plays for placement. Every family block below
+    # reads its parameters from the SAME resolved mode, so a channel's wall
+    # height and the mode id reported in the result can never come from
+    # different readings of the document.
+    resolved_mode = resolve_primary_mode(
+        definition.setting.type,
+        definition.setting.prongStyle,
+        definition.setting.mode,
+    )
+    parameters = resolved_mode.parameters
+    instance_ids = resolved_mode.arrangementInstanceIds
+
     prong: ProngSettingDefinition | None = None
     bezel: BezelSettingDefinition | None = None
+    channel: ChannelSettingDefinition | None = None
+    bar: BarSettingDefinition | None = None
+    flush: FlushSettingDefinition | None = None
+    tension: TensionSettingDefinition | None = None
 
     if definition.setting.type == "prong":
         prong = ProngSettingDefinition(
@@ -79,13 +108,68 @@ def setting_definition_from_jdl(
             prongHeightMm=definition.setting.prongHeight,
             # Resolved from the stone's real symmetry, not requested via JDL.
             placementStrategy=resolve_strategy(stone_reference),
-            style=definition.setting.prongStyle,
+            # The BODY STYLE comes from the resolved mode, which for a document
+            # with no mode block is exactly `setting.prongStyle` — so this is
+            # the same value it always was, read through the one resolution
+            # point instead of twice.
+            style=_prong_style_for(resolved_mode, definition.setting.prongStyle),
             tipRatio=definition.setting.prongTipRatio,
         )
-    else:
+    elif definition.setting.type == "bezel":
         bezel = BezelSettingDefinition(
             wallThicknessMm=definition.setting.bezelWallThickness,
             wallHeightMm=definition.setting.bezelWallHeight,
+            variant="PARTIAL" if resolved_mode.modeId == "BEZEL_PARTIAL" else "FULL",
+            openingCount=parameters.openingCount,
+            openingSweepDeg=parameters.openingSweepDeg,
+            openingStartAngleDeg=parameters.openingStartAngleDeg,
+        )
+    elif definition.setting.type == "channel":
+        channel = ChannelSettingDefinition(
+            axisDeg=parameters.axisDeg,
+            spanMm=parameters.spanMm,
+            innerWidthMm=parameters.innerWidthMm,
+            wallThicknessMm=parameters.wallThicknessMm,
+            wallHeightMm=parameters.wallHeightMm,
+            termination=parameters.termination,
+            symmetry=parameters.symmetry,
+            offsetXMm=parameters.offsetXMm,
+            offsetYMm=parameters.offsetYMm,
+            offsetZMm=parameters.offsetZMm,
+            stoneInstanceIds=instance_ids,
+        )
+    elif definition.setting.type == "bar":
+        bar = BarSettingDefinition(
+            axisDeg=parameters.axisDeg,
+            barCount=parameters.barCount,
+            barSpacingMm=parameters.barSpacingMm,
+            barWidthMm=parameters.wallThicknessMm,
+            barLengthMm=parameters.barLengthMm,
+            barHeightMm=parameters.barHeightMm,
+            symmetry=parameters.symmetry,
+            offsetXMm=parameters.offsetXMm,
+            offsetYMm=parameters.offsetYMm,
+            offsetZMm=parameters.offsetZMm,
+            stoneInstanceIds=instance_ids,
+        )
+    elif definition.setting.type == "flush":
+        flush = FlushSettingDefinition(
+            collarWidthMm=parameters.collarWidthMm,
+            rimHeightMm=parameters.rimHeightMm,
+            offsetXMm=parameters.offsetXMm,
+            offsetYMm=parameters.offsetYMm,
+            offsetZMm=parameters.offsetZMm,
+        )
+    else:
+        tension = TensionSettingDefinition(
+            gripAxisDeg=parameters.gripAxisDeg,
+            padWidthMm=parameters.padWidthMm,
+            padThicknessMm=parameters.padThicknessMm,
+            padDepthMm=parameters.padDepthMm,
+            gripHeightMm=parameters.gripHeightMm,
+            offsetXMm=parameters.offsetXMm,
+            offsetYMm=parameters.offsetYMm,
+            offsetZMm=parameters.offsetZMm,
         )
 
     return SettingDefinition(
@@ -95,9 +179,30 @@ def setting_definition_from_jdl(
         attachment=attachment,
         prong=prong,
         bezel=bezel,
+        channel=channel,
+        bar=bar,
+        flush=flush,
+        tension=tension,
         head=head_definition_from_jdl(definition),
         seat=SeatSettingDefinition(mode=definition.setting.seatMode),
+        settingModeId=resolved_mode.modeId,
+        settingModeFingerprint=setting_mode_fingerprint(resolved_mode),
     )
+
+
+def _prong_style_for(resolved_mode, declared_style: ProngStyle) -> ProngStyle:
+    """The prong body style a resolved mode names.
+
+    `PRONG_SHARED` maps to the round body, so it cannot itself express a style;
+    for that one mode the declared `setting.prongStyle` still applies, which is
+    what makes "a shared CLAW prong" expressible. Every other prong mode names
+    exactly one body.
+    """
+
+    if resolved_mode.modeId == "PRONG_SHARED":
+        return declared_style
+    style = prong_style_for_mode(resolved_mode.modeId)
+    return style if style is not None else declared_style  # type: ignore[return-value]
 
 
 def head_definition_from_jdl(definition: JewelryDefinition) -> HeadSettingDefinition:
@@ -127,4 +232,7 @@ def head_definition_from_jdl(definition: JewelryDefinition) -> HeadSettingDefini
         baseRadiusRatio=definition.setting.headBaseRatio,
         pegDiameterMm=definition.setting.pegDiameter,
         pegHeightMm=definition.setting.pegHeight,
+        windowCount=definition.setting.galleryWindowCount,
+        windowSweepDeg=definition.setting.galleryWindowSweep,
+        windowHeightFraction=definition.setting.galleryWindowHeightFraction,
     )

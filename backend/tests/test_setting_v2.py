@@ -875,15 +875,32 @@ class TestCapabilityConsistency:
                 assert entry.professionalValidationStatus == "NOT_REVIEWED"
 
     def test_seat_support_is_partial_not_current(self):
-        """Relief is real; a cut seat with a bearing shoulder is not."""
+        """Relief is real; a cut seat with a bearing shoulder is not.
 
-        for capability in SETTING_CAPABILITIES.values():
-            assert capability.seatSupport == "PARTIAL"
+        Sprint 27 added ONE exception, and it is real rather than a relaxation:
+        the `flush` family's recess IS half its geometry — the generator refuses
+        a flush setting without relief — so its seat support is CURRENT. Bearing
+        and cutter support stay PLANNED for all six families, because a bearing
+        is sized by a setter and a cutter is manufacturing tooling, and no
+        sourced professional geometry exists for either.
+        """
+
+        for setting_type, capability in SETTING_CAPABILITIES.items():
+            expected = "CURRENT" if setting_type == "flush" else "PARTIAL"
+            assert capability.seatSupport == expected
             assert capability.bearingSupport == "PLANNED"
             assert capability.cutterSupport == "PLANNED"
 
     def test_the_geometry_version_records_the_change(self):
-        assert SETTING_GEOMETRY_VERSION == "1.1.0"
+        """1.2.0 as of Sprint 27, which added four families, the PARTIAL bezel
+        variant, the OPEN_GALLERY head and the SHARED_PRONG retention strategy.
+
+        MINOR rather than MAJOR: every addition is reached only by a document
+        that asks for it, and `BEZEL_FULL`/`BASKET`/`ROUND_PRONG` still
+        reproduce their previous constructions exactly.
+        """
+
+        assert SETTING_GEOMETRY_VERSION == "1.2.0"
 
     def test_the_v2_specs_match_the_live_registries(self):
         def load(name: str) -> dict:

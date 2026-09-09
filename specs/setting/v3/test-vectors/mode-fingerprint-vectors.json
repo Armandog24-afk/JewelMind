@@ -1,0 +1,62 @@
+{
+  "generatedFrom": "backend/jewelmind/setting/modes.py::setting_mode_fingerprint()",
+  "note": "Deterministic and environment-independent: the fingerprint hashes the mode's own content and the taxonomy version, with no wall-clock time, random value, process id or memory address. `derived` is deliberately EXCLUDED, so a document that declares a mode explicitly and one that reaches it through prongStyle fingerprint the same.",
+  "taxonomyVersion": "1.0.0",
+  "vectors": [
+    {
+      "settingModeId": "BAR_TRANSVERSE",
+      "settingType": "bar",
+      "fingerprint": "b11834e899541c85"
+    },
+    {
+      "settingModeId": "BEZEL_FULL",
+      "settingType": "bezel",
+      "fingerprint": "cfaa90a7b7a76a40"
+    },
+    {
+      "settingModeId": "BEZEL_PARTIAL",
+      "settingType": "bezel",
+      "fingerprint": "f34c23a46a983b11"
+    },
+    {
+      "settingModeId": "CHANNEL_LINEAR",
+      "settingType": "channel",
+      "fingerprint": "34bed2f3ac69bae5"
+    },
+    {
+      "settingModeId": "FLUSH_GYPSY",
+      "settingType": "flush",
+      "fingerprint": "237d986fa548e13b"
+    },
+    {
+      "settingModeId": "PRONG_CLAW",
+      "settingType": "prong",
+      "fingerprint": "9677101ec89ab803"
+    },
+    {
+      "settingModeId": "PRONG_ROUND",
+      "settingType": "prong",
+      "fingerprint": "f3f54db500dae707"
+    },
+    {
+      "settingModeId": "PRONG_SHARED",
+      "settingType": "prong",
+      "fingerprint": "77ac2a1fc7215bb2"
+    },
+    {
+      "settingModeId": "PRONG_TAPERED",
+      "settingType": "prong",
+      "fingerprint": "03f7dc024da491c0"
+    },
+    {
+      "settingModeId": "PRONG_V",
+      "settingType": "prong",
+      "fingerprint": "f3dd92ec10c5f237"
+    },
+    {
+      "settingModeId": "TENSION_OPPOSED",
+      "settingType": "tension",
+      "fingerprint": "d408189f70369a3c"
+    }
+  ]
+}

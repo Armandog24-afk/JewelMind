@@ -1,0 +1,68 @@
+{
+  "additionalProperties": false,
+  "description": "Tension-family parameters (Sprint 27).\n\nTWO OPPOSING SUPPORTS and the stone between them. The supports are real\nsolids and the stone's volume is relieved out of each, so the grooves the\nstone would sit in are genuine geometry rather than an implication.\n\nWHAT IS DELIBERATELY NOT MODELLED, and this is the substantive honesty of\nthis family: nothing here computes the elastic response of the metal, the\nforce the supports apply, or whether the stone would be held. A real tension\nring's whole function is a structural one, and asserting anything about it\nwould require material properties and a validated engineering model that do\nnot exist in this project. The capability registry records\n`professionalReviewRequirement: REQUIRED` for exactly this reason, and the\nmode's status is PARTIAL rather than CURRENT — the geometry is complete, the\nengineering claim is absent (SETTING-GOV-010, LAW-010).",
+  "properties": {
+    "gripAxisDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Gripaxisdeg",
+      "type": "number"
+    },
+    "padWidthMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Padwidthmm",
+      "type": "number"
+    },
+    "padThicknessMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Padthicknessmm",
+      "type": "number"
+    },
+    "padDepthMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 10.0,
+      "title": "Paddepthmm",
+      "type": "number"
+    },
+    "gripHeightMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Gripheightmm",
+      "type": "number"
+    },
+    "offsetXMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetxmm",
+      "type": "number"
+    },
+    "offsetYMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetymm",
+      "type": "number"
+    },
+    "offsetZMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetzmm",
+      "type": "number"
+    }
+  },
+  "required": [
+    "padWidthMm",
+    "padThicknessMm",
+    "padDepthMm",
+    "gripHeightMm"
+  ],
+  "title": "TensionSettingDefinition",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v3/tension-setting-definition.schema.json"
+}

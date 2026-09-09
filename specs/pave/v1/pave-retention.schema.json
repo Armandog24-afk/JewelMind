@@ -11,7 +11,8 @@
         "NONE",
         "BEAD",
         "SHARED_BEAD",
-        "MICRO_PRONG"
+        "MICRO_PRONG",
+        "SHARED_PRONG"
       ],
       "title": "Strategy",
       "type": "string"

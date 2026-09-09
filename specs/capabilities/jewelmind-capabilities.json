@@ -23,38 +23,38 @@
     {
       "domain": "setting",
       "capability": "channel_setting",
-      "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "status": "CURRENT",
+      "note": "setting/channel.py; two parallel walls with the stones between them, running along a stated axis, with optional end caps. Extents default to the stone's own measured box. The stones are the Stone Arrangement Engine's: this family builds the walls and records which instances they hold, never where those instances are."
     },
     {
       "domain": "setting",
       "capability": "flush_setting",
-      "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "status": "CURRENT",
+      "note": "setting/flush.py; a solid collar offset from the stone's girdle outline with the stone's own solid cut out of it. Reuses the bezel's verified offset pipeline and the existing REFERENCE_SEAT relief, so the stone is a cutting tool and never becomes production metal. Relief is a PRECONDITION, not an option: JM-SETTING-010 reports a flush setting without it and the generator refuses."
     },
     {
       "domain": "setting",
       "capability": "bar_setting",
-      "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "status": "CURRENT",
+      "note": "setting/bar.py; transverse bars across a run, one component carrying every bar with each bar's own offset in its metadata. Spacing and length default to the stone's own measured extents."
     },
     {
       "domain": "setting",
       "capability": "tension_setting",
-      "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "status": "PARTIAL",
+      "note": "setting/tension.py; two opposing supports with the stone between them, each reaching inward past its edge so the seat relief leaves a real groove. PARTIAL with COMPLETE geometry: a tension setting's whole function is structural, none of that behaviour is modelled (no force, no spring-back, no retention claim), and professional review is REQUIRED before the geometry means anything functional."
     },
     {
       "domain": "setting",
       "capability": "bead_setting",
       "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "note": "Deliberately NOT a setting family and will stay that way: repeated small-stone retention is setting/retention.py's builders driven by a pave field, and a second route to it would be a duplicate retention engine. The real capability is recorded under the pave domain."
     },
     {
       "domain": "setting",
       "capability": "pave_setting",
       "status": "PLANNED",
-      "note": "Reserved family name; no generator, not a SettingFamily enum member."
+      "note": "Deliberately NOT a setting family and will stay that way: repeated small-stone retention is setting/retention.py's builders driven by a pave field, and a second route to it would be a duplicate retention engine. The real capability is recorded under the pave domain."
     },
     {
       "domain": "setting",
@@ -1056,7 +1056,7 @@
       "domain": "setting",
       "capability": "shared_prong_geometry",
       "status": "PARTIAL",
-      "note": "A prong serving two stones is representable (explicit position plus servesStoneInstanceIds) and its assignment is reported, but it cannot be generated against two stones: one stone component is built per model. Blocked on the Stone Arrangement execution boundary."
+      "note": "PRONG_SHARED (Sprint 27): a prong serving two or more stones is expressed through EXPLICIT positions carrying servesStoneInstanceIds, the prongs are real solids, and the assignment is reported per component. PARTIAL because the shared POSITION is stated by the document rather than derived from the two stones' own geometry, so whether a shared prong reaches both stones it names is a geometric fact for inspection rather than a guarantee. No interface authors explicit positions yet."
     },
     {
       "domain": "setting",
@@ -1507,6 +1507,234 @@
       "capability": "object_storage",
       "status": "PLANNED",
       "note": "Asset storage is a Protocol (stone/importing.py::StoneAssetStore) with a single content-addressed filesystem implementation. No object storage exists. The interface was found sufficient and left unmodified; its resolve() returns a Path today, which a future non-filesystem implementation would have to satisfy."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_ROUND",
+      "status": "CURRENT",
+      "note": "Round prong (PRIMARY axis, PRONG family). settingGeometry=True, professionalReview=NOT_REQUIRED. The pre-Sprint-23 straight cylinder and still the default for every prong setting. Count, diameter and height are parameters, so a four- and a six-prong setting are one mode rather than two."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_TAPERED",
+      "status": "CURRENT",
+      "note": "Tapered prong (PRIMARY axis, PRONG family). settingGeometry=True, professionalReview=NOT_REQUIRED. A cone frustum: full radius at the base, `prongTipRatio` of it at the tip. A software reference taper, not a measured claw profile."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_CLAW",
+      "status": "CURRENT",
+      "note": "Claw prong (PRIMARY axis, PRONG family). settingGeometry=True, professionalReview=NOT_REQUIRED. A cylindrical shaft fused to a tapered head, so the taper is concentrated near the tip."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_V",
+      "status": "CURRENT",
+      "note": "V prong (PRIMARY axis, PRONG family). settingGeometry=True, professionalReview=NOT_REQUIRED. A cylinder with a V notch cut into its tip. The notch angle and depth are construction parameters; no claim is made that a stone tip would seat correctly in one."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_SHARED",
+      "status": "PARTIAL",
+      "note": "Shared prong (PRIMARY axis, PRONG family). settingGeometry=True, professionalReview=NOT_REQUIRED. A prong serving two or more stones, expressed through EXPLICIT prong positions carrying `servesStoneInstanceIds`. The prongs are real solids and the assignment is reported per component. What is NOT provided: derivation of the shared position from the two stones' own geometry, so whether a shared prong reaches both stones it names is a geometric fact for inspection rather than a guarantee. No interface authors explicit positions yet, which is why Studio, Designer and Conversation are PLANNED for this mode."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BEZEL_FULL",
+      "status": "CURRENT",
+      "note": "Full bezel (PRIMARY axis, BEZEL family). settingGeometry=True, professionalReview=NOT_REQUIRED. The continuous wall built by offsetting the stone's own girdle outline. Unchanged from Sprint 19 and preserved byte-identically, which is why it remains the bezel default."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BEZEL_PARTIAL",
+      "status": "CURRENT",
+      "note": "Partial bezel (PRIMARY axis, BEZEL family). settingGeometry=True, professionalReview=NOT_REQUIRED. The full bezel's own wall with evenly spaced angular openings cut through it, so a partial bezel can never be a different wall from the full one it derives from. Legitimately several solids — n openings leave n arcs, joined through the head below — and that solid count is reported rather than repaired."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "CHANNEL_LINEAR",
+      "status": "CURRENT",
+      "note": "Linear channel (PRIMARY axis, CHANNEL family). settingGeometry=True, professionalReview=NOT_REQUIRED. Two parallel walls with the stones between them, with optional end caps. Extents default to the stone's own measured box, so the single-stone case needs no parameters. Multi-stone by declaration: a longer run holds the arrangement's instances and records their ids, without computing a single placement."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BAR_TRANSVERSE",
+      "status": "CURRENT",
+      "note": "Transverse bar (PRIMARY axis, BAR family). settingGeometry=True, professionalReview=NOT_REQUIRED. Transverse bars across a run, with the stones between adjacent bars. One component carrying every bar, with each bar's own offset reported. Spacing and length default to the stone's own measured extents."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "FLUSH_GYPSY",
+      "status": "CURRENT",
+      "note": "Flush / gypsy (PRIMARY axis, FLUSH family). settingGeometry=True, professionalReview=NOT_REQUIRED. A solid collar offset from the stone's girdle outline with the stone's own solid cut out of it. Requires REFERENCE_SEAT relief, because without the cut the collar buries the stone — a geometric precondition, refused by the generator and reported by JM-SETTING-010. The rim must stay below the stone's measured crown height."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "TENSION_OPPOSED",
+      "status": "PARTIAL",
+      "note": "Opposed tension (PRIMARY axis, TENSION family). settingGeometry=True, professionalReview=REQUIRED. Two opposing supports with the stone between them, each reaching inward past the stone's edge so the seat relief leaves a real groove. The geometry is complete and the structural behaviour is NOT MODELLED: no force, no spring-back, no retention claim. Professional review is required before this geometry means anything functional."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_BASKET",
+      "status": "CURRENT",
+      "note": "Basket head (HEAD axis, HEAD family). settingGeometry=True, professionalReview=NOT_REQUIRED. The pre-Sprint-23 hollow cylindrical wall, reproduced character-for-character and still the default."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_PEG",
+      "status": "CURRENT",
+      "note": "Peg head (HEAD axis, HEAD family). settingGeometry=True, professionalReview=NOT_REQUIRED. A basket wall on a narrower solid peg, joined by a conical flare. The flare is structural, not decorative: without it the peg never touches the bore and the head is two disconnected solids."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_MARTINI",
+      "status": "CURRENT",
+      "note": "Martini head (HEAD axis, HEAD family). settingGeometry=True, professionalReview=NOT_REQUIRED. A hollow conical wall, wide at the girdle and narrow at the base. A software reference silhouette; no commercial martini proportion is claimed."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_TULIP",
+      "status": "CURRENT",
+      "note": "Tulip head (HEAD axis, HEAD family). settingGeometry=True, professionalReview=NOT_REQUIRED. A concave flare approximated by stacked cone frusta following a quadratic. Section count and curve are construction choices."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_OPEN_GALLERY",
+      "status": "CURRENT",
+      "note": "Open gallery head (HEAD axis, HEAD family). settingGeometry=True, professionalReview=NOT_REQUIRED. The basket wall with evenly spaced windows pierced through it, cut from the basket's own solid. Windows span only the middle of the height so a continuous rim survives and the head stays one connected body. Deliberately not called azure."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_BEAD",
+      "status": "CURRENT",
+      "note": "Bead (RETENTION axis, RETENTION family). settingGeometry=True, professionalReview=NOT_REQUIRED. One bead per lattice corner of each stone, individually. A hemisphere raised at the corner — named honestly as a sphere, because a real bead's shape depends on the graining tool and the hand."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_SHARED_BEAD",
+      "status": "CURRENT",
+      "note": "Shared bead (RETENTION axis, RETENTION family). settingGeometry=True, professionalReview=NOT_REQUIRED. One bead per lattice corner, shared by every stone touching it — genuinely fewer beads, which is the point of the technique. Anchors are derived in the surface's own parameters so neighbouring stones agree about where a corner is."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_MICRO_PRONG",
+      "status": "CURRENT",
+      "note": "Micro prong (RETENTION axis, RETENTION family). settingGeometry=True, professionalReview=NOT_REQUIRED. A small cylinder normal to the host surface at each corner, capped with a hemisphere, built individually per stone."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_SHARED_PRONG",
+      "status": "CURRENT",
+      "note": "Shared micro prong (RETENTION axis, RETENTION family). settingGeometry=True, professionalReview=NOT_REQUIRED. A micro prong at each shared lattice corner, serving every stone that touches it. Sharing is a property of the ANCHOR SET, not of the solid, which is why this maps to the same builder as MICRO_PRONG — exactly as BEAD and SHARED_BEAD already do."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BAR_TAPERED",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A bar with a varying cross-section. Same construction gap as CHANNEL_TAPERED: it needs a swept or lofted profile per bar."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BEZEL_MILLGRAIN",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A milled decorative edge. It is a surface texture applied along the wall's rim, and no texturing or knurling operation exists in the pipeline; approximating it with beads would be a different structure wearing the name."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "BEZEL_OPEN_BACK",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. The generated bezel wall is already open at both ends, so an 'open-back' bezel is not a distinct solid here. A genuine open-back bezel differs by carrying a pierced seat rail the stone rests on, and no seat with a bearing shoulder exists (SETTINGV2-GOV-009)."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "CHANNEL_SHARED_WALL",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. One wall shared between two adjacent channel rows. It requires two hosted rows resolved together, and one setting builds one channel."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "CHANNEL_TAPERED",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A channel whose clear width narrows along its run, for a graduated row. It needs a lofted wall pair rather than a pair of prisms, and a loft over a long shallow taper is not yet verifiable here."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "FLUSH_MILLGRAIN",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A milled rim around a flush-set stone. Same texturing gap as BEZEL_MILLGRAIN."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HALO_HIDDEN_SETTING",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Retention metal for a hidden halo's own stones. Sprint 25 recorded halo settingGeometry as false and it still is: the halo layer composes placements, and no builder holds a halo member. A mode here would have nothing to build."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_AZURE",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Azure/ajouré work is arbitrary decorative piercing, whose pattern is not expressible as parameters. HEAD_OPEN_GALLERY is the parametric subset that is — evenly spaced windows through the wall — and it is deliberately not called azure."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_CATHEDRAL",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A cathedral head is defined by how the SHANK rises to meet it, which is shank geometry rather than head geometry. It belongs to a Shank milestone, not to this taxonomy."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_DOUBLE_GALLERY",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Two stacked galleries need a second head instance per setting, which the one-head-per-setting contract does not express."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "HEAD_TRELLIS",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Interwoven curved rails require a swept solid along a 3D spline. The current pipeline builds solids of revolution and lofts reliably; a swept trellis is not yet verifiable, so no builder exists."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_COMPASS_POINT",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Prongs placed at the stone's own named anchors (tip, cleft, corners). The anchors exist in Stone System v2; a placement strategy that consumes them does not, so OUTLINE_CARDINAL remains the non-round default and a compass-point request would silently be an outline-cardinal layout."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "PRONG_CUSTOM_PROFILE",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. An arbitrary swept prong cross-section. EXPLICIT positions are the escape hatch for LAYOUT; an arbitrary profile is a different escape hatch and no builder accepts one."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_BAR",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Bars between adjacent pavé stones. Same topology reason as RETENTION_CHANNEL: a bar sits at a cell MIDPOINT, not at a corner. BAR_TRANSVERSE is the PRIMARY family that builds bars."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_CHANNEL",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A continuous rail holding a pavé row. The pavé's retention anchors are LATTICE CORNERS — the points where cells meet — which is the right topology for a bead and the wrong one for a rail that runs the whole row. Channel setting exists as its own PRIMARY family instead, which is where a rail's extent is actually stated."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "RETENTION_GRAIN",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A raised grain, as distinct from a bead. Its shape depends on the graining tool and the setter's hand; RETENTION_BEAD's sphere is the deterministic CAD reference for the volume a grain occupies, and a second id mapped to the same solid would imply a difference that is not there."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "TENSION_COMPRESSION_MODELLED",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. A tension setting whose grip is derived from the metal's actual elastic response. That is an engineering calculation requiring material properties and a validated model, neither of which exists here. TENSION_OPPOSED builds the opposing supports and makes no structural claim (see its own capability row)."
+    },
+    {
+      "domain": "setting_mode",
+      "capability": "UNDER_GALLERY_SUPPORT",
+      "status": "PLANNED",
+      "note": "Reserved: no builder, and not a SettingModeId member. Decorative structure below the gallery, joining a head to a shank or to a second head. It needs multi-head or rail geometry, and RESERVED_SUPPORT_ELEMENTS already records that a rail joins two heads while one setting builds one."
     }
   ]
 }

@@ -7,7 +7,7 @@
   "additionalProperties": false,
   "required": ["settingType", "status", "generatable", "inspectable", "categoryNeutral", "stoneShapesSupported", "stoneShapesExperimental", "stoneShapesUnsupported", "stoneSourceModesSupported", "seatSupport", "bearingSupport", "cutterSupport", "professionalValidationStatus", "settingGeometryVersion", "description"],
   "properties": {
-    "settingType": { "enum": ["prong", "bezel"] },
+    "settingType": { "enum": ["prong", "bezel", "channel", "bar", "flush", "tension"] },
     "status": { "$ref": "#/$defs/capabilityStatus" },
     "generatable": { "type": "boolean" },
     "inspectable": { "type": "boolean" },

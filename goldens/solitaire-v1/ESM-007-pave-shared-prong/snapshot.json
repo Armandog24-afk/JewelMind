@@ -1,0 +1,3349 @@
+{
+  "goldenId": "ESM-007-pave-shared-prong",
+  "description": "Shank pave retained by SHARED micro prongs: one prong per shared lattice corner, each serving every stone that touches it. Locks in the fourth retention strategy and that the shared-corner topology genuinely produces fewer prongs than an individual field would.",
+  "sourceJDLPath": "goldens/solitaire-v1/ESM-007-pave-shared-prong/design.json",
+  "definitionHash": "49d0dba91b4a5905",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "pave_retention",
+    "prongs",
+    "stone_reference",
+    "stone_reference.pave.r0.c0",
+    "stone_reference.pave.r0.c1",
+    "stone_reference.pave.r0.c10",
+    "stone_reference.pave.r0.c11",
+    "stone_reference.pave.r0.c12",
+    "stone_reference.pave.r0.c13",
+    "stone_reference.pave.r0.c14",
+    "stone_reference.pave.r0.c15",
+    "stone_reference.pave.r0.c16",
+    "stone_reference.pave.r0.c17",
+    "stone_reference.pave.r0.c18",
+    "stone_reference.pave.r0.c19",
+    "stone_reference.pave.r0.c2",
+    "stone_reference.pave.r0.c20",
+    "stone_reference.pave.r0.c21",
+    "stone_reference.pave.r0.c3",
+    "stone_reference.pave.r0.c4",
+    "stone_reference.pave.r0.c5",
+    "stone_reference.pave.r0.c6",
+    "stone_reference.pave.r0.c7",
+    "stone_reference.pave.r0.c8",
+    "stone_reference.pave.r0.c9"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "49d0dba91b4a5905",
+    "assembly": {
+      "componentCount": 27,
+      "productionComponentCount": 4,
+      "referenceComponentCount": 23,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.635,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.635,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 7.27,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 249.6659606232498,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 23,
+          "faces": 94,
+          "edges": 120,
+          "vertices": 72
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 83.15575842566426,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000000000001,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "pave_retention",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 46,
+        "volumeMm3": 0.7577312786215726,
+        "boundingBox": {
+          "xmin": -9.224804368607725,
+          "ymin": -0.5850000000000012,
+          "zmin": 5.865268506839359,
+          "xmax": 9.224804368607725,
+          "ymax": 0.5850000000000012,
+          "zmax": 11.11,
+          "sizeX": 18.44960873721545,
+          "sizeY": 1.1700000000000024,
+          "sizeZ": 5.24473149316064,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 8.48763425341968
+        },
+        "topology": {
+          "solids": 46,
+          "shells": 46,
+          "faces": 138,
+          "edges": 196,
+          "vertices": 150
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.2216883706749933,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.2216883706749933,
+          "zmax": 15.5,
+          "sizeX": 7.27,
+          "sizeY": 6.4433767413499865,
+          "sizeZ": 5.199999999999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -3.2500001,
+          "ymin": -3.2500001,
+          "zmin": 11.599999900000002,
+          "xmax": 3.2500001,
+          "ymax": 3.2500001,
+          "zmax": 15.6000001,
+          "sizeX": 6.5000002,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c0",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178174,
+        "boundingBox": {
+          "xmin": 8.34794055277785,
+          "ymin": -0.3087501,
+          "zmin": 5.4980653154373025,
+          "xmax": 8.758950640281595,
+          "ymax": 0.3087501,
+          "zmax": 5.99389261206063,
+          "sizeX": 0.4110100875037457,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4958272966233279,
+          "centerX": 8.553445596529723,
+          "centerY": 0.0,
+          "centerZ": 5.745978963748966
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c1",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178306,
+        "boundingBox": {
+          "xmin": 7.747458954747826,
+          "ymin": -0.3087501,
+          "zmin": 6.248399486860577,
+          "xmax": 8.167044402771253,
+          "ymax": 0.3087501,
+          "zmax": 6.709639279024635,
+          "sizeX": 0.4195854480234278,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.46123979216405786,
+          "centerX": 7.9572516787595395,
+          "centerY": 0.0,
+          "centerZ": 6.479019382942606
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c10",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517803,
+        "boundingBox": {
+          "xmin": 0.164045618786534,
+          "ymin": -0.3087501,
+          "zmin": 9.78954329013958,
+          "xmax": 0.7809374663828803,
+          "ymax": 0.3087501,
+          "zmax": 10.17705286048531,
+          "sizeX": 0.6168918475963463,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.3875095703457294,
+          "centerX": 0.47249154258470716,
+          "centerY": 0.0,
+          "centerZ": 9.983298075312444
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c11",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178036,
+        "boundingBox": {
+          "xmin": -0.7809374663828802,
+          "ymin": -0.3087501,
+          "zmin": 9.78954329013958,
+          "xmax": -0.164045618786534,
+          "ymax": 0.3087501,
+          "zmax": 10.17705286048531,
+          "sizeX": 0.6168918475963462,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.3875095703457294,
+          "centerX": -0.4724915425847071,
+          "centerY": 0.0,
+          "centerZ": 9.983298075312444
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c12",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178084,
+        "boundingBox": {
+          "xmin": -1.7197698103286538,
+          "ymin": -0.3087501,
+          "zmin": 9.70727663124628,
+          "xmax": -1.1077375936706253,
+          "ymax": 0.3087501,
+          "zmax": 10.10750103965266,
+          "sizeX": 0.6120322166580285,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4002244084063804,
+          "centerX": -1.4137537019996396,
+          "centerY": 0.0,
+          "centerZ": 9.90738883544947
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c13",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178265,
+        "boundingBox": {
+          "xmin": -2.6450538566413635,
+          "ymin": -0.3087501,
+          "zmin": 9.543813432354126,
+          "xmax": -2.042702617691502,
+          "ymax": 0.3087501,
+          "zmax": 9.953599867286856,
+          "sizeX": 0.6023512389498613,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.40978643493273026,
+          "centerX": -2.343878237166433,
+          "centerY": 0.0,
+          "centerZ": 9.748706649820491
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c14",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325177994,
+        "boundingBox": {
+          "xmin": -3.549501510023106,
+          "ymin": -0.3087501,
+          "zmin": 9.30044149784683,
+          "xmax": -2.961576336394319,
+          "ymax": 0.3087501,
+          "zmax": 9.716561825618877,
+          "sizeX": 0.5879251736287872,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4161203277720471,
+          "centerX": -3.2555389232087126,
+          "centerY": 0.0,
+          "centerZ": 9.508501661732854
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c15",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178126,
+        "boundingBox": {
+          "xmin": -4.425988144698591,
+          "ymin": -0.3087501,
+          "zmin": 8.979078063115816,
+          "xmax": -3.8571204754732484,
+          "ymax": 0.3087501,
+          "zmax": 9.398254251637653,
+          "sizeX": 0.5688676692253427,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4191761885218366,
+          "centerX": -4.14155431008592,
+          "centerY": 0.0,
+          "centerZ": 9.188666157376733
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c16",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178154,
+        "boundingBox": {
+          "xmin": -5.267607456026313,
+          "ymin": -0.3087501,
+          "zmin": 8.582254051088736,
+          "xmax": -4.722278610199431,
+          "ymax": 0.3087501,
+          "zmax": 9.001183996594241,
+          "sizeX": 0.5453288458268819,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.41892994550550533,
+          "centerX": -4.994943033112872,
+          "centerY": 0.0,
+          "centerZ": 8.791719023841488
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c17",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517815,
+        "boundingBox": {
+          "xmin": -6.067731171025613,
+          "ymin": -0.3087501,
+          "zmin": 8.113095403030078,
+          "xmax": -5.550237028761158,
+          "ymax": 0.3087501,
+          "zmax": 8.52847894165541,
+          "sizeX": 0.5174941422644554,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4153835386253313,
+          "centerX": -5.808984099893386,
+          "centerY": 0.0,
+          "centerZ": 8.320787172342744
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c18",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178195,
+        "boundingBox": {
+          "xmin": -6.820055592800238,
+          "ymin": -0.3087501,
+          "zmin": 7.575299513131982,
+          "xmax": -6.334472767619316,
+          "ymax": 0.3087501,
+          "zmax": 7.983864418486866,
+          "sizeX": 0.4855828251809218,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.40856490535488454,
+          "centerX": -6.577264180209777,
+          "centerY": 0.0,
+          "centerZ": 7.779581965809424
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c19",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517816,
+        "boundingBox": {
+          "xmin": -7.5186550095517966,
+          "ymin": -0.3087501,
+          "zmin": 6.944783837684519,
+          "xmax": -7.068808737567242,
+          "ymax": 0.3087501,
+          "zmax": 7.37162849245912,
+          "sizeX": 0.44984627198455485,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.42684465477460076,
+          "centerX": -7.293731873559519,
+          "centerY": 0.0,
+          "centerZ": 7.158206165071819
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c2",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178174,
+        "boundingBox": {
+          "xmin": 7.068808737567242,
+          "ymin": -0.3087501,
+          "zmin": 6.944783837684519,
+          "xmax": 7.518655009551798,
+          "ymax": 0.3087501,
+          "zmax": 7.37162849245912,
+          "sizeX": 0.4498462719845566,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.42684465477460076,
+          "centerX": 7.29373187355952,
+          "centerY": 0.0,
+          "centerZ": 7.158206165071819
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c20",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517826,
+        "boundingBox": {
+          "xmin": -8.167044402771253,
+          "ymin": -0.3087501,
+          "zmin": 6.248399486860577,
+          "xmax": -7.747458954747825,
+          "ymax": 0.3087501,
+          "zmax": 6.709639279024637,
+          "sizeX": 0.4195854480234287,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4612397921640605,
+          "centerX": -7.957251678759539,
+          "centerY": 0.0,
+          "centerZ": 6.479019382942607
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c21",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178154,
+        "boundingBox": {
+          "xmin": -8.758950640281595,
+          "ymin": -0.3087501,
+          "zmin": 5.498065315437305,
+          "xmax": -8.347940552777848,
+          "ymax": 0.3087501,
+          "zmax": 5.99389261206063,
+          "sizeX": 0.41101008750374746,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.49582729662332525,
+          "centerX": -8.553445596529722,
+          "centerY": 0.0,
+          "centerZ": 5.745978963748968
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c3",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325178195,
+        "boundingBox": {
+          "xmin": 6.334472767619318,
+          "ymin": -0.3087501,
+          "zmin": 7.575299513131982,
+          "xmax": 6.820055592800238,
+          "ymax": 0.3087501,
+          "zmax": 7.983864418486866,
+          "sizeX": 0.48558282518092,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.40856490535488454,
+          "centerX": 6.577264180209778,
+          "centerY": 0.0,
+          "centerZ": 7.779581965809424
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c4",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517815,
+        "boundingBox": {
+          "xmin": 5.550237028761158,
+          "ymin": -0.3087501,
+          "zmin": 8.113095403030078,
+          "xmax": 6.067731171025614,
+          "ymax": 0.3087501,
+          "zmax": 8.52847894165541,
+          "sizeX": 0.5174941422644563,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4153835386253313,
+          "centerX": 5.808984099893387,
+          "centerY": 0.0,
+          "centerZ": 8.320787172342744
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c5",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517816,
+        "boundingBox": {
+          "xmin": 4.722278610199431,
+          "ymin": -0.3087501,
+          "zmin": 8.582254051088734,
+          "xmax": 5.2676074560263135,
+          "ymax": 0.3087501,
+          "zmax": 9.001183996594241,
+          "sizeX": 0.5453288458268828,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4189299455055071,
+          "centerX": 4.994943033112872,
+          "centerY": 0.0,
+          "centerZ": 8.791719023841488
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c6",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517815,
+        "boundingBox": {
+          "xmin": 3.8571204754732484,
+          "ymin": -0.3087501,
+          "zmin": 8.979078063115812,
+          "xmax": 4.425988144698591,
+          "ymax": 0.3087501,
+          "zmax": 9.398254251637653,
+          "sizeX": 0.5688676692253427,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.41917618852184013,
+          "centerX": 4.14155431008592,
+          "centerY": 0.0,
+          "centerZ": 9.188666157376733
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c7",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.049917589325177945,
+        "boundingBox": {
+          "xmin": 2.961576336394319,
+          "ymin": -0.3087501,
+          "zmin": 9.300441497846828,
+          "xmax": 3.549501510023106,
+          "ymax": 0.3087501,
+          "zmax": 9.716561825618877,
+          "sizeX": 0.5879251736287872,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4161203277720489,
+          "centerX": 3.2555389232087126,
+          "centerY": 0.0,
+          "centerZ": 9.508501661732852
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c8",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517825,
+        "boundingBox": {
+          "xmin": 2.042702617691502,
+          "ymin": -0.3087501,
+          "zmin": 9.543813432354124,
+          "xmax": 2.6450538566413635,
+          "ymax": 0.3087501,
+          "zmax": 9.953599867286856,
+          "sizeX": 0.6023512389498613,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.40978643493273204,
+          "centerX": 2.343878237166433,
+          "centerY": 0.0,
+          "centerZ": 9.748706649820491
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.pave.r0.c9",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.04991758932517812,
+        "boundingBox": {
+          "xmin": 1.1077375936706253,
+          "ymin": -0.3087501,
+          "zmin": 9.70727663124628,
+          "xmax": 1.719769810328654,
+          "ymax": 0.3087501,
+          "zmax": 10.10750103965266,
+          "sizeX": 0.6120322166580288,
+          "sizeY": 0.6175002,
+          "sizeZ": 0.4002244084063804,
+          "centerX": 1.4137537019996396,
+          "centerY": 0.0,
+          "centerZ": 9.90738883544947
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "pave_retention",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9000000000000004
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c0",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.00838949018476603
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008397178311958792
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009842773025446292
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009842773025446226
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.010107134054099628
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.01045920581776577
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.010376958521132853
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009797358323188834
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009238645293731536
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008718390265017547
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008252954296361074
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008525111519315075
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008525111519314468
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008397178311959455
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008389490184765501
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.008252954296362322
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.00871839026501952
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009238645293731536
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.00979735832319047
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.010376958521132853
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.010459205817767755
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.010107134054099512
+      },
+      {
+        "componentA": "basket_support",
+        "componentB": "pave_retention",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "pave_retention",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.6252720584926382
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c0",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.594404752252318
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.649438410669653
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.445732687135262
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.4457326871352638
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.919886448445031
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.6118577684670474
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.363821804763852
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.1636285642251805
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.004976924523547
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.881240191907057
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.785513906807343
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.710676768216878
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.710676768216879
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.64943841066965
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.594404752252323
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.785513906807343
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.881240191907054
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.004976924523546
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.16362856422518
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.363821804763853
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.611857768467049
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9198864484450313
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.396576451105651
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.28243254039820653
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.396576451105651
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280921260448175
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.58786024430178
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444557521468866
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646434112463
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474200634936
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.896430275361796
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946562932746
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.416499114677885
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.137616612388568
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.830877838598639
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 15.494917277846861
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730376621149728
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 16.128425589315043
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 16.695881305555694
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.21547585757539
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547479733341
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406264873497
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214547275228
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153485081486
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421353125045
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c0",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240464490646
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.459213340928553
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3145332498416869
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.459213340928553
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714241357824372
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859926522999
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444558179582028
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646616922992
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474781857985
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.896431481751003
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946591323834
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.41649962914761
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.137617215482287
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.830879046884542
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280920516929678
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 15.49491810949565
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 16.128425589315043
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730386430344685
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756253105425
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153548088007239
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406155394384
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009215168215065
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153884552742
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c1",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421631245452
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.775829520811545
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5832818748829135
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.775829520811545
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c11",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.328091437573068
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730376068372156
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154748079284965
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153546988606402
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406000592636
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214182555479
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.9231529998071615
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825420615253242
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240614362595
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.8254221567386155
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859926522997
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.44455752146887
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153540154656
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009215143657012
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406297636782
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535483466878578
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756978503496
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730382125387862
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c10",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280926457737036
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.775829520811545
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5832818748829144
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7758295208115449
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c12",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280926457737042
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.273038212538786
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756978503496
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153548346687858
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.0854062976367835
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.0092151436570145
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153540154655
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825422156738616
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240614362595
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.7142413578243705
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587860244301783
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825420615253242
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.92315299980716
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.0092141825554775
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406000592635
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153546988606402
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154748079284965
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c11",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730376068372153
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9029725107190283
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5577946713850499
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9029725107190276
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c13",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280920280345037
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.273037857852739
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154757862053804
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535473965204903
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406023875483
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214404904084
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153838701304
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587860145410897
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421631245452
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.71424046449065
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240101883366
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421100374765
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.9231531392998065
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214997908899
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085405755296749
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535472517894205
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c12",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154753873412507
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.40951318545472126
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5312772996625689
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4106600338229219
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c14",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280922802779819
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730385343748774
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154754523341293
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547749971015
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085405865244911
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009215310262322
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444557860362941
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153884552739
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421353125046
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859115750371
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240020197498
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825420707878402
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153395364269
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.00921416132105
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085405435383004
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c13",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535472517894205
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5834382743811286
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5036220794936711
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.583438274381125
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c15",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809269747863984
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730379854892369
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756161586016
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547373068817
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406595932957
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646643624043
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009215168215062
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153485081488
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444557206530183
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859364224904
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714239997351813
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421307300188
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923152872788638
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.00921416132105
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c14",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085405755296749
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.985237452700871
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4747372071717344
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.985237452700871
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c16",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809178629159336
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.273037819977071
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.215474891594408
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547807025417
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100475380022322
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406155394381
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.00921454727523
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646589755467
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.44455800433695
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859927116773
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714241150946497
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421307300189
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.9231533953642685
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c15",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214997908899
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7353777547078373
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4445793271919588
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7353777547078373
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c17",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280925037827413
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730378991258142
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.215476113579554
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.89643086149082
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535480880072373
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406264873501
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474153117332
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646181311891
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444557420398862
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859927116774
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714239997351814
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825420707878403
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c16",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153139299808
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.634409711202605
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4131910902445144
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.634409711202605
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c18",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280918206345234
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730383771888742
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946439380731
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756253105434
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547479733347
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.89643016755204
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474257522318
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646181311891
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.44455800433695
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859364224904
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240020197499
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c17",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.825421100374768
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.570404685523036
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.38075418493369756
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.570404685523036
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c19",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280930385473545
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.416499474868118
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730386430344671
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.215475857575395
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668945735238635
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.896430167552039
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474153117329
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646589755464
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444557206530181
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587859115750371
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c18",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.714240101883366
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.515398643939942
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.34765033306841914
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.515398643939942
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.137617675134484
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809205169296585
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730376621149766
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.41649947486812
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946439380731
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.89643086149082
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100475380022322
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646643624043
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.44455786036294
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c19",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.587860145410897
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.515398643939942
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.34765033306841864
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.515398643939942
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c20",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.830879046884542
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 15.494917277846861
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280930385473539
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730383771888718
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.215476113579554
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547807025418
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085406595932959
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009215310262324
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c2",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.923153838701303
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.45921334092855
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3145332498416872
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.45921334092855
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c21",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280921260448203
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.137617215482287
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.416499629147607
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946591323834
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.896431481751002
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474781857983
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646616922989
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c20",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 9.444558179582026
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.396576451105654
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.2824325403982062
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.396576451105654
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.830877838598642
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 14.13761661238857
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 13.416499114677885
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.668946562932746
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.896430275361796
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.100474200634936
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c21",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.282646434112467
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5704046855230365
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3807541849336976
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.5704046855230365
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280918206345211
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.273037899125814
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154748915944094
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.153547373068818
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.085405865244914
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c3",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.009214404904083
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.6344097112026015
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4131910902445153
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.6344097112026015
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "stone_reference.pave.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809250378273797
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730378199770696
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154756161586
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535477499710143
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c4",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.08540602387548
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7353777547078366
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.44457932719195814
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7353777547078366
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "stone_reference.pave.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809178629159336
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730379854892366
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.21547545233413
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c5",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.1535473965204885
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9852374527008722
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.47473720717173346
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9852374527008722
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "stone_reference.pave.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32809269747864067
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730385343748787
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c6",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.2154757862053795
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c7",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.583438274381125
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c7",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5036220794936701
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c7",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5834382743811215
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c7",
+        "componentB": "stone_reference.pave.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280922802779833
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c7",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.2730378578527384
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c8",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4095131854547211
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c8",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5312772996625699
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c8",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.4106600338229219
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c8",
+        "componentB": "stone_reference.pave.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3280920280345035
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c9",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9029725107190288
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c9",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.5577946713850485
+      },
+      {
+        "componentA": "stone_reference.pave.r0.c9",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9029725107190288
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "EXTENDED_SETTING_MODES_AWAITING_PROFESSIONAL_REVIEW: every dimension in this design is a software construction parameter. No minimum wall, minimum bar, collar thickness, clearance or settability judgment is asserted anywhere, because no sourced professional evidence for one exists in this project. The baseline is a software regression guard.",
+    "REFERENCE_RELIEF_IS_NOT_A_CUT_SEAT: the recess is the stone's own volume removed from the metal. It has no bearing shoulder, and no claim is made that a stone would sit correctly in it."
+  ],
+  "createdAt": "2026-09-08T14:05:33.520554+00:00",
+  "acceptedAt": "2026-09-08T14:05:38.462563+00:00",
+  "notes": "Sprint 27 Extended Setting Modes v1: INITIAL_BASELINE for a newly executable setting mode. Created by running the real pipeline; no existing baseline was modified."
+}

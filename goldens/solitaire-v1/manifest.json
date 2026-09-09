@@ -218,6 +218,34 @@
     {
       "goldenId": "PAVE-005-three-stone-with-pave",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-001-channel-set-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-002-bar-set-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-003-flush-gypsy-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-004-partial-bezel-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-005-open-gallery-head",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-006-tension-solitaire",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "ESM-007-pave-shared-prong",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [

@@ -1,0 +1,210 @@
+{
+  "additionalProperties": false,
+  "description": "Construction parameters for a setting mode.\n\nONE FLAT MODEL, NOT A DISCRIMINATED UNION, and that is a deliberate repeat\nof the judgment `SettingSpec` already documents: a discriminated union at\nthe JDL layer cannot be reached by a dotted-path patch, which is exactly the\ndefect Sprint 26 hit when Designer could not create a pavé. A flat model\nwith per-mode fields keeps every route — a UI control, a natural-language\nrequest, a hand-written document — able to set one value.\n\nTHE COST IS PAID EXPLICITLY. A field a mode does not read is reported as an\nINFORMATION result by `JM-SETTING-009` rather than silently ignored, the\nsame mechanism `JM-SETTING-006` already uses for `prongStyle` on a bezel. An\nunread field is a fact the author deserves to be told, not a bug to hide.\n\nEVERY DEFAULT IS A CONSTRUCTION PARAMETER. None of them is a professional\nrecommendation, a minimum, or a manufacturing tolerance; each was chosen to\nproduce robust geometry inside the schema's own range\n(SETTING-GOV-010).",
+  "properties": {
+    "openingCount": {
+      "default": 2,
+      "maximum": 24,
+      "minimum": 1,
+      "title": "Openingcount",
+      "type": "integer"
+    },
+    "openingSweepDeg": {
+      "default": 40.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 180.0,
+      "title": "Openingsweepdeg",
+      "type": "number"
+    },
+    "openingStartAngleDeg": {
+      "default": 90.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Openingstartangledeg",
+      "type": "number"
+    },
+    "collarWidthMm": {
+      "default": 1.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Collarwidthmm",
+      "type": "number"
+    },
+    "rimHeightMm": {
+      "default": 0.4,
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Rimheightmm",
+      "type": "number"
+    },
+    "gripAxisDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Gripaxisdeg",
+      "type": "number"
+    },
+    "padWidthMm": {
+      "default": 2.0,
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Padwidthmm",
+      "type": "number"
+    },
+    "padThicknessMm": {
+      "default": 1.6,
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Padthicknessmm",
+      "type": "number"
+    },
+    "padDepthMm": {
+      "default": 0.6,
+      "exclusiveMinimum": 0.0,
+      "maximum": 10.0,
+      "title": "Paddepthmm",
+      "type": "number"
+    },
+    "gripHeightMm": {
+      "default": 1.2,
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Gripheightmm",
+      "type": "number"
+    },
+    "axisDeg": {
+      "default": 0.0,
+      "maximum": 360.0,
+      "minimum": -360.0,
+      "title": "Axisdeg",
+      "type": "number"
+    },
+    "spanMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 200.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spanmm"
+    },
+    "innerWidthMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Innerwidthmm"
+    },
+    "wallThicknessMm": {
+      "default": 0.7,
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Wallthicknessmm",
+      "type": "number"
+    },
+    "wallHeightMm": {
+      "default": 0.8,
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Wallheightmm",
+      "type": "number"
+    },
+    "barCount": {
+      "default": 2,
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Barcount",
+      "type": "integer"
+    },
+    "barSpacingMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Barspacingmm"
+    },
+    "barHeightMm": {
+      "default": 0.8,
+      "exclusiveMinimum": 0.0,
+      "maximum": 50.0,
+      "title": "Barheightmm",
+      "type": "number"
+    },
+    "barLengthMm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Barlengthmm"
+    },
+    "termination": {
+      "default": "OPEN",
+      "enum": [
+        "OPEN",
+        "CLOSED_ENDS"
+      ],
+      "title": "Termination",
+      "type": "string"
+    },
+    "symmetry": {
+      "default": "SYMMETRIC",
+      "enum": [
+        "SYMMETRIC",
+        "ASYMMETRIC"
+      ],
+      "title": "Symmetry",
+      "type": "string"
+    },
+    "offsetXMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetxmm",
+      "type": "number"
+    },
+    "offsetYMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetymm",
+      "type": "number"
+    },
+    "offsetZMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetzmm",
+      "type": "number"
+    }
+  },
+  "title": "SettingModeParameters",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v3/setting-mode-parameters.schema.json"
+}

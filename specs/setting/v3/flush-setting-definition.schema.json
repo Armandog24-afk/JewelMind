@@ -1,0 +1,47 @@
+{
+  "additionalProperties": false,
+  "description": "Flush/gypsy-family parameters (Sprint 27).\n\nA flush setting sinks the stone INTO a mass of metal whose top surface is\nlevel with part of its crown. So the geometry is a solid collar plus a\nRECESS — and the recess is the existing `REFERENCE_SEAT` cut, not a new\noperation: the stone's own solid is used as a cutting tool against the\ncollar, so the stone never becomes production metal (LAW-006,\nSETTINGV2-GOV-008).\n\nThat makes seat relief a GEOMETRIC PRECONDITION of this family rather than\nan option: without it the collar occupies the stone's whole volume and the\nresult is a lump of metal with a stone inside it. `JM-SETTING-010` reports\nthe missing relief; the generator refuses.",
+  "properties": {
+    "collarWidthMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Collarwidthmm",
+      "type": "number"
+    },
+    "rimHeightMm": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 20.0,
+      "title": "Rimheightmm",
+      "type": "number"
+    },
+    "offsetXMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetxmm",
+      "type": "number"
+    },
+    "offsetYMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetymm",
+      "type": "number"
+    },
+    "offsetZMm": {
+      "default": 0.0,
+      "maximum": 50.0,
+      "minimum": -50.0,
+      "title": "Offsetzmm",
+      "type": "number"
+    }
+  },
+  "required": [
+    "collarWidthMm",
+    "rimHeightMm"
+  ],
+  "title": "FlushSettingDefinition",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/setting/v3/flush-setting-definition.schema.json"
+}

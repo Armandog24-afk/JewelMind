@@ -65,7 +65,52 @@ anchor point": everything above the band is centered on it.
 - **Basket support** (`build_basket_support`): a hollow cylindrical wall
   (outer radius minus inner radius) between `band_top_z` and
   `band_top_z + setting.basketHeight`, sized so its radial wall fully
-  contains the prong footprint.
+  contains the prong footprint. An `OPEN_GALLERY` head is that same wall with
+  angular sectors cut from the middle `galleryWindowHeightFraction` of its
+  height, centred on it, so a continuous rim survives at each end.
+
+### The Sprint 27 setting families
+
+All four place rectangular prisms in the **stone's own horizontal frame**: a
+direction `axisDeg` (or `gripAxisDeg`) measured in the XY plane from +X, an
+extent ALONG it and an extent ACROSS it. Each prism is built at the origin,
+rotated about the GLOBAL Z axis, and only then translated onto the stone's
+centre — rotating after the translation would swing it around the design origin
+instead of about its own centre.
+
+Every one of them starts at `attachmentPlaneZMm - embedMm`, which is the same
+expression the basket and the prongs use, so a Sprint 27 family sinks past the
+attachment plane by exactly the amount the existing families do (see "Why solids
+are embedded, not just touching" below).
+
+An extent stated as `None` is resolved from the stone's **measured bounding
+box**, not its requested dimensions: the box is the extent of the solid that
+actually exists, so it already accounts for `stone.orientation` and for any
+shape whose outline does not fill its nominal box.
+
+- **Channel walls** (`generate_channel_setting`): two prisms whose centres sit
+  `innerWidthMm / 2 + wallThicknessMm / 2` either side of the run's centreline,
+  so the CLEAR distance between them is exactly `innerWidthMm`. They span
+  `spanMm` along the axis and rise to
+  `stone.girdlePlaneZMm + wallHeightMm`. `CLOSED_ENDS` adds two caps of the full
+  outer width at each end of the run, so a cap genuinely meets both walls'
+  material rather than touching them along a face.
+- **Bars** (`generate_bar_setting`): `barCount` prisms distributed along the
+  axis. `SYMMETRIC` centres them on the stone (an even count straddles it);
+  `ASYMMETRIC` puts the first bar ON the stone's centre and runs the rest along
+  `+axisDeg`. Each rises to `stone.girdlePlaneZMm + barHeightMm`.
+- **Flush collar** (`generate_flush_setting`): not a prism — the stone's own
+  girdle outline offset outward by `collarWidthMm` (the bezel's verified offset
+  pipeline), extruded from the attachment plane to
+  `stone.girdlePlaneZMm + rimHeightMm`. The stone's own solid is then CUT out of
+  it by the existing `REFERENCE_SEAT` relief, which is what opens the recess.
+  `rimHeightMm` must stay below the stone's measured crown height or the stone
+  would be entirely buried.
+- **Tension supports** (`generate_tension_setting`): two prisms opposing each
+  other along `gripAxisDeg`. Each support's INNER face sits `padDepthMm` inside
+  the stone's edge, so its centre is
+  `halfExtent - padDepthMm + padThicknessMm / 2` from the stone's centre and the
+  relief leaves a real groove rather than a tangent touch.
 
 ## Why solids are embedded, not just touching
 

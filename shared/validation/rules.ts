@@ -35,6 +35,29 @@ export const RULE_IDS = {
   SETTING_HEAD_PARAMETERS_COMPLETE: 'JM-SETTING-005',
   SETTING_FIELD_APPLICABLE: 'JM-SETTING-006',
   SETTING_SEAT_FEASIBLE: 'JM-SETTING-007',
+
+  // Sprint 27 — EXTENDED_SETTING_MODES. A DELIBERATE SUBSET of the backend's
+  // six rules (FORGE-GOV-004: this mirror may only ever enforce a subset, and
+  // the backend's verdict always wins).
+  //
+  // Mirrored: 008 (the declared mode's family must match `setting.type`), 010
+  // (a flush setting requires seat relief) and 012 (the mode requires
+  // professional review). Each is checkable from the document alone with no
+  // registry lookup.
+  //
+  // NOT mirrored, and each for a reason rather than an oversight:
+  //   - JM-SETTING-009 (unread parameters) needs the backend's
+  //     MODE_PARAMETER_FIELDS table, and duplicating it here would be a second
+  //     copy of which mode reads which field.
+  //   - JM-SETTING-011 (geometric feasibility) needs the stone's resolved
+  //     dimensions and the same support arithmetic; the backend's exact check
+  //     runs against the real measured solid.
+  //   - JM-SETTING-013 (mode status) needs the capability registry, which the
+  //     backend owns — the frontend must never define a capability status the
+  //     backend has not.
+  SETTING_MODE_FAMILY_MATCHES: 'JM-SETTING-008',
+  SETTING_MODE_REQUIREMENTS_MET: 'JM-SETTING-010',
+  SETTING_MODE_PROFESSIONAL_REVIEW: 'JM-SETTING-012',
   // Sprint 21 — GEM_IDENTITY_ONLY. Referential and coherence invariants
   // only; no gemological or manufacturing claim.
   GEM_REFERENCE_EXISTS: 'JM-GEM-001',

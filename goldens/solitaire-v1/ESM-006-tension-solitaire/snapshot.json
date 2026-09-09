@@ -1,0 +1,245 @@
+{
+  "goldenId": "ESM-006-tension-solitaire",
+  "description": "Tension setting: two opposing supports gripping the stone along the X axis, each relieved by the stone's own solid. Locks in the opposing-support geometry and the grooves the relief leaves.",
+  "sourceJDLPath": "goldens/solitaire-v1/ESM-006-tension-solitaire/design.json",
+  "definitionHash": "f3f4095fc636b66c",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "stone_reference",
+    "tension_supports"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "f3f4095fc636b66c",
+    "assembly": {
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 1,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.6350000999999996,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.6350000999999996,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 7.270000199999999,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 79.37160268566105,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000100000002,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000001000000015,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25000005
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 5,
+          "edges": 8,
+          "vertices": 5
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -3.2500001,
+          "ymin": -3.2500001,
+          "zmin": 11.599999900000002,
+          "xmax": 3.2500001,
+          "ymax": 3.2500001,
+          "zmax": 15.6000001,
+          "sizeX": 6.5000002,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "tension_supports",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 2,
+        "volumeMm3": 43.15794876286344,
+        "boundingBox": {
+          "xmin": -4.3500001,
+          "ymin": -1.2000001000000007,
+          "zmin": 10.3,
+          "xmax": 4.3500001,
+          "ymax": 1.2000001000000016,
+          "zmax": 15.500000000000002,
+          "sizeX": 8.7000002,
+          "sizeY": 2.4000002000000022,
+          "sizeZ": 5.200000000000001,
+          "centerX": 0.0,
+          "centerY": 4.440892098500626e-16,
+          "centerZ": 12.900000000000002
+        },
+        "topology": {
+          "solids": 2,
+          "shells": 2,
+          "faces": 20,
+          "edges": 47,
+          "vertices": 31
+        },
+        "fallbackUsed": true
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9000000000000004
+      },
+      {
+        "componentA": "band",
+        "componentB": "tension_supports",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 4.440892098500626e-16
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009746200509249106
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "tension_supports",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.009746200509265451
+      },
+      {
+        "componentA": "tension_supports",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 0,
+      "generatedProngCount": 0,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "TENSION_STRUCTURAL_BEHAVIOUR_NOT_MODELLED: the opposing supports are real solids and nothing computes the elastic response of the metal, the force they apply, or whether the stone would be retained under load or wear. This baseline guards the geometry and makes no functional claim. Professional review is required.",
+    "EXTENDED_SETTING_MODES_AWAITING_PROFESSIONAL_REVIEW: every dimension in this design is a software construction parameter. No minimum wall, minimum bar, collar thickness, clearance or settability judgment is asserted anywhere, because no sourced professional evidence for one exists in this project. The baseline is a software regression guard.",
+    "REFERENCE_RELIEF_IS_NOT_A_CUT_SEAT: the recess is the stone's own volume removed from the metal. It has no bearing shoulder, and no claim is made that a stone would sit correctly in it."
+  ],
+  "createdAt": "2026-09-08T14:05:05.442177+00:00",
+  "acceptedAt": "2026-09-08T14:05:10.346781+00:00",
+  "notes": "Sprint 27 Extended Setting Modes v1: INITIAL_BASELINE for a newly executable setting mode. Created by running the real pipeline; no existing baseline was modified."
+}

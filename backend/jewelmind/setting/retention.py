@@ -155,6 +155,15 @@ def retention_builders() -> dict[str, RetentionBuilder]:
         "BEAD": _bead_solid,
         "SHARED_BEAD": _bead_solid,
         "MICRO_PRONG": _micro_prong_solid,
+        # SHARED_PRONG (Sprint 27) maps to the SAME builder as MICRO_PRONG,
+        # deliberately. Sharing is not a property of the solid — it is a
+        # property of the ANCHOR SET: a shared piece sits where cells meet and
+        # names every stone it touches, which is decided by the pavé's anchor
+        # topology, not here. `BEAD` and `SHARED_BEAD` already share a builder
+        # for exactly the same reason, and mapping SHARED_PRONG to a
+        # near-identical second solid would imply a difference that is not
+        # there.
+        "SHARED_PRONG": _micro_prong_solid,
     }
 
 

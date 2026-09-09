@@ -1,5 +1,5 @@
 {
-  "settingGeometryVersion": "1.1.0",
+  "settingGeometryVersion": "1.2.0",
   "generatedFrom": "backend/jewelmind/setting/capability.py::PRONG_STYLE_CAPABILITIES",
   "note": "Generated from the live registry. ROUND_PRONG is the pre-Sprint-23 cylinder, preserved character-for-character and still the default — which is why every existing design's prong volumes are unchanged. Every notch angle, depth and tip ratio is a SOFTWARE CONSTRUCTION parameter; none is a professional prong proportion.",
   "constructionParameters": {
@@ -7,6 +7,14 @@
     "vNotchDepthFraction": 0.35
   },
   "styles": [
+    {
+      "style": "CLAW_PRONG",
+      "status": "CURRENT",
+      "generatable": true,
+      "preservesLegacyGeometry": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "description": "A cylindrical shaft fused to a tapered head, so the taper is concentrated near the tip. Distinct from TAPERED_PRONG, which tapers over its whole length."
+    },
     {
       "style": "ROUND_PRONG",
       "status": "CURRENT",
@@ -22,14 +30,6 @@
       "preservesLegacyGeometry": false,
       "professionalValidationStatus": "NOT_REVIEWED",
       "description": "A cone frustum: full radius at the base, `tipRatio` of it at the tip. A software reference taper, not a measured claw profile."
-    },
-    {
-      "style": "CLAW_PRONG",
-      "status": "CURRENT",
-      "generatable": true,
-      "preservesLegacyGeometry": false,
-      "professionalValidationStatus": "NOT_REVIEWED",
-      "description": "A cylindrical shaft fused to a tapered head, so the taper is concentrated near the tip. Distinct from TAPERED_PRONG, which tapers over its whole length."
     },
     {
       "style": "V_PRONG",

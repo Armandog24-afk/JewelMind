@@ -960,6 +960,12 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-PAVE-GOVERNANCE | Pavé & Microsetting Governance | accepted | current | [`28-pave/pave-governance.md`](../28-pave/pave-governance.md) |
 | JM-BIBLE-PAVE-BOUNDARY | Pavé Execution Boundary | accepted | partial | [`28-pave/execution-boundary.md`](../28-pave/execution-boundary.md) |
 | JM-BIBLE-PAVE-RESEARCH | Pavé Capability Coverage Review | accepted | current | [`28-pave/capability-coverage-review.md`](../28-pave/capability-coverage-review.md) |
+| JM-BIBLE-ESM-README | Extended Setting Modes v1 — Index | accepted | partial | [`29-extended-setting-modes/README.md`](../29-extended-setting-modes/README.md) |
+| JM-BIBLE-ESM-GOVERNANCE | Extended Setting Modes Governance | accepted | current | [`29-extended-setting-modes/setting-mode-governance.md`](../29-extended-setting-modes/setting-mode-governance.md) |
+| JM-BIBLE-ESM-EXECUTION-BOUNDARY | Extended Setting Modes Execution Boundary | accepted | partial | [`29-extended-setting-modes/execution-boundary.md`](../29-extended-setting-modes/execution-boundary.md) |
+| JM-BIBLE-ESM-COVERAGE-REVIEW | Extended Setting Modes Taxonomy Coverage Review | accepted | current | [`29-extended-setting-modes/taxonomy-coverage-review.md`](../29-extended-setting-modes/taxonomy-coverage-review.md) |
+| JM-BIBLE-ADR-013 | ADR-013: Extended Setting Modes taxonomy and mode resolution | accepted | current | [`03-decisions/ADR-013-extended-setting-modes.md`](../03-decisions/ADR-013-extended-setting-modes.md) |
+| JM-BIBLE-ESM-SPRINT-27-REPORT | Sprint 27 Validation Report — Extended Setting Modes v1 | accepted | current | [`29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md`](../29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md) |
 | JM-BIBLE-PAVE-SPRINT-26-REPORT | Sprint 26 Validation Report — Pavé & Microsetting Engine v1 | accepted | current | [`28-pave/SPRINT-26-VALIDATION-REPORT.md`](../28-pave/SPRINT-26-VALIDATION-REPORT.md) |
 | JM-BIBLE-ADR-011 | ADR-011: Instance Axis Tilt | accepted | current | [`03-decisions/ADR-011-instance-axis-tilt.md`](../03-decisions/ADR-011-instance-axis-tilt.md) |
 

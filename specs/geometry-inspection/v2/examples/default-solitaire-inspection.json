@@ -1,7 +1,7 @@
 {
   "inspectionId": "inspection-6af422d9-16cc-4d7f-a4be-47c04ef49205",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "aee3a916fc345721",
+  "definitionHash": "1257cb82878d1659",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
   "startedAt": "2026-09-02T15:55:18.571583+00:00",
@@ -1934,6 +1934,114 @@
         "basket_support"
       ],
       "value": "RADIAL",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.modeId",
+      "factType": "SETTING_MODE_ID",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": "PRONG_ROUND",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.modeFingerprint",
+      "factType": "SETTING_MODE_FINGERPRINT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": "f3f54db500dae707",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.componentProvenanceCount",
+      "factType": "SETTING_COMPONENT_PROVENANCE_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": 2,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.headArchitecture",
+      "factType": "SETTING_HEAD_ARCHITECTURE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": "BASKET",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.seatMode",
+      "factType": "SETTING_SEAT_MODE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": null,
+      "unit": null,
+      "status": "UNKNOWN",
+      "tolerance": null,
+      "sourceOperation": "SettingGeometryResult",
+      "generatedAt": "2026-09-02T15:55:18.886678+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "setting.professionalReviewRequirement",
+      "factType": "SETTING_PROFESSIONAL_REVIEW_REQUIREMENT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "prongs",
+        "basket_support"
+      ],
+      "value": "NOT_REQUIRED",
       "unit": null,
       "status": "PASS",
       "tolerance": null,

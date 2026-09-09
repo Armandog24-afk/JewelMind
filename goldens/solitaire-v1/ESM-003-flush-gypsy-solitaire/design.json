@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "name": "Solitaire Ring",
+    "units": "mm"
+  },
+  "jewelry": {
+    "category": "ring",
+    "style": "solitaire"
+  },
+  "ring": {
+    "sizeSystem": "EU",
+    "size": 16.0,
+    "innerDiameter": 17.8
+  },
+  "band": {
+    "width": 2.4,
+    "thickness": 1.8,
+    "profile": "comfort_fit",
+    "widthTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    },
+    "thicknessTaper": {
+      "mode": "NONE",
+      "bottomRatio": 1.0
+    }
+  },
+  "stone": {
+    "shape": "round",
+    "diameter": 6.5,
+    "length": null,
+    "width": null,
+    "depth": 4.0,
+    "orientation": 0.0,
+    "narrowWidth": null,
+    "source": "PARAMETRIC_REFERENCE",
+    "profile": "FACETED_REFERENCE",
+    "customOutline": null,
+    "measurement": null,
+    "importedAsset": null,
+    "gem": null
+  },
+  "setting": {
+    "type": "flush",
+    "prongCount": 6,
+    "prongDiameter": 1.1,
+    "prongHeight": 4.8,
+    "basketHeight": 3.5,
+    "prongStyle": "ROUND_PRONG",
+    "headArchitecture": "BASKET",
+    "seatMode": "REFERENCE_SEAT",
+    "prongTipRatio": 0.6,
+    "headBaseRatio": 0.55,
+    "pegDiameter": null,
+    "pegHeight": null,
+    "bezelWallThickness": 0.6,
+    "bezelWallHeight": 2.5,
+    "galleryWindowCount": 4,
+    "galleryWindowSweep": 45.0,
+    "galleryWindowHeightFraction": 0.6,
+    "mode": {
+      "modeId": "FLUSH_GYPSY",
+      "enabled": true,
+      "stoneRef": "primary",
+      "arrangementInstanceIds": [],
+      "host": "HEAD",
+      "parameters": {
+        "openingCount": 2,
+        "openingSweepDeg": 40.0,
+        "openingStartAngleDeg": 90.0,
+        "collarWidthMm": 1.2,
+        "rimHeightMm": 0.5,
+        "gripAxisDeg": 0.0,
+        "padWidthMm": 2.0,
+        "padThicknessMm": 1.6,
+        "padDepthMm": 0.6,
+        "gripHeightMm": 1.2,
+        "axisDeg": 0.0,
+        "spanMm": null,
+        "innerWidthMm": null,
+        "wallThicknessMm": 0.7,
+        "wallHeightMm": 0.8,
+        "barCount": 2,
+        "barSpacingMm": null,
+        "barHeightMm": 0.8,
+        "barLengthMm": null,
+        "termination": "OPEN",
+        "symmetry": "SYMMETRIC",
+        "offsetXMm": 0.0,
+        "offsetYMm": 0.0,
+        "offsetZMm": 0.0
+      },
+      "label": "Gypsy collar"
+    }
+  },
+  "material": {
+    "metal": "yellow_gold_18k"
+  },
+  "manufacturing": {
+    "method": "lost_wax_casting"
+  },
+  "preview": {
+    "meshTolerance": 0.1,
+    "angularTolerance": 0.2
+  },
+  "arrangement": null,
+  "family": null,
+  "halo": null,
+  "pave": null
+}

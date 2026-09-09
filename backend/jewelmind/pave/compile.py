@@ -58,6 +58,7 @@ from jewelmind.pave.errors import (
 from jewelmind.pave.models import (
     DESIGN_CENTER_INSTANCE_ID,
     MAX_PAVE_STONES,
+    SHARED_RETENTION_STRATEGIES,
     MicrosettingSpec,
     PaveDefinition,
     PaveModel,
@@ -656,7 +657,7 @@ def _lattice_anchors(
         return []
 
     pitch, row_pitch = lattice_pitches(pave)
-    shared = pave.retention.strategy == "SHARED_BEAD"
+    shared = pave.retention.strategy in SHARED_RETENTION_STRATEGIES
     # An individual bead belongs to ONE stone, so it is drawn in toward that
     # stone rather than left on the corner its neighbours share.
     inset = 1.0 if shared else _INDIVIDUAL_BEAD_INSET_FRACTION

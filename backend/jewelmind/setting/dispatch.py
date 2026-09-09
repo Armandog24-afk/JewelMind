@@ -23,6 +23,7 @@ from jewelmind.setting.errors import (
 )
 from jewelmind.setting.models import (
     SettingComponentFact,
+    SettingComponentProvenance,
     SettingDefinition,
     SettingGeometryResult,
 )
@@ -34,12 +35,29 @@ SettingGenerator = Callable[
 
 @lru_cache(maxsize=1)
 def setting_generators() -> dict[str, SettingGenerator]:
+    """The family registry, EXTENDED in Sprint 27 rather than replaced.
+
+    The four new families join the same registry the existing two are in, are
+    reached through the same `generate_setting()` entry point, and receive the
+    same head and seat handling below. That is what makes Extended Setting Modes
+    an extension of the Setting System rather than a second setting engine: there
+    is still exactly one dispatch, one head step and one seat step.
+    """
+
+    from jewelmind.setting.bar import generate_bar_setting
     from jewelmind.setting.bezel import generate_bezel_setting
+    from jewelmind.setting.channel import generate_channel_setting
+    from jewelmind.setting.flush import generate_flush_setting
     from jewelmind.setting.prong import generate_prong_setting
+    from jewelmind.setting.tension import generate_tension_setting
 
     return {
         "prong": generate_prong_setting,
         "bezel": generate_bezel_setting,
+        "channel": generate_channel_setting,
+        "bar": generate_bar_setting,
+        "flush": generate_flush_setting,
+        "tension": generate_tension_setting,
     }
 
 
@@ -78,6 +96,7 @@ def generate_setting(
     # give those callers two.
     if definition.head is not None:
         from jewelmind.setting.head import HEAD_COMPONENT, build_head
+        from jewelmind.setting.modes import mode_for_head_architecture
 
         head_component = build_head(definition.head, definition.attachment)
         components = {**components, HEAD_COMPONENT: head_component}
@@ -93,6 +112,22 @@ def generate_setting(
                     _component_fact(head_component),
                 ],
                 "headArchitecture": definition.head.architecture,
+                # PROVENANCE FOR THE HEAD (Sprint 27), carrying the HEAD-axis
+                # mode rather than the primary one. The head is a separate axis:
+                # a bezel on a martini is one setting with two modes, and
+                # attributing the head to the primary mode would lose which
+                # architecture actually built it.
+                "componentProvenance": [
+                    *result.componentProvenance,
+                    SettingComponentProvenance(
+                        componentId=HEAD_COMPONENT,
+                        settingModeId=mode_for_head_architecture(
+                            definition.head.architecture
+                        ),
+                        sourceStoneId=definition.stone.stoneId,
+                        classification="PRODUCTION",
+                    ),
+                ],
             }
         )
 
