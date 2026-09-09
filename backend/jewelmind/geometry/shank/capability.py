@@ -119,19 +119,56 @@ SHANK_CAPABILITIES: dict[str, ShankCapability] = {
         ),
         ShankCapability(
             capability="split_shank",
-            status="planned",
-            jdlExposed=False,
-            generatable=False,
-            inspectable=False,
-            description="Multiple rails — architecture reserves the concept, v1 builds exactly one rail.",
+            status="current",
+            jdlExposed=True,
+            generatable=True,
+            inspectable=True,
+            description=(
+                "Sprint 28. TWO rails sharing the band's width, joined into one "
+                "band over the bottom span and genuinely separated at the top — "
+                "the axial gap between them contains no metal. Built by "
+                "`shank/architecture.py::build_split_shank()`, selected by "
+                "`band.architecture = 'SPLIT'`, and reported by the "
+                "SHANK_RAIL_COUNT and SHANK_SEPARATED_AT_HEAD inspection facts. "
+                "A wider separation NARROWS the rails rather than widening the "
+                "ring, and `JM-RINGFAM-004` refuses a separation that leaves no "
+                "rail at all."
+            ),
+        ),
+        ShankCapability(
+            capability="bypass_shank",
+            status="current",
+            jdlExposed=True,
+            generatable=True,
+            inspectable=True,
+            description=(
+                "Sprint 28. ONE open rail travelling past a full turn with its "
+                "axial position shifting as it goes, so its two ends occupy the "
+                "same angles at different axial positions and PASS each other. "
+                "Deliberately one rail rather than two arcs: two axially "
+                "separated arcs come out as two disconnected solids, and a ring "
+                "that is not one connected body is not a ring. Built by "
+                "`shank/architecture.py::build_bypass_shank()`, selected by "
+                "`band.architecture = 'BYPASS'`."
+            ),
         ),
         ShankCapability(
             capability="cathedral_shank",
-            status="planned",
-            jdlExposed=False,
-            generatable=False,
-            inspectable=False,
-            description="Belongs primarily to shoulder/head integration, not a profile type.",
+            status="current",
+            jdlExposed=True,
+            generatable=True,
+            inspectable=True,
+            description=(
+                "Sprint 28. Still not a profile type — it belongs to "
+                "shoulder/head integration, exactly as this entry has said since "
+                "Sprint 17 — and that integration now exists: "
+                "`geometry/shoulder.py` builds two real arches for "
+                "SOLITAIRE_CATHEDRAL and four for a split shank, each lofted "
+                "from the band's OWN profile wire up to the head's OWN height. "
+                "Selected by the ring-family variant rather than by a band "
+                "field, because a cathedral is a family variant and not a "
+                "section shape."
+            ),
         ),
         ShankCapability(
             capability="knife_edge_profile",
@@ -163,7 +200,12 @@ SHANK_CAPABILITIES: dict[str, ShankCapability] = {
             jdlExposed=False,
             generatable=False,
             inspectable=False,
-            description="See split_shank — the general case of more than one rail.",
+            description=(
+                "MORE THAN TWO rails. `split_shank` became real in Sprint 28 and "
+                "builds exactly two; the general case is still not built, and it "
+                "is not a loop over the two-rail builder — three rails sharing "
+                "one band width need their own axial layout and their own bridge."
+            ),
         ),
         ShankCapability(
             capability="sculpted_shank",
@@ -171,7 +213,13 @@ SHANK_CAPABILITIES: dict[str, ShankCapability] = {
             jdlExposed=False,
             generatable=False,
             inspectable=False,
-            description="Local, non-parametric sculpting; not implemented.",
+            description=(
+                "Local, non-parametric sculpting; not implemented. It needs a "
+                "verified swept solid along a 3D spline, which is the same "
+                "prerequisite `SPLIT_SHANK_SCULPTED`, `SOLITAIRE_TRELLIS` and "
+                "`BYPASS_TWIST` all wait on — see "
+                "docs/bible/30-ring-families/coverage-review.md."
+            ),
         ),
     ]
 }

@@ -966,6 +966,12 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-ESM-COVERAGE-REVIEW | Extended Setting Modes Taxonomy Coverage Review | accepted | current | [`29-extended-setting-modes/taxonomy-coverage-review.md`](../29-extended-setting-modes/taxonomy-coverage-review.md) |
 | JM-BIBLE-ADR-013 | ADR-013: Extended Setting Modes taxonomy and mode resolution | accepted | current | [`03-decisions/ADR-013-extended-setting-modes.md`](../03-decisions/ADR-013-extended-setting-modes.md) |
 | JM-BIBLE-ESM-SPRINT-27-REPORT | Sprint 27 Validation Report — Extended Setting Modes v1 | accepted | current | [`29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md`](../29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md) |
+| JM-BIBLE-RINGFAM-README | Ring Families v2 — Index | accepted | partial | [`30-ring-families/README.md`](../30-ring-families/README.md) |
+| JM-BIBLE-RINGFAM-GOVERNANCE | Ring Family Governance | accepted | current | [`30-ring-families/ring-family-governance.md`](../30-ring-families/ring-family-governance.md) |
+| JM-BIBLE-RINGFAM-EXECUTION-BOUNDARY | Ring Families Execution Boundary | accepted | partial | [`30-ring-families/execution-boundary.md`](../30-ring-families/execution-boundary.md) |
+| JM-BIBLE-RINGFAM-COVERAGE-REVIEW | Ring Families Taxonomy Coverage Review | accepted | current | [`30-ring-families/coverage-review.md`](../30-ring-families/coverage-review.md) |
+| JM-BIBLE-ADR-014 | ADR-014: Ring family orchestration and the one family authority | accepted | current | [`03-decisions/ADR-014-ring-family-orchestration.md`](../03-decisions/ADR-014-ring-family-orchestration.md) |
+| JM-BIBLE-RINGFAM-SPRINT-28-REPORT | Sprint 28 Validation Report — Ring Families v2 | accepted | current | [`30-ring-families/SPRINT-28-VALIDATION-REPORT.md`](../30-ring-families/SPRINT-28-VALIDATION-REPORT.md) |
 | JM-BIBLE-PAVE-SPRINT-26-REPORT | Sprint 26 Validation Report — Pavé & Microsetting Engine v1 | accepted | current | [`28-pave/SPRINT-26-VALIDATION-REPORT.md`](../28-pave/SPRINT-26-VALIDATION-REPORT.md) |
 | JM-BIBLE-ADR-011 | ADR-011: Instance Axis Tilt | accepted | current | [`03-decisions/ADR-011-instance-axis-tilt.md`](../03-decisions/ADR-011-instance-axis-tilt.md) |
 

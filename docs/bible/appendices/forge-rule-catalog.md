@@ -52,6 +52,11 @@ The complete, current catalog of all 21 Forge rules — the human-readable compa
 | `JM-SETTING-011` | Setting mode geometrically feasible | GEOMETRY_PRECONDITION | FORGE-3 | error | 1.0.0 | ACCEPTED |
 | `JM-SETTING-012` | Setting mode requires professional review | SEMANTIC_COMPATIBILITY | FORGE-1 | warning | 1.0.0 | ACCEPTED |
 | `JM-SETTING-013` | Setting mode capability status | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-RINGFAM-001` | Ring-family variant belongs to the declared family | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
+| `JM-RINGFAM-002` | A derivation the document pre-empted | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-RINGFAM-003` | A family parameter the variant does not read | SEMANTIC_COMPATIBILITY | FORGE-1 | information | 1.0.0 | ACCEPTED |
+| `JM-RINGFAM-004` | The requested ring structure is geometrically possible | GEOMETRY_PRECONDITION | FORGE-1 | error / warning | 1.0.0 | ACCEPTED |
+| `JM-RINGFAM-005` | Ring-family capability status | MANUFACTURING_CONTEXT | FORGE-1 | information | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-001` | Single placement authority | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-002` | Family roles valid | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |
 | `JM-FAMILY-003` | Family compiles | SEMANTIC_COMPATIBILITY | FORGE-1 | error | 1.0.0 | ACCEPTED |

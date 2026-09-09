@@ -41,8 +41,13 @@ def ring_definition_from_jdl(definition: JewelryDefinition) -> RingDefinition:
             thicknessMm=definition.band.thickness,
             widthTaper=definition.band.widthTaper.model_copy(),
             thicknessTaper=definition.band.thicknessTaper.model_copy(),
+            architecture=definition.band.architecture,
+            splitSeparationMm=definition.band.splitSeparation,
+            splitJoinSpanDeg=definition.band.splitJoinSpan,
+            bypassSeparationMm=definition.band.bypassSeparation,
+            bypassOverlapDeg=definition.band.bypassOverlap,
         ),
-        shoulders=ShoulderDefinition(),
+        shoulders=_shoulders_from_jdl(definition),
         head=RingHeadDefinition(basketHeightMm=definition.setting.basketHeight),
         stoneArrangement=StoneArrangementDefinition(
             arrangement="SINGLE_CENTER",
@@ -55,3 +60,30 @@ def ring_definition_from_jdl(definition: JewelryDefinition) -> RingDefinition:
             prongHeightMm=definition.setting.prongHeight,
         ),
     )
+
+
+def _shoulders_from_jdl(definition: JewelryDefinition) -> ShoulderDefinition:
+    """The shoulder contract, read from the RESOLVED ring family (Sprint 28).
+
+    Resolved rather than inferred from `jewelry.style`, because the architecture
+    belongs to the VARIANT: a classic solitaire has no shoulders and a cathedral
+    one has two arches, and both are `solitaire`. Reading the resolver is what
+    keeps this from disagreeing with the component the assembly actually built —
+    the single-resolution-point discipline `effective_arrangement()` established.
+
+    A document the resolver refuses reports NO shoulder rather than raising: this
+    adapter's job is to describe a design, and `JM-RINGFAM-001` is what reports
+    the refusal.
+    """
+
+    from jewelmind.ring_family.errors import RingFamilyError
+    from jewelmind.ring_family.resolve import resolve_ring_family
+
+    try:
+        architecture = resolve_ring_family(definition).shoulderArchitecture
+    except RingFamilyError:
+        return ShoulderDefinition()
+
+    if architecture == "NONE":
+        return ShoulderDefinition()
+    return ShoulderDefinition(modeled=True, architecture=architecture)

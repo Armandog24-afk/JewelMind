@@ -108,5 +108,23 @@ class GeneratedModel:
     #: concrete type is `jewelmind.pave.compile.CompiledPaveField`.
     pave_result: Any = None
 
+    #: The resolved ring family and every derivation it made (Sprint 28).
+    #:
+    #: ALWAYS PRESENT for a generated ring, because every ring has a family —
+    #: a document with no `ringFamily` resolves to its family's default variant,
+    #: which for `solitaire` reproduces the pre-Sprint-28 design exactly. `None`
+    #: only for a hand-constructed fixture.
+    #:
+    #: THE PROVENANCE THAT MAKES THE SYSTEM PARAMETRIC RATHER THAN MERELY
+    #: CONFIGURABLE. Without it a reader can see that `setting.basketHeight` was
+    #: 4.2 and not that the elevated variant derived it from 3.5 by a factor,
+    #: which is the difference between a relation and a stored value.
+    #:
+    #: Typed `Any` for the same reason as every result above: this dataclass
+    #: must not import `jewelmind.ring_family`, and that package must not import
+    #: geometry. The concrete type is
+    #: `jewelmind.ring_family.resolve.ResolvedRingFamily`.
+    ring_family_result: Any = None
+
     def component_volumes(self) -> dict[str, float]:
         return {name: c.volume_mm3 for name, c in self.components.items()}

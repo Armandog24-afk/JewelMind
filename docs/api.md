@@ -205,6 +205,31 @@ would say, and returns the `ResolvedGem` alongside. See
 [`specs/gem/v1/`](../specs/gem/v1/README.md) and
 [`docs/bible/23-gem-identity/README.md`](bible/23-gem-identity/README.md).
 
+## Ring families (Sprint 28)
+
+**No new endpoint.** A ring family is expressed entirely in the request body, so
+every existing endpoint accepts one and none changed shape:
+
+- `jewelry.style` now accepts `solitaire`, `three_stone`, `halo`, `split_shank`,
+  `bypass` or `signet` (it was a single-member enum from Sprint 16 to 27).
+- `ringFamily` is a new optional block carrying the VARIANT and its parameters.
+  Omitting it — or sending `null` — resolves to the family's default variant,
+  and for `solitaire` that reproduces the pre-Sprint-28 design exactly.
+- `band` gained `architecture`, `splitSeparation`, `splitJoinSpan`,
+  `bypassSeparation` and `bypassOverlap`, each defaulting to the pre-Sprint-28
+  behaviour. They are normally DERIVED from the ring-family variant rather than
+  set directly.
+
+Verified end to end for every family: `POST /api/models/generate`,
+`POST /api/models/export/step`, `POST /api/models/export/stl`,
+`POST /api/models/specification` and `GET /api/models/{id}/inspection` all
+return real results, with real STEP and STL bytes.
+
+A variant belonging to a different family than `jewelry.style` names is
+**refused**, and surfaces as a `JM-RINGFAM-001` error from
+`POST /api/models/validate` and as a blocked generation — never as a design
+resolved by precedence.
+
 ## CORS, limits, and cleanup
 
 - CORS origins are configured via the `JEWELMIND_CORS_ORIGINS` environment

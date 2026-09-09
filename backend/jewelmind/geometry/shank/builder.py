@@ -210,13 +210,91 @@ def _build_tapered_shank(definition: JewelryDefinition) -> GeneratedComponent:
     )
 
 
+def _build_architecture(definition: JewelryDefinition) -> GeneratedComponent:
+    """A Sprint 28 shank architecture: `SPLIT` or `BYPASS`.
+
+    The architecture is checked BEFORE taper, because a split or bypass shank is
+    a different structure rather than a variation of the closed ring — and
+    because the two rails' own taper would need a per-rail interpolation the
+    Shank subsystem does not have. A taper requested alongside an architecture
+    is applied where it is meaningful (`SPLIT_SHANK_TAPERED` derives one) and
+    reported in the metadata either way, never silently honoured for a
+    construction that does not read it.
+    """
+
+    from jewelmind.geometry.shank.architecture import (
+        SHANK_ARCHITECTURE_BUILDERS,
+        ShankArchitectureError,
+    )
+
+    builder = SHANK_ARCHITECTURE_BUILDERS.get(definition.band.architecture)
+    if builder is None:  # pragma: no cover - the closed enum makes this unreachable
+        raise ShankConstructionError(
+            f"No shank builder is registered for architecture "
+            f"{definition.band.architecture!r}. Registered: "
+            f"{sorted(SHANK_ARCHITECTURE_BUILDERS)}."
+        )
+
+    try:
+        shape, architecture_metadata = builder(definition)
+    except ShankArchitectureError as exc:
+        # Re-raised as the Shank subsystem's own error so every caller keeps one
+        # exception type to catch, and the message travels unchanged.
+        raise ShankConstructionError(str(exc)) from exc
+
+    interface = shank_connection_interface(definition)
+    metadata = {
+        "profile": definition.band.profile,
+        "innerRadiusMm": inner_radius(definition),
+        "outerRadiusMm": outer_radius(definition),
+        # No outer-rim fillet: there is no single "circle at radius X" to select
+        # once the band is two rails or an open crossing rail — the same real,
+        # documented limitation the tapered path already carries
+        # (SHANK-GOV-014).
+        "filletApplied": False,
+        "filletSkippedReason": (
+            "An outer-rim fillet is not implemented for a non-uniform shank "
+            "architecture: there is no single circular edge at one radius to "
+            "select once the band is two rails or an open crossing rail."
+        ),
+        "widthTaperMode": definition.band.widthTaper.mode,
+        "thicknessTaperMode": definition.band.thicknessTaper.mode,
+        "connectionInterface": {
+            "topZMm": interface.topZMm,
+            "embedMm": interface.embedMm,
+            "headCenterRadiusMm": interface.headCenterRadiusMm,
+        },
+        **architecture_metadata,
+    }
+
+    return GeneratedComponent(
+        name="band",
+        shape=shape,
+        volume_mm3=shape.Volume(),
+        bounding_box=BoundingBox.from_shape(shape),
+        warnings=[],
+        metadata=metadata,
+    )
+
+
 def build_shank(definition: JewelryDefinition) -> GeneratedComponent:
-    """Build the metal ring shank as a single closed solid, named "band"
+    """Build the metal ring shank as a single connected solid, named "band"
     (the stable, unchanged component identity — brief section 30).
 
-    Dispatches to the exact pre-Sprint-17 construction when no taper is
-    requested, and a new loft-based construction otherwise.
+    Three real construction paths, dispatched on what the document actually
+    asks for and never on a heuristic:
+
+    - a Sprint 28 ARCHITECTURE (`SPLIT`/`BYPASS`) when one is requested;
+    - the exact pre-Sprint-17 uniform construction when no taper is requested;
+    - the loft-based tapered construction otherwise.
+
+    THE UNIFORM FAST PATH IS UNCHANGED AND STILL FIRST FOR EVERY EXISTING
+    DOCUMENT: `architecture` defaults to `UNIFORM`, so a design that predates
+    Sprint 28 reaches exactly the same branch it always did (SHANK-GOV-003).
     """
+
+    if definition.band.architecture != "UNIFORM":
+        return _build_architecture(definition)
 
     width_taper = definition.band.widthTaper
     thickness_taper = definition.band.thicknessTaper

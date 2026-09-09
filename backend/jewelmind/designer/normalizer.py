@@ -507,6 +507,43 @@ def _setting_mode_tables() -> dict[str, dict[str, str]]:
     }
 
 
+@lru_cache(maxsize=1)
+def _ring_family_tables() -> dict[str, dict[str, str]]:
+    """Synonym tables for the two ring-family axes, DERIVED from the registry.
+
+    TWO TABLES, and the split keeps each axis a single authority — the same
+    reason `_setting_mode_tables()` splits three ways. `jewelry.style` declares
+    the FAMILY; `ringFamily.variant` declares which variant of it. A term
+    resolves in both, to different values, because both statements are true of
+    it: "cathedral" names the solitaire family AND the cathedral variant, so a
+    request naming it produces a coherent pair rather than a family with a
+    variant from somewhere else.
+
+    Built lazily and cached because the registry MEASURES its rows by running
+    the real resolver, which imports this package's siblings.
+    """
+
+    from jewelmind.ring_family.capability import designer_family_terms
+    from jewelmind.ring_family.models import family_for_variant, implemented_families
+
+    styles: dict[str, str] = {family: family for family in implemented_families()}
+    variants: dict[str, str] = {}
+
+    for term, variant in designer_family_terms().items():
+        variants.setdefault(term, variant)
+        # A family name already maps to itself and must not be displaced: a
+        # request for "a halo" names the family, and the DEFAULT variant is what
+        # an undeclared `ringFamily` already resolves to.
+        styles.setdefault(term, family_for_variant(variant))
+
+    for variant in designer_family_terms().values():
+        variants.setdefault(variant.lower(), variant)
+        # The spaced form of the id, because a request writes words.
+        variants.setdefault(variant.lower().replace("_", " "), variant)
+
+    return {"jewelry.style": styles, "ringFamily.variant": variants}
+
+
 _ENUM_SYNONYM_TABLES: dict[str, dict[str, str]] = {
     "material.metal": METAL_SYNONYMS,
     "band.profile": BAND_PROFILE_SYNONYMS,
@@ -571,6 +608,11 @@ def normalize_enum_token(field: str, raw_value: str) -> tuple[str | None, bool]:
     derived = _setting_mode_tables().get(field)
     if derived is not None:
         return derived.get(token), False
+
+    # Sprint 28. Derived from the live ring-family registry for the same reason.
+    family_table = _ring_family_tables().get(field)
+    if family_table is not None:
+        return family_table.get(token), False
 
     table = _ENUM_SYNONYM_TABLES.get(field)
     if table is None:

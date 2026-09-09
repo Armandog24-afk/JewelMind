@@ -14,19 +14,39 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
-from jewelmind.domain.schema import BandProfile, BandTaperSpec, RingSizeSystem, SettingType, StoneSpec
+from jewelmind.domain.schema import (
+    BandArchitecture,
+    BandProfile,
+    BandTaperSpec,
+    RingSizeSystem,
+    SettingType,
+    StoneSpec,
+)
 
-#: The full recognized ring-family vocabulary — "solitaire" is CURRENT
-#: (see families.py::RING_FAMILY_GENERATORS); every other value is a
-#: reserved, PLANNED family name that proves RingDefinition v2 is not
-#: solitaire-specific, never implemented this Sprint (brief section 10).
+#: The full recognized ring-family vocabulary.
+#:
+#: Sprint 16 introduced this with `solitaire` CURRENT and everything else a
+#: reserved PLANNED name, to prove `RingDefinition` v2 was not
+#: solitaire-specific. Sprint 28 made SIX of them real: `solitaire`,
+#: `three_stone`, `halo`, `split_shank`, `bypass` and `signet` each have at
+#: least one executable variant in `ring_family/models.py::VARIANT_FAMILY`, and
+#: `families.py::RING_FAMILY_GENERATORS` dispatches every one.
+#:
+#: `toi_et_moi`, `eternity`, `plain_band` and `cluster` remain reserved with
+#: real technical reasons in `ring_family/models.py::RESERVED_RING_FAMILIES` —
+#: two of them because the capability already exists as a STONE family and a
+#: ring family of the same name would be a second authority over one placement.
 RingFamilyId = Literal[
     "solitaire",
     "three_stone",
-    "toi_et_moi",
     "halo",
-    "eternity",
+    "split_shank",
+    "bypass",
     "signet",
+    # Reserved: recognized names with no generator. See
+    # `ring_family/models.py::RESERVED_RING_FAMILIES` for each one's reason.
+    "toi_et_moi",
+    "eternity",
     "plain_band",
     "cluster",
 ]
@@ -49,10 +69,18 @@ class RingSizing(RingModel):
 
 
 class ShankDefinition(RingModel):
-    """CURRENT: uniform shank, plus real width/thickness taper (Sprint
-    17). Maps 1:1 from `JewelryDefinition.band`. Future PLANNED
-    variation: split, cathedral, knife-edge, Euro profiles — see
-    docs/bible/19-shank/556-current-band-migration.md."""
+    """CURRENT: uniform, split and bypass shanks, plus real width/thickness
+    taper. Maps 1:1 from `JewelryDefinition.band`.
+
+    THE 1:1 CLAIM IS LOAD-BEARING, which is why the five architecture fields
+    are here: Sprint 28 added them to `BandSpec` and left this model behind,
+    making the docstring false until it was fixed. SHANK-GOV requires this
+    mirror to move whenever `BandSpec` does, for exactly that reason.
+
+    Still PLANNED: knife-edge and Euro profiles, and more than two rails — see
+    docs/bible/19-shank/556-current-band-migration.md and
+    docs/bible/30-ring-families/coverage-review.md.
+    """
 
     profile: BandProfile
     widthMm: float
@@ -60,16 +88,42 @@ class ShankDefinition(RingModel):
     widthTaper: BandTaperSpec
     thicknessTaper: BandTaperSpec
 
+    #: Sprint 28. Normally DERIVED from the ring-family variant rather than set
+    #: directly, which is why the ring family is the layer that decides them
+    #: and this one only records what the document ended up saying.
+    architecture: BandArchitecture = "UNIFORM"
+    splitSeparationMm: float = 1.2
+    splitJoinSpanDeg: float = 200.0
+    bypassSeparationMm: float = 1.0
+    bypassOverlapDeg: float = 60.0
+
 
 class ShoulderDefinition(RingModel):
-    """IMPLICIT/PARTIAL. The current solitaire has no independently
-    modeled shoulder geometry — the shank flows directly into the head
-    with no distinct transition component. This model exists so the
-    contract has a real place to attach real geometry in a future
-    sprint, not because current geometry has a shoulder to describe —
-    see 527-shoulder-contract.md."""
+    """The shank-to-head transition.
 
-    modeled: Literal[False] = False
+    `modeled: False` was `Literal[False]` from Sprint 16 until Sprint 28,
+    because the shank genuinely flowed straight into the head with no distinct
+    transition component. Ring Families v2 gave the shoulder real geometry —
+    `geometry/shoulder.py` builds two arches for a cathedral solitaire and four
+    for a split shank — so the literal became a false claim and had to change
+    rather than be documented around.
+
+    STILL `False` FOR MOST DESIGNS, and that is the honest answer rather than a
+    gap: a classic solitaire has no shoulder component, and reporting one would
+    describe geometry that is not there. `architecture` names which builder
+    produced it, or `NONE`.
+
+    See 527-shoulder-contract.md and
+    docs/bible/30-ring-families/execution-boundary.md.
+    """
+
+    #: Whether this design has an independently modeled shoulder component.
+    modeled: bool = False
+
+    #: The shoulder architecture that built it, or `NONE`. Read from the
+    #: resolved ring family rather than inferred, so it cannot disagree with the
+    #: component that was actually generated.
+    architecture: Literal["NONE", "CATHEDRAL", "SPLIT_RAILS"] = "NONE"
 
 
 class RingHeadDefinition(RingModel):

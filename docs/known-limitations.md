@@ -103,6 +103,40 @@ to every limitation below and to the design as a whole.
   `SettingGeometryResult` instead. Materializing `GeometryPlan` is an explicit
   ADR condition and nothing in this sprint needed it.
 
+
+### Ring families (Sprint 28)
+
+- **A halo generates no metal to hold its stones.** The halo stones are real
+  solids at real radii, derived from the centre stone; nothing retains them.
+  This is why the `halo` ring family is PARTIAL rather than CURRENT, and it is
+  Sprint 25's own recorded boundary, unchanged.
+- **A signet table is flat and rectangular, and cannot be decorated.** No
+  engraving, relief or texture representation exists anywhere in the pipeline.
+  The `SIGNET_TABLE_ENGRAVED` inspection fact reports `false` for exactly this
+  reason, so a flat table is never mistaken for a finished signet.
+- **A shoulder arch cannot span more than 90 degrees.** Past a quarter turn the
+  ruled loft's two end sections have rotated past each other and the loft
+  self-intersects — silently, because OpenCascade's own validity check passes
+  the individual solid and only the ring's combined metal reports invalid. The
+  span is refused as a precondition in both the schema and the builder. A wider
+  shoulder needs a swept solid along a 3D spline, which does not exist.
+- **A bypass at a very small crossing clearance defeats the ring-level boolean
+  fuse.** At roughly 0.07 mm the fuse returns a degenerate result — negative
+  volumes, components gone — without raising. It is now DETECTED (a union cannot
+  be smaller than its largest input) and the export falls back to a real
+  multi-solid compound with a warning, so nothing broken ships silently; but the
+  single fused solid is not produced for that configuration.
+- **Only two rails.** A split shank builds exactly two; three or more need their
+  own axial layout and bridge.
+- **Nine families and variants are reserved and cannot be built** — `eternity`,
+  `toi_et_moi`, `cluster`, `plain_band`, `SOLITAIRE_TRELLIS`,
+  `SPLIT_SHANK_SCULPTED`, `BYPASS_TWIST`, `SIGNET_ENGRAVED`,
+  `SIGNET_OVAL_TABLE`. Each records its real technical reason; see
+  [`docs/bible/30-ring-families/coverage-review.md`](bible/30-ring-families/coverage-review.md).
+- **No ring dimension is professionally validated.** No rail width, shoulder
+  proportion, signet table thickness or crossing clearance is judged anywhere,
+  and every variant is `NOT_REVIEWED`.
+
 ## Preview / export
 
 - **GLB export was not implemented.** The preview pipeline was evaluated

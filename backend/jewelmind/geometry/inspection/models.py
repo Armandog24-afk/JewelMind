@@ -95,6 +95,30 @@ FactType = Literal[
     "SETTING_PROFESSIONAL_REVIEW_REQUIREMENT",
     "SETTING_COMPONENT_SOLID_COUNT",
     "SETTING_COMPONENT_PROVENANCE_COUNT",
+    # --- Sprint 28 (Ring Families v2), brief section 18 --------------------
+    # Every fact below reports WHAT THE RING FAMILY RESOLVED TO and what was
+    # built for it: the variant, its identity, its architectures, how many JDL
+    # paths it derived and which it did not. None of them is a judgement, and
+    # turning any of them into one remains Forge's job (INSPECT-GOV-001).
+    #
+    # The derived/skipped pair matters specifically because a parametric system
+    # has to be able to say what it changed: a reader who can see that the head
+    # height is 4.2 but not that the elevated variant derived it from 3.5 cannot
+    # check the relation.
+    "RING_FAMILY_ID",
+    "RING_FAMILY_VARIANT",
+    "RING_FAMILY_FINGERPRINT",
+    "RING_FAMILY_DERIVED_PATH_COUNT",
+    "RING_FAMILY_SKIPPED_PATH_COUNT",
+    "RING_FAMILY_SHANK_ARCHITECTURE",
+    "RING_FAMILY_SHOULDER_ARCHITECTURE",
+    "RING_FAMILY_BODY_ARCHITECTURE",
+    "SHANK_RAIL_COUNT",
+    "SHANK_SEPARATED_AT_HEAD",
+    "SHOULDER_ARCH_COUNT",
+    "SHOULDER_RISE",
+    "SIGNET_TABLE_TOP_Z",
+    "SIGNET_TABLE_ENGRAVED",
 ]
 
 InspectionStatus = Literal["PASS", "FAIL", "UNKNOWN", "NOT_APPLICABLE", "NOT_IMPLEMENTED", "ERROR"]

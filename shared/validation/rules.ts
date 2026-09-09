@@ -58,6 +58,30 @@ export const RULE_IDS = {
   SETTING_MODE_FAMILY_MATCHES: 'JM-SETTING-008',
   SETTING_MODE_REQUIREMENTS_MET: 'JM-SETTING-010',
   SETTING_MODE_PROFESSIONAL_REVIEW: 'JM-SETTING-012',
+
+  // Sprint 28 — RING_FAMILY_ONLY. A DELIBERATE SUBSET of the backend's five
+  // rules (FORGE-GOV-004: this mirror may only ever enforce a subset, and the
+  // backend's verdict always wins).
+  //
+  // Mirrored: 001 (the declared variant must belong to the family
+  // `jewelry.style` names) and 004 (the requested structure must be
+  // geometrically possible). Both are checkable from the document alone: the
+  // variant's family is recoverable from its own id, and the rail arithmetic
+  // needs only `band.width` and the separation.
+  //
+  // NOT mirrored, and each for a reason rather than an oversight:
+  //   - JM-RINGFAM-002 (a derivation the document pre-empted) needs the
+  //     resolver's own derived-path table, and duplicating it here would be a
+  //     second copy of which variant derives which path.
+  //   - JM-RINGFAM-003 (unread parameters) needs the resolver's
+  //     `parameters_read_by()` for the same reason. The Studio panel SHOWS only
+  //     the parameters a variant reads, which addresses the same concern
+  //     without asserting a rule the backend owns.
+  //   - JM-RINGFAM-005 (variant status) needs the capability registry, whose
+  //     rows are MEASURED by running the real resolver — the frontend must
+  //     never define a capability status the backend has not.
+  RING_FAMILY_VARIANT_MATCHES: 'JM-RINGFAM-001',
+  RING_FAMILY_GEOMETRY_FEASIBLE: 'JM-RINGFAM-004',
   // Sprint 21 — GEM_IDENTITY_ONLY. Referential and coherence invariants
   // only; no gemological or manufacturing claim.
   GEM_REFERENCE_EXISTS: 'JM-GEM-001',

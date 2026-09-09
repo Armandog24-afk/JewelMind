@@ -1,11 +1,11 @@
 {
-  "inspectionId": "inspection-5b6381fd-1361-4139-8796-bc15e3013998",
+  "inspectionId": "inspection-f1fd0a66-aff9-4c94-bc5f-8b866930a3c6",
   "inspectionVersion": "1.0.0",
-  "definitionHash": "4618fdaad756eefb",
+  "definitionHash": "9d25d8ee8781c3d2",
   "geometryGeneratorVersion": "0.1.0",
   "kernelVersion": "2.8.0",
-  "startedAt": "2026-09-02T15:55:19.119271+00:00",
-  "completedAt": "2026-09-02T15:55:19.402199+00:00",
+  "startedAt": "2026-09-09T13:01:04.192976+00:00",
+  "completedAt": "2026-09-09T13:01:04.700726+00:00",
   "status": "PASS",
   "componentResults": [
     {
@@ -760,7 +760,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -777,7 +777,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -794,7 +794,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -811,7 +811,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -828,7 +828,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -10.700000000000001,
@@ -858,7 +858,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -875,7 +875,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -892,7 +892,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -909,7 +909,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -926,7 +926,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.2500001,
@@ -956,7 +956,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -973,7 +973,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -990,7 +990,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1007,7 +1007,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1024,7 +1024,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1041,7 +1041,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1058,7 +1058,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1075,7 +1075,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1092,7 +1092,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1109,7 +1109,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1126,7 +1126,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1143,7 +1143,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1160,7 +1160,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1177,7 +1177,7 @@
       "status": "NOT_APPLICABLE",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1194,7 +1194,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1211,7 +1211,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1228,7 +1228,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1245,7 +1245,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1262,7 +1262,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1279,7 +1279,7 @@
       "status": "NOT_APPLICABLE",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1296,7 +1296,7 @@
       "status": "NOT_APPLICABLE",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1313,7 +1313,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "GeneratedComponent.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1330,7 +1330,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "geometry.roles.GEOMETRY_ROLE",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1347,7 +1347,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1364,7 +1364,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1381,7 +1381,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1398,7 +1398,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1415,7 +1415,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -1445,7 +1445,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1462,7 +1462,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Solids()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1479,7 +1479,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.Volume",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1496,7 +1496,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.isValid()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1513,7 +1513,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "Shape.BoundingBox()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {
         "xmin": -3.635,
@@ -1546,7 +1546,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "len(model.components)",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1563,7 +1563,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "prongs.metadata",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {
         "requestedCount": 4,
@@ -1585,7 +1585,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "assembly.stoneMetalSeparation",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1603,7 +1603,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1621,7 +1621,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1639,7 +1639,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1657,7 +1657,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1675,7 +1675,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1693,7 +1693,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.intersect()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1711,7 +1711,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1729,7 +1729,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1747,7 +1747,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1765,7 +1765,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1783,7 +1783,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1801,7 +1801,7 @@
       "status": "PASS",
       "tolerance": 1e-06,
       "sourceOperation": "Shape.distance()",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1820,7 +1820,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "connectivity graph (Shape.distance())",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1838,7 +1838,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1856,7 +1856,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1874,7 +1874,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1892,7 +1892,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1910,7 +1910,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1928,7 +1928,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1946,7 +1946,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1964,7 +1964,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -1982,7 +1982,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -2000,7 +2000,7 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -2018,7 +2018,7 @@
       "status": "UNKNOWN",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     },
@@ -2036,18 +2036,178 @@
       "status": "PASS",
       "tolerance": null,
       "sourceOperation": "SettingGeometryResult",
-      "generatedAt": "2026-09-02T15:55:19.402199+00:00",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.family",
+      "factType": "RING_FAMILY_ID",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "solitaire",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.variant",
+      "factType": "RING_FAMILY_VARIANT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "SOLITAIRE_CLASSIC",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.fingerprint",
+      "factType": "RING_FAMILY_FINGERPRINT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "d7410140a3a33b6e",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.derivedPathCount",
+      "factType": "RING_FAMILY_DERIVED_PATH_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": 1,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.skippedPathCount",
+      "factType": "RING_FAMILY_SKIPPED_PATH_COUNT",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": 0,
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.shankArchitecture",
+      "factType": "RING_FAMILY_SHANK_ARCHITECTURE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "UNIFORM",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.shoulderArchitecture",
+      "factType": "RING_FAMILY_SHOULDER_ARCHITECTURE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "NONE",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
+      "diagnostic": null,
+      "metadata": {}
+    },
+    {
+      "factId": "ringFamily.bodyArchitecture",
+      "factType": "RING_FAMILY_BODY_ARCHITECTURE",
+      "inspectionVersion": "1.0.0",
+      "scope": "ASSEMBLY",
+      "componentIds": [
+        "band",
+        "basket_support",
+        "prongs",
+        "stone_reference"
+      ],
+      "value": "NONE",
+      "unit": null,
+      "status": "PASS",
+      "tolerance": null,
+      "sourceOperation": "ResolvedRingFamily",
+      "generatedAt": "2026-09-09T13:01:04.699708+00:00",
       "diagnostic": null,
       "metadata": {}
     }
   ],
   "diagnostics": [],
   "performance": {
-    "totalDurationMs": 275.51140007562935,
-    "componentInspectionMs": 64.57080005202442,
-    "distanceInspectionMs": 46.5717000188306,
-    "intersectionInspectionMs": 152.7709000511095,
-    "topologyInspectionMs": 11.096899979747832
+    "totalDurationMs": 502.7210999978706,
+    "componentInspectionMs": 121.62620003800839,
+    "distanceInspectionMs": 85.75460000429302,
+    "intersectionInspectionMs": 258.5875000222586,
+    "topologyInspectionMs": 36.06030001537874
   },
   "unavailableInspections": []
 }

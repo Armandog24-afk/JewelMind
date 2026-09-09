@@ -51,9 +51,17 @@ KNOWN_UNSUPPORTED_CONCEPTS: dict[str, str] = {
     # (Sprint 25) but Designer cannot compose a nested halo, so it belongs in
     # `PRODUCT_SUPPORTED_NOT_PROPOSABLE` below rather than being described as
     # absent from the product.
-    "trilogy": "Only a single-stone solitaire is currently supported.",
-    "three_stone": "Only a single-stone solitaire is currently supported.",
-    "multi_stone": "Only a single-stone solitaire is currently supported.",
+    # Sprint 28: `trilogy`, `three_stone` and `multi_stone` were REMOVED. Each
+    # said "Only a single-stone solitaire is currently supported", which stopped
+    # being true in Sprint 24 — and `PRODUCT_SUPPORTED_NOT_PROPOSABLE` below
+    # already contradicted it in this same file. Ring Families v2 makes the
+    # whole family a FLAT variant scalar, so a trilogy is now both supported and
+    # proposable, and the entries would be a double misreport.
+    #
+    # The reserved ring FAMILIES and VARIANTS that genuinely do not exist are
+    # added below from `ring_family/models.py::RESERVED_RING_FAMILIES`, so the
+    # two can never disagree — the same discipline the reserved stone shapes and
+    # reserved setting modes already use here.
     # Sprint 19: `bezel` was removed from this map — it is now a real,
     # generatable setting family.
     #
@@ -152,6 +160,83 @@ for _concept, _message in _reserved_setting_mode_concepts().items():
     KNOWN_UNSUPPORTED_CONCEPTS.setdefault(_concept, _message)
 
 
+def _reserved_ring_family_concepts() -> dict[str, str]:
+    """Ring families and variants a request may name that JewelMind cannot build.
+
+    DERIVED from `ring_family/models.py::RESERVED_RING_FAMILIES` rather than
+    hand written, so a family that gains a derivation stops being reported as
+    unsupported on the next import.
+
+    TWO KEYS PER RESERVED VARIANT, and the second one needs three guards. The
+    full lowercased id (`solitaire_trellis`) is always unambiguous. The token a
+    request actually contains is the remainder after the family prefix
+    (`trellis`), and it is emitted only when it is unambiguous, is not itself
+    the name of a live family, and is not a term the registry already recognises
+    for a REAL variant.
+
+    The third guard is the one that matters most, and it is the same misreport
+    Sprints 18, 20, 26 and 27 each had to correct: emitting a token that
+    `designer_family_terms()` resolves to a working variant would tell a user
+    that something the product builds is unsupported.
+    """
+
+    from jewelmind.ring_family.capability import designer_family_terms
+    from jewelmind.ring_family.models import (
+        RESERVED_RING_FAMILIES,
+        implemented_families,
+    )
+
+    live_families = set(implemented_families())
+    live_terms = set(designer_family_terms())
+
+    def _message(name: str, reason: str) -> str:
+        label = name.replace("_", " ").lower()
+        return f"The {label} ring family is not currently supported. {reason}"
+
+    concepts: dict[str, str] = {
+        name.lower(): _message(name, reason)
+        for name, reason in RESERVED_RING_FAMILIES.items()
+    }
+
+    #: The remainder after a live family prefix, per token, so an ambiguous
+    #: remainder claimed by two reserved variants is not emitted at all.
+    stripped: dict[str, list[str]] = {}
+    for name in RESERVED_RING_FAMILIES:
+        lowered = name.lower()
+        for family in live_families:
+            if lowered.startswith(f"{family}_"):
+                stripped.setdefault(lowered[len(family) + 1 :], []).append(name)
+                break
+
+    for token, names in stripped.items():
+        if len(names) != 1 or token in live_families or token in live_terms:
+            continue
+        message = _message(names[0], RESERVED_RING_FAMILIES[names[0]])
+        for key in {token, token.replace("_", " ")}:
+            if key not in live_families and key not in live_terms:
+                concepts.setdefault(key, message)
+    return concepts
+
+
+for _concept, _message in _reserved_ring_family_concepts().items():
+    # Never overwrite an existing entry: a reserved stone shape's own message is
+    # more specific than a family's.
+    KNOWN_UNSUPPORTED_CONCEPTS.setdefault(_concept, _message)
+
+
+def _ring_family_variant_ids() -> list[str]:
+    """The ring-family variants Designer may propose.
+
+    Read from the live capability registry, whose `differsFromFamilyBaseline`
+    axis is MEASURED by running the real resolver, so a variant that loses its
+    derivation stops being proposable on the next import.
+    """
+
+    from jewelmind.ring_family.capability import ring_family_capabilities
+
+    return list(ring_family_capabilities())
+
+
 def _stone_source_capabilities() -> dict[str, str]:
     """The real, current stone source modes and their status.
 
@@ -236,6 +321,12 @@ def current_capabilities() -> dict[str, Any]:
         "headArchitecture": list(get_args(S.HeadArchitecture)),
         "prongStyle": list(get_args(S.ProngStyle)),
         "seatMode": list(get_args(S.SeatMode)),
+        # Sprint 28. `jewelryStyle` above already carries the six ring FAMILIES
+        # straight from the schema's own literal, so it needed no change here —
+        # extending `jewelry.style` rather than adding a competing field is what
+        # made that true. The VARIANT is the new axis, read from the live
+        # capability registry so a reserved variant can never be offered.
+        "ringFamilyVariant": _ring_family_variant_ids(),
     }
 
 
@@ -278,6 +369,8 @@ _ENUM_FIELD_CAPABILITY_KEY: dict[str, str] = {
     "pave.retention.strategy": "paveRetentionStrategy",
     "pave.seat.mode": "paveSeatMode",
     "pave.containment": "paveContainment",
+    # Sprint 28.
+    "ringFamily.variant": "ringFamilyVariant",
     # Sprint 27.
     "setting.mode.modeId": "settingMode",
     "setting.headArchitecture": "headArchitecture",
@@ -293,19 +386,22 @@ _ENUM_FIELD_CAPABILITY_KEY: dict[str, str] = {
 # Designer proposes flat dotted scalar paths, and a family or a halo is a
 # nested structure whose fields could not be diffed one by one or shown with
 # real per-field provenance.
-PRODUCT_SUPPORTED_NOT_PROPOSABLE: dict[str, str] = {
-    "halo": (
-        "Halos are supported and generate real geometry, but they are "
-        "configured in the workspace rather than proposed from a description: "
-        "a halo is a nested structure and every proposed field must carry its "
-        "own provenance."
-    ),
-    "three_stone": (
-        "Multi-stone families are supported and generate real geometry, but "
-        "they are configured in the workspace rather than proposed from a "
-        "description, for the same reason."
-    ),
-}
+#
+# Sprint 28 EMPTIED this map, and the reason is the sprint's own result rather
+# than a relaxation. Both entries said a real capability could not be proposed
+# because it was a NESTED structure whose fields could not carry per-field
+# provenance. Ring Families v2 removed that obstacle instead of working around
+# it: a family is now `jewelry.style` plus `ringFamily.variant`, two flat enum
+# scalars, and the nested `halo`/`family` blocks are DERIVED from them by
+# `resolve_ring_family()` rather than proposed field by field. So both concepts
+# are proposable, with real provenance on the two fields the request actually
+# determines.
+#
+# The map itself stays, with its consumer in `service.py`, because the
+# distinction it draws is still the right one and the next capability that is
+# real but not yet proposable belongs here rather than in
+# `KNOWN_UNSUPPORTED_CONCEPTS`.
+PRODUCT_SUPPORTED_NOT_PROPOSABLE: dict[str, str] = {}
 
 
 # Fields Designer is allowed to propose at all. Anything outside this set
@@ -374,6 +470,27 @@ KNOWN_JDL_FIELD_PATHS: frozenset[str] = frozenset(
         "setting.headArchitecture",
         "setting.prongStyle",
         "setting.seatMode",
+        #
+        # Sprint 28. TWO flat scalars, and between them they determine the
+        # design's whole structure: the family and its variant. Every nested
+        # block a family implies — `family`, `halo`, `pave`, the band's
+        # architecture, the head's height — is DERIVED from these two by
+        # `resolve_ring_family()`, which is why a family became proposable this
+        # sprint without any of the per-field provenance problems that kept it
+        # out before.
+        #
+        # The family itself is `jewelry.style`, already present above since
+        # Sprint 16.
+        "ringFamily.variant",
+        "ringFamily.enabled",
+        #
+        # The ring-family PARAMETERS are deliberately ABSENT, for exactly the
+        # reason the pavé's metric spacings and the setting mode's dimensions
+        # are: a rail separation, a shoulder reach or a table height is a
+        # dimension, and a request for "a bolder split shank" names a WEIGHT.
+        # Converting one into the other requires knowing what separation is
+        # appropriate, which is the professional judgment this project has no
+        # evidence for. They are set through the workspace and the API.
         #
         # The mode PARAMETERS are deliberately ABSENT, for exactly the reason
         # the pave's metric spacings are: a wall thickness, a collar width or a

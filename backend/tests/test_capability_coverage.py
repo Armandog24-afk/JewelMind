@@ -521,15 +521,32 @@ def test_no_halo_claims_a_setting_it_does_not_build():
     assert keys[("halo", "designer_halo_language")]["status"] == "PLANNED"
 
 
-def test_the_reserved_halo_rows_no_longer_call_a_halo_a_family():
-    """Two pre-Sprint-25 rows described a halo as a reserved FAMILY name and as
-    needing an RFC. Both were true then and neither is now, so both were
-    corrected rather than left to contradict the live registry."""
+def test_the_halo_rows_record_both_the_sprint_25_and_sprint_28_positions():
+    """Sprint 28 made `halo` a real ring family, which looks like a reversal of
+    Sprint 25 and is not.
+
+    Sprint 25 marked `ring_family/halo` OUT_OF_SCOPE because a halo is a stone
+    arrangement rather than a family — a claim about where the GEOMETRY lives.
+    That has not moved: the Halo System still owns every halo solid and the ring
+    family derives a `halo` block and computes no placement. Sprint 28 added the
+    orchestration above it.
+
+    So the row is now PARTIAL, and the note must carry BOTH facts. Dropping
+    either would misrepresent a decision rather than update it.
+    """
 
     keys = _by_key()
-    assert keys[("ring_family", "halo")]["status"] == "OUT_OF_SCOPE"
-    assert "not a family" in keys[("ring_family", "halo")]["note"].lower()
+    row = keys[("ring_family", "halo")]
+    assert row["status"] == "PARTIAL"
+    note = row["note"].lower()
+    # Sprint 25's claim, still true.
+    assert "does not reverse" in note
+    assert "halo system still owns" in note
+    # Sprint 28's addition, and the boundary that keeps it PARTIAL.
+    assert "no metal is generated to hold" in note
     assert keys[("stone_arrangement", "halo")]["status"] == "PARTIAL"
+    # And the gap is still tracked where it was.
+    assert keys[("halo", "halo_setting_metal")]["status"] == "PLANNED"
 
 
 def test_multi_stone_stone_geometry_is_now_claimed_honestly():

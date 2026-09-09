@@ -2,11 +2,20 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jewelmind.example/specs/ring/v2/shoulder-definition.schema.json",
   "title": "Shoulder Definition v2",
-  "description": "Mirrors backend/jewelmind/ring/models.py::ShoulderDefinition. IMPLICIT/PARTIAL: the current solitaire has no independently modeled shoulder geometry — 'modeled' is always false today. See docs/bible/18-ring-architecture/527-shoulder-contract.md.",
+  "description": "Mirrors backend/jewelmind/ring/models.py::ShoulderDefinition. 'modeled' was const false from Sprint 16 until Sprint 28, because the shank genuinely flowed straight into the head with no distinct transition component. Ring Families v2 gave the shoulder real geometry — geometry/shoulder.py builds two arches for a cathedral solitaire and four for a split shank — so the const became a false claim and had to change rather than be documented around. It is still false for most designs, and that is the honest answer rather than a gap: a classic solitaire has no shoulder component, and reporting one would describe geometry that is not there. Read from the RESOLVED ring family rather than inferred from jewelry.style, because the architecture belongs to the variant. See docs/bible/18-ring-architecture/527-shoulder-contract.md and docs/bible/30-ring-families/execution-boundary.md.",
   "type": "object",
   "additionalProperties": false,
   "required": ["modeled"],
   "properties": {
-    "modeled": { "const": false }
+    "modeled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this design has an independently modeled shoulder component."
+    },
+    "architecture": {
+      "enum": ["NONE", "CATHEDRAL", "SPLIT_RAILS"],
+      "default": "NONE",
+      "description": "The shoulder architecture that built it, or NONE. CATHEDRAL is two arches, SPLIT_RAILS is four — one per rail per side. Every architecture produces the single 'shoulders' component; the arch count is reported in that component's metadata and by the SHOULDER_ARCH_COUNT inspection fact."
+    }
   }
 }

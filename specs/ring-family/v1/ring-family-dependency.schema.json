@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "description": "One edge of the parametric graph.",
+  "properties": {
+    "kind": {
+      "enum": [
+        "DERIVATION",
+        "INFLUENCE"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "variant": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Variant"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Targets",
+      "type": "array"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "variant",
+    "source",
+    "targets",
+    "reason"
+  ],
+  "title": "RingFamilyDependency",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/ring-family/v1/ring-family-dependency.schema.json"
+}

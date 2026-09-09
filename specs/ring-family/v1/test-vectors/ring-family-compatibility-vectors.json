@@ -1,0 +1,11 @@
+{
+  "note": "The pre-Sprint-28 design, unchanged. Every existing document is a `solitaire` with no `ringFamily`, which resolves to SOLITAIRE_CLASSIC and reproduces the earlier geometry exactly. If this number moves, every Golden baseline moves with it.",
+  "vectors": [
+    {
+      "case": "default-solitaire-no-ring-family",
+      "declaresRingFamily": false,
+      "resolvedVariant": "SOLITAIRE_CLASSIC",
+      "combinedMetalVolumeMm3": 341.44334316909976
+    }
+  ]
+}

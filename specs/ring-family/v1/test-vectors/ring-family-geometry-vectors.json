@@ -1,0 +1,267 @@
+{
+  "note": "MEASURED from real generated solids, never hand-written. Volumes are the kernel's own and are recorded to the precision the kernel reports; they are software measurements, not manufacturing figures, and NOTHING here is professionally validated.",
+  "ringFamilyGeometryVersion": "1.0.0",
+  "vectors": [
+    {
+      "variant": "SOLITAIRE_CLASSIC",
+      "family": "solitaire",
+      "combinedMetalVolumeMm3": 341.44334316909976,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "SOLITAIRE_CATHEDRAL",
+      "family": "solitaire",
+      "combinedMetalVolumeMm3": 363.1668457452281,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "shoulders": 64.846629566,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "SOLITAIRE_LOW_PROFILE",
+      "family": "solitaire",
+      "combinedMetalVolumeMm3": 319.5753439729315,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 53.30497335,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "SOLITAIRE_ELEVATED",
+      "family": "solitaire",
+      "combinedMetalVolumeMm3": 398.0604296863908,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 116.737891636,
+        "prongs": 29.650351465,
+        "shoulders": 69.52722276,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "THREE_STONE_SYMMETRIC",
+      "family": "three_stone",
+      "combinedMetalVolumeMm3": 341.44334316909976,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245,
+        "stone_reference.side.left": 9.686588627,
+        "stone_reference.side.left.mirror.1": 9.686588627
+      },
+      "stoneComponentCount": 3,
+      "warnings": []
+    },
+    {
+      "variant": "THREE_STONE_GRADUATED",
+      "family": "three_stone",
+      "combinedMetalVolumeMm3": 341.44334316909976,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245,
+        "stone_reference.side.left": 4.959533377,
+        "stone_reference.side.left.mirror.1": 4.959533377
+      },
+      "stoneComponentCount": 3,
+      "warnings": []
+    },
+    {
+      "variant": "HALO_SINGLE",
+      "family": "halo",
+      "combinedMetalVolumeMm3": 341.44334316909976,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245,
+        "stone_reference.halo0.0": 0.619941672,
+        "stone_reference.halo0.1": 0.619941672,
+        "stone_reference.halo0.10": 0.619941672,
+        "stone_reference.halo0.11": 0.619941672,
+        "stone_reference.halo0.12": 0.619941672,
+        "stone_reference.halo0.13": 0.619941672,
+        "stone_reference.halo0.14": 0.619941672,
+        "stone_reference.halo0.15": 0.619941672,
+        "stone_reference.halo0.2": 0.619941672,
+        "stone_reference.halo0.3": 0.619941672,
+        "stone_reference.halo0.4": 0.619941672,
+        "stone_reference.halo0.5": 0.619941672,
+        "stone_reference.halo0.6": 0.619941672,
+        "stone_reference.halo0.7": 0.619941672,
+        "stone_reference.halo0.8": 0.619941672,
+        "stone_reference.halo0.9": 0.619941672
+      },
+      "stoneComponentCount": 17,
+      "warnings": []
+    },
+    {
+      "variant": "HALO_DOUBLE",
+      "family": "halo",
+      "combinedMetalVolumeMm3": 341.44334316909976,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245,
+        "stone_reference.halo0.0": 0.619941672,
+        "stone_reference.halo0.1": 0.619941672,
+        "stone_reference.halo0.10": 0.619941672,
+        "stone_reference.halo0.11": 0.619941672,
+        "stone_reference.halo0.12": 0.619941672,
+        "stone_reference.halo0.13": 0.619941672,
+        "stone_reference.halo0.14": 0.619941672,
+        "stone_reference.halo0.15": 0.619941672,
+        "stone_reference.halo0.2": 0.619941672,
+        "stone_reference.halo0.3": 0.619941672,
+        "stone_reference.halo0.4": 0.619941672,
+        "stone_reference.halo0.5": 0.619941672,
+        "stone_reference.halo0.6": 0.619941672,
+        "stone_reference.halo0.7": 0.619941672,
+        "stone_reference.halo0.8": 0.619941672,
+        "stone_reference.halo0.9": 0.619941672,
+        "stone_reference.halo1.0": 0.380721679,
+        "stone_reference.halo1.1": 0.380721679,
+        "stone_reference.halo1.10": 0.380721679,
+        "stone_reference.halo1.11": 0.380721679,
+        "stone_reference.halo1.12": 0.380721679,
+        "stone_reference.halo1.13": 0.380721679,
+        "stone_reference.halo1.14": 0.380721679,
+        "stone_reference.halo1.15": 0.380721679,
+        "stone_reference.halo1.16": 0.380721679,
+        "stone_reference.halo1.17": 0.380721679,
+        "stone_reference.halo1.18": 0.380721679,
+        "stone_reference.halo1.19": 0.380721679,
+        "stone_reference.halo1.2": 0.380721679,
+        "stone_reference.halo1.20": 0.380721679,
+        "stone_reference.halo1.21": 0.380721679,
+        "stone_reference.halo1.3": 0.380721679,
+        "stone_reference.halo1.4": 0.380721679,
+        "stone_reference.halo1.5": 0.380721679,
+        "stone_reference.halo1.6": 0.380721679,
+        "stone_reference.halo1.7": 0.380721679,
+        "stone_reference.halo1.8": 0.380721679,
+        "stone_reference.halo1.9": 0.380721679
+      },
+      "stoneComponentCount": 39,
+      "warnings": []
+    },
+    {
+      "variant": "HALO_HIDDEN",
+      "family": "halo",
+      "combinedMetalVolumeMm3": 349.64384286766267,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 94.349802829,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245,
+        "stone_reference.halo0.0": 0.619941672,
+        "stone_reference.halo0.1": 0.619941672,
+        "stone_reference.halo0.10": 0.619941672,
+        "stone_reference.halo0.11": 0.619941672,
+        "stone_reference.halo0.12": 0.619941672,
+        "stone_reference.halo0.13": 0.619941672,
+        "stone_reference.halo0.14": 0.619941672,
+        "stone_reference.halo0.15": 0.619941672,
+        "stone_reference.halo0.2": 0.619941672,
+        "stone_reference.halo0.3": 0.619941672,
+        "stone_reference.halo0.4": 0.619941672,
+        "stone_reference.halo0.5": 0.619941672,
+        "stone_reference.halo0.6": 0.619941672,
+        "stone_reference.halo0.7": 0.619941672,
+        "stone_reference.halo0.8": 0.619941672,
+        "stone_reference.halo0.9": 0.619941672
+      },
+      "stoneComponentCount": 17,
+      "warnings": []
+    },
+    {
+      "variant": "SPLIT_SHANK_PARALLEL",
+      "family": "split_shank",
+      "combinedMetalVolumeMm3": 304.46539940207856,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 202.048129838,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "shoulders": 35.090470101,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "SPLIT_SHANK_TAPERED",
+      "family": "split_shank",
+      "combinedMetalVolumeMm3": 293.01938257312327,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 189.431200575,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "shoulders": 35.090470101,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "BYPASS_CROSSOVER",
+      "family": "bypass",
+      "combinedMetalVolumeMm3": 177.41269123095003,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 86.899341106,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    },
+    {
+      "variant": "SIGNET_FLAT_TABLE",
+      "family": "signet",
+      "combinedMetalVolumeMm3": 573.0356360267203,
+      "metalSolidCount": 1,
+      "components": {
+        "band": 250.991683177,
+        "basket_support": 83.155758426,
+        "prongs": 29.650351465,
+        "signet_body": 297.0,
+        "stone_reference": 58.221419245
+      },
+      "stoneComponentCount": 1,
+      "warnings": []
+    }
+  ]
+}

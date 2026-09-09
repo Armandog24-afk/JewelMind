@@ -2163,3 +2163,126 @@ agents must:
 
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.
+
+## RING FAMILY RULES
+
+`docs/bible/30-ring-families/` is the authoritative Ring Families v2
+specification — start at
+[`docs/bible/30-ring-families/README.md`](docs/bible/30-ring-families/README.md),
+then
+[`ring-family-governance.md`](docs/bible/30-ring-families/ring-family-governance.md)
+for the 14 RINGFAM-GOV rules,
+[`execution-boundary.md`](docs/bible/30-ring-families/execution-boundary.md) for
+exactly what does and does not execute, and
+[`coverage-review.md`](docs/bible/30-ring-families/coverage-review.md) for why
+each deferred family is deferred. The machine-readable half lives in
+[`specs/ring-family/v1/`](specs/ring-family/v1/README.md). Future coding agents
+must:
+
+- **Read `docs/bible/30-ring-families/README.md` before changing ring
+  structure** — before modifying anything in
+  `backend/jewelmind/ring_family/`, `geometry/ring_family_adapter.py`,
+  `geometry/shank/architecture.py`, `geometry/shoulder.py`,
+  `geometry/signet.py`, `domain/schema.py::BandSpec`/`JewelryDefinition.ringFamily`,
+  or `validation/engine.py::_ring_family_rules`.
+- **Treat a ring family as a PARAMETRIC RELATION, never a preset.** Every
+  parameter must MODULATE something the document already states, so changing
+  `ring.innerDiameter`, `stone.diameter` or `band.width` regenerates the design.
+  A derived value that depends on nothing is a stored constant wearing a
+  parameter's name (RINGFAM-GOV-001).
+- **Keep every variant measurably different from its family's baseline.**
+  `differsFromFamilyBaseline` is MEASURED by running the real resolver, and
+  exactly one variant may report `false` — `SOLITAIRE_CLASSIC`, which IS the
+  baseline and is flagged `isFamilyBaseline`. `SOLITAIRE_LOW_PROFILE` and
+  `SOLITAIRE_ELEVATED` shipped identical to classic during Sprint 28 because
+  both had `headHeightFactor = 1.0`; `VARIANT_HEAD_HEIGHT_FACTOR` is what fixed
+  it (RINGFAM-GOV-002).
+- **Orchestrate the existing systems; never duplicate one.** The layer computes
+  no placement, no outline and no solid of its own. Side stones go to the
+  Multi-Stone Family layer and thence to the Stone Arrangement Engine; halos to
+  the Halo System; pavé to the Pavé Engine; the head to Setting System v2; the
+  taper to `shank/taper.py` (RINGFAM-GOV-003).
+- **Keep the layer category- and kernel-neutral** — nothing under
+  `backend/jewelmind/ring_family/` may import `cadquery`, `OCP`,
+  `jewelmind.geometry`, `jewelmind.ring`, `jewelmind.jewelry_category` or
+  `jewelmind.validation`. `geometry/ring_family_adapter.py` is the ONE sanctioned
+  meeting point with `JewelryDefinition`. Enforced by AST inspection in
+  `backend/tests/test_ring_families.py` (RINGFAM-GOV-004).
+- **Keep `ring_family/__init__.py` importing nothing** — load-bearing:
+  `domain/schema.py` imports `ring_family.models`, the trap `stone`, `gem`,
+  `arrangement`, `family`, `halo` and `pave` each document (RINGFAM-GOV-005).
+- **Measure the resolver; declare only what would require a forbidden import.**
+  `structuralGeometry` is declared BECAUSE measuring it needs the geometry
+  registries, and that is only acceptable with the correspondence asserted in
+  both directions in the test file — the resolution `pave/capability.py` already
+  uses for its own `settingGeometry` (RINGFAM-GOV-006).
+- **Keep `jewelry.style` the ONE family authority.** Never add a competing
+  `ringFamily.family`, and never resolve a family/variant disagreement by
+  precedence: `JM-RINGFAM-001` refuses it, exactly as `JM-FAMILY-001` and
+  `JM-SETTING-008` refuse their own (RINGFAM-GOV-007).
+- **Never overwrite a block the document declares itself** — report it in
+  `skippedPaths` and let `JM-RINGFAM-002` state it as INFORMATION
+  (RINGFAM-GOV-008).
+- **Declare every derived path, and let the resolver self-check every write.**
+  `RING_FAMILY_DEPENDENCIES` is the authority; a path written but not declared
+  raises at runtime, because a derivation no report could explain is worse than
+  a missing one (RINGFAM-GOV-009).
+- **Report an unread parameter; never silently ignore it** — `JM-RINGFAM-003`,
+  and Studio shows only the parameters the chosen variant reads
+  (RINGFAM-GOV-010).
+- **Reject, never repair, and never clamp** — an out-of-range separation, a span
+  past the construction limit, a reserved variant: each raises
+  (RINGFAM-GOV-011).
+- **Never invent a professional threshold, and never claim one.** No rule,
+  model, message or registry description may judge whether a rail is strong
+  enough, a shoulder castable, a signet table thick enough or a bypass sound.
+  Every variant is `NOT_REVIEWED`. The two numeric limits are ARITHMETIC and say
+  so: `JM-RINGFAM-004` refuses a separation that leaves *no rail* (a 0.15 mm
+  rail is thin and is NOT refused), and `MAX_ARCH_SPAN_DEG = 90.0` is the
+  measured limit of a ruled-loft arch (RINGFAM-GOV-012).
+- **Keep an absent ring family absent** — nothing synthesizes a block, and a
+  document with none must generate byte-identical geometry to its pre-Sprint-28
+  self: `341.44334316909976 mm³`. The adapter returns the ORIGINAL object when
+  nothing changes, and "nothing changed" is not "nothing derived" — the baseline
+  derives `setting.basketHeight` from the document's own value times two factors
+  of 1.0 (RINGFAM-GOV-013).
+- **Verify a loft's limits by MEASURING, never by trusting `isValid()`.** A
+  ruled loft between two sections that have rotated past each other
+  self-intersects while OCC reports the solid valid, which is why
+  `MAX_ARCH_SPAN_DEG` is a PRECONDITION rather than a check on the result. And a
+  boolean fuse can SUCCEED and return nonsense: a bypass at ~0.07 mm crossing
+  clearance produced six solids of negative volume with no warning, so
+  `_fuse_metal()` now checks that a union is never smaller than its largest
+  input — arithmetic about unions, not a tolerance.
+- **Never route a `UNIFORM` band through the architecture dispatch.**
+  `SHANK_ARCHITECTURE_BUILDERS` deliberately has no `UNIFORM` entry;
+  `_build_uniform_shank()` is reached first, which is what preserves
+  SHANK-GOV-003's byte-identity guarantee without a wrapper.
+- **Revolve first and translate the SHAPE afterwards.**
+  `Workplane.translate()` before `.revolve()` silently loses the offset, which
+  shipped as two coincident split rails. A partial `revolve()` sweeps
+  unpredictably; build an arc by intersecting a full revolve with a pie sector.
+- **Generate every `specs/ring-family/v1/` artifact by running the real
+  implementation** — registry, schemas, dependency graph, examples and vectors
+  are mirrors, re-derived by `TestSpecArtifacts` on every run, and the geometry
+  vectors are RE-MEASURED by rebuilding each variant (RINGFAM-GOV-014).
+- **Add a NEW Golden case for a new family — never retrofit an existing one.**
+  `RF-001`–`RF-007` cover the current scope; every accepted baseline needs an
+  entry in `docs/bible/appendices/golden-update-register.md` and honest
+  `knownLimitations`.
+- **Create an ADR** before letting the layer compute a placement, outline or
+  solid; adding a competing family field; replacing the measured
+  `differsFromFamilyBaseline` with a declaration; changing an existing variant's
+  derived-path set or the shank-architecture dispatch order; renaming
+  `shoulders`, `signet_body` or `band`; or changing what `geometryHash` includes.
+- **Create an RFC** before adding any ring family or variant beyond the thirteen
+  implemented — **including every reserved name** — a swept solid along a 3D
+  spline (the shared prerequisite for `SOLITAIRE_TRELLIS`,
+  `SPLIT_SHANK_SCULPTED` and `BYPASS_TWIST`), a surface-decoration system (for
+  `SIGNET_ENGRAVED`), metal that holds halo stones (what would make the `halo`
+  family CURRENT), a stone-less ring, or any professional threshold on a rail,
+  shoulder, table or crossing.
+
+Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
+COVERAGE GUARD** — they apply to every future sprint.
+

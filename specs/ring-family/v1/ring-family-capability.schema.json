@@ -1,0 +1,127 @@
+{
+  "additionalProperties": false,
+  "description": "One ring-family variant and everything true about it.",
+  "properties": {
+    "variant": {
+      "title": "Variant",
+      "type": "string"
+    },
+    "family": {
+      "title": "Family",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "CURRENT",
+        "PARTIAL",
+        "PLANNED",
+        "BLOCKED",
+        "OUT_OF_SCOPE"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "representable": {
+      "title": "Representable",
+      "type": "boolean"
+    },
+    "differsFromFamilyBaseline": {
+      "title": "Differsfromfamilybaseline",
+      "type": "boolean"
+    },
+    "isFamilyBaseline": {
+      "title": "Isfamilybaseline",
+      "type": "boolean"
+    },
+    "stoneGeometry": {
+      "title": "Stonegeometry",
+      "type": "boolean"
+    },
+    "structuralGeometry": {
+      "title": "Structuralgeometry",
+      "type": "boolean"
+    },
+    "pipelineCoverage": {
+      "additionalProperties": {
+        "enum": [
+          "CURRENT",
+          "PARTIAL",
+          "PLANNED",
+          "BLOCKED",
+          "OUT_OF_SCOPE"
+        ],
+        "type": "string"
+      },
+      "title": "Pipelinecoverage",
+      "type": "object"
+    },
+    "shankArchitecture": {
+      "title": "Shankarchitecture",
+      "type": "string"
+    },
+    "shoulderArchitecture": {
+      "title": "Shoulderarchitecture",
+      "type": "string"
+    },
+    "bodyArchitecture": {
+      "title": "Bodyarchitecture",
+      "type": "string"
+    },
+    "headHeightFactor": {
+      "title": "Headheightfactor",
+      "type": "number"
+    },
+    "derivedPathCount": {
+      "title": "Derivedpathcount",
+      "type": "integer"
+    },
+    "multiStone": {
+      "title": "Multistone",
+      "type": "boolean"
+    },
+    "professionalValidationStatus": {
+      "enum": [
+        "NOT_REVIEWED",
+        "IN_REVIEW",
+        "VALIDATED"
+      ],
+      "title": "Professionalvalidationstatus",
+      "type": "string"
+    },
+    "designerTerms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Designerterms",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "variant",
+    "family",
+    "status",
+    "representable",
+    "differsFromFamilyBaseline",
+    "isFamilyBaseline",
+    "stoneGeometry",
+    "structuralGeometry",
+    "pipelineCoverage",
+    "shankArchitecture",
+    "shoulderArchitecture",
+    "bodyArchitecture",
+    "headHeightFactor",
+    "derivedPathCount",
+    "multiStone",
+    "professionalValidationStatus",
+    "designerTerms",
+    "description"
+  ],
+  "title": "RingFamilyCapability",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/ring-family/v1/ring-family-capability.schema.json"
+}

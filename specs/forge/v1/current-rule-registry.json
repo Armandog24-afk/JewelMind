@@ -1428,6 +1428,151 @@
         "backend/tests/test_validation.py"
       ],
       "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-RINGFAM-001",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "bypass",
+          "halo",
+          "signet",
+          "solitaire",
+          "split_shank",
+          "three_stone"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_ring_family_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_ring_families.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-RINGFAM-002",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "bypass",
+          "halo",
+          "signet",
+          "solitaire",
+          "split_shank",
+          "three_stone"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_ring_family_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_ring_families.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-RINGFAM-003",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "SEMANTIC_COMPATIBILITY",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "bypass",
+          "halo",
+          "signet",
+          "solitaire",
+          "split_shank",
+          "three_stone"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_ring_family_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_ring_families.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-RINGFAM-004",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "GEOMETRY_PRECONDITION",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "bypass",
+          "halo",
+          "signet",
+          "solitaire",
+          "split_shank",
+          "three_stone"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_ring_family_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_ring_families.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
+    },
+    {
+      "ruleId": "JM-RINGFAM-005",
+      "currentVersion": "1.0.0",
+      "active": true,
+      "lifecycleState": "ACCEPTED",
+      "classification": "MANUFACTURING_CONTEXT",
+      "stage": "FORGE-1",
+      "applicability": {
+        "jewelryCategories": [
+          "ring"
+        ],
+        "styles": [
+          "bypass",
+          "halo",
+          "signet",
+          "solitaire",
+          "split_shank",
+          "three_stone"
+        ]
+      },
+      "professionalValidationStatus": "not_required",
+      "source": "backend/jewelmind/validation/engine.py::_ring_family_rules",
+      "dependencies": [],
+      "tests": [
+        "backend/tests/test_ring_families.py",
+        "backend/tests/test_validation.py"
+      ],
+      "deprecatedVersions": []
     }
   ]
 }

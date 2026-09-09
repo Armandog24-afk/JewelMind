@@ -60,7 +60,12 @@
         "thicknessTaper": {
           "mode": "NONE",
           "bottomRatio": 1.0
-        }
+        },
+        "architecture": "UNIFORM",
+        "splitSeparation": 1.2,
+        "splitJoinSpan": 200.0,
+        "bypassSeparation": 1.0,
+        "bypassOverlap": 60.0
       },
       "stone": {
         "shape": "round",
@@ -110,7 +115,8 @@
       "arrangement": null,
       "family": null,
       "halo": null,
-      "pave": null
+      "pave": null,
+      "ringFamily": null
     },
     "validation": [],
     "forgeEvaluation": {

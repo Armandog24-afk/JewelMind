@@ -34,6 +34,7 @@ from jewelmind.gem.models import (
 )
 from jewelmind.halo.models import HaloDefinition
 from jewelmind.pave.models import PaveDefinition
+from jewelmind.ring_family.models import RingFamilySpec
 from jewelmind.setting.models import (
     HeadArchitecture,
     ProngStyle,
@@ -97,7 +98,29 @@ MetalType = Literal[
 ManufacturingMethod = Literal["lost_wax_casting", "direct_resin_printing"]
 RingSizeSystem = Literal["EU"]
 JewelryCategory = Literal["ring"]
-JewelryStyle = Literal["solitaire"]
+#: The ring FAMILY a document declares.
+#:
+#: `jewelry.style` has meant "ring family" since Sprint 16 — `ring/families.py`
+#: dispatches on it — so Sprint 28 extends it rather than introducing a second
+#: field that could disagree with it. Every member here has at least one real,
+#: executable variant in `ring_family/models.py::VARIANT_FAMILY`, and
+#: `test_ring_families.py` asserts the two agree in both directions: a style
+#: with no variant would be a promise the pipeline cannot keep, and a variant
+#: whose family is not a style would be unreachable.
+#:
+#: Reserved family names (`eternity`, `toi_et_moi`, `cluster`, `plain_band`)
+#: are deliberately NOT members — see
+#: `ring_family/models.py::RESERVED_RING_FAMILIES` for each one's real
+#: technical reason. An ADDITIVE enum extension, so every existing document
+#: keeps validating and `schemaVersion` stays `0.1.0`.
+JewelryStyle = Literal[
+    "solitaire",
+    "three_stone",
+    "halo",
+    "split_shank",
+    "bypass",
+    "signet",
+]
 
 
 class StrictModel(BaseModel):
@@ -161,12 +184,61 @@ class BandTaperSpec(StrictModel):
     bottomRatio: float = Field(default=1.0, gt=0, le=1, allow_inf_nan=False)
 
 
+#: How the shank's own structure is built (Sprint 28).
+#:
+#: `UNIFORM` is the pre-Sprint-28 closed ring and remains the default, so every
+#: existing design keeps byte-identical geometry. The other two are real shank
+#: ARCHITECTURES with real builders:
+#:
+#: - `SPLIT` — two rails sharing the band's own width, joined into one band over
+#:   an angular span centred on the bottom. Genuinely two rails at the top: the
+#:   axial gap between them contains no metal, which is what a split shank is.
+#: - `BYPASS` — ONE open rail travelling past a full turn, its axial position
+#:   shifting as it goes, so its two ends occupy the same angle at different
+#:   axial positions and therefore PASS each other instead of meeting.
+#:
+#: A bypass is deliberately one rail rather than two arcs: two axially separated
+#: arcs come out as two disconnected solids, and a ring that is not one
+#: connected body is not a ring.
+#:
+#: See [`ADR-014`](../../../docs/bible/03-decisions/ADR-014-shank-architectures.md).
+BandArchitecture = Literal["UNIFORM", "SPLIT", "BYPASS"]
+
+
 class BandSpec(StrictModel):
     width: float = Field(default=2.4, allow_inf_nan=False)
     thickness: float = Field(default=1.8, allow_inf_nan=False)
     profile: BandProfile = "comfort_fit"
     widthTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
     thicknessTaper: BandTaperSpec = Field(default_factory=BandTaperSpec)
+
+    # ---- Sprint 28: shank architectures -------------------------------------
+    #
+    # Four additive optional fields, each defaulting to the pre-Sprint-28
+    # behaviour, so every existing document generates byte-identical geometry. A
+    # MINOR change by the same definition Sprint 17 used when the taper fields
+    # were added, so `schemaVersion` stays "0.1.0".
+
+    #: How the shank is structured. `UNIFORM` is the pre-Sprint-28 closed ring.
+    architecture: BandArchitecture = "UNIFORM"
+
+    #: Clear axial distance between a `SPLIT` shank's two rails. The rails share
+    #: the band's own width, so a wider separation makes each rail NARROWER
+    #: rather than making the ring wider — which is why `JM-RINGFAM-004`
+    #: refuses a separation that would leave no rail at all.
+    splitSeparation: float = Field(default=1.2, allow_inf_nan=False)
+
+    #: Angular span, in degrees and centred on the BOTTOM of the ring, over
+    #: which a `SPLIT` shank's rails are joined into one band. Outside it the
+    #: shank is genuinely two rails.
+    splitJoinSpan: float = Field(default=200.0, allow_inf_nan=False)
+
+    #: Clear axial distance between a `BYPASS` rail's two ends where they pass.
+    bypassSeparation: float = Field(default=1.0, allow_inf_nan=False)
+
+    #: How far past a full turn a `BYPASS` rail travels, in degrees. This is
+    #: what makes its two ends PASS each other rather than meet.
+    bypassOverlap: float = Field(default=60.0, allow_inf_nan=False)
 
 
 class JdlGemTreatment(StrictModel):
@@ -617,3 +689,27 @@ class JewelryDefinition(StrictModel):
     #: `schemaVersion` stays "0.1.0": an optional additive field is backward
     #: compatible, the same judgment Sprints 21-25 made.
     pave: PaveDefinition | None = None
+
+    #: The ring family's VARIANT and its parameters (Sprint 28).
+    #:
+    #: NULLABLE AND ABSENT BY DEFAULT, for the compatibility reason every
+    #: optional block since Sprint 22 has been: a document with no `ringFamily`
+    #: resolves to its family's default variant with default parameters, and for
+    #: `solitaire` that reproduces the pre-Sprint-28 design exactly.
+    #:
+    #: THE FAMILY IS NOT HERE. `jewelry.style` has meant "ring family" since
+    #: Sprint 16 and stays the one authority for it; this block carries the
+    #: variant and the parameters, so there is exactly one authority for each
+    #: half rather than two fields that can disagree. A variant belonging to
+    #: another family is refused by `JM-RINGFAM-001`.
+    #:
+    #: A RING FAMILY IS A RELATION, NOT A PRESET. Its parameters MODULATE what
+    #: the document already states — the head's height is the document's own
+    #: basket height times a factor, a halo's radius is the centre stone's own
+    #: half width times a factor — so changing `ring.size` or `stone.diameter`
+    #: regenerates the design rather than leaving it stale. It derives blocks
+    #: the systems that own them then execute; it builds nothing itself.
+    #:
+    #: Participates in `geometryHash`, because a family drives geometry. See
+    #: docs/bible/30-ring-families/README.md.
+    ringFamily: RingFamilySpec | None = None

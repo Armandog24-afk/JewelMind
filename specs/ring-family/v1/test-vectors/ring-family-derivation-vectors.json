@@ -1,0 +1,397 @@
+{
+  "note": "Every derivation each variant makes against a real default document, with the source parameters it was computed from. This is the parametric claim as data: a derived value that depended on nothing would be a stored constant rather than a relation.",
+  "vectors": [
+    {
+      "variant": "SOLITAIRE_CLASSIC",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SOLITAIRE_CATHEDRAL",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "ringFamily.shoulderArchitecture",
+          "sourceParameters": [
+            "ringFamily.params.shoulderSpanDeg",
+            "ringFamily.params.shoulderTopThicknessFactor",
+            "ringFamily.params.shoulderTopWidthFactor"
+          ],
+          "relation": "the 'SOLITAIRE_CATHEDRAL' variant builds CATHEDRAL shoulders rising from the band to the head"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SOLITAIRE_LOW_PROFILE",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (0.6) x headHeightFactor (1.0)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SOLITAIRE_ELEVATED",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.45) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "ringFamily.shoulderArchitecture",
+          "sourceParameters": [
+            "ringFamily.params.shoulderSpanDeg",
+            "ringFamily.params.shoulderTopThicknessFactor",
+            "ringFamily.params.shoulderTopWidthFactor"
+          ],
+          "relation": "the 'SOLITAIRE_ELEVATED' variant builds CATHEDRAL shoulders rising from the band to the head"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "THREE_STONE_SYMMETRIC",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "family.familyType",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the side stones are DELEGATED to the Multi-Stone Family layer, which compiles them into an arrangement"
+        },
+        {
+          "path": "family.params",
+          "sourceParameters": [
+            "ringFamily.params.sideSpacingMm",
+            "ringFamily.params.sideStoneScale"
+          ],
+          "relation": "sideScale = sideStoneScale (0.55)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "THREE_STONE_GRADUATED",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "family.familyType",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the side stones are DELEGATED to the Multi-Stone Family layer, which compiles them into an arrangement"
+        },
+        {
+          "path": "family.params",
+          "sourceParameters": [
+            "ringFamily.params.sideGraduationFactor",
+            "ringFamily.params.sideSpacingMm",
+            "ringFamily.params.sideStoneScale"
+          ],
+          "relation": "sideScale = sideStoneScale (0.55) x sideGraduationFactor (0.8)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "HALO_SINGLE",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "halo.variant",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the halo is DELEGATED to the Halo System, which owns what a halo is"
+        },
+        {
+          "path": "halo.rings",
+          "sourceParameters": [
+            "ringFamily.params.haloRadiusFactor",
+            "ringFamily.params.haloStoneCount",
+            "ringFamily.params.haloStoneScale",
+            "stone.diameter"
+          ],
+          "relation": "radiusMm = stone half width (3.2500) x haloRadiusFactor (1.05)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "HALO_DOUBLE",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "halo.variant",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the halo is DELEGATED to the Halo System, which owns what a halo is"
+        },
+        {
+          "path": "halo.rings",
+          "sourceParameters": [
+            "ringFamily.params.haloRadiusFactor",
+            "ringFamily.params.haloStoneCount",
+            "ringFamily.params.haloStoneScale",
+            "stone.diameter"
+          ],
+          "relation": "radiusMm = stone half width (3.2500) x haloRadiusFactor (1.05)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "HALO_HIDDEN",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.15) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "halo.variant",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the halo is DELEGATED to the Halo System, which owns what a halo is"
+        },
+        {
+          "path": "halo.rings",
+          "sourceParameters": [
+            "ringFamily.params.haloRadiusFactor",
+            "ringFamily.params.haloStoneCount",
+            "ringFamily.params.haloStoneScale",
+            "stone.diameter"
+          ],
+          "relation": "radiusMm = stone half width (3.2500) x haloRadiusFactor (1.05)"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SPLIT_SHANK_PARALLEL",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "band.architecture",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the 'SPLIT_SHANK_PARALLEL' variant requires the SPLIT shank architecture"
+        },
+        {
+          "path": "band.splitSeparation",
+          "sourceParameters": [
+            "ringFamily.params.splitSeparationMm"
+          ],
+          "relation": "the rails share the band's own width, so the separation narrows them rather than widening the ring"
+        },
+        {
+          "path": "band.splitJoinSpan",
+          "sourceParameters": [
+            "ringFamily.params.splitJoinSpanDeg"
+          ],
+          "relation": "the angular span, centred on the bottom, over which the rails are joined into one band"
+        },
+        {
+          "path": "ringFamily.shoulderArchitecture",
+          "sourceParameters": [
+            "ringFamily.params.shoulderSpanDeg",
+            "ringFamily.params.shoulderTopThicknessFactor",
+            "ringFamily.params.shoulderTopWidthFactor"
+          ],
+          "relation": "the 'SPLIT_SHANK_PARALLEL' variant builds SPLIT_RAILS shoulders rising from the band to the head"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SPLIT_SHANK_TAPERED",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "band.architecture",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the 'SPLIT_SHANK_TAPERED' variant requires the SPLIT shank architecture"
+        },
+        {
+          "path": "band.splitSeparation",
+          "sourceParameters": [
+            "ringFamily.params.splitSeparationMm"
+          ],
+          "relation": "the rails share the band's own width, so the separation narrows them rather than widening the ring"
+        },
+        {
+          "path": "band.splitJoinSpan",
+          "sourceParameters": [
+            "ringFamily.params.splitJoinSpanDeg"
+          ],
+          "relation": "the angular span, centred on the bottom, over which the rails are joined into one band"
+        },
+        {
+          "path": "band.widthTaper",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the tapered split narrows its rails toward the bottom using the Shank subsystem's own width taper"
+        },
+        {
+          "path": "ringFamily.shoulderArchitecture",
+          "sourceParameters": [
+            "ringFamily.params.shoulderSpanDeg",
+            "ringFamily.params.shoulderTopThicknessFactor",
+            "ringFamily.params.shoulderTopWidthFactor"
+          ],
+          "relation": "the 'SPLIT_SHANK_TAPERED' variant builds SPLIT_RAILS shoulders rising from the band to the head"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "BYPASS_CROSSOVER",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "band.architecture",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the 'BYPASS_CROSSOVER' variant requires the BYPASS shank architecture"
+        },
+        {
+          "path": "band.bypassSeparation",
+          "sourceParameters": [
+            "ringFamily.params.bypassSeparationMm"
+          ],
+          "relation": "the clear axial distance between the rail's two ends where they pass each other"
+        },
+        {
+          "path": "band.bypassOverlap",
+          "sourceParameters": [
+            "ringFamily.params.bypassOverlapDeg"
+          ],
+          "relation": "how far past a full turn the rail travels, which is what makes its ends pass rather than meet"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "SIGNET_FLAT_TABLE",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "ringFamily.bodyArchitecture",
+          "sourceParameters": [
+            "ringFamily.params.signetTableHeightMm",
+            "ringFamily.params.signetTableLengthMm",
+            "ringFamily.params.signetTableWidthMm"
+          ],
+          "relation": "a signet body is built as its own component, so it has parametric identity rather than being an unnamed lump fused to the band"
+        }
+      ],
+      "skippedPaths": []
+    }
+  ]
+}

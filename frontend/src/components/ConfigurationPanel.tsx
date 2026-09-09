@@ -13,6 +13,7 @@ import { useProjectStore } from '../store/useProjectStore'
 import { FormSection } from './FormSection'
 import { NumericField } from './NumericField'
 import { PaveSection } from './PaveSection'
+import { RingFamilySection } from './RingFamilySection'
 import { SettingModeSection } from './SettingModeSection'
 import { SelectField } from './SelectField'
 import { TextField } from './TextField'
@@ -278,6 +279,11 @@ export function ConfigurationPanel() {
           />
         </div>
       </FormSection>
+
+      {/* First among the design controls, because the family is the design's
+          own structure and everything below it is either read by the family or
+          modulated by it. */}
+      <RingFamilySection />
 
       <FormSection title="Ring">
         <NumericField

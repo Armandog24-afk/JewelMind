@@ -112,6 +112,55 @@ shape whose outline does not fill its nominal box.
   `halfExtent - padDepthMm + padThicknessMm / 2` from the stone's centre and the
   relief leaves a real groove rather than a tangent touch.
 
+### The Sprint 28 ring-family components
+
+Three components joined the assembly, and each states its placement against the
+existing convention rather than introducing one (ATLAS-GOV-012).
+
+**`shoulders`** — the shank-to-head transition, and the first geometry the
+shoulder has ever had. Each arch is a ruled loft between two real sections: the
+base is the band's OWN profile wire from `shank/profile.py`, placed at
+`u = ±span/360` and rotated by `angle_deg_for_u(u)`; the top is a flat section
+at the head's own height, rotated by `angle_deg_for_u(0)`. Using the same
+rotation for both ends is what keeps the loft's sections compatible.
+
+A cathedral builds two arches (one per side, at the band's own half-width); a
+split shank builds four (one per rail per side, at the rails' own half-width and
+axial offset, from the SAME `rail_half_width()` the shank builds them with, so
+the shoulders land on the rails rather than beside them). Every architecture
+produces the single `shoulders` component; the arch count is in its metadata.
+
+**A CONSTRUCTION LIMIT LIVES HERE, and it is arithmetic.**
+`MAX_ARCH_SPAN_DEG = 90.0`: section rotation is `angle_deg_for_u(u) = −90 + u ×
+360`, so the base section's rotation is `−90 + span`. At 90° it reaches 0° — the
+head section's own orientation — and past that it rotates beyond it, so the
+ruled loft turns back on itself. Measured: at 90° the fused arches are
+84.651 mm³ and the ring's metal is valid; at 92° they collapse to 19.577 mm³ and
+the combined metal is invalid, while the individual arch still reports
+`isValid() == True`. It is therefore refused as a PRECONDITION, in both the
+schema and the builder, and never clamped.
+
+**`band` under a `SPLIT` or `BYPASS` architecture** — same frame as the uniform
+band: revolved about the global Y axis, ring in the XZ plane, top at
+`(0, 0, +outer_radius)`.
+
+A split shank is two rails at `±(separation/2 + half)` on the axial (Y) axis,
+each `rail_half_width()` wide, joined by a bridge over the bottom
+`splitJoinSpan` degrees. **Revolve first and translate the SHAPE afterwards**:
+`Workplane.translate()` before `.revolve()` silently loses the offset, which
+shipped as two coincident rails whose fused volume was exactly one rail's. Arcs
+are built by intersecting a full revolve with a pie sector rather than by a
+partial `revolve()`, which sweeps unpredictably.
+
+A bypass is ONE rail lofted over `360 + overlap` degrees with the axial offset
+interpolated linearly along the sweep, starting half the overlap before the top
+so the crossing is centred on it. Deliberately one rail: two axially separated
+arcs come out as two disconnected solids.
+
+**`signet_body`** — a solid centred on the ring's top, embedded `_BODY_EMBED_MM`
+into the band so the fused body is one solid. Its table length runs along the
+ring's circumference and its width along the axial direction.
+
 ## Why solids are embedded, not just touching
 
 If the prongs/basket start their solid geometry exactly at

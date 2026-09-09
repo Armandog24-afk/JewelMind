@@ -153,6 +153,45 @@ def _apply_patch(base: JewelryDefinition, patch: dict[str, Any]) -> JewelryDefin
             return None
         data["setting"]["mode"] = seeded.model_dump(mode="python")
 
+    # A RING FAMILY CANNOT BE BUILT FROM A DOTTED PATCH ALONE EITHER
+    # (Sprint 28), and for the third time for the same structural reason:
+    # `RingFamilySpec.variant` is required, so setting `ringFamily.enabled` on a
+    # design that declares no family would leave a half-formed object the schema
+    # rejects — and "make it a cathedral" would fail for a reason the user could
+    # not act on.
+    #
+    # The DOMAIN's own default is materialized first, from the same functions
+    # the Studio panel mirrors, so the patch lands on a valid spec and every
+    # parameter the request did not state stays visibly a system default in the
+    # diff.
+    if data.get("ringFamily") is None and any(
+        path == "ringFamily" or path.startswith("ringFamily.") for path in patch
+    ):
+        from jewelmind.ring_family.models import (
+            RingFamilySpec,
+            default_params,
+            default_variant_for,
+        )
+
+        # The requested variant decides what is seeded. Falling back to the
+        # FAMILY's own default variant — reading the style the patch itself may
+        # be setting, before it is applied — means a patch that names only a
+        # parameter still resolves to the family the document already meant,
+        # rather than to an arbitrary one.
+        requested = patch.get("ringFamily.variant")
+        style = patch.get("jewelry.style") or data.get("jewelry", {}).get(
+            "style", "solitaire"
+        )
+        try:
+            variant = requested or default_variant_for(str(style))
+            seeded = RingFamilySpec(variant=str(variant), params=default_params())
+        except (KeyError, ValidationError):
+            # An unknown variant or family reaches here only if the capability
+            # gate let it through; refusing the whole proposal is correct, and is
+            # what the `None` return below already means.
+            return None
+        data["ringFamily"] = seeded.model_dump(mode="python")
+
     for path, value in patch.items():
         # Walks the whole dotted path rather than splitting once (Sprint 21):
         # `stone.gem.gemId` is three segments deep, and a single split would

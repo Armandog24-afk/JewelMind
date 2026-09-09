@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "description": "One JDL path a family wrote, and what it was computed from.\n\nTHE PROVENANCE RECORD. Without it a reader can see that `setting.basketHeight`\nis 4.2 and not that the elevated variant derived it from 3.5 — which is the\ndifference between a parametric system and a system that happens to have\nchanged a number.",
+  "properties": {
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value"
+    },
+    "sourceParameters": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sourceparameters",
+      "type": "array"
+    },
+    "relation": {
+      "title": "Relation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "value",
+    "sourceParameters",
+    "relation"
+  ],
+  "title": "RingFamilyDerivation",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/ring-family/v1/ring-family-derivation.schema.json"
+}

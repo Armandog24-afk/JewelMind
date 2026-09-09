@@ -47,7 +47,7 @@ This is also the exact default definition (see `default_definition()` /
 | `project.name` | string | Used to derive sanitized export filenames. |
 | `project.units` | `"mm"` | Fixed; JewelMind only works in millimeters. |
 | `jewelry.category` | `"ring"` | Only `ring` is supported in this milestone. |
-| `jewelry.style` | `"solitaire"` | Only `solitaire` is supported. |
+| `jewelry.style` | `"solitaire"` | The ring FAMILY. Six are supported since Sprint 28: `solitaire`, `three_stone`, `halo`, `split_shank`, `bypass`, `signet`. This field has meant "ring family" since Sprint 16, so it was extended rather than joined by a second field that could disagree with it — which variant of the family is `ringFamily.variant`. |
 | `ring.sizeSystem` | `"EU"` | Only the EU/French convention is supported — see `docs/validation-rules.md` (JM-RING-003). |
 | `ring.size` | number | EU/French ring size. |
 | `ring.innerDiameter` | number, mm | Finger opening diameter. |
@@ -56,6 +56,11 @@ This is also the exact default definition (see `default_definition()` /
 | `band.profile` | `"comfort_fit"` \| `"flat"` | See `docs/geometry-conventions.md`. |
 | `band.widthTaper` | `{mode, bottomRatio}` | Optional width taper toward the bottom (Sprint 17). Default `mode: "NONE"`. See `docs/bible/19-shank/README.md`. |
 | `band.thicknessTaper` | `{mode, bottomRatio}` | Optional thickness taper toward the bottom (Sprint 17). Default `mode: "NONE"`. |
+| `band.architecture` | `"UNIFORM"` \| `"SPLIT"` \| `"BYPASS"` | How the shank's own structure is built (Sprint 28). `UNIFORM` is the pre-Sprint-28 closed ring and remains the default, on its own byte-identical fast path. |
+| `band.splitSeparation` | number, mm | Axial gap between a split shank's two rails. The rails SHARE the band's width, so a wider separation NARROWS them rather than widening the ring. Default `1.2`. |
+| `band.splitJoinSpan` | number, degrees | How much of the ring's bottom the two rails are joined over. Default `200`. |
+| `band.bypassSeparation` | number, mm | Axial gap between a bypass rail's two passes at the crossing. Default `1.0`. |
+| `band.bypassOverlap` | number, degrees | How far past a full turn the bypass rail travels. This is what makes its ends pass rather than meet. Default `60`. |
 | `stone.shape` | `"round" \| "oval" \| "pear" \| "emerald" \| "cushion" \| "princess" \| "marquise"` | All 7 generate real geometry (Sprint 18). Only `round` has a setting designed for it — see `docs/bible/20-stone/README.md`. |
 | `stone.diameter` | number \| null, mm | Girdle diameter. Required for, and meaningful only for, `round`. |
 | `stone.length` | number \| null, mm | Major horizontal dimension (local Y). Required when `shape != "round"`. |
@@ -65,6 +70,7 @@ This is also the exact default definition (see `default_definition()` /
 | `setting.type` | enum | The setting FAMILY, and the value that selects the generator: `prong` (default), `bezel` (Sprint 19), and `channel`/`bar`/`flush`/`tension` (Sprint 27). Each has a real registered generator, asserted equal to `setting_generators()` in both directions. Reserved family names (`bead`, `pave`, `custom`) are deliberately not members. This row said "only prong settings are supported" until Sprint 27 and had been stale since Sprint 19. |
 | `setting.prongCount` | integer | Business rule requires 4 or 6 (JM-PRONG-001) — the *type* allows any integer so an invalid value surfaces as a validation result, not a raw parse error. |
 | `setting.prongDiameter` | number, mm | Prong cylinder diameter. |
+
 | `setting.prongHeight` | number, mm | Prong height above the top of the band. |
 | `setting.basketHeight` | number, mm | Basket support height above the top of the band. |
 | `stone.gem` | `GemIdentity` \| null | What the stone is MADE OF, separate from every geometry field (Sprint 21). `null` on a legacy document, which normalizes to the `unknown` gem — never to diamond. Never inferred from the shape. See `docs/bible/23-gem-identity/README.md`. |
@@ -111,6 +117,31 @@ This is also the exact default definition (see `default_definition()` /
 | `manufacturing.method` | enum | `lost_wax_casting`, `direct_resin_printing`. Affects one validation rule (JM-MANUFACTURING-001). |
 | `preview.meshTolerance` | number, mm | Linear tessellation tolerance for preview meshes and STL export. |
 | `preview.angularTolerance` | number, rad | Angular tessellation tolerance. |
+
+### `ringFamily` (Sprint 28)
+
+`null` by default, and `null` means something real: "no variant declared", which
+resolves to the family's default variant. For `solitaire` that reproduces the
+pre-Sprint-28 design exactly, which is why every existing document stays valid
+and generates identical geometry.
+
+**A ring family is a parametric relation, not a preset.** Its parameters
+MODULATE what the document already states — a head factor multiplies
+`setting.basketHeight`, a halo radius multiplies the centre stone's own half
+width — so `ring.innerDiameter` and `stone.diameter` keep driving the geometry.
+
+| Field | Type | Notes |
+|---|---|---|
+| `ringFamily.variant` | enum, 13 members | Which variant of the family `jewelry.style` names. THE FAMILY IS NOT HERE: a variant belonging to another family is refused by `JM-RINGFAM-001`, never resolved by precedence. |
+| `ringFamily.enabled` | boolean | `false` keeps the parameters in the document and falls back to the family's default variant — a different state from declaring no block at all. |
+| `ringFamily.params` | object, ~22 flat fields | Modulation factors and dimensions. A parameter the chosen variant does not read is reported by `JM-RINGFAM-003` and has no effect. |
+| `ringFamily.label` | string \| `null` | A designer's own name for the configuration. Metadata; affects no geometry. |
+
+Every block a family implies — `family`, `halo`, `pave`, the band's
+architecture, the head's height — is DERIVED from the variant and its
+parameters, and a block the document declares itself is never overwritten
+(`JM-RINGFAM-002` reports which won). See
+[`docs/bible/30-ring-families/README.md`](bible/30-ring-families/README.md).
 
 ## Why `prongCount` is a plain integer, not a closed type
 

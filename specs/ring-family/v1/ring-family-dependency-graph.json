@@ -1,0 +1,433 @@
+{
+  "taxonomyVersion": "1.0.0",
+  "dependencies": [
+    {
+      "kind": "INFLUENCE",
+      "variant": null,
+      "source": "ring.size",
+      "targets": [
+        "ring.innerDiameter",
+        "band",
+        "setting",
+        "stone"
+      ],
+      "reason": "The finger size sets the ring's inner diameter, which sets the band's outer radius, which is the assembly's anchor point: the head attaches there, the stone sits above it, and a shoulder or a pavé field is measured from it. Nothing in a ring family writes the size; everything structural reads it."
+    },
+    {
+      "kind": "INFLUENCE",
+      "variant": null,
+      "source": "band.thickness",
+      "targets": [
+        "setting",
+        "stone"
+      ],
+      "reason": "The band's thickness sets its outer radius and therefore the height the head attaches at, so it moves the stone even though no stone field changed."
+    },
+    {
+      "kind": "INFLUENCE",
+      "variant": null,
+      "source": "stone.diameter",
+      "targets": [
+        "halo.rings",
+        "family.params",
+        "setting"
+      ],
+      "reason": "The centre stone's own size is what a halo radius and a side-stone spacing are measured against, so a derived halo or side stone follows the stone rather than a stored millimetre value."
+    },
+    {
+      "kind": "INFLUENCE",
+      "variant": null,
+      "source": "band.width",
+      "targets": [
+        "band.architecture"
+      ],
+      "reason": "A split or bypass shank's rails SHARE the band's width, so widening the band widens the rails rather than moving them apart."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SOLITAIRE_CATHEDRAL",
+      "source": "ringFamily.params.shoulderSpanDeg",
+      "targets": [
+        "ringFamily.shoulderArchitecture"
+      ],
+      "reason": "A cathedral solitaire builds real shoulder arches rising from the band to the head. The span is where each arch meets the band."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SOLITAIRE_LOW_PROFILE",
+      "source": "ringFamily.params.headHeightFactor",
+      "targets": [
+        "setting.basketHeight"
+      ],
+      "reason": "A low-profile solitaire sits the stone closer to the finger. It MODULATES the document's own basket height rather than replacing it, so the author's scale still applies."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SOLITAIRE_ELEVATED",
+      "source": "ringFamily.params.headHeightFactor",
+      "targets": [
+        "setting.basketHeight",
+        "ringFamily.shoulderArchitecture"
+      ],
+      "reason": "An elevated solitaire raises the stone and gains shoulder arches to support the taller head — the two go together, which is why one variant derives both."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "THREE_STONE_SYMMETRIC",
+      "source": "ringFamily.params.sideSpacingMm",
+      "targets": [
+        "family.familyType",
+        "family.params"
+      ],
+      "reason": "The ring family DELEGATES the side stones to the Multi-Stone Family layer, which compiles them into an arrangement. Nothing here computes a stone position."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "THREE_STONE_GRADUATED",
+      "source": "ringFamily.params.sideGraduationFactor",
+      "targets": [
+        "family.familyType",
+        "family.params"
+      ],
+      "reason": "A graduated trilogy's sides are smaller than a symmetric one's by the graduation factor. The same delegation, with a different scale."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "HALO_SINGLE",
+      "source": "ringFamily.params.haloStoneCount",
+      "targets": [
+        "halo.variant",
+        "halo.rings"
+      ],
+      "reason": "The ring family DELEGATES the halo to the Halo System, which owns what a halo IS. The radius is derived from the CENTRE STONE's own half width times `haloRadiusFactor`, so the halo follows the stone."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "HALO_DOUBLE",
+      "source": "ringFamily.params.haloRadiusFactor",
+      "targets": [
+        "halo.variant",
+        "halo.rings"
+      ],
+      "reason": "A double halo derives two rings whose radii are both measured from the centre stone, so changing the stone moves both."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "HALO_HIDDEN",
+      "source": "ringFamily.params.haloRadiusFactor",
+      "targets": [
+        "halo.variant",
+        "halo.rings"
+      ],
+      "reason": "A hidden halo sits BELOW the centre plane, and the Halo System already requires a negative vertical offset for one — the family derives an offset from the head's own height rather than inventing a depth."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SPLIT_SHANK_PARALLEL",
+      "source": "ringFamily.params.splitSeparationMm",
+      "targets": [
+        "band.architecture",
+        "band.splitSeparation",
+        "band.splitJoinSpan",
+        "ringFamily.shoulderArchitecture"
+      ],
+      "reason": "A split shank is a real SHANK ARCHITECTURE: two rails joined into one band over the bottom span. The band's own width is shared between the rails, so the separation narrows them rather than widening the ring."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SPLIT_SHANK_TAPERED",
+      "source": "ringFamily.params.splitJoinSpanDeg",
+      "targets": [
+        "band.architecture",
+        "band.splitSeparation",
+        "band.splitJoinSpan",
+        "band.widthTaper",
+        "ringFamily.shoulderArchitecture"
+      ],
+      "reason": "The tapered split additionally derives a width taper, so the rails narrow toward the bottom — using the taper the Shank subsystem already owns rather than a second narrowing mechanism."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "BYPASS_CROSSOVER",
+      "source": "ringFamily.params.bypassOverlapDeg",
+      "targets": [
+        "band.architecture",
+        "band.bypassSeparation",
+        "band.bypassOverlap"
+      ],
+      "reason": "A bypass is one open rail travelling past a full turn, so its two ends occupy the same angle at different axial positions. The overlap is what makes them PASS rather than meet."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "SIGNET_FLAT_TABLE",
+      "source": "ringFamily.params.signetTableLengthMm",
+      "targets": [
+        "ringFamily.bodyArchitecture"
+      ],
+      "reason": "A signet ring's defining feature is a solid body with a table at the ring's top, built as its own component so it has parametric identity rather than being an unnamed lump fused to the band."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": null,
+      "source": "ringFamily.params.paveShoulders",
+      "targets": [
+        "pave"
+      ],
+      "reason": "Any family may compose a pavé field onto its shoulders. The Pavé Engine does every piece of it — the family only names the region and the density, and a field is derived only when the document declares no pavé of its own."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": null,
+      "source": "ringFamily.params.headHeightFactor",
+      "targets": [
+        "setting.basketHeight"
+      ],
+      "reason": "Every family modulates the head's height, because every family has a head. A factor of 1.0 writes the document's own value back unchanged, which is why a classic solitaire's geometry does not move."
+    }
+  ],
+  "graph": {
+    "BYPASS_CROSSOVER": {
+      "derives": [
+        "band.architecture",
+        "band.bypassOverlap",
+        "band.bypassSeparation",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.bypassOverlapDeg",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "HALO_DOUBLE": {
+      "derives": [
+        "halo.rings",
+        "halo.variant",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.haloRadiusFactor",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "HALO_HIDDEN": {
+      "derives": [
+        "halo.rings",
+        "halo.variant",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.haloRadiusFactor",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "HALO_SINGLE": {
+      "derives": [
+        "halo.rings",
+        "halo.variant",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.haloStoneCount",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "SIGNET_FLAT_TABLE": {
+      "derives": [
+        "pave",
+        "ringFamily.bodyArchitecture",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.signetTableLengthMm"
+      ]
+    },
+    "SOLITAIRE_CATHEDRAL": {
+      "derives": [
+        "pave",
+        "ringFamily.shoulderArchitecture",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.shoulderSpanDeg"
+      ]
+    },
+    "SOLITAIRE_CLASSIC": {
+      "derives": [
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "SOLITAIRE_ELEVATED": {
+      "derives": [
+        "pave",
+        "ringFamily.shoulderArchitecture",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "SOLITAIRE_LOW_PROFILE": {
+      "derives": [
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "SPLIT_SHANK_PARALLEL": {
+      "derives": [
+        "band.architecture",
+        "band.splitJoinSpan",
+        "band.splitSeparation",
+        "pave",
+        "ringFamily.shoulderArchitecture",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.splitSeparationMm"
+      ]
+    },
+    "SPLIT_SHANK_TAPERED": {
+      "derives": [
+        "band.architecture",
+        "band.splitJoinSpan",
+        "band.splitSeparation",
+        "band.widthTaper",
+        "pave",
+        "ringFamily.shoulderArchitecture",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.splitJoinSpanDeg"
+      ]
+    },
+    "THREE_STONE_GRADUATED": {
+      "derives": [
+        "family.familyType",
+        "family.params",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.sideGraduationFactor"
+      ]
+    },
+    "THREE_STONE_SYMMETRIC": {
+      "derives": [
+        "family.familyType",
+        "family.params",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.sideSpacingMm"
+      ]
+    }
+  }
+}

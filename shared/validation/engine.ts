@@ -9,6 +9,7 @@
 
 import type {
   JewelryDefinition,
+  JewelryStyle,
   PaveDefinition,
   SettingType,
 } from '../types/jewelry-definition'
@@ -1037,6 +1038,94 @@ function settingModeRules(d: JewelryDefinition): ValidationResult[] {
   return out
 }
 
+/**
+ * Which family each ring-family variant belongs to (Sprint 28).
+ *
+ * A MIRROR of the backend's `VARIANT_FAMILY`, kept as a variant-id PREFIX table
+ * rather than a per-variant row: the family is recoverable from the id, so this
+ * cannot drift from a list of variants the way a full copy would. Reserved
+ * variants are absent from the mirrored `RingFamilyVariantId` type, so they can
+ * never reach here. The backend remains authoritative (FORGE-GOV-004).
+ */
+const VARIANT_ID_FAMILY: Readonly<Record<string, JewelryStyle>> = {
+  SOLITAIRE: 'solitaire',
+  THREE_STONE: 'three_stone',
+  HALO: 'halo',
+  SPLIT_SHANK: 'split_shank',
+  BYPASS: 'bypass',
+  SIGNET: 'signet',
+}
+
+/** The variant ids of the families whose name is itself two segments, so a
+ * single split on `_` would recover `SPLIT` or `THREE` rather than the family.
+ * Ordered longest-first so `SPLIT_SHANK` is tried before `SPLIT`. */
+const VARIANT_ID_PREFIXES: readonly string[] = Object.keys(VARIANT_ID_FAMILY).sort(
+  (a, b) => b.length - a.length,
+)
+
+/**
+ * Ring Families validation (Sprint 28) — the mirrored SUBSET.
+ *
+ * Two checks, each answerable from the document alone. See
+ * `shared/validation/rules.ts` for exactly which backend rules are NOT mirrored
+ * here and why.
+ *
+ * NOTHING HERE IS A PROFESSIONAL JUDGMENT. There is no check on whether a rail
+ * is strong enough, a shoulder castable, a signet table thick enough or a
+ * bypass sound. Each needs sourced professional evidence this project does not
+ * have, so none exists — on either side of the mirror.
+ */
+function ringFamilyRules(d: JewelryDefinition): ValidationResult[] {
+  const out: ValidationResult[] = []
+  const spec = d.ringFamily
+
+  if (spec !== null && spec !== undefined && spec.enabled) {
+    const prefix = VARIANT_ID_PREFIXES.find((p) => spec.variant.startsWith(`${p}_`))
+    const family = prefix === undefined ? undefined : VARIANT_ID_FAMILY[prefix]
+    if (family !== undefined && family !== d.jewelry.style) {
+      out.push({
+        ruleId: RULE_IDS.RING_FAMILY_VARIANT_MATCHES,
+        severity: 'error',
+        message:
+          `ringFamily.variant '${spec.variant}' belongs to the ${family} ` +
+          `family, but jewelry.style is '${d.jewelry.style}'. Refused rather ` +
+          'than resolved by precedence: two authorities over one design have ' +
+          'no determinate resolution.',
+        parameter: 'ringFamily.variant',
+      })
+    }
+  }
+
+  // GEOMETRIC FEASIBILITY, and a MATHEMATICAL CONSTRAINT rather than a
+  // threshold: two rails SHARE the band's width, so a separation at or above it
+  // leaves no rail between them. Arithmetic, not a statement about how thin a
+  // rail may be.
+  //
+  // Read from `band.architecture`, which is what the builder dispatches on —
+  // rather than from the variant, which would need the resolver's own
+  // derivation table.
+  if (d.band.architecture === 'SPLIT' || d.band.architecture === 'BYPASS') {
+    const separation =
+      d.band.architecture === 'SPLIT' ? d.band.splitSeparation : d.band.bypassSeparation
+    const railWidth = (d.band.width - separation) / 2
+    if (railWidth <= 0) {
+      out.push({
+        ruleId: RULE_IDS.RING_FAMILY_GEOMETRY_FEASIBLE,
+        severity: 'error',
+        message:
+          `A separation of ${separation} mm leaves ${railWidth.toFixed(4)} mm ` +
+          `of rail in a ${d.band.width} mm band. The rails share the band's ` +
+          'width, so a wider separation narrows them rather than widening the ' +
+          'ring.',
+        parameter:
+          d.band.architecture === 'SPLIT' ? 'band.splitSeparation' : 'band.bypassSeparation',
+      })
+    }
+  }
+
+  return out
+}
+
 export function validateDefinition(definition: JewelryDefinition): ValidationResult[] {
   return [
     ...ringRules(definition),
@@ -1052,6 +1141,7 @@ export function validateDefinition(definition: JewelryDefinition): ValidationRes
     ...settingRules(definition),
     ...settingV2Rules(definition),
     ...settingModeRules(definition),
+    ...ringFamilyRules(definition),
     ...manufacturingRules(definition),
     ...geometryRules(definition),
   ]

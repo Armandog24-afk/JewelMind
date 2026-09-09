@@ -246,6 +246,34 @@
     {
       "goldenId": "ESM-007-pave-shared-prong",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-001-solitaire-cathedral",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-002-solitaire-elevated",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-003-split-shank-parallel",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-004-split-shank-tapered",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-005-bypass-crossover",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-006-signet-flat-table",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "RF-007-halo-hidden",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -292,7 +320,36 @@
     "STV2-013-half-moon-prong",
     "STV2-014-oval-cabochon-bezel",
     "STV2-015-custom-outline-bezel",
-    "STV2-016-measured-oval-prong"
+    "STV2-016-measured-oval-prong",
+    "FAM-001-three-stone-symmetric",
+    "FAM-002-three-stone-mixed-gems",
+    "FAM-003-toi-et-moi-diagonal",
+    "FAM-004-cluster-eight",
+    "FAM-005-center-with-accents",
+    "HALO-001-single-halo",
+    "HALO-002-double-halo",
+    "HALO-003-hidden-halo",
+    "HALO-004-three-stone-with-halo",
+    "HALO-005-halo-around-toi-et-moi",
+    "PAVE-001-shank-single-row",
+    "PAVE-002-shank-staggered",
+    "PAVE-003-microsetting",
+    "PAVE-004-head-plane-gallery",
+    "PAVE-005-three-stone-with-pave",
+    "ESM-001-channel-set-solitaire",
+    "ESM-002-bar-set-solitaire",
+    "ESM-003-flush-gypsy-solitaire",
+    "ESM-004-partial-bezel-solitaire",
+    "ESM-005-open-gallery-head",
+    "ESM-006-tension-solitaire",
+    "ESM-007-pave-shared-prong",
+    "RF-001-solitaire-cathedral",
+    "RF-002-solitaire-elevated",
+    "RF-003-split-shank-parallel",
+    "RF-004-split-shank-tapered",
+    "RF-005-bypass-crossover",
+    "RF-006-signet-flat-table",
+    "RF-007-halo-hidden"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

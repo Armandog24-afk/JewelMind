@@ -59,12 +59,16 @@ placement, multi-stone arrangements (stone system —
 claw, taper, inclination, tip geometry, seat/bearing cut (prong
 refinements — [`048`](../04-jewelry-domain/048-prong-domain.md));
 Non-linear/`TOWARD_HEAD` band taper, tapered-shank outer-rim fillet,
-shoulder width, outer contour, edge radius, split shank, cathedral rise,
-knife-edge profile, Euro shank, twisted shank (band/shank refinements —
+shoulder outer contour, edge radius, knife-edge profile, Euro shank,
+twisted shank, multi-rail (more than two) shank (band/shank refinements —
 [`045`](../04-jewelry-domain/045-band-domain.md),
-[`19-shank/README.md`](../19-shank/README.md)); Gallery, Bridge,
-Shoulders (ring anatomy —
-[`043`](../04-jewelry-domain/043-ring-anatomy.md)); Material density,
+[`19-shank/README.md`](../19-shank/README.md); note SPLIT SHANK, BYPASS and
+CATHEDRAL SHOULDERS moved to CURRENT in Sprint 28 —
+[`30-ring-families/README.md`](../30-ring-families/README.md)); Gallery,
+Bridge (ring anatomy —
+[`043`](../04-jewelry-domain/043-ring-anatomy.md); note SHOULDERS moved to
+CURRENT in Sprint 28, after `ShoulderDefinition` recorded
+`modeled: False` since Sprint 16); Material density,
 estimated weight, alloy variation, casting shrinkage context, structural
 rule profiles, finishing allowances (material —
 [`050`](../04-jewelry-domain/050-material-domain.md)); Print orientation,

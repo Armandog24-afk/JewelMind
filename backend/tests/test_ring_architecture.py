@@ -78,20 +78,42 @@ class TestRingDefinitionAdapter:
 
 
 class TestSolitaireFamilyDispatch:
-    def test_solitaire_is_the_only_registered_family(self):
-        assert set(RING_FAMILY_GENERATORS) == {"solitaire"}
+    def test_every_implemented_family_is_registered(self):
+        # SPRINT 28 SUPERSEDED "solitaire is the only registered family".
+        # `jewelry.style` had one member from Sprint 16 to Sprint 27; Ring
+        # Families v2 gave it six, each with real derivations and real
+        # geometry. The assertion that matters is unchanged in SHAPE — the
+        # registry must match the implemented set exactly — so it is stated
+        # against the live taxonomy rather than against a literal that would
+        # go stale again.
+        from jewelmind.ring_family.models import implemented_families
+
+        assert set(RING_FAMILY_GENERATORS) == set(implemented_families())
 
     def test_generate_ring_dispatches_to_the_real_solitaire_builder(self):
         model = generate_ring(default_definition())
         assert model.components  # a real GeneratedModel, not a mock
 
+    def test_every_registered_family_builds_real_geometry(self):
+        # A registered family that produced nothing would be a name in a
+        # registry — the exact failure Sprint 28 exists to prevent.
+        for family in RING_FAMILY_GENERATORS:
+            d = default_definition()
+            object.__setattr__(d.jewelry, "style", family)
+            model = generate_ring(d)
+            assert model.components, family
+            assert model.combined_metal_volume_mm3 > 0.0, family
+
     def test_unsupported_ring_family_raises_a_clean_error(self):
-        # "three_stone" is a real, recognized RingFamilyId (models.py) with
-        # deliberately no generator (families.py) — bypass StrictModel
-        # validation to simulate a future JDL that allowed it, and confirm
-        # the dispatch boundary (not a schema error) is what rejects it.
+        # THE BOUNDARY THIS TEST PROTECTS IS UNCHANGED, only its example.
+        # "three_stone" gained a generator in Sprint 28, so the case is now
+        # made with a family that is still deliberately generator-less:
+        # `eternity` is a recognized RingFamilyId with no generator. Bypass
+        # StrictModel validation to simulate a future JDL that allowed it, and
+        # confirm the dispatch boundary — not a schema error — is what rejects
+        # it.
         d = default_definition()
-        object.__setattr__(d.jewelry, "style", "three_stone")
+        object.__setattr__(d.jewelry, "style", "eternity")
         with pytest.raises(RingFamilyUnsupportedError):
             generate_ring(d)
 

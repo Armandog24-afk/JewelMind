@@ -42,6 +42,7 @@ to do differently, not a claim about a specific past meeting or debate.
 | [ADR-011](ADR-011-instance-axis-tilt.md) | A real axis tilt on the arrangement instance transform | Accepted |
 | [ADR-012](ADR-012-compilation-hash-as-cache-key.md) | `compilationHash` as the compilation cache key | Accepted |
 | [ADR-013](ADR-013-extended-setting-modes.md) | The setting-mode taxonomy is a derived registry, and `setting.mode` refines `setting.type` | Accepted |
+| [ADR-014](ADR-014-ring-family-orchestration.md) | A ring family derives JDL and orchestrates existing subsystems; `jewelry.style` stays the one family authority | Accepted |
 
 ## Numbering rule
 

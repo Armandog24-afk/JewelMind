@@ -176,3 +176,26 @@ SETTING_MODE_REQUIREMENTS_MET = "JM-SETTING-010"
 SETTING_MODE_GEOMETRY_FEASIBLE = "JM-SETTING-011"
 SETTING_MODE_PROFESSIONAL_REVIEW = "JM-SETTING-012"
 SETTING_MODE_STATUS = "JM-SETTING-013"
+
+# Sprint 28 — RING_FAMILY_ONLY. Structural, referential and MATHEMATICAL checks
+# on a declared ring family: does the variant belong to the family the document
+# chose, does its derivation collide with a block the document already declares,
+# are the parameters it does not read reported, is the requested structure
+# geometrically possible, and does the variant carry an honest status.
+#
+# NOT ONE OF THEM IS A PROFESSIONAL JUDGMENT. There is deliberately no rule
+# about whether a shank section is strong enough, whether a shoulder is
+# castable, whether a signet table is thick enough or whether a bypass would
+# hold its shape. Each of those needs sourced professional evidence this project
+# does not have (SHANK-GOV-012, ATLAS-GOV-002).
+#
+# JM-RINGFAM-004 is the only numeric one and it is a MATHEMATICAL CONSTRAINT: a
+# split or bypass separation wider than the band leaves no rail, as a matter of
+# arithmetic, whatever a setter would say about it. The rail width comes from
+# `shank/architecture.py::rail_half_width()` — the SAME function the geometry
+# uses — so the rule can never stop agreeing with the builder.
+RING_FAMILY_VARIANT_MATCHES = "JM-RINGFAM-001"
+RING_FAMILY_DERIVATION_APPLICABLE = "JM-RINGFAM-002"
+RING_FAMILY_PARAMETER_APPLICABLE = "JM-RINGFAM-003"
+RING_FAMILY_GEOMETRY_FEASIBLE = "JM-RINGFAM-004"
+RING_FAMILY_STATUS = "JM-RINGFAM-005"

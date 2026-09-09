@@ -27,7 +27,10 @@ from jewelmind.geometry.pave_adapter import (
     resolve_pave_surface,
     retention_component,
 )
+from jewelmind.geometry.ring_family_adapter import effective_definition
 from jewelmind.geometry.setting_adapter import setting_definition_from_jdl
+from jewelmind.geometry.shoulder import SHOULDER_COMPONENT, build_shoulders
+from jewelmind.geometry.signet import SIGNET_COMPONENT, build_signet_body
 from jewelmind.geometry.stone.placement import stone_components
 from jewelmind.pave.compile import compose_pave
 from jewelmind.setting.dispatch import generate_setting
@@ -46,6 +49,24 @@ def _fuse_metal(metal_components: list[GeneratedComponent]):
     The fuse order is preserved from the pre-Sprint-19 implementation
     (band, basket, then the setting component) so a prong model's fused
     result is byte-identical.
+
+    ## A fuse that SUCCEEDS and returns nonsense (Sprint 28)
+
+    Raising was not the only failure mode, which is what this function assumed
+    until Sprint 28 measured a case where it was not. A bypass shank whose two
+    passes clear each other by ~0.07 mm produced a fuse that raised nothing,
+    reported `isValid() == True`, and returned SIX SOLIDS OF NEGATIVE VOLUME —
+    the six prongs, inverted, with the band and the basket gone entirely. No
+    warning was emitted, and `combined_metal_volume_mm3` went to −60.904.
+
+    So the result is now checked against an invariant rather than trusted: A
+    UNION IS NEVER SMALLER THAN ITS LARGEST INPUT. That is arithmetic about
+    unions, not a tolerance and not a jewelry threshold, so it needs no invented
+    number — and it is the strongest statement available without recomputing the
+    boolean. A result that fails it takes the same honest compound fallback as a
+    raised failure, with a warning naming what was measured (ATLAS-GOV-006,
+    ALCHEMIST-GOV-007: never silently ignore a component failure, and never
+    report complete success when a required component is gone).
     """
 
     warnings: list[str] = []
@@ -56,6 +77,14 @@ def _fuse_metal(metal_components: list[GeneratedComponent]):
             fused = fused.fuse(shape)
         if not fused.Solids():
             raise ValueError("fuse produced no solids")
+        fused_volume = fused.Volume()
+        largest_input = max(shape.Volume() for shape in shapes)
+        if fused_volume < largest_input:
+            raise ValueError(
+                f"fuse returned {fused_volume:.6f} mm³, which is less than its "
+                f"largest input at {largest_input:.6f} mm³ — a union cannot be "
+                "smaller than any of the bodies it unions"
+            )
         return fused, warnings
     except Exception as exc:  # noqa: BLE001 - OCC boolean failures vary widely
         names = ", ".join(c.name for c in metal_components)
@@ -76,6 +105,22 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
     """
 
     start = time.perf_counter()
+
+    # THE RING FAMILY, resolved and applied ONCE, here (Sprint 28).
+    #
+    # `original` stays the design's IDENTITY: `definitionHash` and
+    # `geometryHash` are computed from it below, every Golden baseline records
+    # it, and every stored hash means it. The family's derivations are a pure
+    # function OF that document, so the identity still determines the geometry
+    # completely — which is exactly why the derived values must not become part
+    # of it.
+    #
+    # A document with no `ringFamily` — every pre-Sprint-28 document — derives
+    # only `setting.basketHeight` at a factor of 1.0, so `effective_definition()`
+    # returns the ORIGINAL object and this ring reaches exactly the geometry
+    # path it always did.
+    original = definition
+    definition, ring_family = effective_definition(definition)
 
     band = build_ring_band(definition)
     stone = build_stone_reference(definition)
@@ -150,9 +195,37 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
             else:
                 basket = relieved
 
+    # RING-FAMILY STRUCTURE (Sprint 28). Real solids, built only when the
+    # resolved family asks for them, and fused into the production body so a
+    # shoulder or a signet body is metal rather than an object resting on the
+    # ring. Each is its own named component, so it carries provenance and
+    # inspection facts instead of vanishing into the shank (brief §12).
+    shoulders = None
+    if ring_family.shoulderArchitecture != "NONE":
+        shoulders = build_shoulders(
+            definition,
+            ring_family.shoulderArchitecture,
+            ring_family.params.shoulderSpanDeg,
+            ring_family.params.shoulderTopWidthFactor,
+            ring_family.params.shoulderTopThicknessFactor,
+        )
+
+    signet_body = None
+    if ring_family.bodyArchitecture == "SIGNET_TABLE":
+        signet_body = build_signet_body(
+            definition,
+            ring_family.params.signetTableLengthMm,
+            ring_family.params.signetTableWidthMm,
+            ring_family.params.signetTableHeightMm,
+        )
+
     metal_parts = [band, basket, *setting_metal]
     if pave_retention is not None:
         metal_parts.append(pave_retention)
+    if shoulders is not None:
+        metal_parts.append(shoulders)
+    if signet_body is not None:
+        metal_parts.append(signet_body)
     combined_metal, fuse_warnings = _fuse_metal(metal_parts)
     combined_metal_volume = combined_metal.Volume()
 
@@ -192,12 +265,20 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
     # it serves are carried in this component's metadata instead.
     if pave_retention is not None:
         components[PAVE_RETENTION_COMPONENT] = pave_retention
+    if shoulders is not None:
+        components[SHOULDER_COMPONENT] = shoulders
+    if signet_body is not None:
+        components[SIGNET_COMPONENT] = signet_body
 
     duration = time.perf_counter() - start
 
     return GeneratedModel(
-        definition_hash=definition_hash(definition),
-        geometry_hash=geometry_hash(definition),
+        # THE ORIGINAL DOCUMENT IS THE IDENTITY, not the effective one. A ring
+        # family's derivations are a pure function of the original, so hashing
+        # it still determines this geometry completely — and every stored hash,
+        # Golden baseline and spec vector keeps meaning what it meant.
+        definition_hash=definition_hash(original),
+        geometry_hash=geometry_hash(original),
         generator_version=GENERATOR_VERSION,
         generation_duration_s=duration,
         components=components,
@@ -216,4 +297,9 @@ def build_solitaire_ring(definition: JewelryDefinition) -> GeneratedModel:
         # topology, its clipped cells and what it did NOT build — travels with
         # the geometry it describes.
         pave_result=pave_field,
+        # Sprint 28. Carried on the model beside every other result, so the
+        # family's own resolution — its variant, its architectures, every
+        # derivation with the parameters it came from, and every path it did
+        # NOT derive — travels with the geometry it describes.
+        ring_family_result=ring_family,
     )

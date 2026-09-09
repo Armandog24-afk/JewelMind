@@ -94,7 +94,24 @@ export type MetalType =
 export type ManufacturingMethod = 'lost_wax_casting' | 'direct_resin_printing'
 export type RingSizeSystem = 'EU'
 export type JewelryCategory = 'ring'
-export type JewelryStyle = 'solitaire'
+/**
+ * The ring FAMILY a document declares.
+ *
+ * `jewelry.style` has meant "ring family" since Sprint 16, so Sprint 28
+ * extended it rather than adding a second field that could disagree with it.
+ * Every member here has at least one real, executable variant.
+ *
+ * A MIRROR of the backend's `JewelryStyle`: reserved family names
+ * (`eternity`, `toi_et_moi`, `cluster`, `plain_band`) are deliberately absent,
+ * because this file must never offer a family the backend cannot build.
+ */
+export type JewelryStyle =
+  | 'solitaire'
+  | 'three_stone'
+  | 'halo'
+  | 'split_shank'
+  | 'bypass'
+  | 'signet'
 
 export interface ProjectInfo {
   name: string
@@ -119,12 +136,40 @@ export interface BandTaperSpec {
   bottomRatio: number
 }
 
+/**
+ * How the shank's own structure is built (Sprint 28).
+ *
+ * `UNIFORM` is the pre-Sprint-28 closed ring and remains the default.
+ * `SPLIT` is two rails sharing the band's width, joined into one band over the
+ * bottom span and genuinely separated at the top. `BYPASS` is ONE open rail
+ * travelling past a full turn, so its two ends pass each other rather than
+ * meeting — deliberately one rail, because two axially separated arcs come out
+ * as two disconnected solids and a ring that is not one connected body is not a
+ * ring.
+ */
+export type BandArchitecture = 'UNIFORM' | 'SPLIT' | 'BYPASS'
+
 export interface BandSpec {
   width: number
   thickness: number
   profile: BandProfile
   widthTaper: BandTaperSpec
   thicknessTaper: BandTaperSpec
+
+  /**
+   * Sprint 28. Each defaults to the pre-Sprint-28 behaviour, so a design saved
+   * before this sprint behaves identically.
+   *
+   * The rails of a `SPLIT` or `BYPASS` shank SHARE the band's own width, so a
+   * wider separation NARROWS them rather than widening the ring — which is why
+   * the backend's `JM-RINGFAM-004` refuses a separation that would leave no
+   * rail at all.
+   */
+  architecture: BandArchitecture
+  splitSeparation: number
+  splitJoinSpan: number
+  bypassSeparation: number
+  bypassOverlap: number
 }
 
 /**
@@ -715,6 +760,98 @@ export interface SettingModeParameters {
   offsetZMm: number
 }
 
+/**
+ * Ring Families v2 (Sprint 28). Mirrors
+ * `backend/jewelmind/ring_family/models.py`.
+ *
+ * A MIRROR: the backend is authoritative, and this file must never offer a
+ * variant it has no derivation for. Every reserved variant —
+ * `SOLITAIRE_TRELLIS`, `SPLIT_SHANK_SCULPTED`, `BYPASS_TWIST`,
+ * `SIGNET_ENGRAVED`, `SIGNET_OVAL_TABLE` — is deliberately absent for exactly
+ * that reason. See `RESERVED_RING_FAMILIES` for each one's real technical
+ * reason.
+ */
+
+/** Every ring-family variant with a real, executable derivation. */
+export type RingFamilyVariantId =
+  // SOLITAIRE — one centre stone; the four variants differ structurally.
+  | 'SOLITAIRE_CLASSIC'
+  | 'SOLITAIRE_CATHEDRAL'
+  | 'SOLITAIRE_LOW_PROFILE'
+  | 'SOLITAIRE_ELEVATED'
+  // THREE_STONE — delegated to the Multi-Stone Family layer.
+  | 'THREE_STONE_SYMMETRIC'
+  | 'THREE_STONE_GRADUATED'
+  // HALO — delegated to the Halo System.
+  | 'HALO_SINGLE'
+  | 'HALO_DOUBLE'
+  | 'HALO_HIDDEN'
+  // SPLIT_SHANK — the shank genuinely divides toward the head.
+  | 'SPLIT_SHANK_PARALLEL'
+  | 'SPLIT_SHANK_TAPERED'
+  // BYPASS — one open rail whose ends pass each other.
+  | 'BYPASS_CROSSOVER'
+  // SIGNET — a solid body with a table at the ring's top.
+  | 'SIGNET_FLAT_TABLE'
+
+/** Whether a family's derived placements are mirrored about the ring's own
+ * midplane. Read by the multi-stone variants. */
+export type RingFamilySymmetry = 'SYMMETRIC' | 'ASYMMETRIC'
+
+/**
+ * A ring family's parametric knobs.
+ *
+ * EVERY PARAMETER IS A MODULATION OR A DIMENSION, never a replacement: a factor
+ * multiplies what the document already states, so `ring.size`, `band.width` and
+ * `stone.diameter` keep driving the geometry. That is what makes the system
+ * parametric rather than a set of stored values.
+ *
+ * A parameter a variant does not read is reported as INFORMATION by the
+ * backend's `JM-RINGFAM-003` rather than silently ignored.
+ */
+export interface RingFamilyParams {
+  /** Multiplies `setting.basketHeight`, on top of the variant's own factor. */
+  headHeightFactor: number
+  /** Cathedral and split shoulders. */
+  shoulderSpanDeg: number
+  shoulderTopWidthFactor: number
+  shoulderTopThicknessFactor: number
+  /** Split shank. The rails share the band's width. */
+  splitSeparationMm: number
+  splitJoinSpanDeg: number
+  /** Bypass. `bypassOverlapDeg` is what makes the ends pass rather than meet. */
+  bypassSeparationMm: number
+  bypassOverlapDeg: number
+  /** Signet. `signetTableLengthMm` runs along the ring's circumference. */
+  signetTableLengthMm: number
+  signetTableWidthMm: number
+  signetTableHeightMm: number
+  /** Side stones, handed to the Multi-Stone Family layer. */
+  sideStoneScale: number
+  sideSpacingMm: number
+  sideGraduationFactor: number
+  /** Halo, handed to the Halo System. `haloRadiusFactor` multiplies the CENTRE
+   * STONE's own half width, so the halo follows the stone. */
+  haloStoneCount: number
+  haloRadiusFactor: number
+  haloStoneScale: number
+  /** Pavé shoulders, handed to the Pavé Engine. */
+  paveShoulders: boolean
+  paveSpanDeg: number
+  paveStoneScale: number
+  symmetry: RingFamilySymmetry
+}
+
+/** A ring family as a document declares it: the VARIANT and its parameters. */
+export interface RingFamilySpec {
+  variant: RingFamilyVariantId
+  /** `false` keeps the parameters and falls back to the family's default
+   * variant — a different state from declaring no family block. */
+  enabled: boolean
+  params: RingFamilyParams
+  label: string | null
+}
+
 /** A setting mode as a document declares it. */
 export interface SettingModeSpec {
   modeId: SettingModeId
@@ -1055,6 +1192,22 @@ export interface JewelryDefinition {
    * in one document needs a rule for what happens where they meet, which does
    * not exist. */
   pave: PaveDefinition | null
+
+  /**
+   * The ring family's VARIANT and its parameters (Sprint 28).
+   *
+   * `null` means "no variant declared", which resolves to the family's default
+   * — and for `solitaire` that reproduces the pre-Sprint-28 design exactly.
+   *
+   * THE FAMILY IS NOT HERE: `jewelry.style` is the one authority for it, so a
+   * variant belonging to another family is refused by the backend's
+   * `JM-RINGFAM-001` rather than resolved by precedence.
+   *
+   * A RING FAMILY IS A RELATION, NOT A PRESET. Its parameters MODULATE what the
+   * document already states, so changing `ring.size` or `stone.diameter`
+   * regenerates the design rather than leaving it stale.
+   */
+  ringFamily: RingFamilySpec | null
 }
 
 const METAL_TYPES: readonly MetalType[] = [
@@ -1065,6 +1218,17 @@ const METAL_TYPES: readonly MetalType[] = [
   'silver',
 ]
 const BAND_PROFILES: readonly BandProfile[] = ['comfort_fit', 'flat']
+/** Mirrors `JewelryStyle`. Used by the runtime guard, so a family the backend
+ * accepts is never rejected here — and one it does not is never let through. */
+const JEWELRY_STYLES: readonly JewelryStyle[] = [
+  'solitaire',
+  'three_stone',
+  'halo',
+  'split_shank',
+  'bypass',
+  'signet',
+]
+
 const SETTING_TYPES: readonly SettingType[] = [
   'prong',
   'bezel',
@@ -1141,7 +1305,16 @@ export function isValidJewelryDefinition(value: unknown): value is JewelryDefini
   }
 
   const jewelry = value['jewelry']
-  if (!isPlainObject(jewelry) || jewelry['category'] !== 'ring' || jewelry['style'] !== 'solitaire') {
+  // Sprint 28: membership in the mirrored enum rather than a hardcoded
+  // 'solitaire'. The hardcode was correct while that was the only family and
+  // would have rejected every Sprint 28 family — the same class of stale
+  // literal the JDL schema's `{"const": "prong"}` turned out to be for
+  // `setting.type`.
+  if (
+    !isPlainObject(jewelry) ||
+    jewelry['category'] !== 'ring' ||
+    !JEWELRY_STYLES.includes(jewelry['style'] as JewelryStyle)
+  ) {
     return false
   }
 
@@ -1224,6 +1397,12 @@ export function createDefaultDefinition(): JewelryDefinition {
       profile: 'comfort_fit',
       widthTaper: { mode: 'NONE', bottomRatio: 1.0 },
       thicknessTaper: { mode: 'NONE', bottomRatio: 1.0 },
+      // Sprint 28 defaults: the pre-Sprint-28 closed ring.
+      architecture: 'UNIFORM',
+      splitSeparation: 1.2,
+      splitJoinSpan: 200,
+      bypassSeparation: 1.0,
+      bypassOverlap: 60,
     },
     stone: {
       shape: 'round',
@@ -1268,6 +1447,9 @@ export function createDefaultDefinition(): JewelryDefinition {
     material: { metal: 'yellow_gold_18k' },
     manufacturing: { method: 'lost_wax_casting' },
     preview: { meshTolerance: 0.1, angularTolerance: 0.2 },
+    // No ring family variant declared: resolves to SOLITAIRE_CLASSIC, which
+    // reproduces the pre-Sprint-28 design exactly.
+    ringFamily: null,
     // No arrangement: a single-stone design, exactly as before Sprint 22.
     arrangement: null,
     // No family: a single-stone design, exactly as before Sprint 24.

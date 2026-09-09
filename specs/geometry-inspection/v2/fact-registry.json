@@ -661,6 +661,146 @@
       "implementationStatus": "implemented",
       "sourceInspection": "SettingGeometryResult",
       "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_ID",
+      "meaning": "The ring family the design resolved to, from `jewelry.style`. A resolved identity, not a judgment about it.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_VARIANT",
+      "meaning": "The ring-family variant the design resolved to. A document declaring none resolves to its family's default, so this is always present.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_FINGERPRINT",
+      "meaning": "The 16-hex-character identity of the resolved family and its parameters. Deterministic, with no timestamp, randomness, process id or memory-derived value.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ring_family_fingerprint()",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_DERIVED_PATH_COUNT",
+      "meaning": "How many JDL paths the family actually wrote. Zero would mean the variant changed nothing about the document.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_SKIPPED_PATH_COUNT",
+      "meaning": "How many paths the family would have derived and did not, because the document declares them itself. Reported rather than hidden.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_SHANK_ARCHITECTURE",
+      "meaning": "Which shank architecture the resolved family selected: UNIFORM, SPLIT or BYPASS.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_SHOULDER_ARCHITECTURE",
+      "meaning": "Which shoulder architecture the resolved family selected: NONE, CATHEDRAL or SPLIT_RAILS.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "RING_FAMILY_BODY_ARCHITECTURE",
+      "meaning": "Which body architecture the resolved family selected: NONE or SIGNET_TABLE.",
+      "valueType": "string",
+      "unit": null,
+      "scope": "ASSEMBLY",
+      "implementationStatus": "implemented",
+      "sourceInspection": "ResolvedRingFamily",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SHANK_RAIL_COUNT",
+      "meaning": "How many rails the band was constructed from. Two for a split shank, one for a bypass and for a uniform ring.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "band component metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SHANK_SEPARATED_AT_HEAD",
+      "meaning": "Whether the band's rails are axially separated where they meet the head. The property that makes a split shank a split shank, stated so a consumer never has to infer it from a volume.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "band component metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SHOULDER_ARCH_COUNT",
+      "meaning": "How many arches the shoulder component was constructed from. Two for a cathedral, four for a split shank's rails.",
+      "valueType": "number",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "shoulders component metadata",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SHOULDER_RISE",
+      "meaning": "How far the shoulder component's top sits above the band's own top, measured from the two bounding boxes. A measurement, with no statement about whether it is right.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "shoulders component bounding box",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SIGNET_TABLE_TOP_Z",
+      "meaning": "The Z coordinate of the signet body's table, in the global frame. A measurement of where the table is.",
+      "valueType": "number",
+      "unit": "mm",
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "signet_body component bounding box",
+      "forgeConsumptionStatus": "not_consumed"
+    },
+    {
+      "factType": "SIGNET_TABLE_ENGRAVED",
+      "meaning": "Whether the signet table carries engraving, relief or texture. ALWAYS false: no pattern representation exists anywhere in JewelMind, so the table is flat and rectangular. Recorded as a fact so a flat table is never mistaken for a finished signet.",
+      "valueType": "boolean",
+      "unit": null,
+      "scope": "COMPONENT",
+      "implementationStatus": "implemented",
+      "sourceInspection": "signet_body component metadata",
+      "forgeConsumptionStatus": "not_consumed"
     }
   ],
   "notes": [

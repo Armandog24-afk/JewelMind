@@ -87,6 +87,15 @@ extension process (see
 - `domain/schema.py::BandSpec` gained `widthTaper`/`thicknessTaper` as an
   additive, backward-compatible MINOR JDL change — `band.profile`,
   `band.width`, `band.thickness` are unchanged.
+> **Partly superseded by Sprint 28.** Split, bypass and cathedral geometry
+> are now real (`geometry/shank/architecture.py`, `geometry/shoulder.py`), and
+> `ShankDefinition` gained the five `BandSpec` fields that keep its "maps 1:1"
+> claim true — it was left behind for part of that sprint, which made the claim
+> false until it was fixed. Knife-edge, Euro, twisted and multi-rail (more than
+> two) remain PLANNED. See
+> [`../30-ring-families/README.md`](../30-ring-families/README.md) and
+> [`ADR-014`](../03-decisions/ADR-014-ring-family-orchestration.md).
+
 - No split/cathedral/knife-edge/Euro/twisted/multi-rail geometry was
   added anywhere in `geometry/`.
 - `jewelmind.jewelry_category.forge_scope.rule_scope()` still classifies

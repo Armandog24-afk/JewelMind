@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "RingFamilyParams": {
+      "additionalProperties": false,
+      "description": "The family's parametric knobs.\n\nONE FLAT MODEL, NOT A DISCRIMINATED UNION, and for the reason Sprint 26 and\nSprint 27 both recorded: a discriminated union at the JDL layer cannot be\nreached by a dotted-path patch, which is exactly the defect that stopped\nDesigner creating a pavé. A flat model keeps every route — a UI control, a\nspoken request, a hand-written document — able to set one value.\n\nEVERY PARAMETER IS A MODULATION OR A DIMENSION, never a replacement. A\nfactor multiplies what the document already states, so `ring.size`,\n`band.width` and `stone.diameter` keep driving the geometry and the family\nmodulates what they produce. That is what makes the system parametric rather\nthan a set of stored values.\n\nA parameter a variant does not read is reported as INFORMATION by\n`JM-RINGFAM-003` rather than silently ignored, and a test asserts every\nfield here is read by at least one variant — a field nothing reads would be\nthe silently ignored parameter ARRANGE-GOV-011 forbids.",
+      "properties": {
+        "headHeightFactor": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.05,
+          "maximum": 5.0,
+          "title": "Headheightfactor",
+          "type": "number"
+        },
+        "shoulderSpanDeg": {
+          "default": 50.0,
+          "exclusiveMinimum": 1.0,
+          "maximum": 90.0,
+          "title": "Shoulderspandeg",
+          "type": "number"
+        },
+        "shoulderTopWidthFactor": {
+          "default": 0.85,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "title": "Shouldertopwidthfactor",
+          "type": "number"
+        },
+        "shoulderTopThicknessFactor": {
+          "default": 0.85,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "title": "Shouldertopthicknessfactor",
+          "type": "number"
+        },
+        "splitSeparationMm": {
+          "default": 1.2,
+          "exclusiveMinimum": 0.0,
+          "maximum": 20.0,
+          "title": "Splitseparationmm",
+          "type": "number"
+        },
+        "splitJoinSpanDeg": {
+          "default": 200.0,
+          "exclusiveMinimum": 10.0,
+          "maximum": 350.0,
+          "title": "Splitjoinspandeg",
+          "type": "number"
+        },
+        "bypassSeparationMm": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 20.0,
+          "title": "Bypassseparationmm",
+          "type": "number"
+        },
+        "bypassOverlapDeg": {
+          "default": 60.0,
+          "exclusiveMinimum": 5.0,
+          "maximum": 180.0,
+          "title": "Bypassoverlapdeg",
+          "type": "number"
+        },
+        "signetTableLengthMm": {
+          "default": 11.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 60.0,
+          "title": "Signettablelengthmm",
+          "type": "number"
+        },
+        "signetTableWidthMm": {
+          "default": 9.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 60.0,
+          "title": "Signettablewidthmm",
+          "type": "number"
+        },
+        "signetTableHeightMm": {
+          "default": 2.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 30.0,
+          "title": "Signettableheightmm",
+          "type": "number"
+        },
+        "sideStoneScale": {
+          "default": 0.55,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "title": "Sidestonescale",
+          "type": "number"
+        },
+        "sideSpacingMm": {
+          "default": 5.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 40.0,
+          "title": "Sidespacingmm",
+          "type": "number"
+        },
+        "sideGraduationFactor": {
+          "default": 0.8,
+          "exclusiveMaximum": 1.0,
+          "exclusiveMinimum": 0.05,
+          "title": "Sidegraduationfactor",
+          "type": "number"
+        },
+        "haloStoneCount": {
+          "default": 16,
+          "maximum": 96,
+          "minimum": 3,
+          "title": "Halostonecount",
+          "type": "integer"
+        },
+        "haloRadiusFactor": {
+          "default": 1.05,
+          "exclusiveMinimum": 0.1,
+          "maximum": 10.0,
+          "title": "Haloradiusfactor",
+          "type": "number"
+        },
+        "haloStoneScale": {
+          "default": 0.22,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "title": "Halostonescale",
+          "type": "number"
+        },
+        "paveShoulders": {
+          "default": false,
+          "title": "Paveshoulders",
+          "type": "boolean"
+        },
+        "paveSpanDeg": {
+          "default": 90.0,
+          "exclusiveMinimum": 1.0,
+          "maximum": 360.0,
+          "title": "Pavespandeg",
+          "type": "number"
+        },
+        "paveStoneScale": {
+          "default": 0.1,
+          "exclusiveMinimum": 0.001,
+          "maximum": 10.0,
+          "title": "Pavestonescale",
+          "type": "number"
+        },
+        "symmetry": {
+          "default": "SYMMETRIC",
+          "enum": [
+            "SYMMETRIC",
+            "ASYMMETRIC"
+          ],
+          "title": "Symmetry",
+          "type": "string"
+        }
+      },
+      "title": "RingFamilyParams",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A ring family as a document declares it.\n\nONLY THE VARIANT AND THE PARAMETERS. The FAMILY comes from\n`jewelry.style`, which has meant \"ring family\" since Sprint 16 and is\nalready the value `ring/families.py` dispatches on — so there is exactly one\nauthority for the family and one for the variant, rather than two fields\nthat can disagree. A variant that does not belong to the declared family is\nrefused by `JM-RINGFAM-001` rather than resolved by precedence.\n\nABSENT IS NOT EMPTY. A document with no `ringFamily` resolves to its\nfamily's default variant with default parameters, which for `solitaire`\nreproduces the pre-Sprint-28 design exactly.",
+  "properties": {
+    "variant": {
+      "enum": [
+        "SOLITAIRE_CLASSIC",
+        "SOLITAIRE_CATHEDRAL",
+        "SOLITAIRE_LOW_PROFILE",
+        "SOLITAIRE_ELEVATED",
+        "THREE_STONE_SYMMETRIC",
+        "THREE_STONE_GRADUATED",
+        "HALO_SINGLE",
+        "HALO_DOUBLE",
+        "HALO_HIDDEN",
+        "SPLIT_SHANK_PARALLEL",
+        "SPLIT_SHANK_TAPERED",
+        "BYPASS_CROSSOVER",
+        "SIGNET_FLAT_TABLE"
+      ],
+      "title": "Variant",
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "params": {
+      "$ref": "#/$defs/RingFamilyParams"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "maxLength": 120,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label"
+    }
+  },
+  "required": [
+    "variant"
+  ],
+  "title": "RingFamilySpec",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jewelmind.dev/specs/ring-family/v1/ring-family-spec.schema.json"
+}

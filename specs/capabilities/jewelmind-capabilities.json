@@ -192,31 +192,31 @@
       "domain": "ring_family",
       "capability": "solitaire",
       "status": "CURRENT",
-      "note": "The only implemented family."
+      "note": "Sprint 28: FOUR real variants — classic, cathedral, low-profile and elevated — each measurably different geometry rather than a label. Cathedral and elevated build real shoulder arches; low-profile and elevated scale the head, which moves the stone."
     },
     {
       "domain": "ring_family",
       "capability": "three_stone",
-      "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "status": "CURRENT",
+      "note": "Sprint 28: a real ring family with two variants, symmetric and graduated. It DELEGATES placement to the Multi-Stone Family layer, which compiles into an arrangement — the ring family states a spacing and a scale and computes no position. 3 real stone solids."
     },
     {
       "domain": "ring_family",
       "capability": "toi_et_moi",
       "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "note": "Reserved; no generator, deliberately. Already expressible as the TOI_ET_MOI stone family (Sprint 24). A ring family of the same name would be a second authority over the same placement, which is what JM-FAMILY-001 refuses."
     },
     {
       "domain": "ring_family",
       "capability": "halo",
-      "status": "OUT_OF_SCOPE",
-      "note": "Not a family, and deliberately so since Sprint 25. A halo COMPOSES onto whatever placement a design declares, so it lives beside `family` as its own HaloDefinition rather than as a fifth family type — a hidden halo needs a vertical axis and a double halo needs two independent rings, neither of which a family's single accent parameter set expresses. Superseded by docs/bible/27-halo/halo-rfc.md; the live capability rows are in the `halo` domain."
+      "status": "PARTIAL",
+      "note": "Sprint 28: a real ring family with three variants — single, double and hidden. THIS DOES NOT REVERSE SPRINT 25's position that a halo is not a family: that claim was about where the GEOMETRY lives, and it has not moved. The Halo System still owns every halo solid, and the ring family DERIVES a `halo` block and computes no placement of its own. What Sprint 28 adds is the orchestration above it, so a designer can name the family and have the radius follow the centre stone. 17/39/17 real stone solids, each ring's radius derived from the CENTRE STONE's own half width. PARTIAL because NO METAL IS GENERATED TO HOLD THE HALO STONES — Sprint 25's own recorded boundary, unchanged, and tracked as `halo/halo_setting_metal`."
     },
     {
       "domain": "ring_family",
       "capability": "eternity",
       "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "note": "Reserved; no generator. Needs a pave field whose host is the band's outer surface over 360 degrees, and the Pave Engine's containment policy clips a field at the host's declared extent rather than wrapping it."
     },
     {
       "domain": "ring_family",
@@ -227,20 +227,20 @@
     {
       "domain": "ring_family",
       "capability": "signet",
-      "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "status": "PARTIAL",
+      "note": "Sprint 28: a real solid body with a rectangular table at the ring's top, built as its own `signet_body` component so it has parametric identity. PARTIAL because a signet's decoration is the point of one and NO ENGRAVING, RELIEF OR TEXTURE exists anywhere in the pipeline: the table is flat and rectangular. SIGNET_ENGRAVED and SIGNET_OVAL_TABLE are reserved with their real reasons."
     },
     {
       "domain": "ring_family",
       "capability": "plain_band",
       "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "note": "Reserved; no generator. A ring with no stone requires the assembly to build no stone, no setting and no head, and `stone_reference` and `basket_support` are REQUIRED components in every current contract. Changing the required-component set is an ADR condition."
     },
     {
       "domain": "ring_family",
       "capability": "cluster",
       "status": "PLANNED",
-      "note": "Reserved name; no generator."
+      "note": "Reserved; no generator, deliberately. A cluster's stones are already the CLUSTER stone family (Sprint 24), composable onto any ring family; a separate ring family would duplicate it for no capability gain."
     },
     {
       "domain": "jewelry_category",
@@ -299,14 +299,14 @@
     {
       "domain": "shank",
       "capability": "split_shank",
-      "status": "PLANNED",
-      "note": "Reserved; no geometry."
+      "status": "CURRENT",
+      "note": "Sprint 28: TWO rails sharing the band's width, joined into one band over the bottom span and genuinely separated at the top — the axial gap contains no metal (9.778 mm3 at the bottom bridge, zero near the head). One connected solid. A wider separation NARROWS the rails rather than widening the ring."
     },
     {
       "domain": "shank",
       "capability": "cathedral",
-      "status": "PLANNED",
-      "note": "Reserved; no geometry."
+      "status": "CURRENT",
+      "note": "Sprint 28: real shoulder arches, built by `geometry/shoulder.py` — two for a cathedral solitaire, four for a split shank. Still not a profile type: it belongs to shoulder/head integration, and that integration now exists. `ShoulderDefinition.modeled` was `Literal[False]` from Sprint 16 until this sprint."
     },
     {
       "domain": "shank",
@@ -330,7 +330,7 @@
       "domain": "shank",
       "capability": "multi_rail",
       "status": "PLANNED",
-      "note": "Reserved; no geometry."
+      "note": "MORE THAN TWO rails. `split_shank` became real in Sprint 28 and builds exactly two; the general case is not a loop over that builder — three rails sharing one band width need their own axial layout and their own bridge."
     },
     {
       "domain": "shank",
@@ -1735,6 +1735,24 @@
       "capability": "UNDER_GALLERY_SUPPORT",
       "status": "PLANNED",
       "note": "Reserved: no builder, and not a SettingModeId member. Decorative structure below the gallery, joining a head to a shank or to a second head. It needs multi-head or rail geometry, and RESERVED_SUPPORT_ELEMENTS already records that a rail joins two heads while one setting builds one."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "split_shank",
+      "status": "CURRENT",
+      "note": "Sprint 28: a real ring family with two variants, parallel and tapered, backed by a real shank architecture plus four shoulder arches carrying the rails to the head. Measurably different: band 202.048 mm3 parallel against 189.431 mm3 tapered."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "bypass",
+      "status": "CURRENT",
+      "note": "Sprint 28: ONE open rail travelling past a full turn with its axial position shifting as it goes, so its two ends occupy the same angles at different axial positions and PASS each other. Deliberately one rail: two axially separated arcs come out as two disconnected solids, and a ring that is not one connected body is not a ring."
+    },
+    {
+      "domain": "shank",
+      "capability": "bypass_shank",
+      "status": "CURRENT",
+      "note": "Sprint 28: the bypass centerline, built by `shank/architecture.py::build_bypass_shank()` and selected by `band.architecture = 'BYPASS'`. One connected solid over 420 degrees."
     }
   ]
 }

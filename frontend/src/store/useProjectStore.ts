@@ -3,11 +3,13 @@ import {
   createDefaultDefinition,
   type BandSpec,
   type JewelryDefinition,
+  type JewelryInfo,
   type ManufacturingSpec,
   type MaterialSpec,
   type PaveDefinition,
   type PreviewSpec,
   type ProjectInfo,
+  type RingFamilySpec,
   type RingSpec,
   type SettingSpec,
   type StoneSpec,
@@ -47,6 +49,11 @@ interface ProjectState {
   includeStoneReferenceInExport: boolean
 
   updateProject: (patch: Partial<ProjectInfo>) => void
+  /** Changes the jewelry category/family block (Sprint 28).
+   *
+   * `jewelry.style` has meant "ring family" since Sprint 16 and had no Studio
+   * control until Ring Families v2 gave it more than one real value. */
+  updateJewelry: (patch: Partial<JewelryInfo>) => void
   updateRing: (patch: Partial<RingSpec>) => void
   updateBand: (patch: Partial<BandSpec>) => void
   updateStone: (patch: Partial<StoneSpec>) => void
@@ -65,6 +72,19 @@ interface ProjectState {
    * none. For the scalar controls, so a slider does not have to restate the
    * whole field. */
   updatePave: (patch: Partial<PaveDefinition>) => void
+  /** Replaces the design's ring-family variant block, or removes it with `null`
+   * (Sprint 28).
+   *
+   * WHOLESALE rather than a partial patch, for the same reason `setPave` is: a
+   * variant and its parameters are one coherent choice, and a partial merge
+   * could leave a variant belonging to one family beside parameters chosen for
+   * another — a state the backend's `JM-RINGFAM-001` refuses and the UI should
+   * never be able to construct.
+   *
+   * `null` is a real state, not an empty one: it means "no variant declared",
+   * which resolves to the family's default and — for `solitaire` — reproduces
+   * the pre-Sprint-28 design exactly. */
+  setRingFamily: (ringFamily: RingFamilySpec | null) => void
   setIncludeStoneReferenceInExport: (value: boolean) => void
   /** Applies an accepted Designer proposal's candidate JDL wholesale — see
    * docs/bible/12-designer/310-user-review-and-acceptance.md. Never called
@@ -111,6 +131,14 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
       withUpdatedDefinition(state, {
         ...state.currentDefinition,
         project: { ...state.currentDefinition.project, ...patch },
+      }),
+    ),
+
+  updateJewelry: (patch) =>
+    set((state) =>
+      withUpdatedDefinition(state, {
+        ...state.currentDefinition,
+        jewelry: { ...state.currentDefinition.jewelry, ...patch },
       }),
     ),
 
@@ -164,6 +192,11 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
         pave: { ...current, ...patch },
       })
     }),
+
+  setRingFamily: (ringFamily) =>
+    set((state) =>
+      withUpdatedDefinition(state, { ...state.currentDefinition, ringFamily }),
+    ),
 
   updateMaterial: (patch) =>
     set((state) =>

@@ -1531,6 +1531,213 @@ def _extent_along(length_mm: float, width_mm: float, axis_deg: float) -> float:
     return abs(math.cos(radians)) * length_mm + abs(math.sin(radians)) * width_mm
 
 
+def _ring_family_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
+    """Ring Families validation (Sprint 28).
+
+    SCOPE: RING_FAMILY_ONLY, and STRUCTURAL, REFERENTIAL or MATHEMATICAL only.
+    Five questions: does the declared variant belong to the family
+    `jewelry.style` names, does its derivation collide with a block the document
+    already declares, which parameters is it not going to read, is the requested
+    structure geometrically possible, and is the variant's status honest.
+
+    NONE OF THEM IS A PROFESSIONAL JUDGMENT. There is no rule here about whether
+    a shank section is strong enough, a shoulder castable, a signet table thick
+    enough or a bypass sound. Each needs sourced professional evidence this
+    project does not have, so none exists.
+
+    A DESIGN WITH NO RING FAMILY BLOCK PRODUCES AT MOST THE STATUS RESULT.
+    Every pre-Sprint-28 document is a `solitaire` with no `ringFamily`, which
+    resolves to `SOLITAIRE_CLASSIC` — CURRENT — so the whole existing corpus
+    stays silent here.
+
+    THE FAMILY IS RESOLVED BY THE REAL RESOLVER, not re-derived. `_family_rules`,
+    `_halo_rules`, `_pave_rules` and `_setting_mode_rules` each do the same, for
+    the same reason: a rule that reimplemented the resolution would eventually
+    disagree with the geometry, and the disagreement would surface as a design
+    that validates and then fails to build.
+    """
+
+    from jewelmind.ring_family.capability import ring_family_capabilities
+    from jewelmind.ring_family.errors import RingFamilyError
+    from jewelmind.ring_family.models import RingFamilyParams, variants_for_family
+    from jewelmind.ring_family.resolve import resolve_ring_family
+
+    out: list[R.ValidationResult] = []
+    spec = d.ringFamily
+
+    try:
+        resolved = resolve_ring_family(d)
+    except RingFamilyError as exc:
+        # The resolver refuses a variant whose family disagrees with
+        # `jewelry.style`, and a derivation that would collide with an explicit
+        # arrangement. Surfaced as a rule result here rather than only as a
+        # generation-time exception, so a caller learns about it from validation
+        # like every other refusal.
+        rule = (
+            R.RING_FAMILY_DERIVATION_APPLICABLE
+            if "arrangement" in str(exc)
+            else R.RING_FAMILY_VARIANT_MATCHES
+        )
+        out.append(
+            R.ValidationResult(
+                ruleId=rule,
+                severity="error",
+                message=str(exc),
+                parameter="ringFamily.variant",
+                suggestedValue=(
+                    variants_for_family(d.jewelry.style)[0]
+                    if variants_for_family(d.jewelry.style)
+                    else None
+                ),
+            )
+        )
+        return out
+
+    entry = ring_family_capabilities().get(resolved.variant)
+    if entry is None:  # pragma: no cover - the closed literal makes this unreachable
+        out.append(
+            R.ValidationResult(
+                ruleId=R.RING_FAMILY_VARIANT_MATCHES,
+                severity="error",
+                message=(
+                    f"ring family variant '{resolved.variant}' has no capability "
+                    "registry entry, so nothing is known about what it builds."
+                ),
+                parameter="ringFamily.variant",
+            )
+        )
+        return out
+
+    # DERIVATIONS THE DOCUMENT PRE-EMPTED. INFORMATION, not a warning: the
+    # document is perfectly valid and its own block is used, which is the
+    # correct outcome — but an author who chose a `halo` family and also wrote a
+    # halo deserves to be told which one won.
+    if resolved.skippedPaths:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.RING_FAMILY_DERIVATION_APPLICABLE,
+                severity="information",
+                message=(
+                    f"The '{resolved.variant}' ring family would derive "
+                    + ", ".join(resolved.skippedPaths)
+                    + ", and this design declares them itself. The declared "
+                    "values are used unchanged; the family derived none."
+                ),
+                parameter=f"{resolved.skippedPaths[0].split('.')[0]}",
+            )
+        )
+
+    # UNREAD PARAMETERS. Reported only when the author actually SET one, by
+    # comparing against the model's own defaults rather than listing every
+    # field, so a variant with few parameters stays silent.
+    if spec is not None and spec.enabled and resolved.unreadParameters:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.RING_FAMILY_PARAMETER_APPLICABLE,
+                severity="information",
+                message=(
+                    f"ring family variant '{resolved.variant}' does not read "
+                    + ", ".join(
+                        f"ringFamily.params.{name}"
+                        for name in resolved.unreadParameters
+                    )
+                    + ". The value is kept in the document and has no effect on "
+                    "the geometry."
+                ),
+                parameter=f"ringFamily.params.{resolved.unreadParameters[0]}",
+            )
+        )
+
+    # A DISABLED FAMILY BLOCK. INFORMATION: the parameters stay in the document
+    # and the family's default variant is used, which is a state worth naming
+    # rather than leaving the author to wonder why nothing changed.
+    if spec is not None and not spec.enabled:
+        out.append(
+            R.ValidationResult(
+                ruleId=R.RING_FAMILY_PARAMETER_APPLICABLE,
+                severity="information",
+                message=(
+                    f"ringFamily is disabled, so the '{d.jewelry.style}' "
+                    f"family's default variant '{resolved.variant}' is built and "
+                    "the declared parameters are not read."
+                ),
+                parameter="ringFamily.enabled",
+            )
+        )
+
+    # GEOMETRIC FEASIBILITY. A MATHEMATICAL CONSTRAINT: two rails sharing the
+    # band's width leave `(width - separation) / 2` of rail between them, so a
+    # separation at or above the width leaves none. The rail width comes from
+    # the SAME function the builder uses, so this rule cannot stop agreeing with
+    # the geometry.
+    params = resolved.params if spec is not None and spec.enabled else RingFamilyParams()
+    if resolved.shankArchitecture in {"SPLIT", "BYPASS"}:
+        separation = (
+            params.splitSeparationMm
+            if resolved.shankArchitecture == "SPLIT"
+            else params.bypassSeparationMm
+        )
+        rail_width = (d.band.width - separation) / 2.0
+        if rail_width <= 0:
+            field = (
+                "splitSeparationMm"
+                if resolved.shankArchitecture == "SPLIT"
+                else "bypassSeparationMm"
+            )
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.RING_FAMILY_GEOMETRY_FEASIBLE,
+                    severity="error",
+                    message=(
+                        f"A separation of {separation} mm leaves "
+                        f"{rail_width:.4f} mm of rail in a {d.band.width} mm "
+                        "band. The rails SHARE the band's width, so a wider "
+                        "separation narrows them rather than widening the ring — "
+                        "arithmetic, not a statement about how thin a rail may "
+                        "be."
+                    ),
+                    parameter=f"ringFamily.params.{field}",
+                )
+            )
+
+    if resolved.bodyArchitecture == "SIGNET_TABLE":
+        # A table narrower than the band would leave the band standing proud of
+        # the body it is meant to be part of.
+        if params.signetTableWidthMm < d.band.width:
+            out.append(
+                R.ValidationResult(
+                    ruleId=R.RING_FAMILY_GEOMETRY_FEASIBLE,
+                    severity="warning",
+                    message=(
+                        f"The signet table is {params.signetTableWidthMm} mm "
+                        f"across a {d.band.width} mm band, so the band stands "
+                        "proud of the body it is part of. Geometrically valid "
+                        "and probably not what was intended."
+                    ),
+                    parameter="ringFamily.params.signetTableWidthMm",
+                    suggestedValue=d.band.width,
+                )
+            )
+
+    # HONEST STATUS. A PARTIAL variant is reported as PARTIAL, with what is
+    # missing, so a caller never has to read the capability registry to learn
+    # that a family it just used is incomplete.
+    if entry.status != "CURRENT":
+        out.append(
+            R.ValidationResult(
+                ruleId=R.RING_FAMILY_STATUS,
+                severity="information",
+                message=(
+                    f"Ring family variant '{resolved.variant}' is "
+                    f"{entry.status}, not CURRENT. {entry.description}"
+                ),
+                parameter="jewelry.style",
+            )
+        )
+
+    return out
+
+
 def _manufacturing_rules(d: JewelryDefinition) -> list[R.ValidationResult]:
     out: list[R.ValidationResult] = []
 
@@ -1603,6 +1810,7 @@ _RULE_GROUPS = (
     _setting_rules,
     _setting_v2_rules,
     _setting_mode_rules,
+    _ring_family_rules,
     _manufacturing_rules,
     _geometry_rules,
 )

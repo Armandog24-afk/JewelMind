@@ -16,10 +16,16 @@
     "thicknessTaper": {
       "mode": "NONE",
       "bottomRatio": 1.0
-    }
+    },
+    "architecture": "UNIFORM",
+    "splitSeparationMm": 1.2,
+    "splitJoinSpanDeg": 200.0,
+    "bypassSeparationMm": 1.0,
+    "bypassOverlapDeg": 60.0
   },
   "shoulders": {
-    "modeled": false
+    "modeled": false,
+    "architecture": "NONE"
   },
   "head": {
     "basketHeightMm": 3.5

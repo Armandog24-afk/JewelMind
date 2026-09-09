@@ -306,6 +306,75 @@ and, for the tension case specifically:
 > baseline guards the geometry and makes no functional claim. Professional
 > review is required.
 
+## Sprint 28 — Ring Families v2 (`RF-001`–`RF-007`)
+
+**Seven NEW cases. Zero existing baselines modified.** `verify-all` reported all
+61 goldens PASS before these were added and all 68 PASS after, and the default
+solitaire's metal is still exactly `341.44334316909976 mm³` — the same number
+Sprints 19, 23 and 27 each had to preserve.
+
+That is the sprint's central compatibility claim, and it is what the register
+exists to record: an additive schema change (`JewelryDefinition.ringFamily` plus
+five `BandSpec` fields) moved every document's `definitionHash`, and moved no
+geometry at all.
+
+| Golden | What it locks in |
+| --- | --- |
+| `RF-001-solitaire-cathedral` | Two real shoulder arches — the FIRST geometry the shoulder has ever had. One connected solid rising above the band. |
+| `RF-002-solitaire-elevated` | The head factor scales `setting.basketHeight`, which moves the stone, AND derives shoulder arches to reach it. |
+| `RF-003-split-shank-parallel` | TWO rails, ONE connected solid, a real axial gap at the head, four shoulder arches. |
+| `RF-004-split-shank-tapered` | The derived width taper is actually READ, and produces measurably less metal than the parallel variant. |
+| `RF-005-bypass-crossover` | ONE open rail over 420°, ONE connected solid, ends passing rather than meeting. |
+| `RF-006-signet-flat-table` | A real `signet_body` component with parametric identity, not metal fused anonymously into the band. |
+| `RF-007-halo-hidden` | Delegation to the Halo System (16 halo stones) plus the raised head that makes room for them. |
+
+**Each case guards a defect this sprint actually shipped and fixed.** They were
+chosen for that reason rather than for coverage of the taxonomy:
+
+- `RF-002` — `LOW_PROFILE`, `CLASSIC` and `ELEVATED` produced *identical*
+  geometry at first, because all three had `headHeightFactor = 1.0` and the
+  variant contributed nothing of its own.
+- `RF-003` — both rails came out coincident, because
+  `Workplane.translate()` before `.revolve()` silently loses the offset. The
+  fused volume was exactly one rail's.
+- `RF-004` — the variant derived `band.widthTaper` and the architecture builder
+  *ignored* it, so the tapered and parallel variants were byte-identical. A
+  silently ignored derived value.
+- `RF-005` — built as two axially separated arcs, a bypass came out as TWO
+  disconnected solids.
+
+No case was added for a variant whose only difference is a scaled parameter: a
+baseline recording the same components with a different volume would add
+maintenance without adding coverage.
+
+**Every one records honest limitations** in its own `knownLimitations`:
+
+> `RING_FAMILIES_AWAITING_PROFESSIONAL_REVIEW`: every dimension in this design
+> is a software construction parameter. No rail width, shoulder proportion,
+> signet table thickness, crossing clearance or settability judgment is asserted
+> anywhere, and no qualified jewelry professional has reviewed this geometry.
+> The variant's capability status is `NOT_REVIEWED`.
+
+and, for the two PARTIAL families specifically:
+
+> `HALO_SETTING_METAL_ABSENT`: the halo stones are real geometry and NO METAL IS
+> GENERATED TO HOLD THEM. Sprint 25's own recorded boundary, unchanged by
+> Sprint 28.
+
+> `SIGNET_TABLE_UNDECORATED`: the table is flat and rectangular. No engraving,
+> relief or texture exists anywhere in JewelMind, which is why the signet family
+> is PARTIAL and why `SIGNET_ENGRAVED` and `SIGNET_OVAL_TABLE` are reserved.
+
+### One pre-existing gap closed while here
+
+`manifest.json`'s `fullSuite` list had been quietly incomplete since Sprint 24:
+every `FAM`, `HALO`, `PAVE` and `ESM` case was registered in `goldenIds` and
+never added to `fullSuite`, so 22 of 68 entries were missing. Nothing in
+`backend/jewelmind/` reads that list — `verify-all` iterates `goldenIds` — so
+the drift had no runtime effect and no test caught it. Completed rather than
+left half-updated, because adding only the seven Sprint 28 cases would have made
+the file inconsistent in a new way.
+
 ## How a future entry gets added
 
 1. Run `python -m jewelmind.geometry_quality.cli generate-candidate <golden_id>`.

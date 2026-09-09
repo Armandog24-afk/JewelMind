@@ -35,6 +35,13 @@ GEOMETRY_ROLE: dict[str, GeometryRole] = {
     "bars": "production_metal",
     "flush_collar": "production_metal",
     "tension_supports": "production_metal",
+    # Sprint 28: the Ring Families structural components. Registered
+    # EXPLICITLY rather than left to the `production_metal` default, so the
+    # classification is a stated fact rather than a fallback that happens to be
+    # right — the same discipline `pave_retention` and the Sprint 27 families
+    # follow.
+    "shoulders": "production_metal",
+    "signet_body": "production_metal",
 }
 
 PRODUCTION_ROLE: dict[str, ProductionRole] = {
@@ -48,6 +55,8 @@ PRODUCTION_ROLE: dict[str, ProductionRole] = {
     "bars": "included_by_default",
     "flush_collar": "included_by_default",
     "tension_supports": "included_by_default",
+    "shoulders": "included_by_default",
+    "signet_body": "included_by_default",
 }
 
 

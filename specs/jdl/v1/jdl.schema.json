@@ -3019,6 +3019,186 @@
         "title": "SettingModeSpec",
         "type": "object"
       }
+    },
+    "ringFamilyParams": {
+      "additionalProperties": false,
+      "description": "A ring family's parametric knobs. EVERY PARAMETER IS A MODULATION OR A DIMENSION, never a replacement: a factor multiplies what the document already states, so ring.innerDiameter, band.width and stone.diameter keep driving the geometry. A parameter the chosen variant does not read is reported by semantic rule JM-RINGFAM-003 rather than dropped.",
+      "properties": {
+        "headHeightFactor": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.05,
+          "maximum": 5.0,
+          "type": "number"
+        },
+        "shoulderSpanDeg": {
+          "default": 50.0,
+          "exclusiveMinimum": 1.0,
+          "maximum": 90.0,
+          "type": "number"
+        },
+        "shoulderTopWidthFactor": {
+          "default": 0.85,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "type": "number"
+        },
+        "shoulderTopThicknessFactor": {
+          "default": 0.85,
+          "exclusiveMinimum": 0.05,
+          "maximum": 1.0,
+          "type": "number"
+        },
+        "splitSeparationMm": {
+          "default": 1.2,
+          "exclusiveMinimum": 0.0,
+          "maximum": 20.0,
+          "type": "number"
+        },
+        "splitJoinSpanDeg": {
+          "default": 200.0,
+          "exclusiveMinimum": 10.0,
+          "maximum": 350.0,
+          "type": "number"
+        },
+        "bypassSeparationMm": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 20.0,
+          "type": "number"
+        },
+        "bypassOverlapDeg": {
+          "default": 60.0,
+          "exclusiveMinimum": 5.0,
+          "maximum": 180.0,
+          "type": "number"
+        },
+        "signetTableLengthMm": {
+          "default": 11.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 60.0,
+          "type": "number"
+        },
+        "signetTableWidthMm": {
+          "default": 9.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 60.0,
+          "type": "number"
+        },
+        "signetTableHeightMm": {
+          "default": 2.0,
+          "exclusiveMinimum": 0.1,
+          "maximum": 30.0,
+          "type": "number"
+        },
+        "sideStoneScale": {
+          "default": 0.55,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "type": "number"
+        },
+        "sideSpacingMm": {
+          "default": 5.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 40.0,
+          "type": "number"
+        },
+        "sideGraduationFactor": {
+          "default": 0.8,
+          "exclusiveMaximum": 1.0,
+          "exclusiveMinimum": 0.05,
+          "type": "number"
+        },
+        "haloStoneCount": {
+          "default": 16,
+          "maximum": 96,
+          "minimum": 3,
+          "type": "integer"
+        },
+        "haloRadiusFactor": {
+          "default": 1.05,
+          "exclusiveMinimum": 0.1,
+          "maximum": 10.0,
+          "type": "number"
+        },
+        "haloStoneScale": {
+          "default": 0.22,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "type": "number"
+        },
+        "paveShoulders": {
+          "default": false,
+          "type": "boolean"
+        },
+        "paveSpanDeg": {
+          "default": 90.0,
+          "exclusiveMinimum": 1.0,
+          "maximum": 360.0,
+          "type": "number"
+        },
+        "paveStoneScale": {
+          "default": 0.1,
+          "exclusiveMinimum": 0.001,
+          "maximum": 10.0,
+          "type": "number"
+        },
+        "symmetry": {
+          "default": "SYMMETRIC",
+          "enum": [
+            "SYMMETRIC",
+            "ASYMMETRIC"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ringFamily": {
+      "additionalProperties": false,
+      "description": "The ring family's VARIANT and its parameters (Sprint 28). THE FAMILY IS NOT HERE: jewelry.style is the one authority for it. Every variant listed has a real derivation; the reserved ones (SOLITAIRE_TRELLIS, SPLIT_SHANK_SCULPTED, BYPASS_TWIST, SIGNET_ENGRAVED, SIGNET_OVAL_TABLE) are deliberately absent.",
+      "properties": {
+        "variant": {
+          "enum": [
+            "SOLITAIRE_CLASSIC",
+            "SOLITAIRE_CATHEDRAL",
+            "SOLITAIRE_LOW_PROFILE",
+            "SOLITAIRE_ELEVATED",
+            "THREE_STONE_SYMMETRIC",
+            "THREE_STONE_GRADUATED",
+            "HALO_SINGLE",
+            "HALO_DOUBLE",
+            "HALO_HIDDEN",
+            "SPLIT_SHANK_PARALLEL",
+            "SPLIT_SHANK_TAPERED",
+            "BYPASS_CROSSOVER",
+            "SIGNET_FLAT_TABLE"
+          ],
+          "type": "string"
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "params": {
+          "$ref": "#/$defs/ringFamilyParams"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "variant"
+      ],
+      "type": "object"
     }
   },
   "properties": {
@@ -3043,18 +3223,28 @@
       }
     },
     "jewelry": {
-      "type": "object",
       "additionalProperties": false,
       "properties": {
         "category": {
           "const": "ring",
-          "default": "ring"
+          "default": "ring",
+          "type": "string"
         },
         "style": {
-          "const": "solitaire",
-          "default": "solitaire"
+          "default": "solitaire",
+          "enum": [
+            "solitaire",
+            "three_stone",
+            "halo",
+            "split_shank",
+            "bypass",
+            "signet"
+          ],
+          "type": "string",
+          "description": "The ring FAMILY. `jewelry.style` has meant 'ring family' since Sprint 16, so Sprint 28 extended it rather than adding a competing field. Which VARIANT of the family is `ringFamily.variant`; a variant belonging to a different family is refused by semantic rule JM-RINGFAM-001, not here."
         }
-      }
+      },
+      "type": "object"
     },
     "ring": {
       "type": "object",
@@ -3077,33 +3267,60 @@
       }
     },
     "band": {
-      "type": "object",
       "additionalProperties": false,
       "properties": {
         "width": {
-          "type": "number",
           "default": 2.4,
+          "type": "number",
           "description": "Millimeters. Minimum 1.5mm / maximum-warning 12mm are semantic rules JM-BAND-001/JM-BAND-003, not enforced here."
         },
         "thickness": {
-          "type": "number",
           "default": 1.8,
+          "type": "number",
           "description": "Millimeters. Minimum 1.4mm is semantic rule JM-BAND-002, not enforced here."
         },
         "profile": {
+          "default": "comfort_fit",
           "enum": [
             "comfort_fit",
             "flat"
           ],
-          "default": "comfort_fit"
+          "type": "string"
         },
         "widthTaper": {
           "$ref": "#/$defs/bandTaper"
         },
         "thicknessTaper": {
           "$ref": "#/$defs/bandTaper"
+        },
+        "architecture": {
+          "default": "UNIFORM",
+          "enum": [
+            "UNIFORM",
+            "SPLIT",
+            "BYPASS"
+          ],
+          "type": "string",
+          "description": "How the shank's own structure is built (Sprint 28). UNIFORM is the pre-Sprint-28 closed ring and remains the default. The rails of a SPLIT or BYPASS shank SHARE the band's width, so a wider separation NARROWS them; a separation that would leave no rail is refused by semantic rule JM-RINGFAM-004, not here."
+        },
+        "splitSeparation": {
+          "default": 1.2,
+          "type": "number"
+        },
+        "splitJoinSpan": {
+          "default": 200.0,
+          "type": "number"
+        },
+        "bypassSeparation": {
+          "default": 1.0,
+          "type": "number"
+        },
+        "bypassOverlap": {
+          "default": 60.0,
+          "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "stone": {
       "type": "object",
@@ -3493,6 +3710,18 @@
         }
       ],
       "default": null
+    },
+    "ringFamily": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ringFamily"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "null means 'no variant declared', which resolves to the family's default variant. For solitaire that reproduces the pre-Sprint-28 design exactly, which is why every existing document stays valid and unchanged."
     }
   }
 }

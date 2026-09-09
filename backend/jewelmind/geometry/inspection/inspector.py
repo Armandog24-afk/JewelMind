@@ -271,6 +271,160 @@ def _stone_identity_facts(
     return facts
 
 
+def _ring_family_facts(now: str, model: GeneratedModel) -> list[GeometricFact]:
+    """Facts about the resolved ring family (Sprint 28, brief §18).
+
+    Reads the structured `ResolvedRingFamily` the resolver already produced and
+    the components' own metadata — it re-derives nothing and judges nothing. A
+    variant is a variant, an arch count is a count, and whether either is
+    appropriate is not a geometric question (INSPECT-GOV-001).
+
+    THE DERIVED/SKIPPED PAIR IS THE POINT. A parametric system has to be able to
+    say what it changed and what it left alone, and a reader who can see the
+    resulting head height but not that a variant derived it from a factor cannot
+    check the relation. That is the difference between provenance and a number.
+
+    Returns an empty list when a model carries no ring-family result (a
+    hand-constructed test fixture), rather than inventing defaults.
+    """
+
+    resolved = getattr(model, "ring_family_result", None)
+    if resolved is None:
+        return []
+
+    facts: list[GeometricFact] = []
+    components = sorted(model.components)
+
+    def _fact(suffix: str, fact_type: str, value, source: str) -> GeometricFact:
+        return GeometricFact(
+            factId=f"ringFamily.{suffix}",
+            factType=fact_type,
+            inspectionVersion=INSPECTION_VERSION,
+            scope="ASSEMBLY",
+            componentIds=components,
+            value=value,
+            unit=None,
+            status="PASS" if value is not None else "UNKNOWN",
+            sourceOperation=source,
+            generatedAt=now,
+        )
+
+    result_source = "ResolvedRingFamily"
+    facts.extend(
+        [
+            _fact("family", "RING_FAMILY_ID", resolved.family, result_source),
+            _fact("variant", "RING_FAMILY_VARIANT", resolved.variant, result_source),
+            _fact(
+                "fingerprint",
+                "RING_FAMILY_FINGERPRINT",
+                resolved.fingerprint,
+                result_source,
+            ),
+            _fact(
+                "derivedPathCount",
+                "RING_FAMILY_DERIVED_PATH_COUNT",
+                len(resolved.derivations),
+                result_source,
+            ),
+            _fact(
+                "skippedPathCount",
+                "RING_FAMILY_SKIPPED_PATH_COUNT",
+                len(resolved.skippedPaths),
+                result_source,
+            ),
+            _fact(
+                "shankArchitecture",
+                "RING_FAMILY_SHANK_ARCHITECTURE",
+                resolved.shankArchitecture,
+                result_source,
+            ),
+            _fact(
+                "shoulderArchitecture",
+                "RING_FAMILY_SHOULDER_ARCHITECTURE",
+                resolved.shoulderArchitecture,
+                result_source,
+            ),
+            _fact(
+                "bodyArchitecture",
+                "RING_FAMILY_BODY_ARCHITECTURE",
+                resolved.bodyArchitecture,
+                result_source,
+            ),
+        ]
+    )
+
+    metadata_source = "GeneratedComponent.metadata"
+
+    if resolved.shankArchitecture != "UNIFORM":
+        band = model.components.get("band")
+        metadata = band.metadata if band else {}
+        facts.append(
+            _fact(
+                "shankRailCount",
+                "SHANK_RAIL_COUNT",
+                metadata.get("railCount"),
+                metadata_source,
+            )
+        )
+        # THE PROPERTY THAT MAKES A SPLIT SHANK SPLIT, reported as a fact: the
+        # rails are separated where the head is. A bypass reports it too, via
+        # its own metadata key, because its ends passing IS the same claim.
+        facts.append(
+            _fact(
+                "shankSeparatedAtHead",
+                "SHANK_SEPARATED_AT_HEAD",
+                metadata.get("separatedAtTheHead")
+                if "separatedAtTheHead" in metadata
+                else metadata.get("endsPassRatherThanMeet"),
+                metadata_source,
+            )
+        )
+
+    if resolved.shoulderArchitecture != "NONE":
+        shoulders = model.components.get("shoulders")
+        metadata = shoulders.metadata if shoulders else {}
+        facts.append(
+            _fact(
+                "shoulderArchCount",
+                "SHOULDER_ARCH_COUNT",
+                metadata.get("archCount"),
+                metadata_source,
+            )
+        )
+        facts.append(
+            _fact(
+                "shoulderRiseMm",
+                "SHOULDER_RISE",
+                metadata.get("riseMm"),
+                metadata_source,
+            )
+        )
+
+    if resolved.bodyArchitecture == "SIGNET_TABLE":
+        body = model.components.get("signet_body")
+        metadata = body.metadata if body else {}
+        facts.append(
+            _fact(
+                "signetTableTopZMm",
+                "SIGNET_TABLE_TOP_Z",
+                metadata.get("tableTopZMm"),
+                metadata_source,
+            )
+        )
+        # Reported as a FACT rather than left in prose: a signet's decoration is
+        # the point of one, and JewelMind builds none.
+        facts.append(
+            _fact(
+                "signetTableEngraved",
+                "SIGNET_TABLE_ENGRAVED",
+                metadata.get("engraved"),
+                metadata_source,
+            )
+        )
+
+    return facts
+
+
 def _setting_facts(now: str, model: GeneratedModel) -> list[GeometricFact]:
     """Setting-level runtime facts (brief section 25;
     docs/bible/21-setting/setting-inspection-contract.md).
@@ -690,6 +844,7 @@ def inspect_model(model: GeneratedModel) -> GeometryInspectionReport:
         )
 
     geometric_facts.extend(_setting_facts(now, model))
+    geometric_facts.extend(_ring_family_facts(now, model))
 
     total_ms = (time.perf_counter() - t_start) * 1000
     completed_at = _now()

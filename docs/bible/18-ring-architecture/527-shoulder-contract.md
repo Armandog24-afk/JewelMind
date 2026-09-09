@@ -22,12 +22,28 @@ normative: true
 
 ## The real current state
 
-`ShoulderDefinition`
-(`backend/jewelmind/ring/models.py`) has exactly one field:
+> **Superseded in part by Sprint 28.** This document described a contract
+> that was honestly empty, and Sprint 28 filled it: `geometry/shoulder.py`
+> builds real shoulder arches. The original statement is kept below as what
+> was true from Sprint 16 to Sprint 27, with the change recorded at the end —
+> the Bible's rule is to report a contradiction, never to rewrite a document
+> into having always said the current thing. See
+> [`../30-ring-families/README.md`](../30-ring-families/README.md).
+
+`ShoulderDefinition` (`backend/jewelmind/ring/models.py`) had exactly one
+field, from Sprint 16 until Sprint 28:
 
 ```python
 class ShoulderDefinition(RingModel):
     modeled: Literal[False] = False
+```
+
+It now carries two, and `modeled` is a real `bool`:
+
+```python
+class ShoulderDefinition(RingModel):
+    modeled: bool = False
+    architecture: Literal["NONE", "CATHEDRAL", "SPLIT_RAILS"] = "NONE"
 ```
 
 [`ring_definition_from_jdl()`](../../../backend/jewelmind/ring/adapter.py)
@@ -68,3 +84,29 @@ functionality as CURRENT (see
 [`../00-foundation/000-bible-governance.md`](../00-foundation/000-bible-governance.md)):
 rather than a docstring claiming "shoulders: PLANNED" while quietly having
 no contract to plan against, the contract exists and is honestly empty.
+
+## What Sprint 28 changed
+
+The contract is no longer empty, and the `Literal[False]` had to go **because
+it became a false claim**, not because it was inconvenient.
+
+`geometry/shoulder.py` builds real arches: two for `SOLITAIRE_CATHEDRAL`, four
+for a split shank (one per rail per side). Each is a ruled loft between two real
+sections — the base is the band's OWN profile wire from `shank/profile.py`, so a
+shoulder can never disagree with the band about its cross-section — and the pair
+is fused into one connected `shoulders` component.
+
+**`modeled` is still `False` for most designs, and that is the honest answer
+rather than a gap.** A classic solitaire has no shoulder component, and
+reporting one would describe geometry that is not there. `architecture` names
+which builder produced it, or `NONE`.
+
+**It is read from the RESOLVED ring family, not inferred from `jewelry.style`**
+(`ring/adapter.py::_shoulders_from_jdl()`), because the architecture belongs to
+the VARIANT: a classic solitaire has no shoulders and a cathedral one has two
+arches, and both are `solitaire`. Reading the resolver is what keeps this
+contract from disagreeing with the component the assembly actually built.
+
+The prediction this document made — that a later sprint could add fields to
+`ShoulderDefinition` without renegotiating where "shoulder" belongs in the
+composition — held exactly as written.

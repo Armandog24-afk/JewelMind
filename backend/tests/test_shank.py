@@ -339,9 +339,50 @@ class TestShankCapabilityRegistry:
     def test_taper_toward_head_is_planned_not_current(self):
         assert get_shank_capability("taper_toward_head").status == "planned"
 
-    def test_split_shank_and_multi_rail_shank_are_planned_not_current(self):
-        assert get_shank_capability("split_shank").status == "planned"
+    def test_split_and_bypass_shanks_became_real_in_sprint_28(self):
+        # SUPERSEDES "split_shank and multi_rail_shank are planned, not
+        # current". Sprint 28 built both split and bypass architectures, so the
+        # registry entries changed and this assertion changed with them —
+        # SHANK-GOV-015 requires the registry to be the single source of truth,
+        # which means it must move when the code does.
+        for capability in ("split_shank", "bypass_shank", "cathedral_shank"):
+            entry = get_shank_capability(capability)
+            assert entry is not None, capability
+            assert entry.status == "current", capability
+            assert entry.generatable is True, capability
+            assert entry.inspectable is True, capability
+
+    def test_multi_rail_shank_is_still_planned(self):
+        # MORE THAN TWO rails is still not built, and it is not a loop over the
+        # two-rail builder: three rails sharing one band width need their own
+        # axial layout and their own bridge.
         assert get_shank_capability("multi_rail_shank").status == "planned"
+
+    def test_every_current_capability_has_a_real_builder(self):
+        # Both directions, so a registry entry cannot claim a construction that
+        # does not exist and an architecture cannot exist unregistered.
+        from jewelmind.geometry.shank.architecture import SHANK_ARCHITECTURE_BUILDERS
+
+        claimed = {
+            name
+            for name, entry in SHANK_CAPABILITIES.items()
+            if entry.status == "current" and name.endswith("_shank")
+        }
+        # TWO entries are current and deliberately NOT in the architecture
+        # dispatch, and each absence is load-bearing:
+        #
+        #   `uniform_shank`   — `_build_uniform_shank()` is reached BEFORE the
+        #                       dispatch, and keeping it out is what stops
+        #                       SHANK-GOV-003's byte-identity guarantee growing
+        #                       a wrapper.
+        #   `cathedral_shank` — built by `geometry/shoulder.py`, because a
+        #                       cathedral is a shoulder architecture rather than
+        #                       a shank one, exactly as its description says.
+        architecture_backed = claimed - {"uniform_shank", "cathedral_shank"}
+        assert architecture_backed == {
+            f"{arch.lower()}_shank" for arch in SHANK_ARCHITECTURE_BUILDERS
+        }
+        assert "UNIFORM" not in SHANK_ARCHITECTURE_BUILDERS
 
     def test_unknown_capability_name_returns_none(self):
         assert get_shank_capability("not_a_real_capability") is None

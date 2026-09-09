@@ -1,0 +1,736 @@
+{
+  "taxonomyVersion": "1.0.0",
+  "ringFamilyGeometryVersion": "1.0.0",
+  "pipelineStages": [
+    "schema",
+    "normalization",
+    "resolution",
+    "compiler",
+    "geometry",
+    "inspection",
+    "export",
+    "vision",
+    "studio",
+    "designer",
+    "conversation"
+  ],
+  "families": {
+    "bypass": {
+      "status": "CURRENT",
+      "defaultVariant": "BYPASS_CROSSOVER",
+      "variants": [
+        "BYPASS_CROSSOVER"
+      ]
+    },
+    "halo": {
+      "status": "PARTIAL",
+      "defaultVariant": "HALO_SINGLE",
+      "variants": [
+        "HALO_DOUBLE",
+        "HALO_HIDDEN",
+        "HALO_SINGLE"
+      ]
+    },
+    "signet": {
+      "status": "PARTIAL",
+      "defaultVariant": "SIGNET_FLAT_TABLE",
+      "variants": [
+        "SIGNET_FLAT_TABLE"
+      ]
+    },
+    "solitaire": {
+      "status": "CURRENT",
+      "defaultVariant": "SOLITAIRE_CLASSIC",
+      "variants": [
+        "SOLITAIRE_CATHEDRAL",
+        "SOLITAIRE_CLASSIC",
+        "SOLITAIRE_ELEVATED",
+        "SOLITAIRE_LOW_PROFILE"
+      ]
+    },
+    "split_shank": {
+      "status": "CURRENT",
+      "defaultVariant": "SPLIT_SHANK_PARALLEL",
+      "variants": [
+        "SPLIT_SHANK_PARALLEL",
+        "SPLIT_SHANK_TAPERED"
+      ]
+    },
+    "three_stone": {
+      "status": "CURRENT",
+      "defaultVariant": "THREE_STONE_SYMMETRIC",
+      "variants": [
+        "THREE_STONE_GRADUATED",
+        "THREE_STONE_SYMMETRIC"
+      ]
+    }
+  },
+  "variants": [
+    {
+      "variant": "SOLITAIRE_CLASSIC",
+      "family": "solitaire",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": false,
+      "isFamilyBaseline": true,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 1,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "solitaire",
+        "classic solitaire",
+        "solitario"
+      ],
+      "description": "One centre stone on a closed band. Reproduces the pre-Sprint-28 solitaire exactly, which is what makes it the family's default and what leaves every existing Golden baseline untouched."
+    },
+    {
+      "variant": "SOLITAIRE_CATHEDRAL",
+      "family": "solitaire",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "CATHEDRAL",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 2,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "cathedral",
+        "cathedral solitaire",
+        "solitario cattedrale"
+      ],
+      "description": "Two real shoulder arches rising from the band's own profile to the head's own height. The first geometry the shoulder has ever had: `ShoulderDefinition` has recorded `modeled: False` since Sprint 16."
+    },
+    {
+      "variant": "SOLITAIRE_LOW_PROFILE",
+      "family": "solitaire",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 0.6,
+      "derivedPathCount": 1,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "low profile",
+        "low-profile solitaire",
+        "profilo basso"
+      ],
+      "description": "The stone sits closer to the finger: the variant scales the head's height, which moves the stone and shrinks the head's own metal. A real geometric difference, not a label."
+    },
+    {
+      "variant": "SOLITAIRE_ELEVATED",
+      "family": "solitaire",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "CATHEDRAL",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.45,
+      "derivedPathCount": 2,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "elevated",
+        "elevated solitaire",
+        "rialzato"
+      ],
+      "description": "The stone is raised and gains shoulder arches to reach the taller head — the two go together, which is why one variant derives both."
+    },
+    {
+      "variant": "THREE_STONE_SYMMETRIC",
+      "family": "three_stone",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "three stone",
+        "trilogy",
+        "trilogia",
+        "three-stone"
+      ],
+      "description": "A centre plus two equal side stones, DELEGATED to the Multi-Stone Family layer, which compiles them into an arrangement. The ring family states a spacing and a scale and computes no position."
+    },
+    {
+      "variant": "THREE_STONE_GRADUATED",
+      "family": "three_stone",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "graduated trilogy",
+        "graduated three stone",
+        "trilogia graduata"
+      ],
+      "description": "The same delegation with a smaller side scale, so the sides step down from the centre. Real: the side stones' own solids are smaller."
+    },
+    {
+      "variant": "HALO_SINGLE",
+      "family": "halo",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "halo",
+        "halo ring",
+        "anello halo"
+      ],
+      "description": "A centre surrounded by one ring of stones, DELEGATED to the Halo System. The radius is the CENTRE STONE's own half width times a factor, so the halo follows the stone. PARTIAL because no metal is generated to hold the halo stones — Sprint 25's own recorded boundary, unchanged."
+    },
+    {
+      "variant": "HALO_DOUBLE",
+      "family": "halo",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "double halo",
+        "doppio halo"
+      ],
+      "description": "Two concentric rings, both measured from the centre stone, so changing the stone moves both. PARTIAL for the same reason as the single halo."
+    },
+    {
+      "variant": "HALO_HIDDEN",
+      "family": "halo",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.15,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "hidden halo",
+        "halo nascosto"
+      ],
+      "description": "A ring of stones below the centre plane, with the vertical offset derived from the head's own height rather than invented as a depth. PARTIAL for the same reason as the single halo."
+    },
+    {
+      "variant": "SPLIT_SHANK_PARALLEL",
+      "family": "split_shank",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "SPLIT",
+      "shoulderArchitecture": "SPLIT_RAILS",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 5,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "split shank",
+        "split",
+        "gambo diviso"
+      ],
+      "description": "A real SHANK ARCHITECTURE: two rails joined into one band over the bottom span, genuinely separated at the top — the axial gap between them contains no metal, which is what a split shank is. Four shoulder arches carry the rails to the head. The rails SHARE the band's width, so a wider separation narrows them rather than widening the ring."
+    },
+    {
+      "variant": "SPLIT_SHANK_TAPERED",
+      "family": "split_shank",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "SPLIT",
+      "shoulderArchitecture": "SPLIT_RAILS",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 6,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "tapered split shank",
+        "gambo diviso rastremato"
+      ],
+      "description": "The same architecture with the rails narrowing toward the bottom, using the width taper the Shank subsystem already owns rather than a second narrowing mechanism. Measurably different metal from the parallel variant."
+    },
+    {
+      "variant": "BYPASS_CROSSOVER",
+      "family": "bypass",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "BYPASS",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 4,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "bypass",
+        "crossover",
+        "bypass ring",
+        "anello incrociato"
+      ],
+      "description": "ONE open rail travelling past a full turn, its axial position shifting as it goes, so its two ends occupy the same angle at different axial positions and PASS each other. Deliberately one rail rather than two arcs: two axially separated arcs come out as two disconnected solids, and a ring that is not one connected body is not a ring."
+    },
+    {
+      "variant": "SIGNET_FLAT_TABLE",
+      "family": "signet",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": true,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "SIGNET_TABLE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 2,
+      "multiStone": false,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "signet",
+        "signet ring",
+        "anello con sigillo",
+        "chevalière",
+        "chevaliere"
+      ],
+      "description": "A real solid body with a rectangular table at the ring's top, built as its own component so it has parametric identity. PARTIAL because a signet's decoration is the point of one and no engraving, relief or texture exists anywhere in the pipeline: the table is flat and rectangular, and both `SIGNET_ENGRAVED` and `SIGNET_OVAL_TABLE` are reserved with their real reasons. Specialty decoration is Sprint 29's territory."
+    }
+  ],
+  "reserved": [
+    {
+      "name": "BYPASS_TWIST",
+      "reason": "A bypass whose rails twist about their own axis as they travel. The current construction lofts sections that translate axially; adding a per-section rotation about the rail's tangent is a different sweep and is not yet verifiable."
+    },
+    {
+      "name": "SIGNET_ENGRAVED",
+      "reason": "An engraved signet table needs a surface-decoration system: a relief or an engraving is a cut driven by a 2D pattern, and no pattern representation exists anywhere in the pipeline. Sprint 29's specialty work is where that belongs."
+    },
+    {
+      "name": "SIGNET_OVAL_TABLE",
+      "reason": "An oval or cushion signet table needs the table's outline to come from the same outline machinery the Stone System uses. Reusing it would be correct and is not wired: `stone/outline.py` builds a STONE's girdle, and giving it a second caller for a metal table is a real change to that module's contract."
+    },
+    {
+      "name": "SOLITAIRE_TRELLIS",
+      "reason": "A trellis solitaire's arches are the reserved TRELLIS head architecture (Sprint 27), which needs a verifiable swept solid along a 3D spline. No builder exists."
+    },
+    {
+      "name": "SPLIT_SHANK_SCULPTED",
+      "reason": "A split shank whose rails follow a sculpted 3D path rather than the ring's own circle. It needs a swept solid along a spline for the same reason the trellis head does."
+    },
+    {
+      "name": "cluster",
+      "reason": "A cluster ring's stones are already the CLUSTER stone family (Sprint 24), composed onto any ring family. A separate ring family would duplicate it for no capability gain."
+    },
+    {
+      "name": "eternity",
+      "reason": "A full eternity band sets stones around the entire circumference, which needs a pavé field whose host is the band's own outer surface over 360 degrees AND a channel or bead retention that follows it. The pavé engine's containment policy clips a field at the host's declared extent rather than wrapping it, so a 360-degree field is not expressible yet."
+    },
+    {
+      "name": "plain_band",
+      "reason": "A band with no stone at all requires the assembly to build no stone, no setting and no head. Every current component contract treats `stone_reference` and `basket_support` as required, so a stone-less ring is a change to the required-component set — an ADR condition — rather than a family parameter."
+    },
+    {
+      "name": "toi_et_moi",
+      "reason": "Two equal stones side by side is already expressible as the TOI_ET_MOI stone family (Sprint 24). A RING family of the same name would be a second authority over the same placement, which is what JM-FAMILY-001 refuses. It stays reserved so the name cannot be taken for something else."
+    }
+  ],
+  "designerTerms": {
+    "anello con sigillo": "SIGNET_FLAT_TABLE",
+    "anello halo": "HALO_SINGLE",
+    "anello incrociato": "BYPASS_CROSSOVER",
+    "bypass": "BYPASS_CROSSOVER",
+    "bypass ring": "BYPASS_CROSSOVER",
+    "cathedral": "SOLITAIRE_CATHEDRAL",
+    "cathedral solitaire": "SOLITAIRE_CATHEDRAL",
+    "chevaliere": "SIGNET_FLAT_TABLE",
+    "chevalière": "SIGNET_FLAT_TABLE",
+    "classic solitaire": "SOLITAIRE_CLASSIC",
+    "crossover": "BYPASS_CROSSOVER",
+    "doppio halo": "HALO_DOUBLE",
+    "double halo": "HALO_DOUBLE",
+    "elevated": "SOLITAIRE_ELEVATED",
+    "elevated solitaire": "SOLITAIRE_ELEVATED",
+    "gambo diviso": "SPLIT_SHANK_PARALLEL",
+    "gambo diviso rastremato": "SPLIT_SHANK_TAPERED",
+    "graduated three stone": "THREE_STONE_GRADUATED",
+    "graduated trilogy": "THREE_STONE_GRADUATED",
+    "halo": "HALO_SINGLE",
+    "halo nascosto": "HALO_HIDDEN",
+    "halo ring": "HALO_SINGLE",
+    "hidden halo": "HALO_HIDDEN",
+    "low profile": "SOLITAIRE_LOW_PROFILE",
+    "low-profile solitaire": "SOLITAIRE_LOW_PROFILE",
+    "profilo basso": "SOLITAIRE_LOW_PROFILE",
+    "rialzato": "SOLITAIRE_ELEVATED",
+    "signet": "SIGNET_FLAT_TABLE",
+    "signet ring": "SIGNET_FLAT_TABLE",
+    "solitaire": "SOLITAIRE_CLASSIC",
+    "solitario": "SOLITAIRE_CLASSIC",
+    "solitario cattedrale": "SOLITAIRE_CATHEDRAL",
+    "split": "SPLIT_SHANK_PARALLEL",
+    "split shank": "SPLIT_SHANK_PARALLEL",
+    "tapered split shank": "SPLIT_SHANK_TAPERED",
+    "three stone": "THREE_STONE_SYMMETRIC",
+    "three-stone": "THREE_STONE_SYMMETRIC",
+    "trilogia": "THREE_STONE_SYMMETRIC",
+    "trilogia graduata": "THREE_STONE_GRADUATED",
+    "trilogy": "THREE_STONE_SYMMETRIC"
+  },
+  "parametersReadByVariant": {
+    "SOLITAIRE_CLASSIC": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "SOLITAIRE_CATHEDRAL": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "shoulderSpanDeg",
+      "shoulderTopThicknessFactor",
+      "shoulderTopWidthFactor"
+    ],
+    "SOLITAIRE_LOW_PROFILE": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "SOLITAIRE_ELEVATED": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "shoulderSpanDeg",
+      "shoulderTopThicknessFactor",
+      "shoulderTopWidthFactor"
+    ],
+    "THREE_STONE_SYMMETRIC": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "sideSpacingMm",
+      "sideStoneScale",
+      "symmetry"
+    ],
+    "THREE_STONE_GRADUATED": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "sideGraduationFactor",
+      "sideSpacingMm",
+      "sideStoneScale",
+      "symmetry"
+    ],
+    "HALO_SINGLE": [
+      "haloRadiusFactor",
+      "haloStoneCount",
+      "haloStoneScale",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "HALO_DOUBLE": [
+      "haloRadiusFactor",
+      "haloStoneCount",
+      "haloStoneScale",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "HALO_HIDDEN": [
+      "haloRadiusFactor",
+      "haloStoneCount",
+      "haloStoneScale",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "SPLIT_SHANK_PARALLEL": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "shoulderSpanDeg",
+      "shoulderTopThicknessFactor",
+      "shoulderTopWidthFactor",
+      "splitJoinSpanDeg",
+      "splitSeparationMm"
+    ],
+    "SPLIT_SHANK_TAPERED": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "shoulderSpanDeg",
+      "shoulderTopThicknessFactor",
+      "shoulderTopWidthFactor",
+      "splitJoinSpanDeg",
+      "splitSeparationMm"
+    ],
+    "BYPASS_CROSSOVER": [
+      "bypassOverlapDeg",
+      "bypassSeparationMm",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "SIGNET_FLAT_TABLE": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "signetTableHeightMm",
+      "signetTableLengthMm",
+      "signetTableWidthMm"
+    ]
+  }
+}

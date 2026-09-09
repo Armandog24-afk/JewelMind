@@ -22,23 +22,45 @@ from jewelmind.geometry.model import GeneratedModel
 from jewelmind.jewelry_category.errors import RingFamilyUnsupportedError
 from jewelmind.ring.adapter import ring_definition_from_jdl
 
-#: Real generators only — a family present in `RingFamilyId`
-#: (models.py) but absent here is a recognized, PLANNED family with no
-#: implementation, never a fake one. Mirrors the category-level
-#: current/planned pattern in `jewelmind.jewelry_category.registry`.
+#: Real generators only — a family present in `RingFamilyId` (models.py) but
+#: absent here is a recognized, PLANNED family with no implementation, never a
+#: fake one. Mirrors the category-level current/planned pattern in
+#: `jewelmind.jewelry_category.registry`.
+#:
+#: EVERY FAMILY MAPS TO THE SAME ASSEMBLY, and that is the point rather than an
+#: oversight (Sprint 28). A ring family is a PARAMETRIC COMPOSITION of the one
+#: ring assembly, not a second assembly: the family resolves into the blocks the
+#: existing systems own — the shank's architecture, the head's height, the stone
+#: family, the halo, the pavé field — and `build_solitaire_ring()` applies the
+#: resolution through `geometry/ring_family_adapter.py::effective_definition()`
+#: before building anything.
+#:
+#: A generator per family would have meant a class per combination, which is
+#: exactly the catalogue the sprint brief forbids: "cathedral + oval diamond +
+#: four prongs + pavé shoulders" is one variant with four parameters.
+#:
+#: The function's NAME is historical — it predates ring families and is
+#: referenced from the Golden suite, the specs and every test — so it is kept
+#: rather than renamed (SETTINGV2-GOV-002's discipline for `basket_support`,
+#: applied to a function).
 RING_FAMILY_GENERATORS: dict[str, Callable[[JewelryDefinition], GeneratedModel]] = {
     "solitaire": build_solitaire_ring,
+    "three_stone": build_solitaire_ring,
+    "halo": build_solitaire_ring,
+    "split_shank": build_solitaire_ring,
+    "bypass": build_solitaire_ring,
+    "signet": build_solitaire_ring,
 }
 
-#: Reserved, PLANNED ring families — metadata only, proving the family
-#: dispatch boundary is not solitaire-specific without implementing any
-#: of them (brief section 10/23).
+#: Reserved, PLANNED ring families — metadata only, with the real technical
+#: reason for each in `ring_family/models.py::RESERVED_RING_FAMILIES`.
+#:
+#: Sprint 28 REMOVED `three_stone`, `halo` and `signet` from this tuple because
+#: each now has a real generator and at least one executable variant, and added
+#: none: `split_shank` and `bypass` were never reserved names, they are new.
 RESERVED_PLANNED_RING_FAMILIES: tuple[str, ...] = (
-    "three_stone",
     "toi_et_moi",
-    "halo",
     "eternity",
-    "signet",
     "plain_band",
     "cluster",
 )

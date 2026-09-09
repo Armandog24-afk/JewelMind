@@ -1,0 +1,243 @@
+{
+  "goldenId": "RF-005-bypass-crossover",
+  "description": "Bypass: ONE open rail travelling past a full turn with its axial position shifting as it goes, so its two ends occupy the same angles at different axial positions and pass each other. Locks in ONE connected solid — built as two axially separated arcs it came out as two disconnected solids, and a ring that is not one connected body is not a ring.",
+  "sourceJDLPath": "goldens/solitaire-v1/RF-005-bypass-crossover/design.json",
+  "definitionHash": "bfbf07f62d53c9c5",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "prongs",
+    "stone_reference"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "bfbf07f62d53c9c5",
+    "assembly": {
+      "componentCount": 4,
+      "productionComponentCount": 3,
+      "referenceComponentCount": 1,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.635,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.635,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 7.27,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 86.89934110611136,
+        "boundingBox": {
+          "xmin": -10.7000001,
+          "ymin": -0.8500000999999999,
+          "zmin": -10.7000001,
+          "xmax": 10.7000001,
+          "ymax": 0.8500000999999999,
+          "zmax": 10.7000001,
+          "sizeX": 21.4000002,
+          "sizeY": 1.7000001999999999,
+          "sizeZ": 21.4000002,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 226,
+          "edges": 452,
+          "vertices": 228
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 83.15575842566426,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000000000001,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.2216883706749933,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.2216883706749933,
+          "zmax": 15.5,
+          "sizeX": 7.27,
+          "sizeY": 6.4433767413499865,
+          "sizeZ": 5.199999999999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -3.2500001,
+          "ymin": -3.2500001,
+          "zmin": 11.599999900000002,
+          "xmax": 3.2500001,
+          "ymax": 3.2500001,
+          "zmax": 15.6000001,
+          "sizeX": 6.5000002,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9004534005325389
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "RING_FAMILIES_AWAITING_PROFESSIONAL_REVIEW: every dimension in this design is a software construction parameter. No rail width, shoulder proportion, signet table thickness, crossing clearance or settability judgment is asserted anywhere, and no qualified jewelry professional has reviewed this geometry. The variant's capability status is NOT_REVIEWED."
+  ],
+  "createdAt": "2026-09-09T13:25:23.474966+00:00",
+  "acceptedAt": "2026-09-09T13:25:27.591455+00:00",
+  "notes": "Sprint 28 Ring Families v2: INITIAL_BASELINE for a newly executable ring family. Created by running the real pipeline; no existing baseline was modified."
+}
