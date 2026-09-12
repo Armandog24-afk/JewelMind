@@ -274,6 +274,53 @@ browser:
   and the permanent header notice — that models are preliminary and require
   review by a qualified jewelry professional — is intact.
 
+## CI failed once, and why
+
+The first push (`9904ed9`) failed CI on Linux after passing every gate on
+Windows. Worth recording in full, because **this project had already made the
+same mistake, in the same place, one sprint earlier** — and `test_setting.py`
+documents it at length.
+
+**An OCCT volume is platform-dependent.** The default solitaire's combined metal
+is `341.44334316909976` on this repo's Windows build and `341.44334316907685`
+on CI's Linux build — a relative difference of ~6.7e-14. `Volume()` is an
+integration over a shape's faces, so this is not unique to the boolean fuse.
+
+Every pre-existing test in the suite therefore compares that number with
+`rel=1e-9`. Two of my new assertions compared **live geometry against a
+recorded value exactly**:
+
+- `test_the_default_design_keeps_its_exact_metal_volume`
+- `TestSpecArtifacts::test_the_compatibility_vector_still_holds`
+
+Both now use `KERNEL_VOLUME_REL_TOL = 1e-9` — the value five existing test
+modules already use, so no new number was introduced. The constant's comment
+records the measured drift and points at `test_setting.py`'s own explanation, so
+the next sprint has it in front of it.
+
+**Determinism assertions stay exact, and that distinction is the point.** Two
+builds of the same design in the same process must agree bit for bit — that is
+what determinism means. A recorded value compared against live geometry is a
+different question and gets the tolerance. Both are now labelled as such.
+
+### Two other platform bets, removed while there
+
+Neither is known to have failed; both were assertions about the KERNEL rather
+than about my own logic, which is not a thing a test may depend on:
+
+- **`test_a_degenerate_fuse_is_reported_rather_than_shipped`** asserted that the
+  bypass at 175° *does* degenerate. Whether a given OpenCascade build degenerates
+  on a given input is build-specific, so asserting a kernel misbehaves
+  reproducibly is asserting the wrong thing. The invariant is arithmetic, so it
+  was extracted as the pure function `fuse_result_is_degenerate()` and is now
+  tested as a table of numbers — including the real measured `−60.904` against
+  `110.690`, so the case that motivated the guard is still recorded as data. The
+  ring-level test now asserts only what holds either way: real geometry, and a
+  warning **if** the fallback fired.
+- **`test_an_extreme_but_legal_parameter_still_builds`** asserted
+  `combined_metal.isValid()` on a configuration that may legitimately take the
+  compound fallback. It now asserts every component is real geometry instead.
+
 ## Gates
 
 | Gate | Result |

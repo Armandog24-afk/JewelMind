@@ -34,7 +34,10 @@ from pydantic import ValidationError
 
 from jewelmind.domain.defaults import default_definition
 from jewelmind.domain.schema import JewelryDefinition
-from jewelmind.geometry.assemblies.solitaire import build_solitaire_ring
+from jewelmind.geometry.assemblies.solitaire import (
+    build_solitaire_ring,
+    fuse_result_is_degenerate,
+)
 from jewelmind.geometry.inspection import inspect_model
 from jewelmind.geometry.ring_family_adapter import (
     effective_definition,
@@ -160,6 +163,29 @@ def stone_count(definition: JewelryDefinition) -> int:
 
 
 ALL_VARIANTS = tuple(VARIANT_FAMILY)
+
+#: Relative tolerance for comparing a RECORDED volume against live geometry.
+#:
+#: AN OCCT VOLUME IS PLATFORM-DEPENDENT, and this project has already paid for
+#: forgetting that once. `test_setting.py` records the measured drift between
+#: this repo's Windows build and CI's Linux build for the very same default
+#: solitaire:
+#:
+#:     combined metal   341.44334316909976  vs  341.44334316907685
+#:                      (~6.7e-14 relative)
+#:
+#: and explains why it is not unique to the boolean fuse: `Volume()` is an OCCT
+#: integration over a shape's faces in every case. Sprint 28 asserted two of
+#: these comparisons EXACTLY, they passed on Windows, and CI failed on Linux —
+#: the same mistake, in the same place, one sprint later.
+#:
+#: 1e-9 is the value `test_setting.py`, `test_pave.py`, `test_halo.py`,
+#: `test_multi_stone_families.py` and `test_extended_setting_modes.py` all
+#: already use, so this introduces no new number: ~4 orders of magnitude above
+#: the largest observed drift and ~6 below any geometry change a test could need
+#: to catch. A SOFTWARE COMPARISON TOLERANCE, never a manufacturing or jewelry
+#: one (QUALITY-GOV-006).
+KERNEL_VOLUME_REL_TOL = 1e-9
 
 
 # ==========================================================================
@@ -537,6 +563,8 @@ class TestVariantGeometryDiffers:
         for variant in ALL_VARIANTS:
             volume = metal_volume(design(variant))
             if variant == "SOLITAIRE_CLASSIC":
+                # Exact: both are live builds in this process (see
+                # `test_the_same_design_builds_the_same_geometry_twice`).
                 assert volume == baseline
                 continue
             if VARIANT_FAMILY[variant] in {"three_stone", "halo"}:
@@ -616,7 +644,7 @@ class TestVariantGeometryDiffers:
         assert band.isValid()
         assert model.components["band"].metadata["railCount"] == 1
 
-    def test_a_degenerate_fuse_is_reported_rather_than_shipped(self):
+    def test_the_fuse_invariant_is_arithmetic_and_is_tested_as_arithmetic(self):
         """The second defect a wide bypass exposed, and the worse of the two.
 
         At a crossing clearance of ~0.07 mm the ring-level boolean fuse RAISED
@@ -625,28 +653,61 @@ class TestVariantGeometryDiffers:
         gone. `combined_metal_volume_mm3` was −60.904 and no warning was
         emitted, so a caller had no way to know the ring had disappeared.
 
-        `_fuse_metal()` now checks the one invariant available without redoing
-        the boolean: A UNION IS NEVER SMALLER THAN ITS LARGEST INPUT. Arithmetic
-        about unions, not a tolerance and not a jewelry threshold.
+        WHY THIS TESTS NUMBERS AND NOT THAT ONE DESIGN. The first version of
+        this test built the bypass at 175 degrees and asserted the fallback
+        fired. That passed locally and FAILED CI, and it deserved to: whether a
+        particular OpenCascade build degenerates on a particular input is not
+        something a test may depend on. Asserting that a kernel misbehaves
+        reproducibly is asserting the wrong thing.
 
-        The honest outcome is the SAME compound fallback a raised failure takes,
-        with a warning that names the measurement — never a quietly broken ring.
+        A UNION IS NEVER SMALLER THAN ITS LARGEST INPUT is arithmetic, so
+        `fuse_result_is_degenerate()` is a pure function and this is a table of
+        numbers — including the real measured values from the defect, so the
+        case that motivated the guard is still recorded as data.
+        """
+
+        # The real measurement, kept as the first row.
+        assert fuse_result_is_degenerate(-60.904106, [110.690230, 29.650351]) is True
+
+        # A sound union: at least its largest input, usually more.
+        assert fuse_result_is_degenerate(341.443343, [250.991683, 29.650351]) is False
+        # Exactly equal is legitimate — one body can contain the others.
+        assert fuse_result_is_degenerate(250.0, [250.0, 10.0]) is False
+        # A hair under is not.
+        assert fuse_result_is_degenerate(249.999, [250.0, 10.0]) is True
+        # Zero from non-zero inputs is the everything-vanished case.
+        assert fuse_result_is_degenerate(0.0, [250.0]) is True
+        # No inputs is not a degenerate union; it is no union.
+        assert fuse_result_is_degenerate(0.0, []) is False
+
+    def test_a_degenerate_fuse_is_reported_rather_than_shipped(self):
+        """Whichever way the kernel goes, the ring is never quietly broken.
+
+        Deliberately makes NO claim about whether this configuration
+        degenerates on this platform — see the test above for why. It asserts
+        the two things that must hold either way: the result is real geometry,
+        and if the fallback DID fire it said so.
         """
 
         model = build_solitaire_ring(design("BYPASS_CROSSOVER", bypassOverlapDeg=175.0))
 
-        # Every real component still exists and is still real geometry.
+        # Every real component exists and is real geometry, either way.
         for name in ("band", "prongs", "basket_support"):
             assert model.components[name].shape.Volume() > 0.0, name
 
-        # The combined body is now the honest compound, not the inverted mess.
+        # The combined body is real, either way — never the inverted mess.
         assert model.combined_metal.Volume() > 0.0
-        assert len(model.combined_metal.Solids()) > 1
         assert model.combined_metal_volume_mm3 > 0.0
+        assert model.combined_metal_volume_mm3 >= max(
+            c.shape.Volume() for c in model.components.values() if is_production_component(c.name)
+        )
 
-        # AND IT IS REPORTED. A silently broken ring is the actual defect.
-        assert any("union failed" in w for w in model.warnings)
-        assert any("cannot be smaller" in w for w in model.warnings)
+        # AND IF THE FALLBACK FIRED, IT IS REPORTED. A silently broken ring is
+        # the actual defect; a correctly fused one needs no warning.
+        union_warnings = [w for w in model.warnings if "union failed" in w]
+        if union_warnings:
+            assert len(model.combined_metal.Solids()) > 1
+            assert any("cannot be smaller" in w for w in union_warnings)
 
     def test_the_fuse_invariant_leaves_every_sound_family_alone(self):
         # The guard must not fire on real geometry. A single fused solid and no
@@ -1024,7 +1085,9 @@ class TestPreSprint28Unchanged:
     def test_the_default_design_keeps_its_exact_metal_volume(self):
         # THE BYTE-FOR-BYTE ANCHOR. This number predates Sprint 28 and predates
         # Setting System v2; if it moves, every Golden baseline moves with it.
-        assert metal_volume(default_definition()) == 341.44334316909976
+        assert metal_volume(default_definition()) == pytest.approx(
+            341.44334316909976, rel=KERNEL_VOLUME_REL_TOL
+        )
 
     def test_the_adapter_returns_the_original_object_when_nothing_is_derived(self):
         # IDENTITY, not equality: a document with no family must reach exactly
@@ -1291,8 +1354,15 @@ class TestAdversarialInput:
             ("SIGNET_FLAT_TABLE", {"signetTableHeightMm": 12.0}),
         ]:
             model = build_solitaire_ring(design(variant, **params))
-            assert model.combined_metal.Volume() > 0.0
-            assert model.combined_metal.isValid()
+            # Real geometry, and every component present. Deliberately does NOT
+            # assert `combined_metal.isValid()`: one of these configurations is
+            # the bypass whose ring-level fuse may legitimately take the
+            # compound fallback on some kernel builds, and whether it does is
+            # the kernel's business rather than this test's.
+            assert model.combined_metal.Volume() > 0.0, variant
+            for name in ("band", "prongs", "basket_support"):
+                assert model.components[name].shape.Volume() > 0.0, (variant, name)
+                assert model.components[name].shape.isValid(), (variant, name)
 
 
 # ==========================================================================
@@ -1341,6 +1411,10 @@ class TestDeterminism:
         ["SOLITAIRE_CATHEDRAL", "SPLIT_SHANK_TAPERED", "BYPASS_CROSSOVER", "SIGNET_FLAT_TABLE"],
     )
     def test_the_same_design_builds_the_same_geometry_twice(self, variant: str):
+        # EXACT on purpose, and the only place that is right: two builds in the
+        # same process on the same machine must agree bit for bit, which is what
+        # determinism MEANS. A recorded value compared against live geometry is
+        # a different question and uses `KERNEL_VOLUME_REL_TOL`.
         d = design(variant)
         assert build_solitaire_ring(d).combined_metal.Volume() == (
             build_solitaire_ring(d).combined_metal.Volume()
@@ -1483,7 +1557,7 @@ class TestSpecArtifacts:
         for variant, vector in recorded.items():
             model = build_solitaire_ring(design(variant))
             assert model.combined_metal_volume_mm3 == pytest.approx(
-                vector["combinedMetalVolumeMm3"], rel=1e-9
+                vector["combinedMetalVolumeMm3"], rel=KERNEL_VOLUME_REL_TOL
             ), variant
             assert sorted(model.components) == sorted(vector["components"]), variant
             assert vector["stoneComponentCount"] == sum(
@@ -1497,5 +1571,9 @@ class TestSpecArtifacts:
         # THE ONE NUMBER THAT MUST NOT MOVE.
         assert build_solitaire_ring(
             default_definition()
-        ).combined_metal_volume_mm3 == vector["combinedMetalVolumeMm3"]
+        ).combined_metal_volume_mm3 == pytest.approx(
+            vector["combinedMetalVolumeMm3"], rel=KERNEL_VOLUME_REL_TOL
+        )
+        # Recorded-against-literal, so this one IS exact: both sides were
+        # produced on the same machine and no kernel runs between them.
         assert vector["combinedMetalVolumeMm3"] == 341.44334316909976

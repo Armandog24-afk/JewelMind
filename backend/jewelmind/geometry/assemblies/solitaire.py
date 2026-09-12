@@ -11,6 +11,7 @@ produced. The Setting itself knows nothing about any of that
 from __future__ import annotations
 
 import time
+from collections.abc import Sequence
 
 import cadquery as cq
 
@@ -37,6 +38,27 @@ from jewelmind.setting.dispatch import generate_setting
 from jewelmind.setting.head import HEAD_COMPONENT
 from jewelmind.setting.retention import PAVE_RETENTION_COMPONENT
 from jewelmind.utils.hashing import definition_hash, geometry_hash
+
+
+def fuse_result_is_degenerate(
+    fused_volume: float, input_volumes: Sequence[float]
+) -> bool:
+    """Whether a boolean union returned a result it could not legitimately have.
+
+    A UNION IS NEVER SMALLER THAN ITS LARGEST INPUT. That is arithmetic about
+    unions — not a tolerance, not a jewelry threshold, and not a guess — which
+    is why this check needs no invented number.
+
+    A SEPARATE, PURE FUNCTION on purpose. The behaviour it guards was found by
+    measuring one specific bypass configuration, and whether a given OpenCascade
+    build degenerates on a given input is not something a test should depend on:
+    asserting that a kernel misbehaves reproducibly is asserting the wrong
+    thing. Stated as arithmetic, it is testable as arithmetic, on every platform.
+    """
+
+    if not input_volumes:
+        return False
+    return fused_volume < max(input_volumes)
 
 
 def _fuse_metal(metal_components: list[GeneratedComponent]):
@@ -78,12 +100,12 @@ def _fuse_metal(metal_components: list[GeneratedComponent]):
         if not fused.Solids():
             raise ValueError("fuse produced no solids")
         fused_volume = fused.Volume()
-        largest_input = max(shape.Volume() for shape in shapes)
-        if fused_volume < largest_input:
+        input_volumes = [shape.Volume() for shape in shapes]
+        if fuse_result_is_degenerate(fused_volume, input_volumes):
             raise ValueError(
                 f"fuse returned {fused_volume:.6f} mm³, which is less than its "
-                f"largest input at {largest_input:.6f} mm³ — a union cannot be "
-                "smaller than any of the bodies it unions"
+                f"largest input at {max(input_volumes):.6f} mm³ — a union cannot "
+                "be smaller than any of the bodies it unions"
             )
         return fused, warnings
     except Exception as exc:  # noqa: BLE001 - OCC boolean failures vary widely
