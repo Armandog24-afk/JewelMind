@@ -351,6 +351,79 @@ _ROWS: tuple[dict[str, object], ...] = (
             "decoration is Sprint 29's territory."
         ),
     },
+    # ---- SPECIALTY FAMILIES (Sprint 29) ------------------------------------
+    {
+        "variant": "ETERNITY_FULL",
+        "status": "CURRENT",
+        "coverage": _all_current(),
+        "multiStone": True,
+        "structural": False,
+        "terms": ["eternity", "eternity ring", "full eternity", "anello eternity",
+                  "veretta"],
+        "description": (
+            "A band set with stones around its WHOLE circumference, DELEGATED to "
+            "the Pave Engine. CURRENT rather than PARTIAL because the Pave "
+            "Engine is the one layer in the programme whose `settingGeometry` is "
+            "true: it builds real retention metal for every stone in the field, "
+            "not only for a primary one. Measured at the default: 68 stones and "
+            "134 bead solids, largest angular gap 5.8 degrees. The stone COUNT "
+            "follows from the band's own circumference, so a larger finger size "
+            "carries more stones rather than the same stones stretched apart."
+        ),
+    },
+    {
+        "variant": "ETERNITY_HALF",
+        "status": "CURRENT",
+        "coverage": _all_current(),
+        "multiStone": True,
+        "structural": False,
+        "terms": ["half eternity", "half-eternity", "mezza veretta",
+                  "eternity parziale"],
+        "description": (
+            "The same delegation specified the way a half band actually is: an "
+            "explicit stone COUNT at a stated spacing, which together decide how "
+            "far round the band the set region reaches and therefore how much of "
+            "it stays unadorned. That unadorned region IS the half-eternity "
+            "distinction. Measured: 12 stones at 1.6 mm give 48 bead solids and "
+            "at 1.4 mm give 26, because the corners genuinely share."
+        ),
+    },
+    {
+        "variant": "CLUSTER_ROUND",
+        "status": "PARTIAL",
+        "coverage": _coverage(),
+        "multiStone": True,
+        "structural": False,
+        "terms": ["cluster", "cluster ring", "anello cluster"],
+        "description": (
+            "A centre surrounded by its own stones, DELEGATED to the Multi-Stone "
+            "Family layer's CLUSTER family, which computes every position. The "
+            "ring family states a count, a radius and a relative size and places "
+            "nothing itself. PARTIAL because that layer's `settingGeometry` is "
+            "false for every family: the surrounding stones are real solids and "
+            "ONLY THE CENTRE STONE IS HELD. Sprint 24's own recorded boundary, "
+            "unchanged here — a setting strategy for a non-primary member is an "
+            "RFC that sprint already identified."
+        ),
+    },
+    {
+        "variant": "TOI_ET_MOI_BYPASS",
+        "status": "PARTIAL",
+        "coverage": _coverage(),
+        "multiStone": True,
+        "structural": False,
+        "terms": ["toi et moi", "toi-et-moi", "two stone", "due pietre"],
+        "description": (
+            "Two principal stones as two SEPARATE Stone Instances, DELEGATED the "
+            "same way, each with its own scale and its own gem identity. PARTIAL "
+            "for TWO reasons, and both are recorded rather than approximated: "
+            "the non-primary stone is not held, exactly as for the cluster; and "
+            "the two stones cannot differ in CUT, because a FamilyMember is an "
+            "occurrence of the design's one `stone` and carries no shape "
+            "(FAMILY-GOV). An oval-and-pear pair therefore needs per-member "
+            "stone specifications, which is an existing Sprint 24 RFC."
+        ),
+    },
 )
 
 

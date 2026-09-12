@@ -182,6 +182,20 @@ function defaultParams() {
     paveShoulders: false,
     paveSpanDeg: 90,
     paveStoneScale: 0.1,
+    // Sprint 29 specialty parameters. The compiler caught their absence the
+    // moment `RingFamilyParams` gained them, which is the mirror doing its job.
+    eternityPitchMm: 1.6,
+    eternityStoneCount: 12,
+    eternityStoneSpacingMm: 1.6,
+    eternityStoneScale: 0.18,
+    eternityStartAngleDeg: 0,
+    eternityRetention: 'BEAD' as const,
+    clusterStoneCount: 8,
+    clusterStoneScale: 0.4,
+    clusterRadiusMm: 4,
+    toiEtMoiSecondScale: 1.0,
+    toiEtMoiSeparationMm: 5,
+    toiEtMoiOrientationDeg: 30,
     symmetry: 'SYMMETRIC' as const,
   }
 }

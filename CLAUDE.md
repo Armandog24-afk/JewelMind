@@ -2286,3 +2286,88 @@ must:
 Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
 COVERAGE GUARD** — they apply to every future sprint.
 
+## SPECIALTY RING RULES
+
+`docs/bible/31-specialty-rings/` is the authoritative Specialty Rings v1
+specification — start at
+[`docs/bible/31-specialty-rings/README.md`](docs/bible/31-specialty-rings/README.md),
+then
+[`specialty-ring-governance.md`](docs/bible/31-specialty-rings/specialty-ring-governance.md)
+for the 10 SPECIALTY-GOV rules,
+[`execution-boundary.md`](docs/bible/31-specialty-rings/execution-boundary.md)
+for exactly what does and does not execute, and
+[`coverage-review.md`](docs/bible/31-specialty-rings/coverage-review.md) for why
+each deferred specialty form is deferred. The machine-readable half lives in
+[`specs/ring-family/v1/`](specs/ring-family/v1/README.md) — the SAME directory
+as Ring Families v2, because there is one ring architecture. **The 14
+RINGFAM-GOV rules apply in full.** Future coding agents must:
+
+- **Read `docs/bible/31-specialty-rings/README.md` before adding a ring
+  architecture** that is not a variant of an existing family.
+- **Extend Ring Families; never parallel them.** A specialty family is a
+  `jewelry.style` member and its variants are `RingFamilyVariantId` members,
+  resolved by the one `resolve_ring_family()`. There is no
+  `SpecialtyRingGenerator`, no second dispatch and no second resolution point —
+  asserted structurally by `test_there_is_no_separate_specialty_generator`
+  (SPECIALTY-GOV-001).
+- **Delegate the stones; compute no placement.** An eternity band derives a
+  `pave` block; a cluster and a toi-et-moi derive a `family` block naming a live
+  Sprint 24 `FamilyType` member. This layer computes no position, lattice or
+  outline (SPECIALTY-GOV-002).
+- **Let `settingGeometry` decide the status, not ambition.** A family may be
+  CURRENT only if the layer it delegates to actually HOLDS its stones. The Pavé
+  Engine does; the Multi-Stone Family and Halo layers hold only the primary, so
+  `cluster` and `toi_et_moi` are PARTIAL and their combined metal is EXACTLY the
+  baseline's — that equality IS the boundary (SPECIALTY-GOV-003).
+- **Make every PARTIAL description say what is missing** — the absent
+  capability and the layer that would provide it. "PARTIAL" alone is a shrug
+  (SPECIALTY-GOV-004).
+- **Never give one capability two names.** There is no `tension_style` ring
+  family because the `tension` SETTING family already builds that geometry, and
+  the stacking band shares `plain_band`'s reservation rather than getting a
+  second entry (SPECIALTY-GOV-005).
+- **Two specs, two questions.** A full eternity states a PITCH and its count
+  follows from the band's circumference; a half states a COUNT and a spacing.
+  Neither variant may read the other's parameters (SPECIALTY-GOV-006).
+- **Keep every specialty parameter a RELATION.** Measure against the REQUEST,
+  not merely "something changed": a cluster radius of 3.0 must place stones at
+  3.000 mm, and a separation of 8.0 must measure 8.000 mm (SPECIALTY-GOV-007).
+- **Reject, never repair, never substitute** — an unsupported retention
+  strategy, an impossible spacing or a reserved variant raises
+  (SPECIALTY-GOV-008).
+- **Never invent a professional threshold.** No stone spacing, bead size,
+  cluster density or stone-security judgment exists anywhere.
+  `MAX_PAVE_STONES_PER_BAND` and `MAX_CLUSTER_STONES` are software safety
+  limits, sit at or below the delegated engine's own limit, and say so
+  (SPECIALTY-GOV-009).
+- **Record a limitation where a reader will MEET it** — the capability
+  description, the golden's `knownLimitations` and the Studio panel, not only in
+  a document nobody opens while designing (SPECIALTY-GOV-010).
+- **Verify a capability by MEASURING before reserving it.** Sprint 28 reserved
+  `eternity` on the reason that a 360-degree pavé field "is not expressible
+  yet"; the code always supported it (`angularSpanDeg` is `le=360.0` and
+  `pave/compile.py` has a closed-ring branch), and one measurement — 68 stones,
+  5.8-degree largest gap, 134 bead solids — contradicted the reservation. A
+  reservation written from a description rather than a measurement is how that
+  happened.
+- **Add a NEW Golden case for a new specialty family — never retrofit one.**
+  `SR-001`–`SR-005` cover the current scope; every accepted baseline needs an
+  entry in `docs/bible/appendices/golden-update-register.md` and honest
+  `knownLimitations`.
+- **Create an ADR** before letting a specialty family construct geometry, adding
+  a specialty dispatch or resolution point, changing `REQUIRED_COMPONENT_NAMES`
+  to allow a stone-less ring (what every eternity and stacking band needs), or
+  promoting `cluster`/`toi_et_moi` to CURRENT.
+- **Create an RFC** before adding any specialty family beyond the three
+  implemented — **including every reserved name** — a swept wall along the
+  band's centreline (the prerequisite for a channel-set band, and the same
+  missing primitive `SPLIT_SHANK_SCULPTED` waits on), per-member stone
+  specifications (the prerequisite for a toi-et-moi with two different cuts), a
+  setting strategy for a non-primary family member (what would make cluster and
+  toi-et-moi CURRENT), or any professional threshold on stone spacing, bead size
+  or cluster density.
+
+Retain the **TOKEN-EFFICIENT AGENT EXECUTION** rules and the **CAPABILITY
+COVERAGE GUARD** — they apply to every future sprint.
+
+

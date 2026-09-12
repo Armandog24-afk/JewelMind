@@ -50,6 +50,15 @@ RING_FAMILY_GENERATORS: dict[str, Callable[[JewelryDefinition], GeneratedModel]]
     "split_shank": build_solitaire_ring,
     "bypass": build_solitaire_ring,
     "signet": build_solitaire_ring,
+    # ---- SPECIALTY FAMILIES (Sprint 29) ------------------------------------
+    # THE SAME GENERATOR, deliberately. A specialty ring is not a different
+    # assembly: it is the same RingHead with a different DERIVED document, and
+    # `effective_definition()` has already applied the derivation before the
+    # assembly runs. A second generator would be the parallel architecture §4
+    # forbids.
+    "eternity": build_solitaire_ring,
+    "cluster": build_solitaire_ring,
+    "toi_et_moi": build_solitaire_ring,
 }
 
 #: Reserved, PLANNED ring families — metadata only, with the real technical
@@ -58,11 +67,22 @@ RING_FAMILY_GENERATORS: dict[str, Callable[[JewelryDefinition], GeneratedModel]]
 #: Sprint 28 REMOVED `three_stone`, `halo` and `signet` from this tuple because
 #: each now has a real generator and at least one executable variant, and added
 #: none: `split_shank` and `bypass` were never reserved names, they are new.
+#:
+#: Sprint 29 removed `eternity`, `cluster` and `toi_et_moi` for the same reason,
+#: and added the two capabilities it deliberately did NOT build — each with its
+#: real technical reason recorded in `RESERVED_RING_FAMILIES`:
+#:
+#:   `channel_set_band`  the setting system's walls are straight prisms in the
+#:                       STONE's frame and cannot follow the band's curve
+#:   `tension_style`     the `tension` SETTING family already builds exactly
+#:                       this geometry; a ring family would be a second name
+#:
+#: `plain_band` stays, and now also covers the STACKING band Sprint 29 was asked
+#: for: both need a ring with no stone, which the required-component set forbids.
 RESERVED_PLANNED_RING_FAMILIES: tuple[str, ...] = (
-    "toi_et_moi",
-    "eternity",
     "plain_band",
-    "cluster",
+    "channel_set_band",
+    "tension_style",
 )
 
 

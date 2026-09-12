@@ -162,6 +162,18 @@ def stone_count(definition: JewelryDefinition) -> int:
     )
 
 
+#: Families whose variants add STONES and no metal.
+#:
+#: NOT A CONVENIENCE: it is the recorded consequence of `settingGeometry: false`
+#: in the Multi-Stone Family and Halo registries — only the PRIMARY stone is
+#: held, so a design that adds accent stones adds no retention metal and its
+#: combined metal volume is EXACTLY the baseline's. Asserting a metal change for
+#: them would be asserting a capability the programme does not have.
+#:
+#: `eternity` is deliberately ABSENT: the Pavé Engine builds real retention, so
+#: an eternity band genuinely does add metal and is held to that standard.
+STONE_ONLY_FAMILIES = frozenset({"three_stone", "halo", "cluster", "toi_et_moi"})
+
 ALL_VARIANTS = tuple(VARIANT_FAMILY)
 
 #: Relative tolerance for comparing a RECORDED volume against live geometry.
@@ -281,7 +293,14 @@ class TestTaxonomy:
             )
 
     def test_taxonomy_version_is_declared(self):
-        assert RING_FAMILY_TAXONOMY_VERSION == "1.0.0"
+        # Pinned to a literal on purpose: it is a tripwire, so that moving the
+        # taxonomy is a decision somebody made rather than a number that drifted.
+        # Sprint 29 moved it to 1.1.0 by adding three families and four variants,
+        # which moves every ring_family_fingerprint(). The GEOMETRY version did
+        # NOT move: the specialty families construct nothing of their own, they
+        # derive a pave or family block that existing engines already built the
+        # same way. Two versions precisely because the two can move apart.
+        assert RING_FAMILY_TAXONOMY_VERSION == "1.1.0"
         assert RING_FAMILY_GEOMETRY_VERSION == "1.0.0"
 
 
@@ -567,9 +586,11 @@ class TestVariantGeometryDiffers:
                 # `test_the_same_design_builds_the_same_geometry_twice`).
                 assert volume == baseline
                 continue
-            if VARIANT_FAMILY[variant] in {"three_stone", "halo"}:
+            if VARIANT_FAMILY[variant] in STONE_ONLY_FAMILIES:
                 # These families add STONES, not metal — the honest recorded
-                # boundary. Their difference is asserted by stone count below.
+                # boundary. Their difference is asserted by stone count below,
+                # and for the Sprint 29 specialty families by the measured stone
+                # positions and volumes in `TestSpecialtyParametrics`.
                 continue
             assert not math.isclose(volume, baseline, rel_tol=1e-9), (
                 f"{variant} produced the same metal volume as the baseline. A "

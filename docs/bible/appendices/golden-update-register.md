@@ -306,6 +306,36 @@ and, for the tension case specifically:
 > baseline guards the geometry and makes no functional claim. Professional
 > review is required.
 
+## Sprint 29 — Specialty Rings v1 (`SR-001`–`SR-005`)
+
+**Five NEW cases. Zero existing baselines modified.** `verify-all` reported all
+68 PASS before and all 73 PASS after.
+
+| Golden | What it locks in |
+| --- | --- |
+| `SR-001-eternity-full` | A stone COUNT that follows the band's own circumference, and 134 real bead solids holding it. |
+| `SR-002-eternity-half` | An explicit count leaving a measured unadorned region — the half-eternity distinction itself. |
+| `SR-003-eternity-shared-bead` | That sharing genuinely shares: a measurably lower bead count for the same stones. |
+| `SR-004-cluster-round` | A cluster topology whose radius is honoured exactly, with every position from the arrangement resolver. |
+| `SR-005-toi-et-moi` | Two SEPARATE Stone Instances, independently sized, at an exact separation and angle. |
+
+**Every one records honest limitations**, and they are not boilerplate — each
+names a different real boundary:
+
+> `SPECIALTY_RINGS_AWAITING_PROFESSIONAL_REVIEW`: no stone spacing, bead size,
+> cluster density or stone-security judgment is asserted anywhere, and no
+> qualified jewelry professional has reviewed this geometry.
+
+> `CENTRE_STONE_AND_HEAD_REMAIN` (SR-001..003): a true eternity band carries no
+> centre stone. `REQUIRED_COMPONENT_NAMES` forces one, so this baseline is a
+> stone-set band PLUS a centre stone, and says so.
+
+> `ACCENT_STONE_RETENTION_ABSENT` (SR-004..005): the accent stones are real and
+> NO METAL HOLDS THEM — only the centre is set.
+
+> `TOI_ET_MOI_STONES_SHARE_A_CUT` (SR-005): independent sizes and gem
+> identities, the same cut, because a FamilyMember carries no shape.
+
 ## Sprint 28 — Ring Families v2 (`RF-001`–`RF-007`)
 
 **Seven NEW cases. Zero existing baselines modified.** `verify-all` reported all

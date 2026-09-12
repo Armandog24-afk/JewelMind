@@ -1,5 +1,5 @@
 {
-  "taxonomyVersion": "1.0.0",
+  "taxonomyVersion": "1.1.0",
   "dependencies": [
     {
       "kind": "INFLUENCE",
@@ -42,6 +42,107 @@
         "band.architecture"
       ],
       "reason": "A split or bypass shank's rails SHARE the band's width, so widening the band widens the rails rather than moving them apart."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "ETERNITY_FULL",
+      "source": "ringFamily.params.eternityPitchMm",
+      "targets": [
+        "pave"
+      ],
+      "reason": "A full eternity band covers the whole circumference at a stated pitch. The stone COUNT is not stated: it follows from the band's own size, which is what makes a larger finger size carry more stones."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "ETERNITY_FULL",
+      "source": "ringFamily.params.eternityStoneScale",
+      "targets": [
+        "pave"
+      ],
+      "reason": "The set stones' size as a multiple of the design's own stone, so changing `stone.diameter` changes the whole band."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "ETERNITY_HALF",
+      "source": "ringFamily.params.eternityStoneCount",
+      "targets": [
+        "pave"
+      ],
+      "reason": "A half eternity is specified by HOW MANY stones it carries. With the spacing it decides how far round the band the set region reaches, and therefore how much of the band stays unadorned."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "ETERNITY_HALF",
+      "source": "ringFamily.params.eternityStoneSpacingMm",
+      "targets": [
+        "pave"
+      ],
+      "reason": "Centre-to-centre spacing along the band. Tighter spacing genuinely shares bead corners rather than only moving stones closer."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "ETERNITY_HALF",
+      "source": "ringFamily.params.eternityStoneScale",
+      "targets": [
+        "pave"
+      ],
+      "reason": "The set stones' size as a multiple of the design's own stone."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "CLUSTER_ROUND",
+      "source": "ringFamily.params.clusterStoneCount",
+      "targets": [
+        "family.familyType",
+        "family.params"
+      ],
+      "reason": "How many stones surround the centre. Every POSITION is computed by the arrangement resolver; the ring family states only the topology."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "CLUSTER_ROUND",
+      "source": "ringFamily.params.clusterRadiusMm",
+      "targets": [
+        "family.params"
+      ],
+      "reason": "Centre-to-centre distance from the centre stone to each surrounding one."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "CLUSTER_ROUND",
+      "source": "ringFamily.params.clusterStoneScale",
+      "targets": [
+        "family.params"
+      ],
+      "reason": "The surrounding stones' size as a multiple of the design's own stone."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "TOI_ET_MOI_BYPASS",
+      "source": "ringFamily.params.toiEtMoiSeparationMm",
+      "targets": [
+        "family.familyType",
+        "family.params"
+      ],
+      "reason": "Centre-to-centre separation between the two principal stones."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "TOI_ET_MOI_BYPASS",
+      "source": "ringFamily.params.toiEtMoiOrientationDeg",
+      "targets": [
+        "family.params"
+      ],
+      "reason": "How far the pair is rotated in the ring's own horizontal plane, which is what makes the classic diagonal arrangement expressible."
+    },
+    {
+      "kind": "DERIVATION",
+      "variant": "TOI_ET_MOI_BYPASS",
+      "source": "ringFamily.params.toiEtMoiSecondScale",
+      "targets": [
+        "family.members"
+      ],
+      "reason": "The second principal stone's size relative to the first. The two stay separate instances with their own scales; they cannot differ in CUT, because a FamilyMember carries no shape (FAMILY-GOV)."
     },
     {
       "kind": "DERIVATION",
@@ -202,6 +303,64 @@
       ],
       "parameters": [
         "ringFamily.params.bypassOverlapDeg",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "CLUSTER_ROUND": {
+      "derives": [
+        "family.familyType",
+        "family.params",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.clusterRadiusMm",
+        "ringFamily.params.clusterStoneCount",
+        "ringFamily.params.clusterStoneScale",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "ETERNITY_FULL": {
+      "derives": [
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.eternityPitchMm",
+        "ringFamily.params.eternityStoneScale",
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders"
+      ]
+    },
+    "ETERNITY_HALF": {
+      "derives": [
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.eternityStoneCount",
+        "ringFamily.params.eternityStoneScale",
+        "ringFamily.params.eternityStoneSpacingMm",
         "ringFamily.params.headHeightFactor",
         "ringFamily.params.paveShoulders"
       ]
@@ -427,6 +586,28 @@
         "ringFamily.params.headHeightFactor",
         "ringFamily.params.paveShoulders",
         "ringFamily.params.sideSpacingMm"
+      ]
+    },
+    "TOI_ET_MOI_BYPASS": {
+      "derives": [
+        "family.familyType",
+        "family.members",
+        "family.params",
+        "pave",
+        "setting.basketHeight"
+      ],
+      "influencedBy": [
+        "band.thickness",
+        "band.width",
+        "ring.size",
+        "stone.diameter"
+      ],
+      "parameters": [
+        "ringFamily.params.headHeightFactor",
+        "ringFamily.params.paveShoulders",
+        "ringFamily.params.toiEtMoiOrientationDeg",
+        "ringFamily.params.toiEtMoiSecondScale",
+        "ringFamily.params.toiEtMoiSeparationMm"
       ]
     }
   }

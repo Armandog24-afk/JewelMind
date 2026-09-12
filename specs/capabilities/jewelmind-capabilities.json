@@ -203,8 +203,8 @@
     {
       "domain": "ring_family",
       "capability": "toi_et_moi",
-      "status": "PLANNED",
-      "note": "Reserved; no generator, deliberately. Already expressible as the TOI_ET_MOI stone family (Sprint 24). A ring family of the same name would be a second authority over the same placement, which is what JM-FAMILY-001 refuses."
+      "status": "PARTIAL",
+      "note": "Sprint 29: two principal stones as two SEPARATE Stone Instances, each with its own scale and gem identity. Measured: separation 8.0 gives a centre distance of exactly 8.000 mm, and orientation 90 degrees rotates the pair onto the other axis. PARTIAL for TWO reasons: the non-primary stone is not held, and the two cannot differ in CUT because a FamilyMember carries no shape (FAMILY-GOV) — an oval-and-pear pair needs per-member stone specifications, an existing Sprint 24 RFC."
     },
     {
       "domain": "ring_family",
@@ -215,8 +215,8 @@
     {
       "domain": "ring_family",
       "capability": "eternity",
-      "status": "PLANNED",
-      "note": "Reserved; no generator. Needs a pave field whose host is the band's outer surface over 360 degrees, and the Pave Engine's containment policy clips a field at the host's declared extent rather than wrapping it."
+      "status": "CURRENT",
+      "note": "Sprint 29: a band set with stones around its whole circumference, DELEGATED to the Pave Engine. CURRENT rather than PARTIAL because the Pave Engine is the one layer whose settingGeometry is true: it builds real retention metal for every stone in a field. Measured: 68 stones and 134 bead solids at the default, and the stone COUNT follows the band's own circumference — finger size 12 to 24 gives 40 to 48 stones. Was PLANNED, on a reason that was factually wrong: the Pave Engine always could wrap a 360-degree field."
     },
     {
       "domain": "ring_family",
@@ -234,13 +234,13 @@
       "domain": "ring_family",
       "capability": "plain_band",
       "status": "PLANNED",
-      "note": "Reserved; no generator. A ring with no stone requires the assembly to build no stone, no setting and no head, and `stone_reference` and `basket_support` are REQUIRED components in every current contract. Changing the required-component set is an ADR condition."
+      "note": "Reserved; no generator. Also covers the STACKING band Sprint 29 was asked for, which is the same capability under another name. Both need a ring with no stone, and REQUIRED_COMPONENT_NAMES is ('band', 'stone_reference', 'basket_support'), so such a ring fails inspection by contract. Changing that set is an ADR condition."
     },
     {
       "domain": "ring_family",
       "capability": "cluster",
-      "status": "PLANNED",
-      "note": "Reserved; no generator, deliberately. A cluster's stones are already the CLUSTER stone family (Sprint 24), composable onto any ring family; a separate ring family would duplicate it for no capability gain."
+      "status": "PARTIAL",
+      "note": "Sprint 29: a centre surrounded by its own stones, DELEGATED to the Multi-Stone Family layer's CLUSTER family, which computes every position. Measured parametric: radius 3.0 places stones at exactly 3.000 mm and 5.5 at 5.500 mm. PARTIAL because that layer's settingGeometry is false for every family — the surrounding stones are real solids and ONLY THE CENTRE IS HELD, which is Sprint 24's own recorded boundary."
     },
     {
       "domain": "jewelry_category",
@@ -1753,6 +1753,24 @@
       "capability": "bypass_shank",
       "status": "CURRENT",
       "note": "Sprint 28: the bypass centerline, built by `shank/architecture.py::build_bypass_shank()` and selected by `band.architecture = 'BYPASS'`. One connected solid over 420 degrees."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "half_eternity_ring",
+      "status": "CURRENT",
+      "note": "Sprint 29: the same delegation specified the way a half band actually is — an explicit stone COUNT at a stated spacing, which together leave the unadorned region that IS the half-eternity distinction. Measured: 16 stones at 1.6 mm give 64 bead solids and at 1.2 mm give 34, because the corners genuinely share."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "channel_set_band",
+      "status": "BLOCKED",
+      "note": "Sprint 29 audited and did NOT build it. A channel-set band runs a stone sequence between walls that follow the band's circumference; setting/channel.py builds its walls with oriented_prism() — straight prisms in the STONE's frame — so it cannot follow a curve. Needs a swept wall along the band's centreline, the same missing primitive SPLIT_SHANK_SCULPTED waits on. BLOCKED rather than PLANNED because the prerequisite is identified."
+    },
+    {
+      "domain": "ring_family",
+      "capability": "tension_style_ring",
+      "status": "OUT_OF_SCOPE",
+      "note": "Sprint 29 deliberately did NOT add a tension ring FAMILY. The `tension` SETTING family (Sprint 27) already builds exactly that geometry — two opposing supports, real solids, PARTIAL, structuralBehaviourModelled false. A ring family wrapping it would be a second name for one capability. What is missing is the structural model, which needs engineering evidence and a professional-validation record, not a new family."
     }
   ]
 }

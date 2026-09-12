@@ -966,6 +966,11 @@ No Bible `id` is assigned to them in this Sprint 1 pass.
 | JM-BIBLE-ESM-COVERAGE-REVIEW | Extended Setting Modes Taxonomy Coverage Review | accepted | current | [`29-extended-setting-modes/taxonomy-coverage-review.md`](../29-extended-setting-modes/taxonomy-coverage-review.md) |
 | JM-BIBLE-ADR-013 | ADR-013: Extended Setting Modes taxonomy and mode resolution | accepted | current | [`03-decisions/ADR-013-extended-setting-modes.md`](../03-decisions/ADR-013-extended-setting-modes.md) |
 | JM-BIBLE-ESM-SPRINT-27-REPORT | Sprint 27 Validation Report — Extended Setting Modes v1 | accepted | current | [`29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md`](../29-extended-setting-modes/SPRINT-27-VALIDATION-REPORT.md) |
+| JM-BIBLE-SPECIALTY-README | Specialty Rings v1 — Index | accepted | partial | [`31-specialty-rings/README.md`](../31-specialty-rings/README.md) |
+| JM-BIBLE-SPECIALTY-GOVERNANCE | Specialty Ring Governance | accepted | current | [`31-specialty-rings/specialty-ring-governance.md`](../31-specialty-rings/specialty-ring-governance.md) |
+| JM-BIBLE-SPECIALTY-EXECUTION-BOUNDARY | Specialty Rings Execution Boundary | accepted | partial | [`31-specialty-rings/execution-boundary.md`](../31-specialty-rings/execution-boundary.md) |
+| JM-BIBLE-SPECIALTY-COVERAGE-REVIEW | Specialty Rings Coverage Review | accepted | current | [`31-specialty-rings/coverage-review.md`](../31-specialty-rings/coverage-review.md) |
+| JM-BIBLE-SPECIALTY-SPRINT-29-REPORT | Sprint 29 Validation Report — Specialty Rings v1 | accepted | current | [`31-specialty-rings/SPRINT-29-VALIDATION-REPORT.md`](../31-specialty-rings/SPRINT-29-VALIDATION-REPORT.md) |
 | JM-BIBLE-RINGFAM-README | Ring Families v2 — Index | accepted | partial | [`30-ring-families/README.md`](../30-ring-families/README.md) |
 | JM-BIBLE-RINGFAM-GOVERNANCE | Ring Family Governance | accepted | current | [`30-ring-families/ring-family-governance.md`](../30-ring-families/ring-family-governance.md) |
 | JM-BIBLE-RINGFAM-EXECUTION-BOUNDARY | Ring Families Execution Boundary | accepted | partial | [`30-ring-families/execution-boundary.md`](../30-ring-families/execution-boundary.md) |

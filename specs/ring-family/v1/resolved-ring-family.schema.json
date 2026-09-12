@@ -174,6 +174,94 @@
           "title": "Pavestonescale",
           "type": "number"
         },
+        "eternityPitchMm": {
+          "default": 1.6,
+          "exclusiveMinimum": 0.05,
+          "maximum": 50.0,
+          "title": "Eternitypitchmm",
+          "type": "number"
+        },
+        "eternityStoneCount": {
+          "default": 12,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Eternitystonecount",
+          "type": "integer"
+        },
+        "eternityStoneSpacingMm": {
+          "default": 1.6,
+          "exclusiveMinimum": 0.05,
+          "maximum": 50.0,
+          "title": "Eternitystonespacingmm",
+          "type": "number"
+        },
+        "eternityStoneScale": {
+          "default": 0.18,
+          "exclusiveMinimum": 0.001,
+          "maximum": 10.0,
+          "title": "Eternitystonescale",
+          "type": "number"
+        },
+        "eternityStartAngleDeg": {
+          "default": 0.0,
+          "maximum": 360.0,
+          "minimum": -360.0,
+          "title": "Eternitystartangledeg",
+          "type": "number"
+        },
+        "eternityRetention": {
+          "default": "BEAD",
+          "enum": [
+            "NONE",
+            "BEAD",
+            "SHARED_BEAD",
+            "MICRO_PRONG"
+          ],
+          "title": "Eternityretention",
+          "type": "string"
+        },
+        "clusterStoneCount": {
+          "default": 8,
+          "maximum": 24,
+          "minimum": 1,
+          "title": "Clusterstonecount",
+          "type": "integer"
+        },
+        "clusterStoneScale": {
+          "default": 0.4,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "title": "Clusterstonescale",
+          "type": "number"
+        },
+        "clusterRadiusMm": {
+          "default": 4.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 40.0,
+          "title": "Clusterradiusmm",
+          "type": "number"
+        },
+        "toiEtMoiSecondScale": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.01,
+          "maximum": 10.0,
+          "title": "Toietmoisecondscale",
+          "type": "number"
+        },
+        "toiEtMoiSeparationMm": {
+          "default": 5.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 40.0,
+          "title": "Toietmoiseparationmm",
+          "type": "number"
+        },
+        "toiEtMoiOrientationDeg": {
+          "default": 30.0,
+          "maximum": 180.0,
+          "minimum": -180.0,
+          "title": "Toietmoiorientationdeg",
+          "type": "number"
+        },
         "symmetry": {
           "default": "SYMMETRIC",
           "enum": [

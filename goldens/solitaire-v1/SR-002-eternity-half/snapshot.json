@@ -1,0 +1,1402 @@
+{
+  "goldenId": "SR-002-eternity-half",
+  "description": "Half eternity: an explicit stone COUNT at a stated spacing, which together leave the unadorned region that IS the half-eternity distinction. Locks in both the count and the gap.",
+  "sourceJDLPath": "goldens/solitaire-v1/SR-002-eternity-half/design.json",
+  "definitionHash": "ffd6de1093f054e0",
+  "versionFingerprint": {
+    "jdlSchemaVersion": "0.1.0",
+    "forgeRuleSetVersion": "1.0.0",
+    "compilerVersion": "0.1.0",
+    "atlasGeneratorVersion": "0.1.0",
+    "inspectionVersion": "1.0.0",
+    "kernelVersion": "2.8.0",
+    "ocpVersion": "7.9.3.1"
+  },
+  "expectedComponents": [
+    "band",
+    "basket_support",
+    "pave_retention",
+    "prongs",
+    "stone_reference",
+    "stone_reference.eternity.r0.c0",
+    "stone_reference.eternity.r0.c1",
+    "stone_reference.eternity.r0.c10",
+    "stone_reference.eternity.r0.c2",
+    "stone_reference.eternity.r0.c3",
+    "stone_reference.eternity.r0.c4",
+    "stone_reference.eternity.r0.c5",
+    "stone_reference.eternity.r0.c6",
+    "stone_reference.eternity.r0.c7",
+    "stone_reference.eternity.r0.c8",
+    "stone_reference.eternity.r0.c9"
+  ],
+  "geometrySnapshot": {
+    "snapshotVersion": "1.0.0",
+    "definitionHash": "ffd6de1093f054e0",
+    "assembly": {
+      "componentCount": 16,
+      "productionComponentCount": 4,
+      "referenceComponentCount": 12,
+      "productionConnectivityGroups": 1,
+      "productionIsFullyConnected": true,
+      "boundingBox": {
+        "xmin": -10.7000001,
+        "ymin": -3.635,
+        "zmin": -10.7000001,
+        "xmax": 10.7000001,
+        "ymax": 3.635,
+        "zmax": 15.6000001,
+        "sizeX": 21.4000002,
+        "sizeY": 7.27,
+        "sizeZ": 26.3000002,
+        "centerX": 0.0,
+        "centerY": 0.0,
+        "centerZ": 2.45
+      }
+    },
+    "components": [
+      {
+        "componentId": "band",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 250.99168317654699,
+        "boundingBox": {
+          "xmin": -10.700000000000001,
+          "ymin": -1.2000001,
+          "zmin": -10.700000000000001,
+          "xmax": 10.700000000000001,
+          "ymax": 1.2000001000000002,
+          "zmax": 10.700000000000001,
+          "sizeX": 21.400000000000002,
+          "sizeY": 2.4000002,
+          "sizeZ": 21.400000000000002,
+          "centerX": 0.0,
+          "centerY": 1.1102230246251565e-16,
+          "centerZ": 0.0
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 6,
+          "edges": 10,
+          "vertices": 6
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "basket_support",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 83.15575842566426,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.635,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.635,
+          "zmax": 14.200000000000001,
+          "sizeX": 7.27,
+          "sizeY": 7.27,
+          "sizeZ": 3.9000000000000004,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.25
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 6,
+          "vertices": 4
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "pave_retention",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 44,
+        "volumeMm3": 1.0748770768698264,
+        "boundingBox": {
+          "xmin": -7.459876282518088,
+          "ymin": -0.7425000000000008,
+          "zmin": 7.579703687076631,
+          "xmax": 7.459876282518088,
+          "ymax": 0.7425000000000008,
+          "zmax": 10.805300955332587,
+          "sizeX": 14.919752565036177,
+          "sizeY": 1.4850000000000017,
+          "sizeZ": 3.2255972682559566,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 9.192502321204609
+        },
+        "topology": {
+          "solids": 44,
+          "shells": 44,
+          "faces": 44,
+          "edges": 44,
+          "vertices": 88
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "prongs",
+        "role": "PRODUCTION",
+        "present": true,
+        "solidCount": 6,
+        "volumeMm3": 29.650351464580467,
+        "boundingBox": {
+          "xmin": -3.635,
+          "ymin": -3.2216883706749933,
+          "zmin": 10.3,
+          "xmax": 3.635,
+          "ymax": 3.2216883706749933,
+          "zmax": 15.5,
+          "sizeX": 7.27,
+          "sizeY": 6.4433767413499865,
+          "sizeZ": 5.199999999999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 12.9
+        },
+        "topology": {
+          "solids": 6,
+          "shells": 6,
+          "faces": 18,
+          "edges": 18,
+          "vertices": 12
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 58.22141924499569,
+        "boundingBox": {
+          "xmin": -3.2500001,
+          "ymin": -3.2500001,
+          "zmin": 11.599999900000002,
+          "xmax": 3.2500001,
+          "ymax": 3.2500001,
+          "zmax": 15.6000001,
+          "sizeX": 6.5000002,
+          "sizeY": 6.5000002,
+          "sizeZ": 4.000000199999999,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 13.600000000000001
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c0",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": 6.4072593061775,
+          "ymin": -0.5850000999999999,
+          "zmin": 7.145054453601865,
+          "xmax": 7.301420051186374,
+          "ymax": 0.5850000999999999,
+          "zmax": 7.926208213543067,
+          "sizeX": 0.8941607450088735,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7811537599412013,
+          "centerX": 6.854339678681937,
+          "centerY": 0.0,
+          "centerZ": 7.535631333572466
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c1",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.339547317036815,
+        "boundingBox": {
+          "xmin": 5.156765634214531,
+          "ymin": -0.5850000999999999,
+          "zmin": 7.999287741570833,
+          "xmax": 6.147589378621154,
+          "ymax": 0.5850000999999999,
+          "zmax": 8.7880359523618,
+          "sizeX": 0.9908237444066232,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7887482107909678,
+          "centerX": 5.652177506417843,
+          "centerY": 0.0,
+          "centerZ": 8.393661846966317
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c10",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368147,
+        "boundingBox": {
+          "xmin": -7.301420051186372,
+          "ymin": -0.5850000999999999,
+          "zmin": 7.145054453601866,
+          "xmax": -6.4072593061775,
+          "ymax": 0.5850000999999999,
+          "zmax": 7.926208213543067,
+          "sizeX": 0.8941607450088718,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7811537599412004,
+          "centerX": -6.854339678681936,
+          "centerY": 0.0,
+          "centerZ": 7.535631333572466
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c2",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": 3.8050961346803778,
+          "ymin": -0.5850000999999999,
+          "zmin": 8.67098479612484,
+          "xmax": 4.873142704472677,
+          "ymax": 0.5850000999999999,
+          "zmax": 9.465668791625918,
+          "sizeX": 1.0680465697922994,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.794683995501078,
+          "centerX": 4.3391194195765275,
+          "centerY": 0.0,
+          "centerZ": 9.068326793875379
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c3",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": 2.3787691528330646,
+          "ymin": -0.5850000999999999,
+          "zmin": 9.16078272365848,
+          "xmax": 3.5030832651715507,
+          "ymax": 0.5850000999999999,
+          "zmax": 9.94581064289833,
+          "sizeX": 1.124314112338486,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7850279192398499,
+          "centerX": 2.9409262090023076,
+          "centerY": 0.0,
+          "centerZ": 9.553296683278404
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c4",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368146,
+        "boundingBox": {
+          "xmin": 0.9057704575531302,
+          "ymin": -0.5850000999999999,
+          "zmin": 9.459071983886028,
+          "xmax": 2.0642928349033975,
+          "ymax": 0.5850000999999999,
+          "zmax": 10.219041422487356,
+          "sizeX": 1.1585223773502673,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7599694386013276,
+          "centerX": 1.485031646228264,
+          "centerY": 0.0,
+          "centerZ": 9.839056703186692
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c5",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681473,
+        "boundingBox": {
+          "xmin": -0.5850000999999999,
+          "ymin": -0.5850000999999999,
+          "zmin": 9.559999900000003,
+          "xmax": 0.5850000999999999,
+          "ymax": 0.5850000999999999,
+          "zmax": 10.2800001,
+          "sizeX": 1.1700001999999998,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7200001999999976,
+          "centerX": 0.0,
+          "centerY": 0.0,
+          "centerZ": 9.920000000000002
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c6",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368145,
+        "boundingBox": {
+          "xmin": -2.064292834903397,
+          "ymin": -0.5850000999999999,
+          "zmin": 9.459071983886028,
+          "xmax": -0.9057704575531302,
+          "ymax": 0.5850000999999999,
+          "zmax": 10.219041422487356,
+          "sizeX": 1.1585223773502669,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7599694386013276,
+          "centerX": -1.4850316462282636,
+          "centerY": 0.0,
+          "centerZ": 9.839056703186692
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c7",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.33954731703681484,
+        "boundingBox": {
+          "xmin": -3.5030832651715507,
+          "ymin": -0.5850000999999999,
+          "zmin": 9.16078272365848,
+          "xmax": -2.3787691528330646,
+          "ymax": 0.5850000999999999,
+          "zmax": 9.94581064289833,
+          "sizeX": 1.124314112338486,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7850279192398499,
+          "centerX": -2.9409262090023076,
+          "centerY": 0.0,
+          "centerZ": 9.553296683278404
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c8",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.3395473170368147,
+        "boundingBox": {
+          "xmin": -4.873142704472676,
+          "ymin": -0.5850000999999999,
+          "zmin": 8.670984796124841,
+          "xmax": -3.8050961346803778,
+          "ymax": 0.5850000999999999,
+          "zmax": 9.465668791625918,
+          "sizeX": 1.0680465697922985,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7946839955010763,
+          "centerX": -4.339119419576527,
+          "centerY": 0.0,
+          "centerZ": 9.068326793875379
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      },
+      {
+        "componentId": "stone_reference.eternity.r0.c9",
+        "role": "REFERENCE",
+        "present": true,
+        "solidCount": 1,
+        "volumeMm3": 0.339547317036815,
+        "boundingBox": {
+          "xmin": -6.147589378621153,
+          "ymin": -0.5850000999999999,
+          "zmin": 7.999287741570833,
+          "xmax": -5.156765634214531,
+          "ymax": 0.5850000999999999,
+          "zmax": 8.7880359523618,
+          "sizeX": 0.9908237444066224,
+          "sizeY": 1.1700001999999998,
+          "sizeZ": 0.7887482107909678,
+          "centerX": -5.652177506417842,
+          "centerY": 0.0,
+          "centerZ": 8.393661846966317
+        },
+        "topology": {
+          "solids": 1,
+          "shells": 1,
+          "faces": 4,
+          "edges": 5,
+          "vertices": 3
+        },
+        "fallbackUsed": false
+      }
+    ],
+    "relationships": [
+      {
+        "componentA": "band",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "pave_retention",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9000000000000004
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c0",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.2540755558780512
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3079738027402444
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.2540755558780532
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.35186356049649176
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3847529524839394
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.40588811077283726
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.41478139464211417
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.40588811077283715
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3847529524839377
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3518635604964917
+      },
+      {
+        "componentA": "band",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.30797380274024455
+      },
+      {
+        "componentA": "basket_support",
+        "componentB": "pave_retention",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "prongs",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.09954185082963012
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "basket_support",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.0456489944454768
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "prongs",
+        "connected": true,
+        "intersectionStatus": "INTERSECTS",
+        "minDistanceMm": 0.0
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c0",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.880753554786365
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.462080094725415
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.8807535547863665
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.121396963276403
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.8850081990424417
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.791426976114421
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.3200000000000003
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.7914269761144217
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.88500819904244
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.1213969632764
+      },
+      {
+        "componentA": "stone_reference",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 5.462080094725417
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.6670452965344604
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.14800127377174696
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.6670452965344604
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c1",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215602628558092
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 12.814518812355
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.811540656040796
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.2926247152564123
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.757538180508225
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.19908732917273
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.610192471671338
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.983922801638299
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.313532562780585
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c0",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.592490990935948
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.1997831421211624
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.1997313046391122
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.1997831421211624
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c10",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 11.592490990935948
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32155954367770784
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115402258259845
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.292624040061167
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.757537878708765
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.19908723607609
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.610191843181252
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.983922394573337
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c1",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.313531468429062
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.667045296534461
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.14800126921827159
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.667045296534461
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c2",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 10.313532562780583
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.983922801638299
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.610192471671337
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.1990873291727295
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.757538180508224
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.2926247152564105
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115406560407954
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c10",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215602628558104
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9587243378215857
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.25091024466068346
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9587243378215857
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c3",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32155994008529515
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115404274968263
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.292624688101599
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.757538732684228
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.199087601234674
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.610192469360756
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c2",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 8.983922394573339
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.35418945710167193
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.30087985824278085
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3541894571016684
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c4",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215596956163084
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115406057405938
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.292624981019182
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.75753850566613
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.199087601234673
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c3",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 7.610191843181251
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.6523517270303789
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.34851055909810386
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.6523517270303779
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "stone_reference.eternity.r0.c5",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215601391717461
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115411151062606
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.2926249810191814
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.757538732684228
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c4",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 6.19908723607609
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9688788687981797
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.39238010843826876
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.9688788687981797
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "stone_reference.eternity.r0.c6",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.32156013917174586
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115406057405932
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.292624688101598
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c5",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 4.7575378787087645
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.6523517270303789
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.34851055909810386
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.6523517270303792
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "stone_reference.eternity.r0.c7",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215596956163078
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115404274968252
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c6",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 3.2926240400611664
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c7",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3541894571016737
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c7",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.30087985824278063
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c7",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.35418945710167016
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c7",
+        "componentB": "stone_reference.eternity.r0.c8",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215599400852931
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c7",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 1.8115402258259838
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c8",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9587243378215838
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c8",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.2509102446606551
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c8",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.9587243378215838
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c8",
+        "componentB": "stone_reference.eternity.r0.c9",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.3215595436777077
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c9",
+        "componentB": "basket_support",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.199783142121163
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c9",
+        "componentB": "pave_retention",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 0.19973130463911243
+      },
+      {
+        "componentA": "stone_reference.eternity.r0.c9",
+        "componentB": "prongs",
+        "connected": false,
+        "intersectionStatus": "NO_INTERSECTION",
+        "minDistanceMm": 2.199783142121163
+      }
+    ],
+    "designConsistency": {
+      "requestedProngCount": 6,
+      "generatedProngCount": 6,
+      "prongCountMatches": true,
+      "stoneReferenceIsProductionMetal": false
+    }
+  },
+  "artifactExpectations": [
+    {
+      "artifactType": "STEP",
+      "nonEmpty": true,
+      "minSolidCount": 1
+    },
+    {
+      "artifactType": "STL",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "JSON",
+      "nonEmpty": true,
+      "minSolidCount": null
+    },
+    {
+      "artifactType": "SPECIFICATION",
+      "nonEmpty": true,
+      "minSolidCount": null
+    }
+  ],
+  "baselineStatus": "STABLE",
+  "knownLimitations": [
+    "SPECIALTY_RINGS_AWAITING_PROFESSIONAL_REVIEW: every dimension in this design is a software construction parameter. No stone spacing, bead size, cluster density or stone-security judgment is asserted anywhere, and no qualified jewelry professional has reviewed this geometry. The variant's capability status is NOT_REVIEWED.",
+    "CENTRE_STONE_AND_HEAD_REMAIN: a true eternity band carries no centre stone and no head. REQUIRED_COMPONENT_NAMES includes `stone_reference` and `basket_support`, so a stone-less ring is not representable — the same blocker `plain_band` records. This baseline is therefore a stone-set band PLUS a centre stone, and says so rather than implying otherwise."
+  ],
+  "createdAt": "2026-09-12T09:06:52.946548+00:00",
+  "acceptedAt": "2026-09-12T09:06:55.957931+00:00",
+  "notes": "Sprint 29 Specialty Rings v1: INITIAL_BASELINE for a newly executable specialty family. Created by running the real pipeline; no existing baseline was modified."
+}

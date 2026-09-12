@@ -392,6 +392,126 @@
         }
       ],
       "skippedPaths": []
+    },
+    {
+      "variant": "ETERNITY_FULL",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "pave",
+          "sourceParameters": [
+            "ringFamily.params.eternityPitchMm",
+            "ringFamily.params.eternityRetention",
+            "ringFamily.params.eternityStartAngleDeg",
+            "ringFamily.params.eternityStoneScale"
+          ],
+          "relation": "a full eternity covers the whole circumference at a stated pitch, so the stone COUNT follows from the band's own size; the lattice, the retention metal and the recess are all the Pavé Engine's, which is the one layer that holds a non-primary stone"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "ETERNITY_HALF",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "pave",
+          "sourceParameters": [
+            "ringFamily.params.eternityRetention",
+            "ringFamily.params.eternityStartAngleDeg",
+            "ringFamily.params.eternityStoneCount",
+            "ringFamily.params.eternityStoneScale",
+            "ringFamily.params.eternityStoneSpacingMm"
+          ],
+          "relation": "a half eternity carries a stated COUNT at a stated spacing, and the unadorned region is what the two leave over; the lattice, the retention metal and the recess are all the Pavé Engine's, which is the one layer that holds a non-primary stone"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "CLUSTER_ROUND",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "family.familyType",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the surrounding stones are DELEGATED to the Multi-Stone Family layer, which compiles them into a radial arrangement"
+        },
+        {
+          "path": "family.params",
+          "sourceParameters": [
+            "ringFamily.params.clusterRadiusMm",
+            "ringFamily.params.clusterStoneCount",
+            "ringFamily.params.clusterStoneScale"
+          ],
+          "relation": "the cluster's topology stated as a count, a radius and a relative size; every POSITION is computed by the arrangement resolver, never here"
+        }
+      ],
+      "skippedPaths": []
+    },
+    {
+      "variant": "TOI_ET_MOI_BYPASS",
+      "derivations": [
+        {
+          "path": "setting.basketHeight",
+          "sourceParameters": [
+            "ringFamily.params.headHeightFactor",
+            "ringFamily.variant",
+            "setting.basketHeight"
+          ],
+          "relation": "setting.basketHeight (3.5) x variant factor (1.0) x headHeightFactor (1.0)"
+        },
+        {
+          "path": "family.familyType",
+          "sourceParameters": [
+            "ringFamily.variant"
+          ],
+          "relation": "the two principal stones are DELEGATED to the Multi-Stone Family layer, which places them as two separate instances"
+        },
+        {
+          "path": "family.params",
+          "sourceParameters": [
+            "ringFamily.params.symmetry",
+            "ringFamily.params.toiEtMoiOrientationDeg",
+            "ringFamily.params.toiEtMoiSeparationMm"
+          ],
+          "relation": "the pair's separation and the angle it sits at in the ring's own horizontal plane"
+        },
+        {
+          "path": "family.members",
+          "sourceParameters": [
+            "ringFamily.params.toiEtMoiSecondScale"
+          ],
+          "relation": "two members with their own scales, which is what makes the second stone independently sizeable; their ids are DERIVED from the structure rather than counted"
+        }
+      ],
+      "skippedPaths": []
     }
   ]
 }

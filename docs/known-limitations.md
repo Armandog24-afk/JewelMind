@@ -137,6 +137,30 @@ to every limitation below and to the design as a whole.
   proportion, signet table thickness or crossing clearance is judged anywhere,
   and every variant is `NOT_REVIEWED`.
 
+
+### Specialty rings (Sprint 29)
+
+- **No metal holds a cluster's or a toi-et-moi's accent stones.** They are real
+  solids in the right places and only the CENTRE stone is set. This is why both
+  families are PARTIAL, and it is the Multi-Stone Family layer's own recorded
+  boundary from Sprint 24.
+- **A toi-et-moi's two stones cannot have different cuts.** They can differ in
+  size and in gem identity; both are occurrences of the document's single
+  `stone`, because a family member carries no shape. The classic oval-and-pear
+  pair therefore is not expressible.
+- **An eternity ring still carries a centre stone and a head.** A true eternity
+  band has neither, but `REQUIRED_COMPONENT_NAMES` includes `stone_reference`
+  and `basket_support`, so a stone-less ring is not representable — the same
+  blocker that reserves `plain_band` and the stacking band.
+- **No channel-set band.** The setting system's channel walls are straight
+  prisms in the stone's own frame and cannot follow the band's curve.
+- **No stacking band, and no tension-style family.** The first needs the
+  stone-less ring above; the second would only rename the `tension` setting
+  family, which already builds that geometry.
+- **No specialty dimension is professionally validated.** No stone spacing, bead
+  size, cluster density or stone-security judgment is asserted anywhere, and
+  every variant is `NOT_REVIEWED`.
+
 ## Preview / export
 
 - **GLB export was not implemented.** The preview pipeline was evaluated

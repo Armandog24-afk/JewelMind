@@ -56,14 +56,18 @@ describe('RingFamilySection', () => {
       'split_shank',
       'bypass',
       'signet',
+      // Sprint 29 built these three, so they belong here now. The list is the
+      // assertion: a family the backend cannot build must never appear.
+      'eternity',
+      'cluster',
+      'toi_et_moi',
     ])
     // The reserved families have real technical reasons for not existing yet
     // (see RESERVED_RING_FAMILIES); an option a user can pick and the product
     // cannot build is worse than an absent one.
-    expect(values).not.toContain('eternity')
-    expect(values).not.toContain('toi_et_moi')
     expect(values).not.toContain('plain_band')
-    expect(values).not.toContain('cluster')
+    expect(values).not.toContain('channel_set_band')
+    expect(values).not.toContain('tension_style')
   })
 
   it('offers no reserved variant in any family', () => {
@@ -209,6 +213,69 @@ describe('RingFamilySection', () => {
     useProjectStore.getState().updateJewelry({ style: 'signet' })
     render(<RingFamilySection />)
     expect(screen.getByText(/no engraving, relief or texture/)).toBeInTheDocument()
+  })
+
+  it('offers the eternity controls the chosen variant actually reads', () => {
+    // FULL states a PITCH and HALF states a COUNT — two different questions,
+    // so offering both on either would present a control that does nothing.
+    useProjectStore.getState().updateJewelry({ style: 'eternity' })
+    render(<RingFamilySection />)
+    expect(screen.getByLabelText(/Stone pitch/)).toBeInTheDocument()
+    expect(screen.queryByLabelText(/Set stones/)).toBeNull()
+
+    fireEvent.change(screen.getByLabelText('Variant'), {
+      target: { value: 'ETERNITY_HALF' },
+    })
+    expect(screen.getByLabelText(/Set stones/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Stone spacing/)).toBeInTheDocument()
+    expect(screen.queryByLabelText(/Stone pitch/)).toBeNull()
+  })
+
+  it('offers retention on an eternity band, including the honest none', () => {
+    useProjectStore.getState().updateJewelry({ style: 'eternity' })
+    render(<RingFamilySection />)
+    const values = Array.from(
+      screen.getByLabelText('Held by').querySelectorAll('option'),
+    ).map((o) => o.getAttribute('value'))
+    expect(values).toEqual(['BEAD', 'SHARED_BEAD', 'MICRO_PRONG', 'NONE'])
+  })
+
+  it('offers the cluster topology controls', () => {
+    useProjectStore.getState().updateJewelry({ style: 'cluster' })
+    render(<RingFamilySection />)
+    expect(screen.getByLabelText(/Surrounding stones/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Cluster radius/)).toBeInTheDocument()
+    expect(screen.queryByLabelText(/Set stones/)).toBeNull()
+  })
+
+  it('offers the toi-et-moi relationship controls', () => {
+    useProjectStore.getState().updateJewelry({ style: 'toi_et_moi' })
+    render(<RingFamilySection />)
+    // RELATIVE to the first stone — the unit says so, because "× first" is what
+    // makes it a relation rather than a millimetre value.
+    expect(screen.getByLabelText(/Second stone size \(× first\)/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Stone separation/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Pair angle/)).toBeInTheDocument()
+  })
+
+  it('states what is missing for the PARTIAL specialty families', () => {
+    useProjectStore.getState().updateJewelry({ style: 'cluster' })
+    const view = render(<RingFamilySection />)
+    expect(screen.getByText(/only the centre stone is held/)).toBeInTheDocument()
+    view.unmount()
+
+    reset()
+    useProjectStore.getState().updateJewelry({ style: 'toi_et_moi' })
+    render(<RingFamilySection />)
+    expect(screen.getByText(/cannot have different cuts/)).toBeInTheDocument()
+  })
+
+  it('presents the eternity band as complete, because it is', () => {
+    // CURRENT, so no PARTIAL note: the Pavé Engine builds real retention for
+    // every stone. Showing a caveat here would be as wrong as hiding one.
+    useProjectStore.getState().updateJewelry({ style: 'eternity' })
+    render(<RingFamilySection />)
+    expect(screen.queryByText(/No metal is generated to hold/)).toBeNull()
   })
 
   it('claims no manufacturing readiness', () => {

@@ -1,5 +1,5 @@
 {
-  "taxonomyVersion": "1.0.0",
+  "taxonomyVersion": "1.1.0",
   "ringFamilyGeometryVersion": "1.0.0",
   "pipelineStages": [
     "schema",
@@ -20,6 +20,21 @@
       "defaultVariant": "BYPASS_CROSSOVER",
       "variants": [
         "BYPASS_CROSSOVER"
+      ]
+    },
+    "cluster": {
+      "status": "PARTIAL",
+      "defaultVariant": "CLUSTER_ROUND",
+      "variants": [
+        "CLUSTER_ROUND"
+      ]
+    },
+    "eternity": {
+      "status": "CURRENT",
+      "defaultVariant": "ETERNITY_FULL",
+      "variants": [
+        "ETERNITY_FULL",
+        "ETERNITY_HALF"
       ]
     },
     "halo": {
@@ -62,6 +77,13 @@
       "variants": [
         "THREE_STONE_GRADUATED",
         "THREE_STONE_SYMMETRIC"
+      ]
+    },
+    "toi_et_moi": {
+      "status": "PARTIAL",
+      "defaultVariant": "TOI_ET_MOI_BYPASS",
+      "variants": [
+        "TOI_ET_MOI_BYPASS"
       ]
     }
   },
@@ -534,6 +556,154 @@
         "chevaliere"
       ],
       "description": "A real solid body with a rectangular table at the ring's top, built as its own component so it has parametric identity. PARTIAL because a signet's decoration is the point of one and no engraving, relief or texture exists anywhere in the pipeline: the table is flat and rectangular, and both `SIGNET_ENGRAVED` and `SIGNET_OVAL_TABLE` are reserved with their real reasons. Specialty decoration is Sprint 29's territory."
+    },
+    {
+      "variant": "ETERNITY_FULL",
+      "family": "eternity",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 2,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "eternity",
+        "eternity ring",
+        "full eternity",
+        "anello eternity",
+        "veretta"
+      ],
+      "description": "A band set with stones around its WHOLE circumference, DELEGATED to the Pave Engine. CURRENT rather than PARTIAL because the Pave Engine is the one layer in the programme whose `settingGeometry` is true: it builds real retention metal for every stone in the field, not only for a primary one. Measured at the default: 68 stones and 134 bead solids, largest angular gap 5.8 degrees. The stone COUNT follows from the band's own circumference, so a larger finger size carries more stones rather than the same stones stretched apart."
+    },
+    {
+      "variant": "ETERNITY_HALF",
+      "family": "eternity",
+      "status": "CURRENT",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 2,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "half eternity",
+        "half-eternity",
+        "mezza veretta",
+        "eternity parziale"
+      ],
+      "description": "The same delegation specified the way a half band actually is: an explicit stone COUNT at a stated spacing, which together decide how far round the band the set region reaches and therefore how much of it stays unadorned. That unadorned region IS the half-eternity distinction. Measured: 12 stones at 1.6 mm give 48 bead solids and at 1.4 mm give 26, because the corners genuinely share."
+    },
+    {
+      "variant": "CLUSTER_ROUND",
+      "family": "cluster",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 3,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "cluster",
+        "cluster ring",
+        "anello cluster"
+      ],
+      "description": "A centre surrounded by its own stones, DELEGATED to the Multi-Stone Family layer's CLUSTER family, which computes every position. The ring family states a count, a radius and a relative size and places nothing itself. PARTIAL because that layer's `settingGeometry` is false for every family: the surrounding stones are real solids and ONLY THE CENTRE STONE IS HELD. Sprint 24's own recorded boundary, unchanged here — a setting strategy for a non-primary member is an RFC that sprint already identified."
+    },
+    {
+      "variant": "TOI_ET_MOI_BYPASS",
+      "family": "toi_et_moi",
+      "status": "PARTIAL",
+      "representable": true,
+      "differsFromFamilyBaseline": true,
+      "isFamilyBaseline": false,
+      "stoneGeometry": true,
+      "structuralGeometry": false,
+      "pipelineCoverage": {
+        "schema": "CURRENT",
+        "normalization": "CURRENT",
+        "resolution": "CURRENT",
+        "compiler": "CURRENT",
+        "geometry": "CURRENT",
+        "inspection": "CURRENT",
+        "export": "CURRENT",
+        "vision": "CURRENT",
+        "studio": "CURRENT",
+        "designer": "CURRENT",
+        "conversation": "CURRENT"
+      },
+      "shankArchitecture": "UNIFORM",
+      "shoulderArchitecture": "NONE",
+      "bodyArchitecture": "NONE",
+      "headHeightFactor": 1.0,
+      "derivedPathCount": 4,
+      "multiStone": true,
+      "professionalValidationStatus": "NOT_REVIEWED",
+      "designerTerms": [
+        "toi et moi",
+        "toi-et-moi",
+        "two stone",
+        "due pietre"
+      ],
+      "description": "Two principal stones as two SEPARATE Stone Instances, DELEGATED the same way, each with its own scale and its own gem identity. PARTIAL for TWO reasons, and both are recorded rather than approximated: the non-primary stone is not held, exactly as for the cluster; and the two stones cannot differ in CUT, because a FamilyMember is an occurrence of the design's one `stone` and carries no shape (FAMILY-GOV). An oval-and-pear pair therefore needs per-member stone specifications, which is an existing Sprint 24 RFC."
     }
   ],
   "reserved": [
@@ -558,24 +728,22 @@
       "reason": "A split shank whose rails follow a sculpted 3D path rather than the ring's own circle. It needs a swept solid along a spline for the same reason the trellis head does."
     },
     {
-      "name": "cluster",
-      "reason": "A cluster ring's stones are already the CLUSTER stone family (Sprint 24), composed onto any ring family. A separate ring family would duplicate it for no capability gain."
-    },
-    {
-      "name": "eternity",
-      "reason": "A full eternity band sets stones around the entire circumference, which needs a pavé field whose host is the band's own outer surface over 360 degrees AND a channel or bead retention that follows it. The pavé engine's containment policy clips a field at the host's declared extent rather than wrapping it, so a 360-degree field is not expressible yet."
+      "name": "channel_set_band",
+      "reason": "A channel-set BAND runs a stone sequence between two walls that follow the band's circumference. `setting/channel.py` builds its walls with `oriented_prism()` — straight rectangular prisms in the STONE's own horizontal frame — so it can wall a run across the top of a ring and cannot follow a curve. A curved channel needs a swept wall along the band's centreline, which is the same missing primitive `SPLIT_SHANK_SCULPTED` and `SOLITAIRE_TRELLIS` wait on."
     },
     {
       "name": "plain_band",
-      "reason": "A band with no stone at all requires the assembly to build no stone, no setting and no head. Every current component contract treats `stone_reference` and `basket_support` as required, so a stone-less ring is a change to the required-component set — an ADR condition — rather than a family parameter."
+      "reason": "A band with no stone at all — and therefore also the STACKING BAND Sprint 29 was asked for, which is the same capability under another name and deliberately not given a second reserved entry. It requires the assembly to build no stone, no setting and no head, and `geometry/inspection/assembly.py::REQUIRED_COMPONENT_NAMES` is `('band', 'stone_reference', 'basket_support')`, so such a ring fails inspection by contract rather than by accident. Changing the required-component set is an explicit ADR condition, which is why this stays reserved rather than being forced through."
     },
     {
-      "name": "toi_et_moi",
-      "reason": "Two equal stones side by side is already expressible as the TOI_ET_MOI stone family (Sprint 24). A RING family of the same name would be a second authority over the same placement, which is what JM-FAMILY-001 refuses. It stays reserved so the name cannot be taken for something else."
+      "name": "tension_style",
+      "reason": "A tension-STYLE ring family would add nothing the `tension` SETTING family does not already build: two opposing supports with the stone between them, real geometry, PARTIAL, `structuralBehaviourModelled: false`. A ring family wrapping it would be a second name for one capability. What is genuinely missing is the structural model, and that needs engineering evidence and a professional-validation record, not a new family."
     }
   ],
   "designerTerms": {
+    "anello cluster": "CLUSTER_ROUND",
     "anello con sigillo": "SIGNET_FLAT_TABLE",
+    "anello eternity": "ETERNITY_FULL",
     "anello halo": "HALO_SINGLE",
     "anello incrociato": "BYPASS_CROSSOVER",
     "bypass": "BYPASS_CROSSOVER",
@@ -585,21 +753,31 @@
     "chevaliere": "SIGNET_FLAT_TABLE",
     "chevalière": "SIGNET_FLAT_TABLE",
     "classic solitaire": "SOLITAIRE_CLASSIC",
+    "cluster": "CLUSTER_ROUND",
+    "cluster ring": "CLUSTER_ROUND",
     "crossover": "BYPASS_CROSSOVER",
     "doppio halo": "HALO_DOUBLE",
     "double halo": "HALO_DOUBLE",
+    "due pietre": "TOI_ET_MOI_BYPASS",
     "elevated": "SOLITAIRE_ELEVATED",
     "elevated solitaire": "SOLITAIRE_ELEVATED",
+    "eternity": "ETERNITY_FULL",
+    "eternity parziale": "ETERNITY_HALF",
+    "eternity ring": "ETERNITY_FULL",
+    "full eternity": "ETERNITY_FULL",
     "gambo diviso": "SPLIT_SHANK_PARALLEL",
     "gambo diviso rastremato": "SPLIT_SHANK_TAPERED",
     "graduated three stone": "THREE_STONE_GRADUATED",
     "graduated trilogy": "THREE_STONE_GRADUATED",
+    "half eternity": "ETERNITY_HALF",
+    "half-eternity": "ETERNITY_HALF",
     "halo": "HALO_SINGLE",
     "halo nascosto": "HALO_HIDDEN",
     "halo ring": "HALO_SINGLE",
     "hidden halo": "HALO_HIDDEN",
     "low profile": "SOLITAIRE_LOW_PROFILE",
     "low-profile solitaire": "SOLITAIRE_LOW_PROFILE",
+    "mezza veretta": "ETERNITY_HALF",
     "profilo basso": "SOLITAIRE_LOW_PROFILE",
     "rialzato": "SOLITAIRE_ELEVATED",
     "signet": "SIGNET_FLAT_TABLE",
@@ -612,9 +790,13 @@
     "tapered split shank": "SPLIT_SHANK_TAPERED",
     "three stone": "THREE_STONE_SYMMETRIC",
     "three-stone": "THREE_STONE_SYMMETRIC",
+    "toi et moi": "TOI_ET_MOI_BYPASS",
+    "toi-et-moi": "TOI_ET_MOI_BYPASS",
     "trilogia": "THREE_STONE_SYMMETRIC",
     "trilogia graduata": "THREE_STONE_GRADUATED",
-    "trilogy": "THREE_STONE_SYMMETRIC"
+    "trilogy": "THREE_STONE_SYMMETRIC",
+    "two stone": "TOI_ET_MOI_BYPASS",
+    "veretta": "ETERNITY_FULL"
   },
   "parametersReadByVariant": {
     "SOLITAIRE_CLASSIC": [
@@ -731,6 +913,46 @@
       "signetTableHeightMm",
       "signetTableLengthMm",
       "signetTableWidthMm"
+    ],
+    "ETERNITY_FULL": [
+      "eternityPitchMm",
+      "eternityRetention",
+      "eternityStartAngleDeg",
+      "eternityStoneScale",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "ETERNITY_HALF": [
+      "eternityRetention",
+      "eternityStartAngleDeg",
+      "eternityStoneCount",
+      "eternityStoneScale",
+      "eternityStoneSpacingMm",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "CLUSTER_ROUND": [
+      "clusterRadiusMm",
+      "clusterStoneCount",
+      "clusterStoneScale",
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale"
+    ],
+    "TOI_ET_MOI_BYPASS": [
+      "headHeightFactor",
+      "paveShoulders",
+      "paveSpanDeg",
+      "paveStoneScale",
+      "symmetry",
+      "toiEtMoiOrientationDeg",
+      "toiEtMoiSecondScale",
+      "toiEtMoiSeparationMm"
     ]
   }
 }

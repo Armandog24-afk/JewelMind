@@ -135,6 +135,86 @@ _INFLUENCES: tuple[RingFamilyDependency, ...] = (
 
 #: The DERIVATION edges: what each variant actually writes.
 _DERIVATIONS: tuple[RingFamilyDependency, ...] = (
+    # ---- SPECIALTY: ETERNITY (Sprint 29) -----------------------------------
+    _for(
+        "ETERNITY_FULL",
+        "ringFamily.params.eternityPitchMm",
+        ("pave",),
+        "A full eternity band covers the whole circumference at a stated pitch. "
+        "The stone COUNT is not stated: it follows from the band's own size, "
+        "which is what makes a larger finger size carry more stones.",
+    ),
+    _for(
+        "ETERNITY_FULL",
+        "ringFamily.params.eternityStoneScale",
+        ("pave",),
+        "The set stones' size as a multiple of the design's own stone, so "
+        "changing `stone.diameter` changes the whole band.",
+    ),
+    _for(
+        "ETERNITY_HALF",
+        "ringFamily.params.eternityStoneCount",
+        ("pave",),
+        "A half eternity is specified by HOW MANY stones it carries. With the "
+        "spacing it decides how far round the band the set region reaches, and "
+        "therefore how much of the band stays unadorned.",
+    ),
+    _for(
+        "ETERNITY_HALF",
+        "ringFamily.params.eternityStoneSpacingMm",
+        ("pave",),
+        "Centre-to-centre spacing along the band. Tighter spacing genuinely "
+        "shares bead corners rather than only moving stones closer.",
+    ),
+    _for(
+        "ETERNITY_HALF",
+        "ringFamily.params.eternityStoneScale",
+        ("pave",),
+        "The set stones' size as a multiple of the design's own stone.",
+    ),
+    # ---- SPECIALTY: CLUSTER (Sprint 29) ------------------------------------
+    _for(
+        "CLUSTER_ROUND",
+        "ringFamily.params.clusterStoneCount",
+        ("family.familyType", "family.params"),
+        "How many stones surround the centre. Every POSITION is computed by the "
+        "arrangement resolver; the ring family states only the topology.",
+    ),
+    _for(
+        "CLUSTER_ROUND",
+        "ringFamily.params.clusterRadiusMm",
+        ("family.params",),
+        "Centre-to-centre distance from the centre stone to each surrounding "
+        "one.",
+    ),
+    _for(
+        "CLUSTER_ROUND",
+        "ringFamily.params.clusterStoneScale",
+        ("family.params",),
+        "The surrounding stones' size as a multiple of the design's own stone.",
+    ),
+    # ---- SPECIALTY: TOI ET MOI (Sprint 29) ---------------------------------
+    _for(
+        "TOI_ET_MOI_BYPASS",
+        "ringFamily.params.toiEtMoiSeparationMm",
+        ("family.familyType", "family.params"),
+        "Centre-to-centre separation between the two principal stones.",
+    ),
+    _for(
+        "TOI_ET_MOI_BYPASS",
+        "ringFamily.params.toiEtMoiOrientationDeg",
+        ("family.params",),
+        "How far the pair is rotated in the ring's own horizontal plane, which "
+        "is what makes the classic diagonal arrangement expressible.",
+    ),
+    _for(
+        "TOI_ET_MOI_BYPASS",
+        "ringFamily.params.toiEtMoiSecondScale",
+        ("family.members",),
+        "The second principal stone's size relative to the first. The two stay "
+        "separate instances with their own scales; they cannot differ in CUT, "
+        "because a FamilyMember carries no shape (FAMILY-GOV).",
+    ),
     # ---- SOLITAIRE ---------------------------------------------------------
     _for(
         "SOLITAIRE_CATHEDRAL",

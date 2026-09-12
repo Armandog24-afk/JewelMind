@@ -49,7 +49,18 @@ from jewelmind.ring_family.errors import RingFamilyUnsupportedVariantError
 #: the parameter contract. Distinct from the geometry versions, which record how
 #: solids are built: a variant can be documented or reserved without any
 #: geometry changing.
-RING_FAMILY_TAXONOMY_VERSION = "1.0.0"
+#:
+#: `1.1.0` (Sprint 29): ADDITIVE. Three families, four variants and twelve
+#: parameters were added; nothing was removed and no existing field changed
+#: meaning, so a pre-Sprint-29 document still resolves to exactly what it did.
+#:
+#: BUMPING IT MOVES EVERY `ring_family_fingerprint()`, and that is the point
+#: rather than a side effect: the fingerprint identifies "this family with this
+#: parameter contract", and the contract genuinely changed. Leaving the version
+#: at 1.0.0 while the contract moved would make the field decorative. Note what
+#: did NOT move: `definitionHash` is unchanged for every existing document,
+#: because a document with `ringFamily: null` serializes identically.
+RING_FAMILY_TAXONOMY_VERSION = "1.1.0"
 
 #: Every ring-family variant with a real, executable derivation behind it.
 #:
@@ -80,6 +91,18 @@ RingFamilyVariantId = Literal[
     "BYPASS_CROSSOVER",
     # SIGNET — a solid body with a table at the ring's top.
     "SIGNET_FLAT_TABLE",
+    # ---- SPECIALTY FAMILIES (Sprint 29) ------------------------------------
+    # ETERNITY — a stone-set BAND rather than a band carrying a head. The
+    # sequence is DELEGATED to the Pavé Engine, the one layer that builds real
+    # retention metal for every stone in a field.
+    "ETERNITY_FULL",
+    "ETERNITY_HALF",
+    # CLUSTER — a centre surrounded by its own stones, DELEGATED to the
+    # Multi-Stone Family layer's own CLUSTER family.
+    "CLUSTER_ROUND",
+    # TOI_ET_MOI — two principal stones, DELEGATED the same way. They stay two
+    # separate Stone Instances with their own identities and cuts.
+    "TOI_ET_MOI_BYPASS",
 ]
 
 #: Which family each variant belongs to, stated ONCE and inverted where the
@@ -99,6 +122,11 @@ VARIANT_FAMILY: dict[str, str] = {
     "SPLIT_SHANK_TAPERED": "split_shank",
     "BYPASS_CROSSOVER": "bypass",
     "SIGNET_FLAT_TABLE": "signet",
+    # Sprint 29.
+    "ETERNITY_FULL": "eternity",
+    "ETERNITY_HALF": "eternity",
+    "CLUSTER_ROUND": "cluster",
+    "TOI_ET_MOI_BYPASS": "toi_et_moi",
 }
 
 #: The variant a family falls back to when a document declares no `ringFamily`.
@@ -114,6 +142,11 @@ DEFAULT_VARIANT: dict[str, str] = {
     "split_shank": "SPLIT_SHANK_PARALLEL",
     "bypass": "BYPASS_CROSSOVER",
     "signet": "SIGNET_FLAT_TABLE",
+    # Sprint 29. `ETERNITY_FULL` is the default because "an eternity ring" with
+    # nothing else stated means the full band; the half is the qualified case.
+    "eternity": "ETERNITY_FULL",
+    "cluster": "CLUSTER_ROUND",
+    "toi_et_moi": "TOI_ET_MOI_BYPASS",
 }
 
 #: Ring families and variants named for architectural completeness, with NO
@@ -123,31 +156,40 @@ DEFAULT_VARIANT: dict[str, str] = {
 #: should be able to tell what would have to exist first — which is why the
 #: reason is written down instead of the word "planned".
 RESERVED_RING_FAMILIES: dict[str, str] = {
-    "eternity": (
-        "A full eternity band sets stones around the entire circumference, which "
-        "needs a pavé field whose host is the band's own outer surface over 360 "
-        "degrees AND a channel or bead retention that follows it. The pavé "
-        "engine's containment policy clips a field at the host's declared extent "
-        "rather than wrapping it, so a 360-degree field is not expressible yet."
+    # Sprint 29 RETIRED three entries — `eternity`, `cluster` and `toi_et_moi`
+    # are live families now. One of their reasons was factually wrong when
+    # written and is recorded in docs/bible/31-specialty-rings/ rather than
+    # deleted: the Pavé Engine always could wrap a 360-degree field, and a
+    # measurement (68 stones, 134 beads, 5.8-degree largest gap) is what
+    # established it.
+    "channel_set_band": (
+        "A channel-set BAND runs a stone sequence between two walls that follow "
+        "the band's circumference. `setting/channel.py` builds its walls with "
+        "`oriented_prism()` — straight rectangular prisms in the STONE's own "
+        "horizontal frame — so it can wall a run across the top of a ring and "
+        "cannot follow a curve. A curved channel needs a swept wall along the "
+        "band's centreline, which is the same missing primitive "
+        "`SPLIT_SHANK_SCULPTED` and `SOLITAIRE_TRELLIS` wait on."
     ),
-    "toi_et_moi": (
-        "Two equal stones side by side is already expressible as the "
-        "TOI_ET_MOI stone family (Sprint 24). A RING family of the same name "
-        "would be a second authority over the same placement, which is what "
-        "JM-FAMILY-001 refuses. It stays reserved so the name cannot be taken "
-        "for something else."
-    ),
-    "cluster": (
-        "A cluster ring's stones are already the CLUSTER stone family "
-        "(Sprint 24), composed onto any ring family. A separate ring family "
-        "would duplicate it for no capability gain."
+    "tension_style": (
+        "A tension-STYLE ring family would add nothing the `tension` SETTING "
+        "family does not already build: two opposing supports with the stone "
+        "between them, real geometry, PARTIAL, `structuralBehaviourModelled: "
+        "false`. A ring family wrapping it would be a second name for one "
+        "capability. What is genuinely missing is the structural model, and "
+        "that needs engineering evidence and a professional-validation record, "
+        "not a new family."
     ),
     "plain_band": (
-        "A band with no stone at all requires the assembly to build no stone, no "
-        "setting and no head. Every current component contract treats "
-        "`stone_reference` and `basket_support` as required, so a stone-less ring "
-        "is a change to the required-component set — an ADR condition — rather "
-        "than a family parameter."
+        "A band with no stone at all — and therefore also the STACKING BAND "
+        "Sprint 29 was asked for, which is the same capability under another "
+        "name and deliberately not given a second reserved entry. It requires "
+        "the assembly to build no stone, no setting and no head, and "
+        "`geometry/inspection/assembly.py::REQUIRED_COMPONENT_NAMES` is "
+        "`('band', 'stone_reference', 'basket_support')`, so such a ring fails "
+        "inspection by contract rather than by accident. Changing the "
+        "required-component set is an explicit ADR condition, which is why this "
+        "stays reserved rather than being forced through."
     ),
     "SOLITAIRE_TRELLIS": (
         "A trellis solitaire's arches are the reserved TRELLIS head "
@@ -208,6 +250,12 @@ VARIANT_HEAD_HEIGHT_FACTOR: dict[str, float] = {
     "SPLIT_SHANK_TAPERED": 1.0,
     "BYPASS_CROSSOVER": 1.0,
     "SIGNET_FLAT_TABLE": 1.0,
+    # Sprint 29. Every specialty family leaves the head where the document put
+    # it: what distinguishes them is the stone structure, not the head's height.
+    "ETERNITY_FULL": 1.0,
+    "ETERNITY_HALF": 1.0,
+    "CLUSTER_ROUND": 1.0,
+    "TOI_ET_MOI_BYPASS": 1.0,
 }
 
 #: Which shank architecture each variant needs. `UNIFORM` is the pre-Sprint-28
@@ -227,6 +275,13 @@ VARIANT_SHANK_ARCHITECTURE: dict[str, str] = {
     "SPLIT_SHANK_TAPERED": "SPLIT",
     "BYPASS_CROSSOVER": "BYPASS",
     "SIGNET_FLAT_TABLE": "UNIFORM",
+    # Sprint 29. Every specialty family keeps the UNIFORM band: what makes them
+    # specialty is the stone STRUCTURE, not a new metal architecture. Saying so
+    # here is what keeps their `structuralGeometry` honestly false.
+    "ETERNITY_FULL": "UNIFORM",
+    "ETERNITY_HALF": "UNIFORM",
+    "CLUSTER_ROUND": "UNIFORM",
+    "TOI_ET_MOI_BYPASS": "UNIFORM",
 }
 
 #: Which shoulder architecture each variant builds.
@@ -249,6 +304,11 @@ VARIANT_SHOULDER_ARCHITECTURE: dict[str, str] = {
     "SPLIT_SHANK_TAPERED": "SPLIT_RAILS",
     "BYPASS_CROSSOVER": "NONE",
     "SIGNET_FLAT_TABLE": "NONE",
+    # Sprint 29.
+    "ETERNITY_FULL": "NONE",
+    "ETERNITY_HALF": "NONE",
+    "CLUSTER_ROUND": "NONE",
+    "TOI_ET_MOI_BYPASS": "NONE",
 }
 
 #: Which body architecture each variant builds. `NONE` for every family but the
@@ -264,9 +324,31 @@ VARIANT_BODY_ARCHITECTURE: dict[str, str] = {
 #: before any validation reported it. NOT jewelry limits — nothing here claims
 #: how many stones a ring should carry.
 MAX_HALO_STONES_PER_FAMILY = 96
+
+#: SOFTWARE SAFETY LIMITS, not jewelry judgments (Sprint 29).
+#:
+#: Neither says anything about how many stones a band or a cluster SHOULD carry.
+#: They exist so a malformed or hostile document cannot ask the pavé lattice or
+#: the arrangement resolver for an unbounded expansion, which is the same reason
+#: `MAX_PAVE_STONES` and `MAX_CLUSTER_COUNT` exist in their own layers. Both are
+#: deliberately at or below the limit the delegated engine already enforces, so
+#: this layer can never ask for more than that engine accepts.
+MAX_PAVE_STONES_PER_BAND = 200
+MAX_CLUSTER_STONES = 24
 MAX_SIDE_SPACING_MM = 40.0
 
 RingFamilySymmetry = Literal["SYMMETRIC", "ASYMMETRIC"]
+
+#: How metal holds an eternity band's stones (Sprint 29).
+#:
+#: A MIRROR of the Pavé Engine's own `PaveRetentionStrategy`, not a second
+#: vocabulary: the family names a strategy and the Pavé Engine builds it. The
+#: reserved strategies that layer records are absent here for the same reason
+#: they are absent there — a name with no builder cannot be honoured.
+#:
+#: `NONE` is a real option rather than an omission: it produces the stone
+#: sequence with no retention metal, which is exactly what a layout preview is.
+EternityRetention = Literal["NONE", "BEAD", "SHARED_BEAD", "MICRO_PRONG"]
 
 
 class RingFamilyModel(BaseModel):
@@ -432,6 +514,86 @@ class RingFamilyParams(RingFamilyModel):
     )
     paveStoneScale: float = Field(
         default=0.1, gt=0.001, le=10.0, allow_inf_nan=False
+    )
+
+    # ---- eternity band (delegated to the Pavé Engine) -----------------------
+    #
+    # TWO SPECS, TWO QUESTIONS, and the split is the Pavé Engine's own. A FULL
+    # eternity asks "cover the whole circumference at this density", which is a
+    # span and a pitch. A HALF eternity asks "put THIS MANY stones here", which
+    # is a count and a spacing — and a count is what a jeweller states for a
+    # half band. Neither is a new primitive: `PaveSpec` and `MicrosettingSpec`
+    # already exist and already build real retention.
+
+    #: FULL only. Centre-to-centre pitch around the band, in mm. The stone count
+    #: FOLLOWS from the band's own circumference, which is what makes a larger
+    #: finger size carry more stones rather than the same stones further apart.
+    eternityPitchMm: float = Field(
+        default=1.6, gt=0.05, le=50.0, allow_inf_nan=False
+    )
+
+    #: HALF only. How many stones the set region carries. An explicit COUNT,
+    #: because that is what a half-eternity is specified by.
+    eternityStoneCount: int = Field(default=12, ge=1, le=MAX_PAVE_STONES_PER_BAND)
+
+    #: HALF only. Centre-to-centre spacing along the band, in mm. With the count
+    #: above it decides how far round the band the set region reaches, and
+    #: therefore how much of the band stays unadorned.
+    eternityStoneSpacingMm: float = Field(
+        default=1.6, gt=0.05, le=50.0, allow_inf_nan=False
+    )
+
+    #: The set stones' size as a multiple of the design's own stone. A RELATION,
+    #: so changing `stone.diameter` changes the whole band.
+    eternityStoneScale: float = Field(
+        default=0.18, gt=0.001, le=10.0, allow_inf_nan=False
+    )
+
+    #: Where the set region starts, in the band's own angular parameterization.
+    #: Read by HALF, where it decides which part of the band is left plain.
+    eternityStartAngleDeg: float = Field(
+        default=0.0, ge=-360.0, le=360.0, allow_inf_nan=False
+    )
+
+    #: How metal holds the set stones. The Pavé Engine's own strategies, named
+    #: rather than redefined — `NONE` is honest and produces the stone sequence
+    #: alone, which is what a layout preview is.
+    eternityRetention: EternityRetention = "BEAD"
+
+    # ---- cluster (delegated to the Multi-Stone Family layer) ----------------
+
+    #: How many stones surround the centre.
+    clusterStoneCount: int = Field(default=8, ge=1, le=MAX_CLUSTER_STONES)
+
+    #: The surrounding stones' size as a multiple of the design's own stone.
+    clusterStoneScale: float = Field(
+        default=0.4, gt=0.01, le=10.0, allow_inf_nan=False
+    )
+
+    #: Centre-to-centre distance from the centre stone to each surrounding one.
+    clusterRadiusMm: float = Field(
+        default=4.0, gt=0.0, le=MAX_SIDE_SPACING_MM, allow_inf_nan=False
+    )
+
+    # ---- toi et moi (delegated to the Multi-Stone Family layer) -------------
+
+    #: The SECOND principal stone's size relative to the first. Deliberately
+    #: allowed to be 1.0 and above: a toi-et-moi's two stones are frequently
+    #: equal, and frequently not, and neither is the "correct" one.
+    toiEtMoiSecondScale: float = Field(
+        default=1.0, gt=0.01, le=10.0, allow_inf_nan=False
+    )
+
+    #: Centre-to-centre separation between the two principal stones.
+    toiEtMoiSeparationMm: float = Field(
+        default=5.0, gt=0.0, le=MAX_SIDE_SPACING_MM, allow_inf_nan=False
+    )
+
+    #: How far the pair is rotated in the ring's own horizontal plane, which is
+    #: what makes the classic diagonal arrangement expressible rather than
+    #: approximated.
+    toiEtMoiOrientationDeg: float = Field(
+        default=30.0, ge=-180.0, le=180.0, allow_inf_nan=False
     )
 
     # ---- shared -------------------------------------------------------------

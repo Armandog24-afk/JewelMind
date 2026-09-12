@@ -112,6 +112,13 @@ export type JewelryStyle =
   | 'split_shank'
   | 'bypass'
   | 'signet'
+  // ---- SPECIALTY FAMILIES (Sprint 29) --------------------------------------
+  // Extending this union rather than adding a `specialty` field is the
+  // architectural decision: a specialty ring IS a ring family, so it resolves
+  // through the one resolver every other family uses.
+  | 'eternity'
+  | 'cluster'
+  | 'toi_et_moi'
 
 export interface ProjectInfo {
   name: string
@@ -793,10 +800,25 @@ export type RingFamilyVariantId =
   | 'BYPASS_CROSSOVER'
   // SIGNET — a solid body with a table at the ring's top.
   | 'SIGNET_FLAT_TABLE'
+  // ETERNITY — a stone-set BAND, delegated to the Pavé Engine, which is the one
+  // layer that builds real retention metal for a non-primary stone.
+  | 'ETERNITY_FULL'
+  | 'ETERNITY_HALF'
+  // CLUSTER and TOI_ET_MOI — delegated to the Multi-Stone Family layer. Both
+  // are PARTIAL: their accent stones are real and only the centre is held.
+  | 'CLUSTER_ROUND'
+  | 'TOI_ET_MOI_BYPASS'
 
 /** Whether a family's derived placements are mirrored about the ring's own
  * midplane. Read by the multi-stone variants. */
 export type RingFamilySymmetry = 'SYMMETRIC' | 'ASYMMETRIC'
+
+/** How metal holds an eternity band's stones (Sprint 29).
+ *
+ * A MIRROR of the Pavé Engine's own retention strategies, not a second
+ * vocabulary. `NONE` is a real option rather than an omission: it produces the
+ * stone sequence with no retention metal, which is what a layout preview is. */
+export type EternityRetention = 'NONE' | 'BEAD' | 'SHARED_BEAD' | 'MICRO_PRONG'
 
 /**
  * A ring family's parametric knobs.
@@ -839,6 +861,34 @@ export interface RingFamilyParams {
   paveShoulders: boolean
   paveSpanDeg: number
   paveStoneScale: number
+
+  /** Eternity band (Sprint 29), delegated to the Pavé Engine.
+   *
+   * TWO SPECS, TWO QUESTIONS. A FULL band states a PITCH and the stone count
+   * follows from the band's own circumference — a larger finger carries more
+   * stones. A HALF band states an explicit COUNT and spacing, and what the two
+   * leave over is the unadorned region that makes it a half eternity. */
+  eternityPitchMm: number
+  eternityStoneCount: number
+  eternityStoneSpacingMm: number
+  eternityStoneScale: number
+  eternityStartAngleDeg: number
+  eternityRetention: EternityRetention
+
+  /** Cluster (Sprint 29), delegated to the Multi-Stone Family layer, which
+   * computes every position. The family states only the topology. */
+  clusterStoneCount: number
+  clusterStoneScale: number
+  clusterRadiusMm: number
+
+  /** Toi-et-moi (Sprint 29). The two principal stones stay SEPARATE Stone
+   * Instances with their own scales and gem identities. They cannot differ in
+   * CUT: a family member carries no shape, so both are occurrences of the
+   * document's one `stone`. */
+  toiEtMoiSecondScale: number
+  toiEtMoiSeparationMm: number
+  toiEtMoiOrientationDeg: number
+
   symmetry: RingFamilySymmetry
 }
 
@@ -1227,6 +1277,9 @@ const JEWELRY_STYLES: readonly JewelryStyle[] = [
   'split_shank',
   'bypass',
   'signet',
+  'eternity',
+  'cluster',
+  'toi_et_moi',
 ]
 
 const SETTING_TYPES: readonly SettingType[] = [

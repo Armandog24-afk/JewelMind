@@ -34,9 +34,11 @@ import { SelectField } from './SelectField'
  *
  * EXPOSES ONLY WHAT THE BACKEND BUILDS. Every option list is a literal mirror of
  * the backend's own `Literal` members, which are exactly the variants with a
- * real derivation: a reserved family (`eternity`, `toi_et_moi`) or variant
- * (`SOLITAIRE_TRELLIS`, `SIGNET_ENGRAVED`) is absent from the type and therefore
- * cannot appear here. This panel carries no "coming soon" list, because an
+ * real derivation: a reserved family (`plain_band`, `channel_set_band`) or
+ * variant (`SOLITAIRE_TRELLIS`, `SIGNET_ENGRAVED`) is absent from the type and
+ * therefore cannot appear here. `eternity`, `cluster` and `toi_et_moi` were
+ * reserved until Sprint 29 built them, and they appear here now for exactly
+ * that reason. This panel carries no "coming soon" list, because an
  * option a user can pick and the product cannot build is worse than an absent
  * one (STUDIO-GOV-011).
  *
@@ -77,6 +79,18 @@ function defaultParams(): RingFamilyParams {
     paveShoulders: false,
     paveSpanDeg: 90,
     paveStoneScale: 0.1,
+    eternityPitchMm: 1.6,
+    eternityStoneCount: 12,
+    eternityStoneSpacingMm: 1.6,
+    eternityStoneScale: 0.18,
+    eternityStartAngleDeg: 0,
+    eternityRetention: 'BEAD',
+    clusterStoneCount: 8,
+    clusterStoneScale: 0.4,
+    clusterRadiusMm: 4,
+    toiEtMoiSecondScale: 1.0,
+    toiEtMoiSeparationMm: 5,
+    toiEtMoiOrientationDeg: 30,
     symmetry: 'SYMMETRIC',
   }
 }
@@ -88,6 +102,9 @@ const FAMILY_OPTIONS: ReadonlyArray<{ value: JewelryStyle; label: string }> = [
   { value: 'split_shank', label: 'Split shank' },
   { value: 'bypass', label: 'Bypass' },
   { value: 'signet', label: 'Signet' },
+  { value: 'eternity', label: 'Eternity band' },
+  { value: 'cluster', label: 'Cluster' },
+  { value: 'toi_et_moi', label: 'Toi et moi' },
 ]
 
 /**
@@ -121,6 +138,12 @@ const FAMILY_VARIANTS: Readonly<
   ],
   bypass: [{ value: 'BYPASS_CROSSOVER', label: 'Crossover' }],
   signet: [{ value: 'SIGNET_FLAT_TABLE', label: 'Flat table' }],
+  eternity: [
+    { value: 'ETERNITY_FULL', label: 'Full — stones all the way round' },
+    { value: 'ETERNITY_HALF', label: 'Half — a set region and a plain region' },
+  ],
+  cluster: [{ value: 'CLUSTER_ROUND', label: 'Round cluster' }],
+  toi_et_moi: [{ value: 'TOI_ET_MOI_BYPASS', label: 'Two stones' }],
 }
 
 /**
@@ -145,6 +168,10 @@ const VARIANT_PARAMS: Readonly<Record<RingFamilyVariantId, readonly string[]>> =
   SPLIT_SHANK_TAPERED: ['split', 'shoulder'],
   BYPASS_CROSSOVER: ['bypass'],
   SIGNET_FLAT_TABLE: ['signet'],
+  ETERNITY_FULL: ['eternityFull'],
+  ETERNITY_HALF: ['eternityHalf'],
+  CLUSTER_ROUND: ['cluster'],
+  TOI_ET_MOI_BYPASS: ['toiEtMoi'],
 }
 
 /** Variants whose capability status the backend records as PARTIAL, with what
@@ -158,6 +185,10 @@ const PARTIAL_NOTE: Partial<Record<RingFamilyVariantId, string>> = {
     'Halo stones are real geometry. No metal is generated to hold them — a boundary recorded since Sprint 25, unchanged here.',
   SIGNET_FLAT_TABLE:
     'The body and its table are real geometry. The table is flat and rectangular: no engraving, relief or texture exists anywhere in JewelMind yet.',
+  CLUSTER_ROUND:
+    'The surrounding stones are real geometry. No metal is generated to hold them — only the centre stone is held. A boundary recorded since Sprint 24, unchanged here.',
+  TOI_ET_MOI_BYPASS:
+    'Both stones are real geometry with independent sizes. The second stone is not held by metal, and the two cannot have different cuts: both are occurrences of this design’s one stone.',
 }
 
 export function RingFamilySection() {
@@ -431,6 +462,165 @@ export function RingFamilySection() {
             max={30}
             step={0.2}
             unit="mm"
+          />
+        </>
+      )}
+
+      {reads.includes('eternityFull') && (
+        <>
+          {/* A PITCH, not a count: the stone count follows from the band's own
+              circumference, so a larger finger carries more stones. */}
+          <NumericField
+            id="ring-family-eternity-pitch"
+            label="Stone pitch"
+            value={params.eternityPitchMm}
+            onChange={(eternityPitchMm) => patchParams({ eternityPitchMm })}
+            min={0.1}
+            max={50}
+            step={0.1}
+            unit="mm"
+          />
+        </>
+      )}
+
+      {reads.includes('eternityHalf') && (
+        <>
+          <NumericField
+            id="ring-family-eternity-count"
+            label="Set stones"
+            value={params.eternityStoneCount}
+            onChange={(eternityStoneCount) => patchParams({ eternityStoneCount })}
+            min={1}
+            max={200}
+            step={1}
+          />
+          <NumericField
+            id="ring-family-eternity-spacing"
+            label="Stone spacing"
+            value={params.eternityStoneSpacingMm}
+            onChange={(eternityStoneSpacingMm) =>
+              patchParams({ eternityStoneSpacingMm })
+            }
+            min={0.1}
+            max={50}
+            step={0.1}
+            unit="mm"
+          />
+          <NumericField
+            id="ring-family-eternity-start"
+            label="Set region starts at"
+            value={params.eternityStartAngleDeg}
+            onChange={(eternityStartAngleDeg) =>
+              patchParams({ eternityStartAngleDeg })
+            }
+            min={-360}
+            max={360}
+            step={15}
+            unit="°"
+          />
+        </>
+      )}
+
+      {(reads.includes('eternityFull') || reads.includes('eternityHalf')) && (
+        <>
+          <NumericField
+            id="ring-family-eternity-scale"
+            label="Set stone size"
+            value={params.eternityStoneScale}
+            onChange={(eternityStoneScale) => patchParams({ eternityStoneScale })}
+            min={0.01}
+            max={10}
+            step={0.02}
+            unit="× stone"
+          />
+          <SelectField
+            id="ring-family-eternity-retention"
+            label="Held by"
+            value={params.eternityRetention}
+            options={[
+              { value: 'BEAD', label: 'Beads' },
+              { value: 'SHARED_BEAD', label: 'Shared beads' },
+              { value: 'MICRO_PRONG', label: 'Micro prongs' },
+              { value: 'NONE', label: 'Nothing — stone layout only' },
+            ]}
+            onChange={(value) =>
+              patchParams({ eternityRetention: value as RingFamilyParams['eternityRetention'] })
+            }
+            wide
+          />
+        </>
+      )}
+
+      {reads.includes('cluster') && (
+        <>
+          <NumericField
+            id="ring-family-cluster-count"
+            label="Surrounding stones"
+            value={params.clusterStoneCount}
+            onChange={(clusterStoneCount) => patchParams({ clusterStoneCount })}
+            min={1}
+            max={24}
+            step={1}
+          />
+          <NumericField
+            id="ring-family-cluster-radius"
+            label="Cluster radius"
+            value={params.clusterRadiusMm}
+            onChange={(clusterRadiusMm) => patchParams({ clusterRadiusMm })}
+            min={0.1}
+            max={40}
+            step={0.5}
+            unit="mm"
+          />
+          <NumericField
+            id="ring-family-cluster-scale"
+            label="Surrounding stone size"
+            value={params.clusterStoneScale}
+            onChange={(clusterStoneScale) => patchParams({ clusterStoneScale })}
+            min={0.02}
+            max={10}
+            step={0.05}
+            unit="× stone"
+          />
+        </>
+      )}
+
+      {reads.includes('toiEtMoi') && (
+        <>
+          {/* RELATIVE, and deliberately allowed at and above 1.0: a toi-et-moi's
+              two stones are frequently equal and frequently not, and neither is
+              the "correct" one. */}
+          <NumericField
+            id="ring-family-toi-scale"
+            label="Second stone size"
+            value={params.toiEtMoiSecondScale}
+            onChange={(toiEtMoiSecondScale) => patchParams({ toiEtMoiSecondScale })}
+            min={0.02}
+            max={10}
+            step={0.05}
+            unit="× first"
+          />
+          <NumericField
+            id="ring-family-toi-separation"
+            label="Stone separation"
+            value={params.toiEtMoiSeparationMm}
+            onChange={(toiEtMoiSeparationMm) => patchParams({ toiEtMoiSeparationMm })}
+            min={0.1}
+            max={40}
+            step={0.5}
+            unit="mm"
+          />
+          <NumericField
+            id="ring-family-toi-orientation"
+            label="Pair angle"
+            value={params.toiEtMoiOrientationDeg}
+            onChange={(toiEtMoiOrientationDeg) =>
+              patchParams({ toiEtMoiOrientationDeg })
+            }
+            min={-180}
+            max={180}
+            step={15}
+            unit="°"
           />
         </>
       )}

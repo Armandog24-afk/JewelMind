@@ -120,6 +120,14 @@ JewelryStyle = Literal[
     "split_shank",
     "bypass",
     "signet",
+    # ---- SPECIALTY FAMILIES (Sprint 29) ------------------------------------
+    # Extending this literal rather than adding a `specialty` field is the whole
+    # architectural decision: a specialty ring is a RING FAMILY, so it resolves
+    # through the one `resolve_ring_family()` every other family uses. A second
+    # field would be a second authority over what a design IS.
+    "eternity",
+    "cluster",
+    "toi_et_moi",
 ]
 
 

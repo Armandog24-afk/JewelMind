@@ -105,15 +105,19 @@ class TestSolitaireFamilyDispatch:
             assert model.combined_metal_volume_mm3 > 0.0, family
 
     def test_unsupported_ring_family_raises_a_clean_error(self):
-        # THE BOUNDARY THIS TEST PROTECTS IS UNCHANGED, only its example.
-        # "three_stone" gained a generator in Sprint 28, so the case is now
-        # made with a family that is still deliberately generator-less:
-        # `eternity` is a recognized RingFamilyId with no generator. Bypass
-        # StrictModel validation to simulate a future JDL that allowed it, and
-        # confirm the dispatch boundary — not a schema error — is what rejects
+        # THE BOUNDARY THIS TEST PROTECTS IS UNCHANGED, only its example — and
+        # it has now moved twice, which is itself the point: `three_stone`
+        # gained a generator in Sprint 28 and `eternity` in Sprint 29, so the
+        # case is made with whatever is STILL deliberately generator-less.
+        # `plain_band` is a recognized RingFamilyId with no generator, and its
+        # blocker is structural rather than unfinished work: a stone-less ring
+        # needs a change to `REQUIRED_COMPONENT_NAMES`, an ADR condition.
+        #
+        # Bypass StrictModel validation to simulate a future JDL that allowed
+        # it, and confirm the dispatch boundary — not a schema error — rejects
         # it.
         d = default_definition()
-        object.__setattr__(d.jewelry, "style", "eternity")
+        object.__setattr__(d.jewelry, "style", "plain_band")
         with pytest.raises(RingFamilyUnsupportedError):
             generate_ring(d)
 

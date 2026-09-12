@@ -274,6 +274,26 @@
     {
       "goldenId": "RF-007-halo-hidden",
       "status": "STABLE"
+    },
+    {
+      "goldenId": "SR-001-eternity-full",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SR-002-eternity-half",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SR-003-eternity-shared-bead",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SR-004-cluster-round",
+      "status": "STABLE"
+    },
+    {
+      "goldenId": "SR-005-toi-et-moi",
+      "status": "STABLE"
     }
   ],
   "fastSuite": [
@@ -349,7 +369,12 @@
     "RF-004-split-shank-tapered",
     "RF-005-bypass-crossover",
     "RF-006-signet-flat-table",
-    "RF-007-halo-hidden"
+    "RF-007-halo-hidden",
+    "SR-001-eternity-full",
+    "SR-002-eternity-half",
+    "SR-003-eternity-shared-bead",
+    "SR-004-cluster-round",
+    "SR-005-toi-et-moi"
   ],
   "expectedEnvironment": {
     "note": "A kernel/OCP version mismatch does not automatically fail verification; it is surfaced as VERSION_REVIEW_REQUIRED. See 510-version-fingerprint-policy.md."

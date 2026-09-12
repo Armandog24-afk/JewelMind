@@ -472,6 +472,178 @@ def _derive(
                 "the region and the density",
             )
 
+    # ---- SPECIALTY: the eternity band, DELEGATED to the Pavé Engine --------
+    #
+    # THE PAVÉ ENGINE IS THE ONLY LAYER THAT HOLDS A NON-PRIMARY STONE. Its
+    # `settingGeometry` is `true` — it builds real beads and micro-prongs per
+    # stone — while every multi-stone family and every halo reports `false`.
+    # That single fact is why an eternity band can be CURRENT while a cluster
+    # cannot.
+
+    if family == "eternity":
+        if definition.pave is not None:
+            skipped.append("pave")
+            notes.append(
+                "This design declares its own pavé field, so the eternity band "
+                "derived none. The declared field is used unchanged."
+            )
+        else:
+            if variant == "ETERNITY_FULL":
+                # SPAN AND PITCH. The stone COUNT follows from the band's own
+                # circumference, which is what makes a larger finger size carry
+                # more stones rather than the same stones stretched further
+                # apart. `compile.py` has a closed-ring branch at `span >= 360`
+                # that spaces the last stone off the first.
+                spec = {
+                    "kind": "PAVE",
+                    "angularSpanDeg": 360.0,
+                    "startAngleDeg": params.eternityStartAngleDeg,
+                    "pitchMm": params.eternityPitchMm,
+                    "rowCount": 1,
+                }
+                sources = (
+                    "ringFamily.params.eternityPitchMm",
+                    "ringFamily.params.eternityStartAngleDeg",
+                )
+                relation = (
+                    "a full eternity covers the whole circumference at a stated "
+                    "pitch, so the stone COUNT follows from the band's own size"
+                )
+            else:
+                # COUNT AND SPACING. A half eternity is specified by how many
+                # stones it carries, and the two together decide how far round
+                # the band the set region reaches — and therefore how much of
+                # the band stays unadorned, which IS the half-eternity
+                # distinction §2.2 asks for.
+                spec = {
+                    "kind": "MICROSETTING",
+                    "columnCount": params.eternityStoneCount,
+                    "rowCount": 1,
+                    "stoneSpacingMm": params.eternityStoneSpacingMm,
+                    "startAngleDeg": params.eternityStartAngleDeg,
+                }
+                sources = (
+                    "ringFamily.params.eternityStoneCount",
+                    "ringFamily.params.eternityStoneSpacingMm",
+                    "ringFamily.params.eternityStartAngleDeg",
+                )
+                relation = (
+                    "a half eternity carries a stated COUNT at a stated spacing, "
+                    "and the unadorned region is what the two leave over"
+                )
+            add(
+                "pave",
+                {
+                    "paveId": "eternity",
+                    "enabled": True,
+                    "kind": spec["kind"],
+                    "host": "BAND_OUTER",
+                    "spec": spec,
+                    "stoneScale": params.eternityStoneScale,
+                    "retention": {"strategy": params.eternityRetention},
+                    "label": "Family-derived eternity band",
+                },
+                (*sources, "ringFamily.params.eternityStoneScale",
+                 "ringFamily.params.eternityRetention"),
+                relation + "; the lattice, the retention metal and the recess "
+                "are all the Pavé Engine's, which is the one layer that holds a "
+                "non-primary stone",
+            )
+
+    # ---- SPECIALTY: cluster and toi-et-moi, DELEGATED ----------------------
+    #
+    # SPRINT 28 RESERVED BOTH NAMES because "a ring family of the same name
+    # would be a second authority over the same placement". Right about the
+    # risk, wrong about the remedy: the remedy is to DERIVE the existing stone
+    # family rather than to place stones here, which is what
+    # `THREE_STONE_SYMMETRIC` has done since that same sprint. One authority,
+    # one placement engine.
+
+    if family in {"cluster", "toi_et_moi"}:
+        if definition.family is not None:
+            skipped.extend(("family.familyType", "family.params", "family.members"))
+            notes.append(
+                "This design declares its own stone family, so the ring family "
+                "derived none. The declared family is used unchanged."
+            )
+        elif definition.arrangement is not None:
+            raise RingFamilyDerivationConflictError(
+                f"A '{family}' ring family derives a stone family, and this "
+                "design already declares an explicit arrangement. A stone "
+                "family and an arrangement together are refused by "
+                "JM-FAMILY-001, so the derivation cannot be applied. Remove the "
+                "arrangement, or choose the 'solitaire' family and place the "
+                "stones yourself."
+            )
+        elif family == "cluster":
+            add(
+                "family.familyType",
+                "CLUSTER",
+                ("ringFamily.variant",),
+                "the surrounding stones are DELEGATED to the Multi-Stone Family "
+                "layer, which compiles them into a radial arrangement",
+            )
+            add(
+                "family.params",
+                {
+                    "kind": "CLUSTER",
+                    "count": params.clusterStoneCount,
+                    "radiusMm": params.clusterRadiusMm,
+                    "memberScale": params.clusterStoneScale,
+                    "includeCenter": True,
+                },
+                (
+                    "ringFamily.params.clusterStoneCount",
+                    "ringFamily.params.clusterRadiusMm",
+                    "ringFamily.params.clusterStoneScale",
+                ),
+                "the cluster's topology stated as a count, a radius and a "
+                "relative size; every POSITION is computed by the arrangement "
+                "resolver, never here",
+            )
+        else:
+            # TWO SEPARATE STONE INSTANCES, each with its own scale. They stay
+            # occurrences of the design's ONE `stone`, so they can differ in gem
+            # identity and in size and NOT in cut — `stoneRef` is `"primary"` or
+            # an unresolved future name (FAMILY-GOV: a member carries no shape).
+            # That is the honest limit, recorded rather than approximated.
+            add(
+                "family.familyType",
+                "TOI_ET_MOI",
+                ("ringFamily.variant",),
+                "the two principal stones are DELEGATED to the Multi-Stone "
+                "Family layer, which places them as two separate instances",
+            )
+            add(
+                "family.params",
+                {
+                    "kind": "TOI_ET_MOI",
+                    "separationMm": params.toiEtMoiSeparationMm,
+                    "axisAngleDeg": params.toiEtMoiOrientationDeg,
+                    "symmetry": params.symmetry,
+                },
+                (
+                    "ringFamily.params.toiEtMoiSeparationMm",
+                    "ringFamily.params.toiEtMoiOrientationDeg",
+                    "ringFamily.params.symmetry",
+                ),
+                "the pair's separation and the angle it sits at in the ring's "
+                "own horizontal plane",
+            )
+            add(
+                "family.members",
+                [
+                    {"memberId": "side.first", "role": "SIDE", "stoneRef": "primary",
+                     "scale": 1.0},
+                    {"memberId": "side.second", "role": "SIDE", "stoneRef": "primary",
+                     "scale": params.toiEtMoiSecondScale},
+                ],
+                ("ringFamily.params.toiEtMoiSecondScale",),
+                "two members with their own scales, which is what makes the "
+                "second stone independently sizeable; their ids are DERIVED "
+                "from the structure rather than counted",
+            )
+
     # Every derived path must appear in the dependency table, and vice versa.
     # Checked here rather than only in a test so a derivation nobody declared
     # cannot reach a document at runtime.
@@ -543,6 +715,34 @@ _VARIANT_PARAMS: dict[str, tuple[str, ...]] = {
         "shoulderTopThicknessFactor",
     ),
     "BYPASS_CROSSOVER": ("bypassSeparationMm", "bypassOverlapDeg"),
+    # Sprint 29. Each variant reads only what it actually uses: the FULL band
+    # reads a pitch and the HALF reads a count and a spacing, so declaring a
+    # count on a full eternity is reported by `JM-RINGFAM-003` rather than
+    # silently ignored.
+    "ETERNITY_FULL": (
+        "eternityPitchMm",
+        "eternityStartAngleDeg",
+        "eternityStoneScale",
+        "eternityRetention",
+    ),
+    "ETERNITY_HALF": (
+        "eternityStoneCount",
+        "eternityStoneSpacingMm",
+        "eternityStartAngleDeg",
+        "eternityStoneScale",
+        "eternityRetention",
+    ),
+    "CLUSTER_ROUND": (
+        "clusterStoneCount",
+        "clusterRadiusMm",
+        "clusterStoneScale",
+    ),
+    "TOI_ET_MOI_BYPASS": (
+        "toiEtMoiSecondScale",
+        "toiEtMoiSeparationMm",
+        "toiEtMoiOrientationDeg",
+        "symmetry",
+    ),
     "SIGNET_FLAT_TABLE": (
         "signetTableLengthMm",
         "signetTableWidthMm",
