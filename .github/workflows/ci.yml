@@ -36,8 +36,34 @@ jobs:
       - name: Ruff
         run: ruff check .
 
+      # Workflow logs need a repository token to download, so a backend failure
+      # otherwise reaches a reader as a bare "Process completed with exit code
+      # 1" and has to be guessed at. pytest's own failure list is re-emitted as
+      # error annotations and into the job summary, both of which are readable
+      # without a token. This reports the failure; it never changes it.
       - name: Pytest (all tests)
-        run: python -m pytest -q
+        run: |
+          set -o pipefail
+          python -m pytest -q --tb=line -rf | tee pytest-output.txt
+
+      - name: Report pytest failures
+        if: failure()
+        run: |
+          if [ ! -f pytest-output.txt ]; then
+            echo "::error::pytest produced no output file"
+            exit 0
+          fi
+          details=$(sed -n '/=== FAILURES ===/,$p' pytest-output.txt | head -80)
+          {
+            echo '## pytest failures'
+            echo '```'
+            echo "$details"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n' "$details" \
+            | grep -E '^(FAILED|ERROR|E +|/home/runner/.*: )' \
+            | head -30 \
+            | while IFS= read -r line; do echo "::error::${line}"; done
 
   frontend:
     name: Frontend (Node 24)

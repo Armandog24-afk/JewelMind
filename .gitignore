@@ -34,3 +34,4 @@ examples/output*/
 
 # Local Claude Code session permissions (personal, not project config)
 .claude/settings.local.json
+backend/pytest-output.txt
