@@ -56,6 +56,7 @@ from jewelmind.geometry.shoulder import (
     build_shoulders,
 )
 from jewelmind.geometry.signet import BODY_ARCHITECTURES, SIGNET_COMPONENT
+from jewelmind.geometry_quality.version import RELATIVE_COMPARISON_TOLERANCE
 from jewelmind.ring_family.capability import (
     RING_FAMILY_GEOMETRY_VERSION,
     RING_FAMILY_PIPELINE_STAGES,
@@ -1577,13 +1578,32 @@ class TestSpecArtifacts:
 
         for variant, vector in recorded.items():
             model = build_solitaire_ring(design(variant))
-            assert model.combined_metal_volume_mm3 == pytest.approx(
-                vector["combinedMetalVolumeMm3"], rel=KERNEL_VOLUME_REL_TOL
-            ), variant
+            # Structure first, and EXACTLY: component membership and stone count
+            # are integers and names, so they are identical on every platform.
+            # They are the real regression net here — a lost bead, a missing
+            # component or a changed stone count fails on the nose rather than
+            # as an unexplained volume.
             assert sorted(model.components) == sorted(vector["components"]), variant
             assert vector["stoneComponentCount"] == sum(
                 1 for n in model.components if geometry_role(n) == "stone_reference"
             ), variant
+            # Then volume, at the CROSS-PLATFORM bound rather than the
+            # same-machine one. These vectors are recorded on one machine and
+            # re-measured on another, and `ETERNITY_FULL` fuses 134 retention
+            # solids into the band, so OCCT's per-boolean rounding compounds far
+            # past the ~1e-16 relative drift a single-fuse solitaire shows:
+            # 1e-9 passed on Windows and failed on Linux CI. The bound used here
+            # is the project's own empirically-measured cross-platform tolerance
+            # (geometry_quality/version.py, QUALITY-GOV-006) — the same one the
+            # SR-001 golden already compares this very variant with on Linux —
+            # so no new number is invented for this test.
+            assert model.combined_metal_volume_mm3 == pytest.approx(
+                vector["combinedMetalVolumeMm3"],
+                rel=RELATIVE_COMPARISON_TOLERANCE,
+            ), (
+                f"{variant}: recorded {vector['combinedMetalVolumeMm3']!r}, "
+                f"rebuilt {model.combined_metal_volume_mm3!r}"
+            )
 
     def test_the_compatibility_vector_still_holds(self):
         vectors = self._load("test-vectors/ring-family-compatibility-vectors.json")

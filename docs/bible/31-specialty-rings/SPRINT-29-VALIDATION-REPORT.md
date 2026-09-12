@@ -169,6 +169,23 @@ exactly as designed, and was answered by recording the decision in it rather tha
 by loosening it. `RING_FAMILY_GEOMETRY_VERSION` stays `1.0.0`: no specialty
 family constructs geometry of its own.
 
+A third failure appeared only on Linux CI: the recorded-versus-rebuilt volume
+for `ETERNITY_FULL` exceeded `rel=1e-9`. `ETERNITY_FULL` fuses 134 retention
+solids into the band, so OCCT's per-boolean rounding compounds far past the
+~1e-16 relative drift a single-fuse solitaire shows — the same-machine bound was
+simply the wrong bound for a recorded-on-one-machine, re-measured-on-another
+comparison. It now uses the project's own empirically-measured cross-platform
+tolerance (`geometry_quality/version.py`, QUALITY-GOV-006), the same one the
+`SR-001` golden already compares this variant with on Linux, so no number was
+invented; and the exact structural assertions (component membership, stone
+count) were moved ahead of it, so a lost bead still fails as a lost bead.
+
+The backend CI job also gained a failure-reporting step: workflow logs need an
+authenticated download, so a backend failure previously reached a reader as a
+bare "Process completed with exit code 1". pytest's failure list is now
+re-emitted as error annotations and into the job summary. It reports a failure;
+it never changes one.
+
 ## Artifacts
 
 - `backend/jewelmind/ring_family/` — extended: 3 families, 4 variants, 12
